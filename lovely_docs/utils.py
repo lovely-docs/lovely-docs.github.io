@@ -6,15 +6,86 @@
 __all__ = ['settings', 'Source', 'GitSource', 'WebSource', 'Settings', 'git_progress', 'clone_repo']
 
 # %% ../nbs/00_utils.ipynb 3
+import os
 from pydantic_settings import BaseSettings
 from pathlib import Path
-import os
-from dotenv import load_dotenv
 
 # Load environment variables from .env file
-load_dotenv()
+from dotenv import load_dotenv; load_dotenv();
 
 # %% ../nbs/00_utils.ipynb 5
+import logging
+import time
+import colorlog
+
+# %% ../nbs/00_utils.ipynb 6
+# Store the last log time globally
+_last_log_time = time.time()
+
+class TimeDeltaLogFormatter(colorlog.ColoredFormatter):
+    """Custom formatter that shows time delta since last log message instead of timestamp."""
+
+    def format(self, record: logging.LogRecord) -> str:
+        global _last_log_time
+        current_time = time.time()
+        delta = current_time - _last_log_time
+        _last_log_time = current_time
+
+        # Add the delta as a field to the record
+        record.delta = f"{delta:.3f}"
+
+        # Convert the pathname to be relative to lovely-docs.
+        if hasattr(record, "pathname"):
+            if "ipykernel" in record.pathname:
+                record.pathname = "<ipykernel>"
+            if "lovely-docs/" in record.pathname:
+                record.pathname = record.pathname.split("lovely-docs/")[1]
+
+        return super().format(record)
+
+
+def setup_logging() -> None:
+    """Set up logging for the application."""
+
+    # Known flooders
+    logging.getLogger("httpx").setLevel(logging.WARNING)
+    # logging.getLogger("anthropic").setLevel(logging.WARNING)
+    logging.getLogger("httpcore").setLevel(logging.WARNING)
+
+    # Reset handlers to avoid duplicate logs
+    logger = logging.getLogger()
+    for handler in logger.handlers[:]:  # Make a copy of the list
+        logger.removeHandler(handler)
+
+    # logger.setLevel(logging.DEBUG)
+
+    console_handler = logging.StreamHandler()
+
+    # Define color scheme
+    log_colors = {
+        'DEBUG': 'cyan',
+        'INFO': 'green',
+        'WARNING': 'yellow',
+        'ERROR': 'red',
+        'CRITICAL': 'red,bg_white',
+    }
+
+    # Create formatter with time delta and colors
+    formatter = TimeDeltaLogFormatter(
+        "+%(delta)ss %(log_color)s%(levelname)s%(reset)s %(blue)s%(pathname)s:"
+        "%(lineno)d%(reset)s %(funcName)s %(message)s",
+        log_colors=log_colors
+    )
+
+    console_handler.setFormatter(formatter)
+
+    # Add handler to logger
+    logger.addHandler(console_handler)
+
+# %% ../nbs/00_utils.ipynb 7
+setup_logging()
+
+# %% ../nbs/00_utils.ipynb 9
 class Source(BaseSettings):
     name: str
     doc_dir: Path
@@ -46,10 +117,10 @@ class Settings(BaseSettings):
 
 settings = Settings()
 
-# %% ../nbs/00_utils.ipynb 6
+# %% ../nbs/00_utils.ipynb 11
 from git import Repo, InvalidGitRepositoryError, NoSuchPathError
 
-# %% ../nbs/00_utils.ipynb 8
+# %% ../nbs/00_utils.ipynb 12
 def git_progress(op_code, cur_count, max_count=None, message=''):
     if max_count:
         print(f"\r{op_code}: {cur_count}/{max_count} {message}", end='', flush=True)

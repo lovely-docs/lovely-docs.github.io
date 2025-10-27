@@ -1,0 +1,44 @@
+You are summarizing a directory of documentation for {{ libname }}.
+
+<dir path="{{ path }}" name="{{ dirname }}">
+
+{% if subdirs %}
+<subdirectories>
+{% for subdir in subdirs %}
+{{ raise("subdir.digest cannot be None or empty for subdir: " + (subdir.better_name or subdir.name)) if not subdir.digest }}
+{{ raise("subdir.essence cannot be None or empty for subdir: " + (subdir.better_name or subdir.name)) if not subdir.essence }}
+<subdir name="{{ subdir.better_name or subdir.name }}" title="{{ subdir.essence }}">
+{{ subdir.digest }}
+</subdir>
+{% endfor %}
+</subdirectories>
+{% endif %}
+
+{% if pages %}
+<pages>
+{% for page in pages %}
+{{ raise("page.essence cannot be None or empty for page: " + (page.better_filename or page.name)) if not page.essence }}
+{{ raise("page.short_digest cannot be None or empty for page: " + (page.better_filename or page.name)) if not page.short_digest }}
+<page path="{{ path }}" name="{{ page.better_filename or page.name }}" title="{{ page.essence }}">
+{{ page.short_digest }}
+</page>
+{% endfor %}
+</pages>
+{% endif %}
+</dir>
+
+Based on the information above, in this order:
+- Come up with a short directory name that perfectly encompasses the contents.
+    - Keep the original if it's good already.
+    - Don't include the name of the library in the name, e.g. "overview" instead of "svelte overview"
+    - If the original starts with a number, don't include it.
+
+- Condense the information in the directory.
+    - Extract bits that are important to a programmer.
+    - Don't include any extra notes. Be concise.
+    - One example per use case max.
+    - You can combine 2 or more simple examples into one.
+    - Write in a declarative style stating what things ARE or DO, not "guide to" or "documentation for".
+
+- One-line capturing the essence of the directory.
+- Decide if the content of this directory is relevant to a programmer.

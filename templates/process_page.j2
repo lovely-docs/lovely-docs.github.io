@@ -1,0 +1,20 @@
+This page is part of documentation for {{ libname }}
+
+<page path="{{ path }}" name="{{ filename }}">
+{{ text }}
+</page>
+
+Based on the page above, in this order:
+- Come up with a short filename that perfectly encompasses the contents.
+    - Keep the original if it's good already.
+    - Don't include the name of the library in the name.
+    - If the original starts with a number, don't include it.
+- Create a digest of the page.
+    - Extract bits that are important to a programmer.
+    - Don't include any extra notes. Be concise, no "guide to" or "documentation for", no water.
+    - One example per use case max.
+    - Combine 2 or more simple examples into one that showcases them all when possible.
+    - Avoid markdown links, describe the target instead of linking.
+- Shorter digest, keep only the most important information, condense examples as much as possible.
+- One-line essence of the page.
+- Is the page relevant to a programmer who is already somewhat familiar with {{ libname }}?
