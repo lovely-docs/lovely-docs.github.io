@@ -1,0 +1,1 @@
+{"type":"data","nodes":[{"type":"data","data":[null],"uses":{}},{"type":"data","data":[{"libraries":1},[2],{"name":3,"source":4,"source_type":8},"sveltejs-svelte",{"name":3,"doc_dir":5,"repo":6,"commit":7},"documentation/docs","https://github.com/sveltejs/svelte","facf528cb8a7289c8b3eaf036949a515f5ad2108","git"],"uses":{}}]}
