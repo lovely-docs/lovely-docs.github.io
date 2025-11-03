@@ -5,6 +5,16 @@
     "type": "module",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "default": "./dist/index.js"
+        },
+        "./doc-cache": {
+            "types": "./dist/lib/doc-cache.d.ts",
+            "default": "./dist/lib/doc-cache.js"
+        }
+    },
     "bin": {
         "lovely-docs-mcp": "dist/index.js"
     },

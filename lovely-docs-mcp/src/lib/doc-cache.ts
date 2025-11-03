@@ -9,6 +9,11 @@ interface IndexEntry {
 	path: string;
 	relevant: boolean;
 	type: 'page' | 'directory';
+	token_counts?: {
+		fulltext?: number;
+		digest?: number;
+		short_digest?: number;
+	};
 	usage?: {
 		input: number;
 		output: number;
@@ -23,6 +28,11 @@ interface MarkdownVariants extends Partial<Record<typeof markdownVariantKeys[num
 interface BaseDocItem {
 	path: string; // Original filesystem path from index.json
 	relevant: boolean;
+	token_counts?: {
+		fulltext?: number;
+		digest?: number;
+		short_digest?: number;
+	};
 	usage?: {
 		input: number;
 		output: number;
@@ -36,14 +46,21 @@ interface DocPage extends BaseDocItem {
 	type: 'page';
 }
 
-// Directory type - has digest and essence but not short_digest or fulltext
+// Directory type - now also has short_digest
 interface DocDirectory extends BaseDocItem {
 	type: 'directory';
 }
 
-type DocItem = DocPage | DocDirectory;
+export type DocItem = DocPage | DocDirectory;
 
-interface LibraryDBItem {
+export interface TreeNode {
+	name: string;
+	path: string;
+	children: Map<string, TreeNode>;
+	data?: DocItem;
+}
+
+export interface LibraryDBItem {
 	library: string;
 	source: {
 		name: string;
@@ -52,7 +69,10 @@ interface LibraryDBItem {
 		commit?: string;
 	};
 	source_type: "git" | "web";
-	items: Map<string, DocItem>; // Key is the full name-based path (e.g., "Introduction/getting-started")
+	date: string;
+	model: string;
+	commit: string;
+	tree: TreeNode;
 }
 
 const cache = new Map<string, LibraryDBItem>();
@@ -109,7 +129,7 @@ async function loadMarkdownVariants(libraryPath: string, fullPath: string): Prom
 	return variants;
 }
 
-async function loadLibrary(libraryPath: string, libraryName: string): Promise<LibraryDBItem> {
+export async function loadLibrary(libraryPath: string, libraryName: string): Promise<LibraryDBItem> {
 	debug(`Loading library: ${libraryName} from ${libraryPath}`);
 	const indexPath = join(libraryPath, 'index.json');
 
@@ -119,11 +139,15 @@ async function loadLibrary(libraryPath: string, libraryName: string): Promise<Li
 	// Validate the index data
 	validateIndexData(data);
 
-	const items = new Map<string, DocItem>();
+	// Build tree structure
+	const root: TreeNode = {
+		name: '',
+		path: '',
+		children: new Map()
+	};
 
-	// Build the flat cache - keys are already full name-based paths
+	let itemCount = 0;
 	for (const [fullPath, entry] of Object.entries(data.map as Record<string, IndexEntry>)) {
-
 		// Load all markdown variants
 		const markdown = await loadMarkdownVariants(libraryPath, fullPath);
 		const nonNullMarkdown = Object.keys(markdown)
@@ -133,20 +157,45 @@ async function loadLibrary(libraryPath: string, libraryName: string): Promise<Li
 			type: entry.type,
 			path: entry.path,
 			relevant: entry.relevant,
+			token_counts: entry.token_counts,
 			usage: entry.usage,
 			markdown
 		};
 
-		items.set(fullPath, docItem);
+		// Build tree path
+		const parts = fullPath.split('/');
+		let current = root;
+
+		for (let i = 0; i < parts.length; i++) {
+			const part = parts[i];
+			const isLast = i === parts.length - 1;
+			const currentPath = parts.slice(0, i + 1).join('/');
+
+			if (!current.children.has(part)) {
+				current.children.set(part, {
+					name: part,
+					path: currentPath,
+					children: new Map(),
+					data: isLast ? docItem : undefined
+				});
+			}
+
+			current = current.children.get(part)!;
+		}
+
+		itemCount++;
 	}
 
-	debug(`Loaded ${items.size} items for ${libraryName}`);
+	debug(`Loaded ${itemCount} items for ${libraryName}`);
 
 	return {
 		library: libraryName,
 		source: data.source,
 		source_type: data.source_type,
-		items
+		date: data.date,
+		model: data.model,
+		commit: data.commit,
+		tree: root
 	};
 }
 
@@ -171,27 +220,41 @@ export async function loadLibrariesFromJson(path: string): Promise<void> {
 			}
 		}
 
-		debug(`Loaded ${cache.size} libraries`);
+		debug(`Loaded ${cache.size} libraries, %O`, cache);
 	} catch (error) {
 		debug('Failed to scan libraries: %O', error)
 	}
 }
 
-export function getLibraries(): Array<{ name: string; source?: any }> {
+export function getLibraries(): Array<{ name: string; source?: any; source_type?: string }> {
 	return Array.from(cache.values()).map(lib => ({
 		name: lib.library,
+		source: lib.source,
+		source_type: lib.source_type
 	}));
 }
 
 export function getLibrary(name: string): LibraryDBItem | undefined {
 	const res = cache.get(name);
-	debug(`getLibrary(${name}) -> %o`, res)
+	debug(`getLibrary(${name}) -> %O`, res)
 	return res
 }
 
 export function getDocItem(library: string, fullPath: string): DocItem | undefined {
 	const lib = cache.get(library);
-	const res = lib?.items.get(fullPath);
-	debug(`getDocItem(${library}, ${fullPath}) -> %o`, res)
+	if (!lib) return undefined;
+
+	// Navigate tree to find item
+	const parts = fullPath.split('/');
+	let current = lib.tree;
+
+	for (const part of parts) {
+		const child = current.children.get(part);
+		if (!child) return undefined;
+		current = child;
+	}
+
+	const res = current.data;
+	debug(`getDocItem(${library}, ${fullPath}) -> %O`, res)
 	return res
 }

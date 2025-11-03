@@ -69,6 +69,9 @@ export interface LibraryDBItem {
 		commit?: string;
 	};
 	source_type: "git" | "web";
+	date: string;
+	model: string;
+	commit: string;
 	tree: TreeNode;
 }
 
@@ -189,6 +192,9 @@ export async function loadLibrary(libraryPath: string, libraryName: string): Pro
 		library: libraryName,
 		source: data.source,
 		source_type: data.source_type,
+		date: data.date,
+		model: data.model,
+		commit: data.commit,
 		tree: root
 	};
 }

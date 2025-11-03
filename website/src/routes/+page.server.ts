@@ -1,4 +1,4 @@
-import { getLibraries } from '$lib/server/doc-cache';
+import { getLibraries } from 'lovely-docs-mcp/doc-cache';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {

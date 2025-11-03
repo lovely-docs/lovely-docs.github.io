@@ -2,7 +2,7 @@
 	import { Badge } from '$lib/components/ui/badge';
 	import { Card, CardContent, CardHeader, CardTitle } from '$lib/components/ui/card';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
-	import type { TreeNode } from '$lib/server/doc-cache';
+	import type { TreeNode } from 'lovely-docs-mcp/doc-cache';
 	import dbg from 'debug';
 	const debug = dbg('app:page:library');
 
@@ -73,17 +73,40 @@
 						</div>
 					</a>
 				{:else}
-					<div class="py-2 px-3 font-medium text-sm" style="padding-left: {depth * 1.5 + 0.75}rem">
-						<span class="text-muted-foreground text-xs">
-							{#if depth > 0}
-								{#each Array(depth) as _}
-									<span class="inline-block w-4"></span>
-								{/each}
-								└─
-							{/if}
-						</span>
-						<span class="font-mono">{child.name}/</span>
-					</div>
+					{#if child.data}
+						<a href="/library/{library.library}/{child.path}" class="block group">
+							<div
+								class="flex items-center justify-between py-2 px-3 rounded hover:bg-accent transition-colors font-medium"
+								style="padding-left: {depth * 1.5 + 0.75}rem">
+								<div class="flex items-center gap-2 flex-1">
+									<span class="text-muted-foreground text-xs">
+										{#if depth > 0}
+											{#each Array(depth) as _}
+												<span class="inline-block w-4"></span>
+											{/each}
+											└─
+										{/if}
+									</span>
+									<span class="font-mono text-sm">{child.name}/</span>
+								</div>
+								<Badge variant={child.data.relevant ? 'default' : 'secondary'} class="ml-2">
+									{child.data.relevant ? '✓ Relevant' : 'Not relevant'}
+								</Badge>
+							</div>
+						</a>
+					{:else}
+						<div class="py-2 px-3 font-medium text-sm" style="padding-left: {depth * 1.5 + 0.75}rem">
+							<span class="text-muted-foreground text-xs">
+								{#if depth > 0}
+									{#each Array(depth) as _}
+										<span class="inline-block w-4"></span>
+									{/each}
+									└─
+								{/if}
+							</span>
+							<span class="font-mono">{child.name}/</span>
+						</div>
+					{/if}
 					{@render renderTree(child, depth + 1)}
 				{/if}
 			</div>

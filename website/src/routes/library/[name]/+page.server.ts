@@ -1,4 +1,4 @@
-import { getLibrary } from '$lib/server/doc-cache';
+import { getLibrary } from 'lovely-docs-mcp/doc-cache';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import dbg from 'debug'

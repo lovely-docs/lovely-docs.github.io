@@ -1577,5 +1577,8 @@
     "doc_dir": "documentation/docs",
     "repo": "https://github.com/sveltejs/svelte",
     "commit": "facf528cb8a7289c8b3eaf036949a515f5ad2108"
-  }
+  },
+  "date": "2025-11-03T22:28:00.000000+00:00",
+  "model": "claude-haiku-4.5",
+  "commit": "23c332ed3d309257c5ce78546d55a4b43a26fdf5-dirty"
 }

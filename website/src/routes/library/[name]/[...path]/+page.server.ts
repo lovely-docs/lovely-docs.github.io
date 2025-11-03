@@ -1,4 +1,4 @@
-import { getLibrary, getDocItem } from '$lib/server/doc-cache';
+import { getLibrary, getDocItem } from 'lovely-docs-mcp/doc-cache';
 import { error } from '@sveltejs/kit';
 import dbg from "debug";
 const debug = dbg("app:page:library:path:server");
