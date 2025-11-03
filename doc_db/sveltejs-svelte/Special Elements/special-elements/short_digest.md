@@ -1,0 +1,1 @@
+Index page for Svelte's special elements - built-in components and directives for core functionality like conditionals, loops, animations, and lifecycle management.

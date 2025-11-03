@@ -1,0 +1,1 @@
+The `svelte/animate` module provides animation utilities for smooth transitions and state changes in Svelte components using built-in animation functions and directives.

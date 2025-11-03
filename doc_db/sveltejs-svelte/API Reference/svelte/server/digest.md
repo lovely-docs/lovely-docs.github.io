@@ -1,0 +1,1 @@
+The `svelte/server` module provides server-side utilities for Svelte applications. This module is used when rendering Svelte components on the server, enabling server-side rendering (SSR) capabilities. It exports functions and utilities necessary for compiling and rendering Svelte components in a Node.js or server environment, separate from client-side rendering.

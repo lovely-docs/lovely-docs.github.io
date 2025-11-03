@@ -1,0 +1,1 @@
+Reactive state management module with store creation and subscription utilities.

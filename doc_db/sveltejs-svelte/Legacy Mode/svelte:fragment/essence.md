@@ -1,0 +1,1 @@
+Legacy element for placing content in named slots without a wrapping DOM element.

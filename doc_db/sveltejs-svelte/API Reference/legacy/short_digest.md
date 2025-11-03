@@ -1,0 +1,1 @@
+The `svelte/legacy` module provides deprecated functions for migration purposes. All exports should be replaced with modern alternatives over time.

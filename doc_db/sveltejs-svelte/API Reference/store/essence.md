@@ -1,0 +1,1 @@
+API reference for svelte/store module providing reactive state management.

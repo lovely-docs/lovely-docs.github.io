@@ -1,0 +1,1 @@
+Element for specifying per-component compiler options like runes mode, namespace, custom element configuration, and CSS injection.

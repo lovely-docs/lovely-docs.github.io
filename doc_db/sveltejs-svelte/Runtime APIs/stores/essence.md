@@ -1,0 +1,1 @@
+Reactive state management through stores with a simple contract, with built-in implementations for writable, readable, derived, and readonly stores.

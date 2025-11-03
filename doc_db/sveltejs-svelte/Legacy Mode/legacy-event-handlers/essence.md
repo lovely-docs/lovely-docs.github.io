@@ -1,0 +1,1 @@
+Legacy mode event handling with the on: directive, modifiers, event forwarding, and component event dispatching.

@@ -1,0 +1,1 @@
+Derived state automatically updates when its dependencies change, with support for complex expressions via $derived.by and temporary value overrides for optimistic UI.

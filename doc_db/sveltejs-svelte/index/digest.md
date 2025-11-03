@@ -1,0 +1,1 @@
+This is the main landing page for Svelte documentation. It serves as the entry point to the Svelte framework documentation and resources.

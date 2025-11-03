@@ -1,0 +1,1 @@
+Render DOM elements with runtime-determined tag names using the `<svelte:element>` component.

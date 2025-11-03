@@ -1,0 +1,1 @@
+Module providing easing functions for animations and transitions in Svelte.

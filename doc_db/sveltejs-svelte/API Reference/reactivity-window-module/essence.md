@@ -1,0 +1,1 @@
+Reactive wrappers for window properties accessible via `.current` in reactive contexts.

@@ -1,0 +1,1 @@
+Documentation reference for runtime warnings that can occur during Svelte application execution.

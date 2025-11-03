@@ -1,0 +1,1 @@
+Overview of deprecated and legacy APIs in Svelte with guidance on modern replacements.

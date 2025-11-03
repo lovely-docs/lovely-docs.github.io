@@ -1,0 +1,1 @@
+Legacy mode makes top-level variables reactive via assignments; mutations alone don't trigger updates without reassignment.

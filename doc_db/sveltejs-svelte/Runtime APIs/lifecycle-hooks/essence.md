@@ -1,0 +1,1 @@
+Svelte 5 lifecycle consists of onMount and onDestroy hooks; use $effect runes instead of deprecated beforeUpdate/afterUpdate for granular state-change reactions.

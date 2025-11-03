@@ -1,0 +1,1 @@
+Reference of runtime errors in Svelte 5 with guidance on binding, component API changes, reactive state constraints, and effect usage.

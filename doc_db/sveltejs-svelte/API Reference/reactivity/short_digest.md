@@ -1,0 +1,1 @@
+The `svelte/reactivity` module exports reactive versions of Map, Set, URL and other built-ins that work like native versions but integrate with Svelte's reactivity system.

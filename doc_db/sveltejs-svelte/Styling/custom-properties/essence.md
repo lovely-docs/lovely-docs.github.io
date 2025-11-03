@@ -1,0 +1,1 @@
+Pass and consume CSS custom properties in Svelte components for dynamic styling.

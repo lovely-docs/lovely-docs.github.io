@@ -1,0 +1,1 @@
+Pass CSS custom properties to components with `--property-name` syntax. Read them inside components using `var(--property-name, fallback)`. Properties are inherited from parent elements and can be defined globally on `:root`.

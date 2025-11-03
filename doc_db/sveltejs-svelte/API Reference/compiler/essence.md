@@ -1,0 +1,1 @@
+API reference for the svelte/compiler module that enables programmatic compilation of Svelte components.

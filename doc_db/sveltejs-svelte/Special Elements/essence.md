@@ -1,0 +1,1 @@
+Built-in special components for error handling, document access, and dynamic element rendering.

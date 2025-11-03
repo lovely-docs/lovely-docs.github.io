@@ -1,0 +1,1 @@
+The `svelte` module is the main entry point for the Svelte framework. It provides core functionality and APIs for building reactive components and applications with Svelte.

@@ -1,0 +1,1 @@
+Svelte 3/4 reactive patterns and APIs using assignments, reactive statements, props, event dispatching, and imperative component instantiation.

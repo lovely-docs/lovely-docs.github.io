@@ -1,0 +1,1 @@
+Guide to testing Svelte applications using Vitest for unit/integration tests, component testing with mount API or testing-library, and Playwright for E2E tests.

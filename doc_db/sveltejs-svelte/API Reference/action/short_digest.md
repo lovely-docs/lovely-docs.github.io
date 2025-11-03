@@ -1,0 +1,1 @@
+The `svelte/action` module exports utilities for creating custom actions that attach to DOM elements to add behavior and interactivity.

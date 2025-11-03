@@ -7,7 +7,7 @@ You are summarizing a directory of documentation for {{ libname }}.
 {% for subdir in subdirs %}
 {{ raise("subdir.digest cannot be None or empty for subdir: " + (subdir.better_name or subdir.name)) if not subdir.digest }}
 {{ raise("subdir.essence cannot be None or empty for subdir: " + (subdir.better_name or subdir.name)) if not subdir.essence }}
-<subdir name="{{ subdir.better_name or subdir.name }}" title="{{ subdir.essence }}">
+<subdir name="{{ subdir.name or subdir.path }}" title="{{ subdir.essence }}">
 {{ subdir.digest }}
 </subdir>
 {% endfor %}
@@ -19,7 +19,7 @@ You are summarizing a directory of documentation for {{ libname }}.
 {% for page in pages %}
 {{ raise("page.essence cannot be None or empty for page: " + (page.better_filename or page.name)) if not page.essence }}
 {{ raise("page.short_digest cannot be None or empty for page: " + (page.better_filename or page.name)) if not page.short_digest }}
-<page path="{{ path }}" name="{{ page.better_filename or page.name }}" title="{{ page.essence }}">
+<page path="{{ path }}" name="{{ page.name or page.path }}" title="{{ page.essence }}">
 {{ page.short_digest }}
 </page>
 {% endfor %}
@@ -29,7 +29,7 @@ You are summarizing a directory of documentation for {{ libname }}.
 
 Based on the information above, in this order:
 - Come up with a short directory name that perfectly encompasses the contents.
-    - Keep the original if it's good already.
+    - Keep the original if it's good already. Use the title from frontmatter is present.
     - Don't include the name of the library in the name, e.g. "overview" instead of "svelte overview"
     - If the original starts with a number, don't include it.
 
@@ -37,8 +37,11 @@ Based on the information above, in this order:
     - Extract bits that are important to a programmer.
     - Don't include any extra notes. Be concise.
     - One example per use case max.
-    - You can combine 2 or more simple examples into one.
+    - Don't skip important examples. You can combine 2 or more simple examples into one more complex.
     - Write in a declarative style stating what things ARE or DO, not "guide to" or "documentation for".
 
-- One-line capturing the essence of the directory.
+- More condensed digest (should be useful without reading the full digest).
+    - Keep only the most important information.
+    - Keep all example though.
+- One-line essence of the contents.
 - Decide if the content of this directory is relevant to a programmer.

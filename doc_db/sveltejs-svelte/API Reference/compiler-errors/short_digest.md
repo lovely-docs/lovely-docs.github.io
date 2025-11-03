@@ -1,0 +1,1 @@
+Reference documentation for Svelte compiler errors with explanations and resolutions for each error type.

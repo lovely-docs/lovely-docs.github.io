@@ -1,0 +1,1 @@
+Nested style tags bypass component scoping and apply globally to the DOM.

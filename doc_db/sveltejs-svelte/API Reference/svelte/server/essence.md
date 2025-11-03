@@ -1,0 +1,1 @@
+Server-side rendering module for Svelte applications

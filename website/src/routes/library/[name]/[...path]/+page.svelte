@@ -1,135 +1,161 @@
 <script lang="ts">
-	import { page } from '$app/state';
-	import { getMarkdown, getLibraryData, type MarkdownVariant } from '$lib/data.remote';
-	import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '$lib/components/ui/card';
-	import { Badge } from '$lib/components/ui/badge';
-	import { Button } from '$lib/components/ui/button';
-	import Markdown from '$lib/components/Markdown.svelte';
-	
-	const libraryName = page.params.name || '';
-	const itemPath = page.params.path || ''; // This is now a name-based path like "Introduction/getting-started"
-	
-	let selectedVariant = $state<MarkdownVariant>('essence');
-	
-	// Helper to find original key from name-based path
-	function findOriginalKey(namePath: string, mapData: Record<string, any>): string | null {
-		for (const [key, value] of Object.entries(mapData)) {
-			if (typeof value === 'object' && value.name) {
-				// Build the name-based path for this key
-				if (value.type === 'page') {
-					const keyParts = key.split('/');
-					const dirPart = keyParts.slice(0, -1).join('/');
-					const dirInfo = dirPart ? mapData[dirPart] : null;
-					const dirName = dirInfo?.name || '';
-					const fileName = value.name;
-					const builtPath = dirPart ? `${dirName}/${fileName}` : fileName;
-					if (builtPath === namePath) return key;
-				} else {
-					if (value.name === namePath) return key;
-				}
-			}
-		}
-		return null;
-	}
-	
+	import Markdown from "$lib/components/Markdown.svelte";
+	import { Badge } from "$lib/components/ui/badge";
+	import { Button } from "$lib/components/ui/button";
+	import {
+		Card,
+		CardContent,
+		CardDescription,
+		CardHeader,
+		CardTitle,
+	} from "$lib/components/ui/card";
+	import ThemeToggle from "$lib/components/ThemeToggle.svelte";
+	import dbg from "debug";
+	const debug = dbg("app:page:library:path");
+
+	let { data } = $props();
+
+	debug(data);
+
+	const { libraryName, itemPath, docItem } = data;
+
+	type MarkdownVariant = "fulltext" | "digest" | "short_digest" | "essence";
+
 	const variantLabels: Record<MarkdownVariant, string> = {
-		fulltext: 'Full Text',
-		digest: 'Digest',
-		short_digest: 'Short Digest',
-		essence: 'Essence'
+		fulltext: "Full Text",
+		digest: "Digest",
+		short_digest: "Short Digest",
+		essence: "Essence",
 	};
+
+	// Get available variants from actual markdown data (excluding essence)
+	const availableVariants = (
+		Object.keys(docItem.markdown) as MarkdownVariant[]
+	).filter((variant) => docItem.markdown[variant] && variant !== 'essence');
+
+	// Initialize from hash or default to essence
+	let selectedVariant = $state<MarkdownVariant>(
+		(typeof window !== "undefined" &&
+			(window.location.hash.slice(1) as MarkdownVariant)) ||
+			"digest",
+	);
+
+	let showRaw = $state(false);
+
+	// Update hash when variant changes
+	function selectVariant(variant: MarkdownVariant) {
+		selectedVariant = variant;
+		if (typeof window !== "undefined") {
+			window.location.hash = variant;
+		}
+	}
+
+	// Listen to hash changes
+	$effect(() => {
+		if (typeof window === "undefined") return;
+
+		const handleHashChange = () => {
+			const hash = window.location.hash.slice(1) as MarkdownVariant;
+			if (hash && availableVariants.includes(hash)) {
+				selectedVariant = hash;
+			}
+		};
+
+		window.addEventListener("hashchange", handleHashChange);
+		return () => window.removeEventListener("hashchange", handleHashChange);
+	});
 </script>
 
-{#if !itemPath}
-	<div class="container mx-auto px-4 py-8 max-w-6xl">
-		<p class="text-muted-foreground">Redirecting...</p>
-	</div>
-	<script>
-		window.location.href = `/library/${libraryName}`;
-	</script>
-{:else}
 <div class="container mx-auto px-4 py-8 max-w-6xl">
-	<nav class="flex items-center gap-2 text-sm text-muted-foreground mb-6">
-		<a href="/" class="hover:text-foreground transition-colors">Home</a>
-		<span>/</span>
-		<a href="/library/{libraryName}" class="hover:text-foreground transition-colors">{libraryName}</a>
-		<span>/</span>
-		<span class="text-foreground">{itemPath}</span>
-	</nav>
+	<div class="flex items-center justify-between mb-6">
+		<nav class="flex items-center gap-2 text-sm text-muted-foreground">
+			<a href="/" class="hover:text-foreground transition-colors">Home</a>
+			<span>/</span>
+			<a
+				href="/library/{libraryName}"
+				class="hover:text-foreground transition-colors">{libraryName}</a
+			>
+			<span>/</span>
+			<span class="text-foreground">{itemPath}</span>
+		</nav>
+		<ThemeToggle />
+	</div>
 
-	{#await getLibraryData(libraryName)}
-		<div class="flex items-center justify-center py-12">
-			<p class="text-muted-foreground">Loading...</p>
+	<div class="mb-6">
+		<div class="flex items-center justify-between mb-2">
+			<h1 class="text-3xl font-bold tracking-tight">
+				{itemPath.split("/").pop() || itemPath}
+			</h1>
+			<Badge variant={docItem.relevant ? "default" : "secondary"}>
+				{docItem.relevant ? "✓ Relevant" : "Not relevant"}
+			</Badge>
 		</div>
-	{:then data}
-		{@const originalKey = findOriginalKey(itemPath, data.map)}
-		{@const itemInfo = originalKey ? data.map[originalKey] : null}
-		{@const availableVariants = itemInfo?.type === 'directory' 
-			? (['fulltext', 'digest', 'essence'] as const)
-			: (['fulltext', 'digest', 'short_digest', 'essence'] as const)}
-		
-		<div class="mb-6">
-			<div class="flex items-center justify-between mb-2">
-				<h1 class="text-3xl font-bold tracking-tight">
-					{#if itemInfo?.name}
-						{itemInfo.name}
-					{:else}
-						{itemPath}
-					{/if}
-				</h1>
-				{#if itemInfo?.relevant !== undefined}
-					<Badge variant={itemInfo.relevant ? 'default' : 'secondary'}>
-						{itemInfo.relevant ? '✓ Relevant' : 'Not relevant'}
-					</Badge>
-				{/if}
+		<p class="text-sm text-muted-foreground font-mono">
+			Path: {docItem.path}
+		</p>
+		{#if docItem.markdown.essence}
+			<div class="mt-3 text-sm text-muted-foreground italic border-l-2 border-muted pl-3">
+				{docItem.markdown.essence}
 			</div>
-			{#if originalKey}
-				<p class="text-sm text-muted-foreground font-mono">Key: {originalKey}</p>
-			{/if}
-		</div>
-		
-		<Card class="mb-6">
-			<CardHeader>
-				<CardTitle class="text-lg">View Mode</CardTitle>
-				<CardDescription>Select how you want to view this documentation</CardDescription>
-			</CardHeader>
-			<CardContent>
+		{/if}
+	</div>
+
+	<Card class="mb-6">
+		<CardContent>
+			<div class="flex items-center justify-between gap-4">
 				<div class="flex flex-wrap gap-2">
 					{#each availableVariants as variant}
-						<Button 
-							variant={selectedVariant === variant ? 'default' : 'outline'}
+						<Button
+							variant={selectedVariant === variant
+								? "default"
+								: "outline"}
 							size="sm"
-							onclick={() => selectedVariant = variant}
+							onclick={() => selectVariant(variant)}
 						>
 							{variantLabels[variant]}
+							{#if docItem.token_counts}
+								{#if variant === 'digest' && docItem.token_counts.digest && docItem.token_counts.fulltext}
+									<span class="ml-1 text-xs opacity-70">
+										({Math.round((docItem.token_counts.digest / docItem.token_counts.fulltext) * 100)}%)
+									</span>
+								{:else if variant === 'short_digest' && docItem.token_counts.short_digest}
+									<span class="ml-1 text-xs opacity-70">
+										{#if docItem.token_counts.fulltext}
+											({Math.round((docItem.token_counts.short_digest / docItem.token_counts.fulltext) * 100)}%)
+										{:else if docItem.token_counts.digest}
+											({Math.round((docItem.token_counts.short_digest / docItem.token_counts.digest) * 100)}%)
+										{/if}
+									</span>
+								{/if}
+							{/if}
 						</Button>
 					{/each}
 				</div>
-			</CardContent>
-		</Card>
-		
-		<Card>
-			<CardContent class="pt-6">
-				{#await getMarkdown({ library: libraryName, path: itemPath, variant: selectedVariant })}
-					<div class="flex items-center justify-center py-12">
-						<p class="text-muted-foreground">Loading {variantLabels[selectedVariant]}...</p>
-					</div>
-				{:then markdown}
-					<Markdown content={markdown} />
-				{:catch error}
-					<div class="rounded-lg bg-destructive/10 p-4 text-destructive">
-						<p class="font-semibold">Failed to load markdown</p>
-						<p class="text-sm mt-1">{error.message}</p>
-					</div>
-				{/await}
-			</CardContent>
-		</Card>
-	{:catch error}
-		<Card class="border-destructive">
-			<CardContent class="py-6">
-				<p class="text-destructive font-semibold">Error: {error.message}</p>
-			</CardContent>
-		</Card>
-	{/await}
+				<Button
+					variant={showRaw ? "default" : "outline"}
+					size="sm"
+					onclick={() => showRaw = !showRaw}
+				>
+					{showRaw ? 'Raw' : 'Markdown'}
+				</Button>
+			</div>
+		</CardContent>
+	</Card>
+
+	<Card>
+		<CardContent class="pt-6">
+			{#if docItem.markdown[selectedVariant]}
+				{#if showRaw}
+					<pre class="whitespace-pre-wrap font-mono text-sm bg-muted p-4 rounded-lg overflow-auto">{docItem.markdown[selectedVariant]}</pre>
+				{:else}
+					<Markdown content={docItem.markdown[selectedVariant]!} />
+				{/if}
+			{:else}
+				<div class="rounded-lg bg-destructive/10 p-4 text-destructive">
+					<p class="font-semibold">Variant not available</p>
+					<p class="text-sm mt-1">{variantLabels[selectedVariant]} is not available for this document.</p>
+				</div>
+			{/if}
+		</CardContent>
+	</Card>
 </div>
-{/if}

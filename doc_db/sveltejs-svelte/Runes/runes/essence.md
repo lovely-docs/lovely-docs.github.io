@@ -1,0 +1,1 @@
+Runes are Svelte's core reactive primitives for managing state, derived values, and side effects in components.

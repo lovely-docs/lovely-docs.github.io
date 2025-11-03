@@ -1,0 +1,1 @@
+Svelte 5 introduces .svelte.js and .svelte.ts files that allow using runes outside components for reusable reactive logic and shared state.

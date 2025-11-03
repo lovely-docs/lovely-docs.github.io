@@ -1,0 +1,1 @@
+Shorthand directive for setting inline styles on elements with support for dynamic values and important modifier.

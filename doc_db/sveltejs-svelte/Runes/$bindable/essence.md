@@ -1,0 +1,1 @@
+The $bindable rune marks component props as bindable, enabling bidirectional data flow and allowing child components to mutate state that flows back to parents.

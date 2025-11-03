@@ -1,0 +1,1 @@
+Testing strategies, TypeScript setup, custom elements compilation, and migration guides for Svelte 4→5.

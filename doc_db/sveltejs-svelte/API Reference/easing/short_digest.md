@@ -1,0 +1,1 @@
+The `svelte/easing` module provides easing functions (linear, quadratic, cubic, sine, exponential, elastic, bounce, etc.) that transform animation progress values (0-1) into eased values for smooth motion effects. Use them with transitions and animations via the `easing` parameter.

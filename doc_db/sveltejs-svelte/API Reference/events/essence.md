@@ -1,0 +1,1 @@
+Module providing event handling utilities for Svelte applications.

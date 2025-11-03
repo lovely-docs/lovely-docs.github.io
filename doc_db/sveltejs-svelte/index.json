@@ -1,0 +1,1581 @@
+{
+  "map": {
+    "Introduction": {
+      "path": "01-introduction",
+      "relevant": true,
+      "usage": {
+        "input": 1479,
+        "output": 470,
+        "details": null
+      },
+      "type": "directory"
+    },
+    "Introduction/overview": {
+      "path": "01-introduction/01-overview.md",
+      "relevant": false,
+      "usage": {
+        "input": 1303,
+        "output": 397,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 266,
+        "digest": 170,
+        "short_digest": 120
+      },
+      "type": "page"
+    },
+    "Introduction/getting-started": {
+      "path": "01-introduction/02-getting-started.md",
+      "relevant": true,
+      "usage": {
+        "input": 1578,
+        "output": 442,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 539,
+        "digest": 237,
+        "short_digest": 88
+      },
+      "type": "page"
+    },
+    "Introduction/.svelte-files": {
+      "path": "01-introduction/03-svelte-files.md",
+      "relevant": true,
+      "usage": {
+        "input": 1660,
+        "output": 609,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 620,
+        "digest": 352,
+        "short_digest": 126
+      },
+      "type": "page"
+    },
+    "Introduction/.svelte.js-and-.svelte.ts-files": {
+      "path": "01-introduction/04-svelte-js-files.md",
+      "relevant": true,
+      "usage": {
+        "input": 1186,
+        "output": 322,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 144,
+        "digest": 129,
+        "short_digest": 60
+      },
+      "type": "page"
+    },
+    "Introduction/introduction": {
+      "path": "01-introduction/index.md",
+      "relevant": false,
+      "usage": {
+        "input": 1049,
+        "output": 201,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 14,
+        "digest": 86,
+        "short_digest": 18
+      },
+      "type": "page"
+    },
+    "Runes": {
+      "path": "02-runes",
+      "relevant": true,
+      "usage": {
+        "input": 2531,
+        "output": 996,
+        "details": null
+      },
+      "type": "directory"
+    },
+    "Runes/what-are-runes": {
+      "path": "02-runes/01-what-are-runes.md",
+      "relevant": true,
+      "usage": {
+        "input": 1290,
+        "output": 307,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 247,
+        "digest": 120,
+        "short_digest": 63
+      },
+      "type": "page"
+    },
+    "Runes/$state": {
+      "path": "02-runes/02-$state.md",
+      "relevant": true,
+      "usage": {
+        "input": 3638,
+        "output": 1065,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 2599,
+        "digest": 770,
+        "short_digest": 178
+      },
+      "type": "page"
+    },
+    "Runes/$derived": {
+      "path": "02-runes/03-$derived.md",
+      "relevant": true,
+      "usage": {
+        "input": 2778,
+        "output": 760,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 1739,
+        "digest": 487,
+        "short_digest": 157
+      },
+      "type": "page"
+    },
+    "Runes/$effect": {
+      "path": "02-runes/04-$effect.md",
+      "relevant": true,
+      "usage": {
+        "input": 7005,
+        "output": 1031,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 5966,
+        "digest": 658,
+        "short_digest": 256
+      },
+      "type": "page"
+    },
+    "Runes/$props": {
+      "path": "02-runes/05-$props.md",
+      "relevant": true,
+      "usage": {
+        "input": 3968,
+        "output": 673,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 2929,
+        "digest": 439,
+        "short_digest": 123
+      },
+      "type": "page"
+    },
+    "Runes/$bindable": {
+      "path": "02-runes/06-$bindable.md",
+      "relevant": true,
+      "usage": {
+        "input": 1855,
+        "output": 540,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 815,
+        "digest": 317,
+        "short_digest": 102
+      },
+      "type": "page"
+    },
+    "Runes/$inspect": {
+      "path": "02-runes/07-$inspect.md",
+      "relevant": true,
+      "usage": {
+        "input": 2159,
+        "output": 603,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 1120,
+        "digest": 354,
+        "short_digest": 145
+      },
+      "type": "page"
+    },
+    "Runes/$host": {
+      "path": "02-runes/08-$host.md",
+      "relevant": true,
+      "usage": {
+        "input": 1678,
+        "output": 379,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 639,
+        "digest": 222,
+        "short_digest": 49
+      },
+      "type": "page"
+    },
+    "Runes/runes": {
+      "path": "02-runes/index.md",
+      "relevant": true,
+      "usage": {
+        "input": 1052,
+        "output": 328,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 16,
+        "digest": 157,
+        "short_digest": 59
+      },
+      "type": "page"
+    },
+    "Template Syntax": {
+      "path": "03-template-syntax",
+      "relevant": true,
+      "usage": {
+        "input": 4429,
+        "output": 2793,
+        "details": null
+      },
+      "type": "directory"
+    },
+    "Template Syntax/basic-markup": {
+      "path": "03-template-syntax/01-basic-markup.md",
+      "relevant": true,
+      "usage": {
+        "input": 3171,
+        "output": 1024,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 2130,
+        "digest": 687,
+        "short_digest": 227
+      },
+      "type": "page"
+    },
+    "Template Syntax/if-blocks": {
+      "path": "03-template-syntax/02-if.md",
+      "relevant": true,
+      "usage": {
+        "input": 1314,
+        "output": 400,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 275,
+        "digest": 183,
+        "short_digest": 115
+      },
+      "type": "page"
+    },
+    "Template Syntax/each-block": {
+      "path": "03-template-syntax/03-each.md",
+      "relevant": true,
+      "usage": {
+        "input": 2322,
+        "output": 733,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 1283,
+        "digest": 488,
+        "short_digest": 128
+      },
+      "type": "page"
+    },
+    "Template Syntax/key": {
+      "path": "03-template-syntax/04-key.md",
+      "relevant": true,
+      "usage": {
+        "input": 1188,
+        "output": 317,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 149,
+        "digest": 135,
+        "short_digest": 68
+      },
+      "type": "page"
+    },
+    "Template Syntax/await-blocks": {
+      "path": "03-template-syntax/05-await.md",
+      "relevant": true,
+      "usage": {
+        "input": 1676,
+        "output": 424,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 637,
+        "digest": 217,
+        "short_digest": 104
+      },
+      "type": "page"
+    },
+    "Template Syntax/snippets": {
+      "path": "03-template-syntax/06-snippet.md",
+      "relevant": true,
+      "usage": {
+        "input": 6554,
+        "output": 1050,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 5515,
+        "digest": 695,
+        "short_digest": 243
+      },
+      "type": "page"
+    },
+    "Template Syntax/@render": {
+      "path": "03-template-syntax/07-@render.md",
+      "relevant": true,
+      "usage": {
+        "input": 1315,
+        "output": 454,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 275,
+        "digest": 218,
+        "short_digest": 125
+      },
+      "type": "page"
+    },
+    "Template Syntax/@html-tag": {
+      "path": "03-template-syntax/08-@html.md",
+      "relevant": true,
+      "usage": {
+        "input": 1413,
+        "output": 396,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 373,
+        "digest": 223,
+        "short_digest": 58
+      },
+      "type": "page"
+    },
+    "Template Syntax/@attach-directive": {
+      "path": "03-template-syntax/09-@attach.md",
+      "relevant": true,
+      "usage": {
+        "input": 5398,
+        "output": 869,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 4358,
+        "digest": 531,
+        "short_digest": 224
+      },
+      "type": "page"
+    },
+    "Template Syntax/@const": {
+      "path": "03-template-syntax/10-@const.md",
+      "relevant": true,
+      "usage": {
+        "input": 1182,
+        "output": 353,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 142,
+        "digest": 153,
+        "short_digest": 100
+      },
+      "type": "page"
+    },
+    "Template Syntax/@debug-tag": {
+      "path": "03-template-syntax/11-@debug.md",
+      "relevant": true,
+      "usage": {
+        "input": 1300,
+        "output": 315,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 260,
+        "digest": 157,
+        "short_digest": 54
+      },
+      "type": "page"
+    },
+    "Template Syntax/bind": {
+      "path": "03-template-syntax/12-bind.md",
+      "relevant": true,
+      "usage": {
+        "input": 6185,
+        "output": 1159,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 5147,
+        "digest": 680,
+        "short_digest": 350
+      },
+      "type": "page"
+    },
+    "Template Syntax/use:-directive": {
+      "path": "03-template-syntax/13-use.md",
+      "relevant": true,
+      "usage": {
+        "input": 1696,
+        "output": 693,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 657,
+        "digest": 445,
+        "short_digest": 136
+      },
+      "type": "page"
+    },
+    "Template Syntax/transition": {
+      "path": "03-template-syntax/14-transition.md",
+      "relevant": true,
+      "usage": {
+        "input": 2608,
+        "output": 998,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 1569,
+        "digest": 709,
+        "short_digest": 173
+      },
+      "type": "page"
+    },
+    "Template Syntax/in-and-out-directives": {
+      "path": "03-template-syntax/15-in-and-out.md",
+      "relevant": true,
+      "usage": {
+        "input": 1251,
+        "output": 427,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 208,
+        "digest": 214,
+        "short_digest": 101
+      },
+      "type": "page"
+    },
+    "Template Syntax/animate": {
+      "path": "03-template-syntax/16-animate.md",
+      "relevant": true,
+      "usage": {
+        "input": 2280,
+        "output": 981,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 1241,
+        "digest": 580,
+        "short_digest": 279
+      },
+      "type": "page"
+    },
+    "Template Syntax/style-directive": {
+      "path": "03-template-syntax/17-style.md",
+      "relevant": true,
+      "usage": {
+        "input": 1334,
+        "output": 419,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 295,
+        "digest": 229,
+        "short_digest": 83
+      },
+      "type": "page"
+    },
+    "Template Syntax/class": {
+      "path": "03-template-syntax/18-class.md",
+      "relevant": true,
+      "usage": {
+        "input": 1960,
+        "output": 666,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 921,
+        "digest": 420,
+        "short_digest": 131
+      },
+      "type": "page"
+    },
+    "Template Syntax/template-syntax": {
+      "path": "03-template-syntax/index.md",
+      "relevant": true,
+      "usage": {
+        "input": 1052,
+        "output": 109,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 15,
+        "digest": 11,
+        "short_digest": 11
+      },
+      "type": "page"
+    },
+    "Styling": {
+      "path": "04-styling",
+      "relevant": true,
+      "usage": {
+        "input": 1532,
+        "output": 590,
+        "details": null
+      },
+      "type": "directory"
+    },
+    "Styling/scoped-styles": {
+      "path": "04-styling/01-scoped-styles.md",
+      "relevant": true,
+      "usage": {
+        "input": 1451,
+        "output": 465,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 411,
+        "digest": 236,
+        "short_digest": 109
+      },
+      "type": "page"
+    },
+    "Styling/global-styles": {
+      "path": "04-styling/02-global-styles.md",
+      "relevant": true,
+      "usage": {
+        "input": 1523,
+        "output": 497,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 484,
+        "digest": 287,
+        "short_digest": 97
+      },
+      "type": "page"
+    },
+    "Styling/custom-properties": {
+      "path": "04-styling/03-custom-properties.md",
+      "relevant": true,
+      "usage": {
+        "input": 1511,
+        "output": 423,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 472,
+        "digest": 266,
+        "short_digest": 55
+      },
+      "type": "page"
+    },
+    "Styling/nested-style-elements": {
+      "path": "04-styling/04-nested-style-elements.md",
+      "relevant": true,
+      "usage": {
+        "input": 1208,
+        "output": 333,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 167,
+        "digest": 144,
+        "short_digest": 85
+      },
+      "type": "page"
+    },
+    "Styling/styling": {
+      "path": "04-styling/index.md",
+      "relevant": false,
+      "usage": {
+        "input": 1050,
+        "output": 181,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 15,
+        "digest": 64,
+        "short_digest": 22
+      },
+      "type": "page"
+    },
+    "Special Elements": {
+      "path": "05-special-elements",
+      "relevant": true,
+      "usage": {
+        "input": 2166,
+        "output": 908,
+        "details": null
+      },
+      "type": "directory"
+    },
+    "Special Elements/svelte:boundary": {
+      "path": "05-special-elements/01-svelte-boundary.md",
+      "relevant": true,
+      "usage": {
+        "input": 2117,
+        "output": 616,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 1075,
+        "digest": 352,
+        "short_digest": 153
+      },
+      "type": "page"
+    },
+    "Special Elements/svelte-window": {
+      "path": "05-special-elements/02-svelte-window.md",
+      "relevant": true,
+      "usage": {
+        "input": 1409,
+        "output": 524,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 367,
+        "digest": 269,
+        "short_digest": 150
+      },
+      "type": "page"
+    },
+    "Special Elements/svelte-document": {
+      "path": "05-special-elements/03-svelte-document.md",
+      "relevant": true,
+      "usage": {
+        "input": 1259,
+        "output": 426,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 217,
+        "digest": 217,
+        "short_digest": 100
+      },
+      "type": "page"
+    },
+    "Special Elements/svelte:body": {
+      "path": "05-special-elements/04-svelte-body.md",
+      "relevant": true,
+      "usage": {
+        "input": 1223,
+        "output": 363,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 181,
+        "digest": 163,
+        "short_digest": 96
+      },
+      "type": "page"
+    },
+    "Special Elements/svelte:head": {
+      "path": "05-special-elements/05-svelte-head.md",
+      "relevant": true,
+      "usage": {
+        "input": 1217,
+        "output": 307,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 175,
+        "digest": 116,
+        "short_digest": 84
+      },
+      "type": "page"
+    },
+    "Special Elements/svelte:element": {
+      "path": "05-special-elements/06-svelte-element.md",
+      "relevant": true,
+      "usage": {
+        "input": 1395,
+        "output": 549,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 353,
+        "digest": 331,
+        "short_digest": 107
+      },
+      "type": "page"
+    },
+    "Special Elements/svelte:options": {
+      "path": "05-special-elements/07-svelte-options.md",
+      "relevant": true,
+      "usage": {
+        "input": 1470,
+        "output": 490,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 428,
+        "digest": 242,
+        "short_digest": 134
+      },
+      "type": "page"
+    },
+    "Special Elements/special-elements": {
+      "path": "05-special-elements/index.md",
+      "relevant": true,
+      "usage": {
+        "input": 1052,
+        "output": 209,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 15,
+        "digest": 70,
+        "short_digest": 39
+      },
+      "type": "page"
+    },
+    "Runtime APIs": {
+      "path": "06-runtime",
+      "relevant": true,
+      "usage": {
+        "input": 1863,
+        "output": 687,
+        "details": null
+      },
+      "type": "directory"
+    },
+    "Runtime APIs/stores": {
+      "path": "06-runtime/01-stores.md",
+      "relevant": true,
+      "usage": {
+        "input": 3873,
+        "output": 989,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 2836,
+        "digest": 655,
+        "short_digest": 218
+      },
+      "type": "page"
+    },
+    "Runtime APIs/context": {
+      "path": "06-runtime/02-context.md",
+      "relevant": true,
+      "usage": {
+        "input": 2675,
+        "output": 600,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 1638,
+        "digest": 364,
+        "short_digest": 126
+      },
+      "type": "page"
+    },
+    "Runtime APIs/lifecycle-hooks": {
+      "path": "06-runtime/03-lifecycle-hooks.md",
+      "relevant": true,
+      "usage": {
+        "input": 4684,
+        "output": 1111,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 3645,
+        "digest": 781,
+        "short_digest": 203
+      },
+      "type": "page"
+    },
+    "Runtime APIs/imperative-component-api": {
+      "path": "06-runtime/04-imperative-component-api.md",
+      "relevant": true,
+      "usage": {
+        "input": 1779,
+        "output": 590,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 737,
+        "digest": 372,
+        "short_digest": 109
+      },
+      "type": "page"
+    },
+    "Runtime APIs/runtime": {
+      "path": "06-runtime/index.md",
+      "relevant": false,
+      "usage": {
+        "input": 1049,
+        "output": 165,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 14,
+        "digest": 53,
+        "short_digest": 18
+      },
+      "type": "page"
+    },
+    "Miscellaneous & Advanced Topics": {
+      "path": "07-misc",
+      "relevant": true,
+      "usage": {
+        "input": 2806,
+        "output": 1520,
+        "details": null
+      },
+      "type": "directory"
+    },
+    "Miscellaneous & Advanced Topics/testing": {
+      "path": "07-misc/02-testing.md",
+      "relevant": true,
+      "usage": {
+        "input": 3569,
+        "output": 1218,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 2532,
+        "digest": 843,
+        "short_digest": 252
+      },
+      "type": "page"
+    },
+    "Miscellaneous & Advanced Topics/typescript": {
+      "path": "07-misc/03-typescript.md",
+      "relevant": true,
+      "usage": {
+        "input": 3991,
+        "output": 1214,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 2954,
+        "digest": 805,
+        "short_digest": 292
+      },
+      "type": "page"
+    },
+    "Miscellaneous & Advanced Topics/custom-elements": {
+      "path": "07-misc/04-custom-elements.md",
+      "relevant": true,
+      "usage": {
+        "input": 3074,
+        "output": 1048,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 2035,
+        "digest": 739,
+        "short_digest": 202
+      },
+      "type": "page"
+    },
+    "Miscellaneous & Advanced Topics/svelte-4-migration-guide": {
+      "path": "07-misc/06-v4-migration-guide.md",
+      "relevant": true,
+      "usage": {
+        "input": 4578,
+        "output": 1076,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 3536,
+        "digest": 653,
+        "short_digest": 294
+      },
+      "type": "page"
+    },
+    "Miscellaneous & Advanced Topics/svelte-5-migration-guide": {
+      "path": "07-misc/07-v5-migration-guide.md",
+      "relevant": true,
+      "usage": {
+        "input": 12817,
+        "output": 1481,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 11775,
+        "digest": 1124,
+        "short_digest": 212
+      },
+      "type": "page"
+    },
+    "Miscellaneous & Advanced Topics/frequently-asked-questions": {
+      "path": "07-misc/99-faq.md",
+      "relevant": true,
+      "usage": {
+        "input": 3677,
+        "output": 960,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 2639,
+        "digest": 619,
+        "short_digest": 224
+      },
+      "type": "page"
+    },
+    "Miscellaneous & Advanced Topics/misc": {
+      "path": "07-misc/index.md",
+      "relevant": false,
+      "usage": {
+        "input": 1050,
+        "output": 166,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 15,
+        "digest": 51,
+        "short_digest": 19
+      },
+      "type": "page"
+    },
+    "API Reference": {
+      "path": "98-reference",
+      "relevant": true,
+      "usage": {
+        "input": 3149,
+        "output": 1115,
+        "details": null
+      },
+      "type": "directory"
+    },
+    "API Reference/Error and Warning Reference": {
+      "path": "98-reference/.generated",
+      "relevant": true,
+      "usage": {
+        "input": 3004,
+        "output": 1183,
+        "details": null
+      },
+      "type": "directory"
+    },
+    "API Reference/Error and Warning Reference/client-errors": {
+      "path": "98-reference/.generated/client-errors.md",
+      "relevant": true,
+      "usage": {
+        "input": 2234,
+        "output": 917,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 1198,
+        "digest": 642,
+        "short_digest": 159
+      },
+      "type": "page"
+    },
+    "API Reference/Error and Warning Reference/client-warnings": {
+      "path": "98-reference/.generated/client-warnings.md",
+      "relevant": true,
+      "usage": {
+        "input": 3473,
+        "output": 1175,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 2437,
+        "digest": 685,
+        "short_digest": 384
+      },
+      "type": "page"
+    },
+    "API Reference/Error and Warning Reference/compile-errors": {
+      "path": "98-reference/.generated/compile-errors.md",
+      "relevant": true,
+      "usage": {
+        "input": 7124,
+        "output": 4495,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 6088,
+        "digest": 3746,
+        "short_digest": 645
+      },
+      "type": "page"
+    },
+    "API Reference/Error and Warning Reference/compile-warnings": {
+      "path": "98-reference/.generated/compile-warnings.md",
+      "relevant": true,
+      "usage": {
+        "input": 9523,
+        "output": 2291,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 8487,
+        "digest": 1994,
+        "short_digest": 188
+      },
+      "type": "page"
+    },
+    "API Reference/Error and Warning Reference/server-errors": {
+      "path": "98-reference/.generated/server-errors.md",
+      "relevant": true,
+      "usage": {
+        "input": 1124,
+        "output": 250,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 88,
+        "digest": 99,
+        "short_digest": 42
+      },
+      "type": "page"
+    },
+    "API Reference/Error and Warning Reference/shared-errors": {
+      "path": "98-reference/.generated/shared-errors.md",
+      "relevant": true,
+      "usage": {
+        "input": 1786,
+        "output": 643,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 750,
+        "digest": 371,
+        "short_digest": 168
+      },
+      "type": "page"
+    },
+    "API Reference/Error and Warning Reference/shared-warnings": {
+      "path": "98-reference/.generated/shared-warnings.md",
+      "relevant": true,
+      "usage": {
+        "input": 1294,
+        "output": 411,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 258,
+        "digest": 185,
+        "short_digest": 115
+      },
+      "type": "page"
+    },
+    "API Reference/svelte": {
+      "path": "98-reference/20-svelte.md",
+      "relevant": true,
+      "usage": {
+        "input": 1059,
+        "output": 158,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 21,
+        "digest": 42,
+        "short_digest": 22
+      },
+      "type": "page"
+    },
+    "API Reference/action": {
+      "path": "98-reference/21-svelte-action.md",
+      "relevant": true,
+      "usage": {
+        "input": 1065,
+        "output": 204,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 25,
+        "digest": 71,
+        "short_digest": 34
+      },
+      "type": "page"
+    },
+    "API Reference/animate": {
+      "path": "98-reference/21-svelte-animate.md",
+      "relevant": true,
+      "usage": {
+        "input": 1065,
+        "output": 208,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 25,
+        "digest": 74,
+        "short_digest": 39
+      },
+      "type": "page"
+    },
+    "API Reference/attachments": {
+      "path": "98-reference/21-svelte-attachments.md",
+      "relevant": true,
+      "usage": {
+        "input": 1068,
+        "output": 182,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 27,
+        "digest": 57,
+        "short_digest": 28
+      },
+      "type": "page"
+    },
+    "API Reference/compiler": {
+      "path": "98-reference/21-svelte-compiler.md",
+      "relevant": true,
+      "usage": {
+        "input": 1065,
+        "output": 279,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 25,
+        "digest": 132,
+        "short_digest": 42
+      },
+      "type": "page"
+    },
+    "API Reference/easing": {
+      "path": "98-reference/21-svelte-easing.md",
+      "relevant": true,
+      "usage": {
+        "input": 1068,
+        "output": 352,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 27,
+        "digest": 179,
+        "short_digest": 72
+      },
+      "type": "page"
+    },
+    "API Reference/events": {
+      "path": "98-reference/21-svelte-events.md",
+      "relevant": true,
+      "usage": {
+        "input": 1065,
+        "output": 184,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 25,
+        "digest": 61,
+        "short_digest": 27
+      },
+      "type": "page"
+    },
+    "API Reference/legacy": {
+      "path": "98-reference/21-svelte-legacy.md",
+      "relevant": true,
+      "usage": {
+        "input": 1107,
+        "output": 209,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 67,
+        "digest": 73,
+        "short_digest": 33
+      },
+      "type": "page"
+    },
+    "API Reference/motion": {
+      "path": "98-reference/21-svelte-motion.md",
+      "relevant": true,
+      "usage": {
+        "input": 1065,
+        "output": 172,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 25,
+        "digest": 55,
+        "short_digest": 20
+      },
+      "type": "page"
+    },
+    "API Reference/reactivity-window-module": {
+      "path": "98-reference/21-svelte-reactivity-window.md",
+      "relevant": true,
+      "usage": {
+        "input": 1199,
+        "output": 331,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 156,
+        "digest": 130,
+        "short_digest": 93
+      },
+      "type": "page"
+    },
+    "API Reference/reactivity": {
+      "path": "98-reference/21-svelte-reactivity.md",
+      "relevant": true,
+      "usage": {
+        "input": 1190,
+        "output": 236,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 149,
+        "digest": 82,
+        "short_digest": 46
+      },
+      "type": "page"
+    },
+    "API Reference/svelte/server": {
+      "path": "98-reference/21-svelte-server.md",
+      "relevant": true,
+      "usage": {
+        "input": 1065,
+        "output": 213,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 25,
+        "digest": 82,
+        "short_digest": 32
+      },
+      "type": "page"
+    },
+    "API Reference/store": {
+      "path": "98-reference/21-svelte-store.md",
+      "relevant": true,
+      "usage": {
+        "input": 1065,
+        "output": 162,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 25,
+        "digest": 45,
+        "short_digest": 19
+      },
+      "type": "page"
+    },
+    "API Reference/svelte/transition": {
+      "path": "98-reference/21-svelte-transition.md",
+      "relevant": true,
+      "usage": {
+        "input": 1065,
+        "output": 337,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 25,
+        "digest": 154,
+        "short_digest": 76
+      },
+      "type": "page"
+    },
+    "API Reference/compiler-errors": {
+      "path": "98-reference/30-compiler-errors.md",
+      "relevant": true,
+      "usage": {
+        "input": 1069,
+        "output": 198,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 30,
+        "digest": 72,
+        "short_digest": 26
+      },
+      "type": "page"
+    },
+    "API Reference/compiler-warnings": {
+      "path": "98-reference/30-compiler-warnings.md",
+      "relevant": true,
+      "usage": {
+        "input": 1246,
+        "output": 301,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 207,
+        "digest": 151,
+        "short_digest": 46
+      },
+      "type": "page"
+    },
+    "API Reference/runtime-errors": {
+      "path": "98-reference/30-runtime-errors.md",
+      "relevant": true,
+      "usage": {
+        "input": 1103,
+        "output": 237,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 64,
+        "digest": 106,
+        "short_digest": 30
+      },
+      "type": "page"
+    },
+    "API Reference/runtime-warnings": {
+      "path": "98-reference/30-runtime-warnings.md",
+      "relevant": true,
+      "usage": {
+        "input": 1088,
+        "output": 250,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 49,
+        "digest": 119,
+        "short_digest": 30
+      },
+      "type": "page"
+    },
+    "API Reference/reference": {
+      "path": "98-reference/index.md",
+      "relevant": false,
+      "usage": {
+        "input": 1049,
+        "output": 151,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 14,
+        "digest": 38,
+        "short_digest": 19
+      },
+      "type": "page"
+    },
+    "Legacy Mode": {
+      "path": "99-legacy",
+      "relevant": true,
+      "usage": {
+        "input": 2830,
+        "output": 846,
+        "details": null
+      },
+      "type": "directory"
+    },
+    "Legacy Mode/legacy-overview": {
+      "path": "99-legacy/00-legacy-overview.md",
+      "relevant": true,
+      "usage": {
+        "input": 1303,
+        "output": 309,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 264,
+        "digest": 130,
+        "short_digest": 64
+      },
+      "type": "page"
+    },
+    "Legacy Mode/reactive-let-var-declarations": {
+      "path": "99-legacy/01-legacy-let.md",
+      "relevant": true,
+      "usage": {
+        "input": 1317,
+        "output": 396,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 278,
+        "digest": 194,
+        "short_digest": 88
+      },
+      "type": "page"
+    },
+    "Legacy Mode/reactive-assignments-with-$:-statements": {
+      "path": "99-legacy/02-legacy-reactive-assignments.md",
+      "relevant": true,
+      "usage": {
+        "input": 1801,
+        "output": 734,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 760,
+        "digest": 460,
+        "short_digest": 156
+      },
+      "type": "page"
+    },
+    "Legacy Mode/export-let": {
+      "path": "99-legacy/03-legacy-export-let.md",
+      "relevant": true,
+      "usage": {
+        "input": 1565,
+        "output": 575,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 524,
+        "digest": 315,
+        "short_digest": 154
+      },
+      "type": "page"
+    },
+    "Legacy Mode/$$props-and-$$restprops": {
+      "path": "99-legacy/04-legacy-$$props-and-$$restProps.md",
+      "relevant": true,
+      "usage": {
+        "input": 1317,
+        "output": 464,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 271,
+        "digest": 238,
+        "short_digest": 120
+      },
+      "type": "page"
+    },
+    "Legacy Mode/legacy-event-handlers": {
+      "path": "99-legacy/10-legacy-on.md",
+      "relevant": true,
+      "usage": {
+        "input": 2129,
+        "output": 907,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 1090,
+        "digest": 532,
+        "short_digest": 263
+      },
+      "type": "page"
+    },
+    "Legacy Mode/legacy-slots": {
+      "path": "99-legacy/20-legacy-slots.md",
+      "relevant": true,
+      "usage": {
+        "input": 1959,
+        "output": 735,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 920,
+        "digest": 550,
+        "short_digest": 71
+      },
+      "type": "page"
+    },
+    "Legacy Mode/$$slots": {
+      "path": "99-legacy/21-legacy-$$slots.md",
+      "relevant": true,
+      "usage": {
+        "input": 1277,
+        "output": 303,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 237,
+        "digest": 132,
+        "short_digest": 63
+      },
+      "type": "page"
+    },
+    "Legacy Mode/svelte:fragment": {
+      "path": "99-legacy/22-legacy-svelte-fragment.md",
+      "relevant": true,
+      "usage": {
+        "input": 1311,
+        "output": 461,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 269,
+        "digest": 244,
+        "short_digest": 113
+      },
+      "type": "page"
+    },
+    "Legacy Mode/svelte:component": {
+      "path": "99-legacy/30-legacy-svelte-component.md",
+      "relevant": true,
+      "usage": {
+        "input": 1200,
+        "output": 288,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 158,
+        "digest": 135,
+        "short_digest": 46
+      },
+      "type": "page"
+    },
+    "Legacy Mode/svelte:self": {
+      "path": "99-legacy/31-legacy-svelte-self.md",
+      "relevant": false,
+      "usage": {
+        "input": 1330,
+        "output": 308,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 288,
+        "digest": 161,
+        "short_digest": 41
+      },
+      "type": "page"
+    },
+    "Legacy Mode/imperative-component-api": {
+      "path": "99-legacy/40-legacy-component-api.md",
+      "relevant": true,
+      "usage": {
+        "input": 2757,
+        "output": 770,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 1716,
+        "digest": 461,
+        "short_digest": 190
+      },
+      "type": "page"
+    },
+    "Legacy Mode/legacy-apis": {
+      "path": "99-legacy/index.md",
+      "relevant": true,
+      "usage": {
+        "input": 1050,
+        "output": 190,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 15,
+        "digest": 57,
+        "short_digest": 30
+      },
+      "type": "page"
+    },
+    "index": {
+      "path": "index.md",
+      "relevant": false,
+      "usage": {
+        "input": 1048,
+        "output": 145,
+        "details": null
+      },
+      "token_counts": {
+        "fulltext": 16,
+        "digest": 35,
+        "short_digest": 16
+      },
+      "type": "page"
+    }
+  },
+  "source_type": "git",
+  "source": {
+    "name": "sveltejs-svelte",
+    "doc_dir": "documentation/docs",
+    "repo": "https://github.com/sveltejs/svelte",
+    "commit": "facf528cb8a7289c8b3eaf036949a515f5ad2108"
+  }
+}

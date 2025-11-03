@@ -1,0 +1,1 @@
+The use: directive attaches action functions to elements on mount, with setup/teardown via $effect and optional typing.

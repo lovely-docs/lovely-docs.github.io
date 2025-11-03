@@ -1,0 +1,1 @@
+Transitions animate elements entering/leaving the DOM with built-in or custom functions, supporting local/global scope, parameters, and lifecycle events.

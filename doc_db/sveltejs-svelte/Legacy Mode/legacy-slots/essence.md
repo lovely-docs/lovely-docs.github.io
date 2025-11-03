@@ -1,0 +1,1 @@
+Legacy mode component content passing and rendering using slots with support for named slots, fallback content, and bidirectional data binding.

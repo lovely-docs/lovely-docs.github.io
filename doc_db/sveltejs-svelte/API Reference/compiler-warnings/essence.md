@@ -1,0 +1,1 @@
+How to suppress Svelte compiler warnings using svelte-ignore comments.

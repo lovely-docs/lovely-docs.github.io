@@ -1,0 +1,1 @@
+Svelte components are written in .svelte files with optional script, style, and markup sections; script runs per instance while script module runs once at module load, and styles are automatically scoped.

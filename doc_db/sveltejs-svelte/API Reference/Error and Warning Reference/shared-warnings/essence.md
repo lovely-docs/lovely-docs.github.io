@@ -1,0 +1,1 @@
+Documentation of two runtime warnings: void elements cannot have content, and $state.snapshot cannot clone certain objects.

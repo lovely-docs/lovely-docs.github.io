@@ -1,0 +1,1 @@
+The `svelte/events` module provides event handling utilities and helpers for Svelte components.

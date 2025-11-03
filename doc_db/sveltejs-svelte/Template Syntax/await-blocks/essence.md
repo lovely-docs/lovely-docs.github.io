@@ -1,0 +1,1 @@
+Await blocks handle Promise states with optional pending, then, and catch branches.

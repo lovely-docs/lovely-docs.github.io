@@ -1,0 +1,1 @@
+Legacy feature for recursive component inclusion; now obsolete in favor of direct self-imports.

@@ -1,0 +1,1 @@
+How Svelte scopes component styles and provides mechanisms for global styles, custom properties, and style element behavior.

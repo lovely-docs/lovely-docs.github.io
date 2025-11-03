@@ -1,0 +1,1 @@
+The `svelte/store` module provides reactive state management utilities for Svelte applications. It includes functions for creating and managing stores that can be subscribed to and updated across components.

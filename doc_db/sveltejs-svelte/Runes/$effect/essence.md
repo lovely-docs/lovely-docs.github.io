@@ -1,0 +1,1 @@
+Effects are side-effect functions that automatically track reactive dependencies and re-run when they change, with support for teardown functions and various execution modes.

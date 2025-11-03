@@ -1,0 +1,1 @@
+Two ways to set classes: the class attribute (supporting objects/arrays since 5.16) and the class: directive (legacy).
