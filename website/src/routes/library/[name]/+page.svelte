@@ -4,6 +4,8 @@
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 	import type { TreeNode } from 'lovely-docs-mcp/doc-cache';
 	import dbg from 'debug';
+	import { resolve } from '$app/paths';
+
 	const debug = dbg('app:page:library');
 
 	let { data } = $props();
@@ -15,7 +17,9 @@
 
 <div class="container mx-auto px-4 py-8 max-w-6xl">
 	<div class="flex items-center justify-between mb-6">
-		<a href="/" class="text-sm text-muted-foreground hover:text-foreground transition-colors"> ← Back to libraries </a>
+		<a href={resolve('/')} class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+			← Back to libraries
+		</a>
 		<ThemeToggle />
 	</div>
 
@@ -52,7 +56,7 @@
 		{#each node.children.values() as child}
 			<div class="relative">
 				{#if child.children.size === 0}
-					<a href="/library/{library.library}/{child.path}" class="block group">
+					<a href={resolve(`/library/${library.library}/${child.path}`)} class="block group">
 						<div
 							class="flex items-center justify-between py-2 px-3 rounded hover:bg-accent transition-colors"
 							style="padding-left: {depth * 1.5 + 0.75}rem">
@@ -74,7 +78,7 @@
 					</a>
 				{:else}
 					{#if child.data}
-						<a href="/library/{library.library}/{child.path}" class="block group">
+						<a href={resolve(`/library/${library.library}/${child.path}`)} class="block group">
 							<div
 								class="flex items-center justify-between py-2 px-3 rounded hover:bg-accent transition-colors font-medium"
 								style="padding-left: {depth * 1.5 + 0.75}rem">

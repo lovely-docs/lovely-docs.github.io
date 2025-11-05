@@ -29,7 +29,7 @@
 	<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 		{#each libraries as library}
 			<a
-				href="library/{library.name}"
+				href="library/{library.name}/"
 				class="block transition-transform hover:scale-[1.02]"
 			>
 				<Card class="h-full hover:shadow-lg transition-shadow">

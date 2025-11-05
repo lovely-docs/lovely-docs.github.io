@@ -11,6 +11,7 @@
 	} from "$lib/components/ui/card";
 	import ThemeToggle from "$lib/components/ThemeToggle.svelte";
 	import dbg from "debug";
+	import { resolve } from "$app/paths";
 	const debug = dbg("app:page:library:path");
 
 	let { data } = $props();
@@ -69,10 +70,10 @@
 <div class="container mx-auto px-4 py-8 max-w-6xl">
 	<div class="flex items-center justify-between mb-6">
 		<nav class="flex items-center gap-2 text-sm text-muted-foreground">
-			<a href="/" class="hover:text-foreground transition-colors">Home</a>
+			<a href={resolve("/")} class="hover:text-foreground transition-colors">Home</a>
 			<span>/</span>
 			<a
-				href="/library/{libraryName}"
+				href={resolve(`/library/${libraryName}`)}
 				class="hover:text-foreground transition-colors">{libraryName}</a
 			>
 			<span>/</span>
