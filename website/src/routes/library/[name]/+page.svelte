@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { Badge } from '$lib/components/ui/badge';
+	import { Button } from '$lib/components/ui/button';
 	import { Card, CardContent, CardHeader, CardTitle } from '$lib/components/ui/card';
+	import { Github } from '@lucide/svelte';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 	import type { TreeNode } from 'lovely-docs-mcp/doc-cache';
 	import dbg from 'debug';
@@ -20,7 +22,14 @@
 		<a href={resolve('/')} class="text-sm text-muted-foreground hover:text-foreground transition-colors">
 			← Back to libraries
 		</a>
-		<ThemeToggle />
+		<div class="flex items-center gap-2">
+			<a href="https://github.com/xl0/lovely-docs" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+				<Button variant="outline" size="icon">
+					<Github size={20} />
+				</Button>
+			</a>
+			<ThemeToggle />
+		</div>
 	</div>
 
 	<h1 class="text-4xl font-bold tracking-tight mb-8">{library.library}</h1>

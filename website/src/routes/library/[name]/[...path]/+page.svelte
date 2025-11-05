@@ -5,6 +5,7 @@
 	import { Badge } from '$lib/components/ui/badge';
 	import { Button } from '$lib/components/ui/button';
 	import { Card, CardContent } from '$lib/components/ui/card';
+	import { Github } from '@lucide/svelte';
 	import dbg from 'debug';
 	const debug = dbg('app:page:library:path');
 
@@ -91,7 +92,14 @@
 				{/if}
 			{/each}
 		</nav>
-		<ThemeToggle />
+		<div class="flex items-center gap-2">
+			<a href="https://github.com/xl0/lovely-docs" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+				<Button variant="outline" size="icon">
+					<Github size={20} />
+				</Button>
+			</a>
+			<ThemeToggle />
+		</div>
 	</div>
 
 	<div class="mb-6">

@@ -7,6 +7,8 @@
 		CardTitle,
 	} from "$lib/components/ui/card";
 	import { Badge } from "$lib/components/ui/badge";
+	import { Button } from "$lib/components/ui/button";
+	import { Github } from "@lucide/svelte";
 	import ThemeToggle from "$lib/components/ThemeToggle.svelte";
 
 	let { data } = $props();
@@ -23,7 +25,14 @@
 				Browse available documentation collections
 			</p>
 		</div>
-		<ThemeToggle />
+		<div class="flex items-center gap-2">
+			<a href="https://github.com/xl0/lovely-docs" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+				<Button variant="outline" size="icon">
+					<Github size={20} />
+				</Button>
+			</a>
+			<ThemeToggle />
+		</div>
 	</div>
 
 	<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
