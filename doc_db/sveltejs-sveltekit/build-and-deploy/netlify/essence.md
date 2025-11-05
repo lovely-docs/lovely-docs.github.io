@@ -1,0 +1,1 @@
+Deploy SvelteKit to Netlify using adapter-netlify with options for edge functions and function splitting, with access to Netlify-specific features like context, forms, and custom functions.

@@ -1,0 +1,1 @@
+Module that provides Node.js polyfills for browser APIs in SvelteKit server-side contexts.

@@ -1,0 +1,1 @@
+This page serves as an introduction to the fundamental concepts of SvelteKit. It appears to be an index or overview page that likely links to or introduces key topics developers need to understand when working with SvelteKit, such as routing, components, stores, and other architectural patterns.

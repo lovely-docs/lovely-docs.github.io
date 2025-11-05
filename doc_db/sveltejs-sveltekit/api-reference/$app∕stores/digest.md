@@ -1,0 +1,1 @@
+The `$app/stores` module provides store-based equivalents of the exports from `$app/state`. This module is considered legacy for SvelteKit 2.12 and later versions, where the `$app/state` module should be used instead for accessing application state.

@@ -1,0 +1,1 @@
+Index page for SvelteKit best practices documentation.

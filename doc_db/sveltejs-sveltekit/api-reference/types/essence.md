@@ -1,0 +1,1 @@
+SvelteKit auto-generates typed `$types` modules for routes to provide type-safe params, load data, and actions without manual type annotations.

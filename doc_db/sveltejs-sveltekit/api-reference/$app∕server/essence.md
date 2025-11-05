@@ -1,0 +1,1 @@
+Module reference for server-side utilities in SvelteKit applications.

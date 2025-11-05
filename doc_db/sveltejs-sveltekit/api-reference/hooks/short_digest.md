@@ -1,0 +1,1 @@
+The `@sveltejs/kit/hooks` module provides server-side hooks (`handle`, `handleError`, `handleFetch`) for intercepting and customizing the request/response lifecycle. Define them in `hooks.server.js` at your project root.

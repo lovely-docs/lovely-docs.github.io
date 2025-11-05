@@ -1,0 +1,1 @@
+This is the main entry point for SvelteKit documentation. It serves as the homepage and starting point for developers learning about or working with SvelteKit.

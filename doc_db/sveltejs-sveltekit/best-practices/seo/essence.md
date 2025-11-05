@@ -1,0 +1,1 @@
+Technical SEO best practices for SvelteKit: leverage built-in SSR and performance, set page metadata, create sitemaps, and optionally support AMP.

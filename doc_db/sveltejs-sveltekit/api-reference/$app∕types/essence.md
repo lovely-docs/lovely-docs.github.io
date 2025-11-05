@@ -1,0 +1,1 @@
+Auto-generated TypeScript types for type-safe access to routes, pathnames, and parameters in your SvelteKit app.

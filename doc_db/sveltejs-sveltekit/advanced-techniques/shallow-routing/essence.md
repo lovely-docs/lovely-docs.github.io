@@ -1,0 +1,1 @@
+Create history entries without navigating using pushState/replaceState to enable patterns like history-driven modals.

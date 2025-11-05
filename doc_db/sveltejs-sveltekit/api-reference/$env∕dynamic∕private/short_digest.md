@@ -1,0 +1,1 @@
+Module for accessing private environment variables at runtime on the server side. Use for sensitive configuration like API keys and database credentials.

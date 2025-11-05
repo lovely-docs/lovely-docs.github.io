@@ -1,0 +1,1 @@
+SvelteKit supports multiple rendering strategies and deployment targets through configurable adapters.

@@ -1,0 +1,1 @@
+Server-side hooks module for intercepting and customizing request/response handling in SvelteKit.

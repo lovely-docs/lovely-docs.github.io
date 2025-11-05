@@ -1,0 +1,1 @@
+How to build a SvelteKit app and prevent code from running during the build process.

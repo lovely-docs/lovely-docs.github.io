@@ -137,11 +137,14 @@ async def llm_process_page(settings: Settings, page: DocPage, libname: str) -> D
                     trace.end(outputs=await res.text())
                 except Exception as e:
                     logger.warning(f"Retry {attempt.retry_state.attempt_number}: {str(e)}")
+                    raise
 
     with ls.trace("Parse", "parser", inputs={"input": await res.text()}) as trace:
         reply = PageReplySchema.model_validate_json(await res.text())
         # Normalize better_name: lowercase, replace spaces with hyphens, remove .md extension
-        reply.better_name = reply.better_name.lower().replace(' ', '-').removesuffix('.md')
+        reply.better_name = (reply.better_name.lower()  .replace(' ', '-')
+                                                        .removesuffix('.md')
+                                                        .replace("/", "∕")) # No / in filenames!
         trace.end(outputs=reply)
         usage = await res.usage()
 
@@ -204,9 +207,6 @@ async def llm_process_directory(settings: Settings, directory: DocDirectory,  li
         prompt = template.render(**input)
         trace.end(outputs=prompt)
 
-    # Generate fulltext using the fulltext template
-    fulltext_template = Environment(loader=FileSystemLoader(settings.templates_dir)).get_template("directory_fulltext.j2")
-    fulltext = fulltext_template.render(**input)
 
     with ls.trace("LLM call", "llm", inputs={"prompt": prompt}) as trace:
         async for attempt in AsyncRetrying(stop=stop_after_attempt(5), wait=wait_exponential(multiplier=1, min=3, max=60)):
@@ -217,10 +217,19 @@ async def llm_process_directory(settings: Settings, directory: DocDirectory,  li
                     usage = await res.usage()
                 except Exception as e:
                     logger.warning(f"Retry {attempt.retry_state.attempt_number}: {str(e)}")
+                    raise
 
     with ls.trace("Parse", "parser", inputs={"input": await res.text()}) as trace:
         reply = DirReplySchema.model_validate_json(await res.text())
+        reply.better_name = (reply.better_name.lower()  .replace(' ', '-')
+                                                        .removesuffix('.md')
+                                                        .replace("/", "∕")) # No / in filenames!
         trace.end(outputs=reply)
+
+
+    # We save a generated fulltext for a directory which is the sum of digests of all the pages and subdirs within.
+    fulltext_template = Environment(loader=FileSystemLoader(settings.templates_dir)).get_template("directory_fulltext.j2")
+    fulltext = fulltext_template.render(**input)
 
     # Count tokens for fulltext, digest, and short_digest in parallel
     fulltext_tokens, digest_tokens, short_digest_tokens = await asyncio.gather(
@@ -275,7 +284,7 @@ async def process_tree_depth_first(settings: Settings, doc_dir: DocDirectory, li
         names.add(name)
 
     if not any(x for x in subdirs+pages if x.relevant):
-        return DocDirectory(path=doc_dir.path, relevant=False)
+        return DocDirectory(path=doc_dir.path, pages=pages, relevant=False)
 
     return await llm_process_directory(settings, DocDirectory(path=doc_dir.path, pages=pages, subdirs=subdirs), libname)
 
@@ -333,7 +342,7 @@ def save_doc_files(path: Path, doc: DocDirectory):
 
 
     for page in doc.pages:
-        (path/page.name).mkdir(exist_ok=True)
+        (path/page.name).mkdir(parents=True, exist_ok=True)
         (path/page.name/"essence.md").write_text(page.essence)
         (path/page.name/"fulltext.md").write_text(page.fulltext)
         (path/page.name/"digest.md").write_text(page.digest)

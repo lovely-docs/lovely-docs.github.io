@@ -1,0 +1,1 @@
+Module providing access to configured application base and assets paths.

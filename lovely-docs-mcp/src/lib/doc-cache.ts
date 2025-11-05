@@ -255,6 +255,6 @@ export function getDocItem(library: string, fullPath: string): DocItem | undefin
 	}
 
 	const res = current.data;
-	debug(`getDocItem(${library}, ${fullPath}) -> %O`, res)
+	debug(`getDocItem(${library}, ${fullPath}) -> %o`, res)
 	return res
 }

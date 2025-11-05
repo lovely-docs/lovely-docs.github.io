@@ -1,0 +1,1 @@
+Access private environment variables at runtime in SvelteKit server-side code.

@@ -1,0 +1,1 @@
+$app/stores is a deprecated module for accessing application state via stores; use $app/state in SvelteKit 2.12+.

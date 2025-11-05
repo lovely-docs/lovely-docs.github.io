@@ -1,0 +1,1 @@
+This page serves as an introduction to building and deploying SvelteKit applications. It covers the process of preparing your application for production and deploying it to various hosting platforms.

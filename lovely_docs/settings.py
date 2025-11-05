@@ -106,9 +106,15 @@ class Settings(BaseSettings):
     sources: dict[str, Source] = {
         "sveltejs/svelte": GitSource(
             name="sveltejs-svelte",
-            doc_dir="documentation/docs",
-            repo="https://github.com/sveltejs/svelte",
+            doc_dir="apps/svelte.dev/content/docs/svelte",
+            repo="https://github.com/sveltejs/svelte.dev",
+            commit="main"),
+        "sveltejs/sveltekit": GitSource(
+            name="sveltejs-sveltekit",
+            doc_dir="apps/svelte.dev/content/docs/kit",
+            repo="https://github.com/sveltejs/svelte.dev",
             commit="main")
+
     }
     api_key: str = os.getenv("ANTHROPIC_API_KEY", "")
 

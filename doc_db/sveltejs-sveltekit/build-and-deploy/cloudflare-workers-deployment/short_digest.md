@@ -1,0 +1,1 @@
+**Deprecated** in favor of `adapter-cloudflare`. Install `@sveltejs/adapter-cloudflare-workers` and configure Wrangler. Access Cloudflare bindings via `platform.env`. Type with `@cloudflare/workers-types`. Test locally with Wrangler 4+. Reduce worker size by client-side imports; use prerendering instead of `fs`.

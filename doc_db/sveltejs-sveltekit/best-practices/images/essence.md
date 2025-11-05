@@ -1,0 +1,1 @@
+Three approaches to image optimization: Vite's built-in asset handling, @sveltejs/enhanced-img for build-time optimization with multiple formats and sizes, and CDN-based solutions for dynamic images.

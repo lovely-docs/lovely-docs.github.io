@@ -1,0 +1,1 @@
+Routes defined by `src/routes` directory structure with `+` prefixed files. `+page.svelte` for pages, `+page.js`/`+page.server.js` for load functions, `+layout.svelte` for shared markup, `+server.js` for API endpoints, `+error.svelte` for error pages. Load functions run on server/client or server-only. `+server.js` exports HTTP handlers. Use `$types` for type safety.

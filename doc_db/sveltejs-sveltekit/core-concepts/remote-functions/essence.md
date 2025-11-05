@@ -1,0 +1,1 @@
+Type-safe client-server communication with query, form, command, and prerender functions that run on server and support validation, progressive enhancement, and single-flight mutations.

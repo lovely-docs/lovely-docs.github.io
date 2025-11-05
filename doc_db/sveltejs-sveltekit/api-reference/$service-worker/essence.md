@@ -1,0 +1,1 @@
+Module for accessing and configuring service worker functionality in SvelteKit.

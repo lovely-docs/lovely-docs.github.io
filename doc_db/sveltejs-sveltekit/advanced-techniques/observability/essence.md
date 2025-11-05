@@ -1,0 +1,1 @@
+SvelteKit can emit OpenTelemetry spans for server-side operations; enable via config, set up instrumentation in src/instrumentation.server.ts, and augment spans with custom attributes.

@@ -1,0 +1,1 @@
+This is a reference documentation index page for SvelteKit. It serves as the entry point to the API reference and technical documentation sections of the framework.

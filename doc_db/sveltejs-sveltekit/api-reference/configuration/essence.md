@@ -1,0 +1,1 @@
+SvelteKit projects are configured via svelte.config.js file with a kit property that accepts various configuration options.

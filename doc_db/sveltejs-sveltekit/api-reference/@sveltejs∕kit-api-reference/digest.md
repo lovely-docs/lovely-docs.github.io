@@ -1,0 +1,1 @@
+This page documents the @sveltejs/kit module API. It references private types that are used internally by public types but cannot be imported directly by users. The page serves as a reference for the public API surface of the kit module.

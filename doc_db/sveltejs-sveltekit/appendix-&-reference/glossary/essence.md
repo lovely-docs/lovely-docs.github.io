@@ -1,0 +1,1 @@
+Reference guide defining rendering modes (CSR, SSR, SPA, SSG, ISR, hybrid) and related concepts (hydration, prerendering, routing, PWA) used in SvelteKit.

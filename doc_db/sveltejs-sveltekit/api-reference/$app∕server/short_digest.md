@@ -1,0 +1,1 @@
+Server-side module providing utilities and APIs for server-only operations in SvelteKit. Available in hooks, routes, and server load functions.

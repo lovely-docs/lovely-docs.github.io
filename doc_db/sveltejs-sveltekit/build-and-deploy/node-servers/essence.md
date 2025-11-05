@@ -1,0 +1,1 @@
+Deploy SvelteKit apps as standalone Node servers using adapter-node with environment variable configuration for proxies, ports, and graceful shutdown.

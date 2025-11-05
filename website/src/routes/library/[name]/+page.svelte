@@ -11,10 +11,12 @@
 	const debug = dbg('app:page:library');
 
 	let { data } = $props();
-	const { library } = data;
-	debug(library);
+	const library = $derived(data.library);
 
-	const tree = library.tree as TreeNode;
+	$effect(() => {
+		debug(library);
+	});
+
 </script>
 
 <div class="container mx-auto px-4 py-8 max-w-6xl">
@@ -128,7 +130,7 @@
 
 	<Card>
 		<CardContent class="p-4">
-			{@render renderTree(tree)}
+			{@render renderTree(library.tree)}
 		</CardContent>
 	</Card>
 </div>

@@ -1,0 +1,1 @@
+Guidelines for managing state in server-rendered and client-side applications, covering shared state pitfalls, load function purity, context API usage, component lifecycle preservation, and state persistence strategies.

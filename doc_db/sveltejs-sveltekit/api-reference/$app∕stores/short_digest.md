@@ -1,0 +1,1 @@
+Legacy module providing store-based state equivalents. Use `$app/state` instead for SvelteKit 2.12+.

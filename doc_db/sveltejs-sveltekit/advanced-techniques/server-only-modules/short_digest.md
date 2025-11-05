@@ -1,0 +1,1 @@
+Mark modules as server-only using `.server` filename suffix or `$lib/server/` directory to prevent sensitive data leaking to the browser. SvelteKit errors if any import chain from client code reaches server-only modules, even indirectly or through unused exports.

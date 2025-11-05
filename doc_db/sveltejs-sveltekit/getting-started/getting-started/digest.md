@@ -1,0 +1,1 @@
+This page serves as the entry point for the documentation. It provides an overview and introduction to getting started with the framework, likely covering initial setup, installation, and basic concepts needed to begin development.

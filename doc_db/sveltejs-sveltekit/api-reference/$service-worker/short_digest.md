@@ -1,0 +1,1 @@
+The `$service-worker` module provides access to service worker functionality in SvelteKit applications.

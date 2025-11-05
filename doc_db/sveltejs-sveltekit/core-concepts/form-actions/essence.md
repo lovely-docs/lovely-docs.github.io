@@ -1,0 +1,1 @@
+Server-side form actions in +page.server.js handle POST requests with progressive enhancement support via use:enhance.

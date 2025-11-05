@@ -1,0 +1,1 @@
+The `$app/environment` module provides access to environment variables and runtime information in SvelteKit applications, allowing you to detect build modes and access environment configuration.

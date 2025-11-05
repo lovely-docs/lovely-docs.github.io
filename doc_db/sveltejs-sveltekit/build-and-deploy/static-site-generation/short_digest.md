@@ -1,0 +1,1 @@
+Install `@sveltejs/adapter-static` and set `prerender = true` in root layout. Configure adapter options: `pages`, `assets`, `fallback` (for SPA), `precompress`, `strict`. Set `trailingSlash: 'always'` if needed. For GitHub Pages, update `paths.base` to repo name and generate `404.html` fallback.

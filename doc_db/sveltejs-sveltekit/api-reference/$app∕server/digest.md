@@ -1,0 +1,1 @@
+The `$app/server` module provides server-side utilities and helpers for SvelteKit applications. This module is only available in server-side code (hooks, routes, and server-side load functions) and cannot be used in browser contexts. It exports server-specific APIs that enable developers to access server runtime information and perform server-only operations.

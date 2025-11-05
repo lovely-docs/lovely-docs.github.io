@@ -1,0 +1,1 @@
+Complete reference for SvelteKit's runtime modules, environment variables, type system, configuration, and server-side APIs.

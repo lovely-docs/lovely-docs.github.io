@@ -1,0 +1,1 @@
+API reference page for @sveltejs/kit module with notes on private vs public types.

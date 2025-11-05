@@ -1,0 +1,1 @@
+The `@sveltejs/kit/node/polyfills` module provides polyfills for Node.js environments when using SvelteKit. This module enables compatibility for browser APIs and features in server-side Node.js contexts, allowing code that relies on browser-specific functionality to work in server-side rendering scenarios.

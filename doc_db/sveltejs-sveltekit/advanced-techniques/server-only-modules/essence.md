@@ -1,0 +1,1 @@
+Prevent accidental exposure of sensitive data to the browser by marking modules as server-only using .server suffix or $lib/server/ directory.

@@ -1,0 +1,1 @@
+Server-only module for accessing private environment variables at build time. Statically replaced during build, never exposed to client. Use for sensitive secrets like API keys and credentials.

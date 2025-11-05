@@ -1,0 +1,1 @@
+Implement the Adapter API by exporting a function that returns an object with name and adapt method, where adapt handles build output, request handling, and platform integration.

@@ -1,0 +1,1 @@
+Module for accessing public environment variables (prefixed with `PUBLIC_`) that are statically injected at build time and safe to expose in client-side code.

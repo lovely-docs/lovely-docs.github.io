@@ -1,0 +1,1 @@
+Define load functions in route files to fetch and return data to components, with separate universal and server-only variants offering different capabilities and execution contexts.

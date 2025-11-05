@@ -1,0 +1,1 @@
+The `$app/paths` module exports `base` and `assets` paths configured in `svelte.config.js`. Use `base` for routing and `assets` for static resources.

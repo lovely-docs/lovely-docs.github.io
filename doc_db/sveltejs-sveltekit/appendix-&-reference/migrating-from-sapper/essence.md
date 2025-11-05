@@ -1,0 +1,1 @@
+Comprehensive guide to migrating a Sapper application to SvelteKit, covering package.json updates, file structure changes, routing conventions, API migrations, and configuration updates.

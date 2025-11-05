@@ -1,0 +1,1 @@
+How to handle expected and unexpected errors in SvelteKit, customize error objects, and control error page rendering.

@@ -1,0 +1,1 @@
+SvelteKit leverages Vite's CLI for development and building, with an additional svelte-kit sync command for generating project configuration and types.

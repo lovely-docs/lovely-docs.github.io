@@ -1,0 +1,1 @@
+The `$app/state` module (added in 2.12) exports three read-only state objects: `page`, `navigating`, and `updated`. Use `$app/stores` for earlier SvelteKit versions.

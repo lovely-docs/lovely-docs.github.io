@@ -1,0 +1,1 @@
+The `$env/dynamic/private` module provides access to private environment variables at runtime in SvelteKit applications. These are environment variables that should only be accessible on the server side and never exposed to the client. Use this module to securely access sensitive configuration like API keys, database credentials, and other secrets that must remain private.

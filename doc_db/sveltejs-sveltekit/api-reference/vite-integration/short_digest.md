@@ -1,0 +1,1 @@
+Vite plugin module for SvelteKit that provides build system integration and configuration utilities.

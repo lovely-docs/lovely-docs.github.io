@@ -1,0 +1,1 @@
+Module for accessing private, server-only environment variables that are statically replaced at build time.

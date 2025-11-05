@@ -1,0 +1,1 @@
+Best practices for using icons in SvelteKit: prefer CSS-based approaches with Iconify, and avoid Svelte component libraries with per-icon files due to Vite optimization issues.

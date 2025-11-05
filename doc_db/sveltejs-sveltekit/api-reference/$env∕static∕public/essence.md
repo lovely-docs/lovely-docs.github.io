@@ -1,0 +1,1 @@
+Access public environment variables in SvelteKit applications via the $env/static/public module.

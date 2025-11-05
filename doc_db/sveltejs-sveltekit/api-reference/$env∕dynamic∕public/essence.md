@@ -1,0 +1,1 @@
+Runtime access to public environment variables in SvelteKit applications.

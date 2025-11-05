@@ -1,0 +1,1 @@
+Reference documentation for @sveltejs/kit module. Notes that private types exist but cannot be imported directly.

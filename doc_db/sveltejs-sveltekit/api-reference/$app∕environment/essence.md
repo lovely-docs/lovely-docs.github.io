@@ -1,0 +1,1 @@
+Module for accessing environment variables and runtime information in SvelteKit.

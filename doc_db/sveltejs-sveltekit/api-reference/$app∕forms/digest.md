@@ -1,0 +1,1 @@
+The `$app/forms` module provides utilities for working with form submissions in SvelteKit applications. This module is part of SvelteKit's app runtime and enables developers to handle form data, validation, and responses in a structured way.

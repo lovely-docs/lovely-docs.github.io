@@ -1,0 +1,1 @@
+Navigation utilities for programmatic routing and data invalidation in SvelteKit.

@@ -1,0 +1,1 @@
+Module for integrating Vite as the build tool in SvelteKit projects.

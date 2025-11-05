@@ -1,0 +1,1 @@
+Export page options from layout and page files to control server rendering, prerendering, client rendering, trailing slashes, and adapter-specific configuration.

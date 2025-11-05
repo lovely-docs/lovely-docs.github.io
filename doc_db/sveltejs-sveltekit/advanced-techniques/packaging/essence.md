@@ -1,0 +1,1 @@
+How to build and publish component libraries with SvelteKit using @sveltejs/package, configuring package.json exports, handling TypeScript definitions, and best practices.
