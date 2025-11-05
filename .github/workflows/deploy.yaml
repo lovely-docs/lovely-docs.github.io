@@ -21,7 +21,15 @@ jobs:
         with:
           bun-version: latest
 
-      - name: Install dependencies
+      - name: Install MCP package dependencies
+        run: bun install
+        working-directory: ./lovely-docs-mcp
+
+      - name: Build MCP package
+        run: bunx tsc
+        working-directory: ./lovely-docs-mcp
+
+      - name: Install website dependencies
         run: bun install
         working-directory: ./website
 
