@@ -1,0 +1,1 @@
+Special element for inserting content into the document head, with SSR support and top-level-only placement requirement.

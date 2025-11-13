@@ -1,1 +1,0 @@
-Context enables parent-to-child value passing without prop-drilling and provides request-isolated state management.

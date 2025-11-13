@@ -1,0 +1,1 @@
+Reference documentation for server-side rendering errors in Svelte with solutions for async handling, deprecated properties, and lifecycle restrictions.

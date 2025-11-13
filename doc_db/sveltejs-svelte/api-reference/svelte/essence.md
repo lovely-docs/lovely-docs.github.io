@@ -1,1 +1,0 @@
-Complete reference of Svelte 5 runtime API for component mounting, lifecycle, state management, context, and type definitions.

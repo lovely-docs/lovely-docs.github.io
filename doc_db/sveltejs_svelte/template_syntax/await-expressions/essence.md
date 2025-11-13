@@ -1,0 +1,1 @@
+Experimental feature enabling await expressions in component scripts, derived declarations, and markup with synchronized updates and concurrency control.

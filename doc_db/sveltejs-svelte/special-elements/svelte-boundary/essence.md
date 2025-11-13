@@ -1,1 +1,0 @@
-Error boundary component for handling rendering errors and pending async states with optional error callbacks and UI snippets.

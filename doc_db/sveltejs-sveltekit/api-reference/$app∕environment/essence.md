@@ -1,1 +1,0 @@
-Runtime environment detection constants for conditional code execution in SvelteKit apps.

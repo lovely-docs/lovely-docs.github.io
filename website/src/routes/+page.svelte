@@ -1,29 +1,26 @@
 <script lang="ts">
-	import {
-		Card,
-		CardContent,
-		CardDescription,
-		CardHeader,
-		CardTitle,
-	} from "$lib/components/ui/card";
-	import { Badge } from "$lib/components/ui/badge";
-	import { Button } from "$lib/components/ui/button";
-	import { Github } from "@lucide/svelte";
-	import ThemeToggle from "$lib/components/ThemeToggle.svelte";
+	import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '$lib/components/ui/card';
+	import { Badge } from '$lib/components/ui/badge';
+	import { Button } from '$lib/components/ui/button';
+	import { Github } from '@lucide/svelte';
+	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
+	import dbg from 'debug';
 
-	let { data } = $props();
-	const { libraries } = data;
+	const debug = dbg('app:page');
+
+	const { data } = $props();
+	const libraries = $derived(data.libraries)
+
+	$effect(() => {
+		debug(data);
+	});
 </script>
 
 <div class="container mx-auto px-4 py-8 max-w-6xl">
 	<div class="flex items-center justify-between mb-8">
 		<div>
-			<h1 class="text-4xl font-bold tracking-tight mb-2">
-				Documentation Libraries
-			</h1>
-			<p class="text-muted-foreground text-lg">
-				Browse available documentation collections
-			</p>
+			<h1 class="text-4xl font-bold tracking-tight mb-2">Documentation Libraries</h1>
+			<p class="text-muted-foreground text-lg">Browse available documentation collections</p>
 		</div>
 		<div class="flex items-center gap-2">
 			<a href="https://github.com/xl0/lovely-docs" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
@@ -36,38 +33,27 @@
 	</div>
 
 	<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-		{#each libraries as library}
-			<a
-				href="library/{library.name}/"
-				class="block transition-transform hover:scale-[1.02]"
-			>
+		{#each libraries as [key, library]}
+			<a href="{key}" class="block transition-transform hover:scale-[1.02]">
 				<Card class="h-full hover:shadow-lg transition-shadow">
 					<CardHeader>
 						<CardTitle class="flex items-center justify-between">
 							<span>{library.name}</span>
 							{#if library.source_type}
-								<Badge variant="secondary"
-									>{library.source_type}</Badge
-								>
+								<Badge variant="secondary">{library.source_type}</Badge>
 							{/if}
 						</CardTitle>
 						{#if library.source}
-							<CardDescription class="line-clamp-2">
-								{library.source.repo ||
-									library.source.name ||
-									"No description"}
+							<CardDescription>
+								{library.source.repo || library.source.name || 'No description'}
 							</CardDescription>
 						{/if}
 					</CardHeader>
-					{#if library.source?.commit}
-						<CardContent>
-							<div
-								class="text-xs text-muted-foreground font-mono"
-							>
-								{library.source.commit.slice(0, 7)}
-							</div>
-						</CardContent>
-					{/if}
+					<CardContent>
+						<div class="text-xs text-muted-foreground font-mono">
+							{library.source.commit.slice(0, 7)}
+						</div>
+					</CardContent>
 				</Card>
 			</a>
 		{/each}

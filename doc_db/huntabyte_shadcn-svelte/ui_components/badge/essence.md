@@ -1,0 +1,1 @@
+A reusable badge component with multiple style variants and support for custom styling and link badges.

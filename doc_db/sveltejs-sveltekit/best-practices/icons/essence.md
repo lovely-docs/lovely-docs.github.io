@@ -1,1 +1,0 @@
-Two approaches to using icons in SvelteKit: CSS-based via Iconify, or Svelte component libraries (avoiding those with per-icon files).

@@ -1,1 +1,0 @@
-App-wide functions that give fine-grained control over SvelteKit's behavior in response to specific events.

@@ -1,0 +1,1 @@
+SvelteKit configuration options in svelte.config.js for adapters, routing, CSP, prerendering, environment variables, and deployment versioning.

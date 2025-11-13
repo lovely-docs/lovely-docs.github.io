@@ -1,0 +1,1 @@
+This is a reference documentation index page for Svelte. It serves as a navigation hub for API documentation and language reference materials. The page itself contains no substantive technical content - it is a structural/organizational page that links to other reference documentation sections.

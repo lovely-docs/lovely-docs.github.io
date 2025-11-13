@@ -1,0 +1,1 @@
+Runtime environment detection constants for SvelteKit apps.

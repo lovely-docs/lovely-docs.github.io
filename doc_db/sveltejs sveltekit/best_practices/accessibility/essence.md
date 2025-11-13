@@ -1,0 +1,1 @@
+Built-in accessibility features in SvelteKit: route announcements via page titles, focus management after navigation, and language attribute configuration.

@@ -1,0 +1,1 @@
+Module for accessing private runtime environment variables on the server side.

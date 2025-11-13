@@ -1,1 +1,0 @@
-How to build and publish component libraries using @sveltejs/package, including package.json configuration, TypeScript support, and best practices.

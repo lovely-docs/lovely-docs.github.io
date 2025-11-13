@@ -1,0 +1,1 @@
+Non-bidirectional transition directives that allow separate entrance and exit animations without reversing.

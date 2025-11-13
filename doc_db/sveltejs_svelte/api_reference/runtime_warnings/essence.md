@@ -1,0 +1,1 @@
+Reference guide for Svelte runtime warnings with explanations and fixes for common issues with state, reactivity, hydration, and component lifecycle.

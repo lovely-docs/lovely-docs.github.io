@@ -1,0 +1,1 @@
+Complete TypeScript API reference for SvelteKit exports, hooks, navigation, forms, configuration, and type generation.

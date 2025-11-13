@@ -1,1 +1,0 @@
-Control per-page rendering behavior (prerendering, SSR, CSR, trailing slashes) and adapter configuration in SvelteKit.

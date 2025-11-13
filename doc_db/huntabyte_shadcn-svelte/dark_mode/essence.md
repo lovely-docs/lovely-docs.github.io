@@ -1,0 +1,1 @@
+Configure dark mode using mode-watcher with Tailwind's class strategy, supporting toggle buttons and dropdown menus with light/dark/system options.

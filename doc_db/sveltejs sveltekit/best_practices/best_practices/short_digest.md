@@ -1,0 +1,1 @@
+Documentation index page for SvelteKit best practices. Specific practices and content are not visible in the provided excerpt.

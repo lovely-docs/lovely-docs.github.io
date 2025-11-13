@@ -1,1 +1,0 @@
-Complete TypeScript API reference for @sveltejs/kit covering response helpers, request/event types, hooks, adapters, remote functions, and cookies.

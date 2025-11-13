@@ -1,0 +1,1 @@
+Preserve ephemeral DOM state across page navigation using snapshot capture and restore methods.

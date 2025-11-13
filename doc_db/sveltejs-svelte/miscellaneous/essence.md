@@ -1,1 +1,0 @@
-Advanced topics covering testing strategies, TypeScript integration, web components, and migration guides for Svelte 4 and 5.

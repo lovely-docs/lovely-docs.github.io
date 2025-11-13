@@ -1,0 +1,1 @@
+Inject raw HTML into components using {@html ...} with proper sanitization and :global styling for injected content.

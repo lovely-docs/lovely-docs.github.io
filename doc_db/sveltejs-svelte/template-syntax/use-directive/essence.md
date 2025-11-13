@@ -1,1 +1,0 @@
-The use: directive attaches action functions to elements for lifecycle management and custom behavior.

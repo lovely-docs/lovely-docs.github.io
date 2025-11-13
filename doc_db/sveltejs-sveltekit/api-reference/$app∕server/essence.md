@@ -1,1 +1,0 @@
-API reference for $app/server module providing remote function utilities (command, form, query, prerender) and asset reading capabilities.

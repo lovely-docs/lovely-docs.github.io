@@ -1,0 +1,1 @@
+Preserve DOM state across navigation using `snapshot` object with `capture` and `restore` methods exported from `+page.svelte` or `+layout.svelte`. Data is stored in history stack and `sessionStorage`, must be JSON-serializable.

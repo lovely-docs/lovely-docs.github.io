@@ -1,0 +1,1 @@
+Resizable panel component for creating accessible, keyboard-navigable draggable panel layouts in horizontal or vertical directions.

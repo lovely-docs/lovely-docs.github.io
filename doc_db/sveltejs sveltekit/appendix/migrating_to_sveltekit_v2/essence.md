@@ -1,0 +1,1 @@
+Breaking changes and migration guide for upgrading from SvelteKit 1 to 2, including error handling, cookie paths, promise handling, routing, environment variables, and dependency updates.

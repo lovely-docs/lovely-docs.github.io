@@ -1,0 +1,1 @@
+Implement dark mode in Astro using Tailwind's class strategy with mode-watcher and localStorage persistence.

@@ -1,0 +1,1 @@
+The $props rune receives component inputs with destructuring, fallback values, renaming, and rest syntax; $props.id() generates unique instance IDs for element linking.

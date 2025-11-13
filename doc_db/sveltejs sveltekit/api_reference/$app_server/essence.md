@@ -1,0 +1,1 @@
+API reference for $app/server module providing remote functions (command, query, form, prerender) and utilities (getRequestEvent, read) for server-side operations in SvelteKit.

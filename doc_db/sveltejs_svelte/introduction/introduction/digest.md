@@ -1,0 +1,1 @@
+This page serves as the introduction section to the Svelte documentation. However, the actual content is not provided in the page excerpt - only the frontmatter metadata is shown. The page appears to be auto-generated as part of the documentation build process.

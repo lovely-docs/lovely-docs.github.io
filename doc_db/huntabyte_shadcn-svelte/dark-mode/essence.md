@@ -1,0 +1,1 @@
+Documentation index for implementing dark mode in shadcn-svelte across different frameworks.

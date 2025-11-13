@@ -1,1 +1,0 @@
-Seven transition functions: **blur**, **fade**, **fly**, **scale**, **slide**, **draw** (SVG), **crossfade** (paired send/receive). All accept `delay`, `duration`, `easing`. Specific parameters: blur has `amount`/`opacity`; fly has `x`/`y`/`opacity`; scale has `start`/`opacity`; slide has `axis`; draw has `speed`; crossfade has `fallback`.

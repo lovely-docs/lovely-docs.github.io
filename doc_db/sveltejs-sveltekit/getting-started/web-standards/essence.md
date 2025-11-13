@@ -1,1 +1,0 @@
-SvelteKit leverages standard Web APIs (Fetch, Request/Response, Headers, FormData, Streams, URL, Web Crypto) available across modern browsers and server environments.

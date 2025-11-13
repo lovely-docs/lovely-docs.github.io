@@ -1,1 +1,0 @@
-Documentation index for Svelte's special elements and built-in components.

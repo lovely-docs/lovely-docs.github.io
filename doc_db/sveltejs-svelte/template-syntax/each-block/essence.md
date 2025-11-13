@@ -1,1 +1,0 @@
-Svelte's each block for iterating over arrays and iterables with support for keying, destructuring, and else clauses.

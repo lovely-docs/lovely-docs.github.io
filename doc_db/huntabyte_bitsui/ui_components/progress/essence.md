@@ -1,0 +1,1 @@
+Progress component for displaying task completion status with configurable min/max values and indeterminate state support.

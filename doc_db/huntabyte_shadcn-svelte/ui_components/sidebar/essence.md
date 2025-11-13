@@ -1,0 +1,1 @@
+Composable, themeable sidebar component with collapsible states, menus, and customizable layout variants.

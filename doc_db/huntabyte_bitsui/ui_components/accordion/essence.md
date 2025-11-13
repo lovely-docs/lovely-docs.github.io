@@ -1,0 +1,1 @@
+Collapsible accordion component supporting single/multiple open items with accessible defaults, state management, and transition support.

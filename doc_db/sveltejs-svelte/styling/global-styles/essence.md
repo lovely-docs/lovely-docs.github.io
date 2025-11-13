@@ -1,1 +1,0 @@
-Use :global(...) modifier or :global block to apply styles globally in Svelte components.

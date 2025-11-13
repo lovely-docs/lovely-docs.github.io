@@ -1,1 +1,0 @@
-.svelte.js and .svelte.ts files are modules that support runes for creating reusable reactive logic and sharing reactive state. Introduced in Svelte 5.

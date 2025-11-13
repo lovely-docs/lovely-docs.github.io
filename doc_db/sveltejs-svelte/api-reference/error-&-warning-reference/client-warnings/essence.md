@@ -1,1 +1,0 @@
-Reference documentation for all client-side warnings in Svelte with explanations and fixes.

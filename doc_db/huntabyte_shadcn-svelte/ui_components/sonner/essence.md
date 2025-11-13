@@ -1,0 +1,1 @@
+Toast notification component with support for success/error types, descriptions, and action buttons.

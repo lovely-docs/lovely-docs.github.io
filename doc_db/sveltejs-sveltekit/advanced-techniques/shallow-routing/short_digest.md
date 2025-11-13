@@ -1,1 +1,0 @@
-Create history entries without navigating using `pushState(url, state)` and `replaceState(url, state)`. Access state via `page.state`. Use `preloadData(href)` to load data before shallow navigation. State is empty during SSR and initial page load; requires JavaScript.

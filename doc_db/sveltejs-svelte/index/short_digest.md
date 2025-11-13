@@ -1,1 +1,0 @@
-Main documentation index page - serves as the root entry point for Svelte docs.

@@ -1,0 +1,1 @@
+Headless Svelte component library focused on developer experience, accessibility, and creative control with unstyled components and composable design.

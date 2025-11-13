@@ -1,30 +1,23 @@
 You are summarizing a directory of documentation for {{ libname }}.
-
 <dir path="{{ path }}" name="{{ dirname }}">
-
-{% if subdirs %}
+{%- if subdirs -%}
 <subdirectories>
-{% for subdir in subdirs %}
-{{ raise("subdir.digest cannot be None or empty for subdir: " + (subdir.better_name or subdir.name)) if not subdir.digest }}
-{{ raise("subdir.essence cannot be None or empty for subdir: " + (subdir.better_name or subdir.name)) if not subdir.essence }}
-<subdir name="{{ subdir.name or subdir.path }}" title="{{ subdir.essence }}">
+{%- for subdir in subdirs -%}{{ raise("subdir.digest cannot be None or empty for subdir: " + (subdir.better_name or subdir.name)) if not subdir.digest }}{{ raise("subdir.essence cannot be None or empty for subdir: " + (subdir.better_name or subdir.name)) if not subdir.essence }}
+<subdir name="{{ subdir.name }}" title="{{ subdir.essence }}">
 {{ subdir.digest }}
 </subdir>
-{% endfor %}
+{%- endfor -%}
 </subdirectories>
-{% endif %}
-
-{% if pages %}
+{%- endif -%}
+{%- if pages %}
 <pages>
-{% for page in pages %}
-{{ raise("page.essence cannot be None or empty for page: " + (page.better_filename or page.name)) if not page.essence }}
-{{ raise("page.short_digest cannot be None or empty for page: " + (page.better_filename or page.name)) if not page.short_digest }}
-<page path="{{ path }}" name="{{ page.name or page.path }}" title="{{ page.essence }}">
-{{ page.short_digest }}
+{%- for page in pages -%}{{ raise("page.essence cannot be None or empty for page: " + (page.better_filename or page.name)) if not page.essence }}{{ raise("page.short_digest cannot be None or empty for page: " + (page.better_filename or page.name)) if not page.short_digest }}
+<page path="{{ page.path }}" name="{{ page.name }}" title="{{ page.essence }}">
+{{ page.digest }}
 </page>
-{% endfor %}
+{%- endfor -%}
 </pages>
-{% endif %}
+{%- endif -%}
 </dir>
 
 Based on the information above, in this order:
@@ -46,3 +39,9 @@ Based on the information above, in this order:
 - One-line essence of the contents.
 - Is the content you saw relevant to a programmer who is already somewhat familiar with {{ libname }}?
     - Ignore various marker/meta files used to structure the documentation.
+
+Output one entry for the whole directory.
+{%- if extra -%}
+Additional instructoins for this directory:
+{{ extra }}
+{%- endif -%}

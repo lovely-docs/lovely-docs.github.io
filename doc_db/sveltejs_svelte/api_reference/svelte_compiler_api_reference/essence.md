@@ -1,0 +1,1 @@
+Complete API reference for the svelte/compiler module with functions for compiling, parsing, and preprocessing Svelte components, including detailed TypeScript type definitions for compilation options and AST structures.

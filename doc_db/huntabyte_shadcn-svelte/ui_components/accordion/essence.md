@@ -1,0 +1,1 @@
+Accordion component for collapsible content sections with WAI-ARIA accessibility.

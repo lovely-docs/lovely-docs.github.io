@@ -1,1 +1,0 @@
-How to set classes on elements using the class attribute (with objects/arrays) or class: directive.

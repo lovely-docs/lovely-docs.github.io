@@ -1,0 +1,1 @@
+SvelteKit's two-stage build process: Vite optimization followed by adapter-specific tuning; prevent unwanted build-time execution with the `building` flag.

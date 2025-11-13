@@ -1,1 +1,0 @@
-Index page for legacy/deprecated Svelte APIs. Auto-generated documentation structure.

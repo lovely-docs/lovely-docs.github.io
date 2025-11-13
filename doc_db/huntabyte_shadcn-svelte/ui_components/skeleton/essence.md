@@ -1,0 +1,1 @@
+A placeholder component for displaying loading states with customizable dimensions via Tailwind CSS classes.

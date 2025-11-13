@@ -1,0 +1,1 @@
+Enhanced label component for associating descriptive text with form inputs.

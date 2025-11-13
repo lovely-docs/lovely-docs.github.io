@@ -1,1 +1,0 @@
-Install `@sveltejs/adapter-static` and add to `svelte.config.js` with `export const prerender = true;` in root layout. Key options: `pages` (output dir), `fallback` (for SPA), `precompress`, `strict`. Set `trailingSlash: 'always'` if needed. For GitHub Pages, update `paths.base` to repo name and generate `404.html` fallback.

@@ -1,0 +1,1 @@
+Read-only reactive state objects for navigation, page data, and app updates in SvelteKit.

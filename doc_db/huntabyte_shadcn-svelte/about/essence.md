@@ -1,0 +1,1 @@
+Overview of shadcn-svelte's origins, maintainers, and the open source projects it depends on.

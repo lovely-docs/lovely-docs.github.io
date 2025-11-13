@@ -1,1 +1,0 @@
-Define local constants within template blocks using {@const ...}

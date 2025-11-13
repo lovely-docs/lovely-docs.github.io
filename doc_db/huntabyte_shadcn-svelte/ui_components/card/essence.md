@@ -1,0 +1,1 @@
+Composable card component with header, title, description, action, content, and footer sections.

@@ -1,0 +1,1 @@
+Main documentation index page for SvelteKit, auto-generated and not meant for manual editing.

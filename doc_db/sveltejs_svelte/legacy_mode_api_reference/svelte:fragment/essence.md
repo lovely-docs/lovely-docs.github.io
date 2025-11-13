@@ -1,0 +1,1 @@
+Legacy element for placing multiple elements in named slots without a wrapper container.

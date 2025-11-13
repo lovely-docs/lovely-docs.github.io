@@ -1,0 +1,1 @@
+Component that maintains a specified aspect ratio for its content using the ratio prop.

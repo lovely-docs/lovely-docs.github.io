@@ -1,0 +1,1 @@
+How to configure shadcn-svelte to use JavaScript instead of TypeScript.

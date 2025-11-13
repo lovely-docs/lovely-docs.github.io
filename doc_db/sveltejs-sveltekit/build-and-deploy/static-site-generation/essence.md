@@ -1,1 +1,0 @@
-Configure SvelteKit to prerender your entire site as static files using adapter-static.

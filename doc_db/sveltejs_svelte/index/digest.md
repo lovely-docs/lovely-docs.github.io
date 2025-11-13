@@ -1,0 +1,1 @@
+This is the main documentation index page for Svelte. The page itself contains only frontmatter metadata and a note indicating it is auto-generated from a documentation sync script. No actual content is present on this page.

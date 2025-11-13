@@ -1,0 +1,1 @@
+Install `@sveltejs/adapter-netlify` and configure in `svelte.config.js` with `edge` and `split` options. Requires `netlify.toml` with build settings. Access Netlify context via `event.platform.context` in server endpoints. Use `_headers` and `_redirects` files for routing. For file access, use `read()` from `$app/server` instead of `fs`.

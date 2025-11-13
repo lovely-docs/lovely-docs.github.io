@@ -1,1 +1,0 @@
-Common questions about learning Svelte, getting support, tooling, testing strategies, routing, mobile development, styling, and hot module reloading.

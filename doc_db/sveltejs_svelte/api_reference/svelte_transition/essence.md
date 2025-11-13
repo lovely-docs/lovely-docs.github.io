@@ -1,0 +1,1 @@
+Built-in transition functions for animating element entry and exit in Svelte.

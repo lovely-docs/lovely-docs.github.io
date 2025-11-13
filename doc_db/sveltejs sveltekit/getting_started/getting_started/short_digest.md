@@ -1,0 +1,1 @@
+Documentation index page for Getting Started section of SvelteKit. Auto-generated from sync script.

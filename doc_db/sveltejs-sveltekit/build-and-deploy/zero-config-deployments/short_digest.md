@@ -1,1 +1,0 @@
-**adapter-auto** automatically selects the correct adapter for Cloudflare Pages, Netlify, Vercel, Azure Static Web Apps, AWS (via SST), or Google Cloud Run. For configuration options, install the specific adapter directly since adapter-auto takes no options.

@@ -1,0 +1,1 @@
+Alert component for displaying callout messages with optional icons, titles, descriptions, and destructive variant.

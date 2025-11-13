@@ -1,1 +1,0 @@
-Advanced SvelteKit patterns for routing, hooks, error handling, navigation, service workers, security, state management, and library publishing.

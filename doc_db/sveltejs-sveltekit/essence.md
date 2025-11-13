@@ -1,1 +1,0 @@
-Complete reference for SvelteKit framework covering project setup, routing, data loading, form handling, deployment adapters, advanced patterns, best practices, and API documentation.

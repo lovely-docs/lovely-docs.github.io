@@ -1,0 +1,1 @@
+Pagination component for navigating through pages with customizable items per page and sibling count.

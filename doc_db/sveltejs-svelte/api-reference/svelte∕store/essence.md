@@ -1,1 +1,0 @@
-API reference for Svelte's reactive store system with creation, access, and interop utilities.

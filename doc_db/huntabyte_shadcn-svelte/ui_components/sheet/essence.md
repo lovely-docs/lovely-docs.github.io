@@ -1,0 +1,1 @@
+Sheet component for displaying dialog-based content sliding from screen edges with configurable positioning and sizing.

@@ -1,0 +1,1 @@
+Add inline script to manage `dark` class on `html` element using `localStorage` and system preference. Install `mode-watcher@0.5.1`, add `<ModeWatcher client:load />`, then create a toggle using `toggleMode()` or `setMode()`/`resetMode()` functions with `client:load` directive.

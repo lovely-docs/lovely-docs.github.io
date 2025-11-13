@@ -1,0 +1,1 @@
+Event handler utility that attaches listeners to DOM elements while maintaining correct execution order relative to declarative handlers.

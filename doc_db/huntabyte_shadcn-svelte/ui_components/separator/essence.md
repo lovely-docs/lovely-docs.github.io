@@ -1,0 +1,1 @@
+A component for visually separating content horizontally or vertically.

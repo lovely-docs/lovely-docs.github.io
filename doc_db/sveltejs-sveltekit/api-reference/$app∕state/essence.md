@@ -1,1 +1,0 @@
-Read-only state objects for navigation, page data, and app updates in SvelteKit.

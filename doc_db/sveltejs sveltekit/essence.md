@@ -1,0 +1,1 @@
+Complete reference for building full-stack web applications with SvelteKit, covering routing, data loading, forms, deployment adapters, hooks, and best practices for performance, SEO, and accessibility.

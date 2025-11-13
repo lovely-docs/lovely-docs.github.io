@@ -1,0 +1,1 @@
+This is a documentation index page for SvelteKit reference materials. The page itself contains no substantive content - it serves as a structural entry point to organize and link to various reference documentation sections.

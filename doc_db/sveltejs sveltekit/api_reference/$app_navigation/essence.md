@@ -1,0 +1,1 @@
+API reference for navigation, lifecycle hooks, data invalidation, and history state management in SvelteKit.

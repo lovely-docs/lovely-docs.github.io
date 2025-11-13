@@ -1,1 +1,0 @@
-Static private environment variables that are injected at build time and cannot be accessed from client-side code.

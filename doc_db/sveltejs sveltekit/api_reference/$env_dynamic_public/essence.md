@@ -1,0 +1,1 @@
+Module for accessing public dynamic environment variables that are safe to expose to client-side code.

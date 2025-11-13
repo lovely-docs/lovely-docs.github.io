@@ -1,0 +1,1 @@
+A form component that groups radio items with configurable state management, keyboard navigation, and accessibility features.

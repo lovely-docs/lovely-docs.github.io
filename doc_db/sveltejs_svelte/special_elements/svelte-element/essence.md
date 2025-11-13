@@ -1,0 +1,1 @@
+Component for rendering DOM elements with tag names determined at runtime.

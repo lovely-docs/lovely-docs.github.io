@@ -1,1 +1,0 @@
-The $effect rune runs side-effect functions when tracked state changes, with automatic dependency tracking and optional teardown functions.

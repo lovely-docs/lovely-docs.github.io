@@ -1,0 +1,1 @@
+Right-click context menu component with support for items, checkboxes, radio groups, nested submenus, and Svelte transitions.

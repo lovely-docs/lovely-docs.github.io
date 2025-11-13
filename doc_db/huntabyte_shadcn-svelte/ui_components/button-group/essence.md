@@ -1,0 +1,1 @@
+A container component for grouping related buttons with consistent styling, supporting vertical orientation, separators, and integration with other UI components.

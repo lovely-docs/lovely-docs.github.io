@@ -1,0 +1,1 @@
+Load functions in +page.js/+page.server.js and +layout.js/+layout.server.js fetch data before rendering, with server-only and universal variants offering different capabilities and constraints.

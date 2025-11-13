@@ -1,1 +1,0 @@
-Introductory documentation page for Svelte framework.

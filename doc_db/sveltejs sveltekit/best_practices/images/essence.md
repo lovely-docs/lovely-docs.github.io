@@ -1,0 +1,1 @@
+Optimize images using Vite's built-in handling, the @sveltejs/enhanced-img build plugin for automatic format conversion and responsive sizing, or CDN-based solutions for runtime images.

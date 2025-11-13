@@ -1,0 +1,1 @@
+Configure OpenTelemetry tracing for server-side operations in SvelteKit applications.

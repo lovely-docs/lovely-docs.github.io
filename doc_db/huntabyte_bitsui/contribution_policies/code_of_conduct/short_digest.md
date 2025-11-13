@@ -1,0 +1,1 @@
+**Guidelines:** Be respectful, constructive, follow contribution guidelines, keep discussions on-topic. **Unacceptable:** Personal attacks, harassment, discrimination, spamming, trolling, sharing private information. **Enforcement:** Maintainers can remove/reject contributions and ban participants. Report violations to maintainers.

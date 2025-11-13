@@ -1,0 +1,1 @@
+Desktop application menubar component with items, checkboxes, radio groups, submenus, and keyboard shortcuts.

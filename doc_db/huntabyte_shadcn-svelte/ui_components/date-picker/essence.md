@@ -1,0 +1,1 @@
+Date picker component supporting single dates, date ranges, presets, and form integration.

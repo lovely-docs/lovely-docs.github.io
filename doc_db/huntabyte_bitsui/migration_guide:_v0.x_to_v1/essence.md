@@ -1,0 +1,1 @@
+Bits UI v1 migration guide covering breaking changes: prop renames (el→ref, asChild→child snippet), required type discriminants, removed indicator components, explicit portalling, and component-specific updates.

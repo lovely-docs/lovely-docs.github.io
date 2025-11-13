@@ -1,1 +1,0 @@
-`{@debug ...}` logs variable values on change and pauses execution with devtools open. Accepts comma-separated variable names only (not expressions). `{@debug}` without arguments triggers on any state change.

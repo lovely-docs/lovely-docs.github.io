@@ -1,0 +1,1 @@
+Overview of all supported SvelteKit application types and deployment patterns with their respective adapters and configuration options.

@@ -1,0 +1,1 @@
+`<svelte:self>` enables recursive component inclusion when placed inside conditional blocks. This is now obsolete—components can import themselves directly instead.

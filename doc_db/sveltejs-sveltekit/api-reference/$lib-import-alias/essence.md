@@ -1,1 +1,0 @@
-$lib is an automatic import alias pointing to src/lib for importing reusable components and utilities.

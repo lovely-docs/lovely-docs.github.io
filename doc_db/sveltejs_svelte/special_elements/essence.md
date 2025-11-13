@@ -1,0 +1,1 @@
+Special elements for error handling, global object access, dynamic rendering, and component configuration.

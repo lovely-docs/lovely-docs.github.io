@@ -1,1 +1,0 @@
-Reactive stores for managing shared state and async data streams in Svelte, with built-in implementations (writable, readable, derived) and a customizable contract.

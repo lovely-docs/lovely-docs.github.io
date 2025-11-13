@@ -1,3 +1,0 @@
-**SSR enabled by default** for reliable search engine indexing. **Performance matters** - use hybrid rendering and optimize images. **Normalized URLs** prevent duplicates.
-
-Add unique `<title>` and `<meta name="description">` in `<svelte:head>`. Create dynamic sitemaps via endpoints. For AMP support, set `inlineStyleThreshold: Infinity`, disable `csr`, and transform HTML with `@sveltejs/amp` in server hooks.

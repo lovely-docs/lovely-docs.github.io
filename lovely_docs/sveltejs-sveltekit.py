@@ -30,8 +30,11 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 # %% ../nbs/11_sveltejs-sveltekit.ipynb 6
-source = settings.sources["sveltejs/sveltekit"]
-assert isinstance(source, GitSource)
+source = GitSource(
+    name="sveltejs/sveltekit",
+    doc_dir="apps/svelte.dev/content/docs/kit",
+    repo="https://github.com/sveltejs/svelte.dev",
+    commit="main")
 
 commit, clone_dir = clone_repo(source)
 source.commit = commit # Replace the literal commit (master) with the hash

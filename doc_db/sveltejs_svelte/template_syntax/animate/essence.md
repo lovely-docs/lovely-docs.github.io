@@ -1,0 +1,1 @@
+Svelte's animate directive triggers animations when keyed each block items are reordered, supporting both built-in and custom animation functions with CSS or tick-based implementations.

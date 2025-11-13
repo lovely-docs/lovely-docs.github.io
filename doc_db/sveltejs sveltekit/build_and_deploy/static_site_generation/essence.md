@@ -1,0 +1,1 @@
+Configure adapter-static for prerendering your entire SvelteKit site as static files, with options for SPA fallback, compression, and GitHub Pages deployment.

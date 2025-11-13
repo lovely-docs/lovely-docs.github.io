@@ -1,0 +1,1 @@
+`<svelte:fragment>` places content in named slots without a wrapping DOM element. In Svelte 5+, use snippets instead.

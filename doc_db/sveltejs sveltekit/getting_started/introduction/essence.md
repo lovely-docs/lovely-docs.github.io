@@ -1,0 +1,1 @@
+SvelteKit is a framework for building web applications with Svelte, providing routing, optimizations, and modern best practices out of the box.

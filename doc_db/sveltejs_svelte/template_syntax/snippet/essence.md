@@ -1,0 +1,1 @@
+Snippets are reusable markup blocks that can be passed as component props and rendered with {@render}, replacing Svelte 4 slots.

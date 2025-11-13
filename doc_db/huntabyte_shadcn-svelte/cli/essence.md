@@ -1,0 +1,1 @@
+CLI commands for initializing projects, adding components, building registries, and configuring proxy support.

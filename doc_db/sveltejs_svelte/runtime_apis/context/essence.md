@@ -1,0 +1,1 @@
+Svelte's context API enables parent-to-child value passing without prop-drilling, with support for reactive state and type safety.

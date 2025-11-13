@@ -1,0 +1,1 @@
+Native HTML select component with design system styling, option grouping, and accessibility features.

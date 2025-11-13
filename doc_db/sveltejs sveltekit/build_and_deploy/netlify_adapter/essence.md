@@ -1,0 +1,1 @@
+How to deploy SvelteKit apps to Netlify using the adapter with configuration options for edge functions, redirects, forms, and accessing Netlify-specific context.

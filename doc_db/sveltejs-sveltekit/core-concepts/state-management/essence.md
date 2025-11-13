@@ -1,1 +1,0 @@
-Best practices for managing state in server-client applications: avoid shared server state, keep load functions pure, use context API instead of globals, leverage component reuse with reactivity, and store persistent state in URLs or snapshots.

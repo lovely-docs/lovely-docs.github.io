@@ -1,1 +1,0 @@
-This page serves as an index/landing page for advanced SvelteKit topics and features. It appears to be a documentation structure page without substantive content of its own.

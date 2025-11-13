@@ -1,0 +1,1 @@
+Dark mode setup for Svelte and Astro frameworks with framework-specific implementation guides.

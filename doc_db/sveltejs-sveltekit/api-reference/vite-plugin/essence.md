@@ -1,1 +1,0 @@
-The sveltekit() function exports Vite plugins for SvelteKit integration.

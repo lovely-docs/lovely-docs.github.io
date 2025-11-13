@@ -1,0 +1,1 @@
+Comprehensive index of 70+ UI components available in shadcn-svelte, including form inputs, display elements, navigation, dialogs, data visualization, layout utilities, and advanced components. Each component has a dedicated documentation page.

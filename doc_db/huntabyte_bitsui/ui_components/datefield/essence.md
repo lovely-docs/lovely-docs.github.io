@@ -1,0 +1,1 @@
+Customizable date input component with segment-based editing, validation, and flexible date/time granularity control.

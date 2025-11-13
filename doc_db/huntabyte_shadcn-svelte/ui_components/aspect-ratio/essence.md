@@ -1,0 +1,1 @@
+AspectRatio component that maintains content within a specified aspect ratio.

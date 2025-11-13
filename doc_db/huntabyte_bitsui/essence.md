@@ -1,0 +1,1 @@
+Complete reference for building accessible, unstyled Svelte components with flexible state management, styling, and composition patterns.

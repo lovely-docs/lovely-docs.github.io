@@ -1,0 +1,1 @@
+Modal dialog component with composable subcomponents for building overlay windows.

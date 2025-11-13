@@ -1,1 +1,0 @@
-Production-ready patterns for authentication, performance optimization, accessibility, SEO, and asset handling in SvelteKit applications.

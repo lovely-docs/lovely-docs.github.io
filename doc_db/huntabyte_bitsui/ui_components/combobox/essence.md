@@ -1,0 +1,1 @@
+Searchable dropdown component with keyboard navigation, single/multiple selection, and customizable positioning.

@@ -1,0 +1,1 @@
+Utility to merge props objects with special handling for event handlers (with preventDefault support), functions, classes, and styles.

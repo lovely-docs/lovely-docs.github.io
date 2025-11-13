@@ -1,1 +1,0 @@
-Documentation index page that serves as the entry point for SvelteKit docs.

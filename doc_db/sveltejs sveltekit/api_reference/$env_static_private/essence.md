@@ -1,0 +1,1 @@
+Static private environment variables that are injected at build time for server-side use only.

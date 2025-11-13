@@ -1,0 +1,1 @@
+Core routing, data loading, form handling, and state management patterns in SvelteKit with type-safe remote functions for client-server communication.

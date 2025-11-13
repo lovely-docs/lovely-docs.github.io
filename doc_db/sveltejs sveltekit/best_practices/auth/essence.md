@@ -1,0 +1,1 @@
+Guide to implementing authentication and authorization in SvelteKit using sessions or tokens, with recommendations for session-based approaches using Lucia.

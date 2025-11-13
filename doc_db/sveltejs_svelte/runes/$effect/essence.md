@@ -1,0 +1,1 @@
+Effects run side effects when state updates, automatically tracking synchronous dependencies and re-running on changes, with variants for pre-DOM execution, tracking context detection, and manual control.

@@ -1,0 +1,1 @@
+Index page for core concepts documentation section.

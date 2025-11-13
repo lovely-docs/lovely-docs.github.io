@@ -1,0 +1,1 @@
+Build custom data tables with TanStack Table v8 using Svelte 5 snippets and components, supporting pagination, sorting, filtering, column visibility, and row selection.

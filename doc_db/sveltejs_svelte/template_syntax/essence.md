@@ -1,0 +1,1 @@
+Complete reference for Svelte template syntax covering markup, attributes, events, control flow, snippets, directives, and special tags.

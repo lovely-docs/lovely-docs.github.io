@@ -1,0 +1,1 @@
+Textarea component for form inputs with support for labels, validation, and disabled states.

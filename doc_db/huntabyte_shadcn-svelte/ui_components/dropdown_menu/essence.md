@@ -1,0 +1,1 @@
+Dropdown menu component with support for items, groups, checkboxes, radio buttons, and nested submenus.

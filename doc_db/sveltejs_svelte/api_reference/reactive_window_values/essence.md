@@ -1,0 +1,1 @@
+Reactive window property bindings that update automatically in reactive contexts without manual event listeners.

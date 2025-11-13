@@ -1,0 +1,1298 @@
+{
+  "map": {
+    "origPath": ".",
+    "displayName": "",
+    "relevant": true,
+    "usage": {
+      "input": 8139,
+      "output": 2522,
+      "details": null
+    },
+    "token_counts": {
+      "fulltext": 5623,
+      "digest": 1748,
+      "short_digest": 637
+    },
+    "children": {
+      "ui_components": {
+        "origPath": "components",
+        "displayName": "UI Components",
+        "relevant": true,
+        "usage": {
+          "input": 36567,
+          "output": 1609,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 13365,
+          "digest": 1256,
+          "short_digest": 234
+        },
+        "children": {
+          "accordion": {
+            "origPath": "components/accordion.md",
+            "displayName": "accordion",
+            "relevant": true,
+            "usage": {
+              "input": 1919,
+              "output": 556,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 806,
+              "digest": 330,
+              "short_digest": 120
+            },
+            "children": {}
+          },
+          "alert-dialog": {
+            "origPath": "components/alert-dialog.md",
+            "displayName": "alert-dialog",
+            "relevant": true,
+            "usage": {
+              "input": 1715,
+              "output": 609,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 600,
+              "digest": 317,
+              "short_digest": 185
+            },
+            "children": {}
+          },
+          "alert": {
+            "origPath": "components/alert.md",
+            "displayName": "alert",
+            "relevant": true,
+            "usage": {
+              "input": 2175,
+              "output": 810,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1062,
+              "digest": 509,
+              "short_digest": 195
+            },
+            "children": {}
+          },
+          "aspect-ratio": {
+            "origPath": "components/aspect-ratio.md",
+            "displayName": "aspect-ratio",
+            "relevant": true,
+            "usage": {
+              "input": 1510,
+              "output": 419,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 395,
+              "digest": 210,
+              "short_digest": 105
+            },
+            "children": {}
+          },
+          "avatar": {
+            "origPath": "components/avatar.md",
+            "displayName": "avatar",
+            "relevant": true,
+            "usage": {
+              "input": 1764,
+              "output": 493,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 651,
+              "digest": 261,
+              "short_digest": 128
+            },
+            "children": {}
+          },
+          "badge": {
+            "origPath": "components/badge.md",
+            "displayName": "badge",
+            "relevant": true,
+            "usage": {
+              "input": 1692,
+              "output": 613,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 579,
+              "digest": 366,
+              "short_digest": 139
+            },
+            "children": {}
+          },
+          "breadcrumb": {
+            "origPath": "components/breadcrumb.md",
+            "displayName": "breadcrumb",
+            "relevant": true,
+            "usage": {
+              "input": 4443,
+              "output": 750,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 3328,
+              "digest": 451,
+              "short_digest": 180
+            },
+            "children": {}
+          },
+          "button-group": {
+            "origPath": "components/button-group.md",
+            "displayName": "button-group",
+            "relevant": true,
+            "usage": {
+              "input": 6009,
+              "output": 592,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 4894,
+              "digest": 372,
+              "short_digest": 104
+            },
+            "children": {}
+          },
+          "button": {
+            "origPath": "components/button.md",
+            "displayName": "button",
+            "relevant": true,
+            "usage": {
+              "input": 2105,
+              "output": 800,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 992,
+              "digest": 431,
+              "short_digest": 262
+            },
+            "children": {}
+          },
+          "calendar": {
+            "origPath": "components/calendar.md",
+            "displayName": "calendar",
+            "relevant": true,
+            "usage": {
+              "input": 4416,
+              "output": 752,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 3303,
+              "digest": 451,
+              "short_digest": 193
+            },
+            "children": {}
+          },
+          "card": {
+            "origPath": "components/card.md",
+            "displayName": "card",
+            "relevant": true,
+            "usage": {
+              "input": 2265,
+              "output": 587,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1152,
+              "digest": 293,
+              "short_digest": 186
+            },
+            "children": {}
+          },
+          "carousel": {
+            "origPath": "components/carousel.md",
+            "displayName": "carousel",
+            "relevant": true,
+            "usage": {
+              "input": 4642,
+              "output": 1460,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 3529,
+              "digest": 928,
+              "short_digest": 417
+            },
+            "children": {}
+          },
+          "chart": {
+            "origPath": "components/chart.md",
+            "displayName": "chart",
+            "relevant": true,
+            "usage": {
+              "input": 8992,
+              "output": 1502,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 7879,
+              "digest": 936,
+              "short_digest": 450
+            },
+            "children": {}
+          },
+          "checkbox": {
+            "origPath": "components/checkbox.md",
+            "displayName": "checkbox",
+            "relevant": true,
+            "usage": {
+              "input": 2706,
+              "output": 800,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1593,
+              "digest": 514,
+              "short_digest": 170
+            },
+            "children": {}
+          },
+          "collapsible": {
+            "origPath": "components/collapsible.md",
+            "displayName": "collapsible",
+            "relevant": true,
+            "usage": {
+              "input": 1792,
+              "output": 908,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 677,
+              "digest": 630,
+              "short_digest": 165
+            },
+            "children": {}
+          },
+          "combobox": {
+            "origPath": "components/combobox.md",
+            "displayName": "combobox",
+            "relevant": true,
+            "usage": {
+              "input": 7074,
+              "output": 1302,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 5959,
+              "digest": 905,
+              "short_digest": 283
+            },
+            "children": {}
+          },
+          "command": {
+            "origPath": "components/command.md",
+            "displayName": "command",
+            "relevant": true,
+            "usage": {
+              "input": 3087,
+              "output": 1164,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1974,
+              "digest": 669,
+              "short_digest": 393
+            },
+            "children": {}
+          },
+          "context-menu": {
+            "origPath": "components/context-menu.md",
+            "displayName": "context-menu",
+            "relevant": true,
+            "usage": {
+              "input": 2128,
+              "output": 814,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1013,
+              "digest": 450,
+              "short_digest": 248
+            },
+            "children": {}
+          },
+          "data-table": {
+            "origPath": "components/data-table.md",
+            "displayName": "data-table",
+            "relevant": true,
+            "usage": {
+              "input": 12129,
+              "output": 2841,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 11014,
+              "digest": 2426,
+              "short_digest": 286
+            },
+            "children": {}
+          },
+          "date-picker": {
+            "origPath": "components/date-picker.md",
+            "displayName": "date-picker",
+            "relevant": true,
+            "usage": {
+              "input": 4669,
+              "output": 929,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 3554,
+              "digest": 570,
+              "short_digest": 252
+            },
+            "children": {}
+          },
+          "dialog": {
+            "origPath": "components/dialog.md",
+            "displayName": "dialog",
+            "relevant": true,
+            "usage": {
+              "input": 1810,
+              "output": 873,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 697,
+              "digest": 607,
+              "short_digest": 163
+            },
+            "children": {}
+          },
+          "drawer": {
+            "origPath": "components/drawer.md",
+            "displayName": "drawer",
+            "relevant": true,
+            "usage": {
+              "input": 3537,
+              "output": 754,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2424,
+              "digest": 471,
+              "short_digest": 180
+            },
+            "children": {}
+          },
+          "dropdown_menu": {
+            "origPath": "components/dropdown-menu.md",
+            "displayName": "Dropdown Menu",
+            "relevant": true,
+            "usage": {
+              "input": 3064,
+              "output": 1005,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1949,
+              "digest": 624,
+              "short_digest": 269
+            },
+            "children": {}
+          },
+          "empty": {
+            "origPath": "components/empty.md",
+            "displayName": "empty",
+            "relevant": true,
+            "usage": {
+              "input": 3306,
+              "output": 673,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2193,
+              "digest": 337,
+              "short_digest": 228
+            },
+            "children": {}
+          },
+          "field": {
+            "origPath": "components/field.md",
+            "displayName": "Field",
+            "relevant": true,
+            "usage": {
+              "input": 7516,
+              "output": 802,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 6403,
+              "digest": 442,
+              "short_digest": 256
+            },
+            "children": {}
+          },
+          "form": {
+            "origPath": "components/form.md",
+            "displayName": "form",
+            "relevant": true,
+            "usage": {
+              "input": 3671,
+              "output": 1254,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2558,
+              "digest": 799,
+              "short_digest": 331
+            },
+            "children": {}
+          },
+          "hover-card": {
+            "origPath": "components/hover-card.md",
+            "displayName": "hover-card",
+            "relevant": true,
+            "usage": {
+              "input": 1792,
+              "output": 842,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 677,
+              "digest": 629,
+              "short_digest": 104
+            },
+            "children": {}
+          },
+          "input-group": {
+            "origPath": "components/input-group.md",
+            "displayName": "input-group",
+            "relevant": true,
+            "usage": {
+              "input": 7475,
+              "output": 1826,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 6360,
+              "digest": 1456,
+              "short_digest": 256
+            },
+            "children": {}
+          },
+          "input-otp": {
+            "origPath": "components/input-otp.md",
+            "displayName": "input-otp",
+            "relevant": true,
+            "usage": {
+              "input": 3267,
+              "output": 1304,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2151,
+              "digest": 980,
+              "short_digest": 213
+            },
+            "children": {}
+          },
+          "input": {
+            "origPath": "components/input.md",
+            "displayName": "input",
+            "relevant": true,
+            "usage": {
+              "input": 2456,
+              "output": 1194,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1343,
+              "digest": 877,
+              "short_digest": 206
+            },
+            "children": {}
+          },
+          "item": {
+            "origPath": "components/item.md",
+            "displayName": "Item",
+            "relevant": true,
+            "usage": {
+              "input": 6157,
+              "output": 1270,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 5044,
+              "digest": 853,
+              "short_digest": 303
+            },
+            "children": {}
+          },
+          "kbd": {
+            "origPath": "components/kbd.md",
+            "displayName": "kbd",
+            "relevant": true,
+            "usage": {
+              "input": 2465,
+              "output": 589,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1352,
+              "digest": 360,
+              "short_digest": 124
+            },
+            "children": {}
+          },
+          "label": {
+            "origPath": "components/label.md",
+            "displayName": "label",
+            "relevant": true,
+            "usage": {
+              "input": 1400,
+              "output": 346,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 287,
+              "digest": 184,
+              "short_digest": 58
+            },
+            "children": {}
+          },
+          "menubar": {
+            "origPath": "components/menubar.md",
+            "displayName": "menubar",
+            "relevant": true,
+            "usage": {
+              "input": 2762,
+              "output": 1081,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1648,
+              "digest": 639,
+              "short_digest": 329
+            },
+            "children": {}
+          },
+          "native-select": {
+            "origPath": "components/native-select.md",
+            "displayName": "native-select",
+            "relevant": true,
+            "usage": {
+              "input": 3341,
+              "output": 889,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2226,
+              "digest": 551,
+              "short_digest": 231
+            },
+            "children": {}
+          },
+          "navigation-menu": {
+            "origPath": "components/navigation-menu.md",
+            "displayName": "navigation-menu",
+            "relevant": true,
+            "usage": {
+              "input": 3541,
+              "output": 695,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2426,
+              "digest": 400,
+              "short_digest": 190
+            },
+            "children": {}
+          },
+          "pagination": {
+            "origPath": "components/pagination.md",
+            "displayName": "pagination",
+            "relevant": true,
+            "usage": {
+              "input": 1996,
+              "output": 856,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 883,
+              "digest": 479,
+              "short_digest": 269
+            },
+            "children": {}
+          },
+          "popover": {
+            "origPath": "components/popover.md",
+            "displayName": "popover",
+            "relevant": true,
+            "usage": {
+              "input": 1884,
+              "output": 977,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 770,
+              "digest": 714,
+              "short_digest": 151
+            },
+            "children": {}
+          },
+          "progress": {
+            "origPath": "components/progress.md",
+            "displayName": "progress",
+            "relevant": true,
+            "usage": {
+              "input": 1409,
+              "output": 501,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 296,
+              "digest": 276,
+              "short_digest": 124
+            },
+            "children": {}
+          },
+          "radio-group": {
+            "origPath": "components/radio-group.md",
+            "displayName": "radio-group",
+            "relevant": true,
+            "usage": {
+              "input": 2423,
+              "output": 1268,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1308,
+              "digest": 937,
+              "short_digest": 229
+            },
+            "children": {}
+          },
+          "range-calendar": {
+            "origPath": "components/range-calendar.md",
+            "displayName": "range-calendar",
+            "relevant": true,
+            "usage": {
+              "input": 1510,
+              "output": 433,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 395,
+              "digest": 259,
+              "short_digest": 69
+            },
+            "children": {}
+          },
+          "resizable": {
+            "origPath": "components/resizable.md",
+            "displayName": "resizable",
+            "relevant": true,
+            "usage": {
+              "input": 2519,
+              "output": 769,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1405,
+              "digest": 503,
+              "short_digest": 154
+            },
+            "children": {}
+          },
+          "scroll-area": {
+            "origPath": "components/scroll-area.md",
+            "displayName": "scroll-area",
+            "relevant": true,
+            "usage": {
+              "input": 2444,
+              "output": 574,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1329,
+              "digest": 348,
+              "short_digest": 112
+            },
+            "children": {}
+          },
+          "select": {
+            "origPath": "components/select.md",
+            "displayName": "select",
+            "relevant": true,
+            "usage": {
+              "input": 2355,
+              "output": 1063,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1242,
+              "digest": 696,
+              "short_digest": 262
+            },
+            "children": {}
+          },
+          "separator": {
+            "origPath": "components/separator.md",
+            "displayName": "separator",
+            "relevant": true,
+            "usage": {
+              "input": 1495,
+              "output": 425,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 382,
+              "digest": 273,
+              "short_digest": 50
+            },
+            "children": {}
+          },
+          "sheet": {
+            "origPath": "components/sheet.md",
+            "displayName": "sheet",
+            "relevant": true,
+            "usage": {
+              "input": 1988,
+              "output": 682,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 875,
+              "digest": 365,
+              "short_digest": 210
+            },
+            "children": {}
+          },
+          "sidebar": {
+            "origPath": "components/sidebar.md",
+            "displayName": "sidebar",
+            "relevant": true,
+            "usage": {
+              "input": 8944,
+              "output": 2350,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 7831,
+              "digest": 1623,
+              "short_digest": 615
+            },
+            "children": {}
+          },
+          "skeleton": {
+            "origPath": "components/skeleton.md",
+            "displayName": "skeleton",
+            "relevant": true,
+            "usage": {
+              "input": 1393,
+              "output": 394,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 280,
+              "digest": 212,
+              "short_digest": 77
+            },
+            "children": {}
+          },
+          "slider": {
+            "origPath": "components/slider.md",
+            "displayName": "slider",
+            "relevant": true,
+            "usage": {
+              "input": 1626,
+              "output": 644,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 513,
+              "digest": 361,
+              "short_digest": 173
+            },
+            "children": {}
+          },
+          "sonner": {
+            "origPath": "components/sonner.md",
+            "displayName": "sonner",
+            "relevant": true,
+            "usage": {
+              "input": 1798,
+              "output": 602,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 684,
+              "digest": 355,
+              "short_digest": 141
+            },
+            "children": {}
+          },
+          "spinner": {
+            "origPath": "components/spinner.md",
+            "displayName": "Spinner",
+            "relevant": true,
+            "usage": {
+              "input": 3069,
+              "output": 463,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1956,
+              "digest": 282,
+              "short_digest": 83
+            },
+            "children": {}
+          },
+          "switch": {
+            "origPath": "components/switch.md",
+            "displayName": "switch",
+            "relevant": true,
+            "usage": {
+              "input": 2121,
+              "output": 839,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1008,
+              "digest": 559,
+              "short_digest": 181
+            },
+            "children": {}
+          },
+          "table": {
+            "origPath": "components/table.md",
+            "displayName": "table",
+            "relevant": true,
+            "usage": {
+              "input": 2136,
+              "output": 854,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1023,
+              "digest": 468,
+              "short_digest": 277
+            },
+            "children": {}
+          },
+          "tabs": {
+            "origPath": "components/tabs.md",
+            "displayName": "tabs",
+            "relevant": true,
+            "usage": {
+              "input": 2120,
+              "output": 691,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1007,
+              "digest": 344,
+              "short_digest": 241
+            },
+            "children": {}
+          },
+          "textarea": {
+            "origPath": "components/textarea.md",
+            "displayName": "textarea",
+            "relevant": true,
+            "usage": {
+              "input": 2289,
+              "output": 1092,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1176,
+              "digest": 742,
+              "short_digest": 244
+            },
+            "children": {}
+          },
+          "toggle-group": {
+            "origPath": "components/toggle-group.md",
+            "displayName": "toggle-group",
+            "relevant": true,
+            "usage": {
+              "input": 3240,
+              "output": 690,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2125,
+              "digest": 438,
+              "short_digest": 141
+            },
+            "children": {}
+          },
+          "toggle": {
+            "origPath": "components/toggle.md",
+            "displayName": "toggle",
+            "relevant": true,
+            "usage": {
+              "input": 1919,
+              "output": 656,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 806,
+              "digest": 386,
+              "short_digest": 166
+            },
+            "children": {}
+          },
+          "tooltip": {
+            "origPath": "components/tooltip.md",
+            "displayName": "tooltip",
+            "relevant": true,
+            "usage": {
+              "input": 1514,
+              "output": 470,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 401,
+              "digest": 237,
+              "short_digest": 120
+            },
+            "children": {}
+          },
+          "typography": {
+            "origPath": "components/typography.md",
+            "displayName": "Typography",
+            "relevant": true,
+            "usage": {
+              "input": 4246,
+              "output": 881,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 3133,
+              "digest": 524,
+              "short_digest": 236
+            },
+            "children": {}
+          }
+        }
+      },
+      "dark_mode": {
+        "origPath": "dark-mode",
+        "displayName": "Dark Mode",
+        "relevant": true,
+        "usage": {
+          "input": 2355,
+          "output": 883,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 204,
+          "digest": 676,
+          "short_digest": 90
+        },
+        "children": {
+          "dark-mode-astro": {
+            "origPath": "dark-mode/astro.md",
+            "displayName": "dark-mode-astro",
+            "relevant": true,
+            "usage": {
+              "input": 2625,
+              "output": 651,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1507,
+              "digest": 452,
+              "short_digest": 85
+            },
+            "children": {}
+          },
+          "dark-mode": {
+            "origPath": "dark-mode/svelte.md",
+            "displayName": "dark-mode",
+            "relevant": true,
+            "usage": {
+              "input": 1954,
+              "output": 875,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 836,
+              "digest": 704,
+              "short_digest": 58
+            },
+            "children": {}
+          }
+        }
+      },
+      "installation": {
+        "origPath": "installation.md",
+        "displayName": "installation",
+        "relevant": true,
+        "usage": {
+          "input": 1880,
+          "output": 481,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 769,
+          "digest": 250,
+          "short_digest": 122
+        },
+        "children": {}
+      },
+      "migration_guides": {
+        "origPath": "migration",
+        "displayName": "Migration Guides",
+        "relevant": true,
+        "usage": {
+          "input": 2271,
+          "output": 834,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 546,
+          "digest": 498,
+          "short_digest": 206
+        },
+        "children": {
+          "svelte_5_migration": {
+            "origPath": "migration/svelte-5.md",
+            "displayName": "Svelte 5 Migration",
+            "relevant": true,
+            "usage": {
+              "input": 3808,
+              "output": 798,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2692,
+              "digest": 453,
+              "short_digest": 211
+            },
+            "children": {}
+          },
+          "tailwind_v4_migration": {
+            "origPath": "migration/tailwind-v4.md",
+            "displayName": "Tailwind v4 Migration",
+            "relevant": true,
+            "usage": {
+              "input": 6997,
+              "output": 942,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 5880,
+              "digest": 574,
+              "short_digest": 227
+            },
+            "children": {}
+          }
+        }
+      },
+      "registry": {
+        "origPath": "registry.md",
+        "displayName": "registry",
+        "relevant": true,
+        "usage": {
+          "input": 1471,
+          "output": 352,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 360,
+          "digest": 150,
+          "short_digest": 83
+        },
+        "children": {}
+      },
+      "about": {
+        "origPath": "about.md",
+        "displayName": "about",
+        "relevant": false,
+        "usage": {
+          "input": 1554,
+          "output": 352,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 443,
+          "digest": 174,
+          "short_digest": 69
+        },
+        "children": {}
+      },
+      "changelog": {
+        "origPath": "changelog.md",
+        "displayName": "changelog",
+        "relevant": true,
+        "usage": {
+          "input": 5014,
+          "output": 778,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 3903,
+          "digest": 510,
+          "short_digest": 155
+        },
+        "children": {}
+      },
+      "cli": {
+        "origPath": "cli.md",
+        "displayName": "cli",
+        "relevant": true,
+        "usage": {
+          "input": 2232,
+          "output": 615,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 1121,
+          "digest": 341,
+          "short_digest": 166
+        },
+        "children": {}
+      },
+      "components.json": {
+        "origPath": "components-json.md",
+        "displayName": "components.json",
+        "relevant": true,
+        "usage": {
+          "input": 2095,
+          "output": 600,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 982,
+          "digest": 357,
+          "short_digest": 131
+        },
+        "children": {}
+      },
+      "components": {
+        "origPath": "components.md",
+        "displayName": "components",
+        "relevant": false,
+        "usage": {
+          "input": 2480,
+          "output": 406,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 1369,
+          "digest": 249,
+          "short_digest": 55
+        },
+        "children": {}
+      },
+      "dark-mode": {
+        "origPath": "dark-mode.md",
+        "displayName": "dark-mode",
+        "relevant": false,
+        "usage": {
+          "input": 1183,
+          "output": 202,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 70,
+          "digest": 72,
+          "short_digest": 26
+        },
+        "children": {}
+      },
+      "figma.md": {
+        "origPath": "figma.md",
+        "displayName": "figma.md",
+        "relevant": false,
+        "usage": {
+          "input": 0,
+          "output": 0,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 0,
+          "digest": 0,
+          "short_digest": 0
+        },
+        "children": {}
+      },
+      "javascript_support": {
+        "origPath": "javascript.md",
+        "displayName": "JavaScript Support",
+        "relevant": true,
+        "usage": {
+          "input": 1407,
+          "output": 376,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 296,
+          "digest": 228,
+          "short_digest": 44
+        },
+        "children": {}
+      },
+      "legacy-docs": {
+        "origPath": "legacy.md",
+        "displayName": "legacy-docs",
+        "relevant": false,
+        "usage": {
+          "input": 1243,
+          "output": 268,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 132,
+          "digest": 107,
+          "short_digest": 55
+        },
+        "children": {}
+      },
+      "migration": {
+        "origPath": "migration.md",
+        "displayName": "migration",
+        "relevant": false,
+        "usage": {
+          "input": 1239,
+          "output": 196,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 128,
+          "digest": 60,
+          "short_digest": 31
+        },
+        "children": {}
+      },
+      "theming": {
+        "origPath": "theming.md",
+        "displayName": "theming",
+        "relevant": true,
+        "usage": {
+          "input": 9452,
+          "output": 956,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 8340,
+          "digest": 477,
+          "short_digest": 355
+        },
+        "children": {}
+      }
+    }
+  },
+  "name": "huntabyte/shadcn-svelte",
+  "source_type": "git",
+  "source": {
+    "name": "huntabyte/shadcn-svelte",
+    "comment": null,
+    "doc_dir": "docs/.svelte-kit/cloudflare/docs",
+    "repo": "https://github.com/huntabyte/shadcn-svelte",
+    "commit": "2c94bbbe096fcebb49282369b8a91a7e2e73eb75"
+  },
+  "date": "2025-11-13T11:01:28.771839+00:00",
+  "model": "claude-haiku-4.5",
+  "commit": "0528ad5fe5486be5b3691edc99daacfaf782e426-dirty"
+}

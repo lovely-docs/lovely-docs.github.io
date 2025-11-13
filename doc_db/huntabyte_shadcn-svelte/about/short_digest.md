@@ -1,0 +1,1 @@
+Svelte port of shadcn/ui maintained by Huntabyte and CokaKoala. Built on Bits UI (headless components), Formsnap (forms), Paneforge (resizable), and Vaul Svelte (drawers). MIT licensed.

@@ -1,1 +1,0 @@
-Optimize images using Vite's built-in handling, @sveltejs/enhanced-img for build-time optimization, or CDN-based solutions for dynamic images, following best practices for responsive sizing and performance.

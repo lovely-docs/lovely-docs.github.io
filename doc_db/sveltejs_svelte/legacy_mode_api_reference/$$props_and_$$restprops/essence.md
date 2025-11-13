@@ -1,0 +1,1 @@
+Legacy mode variables for accessing all component props or all props except declared ones.

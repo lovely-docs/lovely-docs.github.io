@@ -1,0 +1,1 @@
+Configure and build reusable component libraries using @sveltejs/package with proper package.json exports, type definitions, and entry points.

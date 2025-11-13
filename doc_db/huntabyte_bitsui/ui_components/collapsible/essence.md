@@ -1,0 +1,1 @@
+Collapsible component for expandable/collapsible content sections with state management, transitions, and browser search integration.

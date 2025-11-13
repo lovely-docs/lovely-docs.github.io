@@ -1,0 +1,1 @@
+Alert Dialog is a modal component for displaying important messages that require user confirmation or action.

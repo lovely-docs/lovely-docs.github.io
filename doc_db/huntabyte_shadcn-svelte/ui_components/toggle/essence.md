@@ -1,0 +1,1 @@
+Two-state toggle button component with variants, sizes, and disabled state support.

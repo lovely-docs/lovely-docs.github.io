@@ -1,0 +1,1 @@
+Tailwind utility classes for styling typography elements (headings, paragraphs, blockquotes, tables, lists, code) since no default styles are provided.

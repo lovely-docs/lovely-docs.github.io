@@ -1,0 +1,1 @@
+A right-click context menu component with support for items, submenus, checkboxes, radio groups, and keyboard shortcuts.

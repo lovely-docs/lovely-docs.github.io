@@ -1,0 +1,1 @@
+Configuration file that tells the shadcn-svelte CLI how to set up and generate components for your project.

@@ -1,0 +1,1 @@
+The use: directive attaches lifecycle-managed functions to DOM elements.

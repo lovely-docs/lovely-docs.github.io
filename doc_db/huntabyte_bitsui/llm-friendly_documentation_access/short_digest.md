@@ -1,0 +1,1 @@
+Append `/llms.txt` to any Bits UI documentation URL to access LLM-friendly versions. Root index at `bits-ui.com/llms.txt`, full docs at `bits-ui.com/docs/llms.txt`. Use "Copy Markdown" button on pages for the same content.

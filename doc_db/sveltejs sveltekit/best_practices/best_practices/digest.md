@@ -1,0 +1,1 @@
+This page appears to be a documentation index or container page for best practices related to SvelteKit development. The actual content and specific best practices are not included in the provided page excerpt - only the frontmatter metadata is shown, indicating this is an auto-generated documentation file.

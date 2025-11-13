@@ -1,1 +1,0 @@
-Snippets are reusable, parameterized markup blocks that can be passed as component props and typed with the Snippet generic.

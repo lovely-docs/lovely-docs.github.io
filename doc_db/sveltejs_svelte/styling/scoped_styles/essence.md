@@ -1,0 +1,1 @@
+Svelte automatically scopes component styles using hash-based classes to prevent style leakage, with specificity handling and support for scoped keyframes.

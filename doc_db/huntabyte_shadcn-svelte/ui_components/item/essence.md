@@ -1,0 +1,1 @@
+Versatile flex container component for displaying content with optional media, title, description, and actions, supporting variants, sizes, and grouping.

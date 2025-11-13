@@ -1,1 +1,0 @@
-Initial setup, project structure, deployment options, and standard Web API usage in SvelteKit.

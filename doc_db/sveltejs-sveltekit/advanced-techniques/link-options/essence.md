@@ -1,1 +1,0 @@
-Configure SvelteKit link navigation behavior with data-sveltekit-* attributes for preloading, history, focus, and scroll control.

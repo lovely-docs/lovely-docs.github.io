@@ -1,0 +1,1 @@
+Utility type helpers for customizing component prop interfaces when wrapping Bits UI components.

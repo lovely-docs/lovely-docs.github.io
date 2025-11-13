@@ -1,0 +1,1 @@
+Complete reference of all Svelte compiler and runtime error and warning codes with explanations and solutions.

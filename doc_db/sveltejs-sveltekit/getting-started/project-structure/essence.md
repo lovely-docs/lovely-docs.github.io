@@ -1,1 +1,0 @@
-Standard directory layout and configuration files for a SvelteKit project with descriptions of each directory and key template placeholders.

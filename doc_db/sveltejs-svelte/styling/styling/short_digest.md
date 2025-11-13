@@ -1,1 +1,0 @@
-Index page for styling documentation section.

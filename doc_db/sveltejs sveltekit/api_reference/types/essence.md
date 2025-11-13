@@ -1,0 +1,1 @@
+SvelteKit automatically generates typed `$types` modules for routes and pages, with ambient types defined in app.d.ts.

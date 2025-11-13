@@ -1,0 +1,1 @@
+Complete TypeScript API reference for @sveltejs/kit exports including Server class, response helpers, hooks, form actions, navigation types, remote functions, adapter builder, and utility types.

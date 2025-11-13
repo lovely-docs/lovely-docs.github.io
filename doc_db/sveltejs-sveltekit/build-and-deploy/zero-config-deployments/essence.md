@@ -1,1 +1,0 @@
-adapter-auto automatically detects and uses the correct deployment adapter for supported platforms, with option to install specific adapters for configuration.

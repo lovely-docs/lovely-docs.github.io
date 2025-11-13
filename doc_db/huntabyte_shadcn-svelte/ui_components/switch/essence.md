@@ -1,0 +1,1 @@
+Toggle control component for boolean form fields with form integration support.

@@ -1,0 +1,1 @@
+Tabbed interface component with configurable keyboard navigation, activation modes, and state management.

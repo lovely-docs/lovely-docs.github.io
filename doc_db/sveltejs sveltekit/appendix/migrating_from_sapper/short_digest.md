@@ -1,0 +1,13 @@
+## Key Changes
+- Add `"type": "module"` to package.json
+- Replace `sapper` with `@sveltejs/kit` and adapter
+- Update scripts: `sapper build` → `vite build`, `sapper dev` → `vite dev`
+- Replace `webpack.config.js`/`rollup.config.js` with `svelte.config.js`
+- Rename files: `src/template.html` → `src/app.html`, `_layout.svelte` → `+layout.svelte`, `_error.svelte` → `+error.svelte`
+- Routes: `routes/about.svelte` → `routes/about/+page.svelte`
+- `preload` → `load` in `+page.js`/`+layout.js` with single `event` argument
+- Imports: `@sapper/app` → `$app/navigation`, `$app/stores`
+- `src/node_modules` → `src/lib`
+- Stores: `preloading` → `navigating`, `page` has `url`/`params` (no `path`/`query`)
+- Attributes: `sapper:prefetch` → `data-sveltekit-preload-data`
+- Endpoints no longer receive `req`/`res`; use environment-agnostic approach

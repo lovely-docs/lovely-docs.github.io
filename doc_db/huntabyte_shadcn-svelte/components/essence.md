@@ -1,0 +1,1 @@
+Complete catalog of all available UI components in the shadcn-svelte library.

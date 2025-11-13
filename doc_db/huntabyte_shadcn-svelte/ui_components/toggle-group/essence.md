@@ -1,0 +1,1 @@
+A two-state button group component with single/multiple selection modes, customizable sizes and variants.

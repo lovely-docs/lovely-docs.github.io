@@ -1,0 +1,1 @@
+Function to install Node.js polyfills for web APIs like crypto and File.

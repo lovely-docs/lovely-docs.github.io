@@ -1,1 +1,0 @@
-Svelte 5.36+ experimental feature enabling await expressions in scripts, derived declarations, and markup with synchronized updates, concurrent execution, and loading state management.

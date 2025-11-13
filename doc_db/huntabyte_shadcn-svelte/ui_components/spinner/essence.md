@@ -1,0 +1,1 @@
+A customizable animated spinner component for indicating loading states.

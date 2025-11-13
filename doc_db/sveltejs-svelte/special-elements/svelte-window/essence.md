@@ -1,1 +1,0 @@
-Special element for safely attaching window event listeners and binding to window properties with automatic cleanup.

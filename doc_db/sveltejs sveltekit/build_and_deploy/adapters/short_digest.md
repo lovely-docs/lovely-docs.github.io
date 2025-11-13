@@ -1,0 +1,1 @@
+Adapters are deployment plugins configured in `svelte.config.js`. Official adapters exist for Cloudflare, Netlify, Node, static sites, and Vercel. Platform-specific context is accessible via `RequestEvent.platform`.

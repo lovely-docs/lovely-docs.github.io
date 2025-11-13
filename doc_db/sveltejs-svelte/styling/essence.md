@@ -1,1 +1,0 @@
-Svelte provides scoped component styles by default, with mechanisms to apply global styles and use CSS custom properties for dynamic styling.

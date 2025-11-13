@@ -1,0 +1,1 @@
+Latest version requires Svelte v5 and Tailwind v4. See separate migration guides for each upgrade.

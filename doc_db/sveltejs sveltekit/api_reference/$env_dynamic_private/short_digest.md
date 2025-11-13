@@ -1,0 +1,1 @@
+Access runtime private environment variables via `import { env } from '$env/dynamic/private'`. Server-side only. Filters based on `config.kit.env.publicPrefix` and `config.kit.env.privatePrefix` configuration.

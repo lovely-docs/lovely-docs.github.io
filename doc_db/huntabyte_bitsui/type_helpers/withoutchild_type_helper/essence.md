@@ -1,0 +1,1 @@
+Type helper to exclude the child snippet prop from a component when building custom wrappers.

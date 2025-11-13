@@ -1,0 +1,1 @@
+Svelte 5's `$`-prefixed runes provide reactive state management, derived values, effects, props, two-way binding, and debugging utilities.

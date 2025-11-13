@@ -1,1 +1,0 @@
-SvelteKit generates type definitions for routes and pages, providing typed RequestHandler/Load functions via $types imports, and defines ambient App namespace types in app.d.ts.

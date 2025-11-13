@@ -1,0 +1,1 @@
+Drawer component for Svelte with responsive Dialog/Drawer pattern support.

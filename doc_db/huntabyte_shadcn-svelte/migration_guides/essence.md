@@ -1,0 +1,1 @@
+Step-by-step instructions for upgrading shadcn-svelte projects to Svelte 5 and Tailwind v4, including configuration changes, dependency updates, and component migration.

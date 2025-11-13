@@ -1,0 +1,1 @@
+Complete reference for Svelte 3/4 legacy mode reactivity, component props, events, slots, and imperative API.

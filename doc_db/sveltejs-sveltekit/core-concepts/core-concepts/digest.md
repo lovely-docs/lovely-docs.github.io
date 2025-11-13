@@ -1,1 +1,0 @@
-This is a documentation index page for core concepts in SvelteKit. The page itself contains no substantive content - it serves as a structural entry point to guide readers to detailed documentation on fundamental SvelteKit principles and features.

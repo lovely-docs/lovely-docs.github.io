@@ -1,0 +1,1 @@
+Navigation menu component with triggers and collapsible content sections for website navigation.

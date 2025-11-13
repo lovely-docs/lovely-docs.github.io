@@ -1,0 +1,1 @@
+Complete reference for Svelte 5 framework covering runes-based reactivity, template syntax, styling, component lifecycle, state management, animations, and migration from legacy mode.

@@ -1,0 +1,1 @@
+Accessible tooltip component with hover/focus triggers, configurable delays, Floating UI positioning, and support for Svelte transitions.

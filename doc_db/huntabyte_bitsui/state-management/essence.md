@@ -1,0 +1,1 @@
+Two state management patterns for Bits UI components: simple two-way binding with bind: and advanced function binding with custom getter/setter logic.

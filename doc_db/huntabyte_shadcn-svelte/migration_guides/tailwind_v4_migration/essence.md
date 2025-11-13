@@ -1,0 +1,1 @@
+Step-by-step guide to upgrade shadcn-svelte projects from Tailwind v3 to v4 and Svelte 5, including Vite migration, CSS variable updates, and dependency upgrades.

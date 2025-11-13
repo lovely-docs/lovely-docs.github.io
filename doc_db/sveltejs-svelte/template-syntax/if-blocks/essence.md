@@ -1,1 +1,0 @@
-Svelte if-blocks conditionally render content based on boolean expressions.

@@ -1,0 +1,1 @@
+Accessible OTP input component with customizable patterns, separators, and form integration support.

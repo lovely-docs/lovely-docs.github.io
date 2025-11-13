@@ -1,0 +1,1 @@
+Multiple approaches to style unstyled Bits UI components using classes, data attributes, CSS variables, and inline styles, with support for state-based and animated styling.

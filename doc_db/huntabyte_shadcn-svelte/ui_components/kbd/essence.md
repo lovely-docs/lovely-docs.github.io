@@ -1,0 +1,1 @@
+Component for displaying keyboard input with support for grouping and integration with other UI components.

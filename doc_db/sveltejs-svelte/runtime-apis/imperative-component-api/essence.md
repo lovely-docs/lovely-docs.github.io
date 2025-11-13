@@ -1,1 +1,0 @@
-Functions for imperatively creating, mounting, rendering, and hydrating Svelte components.

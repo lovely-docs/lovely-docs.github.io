@@ -1,0 +1,1 @@
+API for resolving asset URLs and pathnames with base path prefixing and dynamic route parameter population.

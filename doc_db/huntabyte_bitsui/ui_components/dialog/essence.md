@@ -1,0 +1,1 @@
+Accessible modal dialog component with compound structure, focus management, nested dialog support, and customizable escape/outside interaction behavior.

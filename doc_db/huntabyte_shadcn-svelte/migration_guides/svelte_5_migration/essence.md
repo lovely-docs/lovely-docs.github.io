@@ -1,0 +1,1 @@
+Step-by-step guide to migrate shadcn-svelte projects from Svelte 4 to Svelte 5, including configuration updates, dependency upgrades, and component migration process.

@@ -1,1 +1,0 @@
-Adapters are deployment plugins configured in svelte.config.js that prepare SvelteKit apps for specific platforms.

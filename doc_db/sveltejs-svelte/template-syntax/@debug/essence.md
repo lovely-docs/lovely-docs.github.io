@@ -1,1 +1,0 @@
-Svelte's {@debug} tag for logging and debugging variable changes in templates.

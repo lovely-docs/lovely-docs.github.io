@@ -1,1 +1,0 @@
-Authentication and authorization patterns in SvelteKit: comparing session vs token approaches, integration via server hooks, and using Lucia for session-based auth.

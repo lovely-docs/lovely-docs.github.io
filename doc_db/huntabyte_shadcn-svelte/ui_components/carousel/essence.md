@@ -1,0 +1,1 @@
+Carousel component built on Embla Carousel with sizing, spacing, orientation, API access, events, and plugin support.

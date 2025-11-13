@@ -1,0 +1,1 @@
+This page appears to be a documentation index or landing page for the Getting Started section of SvelteKit. The actual content is not provided in the page excerpt - only the frontmatter metadata is shown. The page is auto-generated from a documentation sync script and serves as an entry point to introductory SvelteKit documentation.

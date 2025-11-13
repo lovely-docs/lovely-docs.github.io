@@ -1,0 +1,1 @@
+This page appears to be a documentation index or container page for Svelte template syntax. The actual content is not provided in the page excerpt - only the frontmatter metadata is shown. The page is auto-generated from a script and serves as an entry point to template syntax documentation.

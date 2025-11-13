@@ -1,0 +1,1 @@
+API reference for Svelte's reactive store system with writable, readable, and derived stores.

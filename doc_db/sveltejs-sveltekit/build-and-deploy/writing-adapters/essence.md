@@ -1,1 +1,0 @@
-How to implement a custom SvelteKit adapter by exporting a function that returns an Adapter object with required name and adapt method, plus optional emulate and supports methods.

@@ -1,1 +1,0 @@
-SvelteKit builds in two stages: Vite optimizes your code, then an adapter tunes it for your target environment. Prevent build-time code execution using the `building` flag from `$app/environment`. Preview your build with `vite preview`, though it won't include adapter-specific adjustments.

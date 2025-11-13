@@ -1,0 +1,1 @@
+ScrollArea component with configurable scroll behavior types and customizable hide delays for cross-platform consistent scrolling.

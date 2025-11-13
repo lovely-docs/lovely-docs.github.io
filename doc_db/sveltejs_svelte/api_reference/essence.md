@@ -1,0 +1,1 @@
+Complete reference of Svelte 5 runtime APIs, compiler functions, and utility modules for component lifecycle, state management, animations, stores, and server-side rendering.

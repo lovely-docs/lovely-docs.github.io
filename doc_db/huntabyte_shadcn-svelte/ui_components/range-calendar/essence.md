@@ -1,0 +1,1 @@
+A date range picker calendar component built on Bits UI with internationalization support.

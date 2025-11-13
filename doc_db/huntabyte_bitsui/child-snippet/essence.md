@@ -1,0 +1,1 @@
+Use the child snippet to customize rendered elements in Bits UI components while preserving accessibility and functionality.

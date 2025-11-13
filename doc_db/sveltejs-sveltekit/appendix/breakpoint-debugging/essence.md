@@ -1,1 +1,0 @@
-How to set up breakpoint debugging for Svelte and SvelteKit projects in various development environments.

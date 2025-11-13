@@ -1,1 +1,0 @@
-Complete reference of Svelte runtime, compile-time, and server-side errors and warnings with explanations and fixes.

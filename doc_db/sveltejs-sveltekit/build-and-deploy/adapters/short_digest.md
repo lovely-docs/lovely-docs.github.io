@@ -1,1 +1,0 @@
-Adapters transform built SvelteKit apps for deployment. Configure in `svelte.config.js` with `kit.adapter`. Official adapters exist for Cloudflare, Netlify, Node, static sites, and Vercel. Platform-specific context is available via `RequestEvent.platform`.

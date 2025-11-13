@@ -1,0 +1,1 @@
+Documentation appendix index page - structural/organizational page with no direct content.

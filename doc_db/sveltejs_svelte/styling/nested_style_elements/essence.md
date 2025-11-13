@@ -1,0 +1,1 @@
+Nested style tags bypass Svelte's scoping and apply globally to the DOM.

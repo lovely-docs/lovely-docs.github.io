@@ -1,0 +1,1 @@
+Horizontal menu bar component with support for checkboxes, radio buttons, nested submenus, and state management.

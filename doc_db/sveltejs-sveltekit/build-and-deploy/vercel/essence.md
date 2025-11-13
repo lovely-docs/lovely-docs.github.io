@@ -1,1 +1,0 @@
-Deploy SvelteKit to Vercel using adapter-vercel with configuration for functions, ISR, images, and environment variables.

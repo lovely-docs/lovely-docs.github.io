@@ -1,0 +1,1 @@
+Tabbed interface component for displaying multiple content sections with one visible at a time.

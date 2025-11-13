@@ -1,0 +1,1107 @@
+{
+  "map": {
+    "origPath": ".",
+    "displayName": "",
+    "relevant": true,
+    "usage": {
+      "input": 8861,
+      "output": 2050,
+      "details": null
+    },
+    "token_counts": {
+      "fulltext": 4239,
+      "digest": 1593,
+      "short_digest": 347
+    },
+    "children": {
+      "ui_components": {
+        "origPath": "components",
+        "displayName": "UI Components",
+        "relevant": true,
+        "usage": {
+          "input": 33029,
+          "output": 1201,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 13233,
+          "digest": 855,
+          "short_digest": 233
+        },
+        "children": {
+          "accordion": {
+            "origPath": "components/accordion/llms.md",
+            "displayName": "accordion",
+            "relevant": true,
+            "usage": {
+              "input": 10914,
+              "output": 1238,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 9841,
+              "digest": 801,
+              "short_digest": 327
+            },
+            "children": {}
+          },
+          "alert-dialog": {
+            "origPath": "components/alert-dialog/llms.md",
+            "displayName": "alert-dialog",
+            "relevant": true,
+            "usage": {
+              "input": 10120,
+              "output": 1086,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 9043,
+              "digest": 743,
+              "short_digest": 235
+            },
+            "children": {}
+          },
+          "aspect_ratio": {
+            "origPath": "components/aspect-ratio/llms.md",
+            "displayName": "Aspect Ratio",
+            "relevant": true,
+            "usage": {
+              "input": 2147,
+              "output": 645,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1070,
+              "digest": 438,
+              "short_digest": 104
+            },
+            "children": {}
+          },
+          "avatar": {
+            "origPath": "components/avatar/llms.md",
+            "displayName": "avatar",
+            "relevant": true,
+            "usage": {
+              "input": 4292,
+              "output": 747,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 3219,
+              "digest": 379,
+              "short_digest": 263
+            },
+            "children": {}
+          },
+          "button": {
+            "origPath": "components/button/llms.md",
+            "displayName": "Button",
+            "relevant": true,
+            "usage": {
+              "input": 1619,
+              "output": 475,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 546,
+              "digest": 260,
+              "short_digest": 112
+            },
+            "children": {}
+          },
+          "calendar": {
+            "origPath": "components/calendar/llms.md",
+            "displayName": "calendar",
+            "relevant": true,
+            "usage": {
+              "input": 17762,
+              "output": 1931,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 16689,
+              "digest": 1204,
+              "short_digest": 621
+            },
+            "children": {}
+          },
+          "checkbox": {
+            "origPath": "components/checkbox/llms.md",
+            "displayName": "checkbox",
+            "relevant": true,
+            "usage": {
+              "input": 6371,
+              "output": 1308,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 5298,
+              "digest": 829,
+              "short_digest": 375
+            },
+            "children": {}
+          },
+          "collapsible": {
+            "origPath": "components/collapsible/llms.md",
+            "displayName": "collapsible",
+            "relevant": true,
+            "usage": {
+              "input": 5756,
+              "output": 983,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 4679,
+              "digest": 613,
+              "short_digest": 256
+            },
+            "children": {}
+          },
+          "combobox": {
+            "origPath": "components/combobox/llms.md",
+            "displayName": "combobox",
+            "relevant": true,
+            "usage": {
+              "input": 18910,
+              "output": 1120,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 17833,
+              "digest": 680,
+              "short_digest": 333
+            },
+            "children": {}
+          },
+          "command": {
+            "origPath": "components/command/llms.md",
+            "displayName": "command",
+            "relevant": true,
+            "usage": {
+              "input": 15432,
+              "output": 1548,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 14359,
+              "digest": 984,
+              "short_digest": 456
+            },
+            "children": {}
+          },
+          "context-menu": {
+            "origPath": "components/context-menu/llms.md",
+            "displayName": "context-menu",
+            "relevant": true,
+            "usage": {
+              "input": 23211,
+              "output": 1584,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 22134,
+              "digest": 1034,
+              "short_digest": 434
+            },
+            "children": {}
+          },
+          "datefield": {
+            "origPath": "components/date-field/llms.md",
+            "displayName": "DateField",
+            "relevant": true,
+            "usage": {
+              "input": 8121,
+              "output": 1167,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 7044,
+              "digest": 804,
+              "short_digest": 252
+            },
+            "children": {}
+          },
+          "date-picker": {
+            "origPath": "components/date-picker/llms.md",
+            "displayName": "date-picker",
+            "relevant": true,
+            "usage": {
+              "input": 17695,
+              "output": 1702,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 16618,
+              "digest": 1010,
+              "short_digest": 581
+            },
+            "children": {}
+          },
+          "date-range-field": {
+            "origPath": "components/date-range-field/llms.md",
+            "displayName": "date-range-field",
+            "relevant": true,
+            "usage": {
+              "input": 5971,
+              "output": 1061,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 4890,
+              "digest": 675,
+              "short_digest": 272
+            },
+            "children": {}
+          },
+          "date-range-picker": {
+            "origPath": "components/date-range-picker/llms.md",
+            "displayName": "date-range-picker",
+            "relevant": true,
+            "usage": {
+              "input": 19264,
+              "output": 1991,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 18183,
+              "digest": 1476,
+              "short_digest": 402
+            },
+            "children": {}
+          },
+          "dialog": {
+            "origPath": "components/dialog/llms.md",
+            "displayName": "dialog",
+            "relevant": true,
+            "usage": {
+              "input": 12528,
+              "output": 1976,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 11455,
+              "digest": 1463,
+              "short_digest": 400
+            },
+            "children": {}
+          },
+          "dropdown-menu": {
+            "origPath": "components/dropdown-menu/llms.md",
+            "displayName": "dropdown-menu",
+            "relevant": true,
+            "usage": {
+              "input": 26556,
+              "output": 1849,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 25479,
+              "digest": 1213,
+              "short_digest": 520
+            },
+            "children": {}
+          },
+          "label": {
+            "origPath": "components/label/llms.md",
+            "displayName": "Label",
+            "relevant": true,
+            "usage": {
+              "input": 1884,
+              "output": 721,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 811,
+              "digest": 435,
+              "short_digest": 186
+            },
+            "children": {}
+          },
+          "link-preview": {
+            "origPath": "components/link-preview/llms.md",
+            "displayName": "link-preview",
+            "relevant": true,
+            "usage": {
+              "input": 9333,
+              "output": 955,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 8256,
+              "digest": 601,
+              "short_digest": 233
+            },
+            "children": {}
+          },
+          "menubar": {
+            "origPath": "components/menubar/llms.md",
+            "displayName": "menubar",
+            "relevant": true,
+            "usage": {
+              "input": 22497,
+              "output": 1161,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 21422,
+              "digest": 748,
+              "short_digest": 301
+            },
+            "children": {}
+          },
+          "meter": {
+            "origPath": "components/meter/llms.md",
+            "displayName": "Meter",
+            "relevant": true,
+            "usage": {
+              "input": 2878,
+              "output": 951,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1805,
+              "digest": 649,
+              "short_digest": 198
+            },
+            "children": {}
+          },
+          "navigation_menu": {
+            "origPath": "components/navigation-menu/llms.md",
+            "displayName": "Navigation Menu",
+            "relevant": true,
+            "usage": {
+              "input": 16731,
+              "output": 838,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 15654,
+              "digest": 463,
+              "short_digest": 266
+            },
+            "children": {}
+          },
+          "pagination": {
+            "origPath": "components/pagination/llms.md",
+            "displayName": "pagination",
+            "relevant": true,
+            "usage": {
+              "input": 4371,
+              "output": 1257,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 3298,
+              "digest": 800,
+              "short_digest": 352
+            },
+            "children": {}
+          },
+          "pin_input": {
+            "origPath": "components/pin-input/llms.md",
+            "displayName": "PIN Input",
+            "relevant": true,
+            "usage": {
+              "input": 4896,
+              "output": 1220,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 3819,
+              "digest": 772,
+              "short_digest": 334
+            },
+            "children": {}
+          },
+          "popover_component": {
+            "origPath": "components/popover/llms.md",
+            "displayName": "Popover Component",
+            "relevant": true,
+            "usage": {
+              "input": 13309,
+              "output": 1068,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 12234,
+              "digest": 722,
+              "short_digest": 237
+            },
+            "children": {}
+          },
+          "progress": {
+            "origPath": "components/progress/llms.md",
+            "displayName": "progress",
+            "relevant": true,
+            "usage": {
+              "input": 2748,
+              "output": 835,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1675,
+              "digest": 549,
+              "short_digest": 179
+            },
+            "children": {}
+          },
+          "radio_group": {
+            "origPath": "components/radio-group/llms.md",
+            "displayName": "Radio Group",
+            "relevant": true,
+            "usage": {
+              "input": 5479,
+              "output": 962,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 4402,
+              "digest": 578,
+              "short_digest": 276
+            },
+            "children": {}
+          },
+          "range-calendar": {
+            "origPath": "components/range-calendar/llms.md",
+            "displayName": "range-calendar",
+            "relevant": true,
+            "usage": {
+              "input": 19115,
+              "output": 1056,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 18038,
+              "digest": 629,
+              "short_digest": 320
+            },
+            "children": {}
+          },
+          "rating-group": {
+            "origPath": "components/rating-group/llms.md",
+            "displayName": "rating-group",
+            "relevant": true,
+            "usage": {
+              "input": 7464,
+              "output": 1081,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 6387,
+              "digest": 675,
+              "short_digest": 291
+            },
+            "children": {}
+          },
+          "scroll-area": {
+            "origPath": "components/scroll-area/llms.md",
+            "displayName": "scroll-area",
+            "relevant": true,
+            "usage": {
+              "input": 4573,
+              "output": 805,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 3496,
+              "digest": 486,
+              "short_digest": 209
+            },
+            "children": {}
+          },
+          "select": {
+            "origPath": "components/select/llms.md",
+            "displayName": "select",
+            "relevant": true,
+            "usage": {
+              "input": 19097,
+              "output": 1719,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 18024,
+              "digest": 1171,
+              "short_digest": 438
+            },
+            "children": {}
+          },
+          "separator": {
+            "origPath": "components/separator/llms.md",
+            "displayName": "Separator",
+            "relevant": true,
+            "usage": {
+              "input": 2009,
+              "output": 750,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 936,
+              "digest": 504,
+              "short_digest": 141
+            },
+            "children": {}
+          },
+          "slider": {
+            "origPath": "components/slider/llms.md",
+            "displayName": "slider",
+            "relevant": true,
+            "usage": {
+              "input": 12303,
+              "output": 1805,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 11230,
+              "digest": 1092,
+              "short_digest": 601
+            },
+            "children": {}
+          },
+          "switch_component": {
+            "origPath": "components/switch/llms.md",
+            "displayName": "Switch Component",
+            "relevant": true,
+            "usage": {
+              "input": 3770,
+              "output": 752,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2697,
+              "digest": 512,
+              "short_digest": 138
+            },
+            "children": {}
+          },
+          "tabs": {
+            "origPath": "components/tabs/llms.md",
+            "displayName": "tabs",
+            "relevant": true,
+            "usage": {
+              "input": 4734,
+              "output": 781,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 3661,
+              "digest": 505,
+              "short_digest": 171
+            },
+            "children": {}
+          },
+          "timefield_component": {
+            "origPath": "components/time-field/llms.md",
+            "displayName": "TimeField Component",
+            "relevant": true,
+            "usage": {
+              "input": 7960,
+              "output": 1236,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 6883,
+              "digest": 783,
+              "short_digest": 344
+            },
+            "children": {}
+          },
+          "timerangefield": {
+            "origPath": "components/time-range-field/llms.md",
+            "displayName": "TimeRangeField",
+            "relevant": true,
+            "usage": {
+              "input": 5692,
+              "output": 1247,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 4611,
+              "digest": 806,
+              "short_digest": 324
+            },
+            "children": {}
+          },
+          "toggle": {
+            "origPath": "components/toggle/llms.md",
+            "displayName": "toggle",
+            "relevant": true,
+            "usage": {
+              "input": 2330,
+              "output": 637,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1257,
+              "digest": 367,
+              "short_digest": 160
+            },
+            "children": {}
+          },
+          "toggle-group": {
+            "origPath": "components/toggle-group/llms.md",
+            "displayName": "toggle-group",
+            "relevant": true,
+            "usage": {
+              "input": 3549,
+              "output": 824,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2472,
+              "digest": 493,
+              "short_digest": 225
+            },
+            "children": {}
+          },
+          "toolbar": {
+            "origPath": "components/toolbar/llms.md",
+            "displayName": "toolbar",
+            "relevant": true,
+            "usage": {
+              "input": 5052,
+              "output": 915,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 3979,
+              "digest": 583,
+              "short_digest": 224
+            },
+            "children": {}
+          },
+          "tooltip": {
+            "origPath": "components/tooltip/llms.md",
+            "displayName": "Tooltip",
+            "relevant": true,
+            "usage": {
+              "input": 12547,
+              "output": 1491,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 11474,
+              "digest": 1087,
+              "short_digest": 289
+            },
+            "children": {}
+          }
+        }
+      },
+      "contribution_policies": {
+        "origPath": "policies",
+        "displayName": "Contribution Policies",
+        "relevant": true,
+        "usage": {
+          "input": 1689,
+          "output": 481,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 238,
+          "digest": 289,
+          "short_digest": 88
+        },
+        "children": {
+          "changelog-conventions": {
+            "origPath": "policies/changelog-conventions/llms.md",
+            "displayName": "changelog-conventions",
+            "relevant": true,
+            "usage": {
+              "input": 1892,
+              "output": 541,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 815,
+              "digest": 319,
+              "short_digest": 115
+            },
+            "children": {}
+          },
+          "code_of_conduct": {
+            "origPath": "policies/code-of-conduct/llms.md",
+            "displayName": "Code of Conduct",
+            "relevant": false,
+            "usage": {
+              "input": 1534,
+              "output": 451,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 453,
+              "digest": 265,
+              "short_digest": 76
+            },
+            "children": {}
+          },
+          "tracking-bugs-and-feature-requests": {
+            "origPath": "policies/tracking-bugs-and-feature-requests/llms.md",
+            "displayName": "tracking-bugs-and-feature-requests",
+            "relevant": true,
+            "usage": {
+              "input": 1958,
+              "output": 401,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 869,
+              "digest": 220,
+              "short_digest": 65
+            },
+            "children": {}
+          }
+        }
+      },
+      "type_helpers": {
+        "origPath": "type-helpers",
+        "displayName": "Type Helpers",
+        "relevant": true,
+        "usage": {
+          "input": 2116,
+          "output": 525,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 379,
+          "digest": 328,
+          "short_digest": 90
+        },
+        "children": {
+          "withelementref_type_helper": {
+            "origPath": "type-helpers/with-element-ref/llms.md",
+            "displayName": "WithElementRef Type Helper",
+            "relevant": true,
+            "usage": {
+              "input": 1431,
+              "output": 410,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 346,
+              "digest": 247,
+              "short_digest": 57
+            },
+            "children": {}
+          },
+          "withoutchild_type_helper": {
+            "origPath": "type-helpers/without-child/llms.md",
+            "displayName": "WithoutChild Type Helper",
+            "relevant": true,
+            "usage": {
+              "input": 1396,
+              "output": 395,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 315,
+              "digest": 210,
+              "short_digest": 76
+            },
+            "children": {}
+          },
+          "withoutchildren_type_helper": {
+            "origPath": "type-helpers/without-children/llms.md",
+            "displayName": "WithoutChildren Type Helper",
+            "relevant": true,
+            "usage": {
+              "input": 1445,
+              "output": 411,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 364,
+              "digest": 231,
+              "short_digest": 69
+            },
+            "children": {}
+          },
+          "withoutchildrenorchild_type_helper": {
+            "origPath": "type-helpers/without-children-or-child/llms.md",
+            "displayName": "WithoutChildrenOrChild Type Helper",
+            "relevant": true,
+            "usage": {
+              "input": 1449,
+              "output": 385,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 360,
+              "digest": 204,
+              "short_digest": 71
+            },
+            "children": {}
+          }
+        }
+      },
+      "utilities": {
+        "origPath": "utilities",
+        "displayName": "Utilities",
+        "relevant": true,
+        "usage": {
+          "input": 2828,
+          "output": 962,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 833,
+          "digest": 704,
+          "short_digest": 146
+        },
+        "children": {
+          "bitsconfig": {
+            "origPath": "utilities/bits-config/llms.md",
+            "displayName": "BitsConfig",
+            "relevant": true,
+            "usage": {
+              "input": 2775,
+              "output": 905,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1698,
+              "digest": 515,
+              "short_digest": 277
+            },
+            "children": {}
+          },
+          "isusingkeyboard": {
+            "origPath": "utilities/is-using-keyboard/llms.md",
+            "displayName": "IsUsingKeyboard",
+            "relevant": true,
+            "usage": {
+              "input": 1332,
+              "output": 324,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 251,
+              "digest": 127,
+              "short_digest": 86
+            },
+            "children": {}
+          },
+          "mergeprops": {
+            "origPath": "utilities/merge-props/llms.md",
+            "displayName": "mergeProps",
+            "relevant": true,
+            "usage": {
+              "input": 2086,
+              "output": 707,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1009,
+              "digest": 456,
+              "short_digest": 138
+            },
+            "children": {}
+          },
+          "portal": {
+            "origPath": "utilities/portal/llms.md",
+            "displayName": "Portal",
+            "relevant": true,
+            "usage": {
+              "input": 1929,
+              "output": 623,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 856,
+              "digest": 356,
+              "short_digest": 158
+            },
+            "children": {}
+          },
+          "useid": {
+            "origPath": "utilities/use-id/llms.md",
+            "displayName": "useId",
+            "relevant": true,
+            "usage": {
+              "input": 1283,
+              "output": 287,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 206,
+              "digest": 128,
+              "short_digest": 56
+            },
+            "children": {}
+          }
+        }
+      },
+      "child-snippet": {
+        "origPath": "child-snippet/llms.md",
+        "displayName": "child-snippet",
+        "relevant": true,
+        "usage": {
+          "input": 2877,
+          "output": 993,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 1804,
+          "digest": 622,
+          "short_digest": 262
+        },
+        "children": {}
+      },
+      "dates-and-times": {
+        "origPath": "dates/llms.md",
+        "displayName": "dates-and-times",
+        "relevant": true,
+        "usage": {
+          "input": 3664,
+          "output": 1532,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 2595,
+          "digest": 960,
+          "short_digest": 460
+        },
+        "children": {}
+      },
+      "getting-started": {
+        "origPath": "getting-started/llms.md",
+        "displayName": "getting-started",
+        "relevant": true,
+        "usage": {
+          "input": 2663,
+          "output": 920,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 1590,
+          "digest": 585,
+          "short_digest": 225
+        },
+        "children": {}
+      },
+      "introduction": {
+        "origPath": "introduction/llms.md",
+        "displayName": "introduction",
+        "relevant": true,
+        "usage": {
+          "input": 1951,
+          "output": 417,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 882,
+          "digest": 250,
+          "short_digest": 53
+        },
+        "children": {}
+      },
+      "llm-friendly_documentation_access": {
+        "origPath": "llms/llms.md",
+        "displayName": "LLM-Friendly Documentation Access",
+        "relevant": false,
+        "usage": {
+          "input": 1909,
+          "output": 414,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 838,
+          "digest": 219,
+          "short_digest": 77
+        },
+        "children": {}
+      },
+      "migration_guide:_v0.x_to_v1": {
+        "origPath": "migration-guide/llms.md",
+        "displayName": "Migration Guide: v0.x to v1",
+        "relevant": true,
+        "usage": {
+          "input": 3746,
+          "output": 1013,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 2673,
+          "digest": 688,
+          "short_digest": 185
+        },
+        "children": {}
+      },
+      "ref-prop-binding": {
+        "origPath": "ref/llms.md",
+        "displayName": "ref-prop-binding",
+        "relevant": true,
+        "usage": {
+          "input": 2140,
+          "output": 827,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 1071,
+          "digest": 548,
+          "short_digest": 168
+        },
+        "children": {}
+      },
+      "state-management": {
+        "origPath": "state-management/llms.md",
+        "displayName": "state-management",
+        "relevant": true,
+        "usage": {
+          "input": 1658,
+          "output": 540,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 585,
+          "digest": 348,
+          "short_digest": 74
+        },
+        "children": {}
+      },
+      "styling": {
+        "origPath": "styling/llms.md",
+        "displayName": "styling",
+        "relevant": true,
+        "usage": {
+          "input": 4098,
+          "output": 903,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 3029,
+          "digest": 569,
+          "short_digest": 213
+        },
+        "children": {}
+      },
+      "transitions": {
+        "origPath": "transitions/llms.md",
+        "displayName": "Transitions",
+        "relevant": true,
+        "usage": {
+          "input": 2470,
+          "output": 721,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 1401,
+          "digest": 538,
+          "short_digest": 73
+        },
+        "children": {}
+      }
+    }
+  },
+  "name": "huntabyte/bitsui",
+  "source_type": "git",
+  "source": {
+    "name": "huntabyte/bitsui",
+    "comment": null,
+    "doc_dir": "docs/static/docs",
+    "repo": "git@github.com:xl0/bits-ui.git",
+    "commit": "4b6e2b17fd1ef9894da62ff520dbeab75850d87b"
+  },
+  "date": "2025-11-13T11:00:10.696631+00:00",
+  "model": "claude-haiku-4.5",
+  "commit": "0528ad5fe5486be5b3691edc99daacfaf782e426-dirty"
+}

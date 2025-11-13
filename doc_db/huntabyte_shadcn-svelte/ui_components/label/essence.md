@@ -1,0 +1,1 @@
+Accessible label component that associates with form controls via the `for` prop.

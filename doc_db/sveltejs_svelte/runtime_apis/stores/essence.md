@@ -1,0 +1,1 @@
+Reactive state management through stores with automatic subscription handling via $ prefix, plus API for creating writable, readable, and derived stores.

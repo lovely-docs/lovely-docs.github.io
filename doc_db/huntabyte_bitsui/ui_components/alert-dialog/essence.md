@@ -1,0 +1,1 @@
+Modal dialog component with compound structure, focus management, and customizable behaviors for confirmations and user input.

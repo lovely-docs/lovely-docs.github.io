@@ -15,7 +15,7 @@ from dotenv import load_dotenv; load_dotenv();
 
 # %% ../nbs/01_git.ipynb 4
 from .settings import GitSource, settings
-from git import Repo, InvalidGitRepositoryError, NoSuchPathError
+from git import Repo, InvalidGitRepositoryError, NoSuchPathError, GitCommandError, BadName, ODBError
 
 # %% ../nbs/01_git.ipynb 5
 def git_progress(op_code, cur_count, max_count=None, message=''):
@@ -74,12 +74,23 @@ def clone_repo(source: GitSource) -> tuple[str, Path]:
     repo_path = get_repo_path(source.repo)
     clone_dir = settings.git_dir / repo_path
 
+    cloned = False
     try:
         repo = Repo(clone_dir)
         repo.git.clean('-fdq') # Just in case
+        # Fetch to ensure remote branches are up to date
+        if 'origin' in repo.remotes:
+            repo.remotes.origin.fetch(progress=git_progress)
     except (InvalidGitRepositoryError, NoSuchPathError):
         clone_dir.parent.mkdir(parents=True, exist_ok=True)
         repo = Repo.clone_from(source.repo, clone_dir, progress=git_progress)
+        cloned = True
 
-    repo.git.reset('--hard', source.commit)
-    return repo.head.commit.hexsha, clone_dir
+    # Resolve the commit, handling branch names
+    try:
+        commit = repo.rev_parse(source.commit)
+    except ODBError:
+        commit = repo.rev_parse(f"origin/{source.commit}")
+
+    repo.git.reset('--hard', commit.hexsha)
+    return commit.hexsha, clone_dir

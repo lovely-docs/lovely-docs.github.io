@@ -1,0 +1,1 @@
+A portal component that displays content triggered by a button, with Root, Trigger, and Content subcomponents.

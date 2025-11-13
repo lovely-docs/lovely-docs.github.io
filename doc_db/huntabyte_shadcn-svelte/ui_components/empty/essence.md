@@ -1,0 +1,1 @@
+Component for displaying empty states with customizable header, media, title, description, and content sections.

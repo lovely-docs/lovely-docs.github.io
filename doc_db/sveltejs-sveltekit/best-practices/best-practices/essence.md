@@ -1,1 +1,0 @@
-Landing page for best practices section with no actual content.

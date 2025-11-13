@@ -1,1 +1,0 @@
-Documentation index page for Getting Started section. Auto-generated file with no visible content in the excerpt provided.

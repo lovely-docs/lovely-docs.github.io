@@ -1,0 +1,1 @@
+A hover/focus-triggered preview component for links that uses Floating UI for positioning and supports state management, custom anchoring, and Svelte transitions.

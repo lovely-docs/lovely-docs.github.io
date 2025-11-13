@@ -1,0 +1,1 @@
+Svelte special element for error boundaries and async state management with pending and failed UI snippets.

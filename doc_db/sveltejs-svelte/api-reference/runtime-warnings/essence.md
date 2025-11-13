@@ -1,1 +1,0 @@
-Reference documentation for Svelte runtime warnings covering reactivity, hydration, state proxies, bindings, and transitions.

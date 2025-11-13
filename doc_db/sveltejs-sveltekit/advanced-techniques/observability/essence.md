@@ -1,1 +1,0 @@
-Emit and collect OpenTelemetry spans for server-side operations like hooks, load functions, and form actions.

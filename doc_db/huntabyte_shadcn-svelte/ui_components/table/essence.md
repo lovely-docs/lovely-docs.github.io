@@ -1,0 +1,1 @@
+Responsive table component with composable subcomponents for headers, rows, cells, and footers.

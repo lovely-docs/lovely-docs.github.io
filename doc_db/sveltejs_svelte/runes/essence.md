@@ -1,0 +1,1 @@
+Compiler-controlled `$`-prefixed keywords that manage reactive state, derived values, side effects, component inputs, and debugging in Svelte.

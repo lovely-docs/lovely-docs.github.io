@@ -1,0 +1,1 @@
+Floating panel component with configurable positioning, focus management, interaction handling, and animation support.

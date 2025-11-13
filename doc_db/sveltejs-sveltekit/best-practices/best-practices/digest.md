@@ -1,1 +1,0 @@
-This page serves as an index/landing page for best practices documentation in SvelteKit. The actual content appears to be generated automatically from a script and the page itself contains no substantive information - only a title and a note indicating it's auto-generated.

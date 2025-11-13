@@ -1,0 +1,1 @@
+How to set up Svelte projects, structure components in .svelte files, and create reusable reactive logic with runes.

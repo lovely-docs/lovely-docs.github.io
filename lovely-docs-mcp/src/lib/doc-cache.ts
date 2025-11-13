@@ -1,32 +1,19 @@
-import { readdir, readFile } from 'fs/promises';
-import { join } from 'path';
-import { existsSync } from 'fs';
-import dbg from 'debug';
+import { readdir, readFile } from "fs/promises";
+import { join } from "path";
+import { existsSync } from "fs";
+import dbg from "debug";
+import * as v from "valibot";
 
-const debug = dbg('app:lib:doc-cache');
+const debug = dbg("app:mcp:doc-cache");
 
-interface IndexEntry {
-	path: string;
-	relevant: boolean;
-	type: 'page' | 'directory';
-	token_counts?: {
-		fulltext?: number;
-		digest?: number;
-		short_digest?: number;
-	};
-	usage?: {
-		input: number;
-		output: number;
-		details?: any;
-	};
-}
+const markdownVariantKeys = ["fulltext", "digest", "short_digest", "essence"] as const;
+interface MarkdownVariants extends Partial<Record<(typeof markdownVariantKeys)[number], string>> {}
 
-const markdownVariantKeys = ['fulltext', 'digest', 'short_digest', 'essence'] as const;
-interface MarkdownVariants extends Partial<Record<typeof markdownVariantKeys[number], string>> { }
-
-// Base type for both pages and directories
-interface BaseDocItem {
-	path: string; // Original filesystem path from index.json
+// Combined TreeNode and DocItem
+export interface DocItem {
+	displayName: string;
+	origPath: string; // Original path in the documenatation.
+	children: Record<string, DocItem>;
 	relevant: boolean;
 	token_counts?: {
 		fulltext?: number;
@@ -41,29 +28,9 @@ interface BaseDocItem {
 	markdown: MarkdownVariants; // Contains digest, essence, etc.
 }
 
-// Page type - has fulltext and short_digest
-interface DocPage extends BaseDocItem {
-	type: 'page';
-}
-
-// Directory type - now also has short_digest
-interface DocDirectory extends BaseDocItem {
-	type: 'directory';
-}
-
-export type DocItem = DocPage | DocDirectory;
-
-export interface TreeNode {
-	name: string;
-	path: string;
-	children: Map<string, TreeNode>;
-	data?: DocItem;
-}
-
 export interface LibraryDBItem {
-	library: string;
+	name: string;
 	source: {
-		name: string;
 		doc_dir?: string;
 		repo?: string;
 		commit?: string;
@@ -72,52 +39,92 @@ export interface LibraryDBItem {
 	date: string;
 	model: string;
 	commit: string;
-	tree: TreeNode;
+	tree: DocItem;
 }
 
-const cache = new Map<string, LibraryDBItem>();
+export const cache = new Map<string, LibraryDBItem>();
 
-function validateIndexData(data: any): void {
-	if (!data.map || typeof data.map !== 'object') {
-		throw new Error('Invalid index.json: missing or invalid "map" field');
+// Valibot schemas for validation and types
+type IndexNode = {
+	displayName: string;
+	origPath: string;
+	relevant: boolean;
+	usage?: {
+		input: number;
+		output: number;
+		details?: any;
+	};
+	token_counts?: {
+		fulltext?: number;
+		digest?: number;
+		short_digest?: number;
+	};
+	children: Record<string, IndexNode>; // index is the same as the safeName for the child.
+};
+
+const IndexNodeSchema: any = v.object({
+	displayName: v.string(),
+	origPath: v.string(),
+	relevant: v.boolean(),
+	usage: v.optional(
+		v.object({
+			input: v.number(),
+			output: v.number(),
+			details: v.optional(v.any()),
+		})
+	),
+	token_counts: v.optional(
+		v.object({
+			fulltext: v.optional(v.number()),
+			digest: v.optional(v.number()),
+			short_digest: v.optional(v.number()),
+		})
+	),
+	children: v.record(
+		v.string(),
+		v.lazy((): any => IndexNodeSchema)
+	),
+});
+
+const IndexJsonDataSchema = v.object({
+	name: v.string(),
+	map: IndexNodeSchema,
+	source: v.object({
+		name: v.string(),
+		doc_dir: v.optional(v.string()),
+		repo: v.optional(v.string()),
+		commit: v.optional(v.string()),
+		comment: v.optional(v.string()),
+	}),
+	source_type: v.union([v.literal("git"), v.literal("web")]),
+	date: v.string(),
+	model: v.string(),
+	commit: v.string(),
+});
+
+// Json comes with optional fields as null. Convert them to undefined.
+function nullsToUndefined<T>(obj: T): T {
+	if (obj === null) return undefined as T;
+	if (typeof obj !== "object" || obj === undefined) return obj;
+	if (Array.isArray(obj)) return obj.map(nullsToUndefined) as T;
+
+	const result: any = {};
+	for (const [key, value] of Object.entries(obj)) {
+		result[key] = nullsToUndefined(value);
 	}
-
-	const errors: string[] = [];
-	for (const [key, value] of Object.entries(data.map)) {
-		if (typeof value !== 'object' || value === null) {
-			errors.push(`Entry "${key}": not an object`);
-			continue;
-		}
-
-		const entry = value as any;
-		if (typeof entry.path !== 'string') {
-			errors.push(`Entry "${key}": missing or invalid "path" field`);
-		}
-		if (typeof entry.relevant !== 'boolean') {
-			errors.push(`Entry "${key}": missing or invalid "relevant" field`);
-		}
-		if (entry.type !== 'page' && entry.type !== 'directory') {
-			errors.push(`Entry "${key}": missing or invalid "type" field (must be "page" or "directory")`);
-		}
-	}
-
-	if (errors.length > 0) {
-		throw new Error(`Invalid index.json:\n${errors.join('\n')}`);
-	}
+	return result;
 }
 
-// The keys in the index.json map are already the full name-based paths
-// No need to build them - they're provided directly
+type IndexJsonData = v.InferOutput<typeof IndexJsonDataSchema>;
 
-async function loadMarkdownVariants(libraryPath: string, fullPath: string): Promise<MarkdownVariants> {
-	const basePath = join(libraryPath, fullPath);
+async function loadMarkdownVariants(path: string): Promise<MarkdownVariants> {
 	const variants: MarkdownVariants = {};
 
 	for (const variant of markdownVariantKeys) {
-		const filePath = join(basePath, variant + ".md");
+		const filePath = join(path, variant + ".md");
 		if (existsSync(filePath)) {
 			try {
-				const content = await readFile(filePath, 'utf-8');
+				const content = await readFile(filePath, "utf-8");
 				variants[variant] = content;
 				// debug(`Loaded ${variant} for ${fullPath}`);
 			} catch (error) {
@@ -125,136 +132,100 @@ async function loadMarkdownVariants(libraryPath: string, fullPath: string): Prom
 			}
 		}
 	}
+	// debug("loadMarkdownVariants", Object.keys(variants));
 
 	return variants;
 }
 
-export async function loadLibrary(libraryPath: string, libraryName: string): Promise<LibraryDBItem> {
-	debug(`Loading library: ${libraryName} from ${libraryPath}`);
-	const indexPath = join(libraryPath, 'index.json');
+async function buildTreeNode(path: string, node: IndexNode): Promise<DocItem> {
+	const markdown = await loadMarkdownVariants(path);
+	// debug(`${path} -> [${Object.keys(markdown).join(", ")}]`);
 
-	const content = await readFile(indexPath, 'utf-8');
-	const data = JSON.parse(content);
-
-	// Validate the index data
-	validateIndexData(data);
-
-	// Build tree structure
-	const root: TreeNode = {
-		name: '',
-		path: '',
-		children: new Map()
+	const treeNode: DocItem = {
+		displayName: node.displayName,
+		origPath: node.origPath,
+		children: {},
+		relevant: node.relevant,
+		token_counts: node.token_counts,
+		usage: node.usage,
+		markdown,
 	};
 
-	let itemCount = 0;
-	for (const [fullPath, entry] of Object.entries(data.map as Record<string, IndexEntry>)) {
-		// Load all markdown variants
-		const markdown = await loadMarkdownVariants(libraryPath, fullPath);
-		const nonNullMarkdown = Object.keys(markdown)
-		debug(`${fullPath} -> ${entry.path} (${entry.type}) [${nonNullMarkdown.join(', ')}]`);
-
-		const docItem: DocItem = {
-			type: entry.type,
-			path: entry.path,
-			relevant: entry.relevant,
-			token_counts: entry.token_counts,
-			usage: entry.usage,
-			markdown
-		};
-
-		// Build tree path
-		const parts = fullPath.split('/');
-		let current = root;
-
-		for (let i = 0; i < parts.length; i++) {
-			const part = parts[i];
-			const isLast = i === parts.length - 1;
-			const currentPath = parts.slice(0, i + 1).join('/');
-
-			if (!current.children.has(part)) {
-				current.children.set(part, {
-					name: part,
-					path: currentPath,
-					children: new Map(),
-					data: isLast ? docItem : undefined
-				});
-			}
-
-			current = current.children.get(part)!;
-		}
-
-		itemCount++;
+	for (const [k, child] of Object.entries(node.children)) {
+		const childTree = await buildTreeNode(join(path, k), child);
+		treeNode.children[k] = childTree;
 	}
 
-	debug(`Loaded ${itemCount} items for ${libraryName}`);
+	return treeNode;
+}
 
-	return {
-		library: libraryName,
-		source: data.source,
-		source_type: data.source_type,
-		date: data.date,
-		model: data.model,
-		commit: data.commit,
-		tree: root
-	};
+export async function loadLibrary(libraryPath: string): Promise<LibraryDBItem> {
+	debug(`Loading ${libraryPath}`);
+	const indexPath = join(libraryPath, "index.json");
+
+	const content = await readFile(indexPath, "utf-8");
+	const json_content = nullsToUndefined(JSON.parse(content));
+
+	const res = v.safeParse(IndexJsonDataSchema, json_content);
+	if (res.success) {
+		// Build tree structure
+		const o = res.output;
+		const root = await buildTreeNode(libraryPath, o.map);
+
+		debug(`Loaded ${libraryPath} -> ${o.name}`);
+
+		return {
+			name: o.name,
+			commit: o.commit,
+			date: o.date,
+			model: o.model,
+			source: o.source,
+			source_type: o.source_type,
+			tree: root,
+		};
+	} else {
+		debug(res.issues);
+		throw Error;
+	}
 }
 
 export async function loadLibrariesFromJson(path: string): Promise<void> {
-	debug('Scanning libraries...');
+	debug("Scanning libraries...");
+	const entries = await readdir(path, { withFileTypes: true });
 
-	try {
-		const entries = await readdir(path, { withFileTypes: true });
+	for (const entry of entries) {
+		if (!entry.isDirectory()) continue;
 
-		for (const entry of entries) {
-			if (!entry.isDirectory()) continue;
+		const libPath = join(path, entry.name);
+		const indexPath = join(path, entry.name, "index.json");
+		if (!existsSync(indexPath)) continue;
 
-			const libPath = join(path, entry.name)
-			const indexPath = join(path, entry.name, 'index.json');
-			if (!existsSync(indexPath)) continue;
-
-			try {
-				const libraryCache = await loadLibrary(libPath, entry.name);
-				cache.set(entry.name, libraryCache);
-			} catch (error) {
-				debug(`Failed to load library ${entry.name}: %O`, error);
-			}
+		try {
+			const libraryCache = await loadLibrary(libPath);
+			cache.set(entry.name, libraryCache);
+		} catch (error) {
+			debug(`Failed to load library ${entry.name}: %o`, error);
 		}
-
-		debug(`Loaded ${cache.size} libraries, %O`, cache);
-	} catch (error) {
-		debug('Failed to scan libraries: %O', error)
 	}
+
+	debug(`Loaded ${cache.size} libraries, %o`);
 }
 
-export function getLibraries(): Array<{ name: string; source?: any; source_type?: string }> {
-	return Array.from(cache.values()).map(lib => ({
-		name: lib.library,
-		source: lib.source,
-		source_type: lib.source_type
-	}));
+export function getLibraries(): Map<string, { name: string; source?: any; source_type?: string }> {
+	const res = new Map<string, { name: string; source?: any; source_type?: string }>();
+	for (const [key, lib] of cache) {
+		res.set(key, {
+			name: lib.name,
+			source: lib.source,
+			source_type: lib.source_type,
+		});
+	}
+	debug(`getLibraries() -> %o`, res.size);
+	return res;
 }
 
 export function getLibrary(name: string): LibraryDBItem | undefined {
 	const res = cache.get(name);
-	debug(`getLibrary(${name}) -> %O`, res)
-	return res
-}
-
-export function getDocItem(library: string, fullPath: string): DocItem | undefined {
-	const lib = cache.get(library);
-	if (!lib) return undefined;
-
-	// Navigate tree to find item
-	const parts = fullPath.split('/');
-	let current = lib.tree;
-
-	for (const part of parts) {
-		const child = current.children.get(part);
-		if (!child) return undefined;
-		current = child;
-	}
-
-	const res = current.data;
-	debug(`getDocItem(${library}, ${fullPath}) -> %o`, res)
-	return res
+	debug(`getLibrary(${name}) -> %o`, res?.name);
+	return res;
 }

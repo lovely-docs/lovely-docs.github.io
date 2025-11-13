@@ -1,0 +1,1 @@
+Searchable dropdown component combining Popover and Command with examples for status selection, dropdown menus, and form integration.

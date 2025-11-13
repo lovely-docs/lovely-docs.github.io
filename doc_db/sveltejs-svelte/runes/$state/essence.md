@@ -1,1 +1,0 @@
-The $state rune creates reactive state that automatically updates the UI; it supports deep reactivity for objects/arrays via proxies, class fields, and has variants for raw state, snapshots, and eager updates.

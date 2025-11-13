@@ -1,1 +1,0 @@
-Use snapshot objects to preserve and restore ephemeral DOM state when navigating between pages.

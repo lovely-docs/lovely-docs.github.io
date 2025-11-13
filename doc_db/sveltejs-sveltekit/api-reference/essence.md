@@ -1,1 +1,0 @@
-Complete TypeScript API reference for SvelteKit covering response helpers, request/event types, hooks, forms, navigation, environment variables, configuration, and auto-generated types.

@@ -1,1 +1,0 @@
-Shallow routing lets you create browser history entries with associated state without navigating, enabling history-driven modals and overlays.

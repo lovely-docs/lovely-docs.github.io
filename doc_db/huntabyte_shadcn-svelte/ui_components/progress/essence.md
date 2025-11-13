@@ -1,0 +1,1 @@
+A progress bar component that displays task completion with reactive value updates.

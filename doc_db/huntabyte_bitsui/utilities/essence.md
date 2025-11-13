@@ -1,0 +1,1 @@
+Collection of utility functions and components for managing global configuration, keyboard tracking, props merging, portals, and ID generation.

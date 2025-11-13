@@ -1,1 +1,0 @@
-Configure SvelteKit to serve a fully client-rendered single-page app with a fallback page, with guidance on prerendering specific pages and performance tradeoffs.

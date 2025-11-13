@@ -1,1 +1,0 @@
-Index page for Svelte Runes documentation - entry point to learning about reactive state management in Svelte.

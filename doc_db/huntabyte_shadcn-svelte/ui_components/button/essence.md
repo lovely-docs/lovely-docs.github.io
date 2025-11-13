@@ -1,0 +1,1 @@
+Reusable button component supporting multiple variants, sizes, icons, and link rendering.

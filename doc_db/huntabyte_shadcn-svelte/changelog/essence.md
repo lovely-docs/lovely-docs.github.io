@@ -1,0 +1,1 @@
+Timeline of component additions and major updates to shadcn-svelte from October 2023 through June 2025.

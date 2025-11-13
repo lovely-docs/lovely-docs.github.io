@@ -1,0 +1,1 @@
+This is a documentation index page for advanced SvelteKit topics. The page itself contains no substantive content - it serves as a structural container for advanced documentation sections.

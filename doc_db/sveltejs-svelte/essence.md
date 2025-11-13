@@ -1,1 +1,0 @@
-Complete reference for Svelte 5 framework covering runes, template syntax, styling, runtime APIs, special elements, and migration from legacy versions.

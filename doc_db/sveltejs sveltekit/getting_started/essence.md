@@ -1,0 +1,1 @@
+Foundation for creating and configuring SvelteKit projects with rendering patterns, project structure, and Web API usage.

@@ -1,1 +1,0 @@
-This is the main entry point for Svelte documentation. The page itself contains minimal content - it's primarily a structural/navigation page that serves as the root of the documentation site. The actual documentation content is generated automatically from scripts in the apps/svelte.dev/scripts/sync-docs/ directory.

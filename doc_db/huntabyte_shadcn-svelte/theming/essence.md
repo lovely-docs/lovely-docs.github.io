@@ -1,0 +1,1 @@
+Customize component colors using CSS variables with background/foreground convention in OKLCH format, with built-in light/dark mode support and pre-configured color palettes.

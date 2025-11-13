@@ -1,1 +1,0 @@
-API reference for the $service-worker module that provides build-time constants to service workers.

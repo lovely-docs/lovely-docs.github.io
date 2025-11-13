@@ -1,0 +1,1 @@
+Server-side form handling in SvelteKit using actions exported from +page.server.js, with support for validation, redirects, and progressive enhancement.

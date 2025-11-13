@@ -1,1 +1,0 @@
-Index page for best practices documentation. Auto-generated content with no specific guidance included.

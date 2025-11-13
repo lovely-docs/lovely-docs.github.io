@@ -1,1 +1,0 @@
-Use <svelte:fragment> to fill named slots without adding a wrapper DOM element.

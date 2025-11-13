@@ -1,1 +1,0 @@
-Adapters deploy SvelteKit apps to various platforms with platform-specific configuration and runtime APIs.

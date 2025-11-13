@@ -1,1 +1,0 @@
-Shorthand directive for setting inline styles on elements with support for expressions and important modifier.

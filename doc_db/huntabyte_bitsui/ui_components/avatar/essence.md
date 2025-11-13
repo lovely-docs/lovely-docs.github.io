@@ -1,0 +1,1 @@
+Compound component for displaying images with automatic loading state management and fallback support.

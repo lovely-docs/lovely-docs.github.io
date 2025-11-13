@@ -1,0 +1,1 @@
+Customizable time input component with segment-based editing, validation, and support for multiple time value types.

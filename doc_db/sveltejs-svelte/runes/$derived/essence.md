@@ -1,1 +1,0 @@
-The $derived rune creates reactive derived state that automatically updates when its dependencies change, with support for complex derivations via $derived.by and temporary value overrides.

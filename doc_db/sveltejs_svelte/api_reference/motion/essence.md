@@ -1,0 +1,1 @@
+Motion animation utilities: Spring class for physics-based animation, Tween class for time-based animation, and prefersReducedMotion for accessibility.

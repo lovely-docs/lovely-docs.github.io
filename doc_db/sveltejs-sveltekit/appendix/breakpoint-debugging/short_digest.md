@@ -1,1 +1,0 @@
-Set breakpoints to debug Svelte/SvelteKit projects in VSCode (Debug Terminal or `.vscode/launch.json`), other editors, or browser DevTools. VSCode Debug Terminal: `CMD/Ctrl + Shift + P` → "Debug: JavaScript Debug Terminal" → `npm run dev`. Browser DevTools: `NODE_OPTIONS="--inspect" npm run dev` → open `localhost:5173` → click Node.js DevTools icon in browser dev tools.

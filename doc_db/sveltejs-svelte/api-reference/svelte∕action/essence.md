@@ -1,1 +1,0 @@
-Type definitions for Svelte actions: functions called when elements are created, with optional lifecycle methods and custom attributes/events.

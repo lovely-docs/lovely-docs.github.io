@@ -1,0 +1,1 @@
+Tooltip component that shows information on hover or keyboard focus using Provider, Root, Trigger, and Content subcomponents.

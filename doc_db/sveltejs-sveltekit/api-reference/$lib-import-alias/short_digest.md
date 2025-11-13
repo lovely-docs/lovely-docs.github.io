@@ -1,1 +1,0 @@
-SvelteKit provides a `$lib` import alias for `src/lib` directory, allowing imports like `import Component from '$lib/Component.svelte'`. The alias target can be configured in the config file.

@@ -1,0 +1,1 @@
+Install bits-ui, import components, style using class props or data attributes, and leverage TypeScript support.

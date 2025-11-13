@@ -1,0 +1,1 @@
+Best practices for managing state in SvelteKit apps that span server and client, avoiding shared state pitfalls and using context API, derived values, and URL parameters appropriately.

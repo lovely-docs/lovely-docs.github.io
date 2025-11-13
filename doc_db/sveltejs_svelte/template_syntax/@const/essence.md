@@ -1,0 +1,1 @@
+Define local constants within block scopes using {@const ...}

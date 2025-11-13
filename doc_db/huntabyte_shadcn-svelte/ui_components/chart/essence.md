@@ -1,0 +1,1 @@
+Copy-paste chart components built on LayerChart with composition-based design, chart config for theming, and customizable tooltips.

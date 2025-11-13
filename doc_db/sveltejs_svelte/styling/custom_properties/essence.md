@@ -1,0 +1,1 @@
+How to pass and use CSS custom properties in Svelte components.

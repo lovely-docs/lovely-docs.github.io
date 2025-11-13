@@ -1,0 +1,1 @@
+Directive for attaching reactive functions to DOM elements with lifecycle management.

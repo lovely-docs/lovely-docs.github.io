@@ -1,0 +1,1 @@
+**Deprecated** in favor of `adapter-cloudflare`. Install `@sveltejs/adapter-cloudflare-workers`, configure `wrangler.jsonc`, and deploy with `wrangler deploy`. Access Cloudflare bindings via `platform.env`. Enable Node.js compatibility if needed. Prerender routes instead of using `fs`.

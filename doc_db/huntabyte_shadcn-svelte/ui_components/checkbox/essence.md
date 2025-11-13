@@ -1,0 +1,1 @@
+Checkbox component for toggling between checked and unchecked states with support for labels, disabled state, custom styling, and form integration.

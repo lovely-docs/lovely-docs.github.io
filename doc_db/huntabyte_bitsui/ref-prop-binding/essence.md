@@ -1,0 +1,1 @@
+The ref prop provides bindable access to underlying HTML elements in Bits UI components for direct DOM manipulation.

@@ -1,0 +1,1 @@
+How to install shadcn-svelte, structure components across multiple files, and use IDE extensions for component management.

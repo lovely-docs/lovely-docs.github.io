@@ -1,0 +1,1 @@
+Collapsible component for expanding/collapsing content panels with Trigger and Content subcomponents.

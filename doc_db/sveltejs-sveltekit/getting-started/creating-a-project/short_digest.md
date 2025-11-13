@@ -1,1 +1,0 @@
-Run `npx sv create my-app` to scaffold a project. Pages are Svelte components in `src/routes` that are server-rendered initially then client-side. Use VS Code with the Svelte extension.

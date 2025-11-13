@@ -1,0 +1,1 @@
+Two-way data binding directive that allows child-to-parent data flow with support for inputs, selects, media elements, and component props.
