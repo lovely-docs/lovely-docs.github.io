@@ -27,12 +27,7 @@
 		return Array.from(set).sort();
 	});
 
-	let selectedEcosystems = $state<string[]>([]);
-
-	// initialize selection to all ecosystems once data is available
-	$effect(() => {
-		selectedEcosystems = allEcosystems;
-	});
+	let selectedEcosystems = $derived(allEcosystems)
 
 	const filteredLibraries = $derived.by<[string, LibrarySummary][]>(() => {
 		// If there are no ecosystem tags at all, just show all libraries.
@@ -89,7 +84,7 @@
 	{:else}
 		<div class="grid gap-4 grid-cols-1">
 			{#each filteredLibraries as [key, library]}
-				<a href={key} class="block">
+				<a href="{key}" class="block">
 					<Card class="h-full hover:border-primary">
 						<CardHeader>
 							<CardTitle class="flex flex-col gap-2">
