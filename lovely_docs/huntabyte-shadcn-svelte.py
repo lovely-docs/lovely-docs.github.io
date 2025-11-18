@@ -30,7 +30,8 @@ source = GitSource(
     name="huntabyte/shadcn-svelte",
     doc_dir="docs/.svelte-kit/cloudflare/docs",
     repo="https://github.com/huntabyte/shadcn-svelte",
-    commit="main")
+    commit="main",
+    ecosystems=["svelte"])
 
 commit, clone_dir = clone_repo(source)
 source.commit = commit # Replace the literal commit (master) with the hash

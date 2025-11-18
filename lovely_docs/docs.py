@@ -59,7 +59,15 @@ class DocItem(BaseModel):
 DocItem.model_rebuild()  # Resolve forward refs.
 
 # %% ../nbs/02_docs.ipynb 7
-def build_markdown_doc_tree(root: Path, path: Path = Path()) -> DocItem:
+from pathlib import Path
+from typing import Iterable
+
+def build_markdown_doc_tree(
+    root: Path,
+    path: Path = Path(),
+    include: list | None = None,  # Relative prefixes, don't start with '/'
+    exclude: list | None = None,
+) -> DocItem:
     """Recursively build a documentation tree from markdown files.
 
     Args:
@@ -73,13 +81,29 @@ def build_markdown_doc_tree(root: Path, path: Path = Path()) -> DocItem:
     assert root.exists() and root.is_dir()
     assert (root / path).exists() and (root / path).is_dir()
 
+    include_paths: set[str] = set(include or [])
+    exclude_paths: set[str] = set(exclude or [])
+
+    def _is_included(rel: Path) -> bool:
+        rel_str = rel.as_posix()
+        if not include_paths:
+            return True
+        return any(rel_str.startswith(inc) or inc.startswith(rel_str)  for inc in include_paths)
+
+    def _is_excluded(rel: Path) -> bool:
+        rel_str = rel.as_posix()
+        return any(rel_str.startswith(exc) or exc.startswith(rel_str) for exc in exclude_paths)
+
     children: list[DocItem] = []
 
     # Get immediate children only
     for item in sorted((root / path).iterdir()):
-        if item.is_file() and item.suffix == '.md':
+        rel_path = item.relative_to(root)
+        if not _is_included(rel_path) or _is_excluded(rel_path):
+            continue
+
+        if item.is_file() and item.suffix == ".md":
             # We'll process files later, just record them
-            rel_path = item.relative_to(root)
             fulltext = item.read_text()
             if fulltext:
                 name = str(rel_path.name)
@@ -87,7 +111,7 @@ def build_markdown_doc_tree(root: Path, path: Path = Path()) -> DocItem:
                     DocItem(origPath=rel_path, name=name, displayName=name, fulltext=fulltext)
                 )
         if item.is_dir():
-            subtree = build_markdown_doc_tree(root, item.relative_to(root))
+            subtree = build_markdown_doc_tree(root, item.relative_to(root), include, exclude)
             if subtree:
                 children.append(subtree)
 
@@ -101,7 +125,7 @@ def build_markdown_doc_tree(root: Path, path: Path = Path()) -> DocItem:
 
     return None
 
-# %% ../nbs/02_docs.ipynb 10
+# %% ../nbs/02_docs.ipynb 12
 class PageReplySchema(BaseModel):
     better_name: str = Field(description="")
     digest: str = Field(title="Digest, format: markdown", )
@@ -162,7 +186,9 @@ async def llm_process_page(
                         )
                         llm_trace.end(outputs=await res.text())
                     except Exception as e:
-                        logger.warning(f"{page.origPath}: retry {attempt.retry_state.attempt_number}: {str(e)}")
+                        logger.warning(
+                            f"{page.origPath}: retry {attempt.retry_state.attempt_number}: {str(e)}"
+                        )
                         raise
 
         with ls.trace("Parse", "parser", inputs={"input": await res.text()}) as parse_trace:
@@ -208,10 +234,10 @@ async def llm_process_page(
             usage=usage
         )
 
-        trace.end(outputs=result)
+        trace.end(outputs=result.model_copy(update={"fulltext": ""}))
         return result
 
-# %% ../nbs/02_docs.ipynb 22
+# %% ../nbs/02_docs.ipynb 24
 class DirReplySchema(BaseModel):
     better_name: str
     digest: str = Field(title="Directory digest, fmt:markdown")
@@ -325,13 +351,13 @@ async def llm_process_directory(
         result.token_counts = token_counts
         result.usage = usage
 
-        trace.end(outputs=result)
+        trace.end(outputs=result.model_copy(update={"fulltext": ""}))
         return result
 
-# %% ../nbs/02_docs.ipynb 26
+# %% ../nbs/02_docs.ipynb 28
 async def process_tree_depth_first(
     settings: Settings,
-    doc_dir: DocItem,
+    tree: DocItem,
     libname: str,
     extra_dir: str | None = None,
     extra_page: str | None = None
@@ -341,9 +367,9 @@ async def process_tree_depth_first(
     Mutates the doc_dir object.
     """
 
-    with ls.trace(name=f"Process tree: {libname}/{doc_dir.origPath}", run_type="chain") as trace:
+    with ls.trace(name=f"Process tree: {libname}/{tree.origPath}", run_type="chain") as trace:
         # First, recursively process all subdirectories in parallel
-        subdirs = [c for c in doc_dir.children if c.children]
+        subdirs = [c for c in tree.children if c.children]
         subdirs = await asyncio.gather(
             *[
                 process_tree_depth_first(settings, subdir, libname, extra_dir, extra_page)
@@ -353,39 +379,44 @@ async def process_tree_depth_first(
         subdirs = sorted(subdirs, key=lambda s: s.origPath)
 
         # Then process all pages in this directory in parallel
-        pages = [c for c in doc_dir.children if not c.children]
+        pages = [c for c in tree.children if not c.children]
         pages = await asyncio.gather(
             *[llm_process_page(settings, page, libname, extra_page) for page in pages]
         )
         pages = sorted(pages, key=lambda s: s.origPath)
 
-        # .name is llm-generated and might be not unique. Make it unique.
-        names: set[str] = set()
-        for x in subdirs + pages:
-            name, i = x.displayName, 2
-            while name in names:
-                name = f"{x.displayName}_{str(i)}"
-                i += 1
-            x.displayName = name
-            names.add(name)
 
-        if not any(x for x in subdirs + pages if x.relevant):
-            result = DocItem(
-                origPath=doc_dir.origPath,
-                displayName=doc_dir.displayName,
-                children=pages,
-                relevant=False
-            )
-            trace.end(outputs=result)
-            return result
+        # The whole tree is just 1 page.
+        if not pages:
+            result = await llm_process_page(page=tree, extra_prompt=extra_page, libname=libname, settings=settings)
+        else:
+            # .name is llm-generated and might be not unique. Make it unique.
+            names: set[str] = set()
+            for x in subdirs + pages:
+                name, i = x.displayName, 2
+                while name in names:
+                    name = f"{x.displayName}_{str(i)}"
+                    i += 1
+                x.displayName = name
+                names.add(name)
 
-        # Update children with processed items
-        doc_dir.children = subdirs + pages
-        result = await llm_process_directory(settings, doc_dir, libname, extra_dir)
-        trace.end(outputs=result)
+            if not any(x for x in subdirs + pages if x.relevant):
+                result = DocItem(
+                    origPath=tree.origPath,
+                    displayName=tree.displayName,
+                    children=pages,
+                    relevant=False
+                )
+                trace.end(outputs=result)
+                return result
+
+            # Update children with processed items
+            tree.children = subdirs + pages
+            result = await llm_process_directory(settings, tree, libname, extra_dir)
+        trace.end(outputs=result.model_copy(update={"fulltext": ""}))
         return result
 
-# %% ../nbs/02_docs.ipynb 31
+# %% ../nbs/02_docs.ipynb 33
 def calculate_total_usage(doc_dir: DocItem) -> Usage:
     """Calculate total usage for a directory tree including all pages, subdirs, and summaries"""
     total_input = 0
@@ -413,10 +444,10 @@ def calculate_cost(usage: Usage, input_cost: float,
     cost = input_cost_total + output_cost_total
     return cost, input_cost_total, output_cost_total
 
-# %% ../nbs/02_docs.ipynb 34
+# %% ../nbs/02_docs.ipynb 36
 import shutil
 
-# %% ../nbs/02_docs.ipynb 35
+# %% ../nbs/02_docs.ipynb 37
 def save_doc_files(path: Path, doc: DocItem):
     """Save a DocItem structure to disk at the specified path.
 
@@ -436,13 +467,13 @@ def save_doc_files(path: Path, doc: DocItem):
         save_doc_files(path / child.name, child)
 
 
-# %% ../nbs/02_docs.ipynb 38
+# %% ../nbs/02_docs.ipynb 40
 import git
 import json
 from datetime import datetime, timezone
 from .settings import Source, WebSource, GitSource, LLMTxtSource
 
-# %% ../nbs/02_docs.ipynb 40
+# %% ../nbs/02_docs.ipynb 42
 def file_map(doc: DocItem):
     # if not doc.children:
     #     # Leaf node (page)
@@ -488,7 +519,7 @@ def build_metadata(source: Source, doc: DocItem):
         "commit": commit,
     }
 
-# %% ../nbs/02_docs.ipynb 43
+# %% ../nbs/02_docs.ipynb 45
 def save_processed_documents(source: Source, path: Path, tree: DocItem):
     tree = tree.model_copy(deep=True)
     tree.displayName = ""  # The top-level directry does not need a name.

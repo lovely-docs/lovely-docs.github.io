@@ -10,15 +10,23 @@ Based on the page above, in this order:
     - Don't include the name of the library in the name.
     - If the original starts with a number, don't include it.
 - Create a digest of the page.
-    - Extract bits that are important to a programmer.
+    - Extract all bits that are important to a programmer who does not know how to use the library.
+    - Include both high-level purpose and low-level details.
     - Don't include any extra notes. Be concise, no "guide to" or "documentation for", no water.
-    - One example per use case max.
-    - Don't skip important examples. You can combine 2 or more simple examples into one more complex.
+    - One example per use case - don't repeat yourself.
+    - Include all important examples. You can combine 2 or more simple examples into one.
     - Avoid markdown links, describe the target instead of linking.
+
+Note: Some pages are full of information, some are minimal.
+Make sure to preserve all important information in large pages, even if it's long.
+
 - More condensed digest (should be useful without reading the full digest).
     - Keep only the most important information.
     - Keep all example though.
-- One-line essence of the page contents.
+- Short, one-line essence of the page contents.
+    - Maxmimize information content.
+    - Avoid saying things like "documentatiob/guide/reference for"
+    - be very terse, but cram as much details as possible.
 - Is the content you saw relevant to a programmer who is already somewhat familiar with {{ libname }}?
     - Some pages are used to structure the docs and don't contain actual information - they are not relevant by thmselves
 {% if extra %}

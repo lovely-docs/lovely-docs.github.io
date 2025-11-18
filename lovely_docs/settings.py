@@ -90,6 +90,8 @@ class Source(BaseSettings):
     name: str
     comment: str|None = None
     ecosystems: list[str] = Field(default_factory=list)
+    include: list[str] | None = None
+    exclude: list[str] | None = None
 
 
 class GitSource(Source):

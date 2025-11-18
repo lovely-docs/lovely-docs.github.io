@@ -6,7 +6,14 @@ import * as v from "valibot";
 
 const debug = dbg("app:mcp:doc-cache");
 
-const markdownVariantKeys = ["fulltext", "digest", "short_digest", "essence"] as const;
+export const markdownVariantKeys = ["fulltext", "digest", "short_digest", "essence"] as const;
+
+export type MarkdownLevel = (typeof markdownVariantKeys)[number];
+
+export function isMarkdownLevel(level: unknown): level is MarkdownLevel {
+	return typeof level === "string" && (markdownVariantKeys as readonly string[]).includes(level);
+}
+
 interface MarkdownVariants extends Partial<Record<(typeof markdownVariantKeys)[number], string>> {}
 
 // Combined TreeNode and DocItem
@@ -41,6 +48,19 @@ export interface LibraryDBItem {
 	commit: string;
 	tree: DocItem;
 	ecosystems: Array<string>;
+	essence?: string;
+}
+
+export interface EssenceDocNode {
+	essence?: string;
+	children: Record<string, EssenceDocNode>;
+}
+
+export interface LibrarySummary {
+	name: string;
+	source?: any;
+	source_type?: string;
+	ecosystems: string[];
 	essence?: string;
 }
 
@@ -190,7 +210,7 @@ export async function loadLibrary(libraryPath: string): Promise<LibraryDBItem> {
 		};
 	} else {
 		debug(res.issues);
-		throw Error;
+		throw new Error(`Failed to parse '${indexPath}'`);
 	}
 }
 
@@ -213,17 +233,55 @@ export async function loadLibrariesFromJson(path: string): Promise<void> {
 		}
 	}
 
-	debug(`Loaded ${cache.size} libraries, %o`);
+	debug(`Loaded ${cache.size} libraries`);
 }
 
-export function getLibraries(): Map<
-	string,
-	{ name: string; source?: any; source_type?: string; ecosystems: string[]; essence?: string }
-> {
-	const res = new Map<
-		string,
-		{ name: string; source?: any; source_type?: string; ecosystems: string[]; essence?: string }
-	>();
+function buildEssenceTree(node: DocItem): EssenceDocNode | null {
+	const children: Record<string, EssenceDocNode> = {};
+	for (const [key, child] of Object.entries(node.children)) {
+		const childEssence = buildEssenceTree(child);
+		if (childEssence) children[key] = childEssence;
+	}
+
+	const hasRelevantChild = Object.keys(children).length > 0;
+	const isRelevant = node.relevant || hasRelevantChild;
+	if (!isRelevant) return null;
+
+	return {
+		essence: node.markdown.essence,
+		children,
+	};
+}
+
+// Get a tree of pages for a library, optionally with essence for each node.
+export function getRelevantEssenceSubTree(
+	libraryName: string,
+	rootPath: string
+): EssenceDocNode | undefined {
+	const lib = cache.get(libraryName);
+	if (!lib) return undefined;
+	const normPath = normalizePath(rootPath);
+	const rootNode = findNodeByPath(lib.tree, normPath);
+	if (!rootNode) return undefined;
+	const tree = buildEssenceTree(rootNode);
+	return tree ?? undefined;
+}
+
+export interface PageNodeSummary {
+	origPath: string;
+	displayName: string;
+	essence?: string;
+}
+
+export interface LibraryFilterOptions {
+	includeLibs?: string[];
+	includeEcosystems?: string[];
+	excludeLibs?: string[];
+	excludeEcosystems?: string[];
+}
+
+export function getLibraries(): Map<string, LibrarySummary> {
+	const res = new Map<string, LibrarySummary>();
 	for (const [key, lib] of cache) {
 		res.set(key, {
 			name: lib.name,
@@ -235,6 +293,109 @@ export function getLibraries(): Map<
 	}
 	debug(`getLibraries() -> %o`, res.size);
 	return res;
+}
+
+export function filterLibraries(
+	libs: Map<string, LibrarySummary>,
+	options: LibraryFilterOptions
+): Map<string, LibrarySummary> {
+	let res = new Map(libs);
+	const includeLibs = new Set(options.includeLibs ?? []);
+	const includeEcosystems = new Set(options.includeEcosystems ?? []);
+	const excludeLibs = new Set(options.excludeLibs ?? []);
+	const excludeEcosystems = new Set(options.excludeEcosystems ?? []);
+
+	if (includeLibs.size > 0) {
+		res = new Map(Array.from(res.entries()).filter(([key]) => includeLibs.has(key)));
+	}
+	if (includeEcosystems.size > 0) {
+		res = new Map(
+			Array.from(res.entries()).filter(([, lib]) =>
+				lib.ecosystems.some((eco) => includeEcosystems.has(eco))
+			)
+		);
+	}
+	if (excludeLibs.size > 0) {
+		for (const key of excludeLibs) res.delete(key);
+	}
+	if (excludeEcosystems.size > 0) {
+		res = new Map(
+			Array.from(res.entries()).filter(([, lib]) => {
+				if (lib.ecosystems.length === 0) return true;
+				const allExcluded = lib.ecosystems.every((eco) => excludeEcosystems.has(eco));
+				return !allExcluded;
+			})
+		);
+	}
+
+	return res;
+}
+
+export function getEcosystems(libraries: Map<string, LibrarySummary>): Set<string> {
+	const ecosystems = new Set<string>();
+	for (const lib of libraries.values()) {
+		for (const eco of lib.ecosystems) {
+			ecosystems.add(eco);
+		}
+	}
+	return ecosystems;
+}
+
+export function filterEcosystems(
+	ecosystems: Set<string>,
+	options: LibraryFilterOptions
+): Set<string> {
+	let res = new Set(ecosystems);
+	const includeEcosystems = new Set(options.includeEcosystems ?? []);
+	const excludeEcosystems = new Set(options.excludeEcosystems ?? []);
+
+	if (includeEcosystems.size > 0) {
+		res = new Set(Array.from(res).filter((eco) => includeEcosystems.has(eco)));
+	}
+	if (excludeEcosystems.size > 0) {
+		for (const eco of excludeEcosystems) res.delete(eco);
+	}
+
+	return res;
+}
+
+
+function normalizePath(path: string | undefined): string {
+	if (!path || path === "/") return "/";
+	const trimmed = path.replace(/^\/+|\/+$/g, "");
+	return trimmed === "" ? "/" : `/${trimmed}`;
+}
+
+function findNodeByPath(root: DocItem, path: string): DocItem | undefined {
+	if (path === "/") return root;
+	const parts = path.slice(1).split("/");
+	let node: DocItem | undefined = root;
+	for (const part of parts) {
+		if (!node) return undefined;
+		const child: DocItem | undefined = node.children[part];
+		if (!child) return undefined;
+		node = child;
+	}
+	return node;
+}
+
+export function getNodeMarkdown(
+	libraryName: string,
+	path: string | undefined,
+	level: MarkdownLevel
+): string | undefined {
+	const lib = cache.get(libraryName);
+	if (!lib) return undefined;
+	const normPath = normalizePath(path);
+	const node = findNodeByPath(lib.tree, normPath);
+	if (!node) return undefined;
+
+	const content = node.markdown[level];
+	debug(
+		`getNodeMarkdown(${libraryName}, ${normPath}, ${level}, ${content}) -> %o`,
+		Boolean(content)
+	);
+	return content ?? "";
 }
 
 export function getLibrary(name: string): LibraryDBItem | undefined {

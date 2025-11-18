@@ -1,0 +1,1 @@
+Result/ResultAsync types for explicit error handling: Ok/Err variants with chainable methods (map, andThen, match, etc.) for sync/async operations, plus utilities for wrapping throwing functions and combining multiple Results.
