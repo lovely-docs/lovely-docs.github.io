@@ -24,6 +24,9 @@ const config = {
 		}),
 		paths: {
 			base: "/lovely-docs"
+		},
+		prerender: {
+			handleUnseenRoutes: 'warn'
 		}
 	}
 };
