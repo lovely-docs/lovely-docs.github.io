@@ -1,28 +1,55 @@
-import type { PageServerLoad } from './$types';
-import { getLibraries, filterLibraries } from 'lovely-docs-mcp/doc-cache';
-import { getPage } from 'lovely-docs-mcp/handlers';
-import { error } from '@sveltejs/kit';
+import { getDocPageData } from '$lib/server/docs';
+import { buildNested } from 'lovely-docs-mcp/handlers';
 import type { MarkdownLevel } from 'lovely-docs-mcp/doc-cache';
+import { error } from '@sveltejs/kit';
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load = async ({ params }) => {
 	const { library, path } = params;
+	const pathSegments = path ? path.split('/').filter(Boolean) : [];
 
-	const libs = filterLibraries(getLibraries(), {});
+	if (!library) {
+		throw error(404, 'Library name is required');
+	}
+
+	const { currentNode } = getDocPageData(library, pathSegments);
 
 	// For SSG, we need to return content for all levels so the client can switch between them
-	// without making a new request (which wouldn't work on a static site if query params change).
+	// without making a new request.
 	const levels: MarkdownLevel[] = ['digest', 'fulltext', 'short_digest', 'essence'];
 	const content: Record<string, { text: string; children?: unknown[] }> = {};
 
+	// Generate the nested children structure once
+	// Note: buildNested expects a node with children, which DocItem has.
+	// However, buildNested in handlers.ts might expect EssenceDocNode or similar.
+	// Let's verify if DocItem is compatible.
+	// DocItem has children: Record<string, DocItem>
+	// buildNested iterates over children and checks for children property.
+	// It should work.
+	const children = buildNested(currentNode);
+
 	for (const level of levels) {
-		const result = getPage(libs, library, path || undefined, level);
-		if (result.isOk()) {
-			content[level] = result.value;
+		const text = currentNode.markdown[level];
+		if (text !== undefined) {
+			content[level] = {
+				text,
+				children: (level === 'digest' || level === 'fulltext') ? children : undefined
+			};
 		}
 	}
 
 	if (Object.keys(content).length === 0) {
-		throw error(404, `Page not found: ${library}/${path}`);
+		// If no markdown content found for any level, it might be a directory-only node?
+		// But getDocPageData would return the node.
+		// If the node exists but has no markdown, we should probably still return it if it has children.
+		// But the mcp view expects 'text'.
+		// Let's check if we have at least one level.
+		// If not, we can return empty text but with children.
+		if (Object.keys(currentNode.children).length > 0) {
+			// Fallback for directory nodes
+			content['digest'] = { text: '', children };
+		} else {
+			throw error(404, `Page not found: ${library}/${path}`);
+		}
 	}
 
 	return {

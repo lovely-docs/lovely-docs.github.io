@@ -1,7 +1,8 @@
-import { getLibrary } from 'lovely-docs-mcp/doc-cache';
-import { error } from '@sveltejs/kit';
+import { getDocPageData } from '$lib/server/docs';
 import type { PageServerLoad } from './$types';
 import dbg from 'debug';
+
+const debug = dbg('app:pages:library');
 
 export const load: PageServerLoad = async ({ params }) => {
 	const raw = params.name ?? '';
@@ -10,22 +11,14 @@ export const load: PageServerLoad = async ({ params }) => {
 	const libraryKey = segments[0];
 	const pathSegments = segments.slice(1);
 
-	if (!libraryKey) {
-		throw error(404, 'Library name is required');
-	}
+	const { libraryInfo, currentNode } = getDocPageData(libraryKey, pathSegments);
 
-	const debug = dbg(`app:pages:${libraryKey}/+server`);
-	const library = getLibrary(libraryKey);
-
-	if (!library) {
-		throw error(404, `Library not found: ${libraryKey}`);
-	}
-
-	debug({ libraryKey, pathSegments });
+	debug({ libraryKey, pathSegments, nodeName: currentNode.displayName });
 
 	return {
-		library,
+		libraryInfo,
 		libraryKey,
-		pathSegments
+		pathSegments,
+		currentNode
 	};
 };

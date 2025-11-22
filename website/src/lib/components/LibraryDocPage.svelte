@@ -12,7 +12,7 @@
 	import dbg from 'debug';
 
 	let { data } = $props();
-	let lib: LibraryDBItem = $derived(data.library);
+	let lib: Omit<LibraryDBItem, 'tree'> = $derived(data.libraryInfo);
 	let libraryKey: string = $derived(data.libraryKey);
 	let pathSegments: string[] = $derived(data.pathSegments ?? []);
 	let debug = $derived(dbg(`app:page:library/${libraryKey}/${pathSegments.join('/')}`));
@@ -27,25 +27,14 @@
 		}))
 	);
 
-	let item: DocItem | undefined = $derived.by(() => {
-		let current: DocItem = lib.tree;
-		for (const p of pathSegments) {
-			const child = current.children[p];
-			debug({ current, p, child });
-			if (!child) return undefined;
-			current = child;
-		}
-		return current;
-	});
-
-	let currentNode: DocItem | undefined = $derived(isRoot ? lib.tree : item);
+	let currentNode: DocItem = $derived(data.currentNode);
 	let hasChildren = $derived(currentNode && Object.keys(currentNode.children).length > 0);
 	let titleText = $derived(isRoot ? lib.name : (currentNode?.displayName ?? ''));
 
 	let collapsibleStorageKey = $state('');
 	let collapsibleOpen = $state(false);
 
-    /// XXX This state management stuff needs a rework
+	/// XXX This state management stuff needs a rework
 	// compute storage key whenever library or path changes
 	$effect(() => {
 		const suffix = isRoot ? '__root' : pathSegments.join('/');
@@ -154,7 +143,7 @@
 					<Card>
 						<CardContent class="px-4">
 							{#if isRoot}
-								<DocTree node={lib.tree} {libraryKey} />
+								<DocTree node={currentNode} {libraryKey} />
 							{:else}
 								<DocTree node={currentNode} {libraryKey} basePath={pathSegments.join('/') + '/'} />
 							{/if}
@@ -165,7 +154,7 @@
 		</Collapsible.Root>
 
 		<div class="mt-4">
-			<MarkdownPanel markdown={currentNode.markdown} tokenCounts={currentNode.token_counts}/>
+			<MarkdownPanel markdown={currentNode.markdown} tokenCounts={currentNode.token_counts} />
 		</div>
 	{:else}
 		<p class="text-sm text-destructive mt-4">Document not found.</p>
