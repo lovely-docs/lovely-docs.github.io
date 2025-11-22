@@ -1,0 +1,76 @@
+<script lang="ts">
+	import type { PageData } from './$types';
+	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
+
+	const { data } = $props();
+
+	let resourceCommand = $state<string>('doc-page');
+	let selectedPath = $state('');
+	let selectedLevel = $state('digest');
+
+	function navigate() {
+		if (resourceCommand === 'doc-page' && selectedPath) {
+			const parts = selectedPath.split('/');
+			const lib = parts[0];
+			const rest = parts.slice(1).join('/');
+			goto(resolve(`/mcp/doc-page/${lib}${rest}#${selectedLevel}`));
+		}
+	}
+</script>
+
+{#snippet treeNode(node: unknown, prefix: string = '')}
+	{#if Array.isArray(node)}
+		{#each node as child}
+			{#if typeof child === 'string'}
+				{@const fullPath = prefix ? `${prefix}/${child}` : child}
+				<button
+					class="w-full text-left text-primary hover:text-primary/80 hover:bg-accent transition-colors"
+					onclick={() => {
+						resourceCommand = 'doc-page';
+						selectedPath = fullPath;
+						navigate();
+					}}>
+					<span class="text-muted-foreground">- </span>{child}
+				</button>
+			{:else if typeof child === 'object' && child !== null}
+				{#each Object.entries(child) as [key, value]}
+					{@const fullPath = prefix ? `${prefix}/${key}` : key}
+					<div>
+						<button
+							class="w-full text-left text-primary hover:text-primary/80 hover:bg-accent transition-colors"
+							onclick={() => {
+								resourceCommand = 'doc-page';
+								selectedPath = fullPath;
+								navigate();
+							}}>
+							{key}<span class="text-muted-foreground">:</span>
+						</button>
+						<div class="pl-4 border-l border-muted ml-1">
+							{@render treeNode(value, fullPath)}
+						</div>
+					</div>
+				{/each}
+			{/if}
+		{/each}
+	{/if}
+{/snippet}
+
+{#if data.hasTree}
+	<div class="font-mono text-xs whitespace-pre-wrap">
+		<button
+			class="w-full text-left text-primary hover:text-primary/80 hover:bg-accent transition-colors"
+			onclick={() => {
+				resourceCommand = 'doc-page';
+				selectedPath = data.library;
+				navigate();
+			}}>
+			/<span class="text-muted-foreground">:</span>
+		</button>
+		<div class="pl-4 border-l border-muted ml-1">
+			{@render treeNode(data.tree, data.library)}
+		</div>
+	</div>
+{:else}
+	<p class="text-xs text-muted-foreground"># no pages found for {data.library}</p>
+{/if}

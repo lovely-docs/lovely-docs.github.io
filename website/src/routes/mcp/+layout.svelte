@@ -1,6 +1,9 @@
 <script lang="ts">
 	import type { LayoutData } from './$types';
 	import * as Select from '$lib/components/ui/select';
+	import * as Card from '$lib/components/ui/card';
+	import { Button } from '$lib/components/ui/button';
+	import { Separator } from '$lib/components/ui/separator';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { resolve } from '$app/paths';
@@ -67,7 +70,10 @@
 
 	$effect(() => {
 		const routeId = page.route.id;
-		if (routeId === '/mcp/[library]/[...path]') {
+		const hash = page.url.hash.slice(1);
+
+		// Handle doc-page route
+		if (routeId === '/mcp/doc-page/[library]/[...path]') {
 			resourceCommand = 'doc-page';
 			const params = page.params;
 			if (params.library && params.library !== selectedLibrary) {
@@ -79,9 +85,32 @@
 				selectedPath = fullPath;
 			}
 
-			const hash = page.url.hash.slice(1);
 			if (hash && hash !== selectedLevel) {
 				selectedLevel = hash;
+			}
+		}
+		// Handle doc-index route
+		else if (routeId === '/mcp/doc-index') {
+			resourceCommand = 'doc-index';
+			// Ecosystem selection via hash
+			if (hash && ecosystemOptions.includes(hash)) {
+				selectedEcosystem = hash;
+			}
+		}
+		// Handle doc-index-verbose route
+		else if (routeId === '/mcp/doc-index-verbose') {
+			resourceCommand = 'doc-index-verbose';
+			// Ecosystem selection via hash
+			if (hash && ecosystemOptions.includes(hash)) {
+				selectedEcosystem = hash;
+			}
+		}
+		// Handle page-index route
+		else if (routeId === '/mcp/page-index/[library]') {
+			resourceCommand = 'page-index';
+			const params = page.params;
+			if (params.library && params.library !== selectedLibrary) {
+				selectedLibrary = params.library;
 			}
 		}
 	});
@@ -150,9 +179,21 @@
 			if (resourceCommand === 'doc-page') {
 				selectedPath = value;
 				navigate();
+			} else if (resourceCommand === 'page-index') {
+				// Navigate to page-index for this library
+				// @ts-ignore
+				goto(resolve(`/mcp/page-index/${value}`));
 			}
 		} else {
 			selectedEcosystem = value;
+			// Update URL hash for ecosystem selection in doc-index views
+			if (resourceCommand === 'doc-index') {
+				// @ts-ignore
+				goto(resolve(`/mcp/doc-index${value !== '*' ? '#' + value : ''}`), { replaceState: true });
+			} else if (resourceCommand === 'doc-index-verbose') {
+				// @ts-ignore
+				goto(resolve(`/mcp/doc-index-verbose${value !== '*' ? '#' + value : ''}`), { replaceState: true });
+			}
 		}
 	}
 
@@ -175,7 +216,7 @@
 			const parts = selectedPath.split('/');
 			const lib = parts[0];
 			const rest = parts.slice(1).join('/');
-			const url = `/mcp/${lib}${rest ? '/' + rest : ''}#${selectedLevel}`;
+			const url = `/mcp/doc-page/${lib}${rest ? '/' + rest : ''}#${selectedLevel}`;
 			// @ts-ignore
 			goto(resolve(url));
 		}
@@ -184,260 +225,183 @@
 		const newCommand = value as ResourceCommandId;
 		resourceCommand = newCommand;
 
-		if (newCommand !== 'doc-page') {
-			if (page.route.id !== '/mcp') {
-				// @ts-ignore
-				goto(resolve('/mcp'));
+		if (newCommand === 'doc-page') {
+			if (selectedPath) {
+				navigate();
 			}
-		} else if (selectedPath) {
-			navigate();
+		} else if (newCommand === 'doc-index') {
+			const hash = selectedEcosystem !== '*' ? `#${selectedEcosystem}` : '';
+			// @ts-ignore
+			goto(resolve(`/mcp/doc-index${hash}`));
+		} else if (newCommand === 'doc-index-verbose') {
+			const hash = selectedEcosystem !== '*' ? `#${selectedEcosystem}` : '';
+			// @ts-ignore
+			goto(resolve(`/mcp/doc-index-verbose${hash}`));
+		} else if (newCommand === 'page-index') {
+			// @ts-ignore
+			goto(resolve(`/mcp/page-index/${selectedLibrary}`));
 		}
 	}
 </script>
 
-<div class="min-h-screen bg-black text-green-400 font-mono">
-	<div class="w-full px-4 py-8 space-y-6">
-		<header class="border-b border-green-700 pb-4 mb-4">
+<div class="mcp-theme min-h-screen bg-background text-foreground font-mono">
+	<div class="w-full px-4 py-8 space-y-2">
+		<header class="border-b border-border pb-4 mb-4">
 			<h1 class="text-2xl tracking-widest uppercase">lovely-docs :: mcp console</h1>
-			<p class="text-xs text-green-600 mt-1">Fake MCP interface over static docs. No network. No daemons. Just bits.</p>
+			<p class="text-xs text-muted-foreground mt-1">
+				Fake MCP interface over static docs. No network. No daemons. Just bits.
+			</p>
 		</header>
 
-		<div
-			role="tablist"
-			aria-label="MCP data views"
-			class="flex gap-2 border border-green-800/60 rounded-md p-2 bg-black/40 items-center">
-			{#each tabs as tab}
-				<button
-					id={`tab-${tab.id}`}
-					role="tab"
-					class={`px-3 py-1 text-sm uppercase tracking-wide border border-green-800 rounded-sm transition ${
-						mode === tab.id ? 'bg-green-900/40 text-green-100' : 'text-green-500'
-					}`}
-					aria-selected={mode === tab.id}
-					aria-controls={`panel-${tab.id}`}
-					onclick={() => (mode = tab.id)}>
-					{tab.label}
-					<span class="ml-1 text-[10px] text-green-600">{tab.description}</span>
-				</button>
-			{/each}
+		<Card.Root class="border-border bg-card/40">
+			<Card.Content class="">
+				<div role="tablist" aria-label="MCP data views" class="flex gap-2 items-center">
+					{#each tabs as tab}
+						<Button
+							variant={mode === tab.id ? 'default' : 'outline'}
+							size="sm"
+							class="uppercase tracking-wide font-mono"
+							id={`tab-${tab.id}`}
+							role="tab"
+							aria-selected={mode === tab.id}
+							aria-controls={`panel-${tab.id}`}
+							onclick={() => (mode = tab.id)}>
+							{tab.label}
+							<span class="ml-1 text-[10px] opacity-60">{tab.description}</span>
+						</Button>
+					{/each}
 
-			{#if resourceCommand === 'doc-page'}
-				<button
-					class={`ml-auto px-2 py-0.5 text-xs border border-green-700 rounded-sm transition ${
-						mcpState.renderMarkdown ? 'bg-green-900/40 text-green-100' : 'text-green-500'
-					}`}
-					onclick={() => (mcpState.renderMarkdown = !mcpState.renderMarkdown)}
-					aria-label="Toggle markdown rendering">
-					{mcpState.renderMarkdown ? 'MD: ON' : 'MD: OFF'}
-				</button>
-			{/if}
-		</div>
+					{#if resourceCommand === 'doc-page'}
+						<Button
+							variant={mcpState.renderMarkdown ? 'default' : 'outline'}
+							size="sm"
+							class="ml-auto font-mono"
+							onclick={() => (mcpState.renderMarkdown = !mcpState.renderMarkdown)}
+							aria-label="Toggle markdown rendering">
+							{mcpState.renderMarkdown ? 'MD: ON' : 'MD: OFF'}
+						</Button>
+					{/if}
+				</div>
+			</Card.Content>
+		</Card.Root>
 
 		{#if mode === 'tools'}
 			<section class="grid grid-cols-1 md:grid-cols-[220px_minmax(0,1fr)] gap-6">
 				<aside class="space-y-4">
-					<div class="border border-green-700 bg-black/60 p-3 space-y-2">
-						<div class="text-xs text-green-500">ecosystem</div>
-						<select
-							class="w-full bg-black text-green-400 border border-green-700 text-xs px-1 py-0.5"
-							value={selectedEcosystem}
-							onchange={handleEcosystemChange}>
-							{#each ecosystemOptions as eco}
-								<option value={eco}>{eco}</option>
-							{/each}
-						</select>
-					</div>
+					<Card.Root class="border-border bg-card">
+						<Card.Content class="space-y-2">
+							<div class="text-xs text-foreground/70">ecosystem</div>
+							<select
+								class="w-full bg-background text-foreground border border-border text-xs px-1 py-0.5 rounded"
+								value={selectedEcosystem}
+								onchange={handleEcosystemChange}>
+								{#each ecosystemOptions as eco}
+									<option value={eco}>{eco}</option>
+								{/each}
+							</select>
+						</Card.Content>
+					</Card.Root>
 
-					<div class="border border-green-700 bg-black/60 p-3 flex items-center justify-between text-xs">
-						<label class="flex items-center gap-2 cursor-pointer">
-							<input type="checkbox" class="accent-green-500" checked={verbose} onchange={toggleVerbose} />
-							<span>verbose</span>
-						</label>
-						<span class="text-green-600">--detail {verbose ? 'on' : 'off'}</span>
-					</div>
+					<Card.Root class="border-border bg-card">
+						<Card.Content class="flex items-center justify-between text-xs">
+							<label class="flex items-center gap-2 cursor-pointer">
+								<input type="checkbox" class="accent-primary" checked={verbose} onchange={toggleVerbose} />
+								<span>verbose</span>
+							</label>
+							<span class="text-muted-foreground">--detail {verbose ? 'on' : 'off'}</span>
+						</Card.Content>
+					</Card.Root>
 				</aside>
 
-				<div
-					class="border border-green-700 bg-black/80 p-4 overflow-auto min-h-[320px]"
-					role="tabpanel"
-					aria-labelledby="tab-tools">
-					<h2 class="text-sm text-green-300 mb-2">$ mcp tools :: listLibraries</h2>
-					{#if currentTools.length === 0}
-						<p class="text-xs text-green-600"># no tools for this ecosystem</p>
-					{:else}
-						{#each currentTools as t}
-							<div class="mb-4">
-								<div class="text-xs text-green-500 mb-1"># ecosystem: {t.label}</div>
-								<pre class="text-xs whitespace-pre-wrap">
+				<Card.Root class="border-border bg-card">
+					<Card.Content class="overflow-auto min-h-[320px]" role="tabpanel" aria-labelledby="tab-tools">
+						<h2 class="text-sm text-foreground/90 mb-2">$ mcp tools :: listLibraries</h2>
+						{#if currentTools.length === 0}
+							<p class="text-xs text-muted-foreground"># no tools for this ecosystem</p>
+						{:else}
+							{#each currentTools as t}
+								<div class="mb-4">
+									<div class="text-xs text-foreground/70 mb-1"># ecosystem: {t.label}</div>
+									<pre class="text-xs whitespace-pre-wrap">
 {verbose ? t.verboseYaml : t.payloadYaml}
-								</pre>
-							</div>
-						{/each}
-					{/if}
-				</div>
+									</pre>
+								</div>
+							{/each}
+						{/if}
+					</Card.Content>
+				</Card.Root>
 			</section>
 		{:else}
-			<section aria-labelledby="tab-resources" class="space-y-4">
-				<div
-					class="border border-green-800 bg-black/80 rounded px-4 py-3 text-sm flex flex-wrap items-center gap-2 font-mono">
-					<span class="text-green-500">$</span>
-					<span class="text-green-400">lovely-docs://</span>
+			<section aria-labelledby="tab-resources" class="space-y-2">
+				<Card.Root class="border-border bg-card">
+					<Card.Content class="text-sm flex flex-wrap items-center gap-2 font-mono">
+						<span class="text-foreground/70">$</span>
+						<span class="text-foreground">lovely-docs://</span>
 
-					<Select.Root type="single" value={resourceCommand} onValueChange={handleCommandChange}>
-						<Select.Trigger size="sm" class="bg-black/70 border-green-700 text-green-100" aria-label="Resource command">
-							<span>{resourceCommand}</span>
-						</Select.Trigger>
-						<Select.Content class="bg-black border border-green-700 text-green-100">
-							{#each resourceCommands as cmd}
-								<Select.Item value={cmd.id}>{cmd.label}</Select.Item>
-							{/each}
-						</Select.Content>
-					</Select.Root>
-					<span class="text-green-400">/</span>
-					<Select.Root type="single" value={targetValue} onValueChange={handleTargetChange}>
-						<Select.Trigger
-							size="sm"
-							class="bg-black/70 border-green-700 text-green-100"
-							aria-label={currentCommand?.target === 'library' ? 'Library' : 'Ecosystem'}>
-							<span>{selectedTargetLabel}</span>
-						</Select.Trigger>
-						<Select.Content class="bg-black border border-green-700 text-green-100 max-h-56">
-							{#each targetOptions as option}
-								<Select.Item value={option.value}>{option.label}</Select.Item>
-							{/each}
-						</Select.Content>
-					</Select.Root>
-
-					{#if resourceCommand === 'doc-page'}
-						<span class="text-green-400">/</span>
-						<Select.Root type="single" value={selectedPath} onValueChange={handlePathChange}>
+						<Select.Root type="single" value={resourceCommand} onValueChange={handleCommandChange}>
 							<Select.Trigger
 								size="sm"
-								class="bg-black/70 border-green-700 text-green-100 min-w-[200px]"
-								aria-label="Path">
-								<span>{pathOptions.find((o) => o.value === selectedPath)?.label ?? selectedPath ?? '/'}</span>
+								class="bg-background border-border text-foreground"
+								aria-label="Resource command">
+								<span>{resourceCommand}</span>
 							</Select.Trigger>
-							<Select.Content class="bg-black border border-green-700 text-green-100 max-h-56">
-								{#each pathOptions as option}
+							<Select.Content class="bg-popover border border-border text-popover-foreground">
+								{#each resourceCommands as cmd}
+									<Select.Item value={cmd.id}>{cmd.label}</Select.Item>
+								{/each}
+							</Select.Content>
+						</Select.Root>
+						<span class="text-foreground">/</span>
+						<Select.Root type="single" value={targetValue} onValueChange={handleTargetChange}>
+							<Select.Trigger
+								size="sm"
+								class="bg-background border-border text-foreground"
+								aria-label={currentCommand?.target === 'library' ? 'Library' : 'Ecosystem'}>
+								<span>{selectedTargetLabel}</span>
+							</Select.Trigger>
+							<Select.Content class="bg-popover border border-border text-popover-foreground max-h-56">
+								{#each targetOptions as option}
 									<Select.Item value={option.value}>{option.label}</Select.Item>
 								{/each}
 							</Select.Content>
 						</Select.Root>
 
-						<span class="text-green-400">?level=</span>
-						<Select.Root type="single" value={selectedLevel} onValueChange={handleLevelChange}>
-							<Select.Trigger size="sm" class="bg-black/70 border-green-700 text-green-100" aria-label="Level">
-								<span>{selectedLevel}</span>
-							</Select.Trigger>
-							<Select.Content class="bg-black border border-green-700 text-green-100">
-								{#each data.mcp.markdownVariants as v}
-									<Select.Item value={v}>{v}</Select.Item>
-								{/each}
-							</Select.Content>
-						</Select.Root>
-					{/if}
-				</div>
+						{#if resourceCommand === 'doc-page'}
+							<span class="text-foreground">/</span>
+							<Select.Root type="single" value={selectedPath} onValueChange={handlePathChange}>
+								<Select.Trigger
+									size="sm"
+									class="bg-background border-border text-foreground min-w-[200px]"
+									aria-label="Path">
+									<span>{pathOptions.find((o) => o.value === selectedPath)?.label ?? selectedPath ?? '/'}</span>
+								</Select.Trigger>
+								<Select.Content class="bg-popover border border-border text-popover-foreground max-h-56">
+									{#each pathOptions as option}
+										<Select.Item value={option.value}>{option.label}</Select.Item>
+									{/each}
+								</Select.Content>
+							</Select.Root>
 
-				<div
-					class="border border-green-700 bg-black/80 p-4 overflow-auto min-h-[320px]"
-					role="tabpanel"
-					aria-live="polite">
-					{#if resourceCommand === 'doc-page'}
+							<span class="text-foreground">?level=</span>
+							<Select.Root type="single" value={selectedLevel} onValueChange={handleLevelChange}>
+								<Select.Trigger size="sm" class="bg-background border-border text-foreground" aria-label="Level">
+									<span>{selectedLevel}</span>
+								</Select.Trigger>
+								<Select.Content class="bg-popover border border-border text-popover-foreground">
+									{#each data.mcp.markdownVariants as v}
+										<Select.Item value={v}>{v}</Select.Item>
+									{/each}
+								</Select.Content>
+							</Select.Root>
+						{/if}
+					</Card.Content>
+				</Card.Root>
+
+				<Card.Root class="">
+					<Card.Content class="overflow-auto min-h-[320px]" role="tabpanel" aria-live="polite">
 						{@render children()}
-					{:else if resourceCommand === 'doc-index' || resourceCommand === 'doc-index-verbose'}
-						{#if activeResource}
-							<div class="font-mono text-xs whitespace-pre-wrap">
-								{#if resourceCommand === 'doc-index'}
-									{#each activeResource.index as lib}
-										<button
-											class="block w-full text-left text-green-400 hover:text-green-100 hover:bg-green-900/20 transition-colors"
-											onclick={() => {
-												resourceCommand = 'page-index';
-												selectedLibrary = lib;
-											}}>
-											<span class="text-green-600">- </span>{lib}
-										</button>
-									{/each}
-								{:else}
-									{#each Object.entries(activeResource.verbose) as [lib, summary]}
-										<button
-											class="block w-full text-left text-green-400 hover:text-green-100 hover:bg-green-900/20 transition-colors"
-											onclick={() => {
-												resourceCommand = 'page-index';
-												selectedLibrary = lib;
-											}}>
-											{lib}<span class="text-green-600">: {summary}</span>
-										</button>
-									{/each}
-								{/if}
-							</div>
-						{:else}
-							<p class="text-xs text-green-600"># no resources for this ecosystem</p>
-						{/if}
-					{:else if resourceCommand === 'page-index'}
-						{#snippet treeNode(node: unknown, prefix: string = '')}
-							{#if Array.isArray(node)}
-								{#each node as child}
-									{#if typeof child === 'string'}
-										{@const fullPath = prefix ? `${prefix}/${child}` : child}
-										<button
-											class="w-full text-left text-green-400 hover:text-green-100 hover:bg-green-900/20 transition-colors"
-											onclick={() => {
-												resourceCommand = 'doc-page';
-												selectedPath = fullPath;
-												navigate();
-											}}>
-											<span class="text-green-600">- </span>{child}
-										</button>
-									{:else if typeof child === 'object' && child !== null}
-										{#each Object.entries(child) as [key, value]}
-											{@const fullPath = prefix ? `${prefix}/${key}` : key}
-											<div>
-												<button
-													class="w-full text-left text-green-400 hover:text-green-100 hover:bg-green-900/20 transition-colors"
-													onclick={() => {
-														resourceCommand = 'doc-page';
-														selectedPath = fullPath;
-														navigate();
-													}}>
-													{key}<span class="text-green-600">:</span>
-												</button>
-												<div class="pl-4 border-l border-green-900/30 ml-1">
-													{@render treeNode(value, fullPath)}
-												</div>
-											</div>
-										{/each}
-									{/if}
-								{/each}
-							{/if}
-						{/snippet}
-
-						{#if pageIndexes.find((p) => p.label === selectedLibrary)?.tree}
-							<div class="font-mono text-xs whitespace-pre-wrap">
-								<button
-									class="w-full text-left text-green-400 hover:text-green-100 hover:bg-green-900/20 transition-colors"
-									onclick={() => {
-										resourceCommand = 'doc-page';
-										selectedPath = selectedLibrary;
-										navigate();
-									}}>
-									/<span class="text-green-600">:</span>
-								</button>
-								<div class="pl-4 border-l border-green-900/30 ml-1">
-									{@render treeNode(pageIndexes.find((p) => p.label === selectedLibrary)?.tree, selectedLibrary)}
-								</div>
-							</div>
-						{:else}
-							<p class="text-xs text-green-600"># no pages found for {selectedLibrary}</p>
-						{/if}
-					{:else if !resourceOutput}
-						<p class="text-xs text-green-600"># no resources for this ecosystem</p>
-					{:else}
-						<pre class="text-xs whitespace-pre-wrap">
-{resourceOutput}
-						</pre>
-					{/if}
-				</div>
+					</Card.Content>
+				</Card.Root>
 			</section>
 		{/if}
 	</div>
