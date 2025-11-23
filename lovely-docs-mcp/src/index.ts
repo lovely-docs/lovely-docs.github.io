@@ -14,6 +14,7 @@ import { homedir } from "os";
 import { existsSync, mkdirSync } from "fs";
 import { simpleGit } from "simple-git";
 import { getServer, ResourceResponseError } from "./server.js";
+import { Logtail } from "@logtail/node";
 
 const debug = dbg("app:index");
 
@@ -38,6 +39,14 @@ interface CliOptions {
 }
 
 const isProd = !process.env.LOVELY_DOCS_DEV;
+
+// Initialize BetterStack Logtail if configured
+let logtail: Logtail | null = null;
+if (process.env.BETTERSTACK_SOURCE_TOKEN) {
+	const endpoint = process.env.BETTERSTACK_ENDPOINT || "https://in.logs.betterstack.com";
+	logtail = new Logtail(process.env.BETTERSTACK_SOURCE_TOKEN, { endpoint });
+	console.error("BetterStack logging enabled");
+}
 
 function getCacheDir(): string {
 	if (process.platform === "win32") {
@@ -213,11 +222,11 @@ async function prepareDocDb(cli: CliOptions): Promise<string> {
 		}
 		const git = simpleGit();
 		if (!existsSync(targetGitRoot)) {
-			console.info(`Cloning ${cli.repo} to ${targetGitRoot}...`);
+			console.error(`Cloning ${cli.repo} to ${targetGitRoot}...`);
 			mkdirSync(dirname(targetGitRoot), { recursive: true });
 			await git.clone(cli.repo, targetGitRoot, ["-b", cli.branch]);
 		} else {
-			console.info(`Syncing ${cli.repo} in ${targetGitRoot}...`);
+			console.error(`Syncing ${cli.repo} in ${targetGitRoot}...`);
 			try {
 				if (!existsSync(join(targetGitRoot, ".git"))) {
 					throw new Error("Directory exists but is not a git repository");
@@ -245,7 +254,7 @@ async function prepareDocDb(cli: CliOptions): Promise<string> {
 const doc_db_path = await prepareDocDb(cli);
 
 if (cli.gitSyncOnly) {
-	console.info("Git sync completed successfully.");
+	console.error("Git sync completed successfully.");
 	process.exit(0);
 }
 
@@ -278,6 +287,7 @@ function parseFilterOptionsFromQuery(query: any): LibraryFilterOptions {
 }
 
 async function startHttpServer(port: number) {
+	const serverStartTime = Date.now();
 	const app = express();
 	app.use(express.json());
 
@@ -288,7 +298,29 @@ async function startHttpServer(port: number) {
 		})
 	);
 
+	// Health/uptime endpoint for monitoring
+	app.get("/health", (req: Request, res: Response) => {
+		const uptime = Date.now() - serverStartTime;
+		const uptimeSeconds = Math.floor(uptime / 1000);
+
+		res.status(200).json({
+			status: "ok",
+			uptime: uptimeSeconds,
+			uptimeMs: uptime,
+			timestamp: new Date().toISOString(),
+			mode: isProd ? "production" : "development",
+			transport: "http",
+			version: "0.0.0", // Could be read from package.json if needed
+		});
+
+		// Optional: Log health checks to BetterStack (but maybe too noisy)
+		// if (logtail) {
+		// 	logtail.debug("Health check", { uptime: uptimeSeconds });
+		// }
+	});
+
 	app.post("/mcp", async (req: Request, res: Response) => {
+		const startTime = Date.now();
 		const transport = new StreamableHTTPServerTransport({
 			sessionIdGenerator: undefined,
 			enableJsonResponse: true,
@@ -298,6 +330,15 @@ async function startHttpServer(port: number) {
 		const filterOptions = parseFilterOptionsFromQuery(req.query);
 		const server = getServer(filterOptions);
 
+		// Extract request metadata for logging
+		const requestMetadata = {
+			method: req.body?.method,
+			id: req.body?.id,
+			filters: filterOptions,
+			ip: req.ip || req.socket.remoteAddress,
+			userAgent: req.get("user-agent"),
+		};
+
 		res.on("close", () => {
 			transport.close();
 		});
@@ -305,9 +346,34 @@ async function startHttpServer(port: number) {
 		await server.connect(transport);
 		try {
 			await transport.handleRequest(req, res, req.body);
+			const duration = Date.now() - startTime;
+
+			// Log successful request to BetterStack
+			if (logtail) {
+				logtail.info("MCP request completed", {
+					...requestMetadata,
+					duration,
+					status: "success",
+					statusCode: res.statusCode,
+				});
+			}
 		} catch (error) {
+			const duration = Date.now() - startTime;
+
 			if (error instanceof ResourceResponseError) {
 				debug(req, error);
+
+				// Log resource error to BetterStack
+				if (logtail) {
+					logtail.warn("MCP resource error", {
+						...requestMetadata,
+						duration,
+						status: "resource_error",
+						errorCode: error.code,
+						errorMessage: error.message,
+					});
+				}
+
 				const id = req.body?.id ?? null;
 				return res.status(200).json({
 					jsonrpc: "2.0",
@@ -318,15 +384,42 @@ async function startHttpServer(port: number) {
 					},
 				});
 			}
+
+			// Log unexpected error to BetterStack
+			if (logtail) {
+				logtail.error("MCP request failed", {
+					...requestMetadata,
+					duration,
+					status: "error",
+					error: error instanceof Error ? error.message : String(error),
+					errorStack: error instanceof Error ? error.stack : undefined,
+				});
+			}
+
 			throw error;
 		}
 	});
 
 	app.listen(port, () => {
 		console.error(`Lovely Docs MCP HTTP server running on http://localhost:${port}/mcp`);
+		if (logtail) {
+			logtail.info("HTTP server started", {
+				port,
+				mode: isProd ? "production" : "development",
+				docDbPath: doc_db_path,
+			});
+		}
 	}).on("error", (error: unknown) => {
 		console.error("HTTP server error:", error);
-		process.exit(1);
+		if (logtail) {
+			logtail.error("HTTP server failed to start", {
+				error: error instanceof Error ? error.message : String(error),
+				errorStack: error instanceof Error ? error.stack : undefined,
+			});
+			logtail.flush().then(() => process.exit(1));
+		} else {
+			process.exit(1);
+		}
 	});
 }
 
@@ -341,8 +434,33 @@ async function main() {
 	}
 }
 
-main().catch((error) => {
+main().catch(async (error) => {
 	console.error("Fatal error:", error);
+	if (logtail) {
+		logtail.error("Fatal server error", {
+			error: error instanceof Error ? error.message : String(error),
+			errorStack: error instanceof Error ? error.stack : undefined,
+		});
+		await logtail.flush();
+	}
 	process.exit(1);
 });
+
+// Graceful shutdown - flush logs before exit
+let isShuttingDown = false;
+
+const gracefulShutdown = async (signal: string) => {
+	if (isShuttingDown) return;
+	isShuttingDown = true;
+
+	console.error(`\nShutting down gracefully... (${signal})`);
+	if (logtail) {
+		logtail.info("Server shutting down", { signal });
+		await logtail.flush();
+	}
+	process.exit(0);
+};
+
+process.on("SIGINT", () => gracefulShutdown("SIGINT"));
+process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
 //# sourceMappingURL=index.js.map

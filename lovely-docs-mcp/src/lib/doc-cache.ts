@@ -151,7 +151,7 @@ async function loadMarkdownVariants(path: string): Promise<MarkdownVariants> {
 				variants[variant] = content;
 				// debug(`Loaded ${variant} for ${fullPath}`);
 			} catch (error) {
-				console.warn(`Failed to read ${filePath}:`, error);
+				console.error(`Failed to read ${filePath}:`, error);
 			}
 		}
 	}
