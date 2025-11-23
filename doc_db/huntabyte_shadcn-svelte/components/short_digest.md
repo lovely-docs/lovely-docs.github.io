@@ -1,1 +1,1 @@
-Comprehensive index of 70+ UI components available in shadcn-svelte, including form inputs, display elements, navigation, dialogs, data visualization, layout utilities, and advanced components. Each component has a dedicated documentation page.
+70+ UI components available including form inputs (Input, Checkbox, Select, etc.), display elements (Badge, Avatar, Card, etc.), navigation (Button, Tabs, Pagination), dialogs (Dialog, Drawer, Popover), data components (Table, Calendar, Chart), and layout utilities. Install with `npx shadcn-svelte@latest add <component> -y -o`.

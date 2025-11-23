@@ -1,24 +1,33 @@
-## Alert Dialog Component
+## Alert Dialog
 
-A modal dialog component that interrupts the user with important content and expects a response.
+Modal dialog component that interrupts the user with important content and expects a response.
 
 ### Installation
 
 ```bash
-npm install shadcn-svelte@latest add alert-dialog
+npx shadcn-svelte@latest add alert-dialog -y -o
 ```
+
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Usage
 
-Import and compose the component:
+Import the AlertDialog components:
 
 ```svelte
 <script lang="ts">
   import * as AlertDialog from "$lib/components/ui/alert-dialog/index.js";
+  import { buttonVariants } from "$lib/components/ui/button/index.js";
 </script>
+```
 
+Basic structure with all available sub-components:
+
+```svelte
 <AlertDialog.Root>
-  <AlertDialog.Trigger>Open</AlertDialog.Trigger>
+  <AlertDialog.Trigger class={buttonVariants({ variant: "outline" })}>
+    Show Dialog
+  </AlertDialog.Trigger>
   <AlertDialog.Content>
     <AlertDialog.Header>
       <AlertDialog.Title>Are you absolutely sure?</AlertDialog.Title>
@@ -35,4 +44,16 @@ Import and compose the component:
 </AlertDialog.Root>
 ```
 
-The component uses a composition pattern with sub-components: Root (container), Trigger (opens dialog), Content (modal container), Header/Title/Description (content structure), Footer (action buttons), Cancel and Action buttons.
+### Components
+
+- `AlertDialog.Root` - Root container
+- `AlertDialog.Trigger` - Button that opens the dialog
+- `AlertDialog.Content` - Dialog content wrapper
+- `AlertDialog.Header` - Header section
+- `AlertDialog.Title` - Dialog title
+- `AlertDialog.Description` - Dialog description text
+- `AlertDialog.Footer` - Footer section
+- `AlertDialog.Cancel` - Cancel button
+- `AlertDialog.Action` - Action/confirm button
+
+The component is built on Bits UI. See Bits UI documentation for API reference and additional configuration options.

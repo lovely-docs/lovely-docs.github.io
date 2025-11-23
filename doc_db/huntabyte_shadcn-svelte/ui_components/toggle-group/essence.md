@@ -1,1 +1,1 @@
-A two-state button group component with single/multiple selection modes, customizable sizes and variants.
+Toggle group component with single/multiple selection modes, outline variant, sm/lg sizes, and disabled state.

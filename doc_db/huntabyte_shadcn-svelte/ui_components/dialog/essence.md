@@ -1,1 +1,1 @@
-Modal dialog component with composable subcomponents for building overlay windows.
+Modal overlay component with Root, Trigger, Content, Header, Title, Description, and Footer subcomponents; install with `npx shadcn-svelte@latest add dialog -y -o`.

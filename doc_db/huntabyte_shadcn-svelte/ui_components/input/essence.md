@@ -1,1 +1,1 @@
-A reusable form input component supporting various input types with optional label, validation, and helper text integration.
+Form input component supporting multiple types (text, email, file), disabled/invalid states, labels, helper text, and sveltekit-superforms integration.

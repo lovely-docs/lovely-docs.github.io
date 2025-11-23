@@ -1,1 +1,1 @@
-Searchable dropdown component combining Popover and Command with examples for status selection, dropdown menus, and form integration.
+Autocomplete input and command palette composed from Popover and Command; supports basic selection, status indicators with icons, dropdown menu integration, and form submission with proper accessibility attributes.

@@ -1,1 +1,1 @@
-A component for visually separating content horizontally or vertically.
+Separator component for horizontal/vertical content division; supports orientation prop and custom styling via class.

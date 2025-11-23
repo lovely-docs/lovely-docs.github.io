@@ -1,1 +1,1 @@
-Configuration file that tells the shadcn-svelte CLI how to set up and generate components for your project.
+Project configuration file for shadcn-svelte CLI specifying Tailwind setup, path aliases, TypeScript config, and component registry location.

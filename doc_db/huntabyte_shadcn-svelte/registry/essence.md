@@ -1,1 +1,1 @@
-Create and host your own component registry to distribute custom components, hooks, and files to Svelte projects via the shadcn-svelte CLI.
+Create custom component registries with JSON-based items compatible with shadcn-svelte CLI; use provided template as starting point.

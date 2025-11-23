@@ -1,1 +1,1 @@
-A customizable animated spinner component for indicating loading states.
+Spinner component for loading states; customize size/color with utility classes; works in Button, Badge, InputGroup, Empty, and Item components.

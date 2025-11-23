@@ -5,10 +5,14 @@ Fast, composable, unstyled command menu for Svelte. Built on Bits UI.
 ### Installation
 
 ```bash
-npm install shadcn-svelte@latest add command
+npx shadcn-svelte@latest add command -y -o
 ```
 
+The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+
 ### Basic Usage
+
+Import and use the Command component with its subcomponents:
 
 ```svelte
 <script lang="ts">
@@ -22,19 +26,32 @@ npm install shadcn-svelte@latest add command
     <Command.Group heading="Suggestions">
       <Command.Item>Calendar</Command.Item>
       <Command.Item>Search Emoji</Command.Item>
+      <Command.Item>Calculator</Command.Item>
     </Command.Group>
     <Command.Separator />
     <Command.Group heading="Settings">
       <Command.Item>Profile</Command.Item>
+      <Command.Item>Billing</Command.Item>
       <Command.Item>Settings</Command.Item>
     </Command.Group>
   </Command.List>
 </Command.Root>
 ```
 
+### Component Structure
+
+- `<Command.Root>` - Container component, accepts styling classes
+- `<Command.Input>` - Search/filter input field
+- `<Command.List>` - Scrollable list container
+- `<Command.Empty>` - Message shown when no results match
+- `<Command.Group>` - Groups items with an optional heading
+- `<Command.Item>` - Individual command item (can be disabled)
+- `<Command.Separator>` - Visual divider between groups
+- `<Command.Shortcut>` - Display keyboard shortcut hint within an item
+
 ### Dialog Example
 
-Use `<Command.Dialog />` instead of `<Command.Root />` to display the command menu in a modal dialog. Bind the `open` prop to control visibility:
+Use `<Command.Dialog>` to display the command menu in a modal dialog:
 
 ```svelte
 <script lang="ts">
@@ -59,19 +76,18 @@ Use `<Command.Dialog />` instead of `<Command.Root />` to display the command me
     <Command.Group heading="Suggestions">
       <Command.Item>Calendar</Command.Item>
       <Command.Item>Search Emoji</Command.Item>
+      <Command.Item>Calculator</Command.Item>
     </Command.Group>
   </Command.List>
 </Command.Dialog>
 ```
 
-### Components
+`<Command.Dialog>` accepts props for both Dialog.Root and Command.Root components. Bind the `open` state to control visibility.
 
-- `Command.Root` - Container for the command menu
-- `Command.Dialog` - Dialog variant that accepts props for both Dialog and Command
-- `Command.Input` - Search/command input field
-- `Command.List` - Container for command items
-- `Command.Empty` - Shown when no results match
-- `Command.Group` - Groups related items with optional heading
-- `Command.Item` - Individual command item (automatically styles nested icons with `gap-2`, `size-4`, `shrink-0`)
-- `Command.Separator` - Visual separator between groups
-- `Command.Shortcut` - Display keyboard shortcut hint
+### Icon Styling
+
+As of 2024-10-30, `<Command.Item>` automatically applies icon styling: `gap-2 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0`. Icons placed inside items are automatically sized and spaced correctly.
+
+### API Reference
+
+Full API documentation available in Bits UI docs for the Command component.

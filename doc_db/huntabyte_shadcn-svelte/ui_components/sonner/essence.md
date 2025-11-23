@@ -1,1 +1,1 @@
-Toast notification component with support for success/error types, descriptions, and action buttons.
+Toast notifications with success/error types, descriptions, and action buttons; dark mode support via system preference or mode-watcher.

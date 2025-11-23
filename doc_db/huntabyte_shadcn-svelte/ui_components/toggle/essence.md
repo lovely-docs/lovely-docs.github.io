@@ -1,1 +1,1 @@
-Two-state toggle button component with variants, sizes, and disabled state support.
+Two-state toggle button with variants (default/outline), sizes (sm/md/lg), icon/text support, and disabled state.

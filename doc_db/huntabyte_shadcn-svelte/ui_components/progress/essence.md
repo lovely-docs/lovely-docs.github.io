@@ -1,1 +1,1 @@
-A progress bar component that displays task completion with reactive value updates.
+Progress bar component with reactive value binding, max prop, and class styling support.

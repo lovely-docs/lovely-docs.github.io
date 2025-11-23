@@ -1,25 +1,41 @@
 ## Installation Guides
 
-Multiple setup paths available: SvelteKit, Astro, Vite, or Manual installation.
+Installation instructions are provided for multiple frameworks:
+- SvelteKit
+- Astro
+- Vite
+- Manual setup
 
 ## Component Structure & Imports
 
-Components are split into multiple `.svelte` files per component (unlike React's shadcn/ui). Each component folder contains an `index.ts` that exports all subcomponents.
+Unlike the React version, components are split into multiple files because Svelte doesn't support multiple components per file. The CLI creates a folder for each component containing individual `.svelte` files and an `index.ts` barrel export.
 
-Example - Accordion component structure:
-```ts
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger
-} from "$lib/components/ui/accordion"
+Example: Accordion component structure:
+```
+accordion/
+  ├── accordion.svelte
+  ├── accordion-content.svelte
+  ├── accordion-item.svelte
+  ├── accordion-trigger.svelte
+  └── index.ts
 ```
 
-Components are tree-shaken by Rollup, so unused exports don't bloat the bundle.
+Import approaches (both are tree-shaken by Rollup):
+```ts
+import * as Accordion from '$lib/components/ui/accordion'
+// or
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '$lib/components/ui/accordion'
+```
 
 ## IDE Extensions
 
-**VSCode**: shadcn-svelte extension by @selemondev provides CLI initialization, component addition, documentation navigation, and import snippets.
+**VSCode**: Install shadcn-svelte extension by @selemondev
+- Initialize CLI
+- Add components
+- Navigate to component documentation
+- Component import snippets
 
-**JetBrains IDEs**: shadcn/ui Components Manager extension by @WarningImHack3r supports auto-detection, adding/removing/updating components, and works across Svelte, React, Vue, and Solid implementations.
+**JetBrains IDEs**: Install shadcn/ui Components Manager by @WarningImHack3r (supports Svelte, React, Vue, Solid)
+- Auto-detect components
+- Add/remove/update with one click
+- Search remote or existing components

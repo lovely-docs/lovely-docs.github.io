@@ -1,1 +1,1 @@
-Component for displaying keyboard input with support for grouping and integration with other UI components.
+Kbd component for displaying keyboard keys; use Kbd.Root for individual keys and Kbd.Group to combine multiple keys; integrates with Button, Tooltip, and InputGroup components.

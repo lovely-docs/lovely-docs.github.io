@@ -5,10 +5,14 @@ A UI component for displaying badges with multiple style variants.
 ### Installation
 
 ```bash
-pnpm dlx shadcn-svelte@latest add badge
+npx shadcn-svelte@latest add badge -y -o
 ```
 
+The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+
 ### Basic Usage
+
+Import and use the Badge component:
 
 ```svelte
 <script lang="ts">
@@ -23,31 +27,29 @@ pnpm dlx shadcn-svelte@latest add badge
 
 ### Variants
 
-- `default` - Standard badge style
-- `secondary` - Secondary style
-- `destructive` - Destructive/error style
-- `outline` - Outlined style
+The component supports four built-in variants: default, secondary, destructive, and outline.
 
-### Advanced Examples
+### Customization
 
-Badges can be customized with icons and custom styling:
+Badges can be customized with additional classes for styling:
 
 ```svelte
-<Badge variant="secondary" class="bg-blue-500 text-white">
+<Badge variant="secondary" class="bg-blue-500 text-white dark:bg-blue-600">
   <BadgeCheckIcon />
   Verified
 </Badge>
 ```
 
-Circular badges with numbers:
+Circular badge variants can be created using custom classes:
 
 ```svelte
 <Badge class="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums">8</Badge>
+<Badge class="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums" variant="destructive">99</Badge>
 ```
 
 ### Link Badge
 
-Use the `badgeVariants` helper to create links styled as badges:
+Use the `badgeVariants` helper to style links as badges:
 
 ```svelte
 <script lang="ts">

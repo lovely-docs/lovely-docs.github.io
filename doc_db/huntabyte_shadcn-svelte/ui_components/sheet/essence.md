@@ -1,1 +1,1 @@
-Sheet component for displaying dialog-based content sliding from screen edges with configurable positioning and sizing.
+Sheet component extends Dialog to display complementary content sliding from screen edges (top/right/bottom/left); configure with side prop and size via CSS classes.

@@ -1,1 +1,1 @@
-A container component for grouping related buttons with consistent styling, supporting vertical orientation, separators, and integration with other UI components.
+Container for grouping related buttons with consistent styling, supporting vertical/horizontal orientation, separators, nesting, and integration with Input, DropdownMenu, Select, Popover components; accessible with role="group" and aria-label support.

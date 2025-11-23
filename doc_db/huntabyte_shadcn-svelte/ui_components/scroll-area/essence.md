@@ -1,1 +1,1 @@
-Scroll Area component for custom-styled scrollable containers with support for vertical, horizontal, or bidirectional scrolling.
+ScrollArea component for custom cross-browser scrollable containers with vertical, horizontal, or bidirectional scrolling via orientation prop.

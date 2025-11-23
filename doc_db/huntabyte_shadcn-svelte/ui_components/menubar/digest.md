@@ -1,12 +1,14 @@
-## Menubar Component
+## Menubar
 
-A persistent menu UI component for desktop applications providing quick access to commands.
+A persistent menu component common in desktop applications providing quick access to a consistent set of commands.
 
 ### Installation
 
 ```bash
-pnpm dlx shadcn-svelte@latest add menubar
+npx shadcn-svelte@latest add menubar -y -o
 ```
+
+The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 
 ### Basic Usage
 
@@ -19,12 +21,75 @@ pnpm dlx shadcn-svelte@latest add menubar
   <Menubar.Menu>
     <Menubar.Trigger>File</Menubar.Trigger>
     <Menubar.Content>
-      <Menubar.Item>New Tab <Menubar.Shortcut>T</Menubar.Shortcut></Menubar.Item>
+      <Menubar.Item>
+        New Tab
+        <Menubar.Shortcut>T</Menubar.Shortcut>
+      </Menubar.Item>
+      <Menubar.Item>New Window</Menubar.Item>
       <Menubar.Separator />
+      <Menubar.Item>Share</Menubar.Item>
+      <Menubar.Separator />
+      <Menubar.Item>Print</Menubar.Item>
+    </Menubar.Content>
+  </Menubar.Menu>
+</Menubar.Root>
+```
+
+### Component Structure
+
+- **Menubar.Root**: Container for all menus
+- **Menubar.Menu**: Individual menu group
+- **Menubar.Trigger**: Menu label/button
+- **Menubar.Content**: Menu dropdown container
+- **Menubar.Item**: Menu item
+- **Menubar.Shortcut**: Keyboard shortcut display
+- **Menubar.Separator**: Visual divider between items
+- **Menubar.Sub / Menubar.SubTrigger / Menubar.SubContent**: Nested submenu
+- **Menubar.CheckboxItem**: Checkbox menu item with `bind:checked` binding
+- **Menubar.RadioGroup / Menubar.RadioItem**: Radio button group with `bind:value` binding
+- **Menubar.Item inset**: Item with inset styling (typically for secondary actions)
+
+### Advanced Example
+
+```svelte
+<script lang="ts">
+  let bookmarks = $state(false);
+  let profileValue = $state("benoit");
+</script>
+
+<Menubar.Root>
+  <Menubar.Menu>
+    <Menubar.Trigger>View</Menubar.Trigger>
+    <Menubar.Content>
+      <Menubar.CheckboxItem bind:checked={bookmarks}>
+        Always Show Bookmarks Bar
+      </Menubar.CheckboxItem>
+      <Menubar.Separator />
+      <Menubar.Item inset>
+        Reload <Menubar.Shortcut>R</Menubar.Shortcut>
+      </Menubar.Item>
+    </Menubar.Content>
+  </Menubar.Menu>
+  <Menubar.Menu>
+    <Menubar.Trigger>Profiles</Menubar.Trigger>
+    <Menubar.Content>
+      <Menubar.RadioGroup bind:value={profileValue}>
+        <Menubar.RadioItem value="andy">Andy</Menubar.RadioItem>
+        <Menubar.RadioItem value="benoit">Benoit</Menubar.RadioItem>
+      </Menubar.RadioGroup>
+      <Menubar.Separator />
+      <Menubar.Item inset>Edit...</Menubar.Item>
+    </Menubar.Content>
+  </Menubar.Menu>
+  <Menubar.Menu>
+    <Menubar.Trigger>Edit</Menubar.Trigger>
+    <Menubar.Content>
       <Menubar.Sub>
-        <Menubar.SubTrigger>Share</Menubar.SubTrigger>
+        <Menubar.SubTrigger>Find</Menubar.SubTrigger>
         <Menubar.SubContent>
-          <Menubar.Item>Email link</Menubar.Item>
+          <Menubar.Item>Search the web</Menubar.Item>
+          <Menubar.Separator />
+          <Menubar.Item>Find...</Menubar.Item>
         </Menubar.SubContent>
       </Menubar.Sub>
     </Menubar.Content>
@@ -34,23 +99,11 @@ pnpm dlx shadcn-svelte@latest add menubar
 
 ### Features
 
-- **Checkbox Items**: `<Menubar.CheckboxItem bind:checked={state}>Label</Menubar.CheckboxItem>`
-- **Radio Groups**: `<Menubar.RadioGroup bind:value={state}>` with `<Menubar.RadioItem value="option">Label</Menubar.RadioItem>`
-- **Submenus**: Nest `<Menubar.Sub>` with `<Menubar.SubTrigger>` and `<Menubar.SubContent>`
-- **Shortcuts**: Display keyboard shortcuts with `<Menubar.Shortcut>Key</Menubar.Shortcut>`
-- **Separators**: Use `<Menubar.Separator />` to divide menu sections
-- **Inset Items**: Add `inset` prop to `<Menubar.Item>` for visual alignment
-
-### Component Structure
-
-- `Menubar.Root`: Container
-- `Menubar.Menu`: Individual menu
-- `Menubar.Trigger`: Menu label/button
-- `Menubar.Content`: Menu dropdown container
-- `Menubar.Item`: Menu item
-- `Menubar.CheckboxItem`: Toggleable menu item
-- `Menubar.RadioItem`: Radio option in menu
-- `Menubar.RadioGroup`: Radio group container
-- `Menubar.Sub`: Submenu container
-- `Menubar.SubTrigger`: Submenu trigger
-- `Menubar.SubContent`: Submenu content
+- Multiple independent menus in a single menubar
+- Nested submenus with SubTrigger and SubContent
+- Checkbox items with reactive state binding
+- Radio button groups with reactive value binding
+- Keyboard shortcuts display
+- Visual separators
+- Inset styling for secondary menu items
+- Full keyboard navigation support (via underlying Bits UI component)

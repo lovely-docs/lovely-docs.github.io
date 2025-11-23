@@ -1,12 +1,14 @@
 ## Input OTP
 
-Accessible one-time password component with copy-paste functionality, built on Bits UI's PinInput.
+Accessible one-time password component with copy-paste functionality, built on Bits UI's PinInput component.
 
 ### Installation
 
 ```bash
-npm install shadcn-svelte@latest add input-otp
+npx shadcn-svelte@latest add input-otp -y -o
 ```
+
+The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 
 ### Basic Usage
 
@@ -32,9 +34,16 @@ npm install shadcn-svelte@latest add input-otp
 </InputOTP.Root>
 ```
 
+### Components
+
+- **InputOTP.Root**: Container with `maxlength` prop to set OTP length
+- **InputOTP.Group**: Groups cells together
+- **InputOTP.Slot**: Individual input cell that receives `{cell}` prop
+- **InputOTP.Separator**: Visual separator between groups
+
 ### Pattern Validation
 
-Use the `pattern` prop to restrict input to specific characters:
+Use the `pattern` prop to restrict input characters:
 
 ```svelte
 <script lang="ts">
@@ -55,10 +64,24 @@ Use the `pattern` prop to restrict input to specific characters:
 
 ### Invalid State
 
-Add `aria-invalid` attribute to slots for error styling:
+Mark slots as invalid using the `aria-invalid` attribute:
 
 ```svelte
-<InputOTP.Slot aria-invalid {cell} />
+<InputOTP.Root maxlength={6}>
+  {#snippet children({ cells })}
+    <InputOTP.Group>
+      {#each cells.slice(0, 3) as cell (cell)}
+        <InputOTP.Slot aria-invalid {cell} />
+      {/each}
+    </InputOTP.Group>
+    <InputOTP.Separator />
+    <InputOTP.Group>
+      {#each cells.slice(3, 6) as cell (cell)}
+        <InputOTP.Slot aria-invalid {cell} />
+      {/each}
+    </InputOTP.Group>
+  {/snippet}
+</InputOTP.Root>
 ```
 
 ### Form Integration
@@ -69,24 +92,34 @@ Integrate with sveltekit-superforms for validation:
 <script lang="ts" module>
   import { z } from "zod/v4";
   const formSchema = z.object({
-    pin: z.string().min(6, { message: "Must be at least 6 characters." })
+    pin: z.string().min(6, {
+      message: "Your one-time password must be at least 6 characters."
+    })
   });
 </script>
 
 <script lang="ts">
   import { defaults, superForm } from "sveltekit-superforms";
   import { zod4 } from "sveltekit-superforms/adapters";
+  import { toast } from "svelte-sonner";
   import * as InputOTP from "$lib/components/ui/input-otp/index.js";
   import * as Form from "$lib/components/ui/form/index.js";
-  
+
   const form = superForm(defaults(zod4(formSchema)), {
     validators: zod4(formSchema),
-    SPA: true
+    SPA: true,
+    onUpdate: ({ form: f }) => {
+      if (f.valid) {
+        toast.success(`You submitted ${JSON.stringify(f.data, null, 2)}`);
+      } else {
+        toast.error("Please fix the errors in the form.");
+      }
+    }
   });
   const { form: formData, enhance } = form;
 </script>
 
-<form method="POST" use:enhance>
+<form method="POST" class="w-2/3 space-y-6" use:enhance>
   <Form.Field {form} name="pin">
     <Form.Control>
       {#snippet children({ props })}
@@ -101,15 +134,9 @@ Integrate with sveltekit-superforms for validation:
         </InputOTP.Root>
       {/snippet}
     </Form.Control>
+    <Form.Description>Please enter the one-time password sent to your phone.</Form.Description>
     <Form.FieldErrors />
   </Form.Field>
   <Form.Button>Submit</Form.Button>
 </form>
 ```
-
-### Components
-
-- `InputOTP.Root` - Container with `maxlength` prop
-- `InputOTP.Group` - Groups cells together
-- `InputOTP.Slot` - Individual input cell
-- `InputOTP.Separator` - Visual separator between groups

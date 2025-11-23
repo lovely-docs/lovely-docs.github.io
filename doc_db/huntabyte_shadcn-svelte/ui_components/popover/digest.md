@@ -1,12 +1,6 @@
-## Popover Component
+## Popover
 
-A UI component that displays rich content in a portal, triggered by a button.
-
-### Installation
-
-```bash
-pnpm dlx shadcn-svelte@latest add popover
-```
+A component that displays rich content in a portal, triggered by a button.
 
 ### Basic Usage
 
@@ -21,7 +15,15 @@ pnpm dlx shadcn-svelte@latest add popover
 </Popover.Root>
 ```
 
-### Example with Form Controls
+### Installation
+
+```bash
+npx shadcn-svelte@latest add popover -y -o
+```
+
+The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+
+### Complete Example
 
 ```svelte
 <script lang="ts">
@@ -68,4 +70,4 @@ pnpm dlx shadcn-svelte@latest add popover
 
 ### API Reference
 
-See the Bits UI documentation for complete API reference details.
+See the Bits UI documentation for the complete API reference.

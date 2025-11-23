@@ -1,1 +1,1 @@
-Tooltip component that shows information on hover or keyboard focus using Provider, Root, Trigger, and Content subcomponents.
+Tooltip component with Provider/Root/Trigger/Content structure; displays on hover or focus; install with `npx shadcn-svelte@latest add tooltip -y -o`

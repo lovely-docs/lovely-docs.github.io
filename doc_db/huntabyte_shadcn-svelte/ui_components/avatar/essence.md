@@ -1,1 +1,1 @@
-Avatar component for displaying user images with text fallback when images fail to load.
+Avatar component with Image and Fallback subcomponents; displays user image or initials fallback text.

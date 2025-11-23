@@ -1,13 +1,16 @@
 ## Date Picker
 
-Composable date picker built from Popover + Calendar/RangeCalendar components.
+Composable date picker built from Popover and Calendar/RangeCalendar components.
 
-**Basic single date picker:**
+### Basic Usage
 ```svelte
 <Popover.Root>
   <Popover.Trigger>
     {#snippet child({ props })}
-      <Button {...props}>{value ? format(value) : "Select a date"}</Button>
+      <Button {...props}>
+        <CalendarIcon class="mr-2 size-4" />
+        {value ? df.format(value.toDate(getLocalTimeZone())) : "Select a date"}
+      </Button>
     {/snippet}
   </Popover.Trigger>
   <Popover.Content class="w-auto p-0">
@@ -16,8 +19,11 @@ Composable date picker built from Popover + Calendar/RangeCalendar components.
 </Popover.Root>
 ```
 
-**Date range picker:** Use RangeCalendar with `numberOfMonths={2}` and track `startValue` via `onStartValueChange`.
+### Date Range Picker
+Use `RangeCalendar` with `numberOfMonths={2}` to display two months side-by-side. Track `startValue` separately via `onStartValueChange` callback.
 
-**With presets:** Add Select component inside Popover.Content for quick date options.
+### With Presets
+Combine `Select` component with preset date options (Today, Tomorrow, In 3 days, In a week) that update the calendar value.
 
-**Form integration:** Use with sveltekit-superforms, set Calendar `minValue`/`maxValue`, update form data via `onValueChange`.
+### Form Integration
+Use with sveltekit-superforms and zod validation. Set `minValue` and `maxValue` on Calendar to constrain date selection (e.g., date of birth between 1900 and today).

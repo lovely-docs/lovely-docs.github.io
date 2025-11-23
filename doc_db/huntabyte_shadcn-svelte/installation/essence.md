@@ -1,1 +1,1 @@
-How to install shadcn-svelte, structure components across multiple files, and use IDE extensions for component management.
+Installation guides for SvelteKit/Astro/Vite/Manual; components split into multiple files with barrel exports; VSCode and JetBrains IDE extensions available.

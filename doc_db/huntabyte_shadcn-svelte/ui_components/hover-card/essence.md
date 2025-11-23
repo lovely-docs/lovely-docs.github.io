@@ -1,1 +1,1 @@
-A component that shows preview content when hovering over a link, built on Bits UI.
+Hover card component for displaying link preview content on hover; composed of Root, Trigger (link element), and Content (preview) subcomponents.

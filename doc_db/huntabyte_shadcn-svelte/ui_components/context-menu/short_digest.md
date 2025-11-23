@@ -1,6 +1,14 @@
 ## Context Menu
 
-Right-click triggered menu component.
+Right-click triggered menu component with items, submenus, checkboxes, and radio buttons.
+
+### Installation
+
+```bash
+npx shadcn-svelte@latest add context-menu -y -o
+```
+
+### Basic Usage
 
 ```svelte
 <script lang="ts">
@@ -11,13 +19,18 @@ Right-click triggered menu component.
   <ContextMenu.Trigger>Right click</ContextMenu.Trigger>
   <ContextMenu.Content>
     <ContextMenu.Item>Profile</ContextMenu.Item>
-    <ContextMenu.CheckboxItem bind:checked={show}>Show</ContextMenu.CheckboxItem>
-    <ContextMenu.RadioGroup bind:value>
-      <ContextMenu.RadioItem value="a">Option A</ContextMenu.RadioItem>
-      <ContextMenu.RadioItem value="b">Option B</ContextMenu.RadioItem>
-    </ContextMenu.RadioGroup>
+    <ContextMenu.Item>Billing</ContextMenu.Item>
   </ContextMenu.Content>
 </ContextMenu.Root>
 ```
 
-Supports submenus, separators, disabled items, shortcuts, checkboxes, and radio groups.
+### Key Components
+
+- **Root/Trigger/Content**: Basic structure
+- **Item**: Menu items with optional `inset` and `disabled` props
+- **Shortcut**: Keyboard shortcut display
+- **Sub/SubTrigger/SubContent**: Nested submenus
+- **Separator**: Visual dividers
+- **CheckboxItem**: Checkbox items with `bind:checked`
+- **RadioGroup/RadioItem**: Radio selection with `bind:value`
+- **Group/GroupHeading**: Item grouping with headers

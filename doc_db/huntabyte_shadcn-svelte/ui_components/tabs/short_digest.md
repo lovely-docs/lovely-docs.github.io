@@ -1,26 +1,33 @@
 ## Tabs Component
 
-Layered content sections displayed one at a time.
+Tabbed interface displaying one content panel at a time.
 
 ### Installation
+
 ```bash
-pnpm dlx shadcn-svelte@latest add tabs
+npx shadcn-svelte@latest add tabs -y -o
 ```
 
-### Usage
+### Basic Usage
+
 ```svelte
 <script lang="ts">
   import * as Tabs from "$lib/components/ui/tabs/index.js";
 </script>
 
-<Tabs.Root value="account">
+<Tabs.Root value="account" class="w-[400px]">
   <Tabs.List>
     <Tabs.Trigger value="account">Account</Tabs.Trigger>
     <Tabs.Trigger value="password">Password</Tabs.Trigger>
   </Tabs.List>
-  <Tabs.Content value="account">Account content</Tabs.Content>
-  <Tabs.Content value="password">Password content</Tabs.Content>
+  <Tabs.Content value="account">Make changes to your account here.</Tabs.Content>
+  <Tabs.Content value="password">Change your password here.</Tabs.Content>
 </Tabs.Root>
 ```
 
-Components: `Tabs.Root` (container), `Tabs.List` (trigger container), `Tabs.Trigger` (tab button), `Tabs.Content` (panel).
+### Components
+
+- **Tabs.Root**: Container with `value` prop for active tab
+- **Tabs.List**: Trigger container
+- **Tabs.Trigger**: Tab button with `value` matching content
+- **Tabs.Content**: Panel displayed when trigger is active

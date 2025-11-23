@@ -1,28 +1,27 @@
 ## Switch Component
 
-Toggle control for boolean states.
+Toggle control for binary states.
 
 ### Installation
+
 ```bash
-npx shadcn-svelte@latest add switch
+npx shadcn-svelte@latest add switch -y -o
 ```
 
 ### Basic Usage
+
 ```svelte
-<Switch id="airplane-mode" />
-<Label for="airplane-mode">Airplane Mode</Label>
+<script lang="ts">
+  import { Switch } from "$lib/components/ui/switch/index.js";
+  import { Label } from "$lib/components/ui/label/index.js";
+</script>
+
+<div class="flex items-center space-x-2">
+  <Switch id="airplane-mode" />
+  <Label for="airplane-mode">Airplane Mode</Label>
+</div>
 ```
 
 ### Form Integration
-```svelte
-<Form.Field {form} name="marketing_emails">
-  <Form.Control>
-    {#snippet children({ props })}
-      <Form.Label>Marketing emails</Form.Label>
-      <Switch {...props} bind:checked={$formData.marketing_emails} />
-    {/snippet}
-  </Form.Control>
-</Form.Field>
-```
 
-Supports `disabled` and `aria-readonly` attributes.
+Bind to form state with `bind:checked={$formData.fieldName}`. Supports `disabled` and `aria-readonly` attributes.

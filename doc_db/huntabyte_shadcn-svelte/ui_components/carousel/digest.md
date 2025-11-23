@@ -1,12 +1,14 @@
-## Carousel Component
+## Carousel
 
 A carousel component built on Embla Carousel with motion and swipe support.
 
 ### Installation
 
 ```bash
-pnpm dlx shadcn-svelte@latest add carousel
+npx shadcn-svelte@latest add carousel -y -o
 ```
+
+The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 
 ### Basic Usage
 
@@ -28,11 +30,12 @@ pnpm dlx shadcn-svelte@latest add carousel
 
 ### Sizing Items
 
-Use `basis` utility classes on `Carousel.Item` to control item size:
+Use the `basis` utility class on `<Carousel.Item />` to control item size:
 
 ```svelte
-<Carousel.Root class="w-full max-w-sm">
+<Carousel.Root>
   <Carousel.Content>
+    <Carousel.Item class="basis-1/3">...</Carousel.Item>
     <Carousel.Item class="md:basis-1/2 lg:basis-1/3">...</Carousel.Item>
   </Carousel.Content>
 </Carousel.Root>
@@ -40,43 +43,52 @@ Use `basis` utility classes on `Carousel.Item` to control item size:
 
 ### Spacing Between Items
 
-Use `pl-[VALUE]` on items and `-ml-[VALUE]` on content:
+Use `pl-[VALUE]` on `<Carousel.Item />` and `-ml-[VALUE]` on `<Carousel.Content />`:
 
 ```svelte
 <Carousel.Root>
-  <Carousel.Content class="-ml-4">
-    <Carousel.Item class="pl-4">...</Carousel.Item>
+  <Carousel.Content class="-ml-4 md:-ml-6">
+    <Carousel.Item class="pl-4 md:pl-6">...</Carousel.Item>
+    <Carousel.Item class="pl-4 md:pl-6">...</Carousel.Item>
   </Carousel.Content>
 </Carousel.Root>
 ```
 
 ### Orientation
 
+Set carousel direction with the `orientation` prop:
+
 ```svelte
-<Carousel.Root orientation="vertical" opts={{ align: "start" }}>
-  <Carousel.Content class="-mt-1 h-[200px]">
+<Carousel.Root orientation="vertical" class="h-[200px]">
+  <Carousel.Content class="-mt-1">
     <Carousel.Item class="pt-1">...</Carousel.Item>
   </Carousel.Content>
 </Carousel.Root>
 ```
 
+Accepts `"vertical"` or `"horizontal"`.
+
 ### Options
 
-Pass options via `opts` prop (see Embla Carousel docs for full list):
+Pass Embla Carousel options via the `opts` prop:
 
 ```svelte
 <Carousel.Root opts={{ align: "start", loop: true }}>
-  ...
+  <Carousel.Content>
+    <Carousel.Item>...</Carousel.Item>
+  </Carousel.Content>
 </Carousel.Root>
 ```
 
-### API Access
+### API & State Management
 
-Use `setApi` callback to access carousel instance:
+Use the `setApi` callback to access the carousel API instance:
 
 ```svelte
 <script lang="ts">
   import type { CarouselAPI } from "$lib/components/ui/carousel/context.js";
+  import * as Carousel from "$lib/components/ui/carousel/index.js";
+  
   let api = $state<CarouselAPI>();
   const count = $derived(api ? api.scrollSnapList().length : 0);
   let current = $state(0);
@@ -92,15 +104,19 @@ Use `setApi` callback to access carousel instance:
 </script>
 
 <Carousel.Root setApi={(emblaApi) => (api = emblaApi)}>
-  ...
+  <Carousel.Content>
+    <Carousel.Item>...</Carousel.Item>
+  </Carousel.Content>
 </Carousel.Root>
 
 <div>Slide {current} of {count}</div>
 ```
 
+Available API methods: `scrollSnapList()`, `selectedScrollSnap()`, and event listeners via `api.on()`.
+
 ### Events
 
-Listen to carousel events via the API instance:
+Listen to carousel events using the API instance:
 
 ```svelte
 <script lang="ts">
@@ -109,20 +125,26 @@ Listen to carousel events via the API instance:
   $effect(() => {
     if (api) {
       api.on("select", () => {
-        // handle selection
+        // Handle selection change
       });
     }
   });
 </script>
+
+<Carousel.Root setApi={(emblaApi) => (api = emblaApi)}>
+  ...
+</Carousel.Root>
 ```
 
 ### Plugins
 
-Add plugins like Autoplay:
+Add Embla Carousel plugins via the `plugins` prop:
 
 ```svelte
 <script lang="ts">
   import Autoplay from "embla-carousel-autoplay";
+  import * as Carousel from "$lib/components/ui/carousel/index.js";
+  
   const plugin = Autoplay({ delay: 2000, stopOnInteraction: true });
 </script>
 
@@ -131,6 +153,10 @@ Add plugins like Autoplay:
   onmouseenter={plugin.stop}
   onmouseleave={plugin.reset}
 >
-  ...
+  <Carousel.Content>
+    <Carousel.Item>...</Carousel.Item>
+  </Carousel.Content>
 </Carousel.Root>
 ```
+
+Refer to Embla Carousel documentation for available plugins and options.

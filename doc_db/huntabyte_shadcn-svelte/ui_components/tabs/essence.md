@@ -1,1 +1,1 @@
-Tabbed interface component for displaying multiple content sections with one visible at a time.
+Tabbed interface component with Tabs.Root, Tabs.List, Tabs.Trigger, and Tabs.Content; install with `npx shadcn-svelte@latest add tabs -y -o`; set active tab via Root's value prop matching Trigger/Content values.

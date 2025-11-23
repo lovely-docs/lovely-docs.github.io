@@ -1,1 +1,1 @@
-Navigation page linking to previous versions of documentation for different Svelte and Tailwind combinations.
+Legacy documentation index for older Svelte and Tailwind version combinations

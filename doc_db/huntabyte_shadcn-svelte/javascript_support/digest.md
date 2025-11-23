@@ -1,6 +1,4 @@
-shadcn-svelte is written in TypeScript, but JavaScript versions of components are available through the CLI.
-
-To use JavaScript instead of TypeScript, set `"typescript": false` in `components.json`:
+shadcn-svelte is written in TypeScript, but JavaScript versions of components are available through the CLI. To use JavaScript instead of TypeScript, set `"typescript": false` in `components.json`:
 
 ```json
 {
@@ -19,7 +17,7 @@ To use JavaScript instead of TypeScript, set `"typescript": false` in `component
 }
 ```
 
-For import aliases in JavaScript projects, create a `jsconfig.json` file:
+Configure import aliases by creating `jsconfig.json`:
 
 ```json
 {
@@ -30,3 +28,5 @@ For import aliases in JavaScript projects, create a `jsconfig.json` file:
   }
 }
 ```
+
+TypeScript is recommended for the project, but JavaScript support is provided as an alternative.

@@ -1,1 +1,1 @@
-Composable, themeable sidebar component with collapsible states, menus, and customizable layout variants.
+Composable sidebar component with collapse-to-icons, multiple variants (sidebar/floating/inset), collapsible modes (offcanvas/icon/none), menu system, header/footer, groups, badges, skeletons, separators, and theming via CSS variables.

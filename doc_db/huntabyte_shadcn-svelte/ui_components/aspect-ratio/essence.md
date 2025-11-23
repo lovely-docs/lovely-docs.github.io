@@ -1,1 +1,1 @@
-AspectRatio component that maintains content within a specified aspect ratio.
+AspectRatio component maintains content at specified ratio (e.g., 16/9); accepts ratio prop and class styling.

@@ -1,12 +1,14 @@
-## Toggle Component
+## Toggle
 
 A two-state button component that toggles between on and off states.
 
 ### Installation
 
 ```bash
-npm install shadcn-svelte@latest add toggle
+npx shadcn-svelte@latest add toggle -y -o
 ```
+
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Basic Usage
 
@@ -14,29 +16,32 @@ npm install shadcn-svelte@latest add toggle
 <script lang="ts">
   import { Toggle } from "$lib/components/ui/toggle/index.js";
 </script>
+
 <Toggle>Toggle</Toggle>
 ```
 
-### Variants and Sizes
-
-- **Default variant**: Standard toggle button
-- **Outline variant**: `variant="outline"` for outlined style
-- **Sizes**: `size="sm"` for small, `size="lg"` for large
-
 ### Examples
 
-Icon-only toggle:
+**Default with icon:**
 ```svelte
 <script lang="ts">
   import BoldIcon from "@lucide/svelte/icons/bold";
   import { Toggle } from "$lib/components/ui/toggle/index.js";
 </script>
+
 <Toggle aria-label="toggle bold">
   <BoldIcon class="size-4" />
 </Toggle>
 ```
 
-Toggle with text:
+**Outline variant:**
+```svelte
+<Toggle variant="outline" aria-label="Toggle italic">
+  <ItalicIcon class="size-4" />
+</Toggle>
+```
+
+**With text and icon:**
 ```svelte
 <Toggle aria-label="Toggle italic">
   <ItalicIcon class="mr-2 size-4" />
@@ -44,7 +49,18 @@ Toggle with text:
 </Toggle>
 ```
 
-Disabled state:
+**Size variants (small and large):**
+```svelte
+<Toggle size="sm" aria-label="Toggle italic">
+  <ItalicIcon class="size-4" />
+</Toggle>
+
+<Toggle size="lg" aria-label="Toggle italic">
+  <ItalicIcon class="size-4" />
+</Toggle>
+```
+
+**Disabled state:**
 ```svelte
 <Toggle aria-label="Toggle underline" disabled>
   <UnderlineIcon class="size-4" />
@@ -53,7 +69,7 @@ Disabled state:
 
 ### Props
 
-- `variant`: "default" or "outline"
-- `size`: "sm", "md" (default), or "lg"
-- `disabled`: boolean to disable the toggle
-- `aria-label`: accessibility label (recommended)
+- `variant`: "default" or "outline" - controls button styling
+- `size`: "sm", "md" (default), or "lg" - controls button size
+- `disabled`: boolean - disables the toggle button
+- `aria-label`: string - accessibility label for the button

@@ -1,1 +1,1 @@
-Alert Dialog is a modal component for displaying important messages that require user confirmation or action.
+Modal dialog component with Root, Trigger, Content, Header, Title, Description, Footer, Cancel, and Action sub-components; install with `npx shadcn-svelte@latest add alert-dialog -y -o`.

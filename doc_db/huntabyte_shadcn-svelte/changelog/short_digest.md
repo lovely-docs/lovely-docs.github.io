@@ -1,6 +1,11 @@
 ## Recent Updates
-- **June 2025**: Calendar components overhauled with dropdowns, 30+ blocks added; custom registry support
-- **May 2025**: Tailwind v4 support with migration guide; Charts preview component; custom registries
-- **Feb 2024**: Icon imports now use deep imports (@lucide/svelte/icons/check) for better performance; Formsnap completely rewritten with new API
-- **Jan 2024**: Carousel, Drawer, Sonner, Pagination components added
-- **Oct 2023**: Command and Combobox components; Form.Label now uses $ids.input; Form.Control component added
+
+**June 2025:** Calendar components overhauled with month/year dropdowns; 30+ Calendar blocks added
+
+**May 2025:** Tailwind v4 support released; Charts component added; Custom registry support for publishing components
+
+**February 2024:** Icon imports changed to deep imports (`import Check from "@lucide/svelte/icons/check"`) for better dev server performance; Formsnap completely rewritten with breaking changes
+
+**January 2024:** Added Carousel, Drawer (vaul-svelte), Sonner (toast notifications), Pagination components
+
+**October 2023:** Added Command (command palette), Combobox (searchable dropdown); Form.Label now uses store for ids (`$ids.input`); Form.Control component added for non-traditional form elements

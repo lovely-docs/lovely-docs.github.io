@@ -1,1 +1,1 @@
-Composable command menu component with dialog support and keyboard shortcuts.
+Unstyled command menu component with Root/Input/List/Group/Item/Separator/Shortcut subcomponents; supports dialog mode with keyboard shortcuts (Cmd/Ctrl+K); auto-styles icons in items.

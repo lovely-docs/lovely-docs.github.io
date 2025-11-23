@@ -1,16 +1,22 @@
-## Form Components
+## Form Component Guide
 
-Build accessible, type-safe forms with Formsnap, Superforms, and Zod validation.
+Composable form components wrapping Formsnap and Superforms with Zod validation.
 
-**Setup**: Define Zod schema → setup load function with `superValidate` → create form component using `Form.Field`, `Form.Control`, `Form.Label`, `Form.FieldErrors` → create server action for validation.
+**Setup:**
+1. Define Zod schema
+2. Create load function with `superValidate(zod4(formSchema))`
+3. Build form component using `Form.Field`, `Form.Control`, `Form.Label`, `Form.Description`, `Form.FieldErrors`
+4. Create server action to validate and handle form submission
 
-**Example**:
+**Basic Example:**
 ```svelte
-<script>
+<script lang="ts">
   import * as Form from "$lib/components/ui/form/index.js";
+  import { Input } from "$lib/components/ui/input/index.js";
   import { superForm } from "sveltekit-superforms";
   import { zod4Client } from "sveltekit-superforms/adapters";
-  
+
+  let { data } = $props();
   const form = superForm(data.form, { validators: zod4Client(formSchema) });
   const { form: formData, enhance } = form;
 </script>
@@ -23,9 +29,16 @@ Build accessible, type-safe forms with Formsnap, Superforms, and Zod validation.
         <Input {...props} bind:value={$formData.username} />
       {/snippet}
     </Form.Control>
+    <Form.Description>Public display name.</Form.Description>
     <Form.FieldErrors />
   </Form.Field>
+  <Form.Button>Submit</Form.Button>
 </form>
 ```
 
-**Install**: `pnpm dlx shadcn-svelte@latest add form`
+**Installation:**
+```bash
+npx shadcn-svelte@latest add form -y -o
+```
+
+Works with Checkbox, Date Picker, Input, Radio Group, Select, Switch, Textarea.

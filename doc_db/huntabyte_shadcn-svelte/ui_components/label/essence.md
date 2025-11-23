@@ -1,1 +1,1 @@
-Accessible label component that associates with form controls via the `for` prop.
+Accessible label component with for attribute to associate with form controls; install with `npx shadcn-svelte@latest add label -y -o`

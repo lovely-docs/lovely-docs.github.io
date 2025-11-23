@@ -1,1 +1,1 @@
-Tailwind utility classes for styling typography elements (headings, paragraphs, blockquotes, tables, lists, code) since no default styles are provided.
+Utility class examples for styling headings (h1-h4), paragraphs (standard, lead, large, small, muted), blockquotes, inline code, lists, and tables using Tailwind CSS.

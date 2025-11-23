@@ -1,1 +1,1 @@
-Guide to building accessible, type-safe forms using shadcn-svelte's Form components with Formsnap, Superforms, and Zod validation.
+Composable form components with Formsnap/Superforms/Zod integration for type-safe, accessible forms with client/server validation.

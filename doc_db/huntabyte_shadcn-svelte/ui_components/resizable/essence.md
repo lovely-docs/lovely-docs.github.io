@@ -1,1 +1,1 @@
-Resizable panel component for creating accessible, keyboard-navigable draggable panel layouts in horizontal or vertical directions.
+Resizable panel groups with horizontal/vertical directions, defaultSize prop, withHandle indicator, and nested layout support.

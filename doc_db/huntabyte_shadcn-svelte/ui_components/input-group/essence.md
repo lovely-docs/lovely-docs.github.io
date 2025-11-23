@@ -1,1 +1,0 @@
-Input group component for adding prefixes, suffixes, icons, buttons, and other UI elements around input and textarea fields.

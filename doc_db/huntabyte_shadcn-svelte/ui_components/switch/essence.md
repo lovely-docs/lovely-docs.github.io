@@ -1,1 +1,1 @@
-Toggle control component for boolean form fields with form integration support.
+Toggle control for checked/unchecked states; install with `npx shadcn-svelte@latest add switch -y -o`; bind to form data with `bind:checked`; supports disabled and aria-readonly.

@@ -1,3 +1,16 @@
-## Dark Mode
+## Dark Mode Setup
 
-Install `mode-watcher` and add `<ModeWatcher />` to your root layout. Use `toggleMode()` for a simple button or `setMode()`/`resetMode()` for dropdown menus with light/dark/system options. For Astro, add an inline script to prevent FUOC by reading theme from localStorage or system preference.
+Install `mode-watcher`:
+```bash
+npm i mode-watcher
+```
+
+Add `ModeWatcher` to root layout:
+```svelte
+<script lang="ts">
+  import { ModeWatcher } from "mode-watcher";
+</script>
+<ModeWatcher />
+```
+
+Create toggle with `toggleMode()`, `setMode()`, or `resetMode()` from mode-watcher. Use Lucide icons (Sun/Moon) with dark mode transitions for UI.

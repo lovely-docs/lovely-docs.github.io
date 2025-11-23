@@ -1,12 +1,14 @@
-## Separator Component
+## Separator
 
-A UI component for visually or semantically separating content.
+A component that visually or semantically separates content.
 
 ### Installation
 
 ```bash
-pnpm dlx shadcn-svelte@latest add separator
+npx shadcn-svelte@latest add separator -y -o
 ```
+
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Usage
 
@@ -17,11 +19,22 @@ Import and use the Separator component:
   import { Separator } from "$lib/components/ui/separator/index.js";
 </script>
 
+<Separator />
+```
+
+### Examples
+
+**Horizontal separator with text content:**
+```svelte
 <div class="space-y-1">
   <h4 class="text-sm font-medium leading-none">Bits UI Primitives</h4>
   <p class="text-muted-foreground text-sm">An open-source UI component library.</p>
 </div>
 <Separator class="my-4" />
+```
+
+**Vertical separators between inline items:**
+```svelte
 <div class="flex h-5 items-center space-x-4 text-sm">
   <div>Blog</div>
   <Separator orientation="vertical" />
@@ -31,4 +44,4 @@ Import and use the Separator component:
 </div>
 ```
 
-Supports horizontal (default) and vertical orientations via the `orientation` prop.
+The component supports an `orientation` prop that accepts `"vertical"` for vertical separators (default is horizontal). Custom styling can be applied via the `class` prop.

@@ -1,6 +1,6 @@
-## RangeCalendar Component
+## Range Calendar
 
-A calendar component for selecting a range of dates, built on top of Bits UI's Range Calendar component using the @internationalized/date package for date handling.
+A calendar component for selecting a date range.
 
 ### Basic Usage
 
@@ -18,15 +18,22 @@ A calendar component for selecting a range of dates, built on top of Bits UI's R
 <RangeCalendar bind:value class="rounded-md border" />
 ```
 
-The component accepts a `value` object with `start` and `end` date properties and supports standard class bindings for styling.
+### Implementation Details
+
+- Built on top of Bits Range Calendar component
+- Uses `@internationalized/date` package for date handling
+- Accepts `value` object with `start` and `end` date properties
+- Supports standard HTML class binding for styling
 
 ### Installation
 
 ```bash
-npm install shadcn-svelte@latest add range-calendar
+npx shadcn-svelte@latest add range-calendar -y -o
 ```
 
-### References
+Use `-y` to skip confirmation prompt and `-o` to overwrite existing files.
 
-- Full API reference available in Bits UI documentation
-- 30+ calendar block examples available in the component library
+### Related Resources
+
+- Bits UI Range Calendar documentation and API reference available
+- 30+ Calendar Blocks available showcasing the component in action

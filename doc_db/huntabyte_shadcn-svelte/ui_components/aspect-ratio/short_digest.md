@@ -1,6 +1,6 @@
-## AspectRatio
+## Aspect Ratio
 
-Constrains content to a specific aspect ratio using the `ratio` prop.
+Constrains content to a specific aspect ratio using the `AspectRatio` component with a `ratio` prop:
 
 ```svelte
 <AspectRatio ratio={16 / 9} class="bg-muted">
@@ -8,4 +8,4 @@ Constrains content to a specific aspect ratio using the `ratio` prop.
 </AspectRatio>
 ```
 
-Install: `pnpm dlx shadcn-svelte@latest add aspect-ratio`
+Install: `npx shadcn-svelte@latest add aspect-ratio -y -o`

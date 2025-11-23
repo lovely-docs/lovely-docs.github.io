@@ -2,10 +2,20 @@
 
 Placeholder component for loading states.
 
-```svelte
-import { Skeleton } from "$lib/components/ui/skeleton/index.js";
+### Installation
 
-<Skeleton class="h-4 w-[250px]" />
+```bash
+npx shadcn-svelte@latest add skeleton -y -o
 ```
 
-Style with Tailwind CSS utilities via the `class` prop.
+### Usage
+
+```svelte
+<script lang="ts">
+  import { Skeleton } from "$lib/components/ui/skeleton/index.js";
+</script>
+
+<Skeleton class="size-12 rounded-full" />
+```
+
+Style with Tailwind classes for sizing and shape.

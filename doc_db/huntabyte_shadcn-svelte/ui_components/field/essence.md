@@ -1,1 +1,1 @@
-Composable form field components for building accessible forms with flexible layouts and validation support.
+Composable form field components with labels, descriptions, errors, and validation; supports vertical/horizontal/responsive layouts; works with inputs, textareas, selects, sliders, checkboxes, radios, and switches.

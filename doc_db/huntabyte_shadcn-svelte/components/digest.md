@@ -1,11 +1,25 @@
-Complete list of available components in shadcn-svelte library organized alphabetically. Includes 70+ UI components covering:
+## Available Components
 
-- **Form inputs**: Input, Textarea, Checkbox, Radio Group, Select, Native Select, Combobox, Toggle, Switch, Input OTP, Input Group
-- **Display**: Badge, Avatar, Alert, Card, Skeleton, Progress, Spinner, Tooltip, Kbd, Typography
-- **Navigation**: Button, Button Group, Breadcrumb, Pagination, Menubar, Navigation Menu, Tabs
-- **Dialogs & Overlays**: Dialog, Alert Dialog, Drawer, Sheet, Popover, Hover Card, Context Menu, Dropdown Menu
-- **Data**: Data Table, Calendar, Date Picker, Range Calendar, Carousel, Chart
-- **Layout**: Accordion, Collapsible, Resizable, Scroll Area, Separator, Aspect Ratio
-- **Advanced**: Command, Combobox, Field, Formsnap, Item, Empty, Sonner (toast notifications)
+The library provides 70+ pre-built UI components covering common interface patterns:
 
-Each component links to its dedicated documentation page.
+**Form & Input Components**: Input, Textarea, Checkbox, Radio Group, Select, Native Select, Combobox, Toggle, Toggle Group, Switch, Label, Input Group, Input OTP, Field
+
+**Display Components**: Badge, Avatar, Alert, Card, Skeleton, Progress, Spinner, Kbd, Typography, Separator, Scroll Area
+
+**Navigation Components**: Button, Button Group, Breadcrumb, Pagination, Menubar, Navigation Menu, Tabs
+
+**Dialog & Overlay Components**: Dialog, Alert Dialog, Drawer, Sheet, Popover, Hover Card, Tooltip, Context Menu, Dropdown Menu
+
+**Data Components**: Data Table, Calendar, Range Calendar, Date Picker, Carousel, Chart
+
+**Layout Components**: Aspect Ratio, Resizable, Sidebar, Item
+
+**Interaction Components**: Accordion, Collapsible, Command
+
+**Specialized Components**: Empty, Sonner (toast notifications)
+
+All components are available for installation via the CLI. Install individual components with:
+```
+npx shadcn-svelte@latest add <component> -y -o
+```
+Where `-y` skips the confirmation prompt and `-o` overwrites existing files if needed.

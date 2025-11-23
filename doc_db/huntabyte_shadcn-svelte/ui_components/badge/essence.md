@@ -1,1 +1,1 @@
-A reusable badge component with multiple style variants and support for custom styling and link badges.
+Badge component with default/secondary/destructive/outline variants; supports custom styling and link styling via badgeVariants helper.

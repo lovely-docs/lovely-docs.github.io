@@ -1,1 +1,1 @@
-A date range picker calendar component built on Bits UI with internationalization support.
+Date range picker component built on Bits UI, uses @internationalized/date for date handling, bind value object with start/end properties.

@@ -1,1 +1,1 @@
-Native HTML select component with design system styling, option grouping, and accessibility features.
+Native HTML select wrapper with styling, grouping (OptGroup), disabled/invalid states, and full accessibility support.

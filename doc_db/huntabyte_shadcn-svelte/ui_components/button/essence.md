@@ -1,1 +1,1 @@
-Reusable button component supporting multiple variants, sizes, icons, and link rendering.
+Button component with variants (outline, secondary, destructive, ghost, link), href support for links, icon/size props, and disabled state.

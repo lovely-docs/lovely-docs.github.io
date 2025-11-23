@@ -1,1 +1,1 @@
-A right-click context menu component with support for items, submenus, checkboxes, radio groups, and keyboard shortcuts.
+Right-click context menu with items, submenus, checkboxes, radio buttons, separators, and keyboard shortcuts; install with `npx shadcn-svelte@latest add context-menu -y -o`.

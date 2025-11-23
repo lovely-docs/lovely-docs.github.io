@@ -2,22 +2,22 @@
 ```bash
 npx shadcn-svelte@latest init
 ```
-Initializes project with dependencies, `cn` util, and CSS variables. Configures base color and import aliases.
+Initializes project with dependencies, `cn` utility, CSS variables. Prompts for base color, CSS file path, and import aliases. Options: `--base-color`, `--css`, `--*-alias`, `--no-deps`, `-o/--overwrite`, `--proxy`
 
 ## add
 ```bash
-npx shadcn-svelte@latest add button
+npx shadcn-svelte@latest add <component> -y -o
 ```
-Adds components interactively or by name.
+Adds components to project. `-y` skips confirmation, `-o` overwrites files. Options: `-a/--all`, `--no-deps`, `--proxy`
 
 ## registry build
 ```bash
-npx shadcn-svelte@latest registry build ./registry.json
+npx shadcn-svelte@latest registry build [registry.json]
 ```
-Generates registry JSON files to `static/r`.
+Generates registry JSON files to `static/r` directory. Options: `-o/--output`
 
 ## Proxy
 ```bash
 HTTP_PROXY="<proxy-url>" npx shadcn-svelte@latest init
 ```
-Respects HTTP_PROXY environment variable for requests.
+Use HTTP proxy for registry requests via environment variables.

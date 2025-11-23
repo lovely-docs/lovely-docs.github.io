@@ -1,8 +1,20 @@
-## Tooltip
+## Tooltip Component
 
-Displays information on hover or focus.
+Displays information on hover or keyboard focus.
+
+### Installation
+
+```bash
+npx shadcn-svelte@latest add tooltip -y -o
+```
+
+### Usage
 
 ```svelte
+<script lang="ts">
+  import * as Tooltip from "$lib/components/ui/tooltip/index.js";
+</script>
+
 <Tooltip.Provider>
   <Tooltip.Root>
     <Tooltip.Trigger>Hover</Tooltip.Trigger>
@@ -12,5 +24,3 @@ Displays information on hover or focus.
   </Tooltip.Root>
 </Tooltip.Provider>
 ```
-
-Install: `pnpm dlx shadcn-svelte@latest add tooltip`

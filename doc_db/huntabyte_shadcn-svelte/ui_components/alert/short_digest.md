@@ -1,24 +1,44 @@
 ## Alert Component
 
-Callout component for user attention messages.
+Displays callouts for user attention.
 
 ### Installation
+
 ```bash
-pnpm dlx shadcn-svelte@latest add alert
+npx shadcn-svelte@latest add alert -y -o
 ```
 
 ### Usage
+
 ```svelte
 <script lang="ts">
   import * as Alert from "$lib/components/ui/alert/index.js";
-  import AlertCircleIcon from "@lucide/svelte/icons/alert-circle";
 </script>
 
+<Alert.Root>
+  <Alert.Title>Heads up!</Alert.Title>
+  <Alert.Description>You can add components to your app using the cli.</Alert.Description>
+</Alert.Root>
+```
+
+### Variants
+
+**Default:**
+```svelte
+<Alert.Root>
+  <CheckCircle2Icon />
+  <Alert.Title>Success! Your changes have been saved</Alert.Title>
+  <Alert.Description>This is an alert with icon, title and description.</Alert.Description>
+</Alert.Root>
+```
+
+**Destructive:**
+```svelte
 <Alert.Root variant="destructive">
-  <AlertCircleIcon />
+  <CircleAlertIcon class="size-4" />
   <Alert.Title>Error</Alert.Title>
   <Alert.Description>Your session has expired. Please login again.</Alert.Description>
 </Alert.Root>
 ```
 
-Supports `Alert.Root`, `Alert.Title`, `Alert.Description` with optional icons and `variant="destructive"` for error styling.
+Supports icons, flexible title/description combinations, and rich content in descriptions.

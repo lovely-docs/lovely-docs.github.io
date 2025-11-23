@@ -1,1 +1,1 @@
-Documentation index for implementing dark mode in shadcn-svelte across different frameworks.
+Dark mode implementation guide for Svelte and Astro frameworks

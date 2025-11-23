@@ -1,10 +1,10 @@
-Configuration file for shadcn-svelte CLI (optional, only needed for CLI-based component installation).
+## Configuration File for CLI
+Create with `npx shadcn-svelte@latest init`. Optional, only needed for CLI component installation.
 
-Initialize: `npx shadcn-svelte@latest init`
-
-Main settings:
-- `tailwind.css`: Path to Tailwind CSS import
-- `tailwind.baseColor`: Base color palette (gray/neutral/slate/stone/zinc) - immutable after init
-- `aliases`: Import path aliases for lib, utils, components, ui, hooks
-- `typescript`: Enable/disable or specify custom config path
-- `registry`: Component registry URL
+**Key sections:**
+- **$schema**: `https://shadcn-svelte.com/schema.json`
+- **tailwind.css**: Path to Tailwind CSS import file
+- **tailwind.baseColor**: Default palette (gray/neutral/slate/stone/zinc) - immutable after init
+- **aliases**: Path aliases for lib, utils, components, ui, hooks (must match svelte.config.js)
+- **typescript**: Enable/disable or specify custom config path
+- **registry**: Component registry URL (default: `https://shadcn-svelte.com/registry`)

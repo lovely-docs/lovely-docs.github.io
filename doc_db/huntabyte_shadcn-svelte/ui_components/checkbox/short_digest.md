@@ -1,23 +1,47 @@
-## Checkbox Component
+## Checkbox
 
 Toggle control for checked/unchecked states.
 
-**Installation:** `npm install shadcn-svelte@latest add checkbox`
+### Installation
 
-**Basic:** `<Checkbox />` with optional `checked` and `disabled` props
+```bash
+npx shadcn-svelte@latest add checkbox -y -o
+```
 
-**With Label:**
+### Basic Usage
+
 ```svelte
+<script lang="ts">
+  import { Checkbox } from "$lib/components/ui/checkbox/index.js";
+  import { Label } from "$lib/components/ui/label/index.js";
+</script>
+
 <Checkbox id="terms" />
 <Label for="terms">Accept terms</Label>
 ```
 
-**Form Integration:**
+### States & Styling
+
 ```svelte
-<Checkbox
-  checked={$formData.items.includes(item.id)}
-  onCheckedChange={(v) => v ? addItem(id) : removeItem(id)}
-/>
+<Checkbox checked />
+<Checkbox disabled />
+<Checkbox class="data-[state=checked]:bg-blue-600" />
 ```
 
-**Styling:** Use `class` prop with `data-[state=checked]` selectors
+### Form Integration
+
+```svelte
+<Form.Fieldset {form} name="items">
+  {#each items as item}
+    <Checkbox
+      checked={$formData.items.includes(item.id)}
+      onCheckedChange={(v) => {
+        if (v) $formData.items = [...$formData.items, item.id];
+        else $formData.items = $formData.items.filter((i) => i !== item.id);
+      }}
+    />
+  {/each}
+</Form.Fieldset>
+```
+
+Use `data-[state=checked]` for styling checked state and `onCheckedChange` for state updates.

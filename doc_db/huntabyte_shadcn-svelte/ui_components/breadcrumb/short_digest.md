@@ -1,14 +1,56 @@
 ## Breadcrumb Component
 
-Hierarchical navigation path display with links and separators.
+Displays hierarchical navigation path using links and separators.
 
-**Installation:** `pnpm dlx shadcn-svelte@latest add breadcrumb`
+### Installation
 
-**Basic structure:** `<Breadcrumb.Root>` → `<Breadcrumb.List>` → `<Breadcrumb.Item>` with `<Breadcrumb.Link>` or `<Breadcrumb.Page>`, separated by `<Breadcrumb.Separator />`
+```bash
+npx shadcn-svelte@latest add breadcrumb -y -o
+```
 
-**Features:**
-- Custom separators via slot
-- Dropdown menus in items
-- `<Breadcrumb.Ellipsis />` for collapsed state
-- `asChild` prop for custom link components
-- Responsive example with desktop dropdown / mobile drawer
+### Basic Usage
+
+```svelte
+<Breadcrumb.Root>
+  <Breadcrumb.List>
+    <Breadcrumb.Item>
+      <Breadcrumb.Link href="/">Home</Breadcrumb.Link>
+    </Breadcrumb.Item>
+    <Breadcrumb.Separator />
+    <Breadcrumb.Item>
+      <Breadcrumb.Page>Current</Breadcrumb.Page>
+    </Breadcrumb.Item>
+  </Breadcrumb.List>
+</Breadcrumb.Root>
+```
+
+### Key Components
+
+- `<Breadcrumb.Link>` - Clickable link with `href`
+- `<Breadcrumb.Page>` - Current page (non-clickable)
+- `<Breadcrumb.Separator>` - Divider (accepts custom slot content)
+- `<Breadcrumb.Ellipsis>` - Collapsed state indicator
+
+### Examples
+
+**Custom separator:**
+```svelte
+<Breadcrumb.Separator>
+  <SlashIcon />
+</Breadcrumb.Separator>
+```
+
+**Dropdown integration:**
+```svelte
+<Breadcrumb.Item>
+  <DropdownMenu.Root>
+    <DropdownMenu.Trigger>Components <ChevronDownIcon /></DropdownMenu.Trigger>
+    <DropdownMenu.Content align="start">
+      <DropdownMenu.Item>Documentation</DropdownMenu.Item>
+    </DropdownMenu.Content>
+  </DropdownMenu.Root>
+</Breadcrumb.Item>
+```
+
+**Responsive (desktop dropdown, mobile drawer):**
+Use `MediaQuery("(min-width: 768px)")` to conditionally render `<DropdownMenu />` or `<Drawer />` with `<Breadcrumb.Ellipsis />` for collapsed items.

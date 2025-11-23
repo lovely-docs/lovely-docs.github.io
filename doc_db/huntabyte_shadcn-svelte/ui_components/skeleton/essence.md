@@ -1,1 +1,1 @@
-A placeholder component for displaying loading states with customizable dimensions via Tailwind CSS classes.
+Placeholder component for loading states; import from $lib/components/ui/skeleton and style with Tailwind classes.

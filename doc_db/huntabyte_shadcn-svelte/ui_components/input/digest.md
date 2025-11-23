@@ -3,23 +3,32 @@
 A form input field component for text, email, file, and other input types.
 
 ### Installation
+
 ```bash
-npm install shadcn-svelte@latest add input
+npx shadcn-svelte@latest add input -y -o
 ```
 
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
+
 ### Basic Usage
+
 ```svelte
 <script lang="ts">
   import { Input } from "$lib/components/ui/input/index.js";
 </script>
-<Input type="email" placeholder="email" />
+<Input type="email" placeholder="email" class="max-w-xs" />
 ```
 
 ### Examples
 
+**Default input:**
+```svelte
+<Input type="email" placeholder="email" class="max-w-xs" />
+```
+
 **Disabled state:**
 ```svelte
-<Input disabled type="email" placeholder="email" />
+<Input disabled type="email" placeholder="email" class="max-w-sm" />
 ```
 
 **With label:**
@@ -27,10 +36,11 @@ npm install shadcn-svelte@latest add input
 <script lang="ts">
   import { Input } from "$lib/components/ui/input/index.js";
   import { Label } from "$lib/components/ui/label/index.js";
+  const id = $props.id();
 </script>
 <div class="flex w-full max-w-sm flex-col gap-1.5">
-  <Label for="email">Email</Label>
-  <Input type="email" id="email" placeholder="email" />
+  <Label for="email-{id}">Email</Label>
+  <Input type="email" id="email-{id}" placeholder="email" />
 </div>
 ```
 
@@ -43,8 +53,12 @@ npm install shadcn-svelte@latest add input
 </div>
 ```
 
-**With button:**
+**With button (subscribe form):**
 ```svelte
+<script lang="ts">
+  import { Button } from "$lib/components/ui/button/index.js";
+  import { Input } from "$lib/components/ui/input/index.js";
+</script>
 <form class="flex w-full max-w-sm items-center space-x-2">
   <Input type="email" placeholder="email" />
   <Button type="submit">Subscribe</Button>
@@ -53,7 +67,7 @@ npm install shadcn-svelte@latest add input
 
 **Invalid state:**
 ```svelte
-<Input aria-invalid type="email" placeholder="email" value="shadcn@example" />
+<Input aria-invalid type="email" placeholder="email" value="shadcn@example" class="max-w-sm" />
 ```
 
 **File input:**
@@ -75,12 +89,20 @@ npm install shadcn-svelte@latest add input
 <script lang="ts">
   import { defaults, superForm } from "sveltekit-superforms";
   import { zod4 } from "sveltekit-superforms/adapters";
+  import { toast } from "svelte-sonner";
   import * as Form from "$lib/components/ui/form/index.js";
   import { Input } from "$lib/components/ui/input/index.js";
   
   const form = superForm(defaults(zod4(formSchema)), {
     validators: zod4(formSchema),
-    SPA: true
+    SPA: true,
+    onUpdate: ({ form: f }) => {
+      if (f.valid) {
+        toast.success(`You submitted ${JSON.stringify(f.data, null, 2)}`);
+      } else {
+        toast.error("Please fix the errors in the form.");
+      }
+    }
   });
   const { form: formData, enhance } = form;
 </script>
@@ -98,3 +120,5 @@ npm install shadcn-svelte@latest add input
   <Form.Button>Submit</Form.Button>
 </form>
 ```
+
+The component supports standard HTML input attributes (type, placeholder, disabled, aria-invalid) and integrates with other shadcn-svelte components like Label, Button, and Form for building complete form interfaces.

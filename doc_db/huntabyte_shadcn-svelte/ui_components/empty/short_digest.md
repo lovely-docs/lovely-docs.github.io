@@ -1,28 +1,32 @@
 ## Empty Component
 
-Display empty states with icon, title, description, and content sections.
+Display empty states with title, description, icon/avatar, and action content.
 
 ### Installation
+
 ```bash
-pnpm dlx shadcn-svelte@latest add empty
+npx shadcn-svelte@latest add empty -y -o
 ```
 
 ### Basic Usage
+
 ```svelte
 <Empty.Root>
   <Empty.Header>
     <Empty.Media variant="icon"><FolderCodeIcon /></Empty.Media>
-    <Empty.Title>No data</Empty.Title>
-    <Empty.Description>No data found</Empty.Description>
+    <Empty.Title>No Projects Yet</Empty.Title>
+    <Empty.Description>Get started by creating your first project.</Empty.Description>
   </Empty.Header>
   <Empty.Content>
-    <Button>Add data</Button>
+    <Button>Create Project</Button>
   </Empty.Content>
 </Empty.Root>
 ```
 
-### Variants
-- **Outline**: Add `border border-dashed` class
-- **Background**: Use gradient utilities like `bg-gradient-to-b`
-- **Avatar**: Use `Empty.Media variant="default"` for custom content
-- **With InputGroup**: Combine with InputGroup for search functionality
+### Examples
+
+- **Outline**: Add `class="border border-dashed"` to `Empty.Root`
+- **Background**: Add `class="bg-gradient-to-b from-muted/50 to-background from-30%"` to `Empty.Root`
+- **Avatar**: Use `Empty.Media variant="default"` with Avatar component
+- **Avatar Group**: Use `Empty.Media` with multiple overlapping avatars
+- **With InputGroup**: Add InputGroup component to `Empty.Content` for search functionality

@@ -1,1 +1,1 @@
-Step-by-step guide to upgrade shadcn-svelte projects from Tailwind v3 to v4 and Svelte 5, including Vite migration, CSS variable updates, and dependency upgrades.
+Upgrade shadcn-svelte from Tailwind v3→v4 and Svelte 4→5: use Vite instead of PostCSS, replace `tailwind.config.ts` with CSS-based `@theme inline` in `app.css`, wrap colors in `hsl()`, replace `tailwindcss-animate` with `tw-animate-css`, use `size-*` utility, update dependencies and type helpers.

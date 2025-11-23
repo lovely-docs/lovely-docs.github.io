@@ -1,1 +1,1 @@
-Implement dark mode in Svelte using mode-watcher with ModeWatcher component and toggle controls.
+Install mode-watcher, add ModeWatcher to root layout, create toggles with toggleMode/setMode/resetMode functions.

@@ -1,15 +1,13 @@
-## Form Components with Formsnap & Superforms
+## Building Forms with Formsnap, Superforms & Zod
 
-Building accessible, type-safe forms using shadcn-svelte's Form components, which wrap Formsnap and Superforms.
+The Form components in shadcn-svelte wrap Formsnap and Superforms to provide composable form building with:
+- Semantic HTML structure with proper ARIA attributes
+- Client and server-side validation using Zod
+- Integration with shadcn-svelte components (Select, RadioGroup, Switch, Checkbox, etc.)
+- Type-safe form handling
 
-### Features
-- Composable form field components with state scoping
-- Zod validation (client & server-side)
-- Automatic ARIA attributes based on field state
-- Integration with Select, RadioGroup, Switch, Checkbox, and other form components
-
-### Anatomy
-```svelte
+### Component Anatomy
+```
 <form>
   <Form.Field>
     <Form.Control>
@@ -29,14 +27,20 @@ import { z } from "zod";
 export const formSchema = z.object({
   username: z.string().min(2).max(50),
 });
+export type FormSchema = typeof formSchema;
 ```
 
 2. **Setup load function** (src/routes/settings/+page.server.ts):
 ```ts
+import type { PageServerLoad } from "./$types.js";
 import { superValidate } from "sveltekit-superforms";
+import { formSchema } from "./schema";
 import { zod4 } from "sveltekit-superforms/adapters";
-export const load = async () => {
-  return { form: await superValidate(zod4(formSchema)) };
+
+export const load: PageServerLoad = async () => {
+  return {
+    form: await superValidate(zod4(formSchema)),
+  };
 };
 ```
 
@@ -45,11 +49,14 @@ export const load = async () => {
 <script lang="ts">
   import * as Form from "$lib/components/ui/form/index.js";
   import { Input } from "$lib/components/ui/input/index.js";
-  import { superForm } from "sveltekit-superforms";
+  import { formSchema, type FormSchema } from "./schema";
+  import { type SuperValidated, type Infer, superForm } from "sveltekit-superforms";
   import { zod4Client } from "sveltekit-superforms/adapters";
-  
-  let { data } = $props();
-  const form = superForm(data.form, { validators: zod4Client(formSchema) });
+
+  let { data }: { data: { form: SuperValidated<Infer<FormSchema>> } } = $props();
+  const form = superForm(data.form, {
+    validators: zod4Client(formSchema),
+  });
   const { form: formData, enhance } = form;
 </script>
 
@@ -68,23 +75,92 @@ export const load = async () => {
 </form>
 ```
 
-4. **Create server action** for validation:
+4. **Use component** (src/routes/settings/+page.svelte):
+```svelte
+<script lang="ts">
+  import type { PageData } from "./$types.js";
+  import SettingsForm from "./settings-form.svelte";
+  let { data }: { data: PageData } = $props();
+</script>
+
+<SettingsForm {data} />
+```
+
+5. **Create server action** (src/routes/settings/+page.server.ts):
 ```ts
-export const actions = {
+import type { PageServerLoad, Actions } from "./$types.js";
+import { fail } from "@sveltejs/kit";
+import { superValidate } from "sveltekit-superforms";
+import { zod4 } from "sveltekit-superforms/adapters";
+import { formSchema } from "./schema";
+
+export const load: PageServerLoad = async () => {
+  return {
+    form: await superValidate(zod4(formSchema)),
+  };
+};
+
+export const actions: Actions = {
   default: async (event) => {
     const form = await superValidate(event, zod4(formSchema));
-    if (!form.valid) return fail(400, { form });
+    if (!form.valid) {
+      return fail(400, { form });
+    }
     return { form };
   },
 };
 ```
 
-### Installation
-```bash
-pnpm dlx shadcn-svelte@latest add form
+### SPA Example with Client-Side Validation
+```svelte
+<script lang="ts" module>
+  import { z } from "zod";
+  const formSchema = z.object({
+    username: z.string().min(2).max(50)
+  });
+</script>
+
+<script lang="ts">
+  import { defaults, superForm } from "sveltekit-superforms";
+  import { zod4 } from "sveltekit-superforms/adapters";
+  import { toast } from "svelte-sonner";
+  import * as Form from "$lib/components/ui/form/index.js";
+  import { Input } from "$lib/components/ui/input/index.js";
+
+  const form = superForm(defaults(zod4(formSchema)), {
+    validators: zod4(formSchema),
+    SPA: true,
+    onUpdate: ({ form: f }) => {
+      if (f.valid) {
+        toast.success(`You submitted ${JSON.stringify(f.data, null, 2)}`);
+      } else {
+        toast.error("Please fix the errors in the form.");
+      }
+    }
+  });
+  const { form: formData, enhance } = form;
+</script>
+
+<form method="POST" class="w-2/3 space-y-6" use:enhance>
+  <Form.Field {form} name="username">
+    <Form.Control>
+      {#snippet children({ props })}
+        <Form.Label>Username</Form.Label>
+        <Input {...props} bind:value={$formData.username} />
+      {/snippet}
+    </Form.Control>
+    <Form.Description>This is your public display name.</Form.Description>
+    <Form.FieldErrors />
+  </Form.Field>
+  <Form.Button>Submit</Form.Button>
+</form>
 ```
 
-### Notes
-- Form labels automatically associate with inputs via `for` attribute
-- Accessibility attributes applied via spreading `props` from Form.Control
-- See Checkbox, Date Picker, Input, Radio Group, Select, Switch, Textarea component docs for additional form examples
+### Installation
+```bash
+npx shadcn-svelte@latest add form -y -o
+```
+(-y: skip confirmation, -o: overwrite existing files)
+
+### Integration Examples
+Form components work with: Checkbox, Date Picker, Input, Radio Group, Select, Switch, Textarea. See component-specific documentation for examples.

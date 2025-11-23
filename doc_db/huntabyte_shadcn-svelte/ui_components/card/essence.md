@@ -1,1 +1,1 @@
-Composable card component with header, title, description, action, content, and footer sections.
+Composable card component with Root, Header, Title, Description, Action, Content, Footer sub-components; supports Tailwind styling.

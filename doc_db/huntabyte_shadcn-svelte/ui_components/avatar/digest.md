@@ -1,12 +1,14 @@
 ## Avatar Component
 
-An image element with fallback text for displaying user avatars.
+Image element with fallback for user representation.
 
 ### Installation
 
 ```bash
-npm install shadcn-svelte@latest add avatar
+npx shadcn-svelte@latest add avatar -y -o
 ```
+
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Basic Usage
 
@@ -21,13 +23,32 @@ npm install shadcn-svelte@latest add avatar
 </Avatar.Root>
 ```
 
-### Styling Variants
+### Variants
 
-- **Rounded corners**: Add `class="rounded-lg"` to `Avatar.Root` for square avatars with rounded corners
-- **Grouped avatars**: Use multiple `Avatar.Root` components in a container with negative margin and styling utilities for overlapping avatar groups with grayscale and ring effects
+**Rounded corners:**
+```svelte
+<Avatar.Root class="rounded-lg">
+  <Avatar.Image src="https://github.com/evilrabbit.png" alt="@evilrabbit" />
+  <Avatar.Fallback>ER</Avatar.Fallback>
+</Avatar.Root>
+```
 
-### Component Structure
+**Avatar group with styling:**
+```svelte
+<div class="*:data-[slot=avatar]:ring-background flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:grayscale">
+  <Avatar.Root>
+    <Avatar.Image src="https://github.com/shadcn.png" alt="@shadcn" />
+    <Avatar.Fallback>CN</Avatar.Fallback>
+  </Avatar.Root>
+  <Avatar.Root>
+    <Avatar.Image src="https://github.com/leerob.png" alt="@leerob" />
+    <Avatar.Fallback>LR</Avatar.Fallback>
+  </Avatar.Root>
+</div>
+```
 
-- `Avatar.Root` - Container element
-- `Avatar.Image` - Image element with src and alt attributes
-- `Avatar.Fallback` - Text displayed when image fails to load
+### Structure
+
+- `Avatar.Root`: Container component
+- `Avatar.Image`: Image element with src and alt attributes
+- `Avatar.Fallback`: Text displayed when image fails to load

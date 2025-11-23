@@ -1,111 +1,150 @@
 ## UI Components Library
 
-Complete collection of composable, accessible UI components for Svelte applications built on Bits UI and other primitives.
+A comprehensive collection of 60+ composable, accessible UI components built on Bits UI, Embla Carousel, Vaul, and other primitives. All components support Tailwind CSS styling and integrate with SvelteKit forms.
+
+### Installation
+```bash
+npx shadcn-svelte@latest add <component> -y -o
+```
+Flags: `-y` skips confirmation, `-o` overwrites existing files.
 
 ### Core Components
 
 **Layout & Structure**
-- `Card` - Composable sections (Header, Title, Description, Content, Footer)
-- `Container` - Flex container with media, title, description, actions
-- `Empty` - Empty state display with media, title, description
-- `Sidebar` - Collapsible sidebar with menu, groups, and provider state management
-- `Resizable` - Draggable panel layouts with keyboard support
+- **Sidebar**: Collapsible sidebar with icon mode, multiple variants (sidebar/floating/inset), menu system, header/footer, theming via CSS variables
+- **Card**: Composable sections (Root, Header, Title, Description, Action, Content, Footer)
+- **Resizable**: Horizontal/vertical pane groups with nested layout support
+- **Scroll Area**: Custom cross-browser scrolling with vertical/horizontal/bidirectional orientation
+- **Separator**: Horizontal or vertical content dividers
+- **Empty**: Empty state display with icon/avatar/image media variants
 
 **Navigation**
-- `Breadcrumb` - Hierarchical navigation with custom separators and dropdowns
-- `Navigation Menu` - Website navigation with triggers and collapsible content
-- `Pagination` - Page navigation with customizable items per page
-- `Tabs` - Tabbed interface with triggers and content panels
-- `Menubar` - Desktop application menu with checkboxes, radio groups, submenus
+- **Breadcrumb**: Path navigation with custom separators, dropdown/drawer integration, responsive collapsed states
+- **Navigation Menu**: Grid-based navigation with descriptions, icons, and snippet-based children
+- **Pagination**: Page navigation with prev/next buttons and ellipsis
+- **Tabs**: Tabbed interface with single active panel
+- **Menubar**: Desktop application-style menu with File/Edit/View structure
 
 **Forms & Input**
-- `Input` - Text input with validation support
-- `Textarea` - Multi-line text input
-- `Checkbox` - Toggle control with label support
-- `Radio Group` - Mutually exclusive options
-- `Switch` - Boolean toggle control
-- `Select` - Dropdown with single/multiple selection and grouping
-- `Native Select` - Styled HTML select element
-- `Combobox` - Searchable dropdown combining Popover and Command
-- `Input OTP` - One-time password input with copy-paste
-- `Input Group` - Prefix/suffix containers for inputs with icons, buttons, text
-- `Slider` - Range input with single/multiple values
-- `Field` - Composable form field with label, description, error states
-- `Form` - Type-safe forms with Formsnap, Superforms, and Zod validation
+- **Input**: Text/email/file inputs with labels and validation states
+- **Textarea**: Multi-line text input with form integration
+- **Label**: Accessible form labels with `for` attribute binding
+- **Checkbox**: Toggle control with checked/disabled states, form integration
+- **Radio Group**: Mutually exclusive selection with form binding
+- **Switch**: Binary toggle control
+- **Select**: Dropdown with single selection, grouping, dynamic options
+- **Native Select**: Styled HTML select wrapper with OptGroup support
+- **Input OTP**: One-time password input with configurable length and separators
+- **Input Group**: Attach icons, text, buttons to inputs with flexible alignment (inline-end, block-start, block-end)
+- **Slider**: Single/multiple thumb range input with vertical/horizontal orientation
+- **Toggle**: Two-state button with variants and sizes
+- **Toggle Group**: Multiple toggles with single/multiple selection modes
+- **Field**: Composable form field wrapper with labels, descriptions, errors, validation states; supports vertical/horizontal/responsive layouts
 
 **Dialogs & Overlays**
-- `Dialog` - Modal window overlay
-- `Alert Dialog` - Modal for important messages requiring confirmation
-- `Drawer` - Slide-in panel from screen edges
-- `Sheet` - Dialog-based content from edges with positioning
-- `Popover` - Portal content triggered by button
-- `Hover Card` - Preview content on hover
-- `Command` - Command menu/palette with dialog variant
-- `Context Menu` - Right-click menu with items, submenus, checkboxes, radio groups
+- **Dialog**: Modal overlay with header, title, description, footer
+- **Alert Dialog**: Modal for important interruptions requiring response
+- **Drawer**: Slide-out panel from screen edges (top/right/bottom/left)
+- **Popover**: Rich content portal triggered by button
+- **Hover Card**: Link preview on hover with avatar/content
+- **Sheet**: Dialog-based complementary content from edges
+- **Tooltip**: Popup on hover/focus with Provider/Root/Trigger/Content structure
+
+**Dropdowns & Menus**
+- **Dropdown Menu**: Menu with items, groups, separators, shortcuts, submenus, checkboxes, radio groups
+- **Context Menu**: Right-click menu with nested submenus and state bindings
+- **Combobox**: Autocomplete input composed from Popover + Command with status indicators
 
 **Data Display**
-- `Table` - Responsive table with headers, rows, cells, footer
-- `Data Table` - TanStack Table v8 with pagination, sorting, filtering, column visibility, row selection
-- `Carousel` - Embla Carousel with sizing, spacing, orientation, API access, plugins
-- `Calendar` - Date selection with single dates, multiple months, dropdowns
-- `Range Calendar` - Date range picker
-- `Date Picker` - Popover-based date picker with presets
-- `Chart` - LayerChart-based charts with composition design and theming
-- `Badge` - Styled badges with variants (default, secondary, destructive, outline)
-- `Avatar` - Image with text fallback
-- `Progress` - Task completion progress bar
-- `Skeleton` - Loading state placeholder
-
-**Buttons & Controls**
-- `Button` - Reusable button with variants, sizes, link rendering
-- `Button Group` - Grouped buttons with separators and orientation
-- `Toggle` - Two-state button
-- `Toggle Group` - Multiple two-state buttons with single/multiple selection
-- `Kbd` - Keyboard input display
+- **Table**: Responsive table with Header/Body/Footer/Row/Head/Cell components
+- **Data Table**: TanStack Table v8 integration with sorting, filtering, pagination, column visibility, row selection
+- **Carousel**: Embla Carousel with sizing, spacing, vertical/horizontal orientation, plugins, reactive API
+- **Chart**: LayerChart-based charts with customizable config, CSS variable theming, flexible tooltips
+- **Badge**: Multiple variants (default/secondary/destructive/outline) with custom styling
+- **Avatar**: Image with fallback text, supports groups with overlapping display
+- **Item**: Flex container for content with title/description/media/actions; supports variants (default/outline/muted) and sizes
 
 **Feedback & Status**
-- `Alert` - Callout messages with icons, titles, descriptions, variants
-- `Sonner` - Toast notifications with success/error types, descriptions, actions
-- `Spinner` - Animated loading indicator
+- **Alert**: Callout with default/destructive variants, icon support
+- **Progress**: Visual progress bar with reactive value binding
+- **Spinner**: Loading indicator with customizable size/color
+- **Sonner**: Toast notifications with success/error types, descriptions, action buttons, dark mode support
 
 **Utilities**
-- `Aspect Ratio` - Content constraint to specific aspect ratio
-- `Label` - Accessible form label
-- `Separator` - Visual content divider (horizontal/vertical)
-- `Scroll Area` - Custom-styled scrollable container
-- `Tooltip` - Information popup on hover/focus
-- `Collapsible` - Expand/collapse panel
-- `Accordion` - Vertically stacked collapsible sections
-- `Typography` - Tailwind utility classes for text styling
+- **Accordion**: Vertically stacked interactive headings with single/multiple type, WAI-ARIA accessible
+- **Aspect Ratio**: Maintains content at specified ratio (e.g., 16/9)
+- **Button**: Multiple variants (outline/secondary/destructive/ghost/link), href support, icon/size props
+- **Button Group**: Groups related buttons with consistent styling, separators, nesting, integration with Input/DropdownMenu/Select/Popover
+- **Collapsible**: Expand/collapse panel with Trigger and Content
+- **Calendar**: Date selection with single/multi-month display, dropdown captions, timezone support
+- **Date Picker**: Popover + Calendar composition with single/range selection, presets, form integration
+- **Range Calendar**: Date range picker with start/end properties
+- **Kbd**: Keyboard key display, groups multiple keys together
+- **Skeleton**: Placeholder for loading states
 
-### Installation & Usage
+### Form Integration
 
-Install components via CLI:
-```bash
-npm install shadcn-svelte@latest add [component-name]
-```
+All form components integrate with **sveltekit-superforms** and **Zod** for type-safe validation:
 
-Components use composition pattern with sub-components:
 ```svelte
-<script lang="ts">
-  import * as Card from "$lib/components/ui/card/index.js";
+<script lang="ts" module>
+  import { z } from "zod/v4";
+  const schema = z.object({ username: z.string().min(2) });
 </script>
 
+<script lang="ts">
+  import { defaults, superForm } from "sveltekit-superforms";
+  import { zod4 } from "sveltekit-superforms/adapters";
+  import * as Form from "$lib/components/ui/form/index.js";
+  import { Input } from "$lib/components/ui/input/index.js";
+
+  const form = superForm(defaults(zod4(schema)), {
+    validators: zod4(schema),
+    SPA: true
+  });
+  const { form: formData, enhance } = form;
+</script>
+
+<form method="POST" use:enhance>
+  <Form.Field {form} name="username">
+    <Form.Control>
+      {#snippet children({ props })}
+        <Form.Label>Username</Form.Label>
+        <Input {...props} bind:value={$formData.username} />
+      {/snippet}
+    </Form.Control>
+    <Form.Description>Public display name</Form.Description>
+    <Form.FieldErrors />
+  </Form.Field>
+  <Form.Button>Submit</Form.Button>
+</form>
+```
+
+### Composition Pattern
+
+Components use composable sub-components:
+```svelte
 <Card.Root>
   <Card.Header>
     <Card.Title>Title</Card.Title>
+    <Card.Description>Description</Card.Description>
   </Card.Header>
   <Card.Content>Content</Card.Content>
+  <Card.Footer>Footer</Card.Footer>
 </Card.Root>
 ```
 
-### Key Features
+### Accessibility
 
-- **Accessibility**: WAI-ARIA patterns, keyboard navigation, screen reader support
-- **Composition**: Build complex UIs by combining sub-components
-- **Form Integration**: Works with sveltekit-superforms and Zod validation
-- **Theming**: CSS variables for customization, dark mode support
-- **Responsive**: Mobile-first design with Tailwind CSS utilities
-- **Type-Safe**: Full TypeScript support
-- **Snippets**: Svelte 5 snippet support for flexible rendering
-- **Icons**: Integration with lucide-svelte icons
+- WAI-ARIA compliant with proper roles and attributes
+- Keyboard navigation support
+- Screen reader friendly
+- Form validation with error messages
+- Semantic HTML structure
+
+### Theming
+
+- Tailwind CSS utility classes for styling
+- CSS variables for component-specific theming (e.g., sidebar colors)
+- Dark mode support via class or system preference
+- Customizable via `class` prop on most components

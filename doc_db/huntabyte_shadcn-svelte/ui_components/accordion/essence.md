@@ -1,1 +1,1 @@
-Accordion component for collapsible content sections with WAI-ARIA accessibility.
+Accordion component with Root, Item, Trigger, and Content subcomponents; supports single/multiple type; WAI-ARIA accessible; install with `npx shadcn-svelte@latest add accordion -y -o`

@@ -1,1 +1,1 @@
-Timeline of component additions and major updates to shadcn-svelte from October 2023 through June 2025.
+Changelog documenting component additions (Calendar, Carousel, Drawer, Sonner, Pagination, Command, Combobox, Breadcrumb, Scroll Area, Resizable, Toggle Group), Tailwind v4 support, icon import optimization, Formsnap rewrite with breaking changes, custom registry support, and form component API updates.

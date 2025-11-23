@@ -1,39 +1,54 @@
 ## Button Component
 
-Reusable button that renders as `<button>` or `<a>` with multiple variants.
+Displays a button or component that looks like a button.
 
 ### Installation
+
 ```bash
-pnpm dlx shadcn-svelte@latest add button
+npx shadcn-svelte@latest add button -y -o
 ```
 
 ### Usage
+
 ```svelte
-<Button>Button</Button>
-<Button href="/dashboard">Dashboard</Button>
-<Button variant="outline">Outline</Button>
-<Button variant="secondary">Secondary</Button>
-<Button variant="destructive">Destructive</Button>
-<Button variant="ghost">Ghost</Button>
-<Button variant="link">Link</Button>
+<script lang="ts">
+  import { Button } from "$lib/components/ui/button/index.js";
+</script>
+<Button variant="outline">Button</Button>
 ```
 
-### With Icons
+### Variants
+
+`outline`, `secondary`, `destructive`, `ghost`, `link`
+
+### Link Conversion
+
+```svelte
+<Button href="/dashboard">Dashboard</Button>
+```
+
+Or use `buttonVariants` helper:
+
+```svelte
+<a href="/dashboard" class={buttonVariants({ variant: "outline" })}>
+  Dashboard
+</a>
+```
+
+### Icons and Sizes
+
 ```svelte
 <Button variant="outline" size="sm">
   <GitBranchIcon />
   Login with Email
 </Button>
-```
-
-### Icon-only
-```svelte
 <Button variant="secondary" size="icon" class="size-8">
   <ChevronRightIcon />
 </Button>
 ```
 
-### Loading
+### Disabled State
+
 ```svelte
 <Button disabled>
   <Loader2Icon class="animate-spin" />

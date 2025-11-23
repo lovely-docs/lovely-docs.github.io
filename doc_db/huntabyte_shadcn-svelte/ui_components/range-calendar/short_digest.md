@@ -1,5 +1,16 @@
-Calendar component for date range selection using @internationalized/date. Initialize with `start` and `end` dates, bind to `value` prop, and apply classes for styling.
+## Range Calendar
+
+Calendar component for date range selection using `@internationalized/date`.
 
 ```svelte
+<script lang="ts">
+  import { getLocalTimeZone, today } from "@internationalized/date";
+  import { RangeCalendar } from "$lib/components/ui/range-calendar/index.js";
+  const start = today(getLocalTimeZone());
+  const end = start.add({ days: 7 });
+  let value = $state({ start, end });
+</script>
 <RangeCalendar bind:value class="rounded-md border" />
 ```
+
+Install: `npx shadcn-svelte@latest add range-calendar -y -o`

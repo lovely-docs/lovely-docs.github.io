@@ -1,1 +1,1 @@
-Breadcrumb component for displaying hierarchical navigation paths with support for custom separators, dropdowns, collapsing, and responsive behavior.
+Breadcrumb component with Link, Page, Separator, Ellipsis; supports custom separators, dropdown/drawer integration, and responsive collapsed states.

@@ -1,1 +1,1 @@
-Install `mode-watcher` and add `ModeWatcher` component to root layout. Use `toggleMode()` for simple toggle or `setMode()`/`resetMode()` for dropdown with light/dark/system options.
+Install `mode-watcher` and add `ModeWatcher` component to root layout. Create mode toggles using `toggleMode()`, `setMode()`, or `resetMode()` functions with Button or DropdownMenu components.

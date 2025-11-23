@@ -1,12 +1,14 @@
 ## Tooltip Component
 
-A popup that displays information when an element receives keyboard focus or mouse hover.
+A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.
 
 ### Installation
 
 ```bash
-pnpm dlx shadcn-svelte@latest add tooltip
+npx shadcn-svelte@latest add tooltip -y -o
 ```
+
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Usage
 
@@ -25,6 +27,10 @@ pnpm dlx shadcn-svelte@latest add tooltip
 </Tooltip.Provider>
 ```
 
-The component requires wrapping in `Tooltip.Provider` and consists of `Tooltip.Root` containing a `Tooltip.Trigger` element and `Tooltip.Content` that displays on interaction. The trigger can accept styling via class attributes like `buttonVariants()`.
+The component structure consists of:
+- `Tooltip.Provider`: Wraps the tooltip context
+- `Tooltip.Root`: The root container for the tooltip
+- `Tooltip.Trigger`: The element that triggers the tooltip on hover or focus
+- `Tooltip.Content`: The popup content displayed when triggered
 
-See Bits UI documentation for full API reference.
+The trigger element can accept styling through class bindings, such as button variants.

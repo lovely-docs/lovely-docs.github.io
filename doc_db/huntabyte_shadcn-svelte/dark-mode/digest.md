@@ -1,7 +1,9 @@
-Dark mode implementation guide for shadcn-svelte projects.
+## Dark Mode
 
-Supported frameworks:
-- Svelte: Native dark mode setup for Svelte applications
-- Astro: Dark mode configuration for Astro-based projects
+Adding dark mode support to your site.
 
-Each framework has specific implementation details and best practices documented in their respective sections.
+The documentation covers implementation for two frameworks:
+- **Svelte**: Native dark mode implementation for Svelte projects
+- **Astro**: Dark mode setup for Astro-based sites
+
+Refer to the framework-specific documentation pages for detailed implementation instructions.

@@ -1,14 +1,18 @@
-## Dialog Component
+## Dialog
 
-A modal window overlay that renders content on top of the primary window or another dialog, making underlying content inert.
+A modal window overlaid on the primary window or another dialog, rendering underlying content inert.
 
 ### Installation
 
 ```bash
-pnpm dlx shadcn-svelte@latest add dialog
+npx shadcn-svelte@latest add dialog -y -o
 ```
 
-### Basic Usage
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
+
+### Usage
+
+Import and compose dialog components:
 
 ```svelte
 <script lang="ts">
@@ -29,7 +33,17 @@ pnpm dlx shadcn-svelte@latest add dialog
 </Dialog.Root>
 ```
 
-### Complex Example with Form
+### Components
+
+- `Dialog.Root` - Container for the dialog
+- `Dialog.Trigger` - Button or element that opens the dialog
+- `Dialog.Content` - Main dialog container with styling
+- `Dialog.Header` - Header section wrapper
+- `Dialog.Title` - Dialog title
+- `Dialog.Description` - Dialog description text
+- `Dialog.Footer` - Footer section wrapper
+
+### Example with Form
 
 ```svelte
 <Dialog.Root>
@@ -60,12 +74,4 @@ pnpm dlx shadcn-svelte@latest add dialog
 </Dialog.Root>
 ```
 
-### Components
-
-- `Dialog.Root` - Container
-- `Dialog.Trigger` - Opens the dialog
-- `Dialog.Content` - Dialog content wrapper
-- `Dialog.Header` - Header section
-- `Dialog.Title` - Title text
-- `Dialog.Description` - Description text
-- `Dialog.Footer` - Footer section
+Built on Bits UI dialog component. See Bits UI documentation for full API reference and advanced options.

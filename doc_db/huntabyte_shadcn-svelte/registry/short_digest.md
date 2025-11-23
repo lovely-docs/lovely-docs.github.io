@@ -1,5 +1,5 @@
-Create a custom component registry using the CLI to distribute components to Svelte projects. Registry items must be valid JSON files conforming to the registry-item schema. Use the official template as a starting point:
+Create your own component registry to distribute custom components, hooks, and files to Svelte projects. Registry items must be valid JSON conforming to the registry-item schema. Clone the template project to get started:
 
 ```bash
-pnpm dlx degit huntabyte/shadcn-svelte/registry-template#next-tailwind-4
+npx degit huntabyte/shadcn-svelte/registry-template#next-tailwind-4
 ```

@@ -1,11 +1,11 @@
-## Popover Component
+## Popover
 
 Displays rich content in a portal triggered by a button.
 
 ### Installation
 
 ```bash
-pnpm dlx shadcn-svelte@latest add popover
+npx shadcn-svelte@latest add popover -y -o
 ```
 
 ### Usage

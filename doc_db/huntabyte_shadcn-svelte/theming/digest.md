@@ -1,30 +1,63 @@
-## CSS Variables Convention
+## CSS Variables for Theming
 
-shadcn-svelte uses CSS variables for styling. Colors follow a `background` and `foreground` convention where the `background` suffix is omitted for component backgrounds.
+shadcn-svelte uses CSS variables to customize component appearance. This allows changing colors without updating class names.
 
+### Convention
+
+Colors follow a `background` and `foreground` convention:
+- `background` variable: component background color
+- `foreground` variable: text color
+- The `background` suffix is omitted in utility classes
+
+Example:
 ```css
 --primary: oklch(0.205 0 0);
 --primary-foreground: oklch(0.985 0 0);
 ```
 
+Used as:
 ```svelte
 <div class="bg-primary text-primary-foreground">Hello</div>
 ```
 
-## Available Variables
+### Available CSS Variables
 
-Core variables in `:root` and `.dark`:
-- Layout: `--radius`, `--background`, `--foreground`
-- Components: `--card`, `--popover`, `--primary`, `--secondary`, `--muted`, `--accent`, `--destructive`
-- UI: `--border`, `--input`, `--ring`
-- Charts: `--chart-1` through `--chart-5`
-- Sidebar: `--sidebar`, `--sidebar-foreground`, `--sidebar-primary`, `--sidebar-accent`, `--sidebar-border`, `--sidebar-ring`
+Default light/dark theme variables in `src/app.css`:
 
-Colors use OKLCH format and have separate light/dark mode values.
+**Layout & Structure:**
+- `--radius`: Border radius (default: 0.625rem)
 
-## Adding Custom Colors
+**Base Colors:**
+- `--background` / `--foreground`: Page background and text
+- `--card` / `--card-foreground`: Card components
+- `--popover` / `--popover-foreground`: Popover components
 
-Add to CSS file with both light and dark variants:
+**Semantic Colors:**
+- `--primary` / `--primary-foreground`: Primary actions
+- `--secondary` / `--secondary-foreground`: Secondary actions
+- `--muted` / `--muted-foreground`: Disabled/muted states
+- `--accent` / `--accent-foreground`: Accent highlights
+- `--destructive`: Destructive actions (red)
+
+**UI Elements:**
+- `--border`: Border color
+- `--input`: Input field background
+- `--ring`: Focus ring color
+
+**Charts:**
+- `--chart-1` through `--chart-5`: Chart colors
+
+**Sidebar:**
+- `--sidebar` / `--sidebar-foreground`: Sidebar background and text
+- `--sidebar-primary` / `--sidebar-primary-foreground`: Sidebar primary
+- `--sidebar-accent` / `--sidebar-accent-foreground`: Sidebar accent
+- `--sidebar-border` / `--sidebar-ring`: Sidebar borders and rings
+
+Colors use OKLCH format. Dark mode overrides are defined in `.dark` selector.
+
+### Adding Custom Colors
+
+Add new color variables to both `:root` and `.dark` selectors, then register with Tailwind:
 
 ```css
 :root {
@@ -41,8 +74,11 @@ Add to CSS file with both light and dark variants:
 }
 ```
 
-Then use: `<div class="bg-warning text-warning-foreground"></div>`
+Use as utility classes:
+```svelte
+<div class="bg-warning text-warning-foreground"></div>
+```
 
-## Base Color Palettes
+### Preset Color Schemes
 
-Pre-configured palettes available: Neutral, Stone, Zinc, Gray, Slate. Each includes full light/dark mode variable sets.
+Pre-configured neutral color palettes available: Neutral, Stone, Zinc, Gray, Slate. Each includes light and dark mode variants with all standard variables configured.

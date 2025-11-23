@@ -1,12 +1,14 @@
 ## Alert Component
 
-A callout component for displaying user attention messages with optional icons, titles, and descriptions.
+Displays a callout for user attention with customizable variants and content.
 
 ### Installation
 
 ```bash
-pnpm dlx shadcn-svelte@latest add alert
+npx shadcn-svelte@latest add alert -y -o
 ```
+
+The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 
 ### Basic Usage
 
@@ -23,41 +25,36 @@ pnpm dlx shadcn-svelte@latest add alert
 </Alert.Root>
 ```
 
-### With Icon and Multiple Variants
+### Component Structure
 
+- `Alert.Root`: Container component
+- `Alert.Title`: Title text
+- `Alert.Description`: Description content
+- Supports icon elements (from lucide-svelte or custom)
+
+### Variants
+
+**Default variant** - Standard alert styling:
 ```svelte
-<script lang="ts">
-  import * as Alert from "$lib/components/ui/alert/index.js";
-  import CheckCircle2Icon from "@lucide/svelte/icons/check-circle-2";
-  import AlertCircleIcon from "@lucide/svelte/icons/alert-circle";
-</script>
-
-<!-- Success variant (default) -->
 <Alert.Root>
   <CheckCircle2Icon />
   <Alert.Title>Success! Your changes have been saved</Alert.Title>
   <Alert.Description>This is an alert with icon, title and description.</Alert.Description>
 </Alert.Root>
+```
 
-<!-- Destructive variant -->
+**Destructive variant** - Error/warning styling:
+```svelte
 <Alert.Root variant="destructive">
-  <AlertCircleIcon />
-  <Alert.Title>Unable to process your payment.</Alert.Title>
-  <Alert.Description>
-    <p>Please verify your billing information and try again.</p>
-    <ul class="list-inside list-disc text-sm">
-      <li>Check your card details</li>
-      <li>Ensure sufficient funds</li>
-      <li>Verify billing address</li>
-    </ul>
-  </Alert.Description>
+  <CircleAlertIcon class="size-4" />
+  <Alert.Title>Error</Alert.Title>
+  <Alert.Description>Your session has expired. Please login again.</Alert.Description>
 </Alert.Root>
 ```
 
-### Component Structure
+### Features
 
-- `Alert.Root` - Container component
-- `Alert.Title` - Alert title (optional)
-- `Alert.Description` - Alert description (optional)
-- Supports icons via Lucide Svelte
-- `variant="destructive"` for error/warning styling
+- Flexible composition: can include title only, description only, or both
+- Icon support via slot (typically lucide-svelte icons)
+- Rich content support in description (paragraphs, lists, etc.)
+- Two built-in variants: default and destructive

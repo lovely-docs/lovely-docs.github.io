@@ -1,20 +1,16 @@
-## CSS Variables & Convention
+## CSS Variables Theming
 
-Colors use `background`/`foreground` convention in OKLCH format:
-```css
---primary: oklch(0.205 0 0);
---primary-foreground: oklch(0.985 0 0);
-```
+shadcn-svelte uses CSS variables with `background`/`foreground` convention for colors. Utility classes omit the `background` suffix:
+
 ```svelte
 <div class="bg-primary text-primary-foreground">Hello</div>
 ```
 
-## Core Variables
+**Core variables:** `--radius`, `--background`, `--foreground`, `--card`, `--popover`, `--primary`, `--secondary`, `--muted`, `--accent`, `--destructive`, `--border`, `--input`, `--ring`, `--chart-1` through `--chart-5`, `--sidebar` variants.
 
-`:root` and `.dark` include: `--radius`, `--background`, `--foreground`, `--card`, `--popover`, `--primary`, `--secondary`, `--muted`, `--accent`, `--destructive`, `--border`, `--input`, `--ring`, `--chart-1` to `--chart-5`, sidebar variants.
+Colors use OKLCH format with dark mode overrides in `.dark` selector.
 
-## Custom Colors
-
+**Add custom colors:**
 ```css
 :root {
   --warning: oklch(0.84 0.16 84);
@@ -30,6 +26,6 @@ Colors use `background`/`foreground` convention in OKLCH format:
 }
 ```
 
-Use: `<div class="bg-warning text-warning-foreground"></div>`
+Use as: `<div class="bg-warning text-warning-foreground"></div>`
 
-Pre-configured palettes: Neutral, Stone, Zinc, Gray, Slate.
+Preset schemes available: Neutral, Stone, Zinc, Gray, Slate.

@@ -3,12 +3,18 @@
 Fast, composable command menu for Svelte.
 
 ### Installation
+
 ```bash
-npm install shadcn-svelte@latest add command
+npx shadcn-svelte@latest add command -y -o
 ```
 
 ### Basic Usage
+
 ```svelte
+<script lang="ts">
+  import * as Command from "$lib/components/ui/command/index.js";
+</script>
+
 <Command.Root>
   <Command.Input placeholder="Type a command or search..." />
   <Command.List>
@@ -20,7 +26,8 @@ npm install shadcn-svelte@latest add command
 </Command.Root>
 ```
 
-### Dialog with Keyboard Shortcut
+### Dialog Mode
+
 ```svelte
 <script lang="ts">
   let open = $state(false);
@@ -31,6 +38,7 @@ npm install shadcn-svelte@latest add command
     }
   }
 </script>
+
 <svelte:document onkeydown={handleKeydown} />
 <Command.Dialog bind:open>
   <Command.Input placeholder="Type a command or search..." />
@@ -44,4 +52,14 @@ npm install shadcn-svelte@latest add command
 ```
 
 ### Components
-`Command.Root`, `Command.Dialog`, `Command.Input`, `Command.List`, `Command.Empty`, `Command.Group`, `Command.Item`, `Command.Separator`, `Command.Shortcut`
+
+- `Root` - Container
+- `Input` - Search field
+- `List` - Scrollable list
+- `Empty` - No results message
+- `Group` - Item grouping with heading
+- `Item` - Command item (supports disabled state)
+- `Separator` - Visual divider
+- `Shortcut` - Keyboard shortcut display
+
+Icons in items are auto-styled (size-4, gap-2, pointer-events-none).

@@ -5,12 +5,14 @@ Accessible resizable panel groups and layouts with keyboard support, built on Pa
 ### Installation
 
 ```bash
-npm install shadcn-svelte@latest add resizable
+npx shadcn-svelte@latest add resizable -y -o
 ```
 
-### Usage
+The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 
-Import and use resizable panels with `PaneGroup`, `Pane`, and `Handle` components:
+### Basic Usage
+
+Import and use the Resizable components:
 
 ```svelte
 <script lang="ts">
@@ -18,6 +20,42 @@ Import and use resizable panels with `PaneGroup`, `Pane`, and `Handle` component
 </script>
 
 <Resizable.PaneGroup direction="horizontal">
+  <Resizable.Pane>One</Resizable.Pane>
+  <Resizable.Handle />
+  <Resizable.Pane>Two</Resizable.Pane>
+</Resizable.PaneGroup>
+```
+
+### Components
+
+- **PaneGroup**: Container for resizable panes with `direction` prop ("horizontal" or "vertical")
+- **Pane**: Individual resizable panel with optional `defaultSize` prop (percentage)
+- **Handle**: Divider between panes, can show visual indicator with `withHandle` prop
+
+### Vertical Layout
+
+```svelte
+<Resizable.PaneGroup direction="vertical" class="min-h-[200px] max-w-md rounded-lg border">
+  <Resizable.Pane defaultSize={25}>
+    <div class="flex h-full items-center justify-center p-6">
+      <span class="font-semibold">Header</span>
+    </div>
+  </Resizable.Pane>
+  <Resizable.Handle />
+  <Resizable.Pane defaultSize={75}>
+    <div class="flex h-full items-center justify-center p-6">
+      <span class="font-semibold">Content</span>
+    </div>
+  </Resizable.Pane>
+</Resizable.PaneGroup>
+```
+
+### Nested Layouts
+
+Combine horizontal and vertical pane groups:
+
+```svelte
+<Resizable.PaneGroup direction="horizontal" class="max-w-md rounded-lg border">
   <Resizable.Pane defaultSize={50}>
     <div class="flex h-[200px] items-center justify-center p-6">
       <span class="font-semibold">One</span>
@@ -42,10 +80,24 @@ Import and use resizable panels with `PaneGroup`, `Pane`, and `Handle` component
 </Resizable.PaneGroup>
 ```
 
-### Key Props
+### Handle Visibility
 
-- `direction`: Set to `"horizontal"` or `"vertical"` on `PaneGroup`
-- `defaultSize`: Set initial pane size (percentage) on `Pane`
-- `withHandle`: Show visual handle on `Handle` component for better UX
+Use `withHandle` prop on Handle to display a visual indicator:
 
-Panels can be nested for complex layouts. See PaneForge documentation for all available props.
+```svelte
+<Resizable.PaneGroup direction="horizontal" class="min-h-[200px] max-w-md rounded-lg border">
+  <Resizable.Pane defaultSize={25}>
+    <div class="flex h-full items-center justify-center p-6">
+      <span class="font-semibold">Sidebar</span>
+    </div>
+  </Resizable.Pane>
+  <Resizable.Handle withHandle />
+  <Resizable.Pane defaultSize={75}>
+    <div class="flex h-full items-center justify-center p-6">
+      <span class="font-semibold">Content</span>
+    </div>
+  </Resizable.Pane>
+</Resizable.PaneGroup>
+```
+
+For all available props and features, see the PaneForge documentation.

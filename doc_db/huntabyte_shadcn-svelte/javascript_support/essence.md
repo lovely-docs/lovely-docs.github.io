@@ -1,1 +1,1 @@
-How to configure shadcn-svelte to use JavaScript instead of TypeScript.
+Use JavaScript instead of TypeScript by setting typescript: false in components.json and configuring jsconfig.json with import aliases.

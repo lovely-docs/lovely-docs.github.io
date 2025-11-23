@@ -1,1 +1,1 @@
-Navigation menu component with triggers and collapsible content sections for website navigation.
+Navigation menu component with Root/List/Item/Trigger/Content/Link subcomponents; supports grid layouts, descriptions, icons, and snippet-based children; install with `npx shadcn-svelte@latest add navigation-menu -y -o`.

@@ -1,19 +1,27 @@
-## Skeleton Component
+## Skeleton
 
 A placeholder component for displaying loading states while content is being fetched.
 
-### Import
-```svelte
-import { Skeleton } from "$lib/components/ui/skeleton/index.js";
+### Installation
+
+```bash
+npx shadcn-svelte@latest add skeleton -y -o
 ```
 
-### Installation
-```bash
-npx shadcn-svelte@latest add skeleton
-```
+The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 
 ### Usage
-Create skeleton placeholders with custom dimensions and styling:
+
+Import the Skeleton component:
+
+```svelte
+<script lang="ts">
+  import { Skeleton } from "$lib/components/ui/skeleton/index.js";
+</script>
+```
+
+Apply to elements with custom dimensions and styling:
+
 ```svelte
 <div class="flex items-center space-x-4">
   <Skeleton class="size-12 rounded-full" />
@@ -24,4 +32,4 @@ Create skeleton placeholders with custom dimensions and styling:
 </div>
 ```
 
-The component accepts a `class` prop for styling with Tailwind CSS utilities to define size, shape, and spacing.
+Use Skeleton to create placeholder layouts matching your content structure. Style with Tailwind classes for sizing (`h-`, `w-`, `size-`) and shape (`rounded-full`, etc.).

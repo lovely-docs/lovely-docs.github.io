@@ -1,1 +1,1 @@
-Date selection component with support for single dates, multiple months, dropdowns, and natural language parsing.
+Date selection component with single/multi-month display, dropdown caption layouts, timezone support, and examples for popover pickers, date+time, and natural language parsing.

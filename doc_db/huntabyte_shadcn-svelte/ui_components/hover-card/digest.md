@@ -5,8 +5,10 @@ A component that displays preview content when users hover over a link, useful f
 ### Installation
 
 ```bash
-pnpm dlx shadcn-svelte@latest add hover-card
+npx shadcn-svelte@latest add hover-card -y -o
 ```
+
+The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 
 ### Basic Usage
 
@@ -23,9 +25,7 @@ pnpm dlx shadcn-svelte@latest add hover-card
 </HoverCard.Root>
 ```
 
-### Advanced Example
-
-Combine with Avatar component to display rich preview content:
+### Complete Example with Avatar
 
 ```svelte
 <script lang="ts">
@@ -64,4 +64,10 @@ Combine with Avatar component to display rich preview content:
 </HoverCard.Root>
 ```
 
-Built on Bits UI link-preview component.
+### Structure
+
+- `HoverCard.Root`: Container component
+- `HoverCard.Trigger`: The element that triggers the hover preview (can be a link with href, target, rel attributes)
+- `HoverCard.Content`: The preview content displayed on hover (supports custom styling with class prop)
+
+The component is built on Bits UI's link-preview component. See Bits UI documentation for full API reference.

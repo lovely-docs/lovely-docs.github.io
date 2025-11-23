@@ -1,12 +1,23 @@
+## Overview
+
 shadcn-svelte is a Svelte/SvelteKit port of shadcn/ui, maintained by Huntabyte and CokaKoala with community contributions.
 
-The project builds on several key open source libraries:
-- Bits UI provides headless components
-- Formsnap provides form components
-- Paneforge provides resizable components
-- Vaul Svelte provides drawer components
-- Radix UI provided the original headless components and examples that shadcn/ui was built on
+## Credits & Dependencies
 
-The original shadcn/ui was created by shadcn, with typography adapted from Shu Ding's work on Nextra, and button styles inspired by Cal.com.
+The project builds on several foundational libraries:
 
-Licensed under MIT by shadcn and huntabyte.
+- **Bits UI** - Provides headless components
+- **Formsnap** - Handles form components
+- **Paneforge** - Supplies resizable components
+- **Vaul Svelte** - Provides drawer components
+- **Radix UI** - The headless component foundation that the original shadcn/ui was built on
+
+## Design & Inspiration
+
+- **shadcn** - Original designer and creator of shadcn/ui methodology and implementation
+- **Shu Ding** - Typography styling adapted from Nextra
+- **Cal** - Button component styles were copied from their implementation
+
+## License
+
+MIT licensed under shadcn and huntabyte

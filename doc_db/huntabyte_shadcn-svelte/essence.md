@@ -1,1 +1,1 @@
-Complete reference for shadcn-svelte: 60+ UI components, installation across frameworks, CLI usage, theming with CSS variables, dark mode setup, migrations to Svelte 5/Tailwind v4, and custom registry creation.
+Complete reference for shadcn-svelte: 60+ composable UI components, dark mode setup, installation guides, migration paths, custom registries, theming system, and CLI commands.

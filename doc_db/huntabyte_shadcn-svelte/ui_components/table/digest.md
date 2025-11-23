@@ -5,17 +5,23 @@ A responsive table component for displaying tabular data.
 ### Installation
 
 ```bash
-pnpm dlx shadcn-svelte@latest add table
+npx shadcn-svelte@latest add table -y -o
 ```
+
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Usage
 
 Import the table components:
+
 ```svelte
-import * as Table from "$lib/components/ui/table/index.js";
+<script lang="ts">
+  import * as Table from "$lib/components/ui/table/index.js";
+</script>
 ```
 
-Build tables using the component hierarchy:
+Build tables using the following structure:
+
 ```svelte
 <Table.Root>
   <Table.Caption>A list of your recent invoices.</Table.Caption>
@@ -46,4 +52,13 @@ Build tables using the component hierarchy:
 </Table.Root>
 ```
 
-Components available: `Table.Root`, `Table.Caption`, `Table.Header`, `Table.Body`, `Table.Footer`, `Table.Row`, `Table.Head`, `Table.Cell`. Use standard HTML attributes like `colspan` and CSS classes for styling and layout control.
+### Components
+
+- `Table.Root`: Container for the entire table
+- `Table.Caption`: Optional caption/title for the table
+- `Table.Header`: Header section containing column definitions
+- `Table.Body`: Body section containing data rows
+- `Table.Footer`: Optional footer section for totals or summary
+- `Table.Row`: Individual row container
+- `Table.Head`: Header cell
+- `Table.Cell`: Data cell (supports `colspan` attribute and custom classes for alignment/styling)

@@ -2,24 +2,34 @@
 
 Menu component triggered by a button, displaying actions or functions.
 
-**Installation:** `pnpm dlx shadcn-svelte@latest add dropdown-menu`
+### Installation
 
-**Basic structure:**
+```bash
+npx shadcn-svelte@latest add dropdown-menu -y -o
+```
+
+### Basic Structure
+
 ```svelte
 <DropdownMenu.Root>
-  <DropdownMenu.Trigger>Open</DropdownMenu.Trigger>
+  <DropdownMenu.Trigger>
+    {#snippet child({ props })}
+      <Button {...props}>Open</Button>
+    {/snippet}
+  </DropdownMenu.Trigger>
   <DropdownMenu.Content>
-    <DropdownMenu.Item>Action</DropdownMenu.Item>
+    <DropdownMenu.Label>My Account</DropdownMenu.Label>
+    <DropdownMenu.Item>Profile</DropdownMenu.Item>
+    <DropdownMenu.Item disabled>API</DropdownMenu.Item>
   </DropdownMenu.Content>
 </DropdownMenu.Root>
 ```
 
-**Key components:** Root, Trigger, Content, Group, Label, Item, Separator, Sub/SubTrigger/SubContent, Shortcut, CheckboxItem, RadioGroup/RadioItem
+### Key Components
 
-**Stateful items:**
-```svelte
-<DropdownMenu.CheckboxItem bind:checked={state}>Label</DropdownMenu.CheckboxItem>
-<DropdownMenu.RadioGroup bind:value={selected}>
-  <DropdownMenu.RadioItem value="option">Option</DropdownMenu.RadioItem>
-</DropdownMenu.RadioGroup>
-```
+- **Root/Trigger/Content**: Basic structure
+- **Item/Label/Group/Separator**: Menu organization
+- **Shortcut**: Display keyboard shortcuts
+- **Sub/SubTrigger/SubContent**: Nested submenus
+- **CheckboxItem**: `bind:checked` for state
+- **RadioGroup/RadioItem**: `bind:value` for selection

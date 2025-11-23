@@ -1,0 +1,1 @@
+Component for attaching icons, text, buttons, and other UI elements to input/textarea fields with flexible alignment (inline-end, block-start, block-end) and integration with tooltips, dropdowns, and custom inputs.

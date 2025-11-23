@@ -1,1 +1,1 @@
-Date picker component supporting single dates, date ranges, presets, and form integration.
+Date picker component composition using Popover + Calendar/RangeCalendar; supports single/range selection, presets, and form integration with date constraints.

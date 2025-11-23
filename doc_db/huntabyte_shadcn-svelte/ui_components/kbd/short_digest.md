@@ -1,11 +1,29 @@
 ## Kbd Component
 
-Display keyboard input with `Kbd.Root` and group with `Kbd.Group`.
+Displays keyboard input visually.
 
-**Installation:** `pnpm dlx shadcn-svelte@latest add kbd`
+### Installation
 
-**Basic:** `<Kbd.Root>B</Kbd.Root>`
+```bash
+npx shadcn-svelte@latest add kbd -y -o
+```
 
-**Group:** `<Kbd.Group><Kbd.Root>Ctrl</Kbd.Root><Kbd.Root>K</Kbd.Root></Kbd.Group>`
+### Usage
 
-Works inside Button, Tooltip, and InputGroup components.
+```svelte
+<script lang="ts">
+  import * as Kbd from "$lib/components/ui/kbd/index.js";
+</script>
+<Kbd.Root>B</Kbd.Root>
+<Kbd.Group>
+  <Kbd.Root>Ctrl</Kbd.Root>
+  <span>+</span>
+  <Kbd.Root>B</Kbd.Root>
+</Kbd.Group>
+```
+
+### Examples
+
+- **Button**: `<Button><Kbd.Root>Esc</Kbd.Root></Button>`
+- **Tooltip**: Wrap `Kbd.Root` in `Tooltip.Content`
+- **InputGroup**: Place `Kbd.Root` in `InputGroup.Addon`

@@ -1,1 +1,1 @@
-A range input component supporting single/multiple value selection with configurable max, step, and vertical orientation.
+Range input with single/multiple thumbs, vertical/horizontal orientation, configurable max and step values.

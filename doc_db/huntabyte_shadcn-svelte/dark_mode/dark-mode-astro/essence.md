@@ -1,1 +1,1 @@
-Implement dark mode in Astro using Tailwind's class strategy with mode-watcher and localStorage persistence.
+Astro dark mode via Tailwind's class strategy: inline script for theme persistence + mode-watcher library + toggle components (light switch or dropdown menu)

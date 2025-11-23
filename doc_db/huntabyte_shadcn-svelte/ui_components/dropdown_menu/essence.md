@@ -1,1 +1,1 @@
-Dropdown menu component with support for items, groups, checkboxes, radio buttons, and nested submenus.
+Dropdown menu component with Root/Trigger/Content structure; supports items, groups, separators, shortcuts, submenus, checkboxes (bind:checked), and radio groups (bind:value); install with `npx shadcn-svelte@latest add dropdown-menu -y -o`.

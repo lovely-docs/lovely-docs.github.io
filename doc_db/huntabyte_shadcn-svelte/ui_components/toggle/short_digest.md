@@ -1,17 +1,27 @@
-## Toggle Component
+## Toggle
 
-Two-state button that toggles between on/off.
+Two-state button component that toggles between on and off.
 
-**Installation**: `npm install shadcn-svelte@latest add toggle`
+### Installation
 
-**Basic usage**:
+```bash
+npx shadcn-svelte@latest add toggle -y -o
+```
+
+### Usage
+
 ```svelte
+<script lang="ts">
+  import { Toggle } from "$lib/components/ui/toggle/index.js";
+</script>
+
 <Toggle>Toggle</Toggle>
 ```
 
-**Props**: `variant` ("default" | "outline"), `size` ("sm" | "lg"), `disabled`, `aria-label`
+### Variants
 
-**Examples**:
-- Icon: `<Toggle aria-label="toggle bold"><BoldIcon class="size-4" /></Toggle>`
-- With text: `<Toggle><ItalicIcon class="mr-2 size-4" />Italic</Toggle>`
-- Disabled: `<Toggle disabled>...</Toggle>`
+- **Default with icon:** `<Toggle aria-label="toggle bold"><BoldIcon class="size-4" /></Toggle>`
+- **Outline:** `<Toggle variant="outline" aria-label="Toggle italic"><ItalicIcon class="size-4" /></Toggle>`
+- **With text:** `<Toggle aria-label="Toggle italic"><ItalicIcon class="mr-2 size-4" />Italic</Toggle>`
+- **Sizes:** `size="sm"` or `size="lg"`
+- **Disabled:** `<Toggle disabled aria-label="Toggle underline"><UnderlineIcon class="size-4" /></Toggle>`
