@@ -23,11 +23,12 @@
 		"lovely-docs-mcp": "dist/index.js"
 	},
 	"scripts": {
-		"build": "tsc && cp -r ../doc_db dist/",
+		"build": "tsc",
+		"git-sync": "bun run src/index.ts --git-sync-only",
 		"prepublishOnly": "bun run build",
 		"publish": "npm publish",
-		"serve": "cd dist; bun run index.js --transport http",
-		"dev": "bun --watch run src/index.ts  --transport http"
+		"serve": "bun run dist/index.js --transport http",
+		"dev": "LOVELY_DOCS_DEV=1 bun --watch run src/index.ts  --transport http"
 	},
 	"keywords": [
 		"mcp",
@@ -44,6 +45,7 @@
 		"express": "^5.1.0",
 		"lovely-docs-mcp": ".",
 		"neverthrow": "^8.2.0",
+		"simple-git": "^3.30.0",
 		"valibot": "^1.1.0",
 		"yaml": "^2.8.1",
 		"yargs": "^18.0.0"
