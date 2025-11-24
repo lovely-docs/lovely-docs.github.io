@@ -37,7 +37,6 @@ export class ResourceResponseError extends Error {
 }
 
 export function getServer(options: LibraryFilterOptions): McpServer {
-	debug("getServer", options);
 
 	const server = new McpServer({
 		name: "lovely-docs-mcp",
@@ -135,7 +134,6 @@ export function getServer(options: LibraryFilterOptions): McpServer {
 			mimeType: "text/yaml",
 		},
 		async (uri: URL, variables: any, extra: any) => {
-			debug(uri, variables, extra);
 			const ecosystem =
 				typeof variables.ecosystem === "string"
 					? variables.ecosystem
@@ -176,7 +174,6 @@ export function getServer(options: LibraryFilterOptions): McpServer {
 			const vParam = typeof variables.verbose === "string" ? variables.verbose : variables.verbose?.[0];
 			const verbose = vParam === "true";
 
-			debug(uri, variables);
 			const libs = filterLibraries(getLibraries(), options);
 			const result = getPageIndex(libs, name, verbose);
 			if (result.isErr()) throw new ResourceResponseError(result.error, uri.href);
@@ -227,8 +224,6 @@ export function getServer(options: LibraryFilterOptions): McpServer {
 			const libs = filterLibraries(getLibraries(), options);
 			const result = getPage(libs, name, p, level);
 			if (result.isErr()) throw new ResourceResponseError(result.error, uri.href);
-
-			// debug("doc-page",result.value.children);
 
 			return {
 				contents: [

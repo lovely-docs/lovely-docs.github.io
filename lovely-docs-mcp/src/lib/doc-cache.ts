@@ -149,20 +149,17 @@ async function loadMarkdownVariants(path: string): Promise<MarkdownVariants> {
 			try {
 				const content = await readFile(filePath, "utf-8");
 				variants[variant] = content;
-				// debug(`Loaded ${variant} for ${fullPath}`);
 			} catch (error) {
 				console.error(`Failed to read ${filePath}:`, error);
 			}
 		}
 	}
-	// debug("loadMarkdownVariants", Object.keys(variants));
 
 	return variants;
 }
 
 async function buildTreeNode(path: string, node: IndexNode): Promise<DocItem> {
 	const markdown = await loadMarkdownVariants(path);
-	// debug(`${path} -> [${Object.keys(markdown).join(", ")}]`);
 
 	const treeNode: DocItem = {
 		displayName: node.displayName,
@@ -391,10 +388,6 @@ export function getNodeMarkdown(
 	if (!node) return undefined;
 
 	const content = node.markdown[level];
-	debug(
-		`getNodeMarkdown(${libraryName}, ${normPath}, ${level}, ${content}) -> %o`,
-		Boolean(content)
-	);
 	return content ?? "";
 }
 

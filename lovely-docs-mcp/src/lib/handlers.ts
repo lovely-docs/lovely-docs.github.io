@@ -16,24 +16,6 @@ export function libraryIndex(libraries: Map<string, LibrarySummary>, ecosystem: 
 	);
 }
 
-// export function libraryTree(
-// 	libraries: Map<string, LibrarySummary>,
-// 	name: string,
-// 	verbose: boolean
-// ): Result<{ pages: Record<string, unknown> }, string> {
-// 	const lib = libraries.get(name);
-// 	if (!lib) return err(`Unknown library: ${name}`);
-// 	const tree = getRelevantEssenceTree(name, verbose);
-// 	const buildNested = (node: any): Record<string, unknown> => {
-// 		const result: Record<string, unknown> = {};
-// 		for (const [key, child] of Object.entries(node.children ?? {})) {
-// 			result[key] = buildNested(child);
-// 		}
-// 		return result;
-// 	};
-// 	const pages = tree ? { "/": buildNested(tree) } : {};
-// 	return ok({ pages });
-// }
 
 export const buildNested = (node: any): unknown[] => {
 	const items: unknown[] = [];
@@ -83,7 +65,6 @@ export function getPage(
 	page: string | undefined,
 	level: MarkdownLevel | undefined
 ): Result<{ text: string; children?: unknown[] }, string> {
-	debug(library, page, level);
 	const byKey = libraries.get(library);
 	if (!byKey) return err(`Library not found: ${library}`);
 	const effectiveLevel = (level ?? "digest") as MarkdownLevel;
