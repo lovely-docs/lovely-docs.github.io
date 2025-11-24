@@ -44,7 +44,7 @@
 							{/if}
 						</div>
 						<span class="font-mono text-sm truncate group-hover:text-foreground transition-colors flex gap-1"
-							>{child.displayName}: <div class="text-muted-foreground">{child.markdown.essence}</div></span>
+							>{child.displayName}: <span class="text-muted-foreground" title={child.markdown.essence}>{child.markdown.essence}</span></span>
 					</div>
 				</div>
 			</a>
