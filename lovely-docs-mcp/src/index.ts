@@ -40,13 +40,23 @@ interface CliOptions {
 
 const isProd = !process.env.LOVELY_DOCS_DEV;
 
-// Initialize BetterStack Logtail if configured
-let logtail: Logtail | null = null;
-if (process.env.BETTERSTACK_SOURCE_TOKEN) {
-	const endpoint = process.env.BETTERSTACK_ENDPOINT || "https://in.logs.betterstack.com";
-	logtail = new Logtail(process.env.BETTERSTACK_SOURCE_TOKEN, { endpoint });
-	console.error("BetterStack logging enabled");
+// Null object pattern for logger - avoids if checks everywhere
+class NullLogger {
+	info(..._args: any[]) {}
+	warn(..._args: any[]) {}
+	error(..._args: any[]) {}
+	debug(..._args: any[]) {}
+	async flush() {}
 }
+
+// Initialize BetterStack Logtail if configured, otherwise use null logger
+const logtail: Logtail | NullLogger = process.env.BETTERSTACK_SOURCE_TOKEN
+	? (() => {
+			const endpoint = process.env.BETTERSTACK_ENDPOINT || "https://in.logs.betterstack.com";
+			console.error("BetterStack logging enabled");
+			return new Logtail(process.env.BETTERSTACK_SOURCE_TOKEN!, { endpoint });
+	  })()
+	: new NullLogger();
 
 function getCacheDir(): string {
 	if (process.platform === "win32") {
@@ -334,7 +344,6 @@ async function startHttpServer(port: number) {
 		const requestMetadata = {
 			method: req.body?.method,
 			id: req.body?.id,
-			filters: filterOptions,
 			ip: req.ip || req.socket.remoteAddress,
 			userAgent: req.get("user-agent"),
 		};
@@ -349,14 +358,12 @@ async function startHttpServer(port: number) {
 			const duration = Date.now() - startTime;
 
 			// Log successful request to BetterStack
-			if (logtail) {
-				logtail.info("MCP request completed", {
-					...requestMetadata,
-					duration,
-					status: "success",
-					statusCode: res.statusCode,
-				});
-			}
+			logtail.info("MCP request completed", {
+				...requestMetadata,
+				duration,
+				status: "success",
+				statusCode: res.statusCode,
+			});
 		} catch (error) {
 			const duration = Date.now() - startTime;
 
@@ -364,15 +371,13 @@ async function startHttpServer(port: number) {
 				debug(req, error);
 
 				// Log resource error to BetterStack
-				if (logtail) {
-					logtail.warn("MCP resource error", {
-						...requestMetadata,
-						duration,
-						status: "resource_error",
-						errorCode: error.code,
-						errorMessage: error.message,
-					});
-				}
+				logtail.warn("MCP resource error", {
+					...requestMetadata,
+					duration,
+					status: "resource_error",
+					errorCode: error.code,
+					errorMessage: error.message,
+				});
 
 				const id = req.body?.id ?? null;
 				return res.status(200).json({
@@ -386,15 +391,13 @@ async function startHttpServer(port: number) {
 			}
 
 			// Log unexpected error to BetterStack
-			if (logtail) {
-				logtail.error("MCP request failed", {
-					...requestMetadata,
-					duration,
-					status: "error",
-					error: error instanceof Error ? error.message : String(error),
-					errorStack: error instanceof Error ? error.stack : undefined,
-				});
-			}
+			logtail.error("MCP request failed", {
+				...requestMetadata,
+				duration,
+				status: "error",
+				error: error instanceof Error ? error.message : String(error),
+				errorStack: error instanceof Error ? error.stack : undefined,
+			});
 
 			throw error;
 		}
@@ -402,24 +405,18 @@ async function startHttpServer(port: number) {
 
 	app.listen(port, () => {
 		console.error(`Lovely Docs MCP HTTP server running on http://localhost:${port}/mcp`);
-		if (logtail) {
-			logtail.info("HTTP server started", {
-				port,
-				mode: isProd ? "production" : "development",
-				docDbPath: doc_db_path,
-			});
-		}
+		logtail.info("HTTP server started", {
+			port,
+			mode: isProd ? "production" : "development",
+			docDbPath: doc_db_path,
+		});
 	}).on("error", (error: unknown) => {
 		console.error("HTTP server error:", error);
-		if (logtail) {
-			logtail.error("HTTP server failed to start", {
-				error: error instanceof Error ? error.message : String(error),
-				errorStack: error instanceof Error ? error.stack : undefined,
-			});
-			logtail.flush().then(() => process.exit(1));
-		} else {
-			process.exit(1);
-		}
+		logtail.error("HTTP server failed to start", {
+			error: error instanceof Error ? error.message : String(error),
+			errorStack: error instanceof Error ? error.stack : undefined,
+		});
+		logtail.flush().then(() => process.exit(1));
 	});
 }
 
@@ -436,13 +433,11 @@ async function main() {
 
 main().catch(async (error) => {
 	console.error("Fatal error:", error);
-	if (logtail) {
-		logtail.error("Fatal server error", {
-			error: error instanceof Error ? error.message : String(error),
-			errorStack: error instanceof Error ? error.stack : undefined,
-		});
-		await logtail.flush();
-	}
+	logtail.error("Fatal server error", {
+		error: error instanceof Error ? error.message : String(error),
+		errorStack: error instanceof Error ? error.stack : undefined,
+	});
+	await logtail.flush();
 	process.exit(1);
 });
 
@@ -454,10 +449,8 @@ const gracefulShutdown = async (signal: string) => {
 	isShuttingDown = true;
 
 	console.error(`\nShutting down gracefully... (${signal})`);
-	if (logtail) {
-		logtail.info("Server shutting down", { signal });
-		await logtail.flush();
-	}
+	logtail.info("Server shutting down", { signal });
+	await logtail.flush();
 	process.exit(0);
 };
 
