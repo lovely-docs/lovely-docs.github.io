@@ -10,23 +10,26 @@
 
 	const ecosystems = $derived(data.mcp.ecosystems);
 	const ecosystemOptions = $derived(ecosystems);
-	const selectedEcosystem = $derived(page.url.hash.slice(1) || '*');
-	const verbose = $derived(page.url.searchParams.get('detail') === 'true');
+	const hashParts = $derived(page.url.hash.slice(1).split('&'));
+	const selectedEcosystem = $derived(hashParts[0] || '*');
+	const verbose = $derived(hashParts.includes('verbose=true'));
 
 	const currentTools = $derived(data.mcp.tools.filter((t: any) => t.label === selectedEcosystem));
 
 	const resourceRoot = 'list-libraries';
 
 	function handleEcosystemChange(value: string) {
-		const hash = value !== '*' ? `#${value}` : '';
-		const query = verbose ? '?detail=true' : '';
-		goto(resolve(`/mcp/tools/list-libraries${query}${hash}`));
+		const eco = value !== '*' ? value : '';
+		const verb = verbose ? '&verbose=true' : '';
+		const hash = eco || verb ? `#${eco}${verb}` : '';
+		goto(resolve(`/mcp/tools/list-libraries${hash}`));
 	}
 
 	function toggleVerbose() {
-		const hash = selectedEcosystem !== '*' ? `#${selectedEcosystem}` : '';
-		const query = !verbose ? '?detail=true' : '';
-		goto(resolve(`/mcp/tools/list-libraries${query}${hash}`));
+		const eco = selectedEcosystem !== '*' ? selectedEcosystem : '';
+		const verb = !verbose ? '&verbose=true' : '';
+		const hash = eco || verb ? `#${eco}${verb}` : '';
+		goto(resolve(`/mcp/tools/list-libraries${hash}`));
 	}
 </script>
 
@@ -54,10 +57,7 @@
 			<div class="flex items-center gap-1">
 				<span class="text-muted-foreground">ecosystem=</span>
 				<Select.Root type="single" value={selectedEcosystem} onValueChange={handleEcosystemChange}>
-					<Select.Trigger
-						size="sm"
-						class="bg-background border-border text-foreground px-2 h-7"
-						aria-label="Ecosystem">
+					<Select.Trigger size="sm" class="bg-background border-border text-foreground px-2 h-7" aria-label="Ecosystem">
 						<span>{selectedEcosystem}</span>
 					</Select.Trigger>
 					<Select.Content class="bg-popover border border-border text-popover-foreground">

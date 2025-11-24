@@ -27,7 +27,7 @@
 			{#if typeof child === 'string'}
 				{@const fullPath = prefix ? `${prefix}/${child}` : child}
 				<a
-					href={resolve(`/mcp/tools/get-page/${fullPath}?level=digest`)}
+					href={resolve(`/mcp/tools/get-page/${fullPath}#digest`)}
 					class="w-full text-left text-primary hover:text-primary/80 hover:bg-accent transition-colors block">
 					<span class="text-muted-foreground">- </span>{child}
 				</a>
@@ -36,7 +36,7 @@
 					{@const fullPath = prefix ? `${prefix}/${key}` : key}
 					<div>
 						<a
-							href={resolve(`/mcp/tools/get-page/${fullPath}?level=digest`)}
+							href={resolve(`/mcp/tools/get-page/${fullPath}#digest`)}
 							class="w-full text-left text-primary hover:text-primary/80 hover:bg-accent transition-colors block">
 							{key}<span class="text-muted-foreground">:</span>
 						</a>
@@ -100,7 +100,7 @@
 			{#if pageIndex}
 				<div class="font-mono text-xs">
 					<a
-						href={resolve(`/mcp/tools/get-page/${selectedLibrary}?level=digest`)}
+						href={resolve(`/mcp/tools/get-page/${selectedLibrary}#digest`)}
 						class="w-full text-left text-primary hover:text-primary/80 hover:bg-accent transition-colors block">
 						/<span class="text-muted-foreground">:</span>
 					</a>

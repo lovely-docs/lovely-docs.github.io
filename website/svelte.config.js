@@ -19,8 +19,9 @@ const config = {
 			pages: 'build',
 			assets: 'build',
 			fallback: "404.html",
-			precompress: true,
-			strict: true
+			precompress: false,
+			strict: true,
+
 		}),
 		paths: {
 			base: "/lovely-docs"

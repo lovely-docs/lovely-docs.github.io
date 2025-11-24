@@ -16,7 +16,7 @@
 
 	const selectedLibrary = $derived(page.params.library ?? libraries[0].key ?? '');
 	const selectedPath = $derived(page.params.path ?? '');
-	const selectedLevel = $derived(page.url.searchParams.get('level') || 'digest');
+	const selectedLevel = $derived(page.url.hash.slice(1) || 'digest');
 
 	const content = $derived(data.content ? (data.content[selectedLevel] ?? data.content['digest']) : null);
 
@@ -34,7 +34,8 @@
 	const resourceRoot = 'get-page';
 
 	function updateUrl(lib: string, pathPart: string, lvl: string) {
-		goto(resolve(`/mcp/tools/get-page/${lib}${pathPart !== '/' ? '/' + pathPart : ''}?level=${lvl}`));
+		const hash = lvl !== 'digest' ? `#${lvl}` : '';
+		goto(resolve(`/mcp/tools/get-page/${lib}${pathPart !== '/' ? '/' + pathPart : ''}${hash}`));
 	}
 
 	// Helper to construct full path for links
@@ -49,8 +50,9 @@
 			{#if typeof child === 'string'}
 				{@const childPathPart = basePathPart ? `${basePathPart}/${child}` : child}
 				{@const childFullPath = getFullPath(childPathPart)}
+				{@const hash = selectedLevel !== 'digest' ? `#${selectedLevel}` : ''}
 				<a
-					href={resolve(`/mcp/tools/get-page/${childFullPath}?level=${selectedLevel}`)}
+					href={resolve(`/mcp/tools/get-page/${childFullPath}${hash}`)}
 					class="w-full text-left text-primary hover:text-primary/80 hover:bg-accent transition-colors block">
 					<span class="text-muted-foreground">- </span>{child}
 				</a>
@@ -58,9 +60,10 @@
 				{#each Object.entries(child) as [key, value]}
 					{@const childPathPart = basePathPart ? `${basePathPart}/${key}` : key}
 					{@const childFullPath = getFullPath(childPathPart)}
+					{@const hash = selectedLevel !== 'digest' ? `#${selectedLevel}` : ''}
 					<div>
 						<a
-							href={resolve(`/mcp/tools/get-page/${childFullPath}?level=${selectedLevel}`)}
+							href={resolve(`/mcp/tools/get-page/${childFullPath}${hash}`)}
 							class="w-full text-left text-primary hover:text-primary/80 hover:bg-accent transition-colors block">
 							{key}<span class="text-muted-foreground">:</span>
 						</a>
