@@ -9,7 +9,7 @@ function stripMarkdown(node: DocItem): DocItem {
 
 	return {
 		...node,
-		markdown: {}, // Remove markdown content
+		markdown: {essence: node.markdown.essence}, // Remove markdown content
 		children: newChildren
 	};
 }

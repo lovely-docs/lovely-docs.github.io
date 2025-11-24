@@ -43,8 +43,8 @@
 								<FileText class="h-4 w-4 {child.relevant ? 'text-foreground' : 'text-muted-foreground'}" />
 							{/if}
 						</div>
-						<span class="font-mono text-sm truncate group-hover:text-foreground transition-colors"
-							>{child.displayName}</span>
+						<span class="font-mono text-sm truncate group-hover:text-foreground transition-colors flex gap-1"
+							>{child.displayName}: <div class="text-muted-foreground">{child.markdown.essence}</div></span>
 					</div>
 				</div>
 			</a>
