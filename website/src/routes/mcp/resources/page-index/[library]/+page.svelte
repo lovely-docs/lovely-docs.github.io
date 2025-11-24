@@ -8,14 +8,15 @@
 
 	const library = $derived(page.params.library);
 	const pageIndex = $derived(data.mcp.pageIndexes.find((p: any) => p.label === library));
+	const verbose = $derived(page.url.hash.slice(1).includes('verbose=true'));
 </script>
 
 {#snippet treeNode(node: unknown, pathPart: string = '')}
 	{#if Array.isArray(node)}
 		{#each node as child}
 			{#if typeof child === 'string'}
-				{@const childPathPart = pathPart ? `${pathPart}/${child}` : child}
-				{@const fullPath = `${library}/${childPathPart}`}
+				{@const childPathPart = pathPart && pathPart !== '/' ? `${pathPart}/${child}` : child}
+				{@const fullPath = childPathPart === '/' ? library : `${library}/${childPathPart}`}
 				<a
 					href={resolve(`/mcp/resources/doc-page/${fullPath}`)}
 					class="w-full text-left text-primary hover:text-primary/80 hover:bg-accent transition-colors block">
@@ -23,8 +24,8 @@
 				</a>
 			{:else if typeof child === 'object' && child !== null}
 				{#each Object.entries(child) as [key, value]}
-					{@const childPathPart = pathPart ? `${pathPart}/${key}` : key}
-					{@const fullPath = `${library}/${childPathPart}`}
+					{@const childPathPart = pathPart && pathPart !== '/' ? `${pathPart}/${key}` : key}
+					{@const fullPath = childPathPart === '/' ? library : `${library}/${childPathPart}`}
 					<div>
 						<a
 							href={resolve(`/mcp/resources/doc-page/${fullPath}`)}
@@ -41,19 +42,50 @@
 	{/if}
 {/snippet}
 
+{#snippet verboseTreeNode(node: unknown, pathPart: string = '')}
+	{#if Array.isArray(node)}
+		{#each node as child}
+			{#if typeof child === 'object' && child !== null}
+				{#each Object.entries(child) as [key, value]}
+					{@const childPathPart = pathPart && pathPart !== '/' ? `${pathPart}/${key}` : key}
+					{@const fullPath = childPathPart === '/' ? library : `${library}/${childPathPart}`}
+					{@const essence = typeof value === 'string' ? value : (value as any).essence}
+					{@const children = typeof value === 'object' && value !== null ? (value as any).children : null}
+
+					<div class="mb-1">
+						<a
+							href={resolve(`/mcp/resources/doc-page/${fullPath}`)}
+							class="flex items-baseline overflow-hidden text-primary hover:text-primary/80 hover:bg-accent transition-colors w-full">
+							<span class="whitespace-nowrap shrink-0">{key}</span>
+							{#if essence}
+								<span class="text-muted-foreground text-xs truncate" title={essence}>
+									: {essence}
+								</span>
+							{/if}
+						</a>
+
+						{#if children}
+							<div class="pl-4 border-l border-muted ml-1 mt-1">
+								{@render verboseTreeNode(children, childPathPart)}
+							</div>
+						{/if}
+					</div>
+				{/each}
+			{/if}
+		{/each}
+	{/if}
+{/snippet}
+
 <!-- Content -->
 <Card.Root class="border-border bg-card">
 	<Card.Content class="overflow-auto min-h-[320px]">
 		{#if !!data.mcp.pageIndexes && library}
 			<div class="font-mono text-xs">
-				<a
-					href={resolve(`/mcp/resources/doc-page/${library}`)}
-					class="w-full text-left text-primary hover:text-primary/80 hover:bg-accent transition-colors block">
-					/<span class="text-muted-foreground">:</span>
-				</a>
-				<div class="pl-4 border-l border-muted ml-1">
+				{#if verbose}
+					{@render verboseTreeNode(pageIndex?.verboseTree, '')}
+				{:else}
 					{@render treeNode(pageIndex?.tree, '')}
-				</div>
+				{/if}
 			</div>
 		{:else}
 			<p class="text-xs text-muted-foreground"># no pages found for {library}</p>

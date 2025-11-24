@@ -63,9 +63,6 @@
 		}
 	});
 
-	$effect(() => {
-		debug({ lib, libraryKey, currentNode, pathSegments, isRoot, hasChildren, collapsibleOpen });
-	});
 </script>
 
 <div class="container mx-auto px-4 py-8 max-w-6xl">

@@ -79,15 +79,31 @@ function buildIndexes(options: LibraryFilterOptions) {
 	});
 
 	const pageIndexes = librarySummaries.map(({ key }) => {
+		const lib = libs.get(key);
 		const result = getPageIndex(libs, key);
-		const tree = result.isOk() ? result.value.tree ?? {} : {};
+		const tree = result.isOk() ? result.value.tree ?? [] : [];
+
+		const verboseResult = getPageIndex(libs, key, true);
+		const verboseTree = verboseResult.isOk() ? verboseResult.value.tree ?? [] : [];
+
+		const wrappedTree = [{ '/': tree }];
+		const wrappedVerboseTree = [
+			{
+				'/': {
+					essence: lib?.essence,
+					children: verboseTree
+				}
+			}
+		];
+
 		const textBody = toYaml({ '/': tree });
 		return {
 			label: key,
 			yaml: textBody,
 			paths: flattenPagePaths(tree, key),
 			// Raw data for interactivity
-			tree
+			tree: wrappedTree,
+			verboseTree: wrappedVerboseTree
 		};
 	});
 
@@ -115,7 +131,6 @@ export const load: LayoutServerLoad = async () => {
 			markdownVariants
 		}
 	};
-	debug({libraries, pageIndexes})
 
 	return res;
 };

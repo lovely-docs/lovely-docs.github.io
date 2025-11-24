@@ -11,21 +11,29 @@
 	const libraries = $derived(data.mcp.libraries);
 	const libraryOptions = $derived(libraries.map((l: any) => l.key));
 	const selectedLibrary = $derived(page.params.library ?? '');
+	const verbose = $derived(page.url.hash.slice(1).includes('verbose=true'));
 
 	const pageIndex = $derived(data.mcp.pageIndexes.find((p: any) => p.label === selectedLibrary));
 
 	const resourceRoot = 'list-pages';
 
 	function handleLibraryChange(value: string) {
-		goto(resolve(`/mcp/tools/list-pages/${value}`));
+		const verb = verbose ? '#&verbose=true' : '';
+		goto(resolve(`/mcp/tools/list-pages/${value}${verb}`));
+	}
+
+	function toggleVerbose() {
+		const verb = !verbose ? '#&verbose=true' : '';
+		goto(resolve(`/mcp/tools/list-pages/${selectedLibrary}${verb}`));
 	}
 </script>
 
-{#snippet treeNode(node: unknown, prefix: string = '')}
+{#snippet treeNode(node: unknown, pathPart: string = '')}
 	{#if Array.isArray(node)}
 		{#each node as child}
 			{#if typeof child === 'string'}
-				{@const fullPath = prefix ? `${prefix}/${child}` : child}
+				{@const childPathPart = pathPart && pathPart !== '/' ? `${pathPart}/${child}` : child}
+				{@const fullPath = childPathPart === '/' ? selectedLibrary : `${selectedLibrary}/${childPathPart}`}
 				<a
 					href={resolve(`/mcp/tools/get-page/${fullPath}#digest`)}
 					class="w-full text-left text-primary hover:text-primary/80 hover:bg-accent transition-colors block">
@@ -33,7 +41,8 @@
 				</a>
 			{:else if typeof child === 'object' && child !== null}
 				{#each Object.entries(child) as [key, value]}
-					{@const fullPath = prefix ? `${prefix}/${key}` : key}
+					{@const childPathPart = pathPart && pathPart !== '/' ? `${pathPart}/${key}` : key}
+					{@const fullPath = childPathPart === '/' ? selectedLibrary : `${selectedLibrary}/${childPathPart}`}
 					<div>
 						<a
 							href={resolve(`/mcp/tools/get-page/${fullPath}#digest`)}
@@ -41,8 +50,42 @@
 							{key}<span class="text-muted-foreground">:</span>
 						</a>
 						<div class="pl-4 border-l border-muted ml-1">
-							{@render treeNode(value, fullPath)}
+							{@render treeNode(value, childPathPart)}
 						</div>
+					</div>
+				{/each}
+			{/if}
+		{/each}
+	{/if}
+{/snippet}
+
+{#snippet verboseTreeNode(node: unknown, pathPart: string = '')}
+	{#if Array.isArray(node)}
+		{#each node as child}
+			{#if typeof child === 'object' && child !== null}
+				{#each Object.entries(child) as [key, value]}
+					{@const childPathPart = pathPart && pathPart !== '/' ? `${pathPart}/${key}` : key}
+					{@const fullPath = childPathPart === '/' ? selectedLibrary : `${selectedLibrary}/${childPathPart}`}
+					{@const essence = typeof value === 'string' ? value : (value as any).essence}
+					{@const children = typeof value === 'object' && value !== null ? (value as any).children : null}
+
+					<div class="mb-1">
+						<a
+							href={resolve(`/mcp/tools/get-page/${fullPath}`)}
+							class="flex items-baseline overflow-hidden text-primary hover:text-primary/80 hover:bg-accent transition-colors w-full">
+							<span class="whitespace-nowrap shrink-0">{key}</span>
+							{#if essence}
+								<span class="text-muted-foreground text-xs truncate" title={essence}>
+									: {essence}
+								</span>
+							{/if}
+						</a>
+
+						{#if children}
+							<div class="pl-4 border-l border-muted ml-1 mt-1">
+								{@render verboseTreeNode(children, childPathPart)}
+							</div>
+						{/if}
 					</div>
 				{/each}
 			{/if}
@@ -90,6 +133,16 @@
 				</Select.Root>
 			</div>
 
+			<span class="text-foreground">,</span>
+
+			<div class="flex items-center gap-1">
+				<span class="text-muted-foreground">verbose=</span>
+				<label
+					class="flex items-center gap-2 cursor-pointer bg-background border border-border px-2 h-7 rounded-md hover:bg-accent/50 transition-colors">
+					<input type="checkbox" class="accent-primary h-3 w-3" checked={verbose} onchange={toggleVerbose} />
+				</label>
+			</div>
+
 			<span class="text-foreground">);</span>
 		</Card.Content>
 	</Card.Root>
@@ -99,14 +152,11 @@
 		<Card.Content class="overflow-auto min-h-[320px]">
 			{#if pageIndex}
 				<div class="font-mono text-xs">
-					<a
-						href={resolve(`/mcp/tools/get-page/${selectedLibrary}#digest`)}
-						class="w-full text-left text-primary hover:text-primary/80 hover:bg-accent transition-colors block">
-						/<span class="text-muted-foreground">:</span>
-					</a>
-					<div class="pl-4 border-l border-muted ml-1">
-						{@render treeNode(pageIndex.tree, selectedLibrary)}
-					</div>
+					{#if verbose}
+						{@render verboseTreeNode(pageIndex?.verboseTree, '')}
+					{:else}
+						{@render treeNode(pageIndex?.tree, '')}
+					{/if}
 				</div>
 			{:else}
 				<p class="text-xs text-muted-foreground"># select a library to view pages</p>

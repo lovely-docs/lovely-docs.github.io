@@ -77,7 +77,7 @@
 	<div class="hidden" aria-hidden="true">
 		<!-- Index pages for each ecosystem -->
 		<a href={resolve('/mcp/resources/doc-index')}>doc-index</a>
-		<a href={resolve('/mcp/resources/doc-index-verbose')}>doc-index-verbose</a>
+
 		<!-- Page index for each library -->
 		{#each libraries as lib}
 			<a href={resolve(`/mcp/resources/page-index/${lib.key}`)}>page-index {lib.key}</a>

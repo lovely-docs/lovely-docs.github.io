@@ -19,6 +19,14 @@
 		const opts = data.mcp.libraries.map((lib: LibraryOption) => ({ value: lib.key, label: lib.name ?? lib.key }));
 		return opts.length > 0 ? opts : [{ value: '', label: '(no libraries available)' }];
 	});
+
+	const verbose = $derived(page.url.hash.slice(1).includes('verbose=true'));
+
+	function toggleVerbose() {
+		const verb = !verbose ? '&verbose=true' : '';
+		const hash = verb ? `#${verb}` : '';
+		goto(resolve(`/mcp/resources/page-index/${library}${hash}`));
+	}
 </script>
 
 <div class="space-y-2">
@@ -46,7 +54,9 @@
 				type="single"
 				value={library}
 				onValueChange={(lib) => {
-					goto(resolve(`/mcp/resources/page-index/${lib}`));
+					const verb = verbose ? '&verbose=true' : '';
+					const hash = verb ? `#${verb}` : '';
+					goto(resolve(`/mcp/resources/page-index/${lib}${hash}`));
 				}}>
 				<Select.Trigger size="sm" class="bg-background border-border text-foreground" aria-label="Ecosystem">
 					<span>{library}</span>
@@ -57,6 +67,16 @@
 					{/each}
 				</Select.Content>
 			</Select.Root>
+
+			<span class="text-foreground">?</span>
+
+			<div class="flex items-center gap-1">
+				<span class="text-muted-foreground">verbose=</span>
+				<label
+					class="flex items-center gap-2 cursor-pointer bg-background border border-border px-2 h-7 rounded-md hover:bg-accent/50 transition-colors">
+					<input type="checkbox" class="accent-primary h-3 w-3" checked={verbose} onchange={toggleVerbose} />
+				</label>
+			</div>
 		</Card.Content>
 	</Card.Root>
 

@@ -10,13 +10,27 @@
 
 	const ecosystems = $derived(data.mcp.ecosystems);
 	const ecosystemOptions = $derived(ecosystems);
-	const selectedEcosystem = $derived(page.url.hash.slice(1) || '*');
+
+	const hashParts = $derived(page.url.hash.slice(1).split('&'));
+	const selectedEcosystem = $derived(hashParts[0] || '*');
+	const verbose = $derived(hashParts.includes('verbose=true'));
+
 	const activeResource = $derived(
-		data.mcp.resources.find((r) => r.label === selectedEcosystem) || data.mcp.resources.find((r) => r.label === '*')
+		data.mcp.resources.find((r: any) => r.label === selectedEcosystem) ||
+			data.mcp.resources.find((r: any) => r.label === '*')
 	);
 
 	function handleEcosystemChange(value: string) {
-		const hash = value !== '*' ? `#${value}` : '';
+		const eco = value !== '*' ? value : '';
+		const verb = verbose ? '&verbose=true' : '';
+		const hash = eco || verb ? `#${eco}${verb}` : '';
+		goto(resolve(`/mcp/resources/doc-index${hash}`));
+	}
+
+	function toggleVerbose() {
+		const eco = selectedEcosystem !== '*' ? selectedEcosystem : '';
+		const verb = !verbose ? '&verbose=true' : '';
+		const hash = eco || verb ? `#${eco}${verb}` : '';
 		goto(resolve(`/mcp/resources/doc-index${hash}`));
 	}
 
@@ -35,7 +49,7 @@
 				value={resourceRoot}
 				onValueChange={(v) => handleResourceCommandChange(v, resourceRoot)}>
 				<Select.Trigger size="sm" class="bg-background border-border text-foreground" aria-label="Resource command">
-					<span>{resourceRoot}</span>
+					<span>index</span>
 				</Select.Trigger>
 				<Select.Content class="bg-popover border border-border text-popover-foreground">
 					{#each resourceCommands as cmd}
@@ -54,6 +68,16 @@
 					{/each}
 				</Select.Content>
 			</Select.Root>
+
+			<span class="text-foreground">?</span>
+
+			<div class="flex items-center gap-1">
+				<span class="text-muted-foreground">verbose=</span>
+				<label
+					class="flex items-center gap-2 cursor-pointer bg-background border border-border px-2 h-7 rounded-md hover:bg-accent/50 transition-colors">
+					<input type="checkbox" class="accent-primary h-3 w-3" checked={verbose} onchange={toggleVerbose} />
+				</label>
+			</div>
 		</Card.Content>
 	</Card.Root>
 
@@ -62,13 +86,23 @@
 		<Card.Content class="overflow-auto min-h-[320px]">
 			{#if activeResource}
 				<div class="font-mono text-sm">
-					{#each activeResource.index as lib}
-						<a
-							href={resolve(`/mcp/resources/page-index/${lib}`)}
-							class="block w-full text-left text-primary hover:text-primary/80 hover:bg-accent transition-colors">
-							<span class="text-muted-foreground">- </span>{lib}
-						</a>
-					{/each}
+					{#if verbose}
+						{#each Object.entries(activeResource.verbose) as [lib, summary]}
+							<a
+								href={resolve(`/mcp/resources/page-index/${lib}`)}
+								class="block w-full text-left text-primary hover:text-primary/80 hover:bg-accent transition-colors">
+								{lib}<span class="text-muted-foreground">: {summary}</span>
+							</a>
+						{/each}
+					{:else}
+						{#each activeResource.index as lib}
+							<a
+								href={resolve(`/mcp/resources/page-index/${lib}`)}
+								class="block w-full text-left text-primary hover:text-primary/80 hover:bg-accent transition-colors">
+								<span class="text-muted-foreground">- </span>{lib}
+							</a>
+						{/each}
+					{/if}
 				</div>
 			{:else}
 				<p class="text-xs text-muted-foreground"># no resources for ecosystem {selectedEcosystem}</p>

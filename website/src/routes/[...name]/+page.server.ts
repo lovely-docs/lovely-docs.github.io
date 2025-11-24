@@ -13,8 +13,6 @@ export const load: PageServerLoad = async ({ params }) => {
 
 	const { libraryInfo, currentNode } = getDocPageData(libraryKey, pathSegments);
 
-	debug({ libraryKey, pathSegments, nodeName: currentNode.displayName });
-
 	return {
 		libraryInfo,
 		libraryKey,
