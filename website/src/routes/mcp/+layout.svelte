@@ -22,7 +22,9 @@
 	const mode = $derived(page.route.id?.startsWith('/mcp/tools') ? 'tools' : 'resources');
 
 	// Check if we're on a doc-page route for the markdown toggle
-	const isDocPage = $derived(page.route.id?.startsWith('/mcp/resources/doc-page/') || page.route.id?.startsWith('/mcp/tools/get-page/'));
+	const isDocPage = $derived(
+		page.route.id?.startsWith('/mcp/resources/doc-page/') || page.route.id?.startsWith('/mcp/tools/get-page/')
+	);
 </script>
 
 <div class="mcp-theme min-h-screen bg-background text-foreground font-mono">
@@ -32,7 +34,7 @@
 				<h1 class="text-2xl tracking-widest uppercase">lovely-docs :: Through the eyes of a Bender unit</h1>
 			</div>
 			<div role="tablist" aria-label="MCP data views" class="flex gap-2 items-center">
-				<a href={resolve('/')} class="">
+				<a href={resolve('/human')} class="">
 					<Button variant="outline" size="sm">
 						<User size={16} />
 					</Button>
@@ -76,6 +78,7 @@
 	<!-- Hidden links for static site generation crawler -->
 	<div class="hidden" aria-hidden="true">
 		<!-- Index pages for each ecosystem -->
+		<a href={resolve('/human')}>human-index</a>
 		<a href={resolve('/mcp/resources/doc-index')}>doc-index</a>
 
 		<!-- Page index for each library -->

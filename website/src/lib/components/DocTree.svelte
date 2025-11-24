@@ -10,7 +10,7 @@
 	}
 
 	function buildHref(base: string, key: string): string {
-		return resolve(`/${libraryKey}/${buildPath(base, key)}`);
+		return resolve(`/human/${libraryKey}/${buildPath(base, key)}`);
 	}
 </script>
 
@@ -44,7 +44,8 @@
 							{/if}
 						</div>
 						<span class="font-mono text-sm truncate group-hover:text-foreground transition-colors flex gap-1"
-							>{child.displayName}: <span class="text-muted-foreground" title={child.markdown.essence}>{child.markdown.essence}</span></span>
+							>{child.displayName}:
+							<span class="text-muted-foreground" title={child.markdown.essence}>{child.markdown.essence}</span></span>
 					</div>
 				</div>
 			</a>

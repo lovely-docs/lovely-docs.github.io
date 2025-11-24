@@ -62,21 +62,20 @@
 			// ignore storage errors
 		}
 	});
-
 </script>
 
 <div class="container mx-auto px-4 py-8 max-w-6xl">
 	<div class="flex items-center justify-between mb-6">
 		<nav class="flex items-center gap-2 text-sm text-muted-foreground">
-			<a href={resolve('/')} class="hover:text-foreground transition-colors">Home</a>
+			<a href={resolve('/human')} class="hover:text-foreground transition-colors">Home</a>
 			<span>/</span>
-			<a href={resolve(`/${libraryKey}`)} class="hover:text-foreground transition-colors">{lib.name}</a>
+			<a href={resolve(`/human/${libraryKey}`)} class="hover:text-foreground transition-colors">{lib.name}</a>
 			{#each breadcrumbs as crumb}
 				<span>/</span>
 				{#if crumb.isLast}
 					<span class="text-foreground">{crumb.name}</span>
 				{:else}
-					<a href={resolve(`/${crumb.href}`)} class="hover:text-foreground transition-colors">
+					<a href={resolve(`/human/${crumb.href}`)} class="hover:text-foreground transition-colors">
 						{crumb.name}
 					</a>
 				{/if}

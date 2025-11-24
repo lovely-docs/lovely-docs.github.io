@@ -2,6 +2,9 @@
 import adapter from '@sveltejs/adapter-static'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
+const repo = process.env.GITHUB_REPOSITORY?.split('/')[1];
+const base = repo && repo !== 'lovely-docs.github.io' ? repo : '';
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	// Consult https://svelte.dev/docs/kit/integrations
@@ -24,7 +27,7 @@ const config = {
 
 		}),
 		paths: {
-			base: "/lovely-docs"
+			base
 		},
 		prerender: {
 			handleUnseenRoutes: 'warn',

@@ -52,7 +52,7 @@
 					{@const essence = typeof value === 'string' ? value : (value as any).essence}
 					{@const children = typeof value === 'object' && value !== null ? (value as any).children : null}
 
-					<div class="mb-1">
+					<div class="">
 						<a
 							href={resolve(`/mcp/resources/doc-page/${fullPath}`)}
 							class="w-full text-left text-primary hover:text-primary/80 hover:bg-accent transition-colors block text-nowrap">
