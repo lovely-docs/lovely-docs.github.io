@@ -49,15 +49,32 @@ export const buildNested = (node: any): unknown[] => {
 	return items;
 };
 
+export const buildNestedVerbose = (node: any): unknown[] => {
+	const items: unknown[] = [];
+	for (const [key, child] of Object.entries(node.children ?? {})) {
+		const childNode = child as any;
+		const hasChildren = childNode && Object.keys(childNode.children ?? {}).length > 0;
+		if (!hasChildren) {
+			items.push({ [key]: childNode.essence });
+		} else {
+			items.push({
+				[key]: { essence: childNode.essence, children: buildNestedVerbose(childNode) },
+			});
+		}
+	}
+	return items;
+};
+
 export function getPageIndex(
 	libraries: Map<string, LibrarySummary>,
-	library: string
+	library: string,
+	verbose: boolean = false
 ): Result<Record<string, unknown>, string> {
 	const byKey = libraries.get(library);
 	if (!byKey) return err(`Unknown library: ${library}`);
 	const tree = getRelevantEssenceSubTree(library, "/");
 	if (!tree) return ok({});
-	return ok({ tree: buildNested(tree) });
+	return ok({ tree: verbose ? buildNestedVerbose(tree) : buildNested(tree) });
 }
 
 export function getPage(

@@ -77,11 +77,12 @@ export function getServer(options: LibraryFilterOptions): McpServer {
 			description: "Get available libraries with the `listLibraries` tool",
 			inputSchema: {
 				library: z.string(),
+				verbose: z.boolean().optional(),
 			},
 		},
-		async ({ library }: { library: string }) => {
+		async ({ library, verbose }: { library: string; verbose?: boolean }) => {
 			const libs = filterLibraries(getLibraries(), options);
-			const result = getPageIndex(libs, library);
+			const result = getPageIndex(libs, library, verbose);
 			if (result.isErr()) return mcpError(result.error);
 			const pages = result.value.tree ?? {};
 			return {
@@ -123,14 +124,14 @@ export function getServer(options: LibraryFilterOptions): McpServer {
 	// Static libraries index: overview of available libraries
 	server.registerResource(
 		"doc-index",
-		new ResourceTemplate("lovely-docs://doc-index/{ecosystem}", { list: undefined }),
+		new ResourceTemplate("lovely-docs://doc-index/{ecosystem}{?verbose}", { list: undefined }),
 		{
 			title: "Index of available libraries",
 			description: `Available ecossytems: [${Array.from(
 				filterEcosystems(getEcosystems(getLibraries()), options)
 			)
 				.sort()
-				.join(", ")}] or * for all.`,
+				.join(", ")}] or * for all. Set verbose=true for descriptions.`,
 			mimeType: "text/yaml",
 		},
 		async (uri: URL, variables: any, extra: any) => {
@@ -139,43 +140,20 @@ export function getServer(options: LibraryFilterOptions): McpServer {
 				typeof variables.ecosystem === "string"
 					? variables.ecosystem
 					: variables.ecosystem?.[0];
-			const libs = filterLibraries(getLibraries(), options);
-			const idx = libraryIndex(libs, ecosystem);
-			return {
-				contents: [
-					{
-						uri: uri.href,
-						text: toYaml(Object.keys(idx)),
-					},
-				],
-			};
-		}
-	);
 
-	server.registerResource(
-		"doc-index-verbose",
-		new ResourceTemplate("lovely-docs://doc-index-verbose/{ecosystem}", { list: undefined }),
-		{
-			title: "Index of available libraries with a short description for each library",
-			description: `Available ecossytems: [${Array.from(
-				filterEcosystems(getEcosystems(getLibraries()), options)
-			)
-				.sort()
-				.join(", ")}] or * for all.`,
-			mimeType: "text/yaml",
-		},
-		async (uri: URL, variables: any, extra: any) => {
-			const ecosystem =
-				typeof variables.ecosystem === "string"
-					? variables.ecosystem
-					: variables.ecosystem?.[0];
+			const vParam = typeof variables.verbose === "string" ? variables.verbose : variables.verbose?.[0];
+			const verbose = vParam === "true";
+
 			const libs = filterLibraries(getLibraries(), options);
 			const idx = libraryIndex(libs, ecosystem);
+
+			const payload = verbose ? idx : Object.keys(idx);
+
 			return {
 				contents: [
 					{
 						uri: uri.href,
-						text: toYaml(idx),
+						text: toYaml(payload),
 					},
 				],
 			};
@@ -184,18 +162,23 @@ export function getServer(options: LibraryFilterOptions): McpServer {
 
 	server.registerResource(
 		"page-index",
-		new ResourceTemplate("lovely-docs://index/{name}", { list: undefined }),
+		new ResourceTemplate("lovely-docs://index/{name}{?verbose}", { list: undefined }),
 		{
 			title: "Index of pages for a library",
+			description: "Set verbose=true to include page essence/summary in the tree.",
 			mimeType: "text/yaml",
 		},
 		async (uri: URL, variables: any, extra: any) => {
 			const name = typeof variables.name === "string" ? variables.name : variables.name?.[0];
 			if (!name)
 				throw new ResourceResponseError("Missing required parameter: name", uri.href);
+
+			const vParam = typeof variables.verbose === "string" ? variables.verbose : variables.verbose?.[0];
+			const verbose = vParam === "true";
+
 			debug(uri, variables);
 			const libs = filterLibraries(getLibraries(), options);
-			const result = getPageIndex(libs, name);
+			const result = getPageIndex(libs, name, verbose);
 			if (result.isErr()) throw new ResourceResponseError(result.error, uri.href);
 			const pages = result.value.tree ?? {};
 
