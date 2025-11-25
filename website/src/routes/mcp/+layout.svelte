@@ -7,7 +7,7 @@
 	import { goto } from '$app/navigation';
 	import { mcpState } from '$lib/mcp-state.svelte';
 	import type { Snippet } from 'svelte';
-	import { User } from '@lucide/svelte';
+	import { SquareArrowLeft, User } from '@lucide/svelte';
 
 	const { data, children } = $props<{ data: LayoutData; children: Snippet }>();
 
@@ -31,6 +31,11 @@
 	<div class="w-full px-4 py-8 space-y-2">
 		<header class="border-b border-border pb-4 mb-4 flex flex-col md:flex-row md:items-end justify-between gap-4">
 			<div class="flex items-center gap-3">
+				<a href={resolve('/')} aria-label="Go back">
+					<Button variant="ghost" size="icon" class="size-8">
+						<SquareArrowLeft class="size-6" />
+					</Button>
+				</a>
 				<h1 class="text-2xl tracking-widest uppercase">lovely-docs :: Through the eyes of a Bender unit</h1>
 			</div>
 			<div role="tablist" aria-label="MCP data views" class="flex gap-2 items-center">

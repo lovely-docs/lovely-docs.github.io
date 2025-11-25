@@ -2,7 +2,7 @@
 	import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '$lib/components/ui/card';
 	import { Badge } from '$lib/components/ui/badge';
 	import { Button } from '$lib/components/ui/button';
-	import { Github, Bot, ArrowBigLeft } from '@lucide/svelte';
+	import { Github, Bot, ArrowLeft, SquareArrowLeft } from '@lucide/svelte';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 
 	import dbg from 'debug';
@@ -29,13 +29,13 @@
 		return Array.from(set).sort();
 	});
 
-	let selectedEcosystems = $derived(allEcosystems);
+	let selectedEcosystems = $state<string[]>([]);
 
 	const filteredLibraries = $derived.by<[string, LibrarySummary][]>(() => {
-		// If there are no ecosystem tags at all, just show all libraries.
-		if (!allEcosystems.length) return Array.from(libraries.entries());
-		// When some ecosystems exist but none are selected, show nothing.
-		if (!selectedEcosystems.length) return [];
+		// If no ecosystems are selected, show all libraries
+		console.log(selectedEcosystems);
+		if (!selectedEcosystems.length) return Array.from(libraries.entries());
+		// Otherwise, filter by selected ecosystems
 		return Array.from(libraries.entries()).filter(([, lib]) =>
 			lib.ecosystems.some((eco) => selectedEcosystems.includes(eco))
 		);
@@ -44,9 +44,13 @@
 
 <div class="container mx-auto px-4 py-8 max-w-6xl">
 	<div class="flex items-center justify-between mb-8">
-		<div>
-			<a href={resolve('/')}><ArrowBigLeft /></a>
-			<h1 class="text-4xl font-bold tracking-tight mb-2">Lovely Docs</h1>
+		<div class="flex items-baseline gap-2">
+			<a href={resolve('/')} aria-label="Go back">
+				<Button variant="ghost" size="icon" class="size-8">
+					<SquareArrowLeft class="size-6" />
+				</Button>
+			</a>
+			<h1 class="text-4xl font-bold tracking-tight">Lovely Docs</h1>
 		</div>
 		<div class="flex items-center gap-2">
 			<a href={resolve('/mcp')} title="Switch to MCP view" aria-label="Switch to MCP view">
@@ -54,7 +58,7 @@
 					variant="outline"
 					size="icon"
 					class="mcp-theme bg-background text-foreground border-border hover:bg-accent">
-					<Bot size={20} />
+					<Bot size={24} />
 				</Button>
 			</a>
 			<a href="https://github.com/xl0/lovely-docs" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
@@ -83,53 +87,47 @@
 		</div>
 	{/if}
 
-	{#if allEcosystems.length && !selectedEcosystems.length}
-		<p class="text-sm text-muted-foreground">
-			No ecosystems selected. Choose one or more ecosystems above to see libraries.
-		</p>
-	{:else}
-		<div class="grid gap-4 grid-cols-1">
-			{#each filteredLibraries as [key, library]}
-				<a href={resolve(`/human/${key}`)} class="block">
-					<Card class="h-full hover:border-primary">
-						<CardHeader>
-							<CardTitle class="flex flex-col gap-2">
-								<div class="flex items-center justify-between gap-3">
-									<div class="flex items-center gap-2 flex-wrap">
-										<span>{library.name}</span>
-										{#if library.ecosystems?.length}
-											<div class="flex flex-wrap gap-1">
-												{#each library.ecosystems as eco}
-													<Badge variant="outline" class="text-[0.7rem] px-1.5 py-0">
-														{eco}
-													</Badge>
-												{/each}
-											</div>
-										{/if}
-									</div>
-									<div class="flex items-center gap-2">
-										{#if library.source_type}
-											<Badge variant="secondary">{library.source_type}</Badge>
-										{/if}
-										{#if library.source?.commit}
-											<span class="text-xs text-muted-foreground font-mono">
-												{library.source.commit.slice(0, 7)}
-											</span>
-										{/if}
-									</div>
+	<div class="grid gap-4 grid-cols-1">
+		{#each filteredLibraries as [key, library]}
+			<a href={resolve(`/human/${key}`)} class="block">
+				<Card class="h-full hover:border-primary">
+					<CardHeader>
+						<CardTitle class="flex flex-col gap-2">
+							<div class="flex items-center justify-between gap-3">
+								<div class="flex items-center gap-2 flex-wrap">
+									<span>{library.name}</span>
+									{#if library.ecosystems?.length}
+										<div class="flex flex-wrap gap-1">
+											{#each library.ecosystems as eco}
+												<Badge variant="outline">
+													{eco}
+												</Badge>
+											{/each}
+										</div>
+									{/if}
 								</div>
-								{#if library.essence}
-									<span class="text-sm text-muted-foreground font-normal">{library.essence}</span>
-								{:else if library.source}
-									<CardDescription>
-										{library.source.repo || library.source.name || 'No description'}
-									</CardDescription>
-								{/if}
-							</CardTitle>
-						</CardHeader>
-					</Card>
-				</a>
-			{/each}
-		</div>
-	{/if}
+								<div class="flex items-center gap-2">
+									{#if library.source_type}
+										<Badge variant="secondary">{library.source_type}</Badge>
+									{/if}
+									{#if library.source?.commit}
+										<span class="text-xs text-muted-foreground font-mono">
+											{library.source.commit.slice(0, 7)}
+										</span>
+									{/if}
+								</div>
+							</div>
+							{#if library.essence}
+								<span class="text-sm text-muted-foreground font-normal">{library.essence}</span>
+							{:else if library.source}
+								<CardDescription>
+									{library.source.repo || library.source.name || 'No description'}
+								</CardDescription>
+							{/if}
+						</CardTitle>
+					</CardHeader>
+				</Card>
+			</a>
+		{/each}
+	</div>
 </div>
