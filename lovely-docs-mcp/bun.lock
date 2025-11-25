@@ -6,12 +6,9 @@
       "dependencies": {
         "@logtail/node": "^0.5.6",
         "@modelcontextprotocol/sdk": "^1.22.0",
-        "@types/debug": "^4.1.12",
-        "@types/yaml": "^1.9.7",
         "cors": "^2.8.5",
         "debug": "^4.4.3",
         "express": "^5.1.0",
-        "lovely-docs-mcp": ".",
         "neverthrow": "^8.2.0",
         "simple-git": "^3.30.0",
         "valibot": "^1.1.0",
@@ -20,8 +17,10 @@
       },
       "devDependencies": {
         "@types/cors": "^2.8.19",
+        "@types/debug": "^4.1.12",
         "@types/express": "^5.0.5",
         "@types/node": "^24.10.1",
+        "@types/yaml": "^1.9.7",
         "@types/yargs": "^17.0.35",
         "typescript": "^5.9.3",
       },
@@ -189,8 +188,6 @@
     "isexe": ["isexe@2.0.0", "", {}, "sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw=="],
 
     "json-schema-traverse": ["json-schema-traverse@1.0.0", "", {}, "sha512-NM8/P9n3XjXhIZn1lLhkFaACTOURQXjWhV4BA/RnOv8xvgqtqpAX9IO4mRQxSx1Rlo4tqzeqb0sOlruaOy3dug=="],
-
-    "lovely-docs-mcp": ["lovely-docs-mcp@root:", {}],
 
     "math-intrinsics": ["math-intrinsics@1.1.0", "", {}, "sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g=="],
 
