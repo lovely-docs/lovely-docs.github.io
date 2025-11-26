@@ -1,4 +1,4 @@
-import { getLibrary, type DocItem } from 'lovely-docs-mcp/doc-cache';
+import { getLibrary, type DocItem } from 'lovely-docs/doc-cache';
 import { error } from '@sveltejs/kit';
 
 function stripMarkdown(node: DocItem): DocItem {

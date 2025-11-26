@@ -32,7 +32,7 @@
 	};
 
 	const MCP_SERVER_NAME = 'lovely-docs';
-	const PACKAGE_NAME = 'lovely-docs-mcp';
+	const PACKAGE_NAME = 'lovely-docs';
 	const REMOTE_URL = 'https://lovely-docs-production.up.railway.app/mcp';
 
 	// ============================================================================

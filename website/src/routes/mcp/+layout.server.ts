@@ -7,8 +7,8 @@ import {
 	getLibraries,
 	markdownVariantKeys,
 	type LibraryFilterOptions
-} from 'lovely-docs-mcp/doc-cache';
-import { getPageIndex, libraryIndex } from 'lovely-docs-mcp/handlers';
+} from 'lovely-docs/doc-cache';
+import { getPageIndex, libraryIndex } from 'lovely-docs/handlers';
 
 import dbg from 'debug';
 const debug = dbg('app:mcp:tools:layout:server');

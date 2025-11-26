@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import { FileText, FolderOpen } from '@lucide/svelte';
-	import type { DocItem } from 'lovely-docs-mcp/doc-cache';
+	import type { DocItem } from 'lovely-docs/doc-cache';
 
 	let { node, libraryKey, basePath = '' }: { node: DocItem; libraryKey: string; basePath?: string } = $props();
 

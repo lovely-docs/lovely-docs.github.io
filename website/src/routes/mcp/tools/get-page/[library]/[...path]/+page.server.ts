@@ -1,6 +1,6 @@
 import { getDocPageData } from '$lib/server/docs';
-import { buildNested } from 'lovely-docs-mcp/handlers';
-import type { MarkdownLevel } from 'lovely-docs-mcp/doc-cache';
+import { buildNested } from 'lovely-docs/handlers';
+import type { MarkdownLevel } from 'lovely-docs/doc-cache';
 
 import dbg from 'debug';
 const debug = dbg('app:mcp:tools:get-page:server');

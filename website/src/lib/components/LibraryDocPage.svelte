@@ -8,7 +8,7 @@
 	import { Badge } from '$lib/components/ui/badge';
 	import * as Collapsible from '$lib/components/ui/collapsible';
 	import { Github, ChevronDown, Bot } from '@lucide/svelte';
-	import type { LibraryDBItem, DocItem } from 'lovely-docs-mcp/doc-cache';
+	import type { LibraryDBItem, DocItem } from 'lovely-docs/doc-cache';
 	import dbg from 'debug';
 
 	let { data } = $props();
