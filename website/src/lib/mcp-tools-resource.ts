@@ -2,6 +2,7 @@ import { goto } from "$app/navigation";
 import { resolve } from "$app/paths";
 
 type ResourceCommandId = ResourceCommand['id'];
+type ToolCommandId = ToolCommand['id'];
 type ResourceField = 'indexYaml' | 'verboseYaml';
 
 export type ResourceCommand =
@@ -26,10 +27,10 @@ export const toolCommands: ToolCommand[] = [
 ];
 
 
-export function handleResourceCommandChange(value: string, current: string) {
+export function handleResourceCommandChange(value: ResourceCommandId, current: string) {
 	if (value !== current) goto(resolve(`/mcp/resources/${value}`));
 }
 
-export function handleToolCommandChange(value: string, current: string) {
+export function handleToolCommandChange(value: ToolCommandId, current: string) {
 	if (value !== current) goto(resolve(`/mcp/tools/${value}`));
 }

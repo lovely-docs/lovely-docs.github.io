@@ -5,7 +5,7 @@
 	import * as Card from '$lib/components/ui/card';
 	import * as Select from '$lib/components/ui/select';
 	import Markdown from '$lib/components/Markdown.svelte';
-	import { handleToolCommandChange, toolCommands } from '$lib/mcp-tools-resource';
+	import { handleToolCommandChange, toolCommands, type ToolCommand } from '$lib/mcp-tools-resource';
 	import { mcpState } from '$lib/mcp-state.svelte';
 
 	const { data } = $props();
@@ -83,7 +83,10 @@
 		<Card.Content class="text-sm flex flex-wrap items-center gap-2 font-mono">
 			<span class="text-foreground/70">$</span>
 			<div class="flex items-center">
-				<Select.Root type="single" value={resourceRoot} onValueChange={(v) => handleToolCommandChange(v, resourceRoot)}>
+				<Select.Root
+					type="single"
+					value={resourceRoot}
+					onValueChange={(v) => handleToolCommandChange(v as ToolCommand['id'], resourceRoot)}>
 					<Select.Trigger
 						size="sm"
 						class="bg-background border-border text-foreground px-2 h-7"

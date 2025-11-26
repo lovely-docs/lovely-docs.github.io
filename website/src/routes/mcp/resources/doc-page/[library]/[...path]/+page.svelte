@@ -5,7 +5,7 @@
 	import Markdown from '$lib/components/Markdown.svelte';
 	import * as Card from '$lib/components/ui/card';
 	import * as Select from '$lib/components/ui/select';
-	import { handleResourceCommandChange, resourceCommands } from '$lib/mcp-tools-resource';
+	import { handleResourceCommandChange, resourceCommands, type ResourceCommand } from '$lib/mcp-tools-resource';
 	import { mcpState } from '$lib/mcp-state.svelte';
 
 	let { data } = $props();
@@ -86,7 +86,7 @@
 			<Select.Root
 				type="single"
 				value={resourceRoot}
-				onValueChange={(v) => handleResourceCommandChange(v, resourceRoot)}>
+				onValueChange={(v) => handleResourceCommandChange(v as ResourceCommand['id'], resourceRoot)}>
 				<Select.Trigger size="sm" class="bg-background border-border text-foreground" aria-label="Resource command">
 					<span>{resourceRoot}</span>
 				</Select.Trigger>

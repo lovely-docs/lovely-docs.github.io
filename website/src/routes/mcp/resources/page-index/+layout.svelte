@@ -4,7 +4,7 @@
 	import { page } from '$app/state';
 	import * as Card from '$lib/components/ui/card';
 	import * as Select from '$lib/components/ui/select';
-	import { handleResourceCommandChange, resourceCommands } from '$lib/mcp-tools-resource.js';
+	import { handleResourceCommandChange, resourceCommands, type ResourceCommand } from '$lib/mcp-tools-resource.js';
 	import type { LayoutData } from './$types.js';
 	type LibraryOption = LayoutData['mcp']['libraries'][number];
 
@@ -39,7 +39,7 @@
 			<Select.Root
 				type="single"
 				value={resourceRoot}
-				onValueChange={(v) => handleResourceCommandChange(v, resourceRoot)}>
+				onValueChange={(v) => handleResourceCommandChange(v as ResourceCommand['id'], resourceRoot)}>
 				<Select.Trigger size="sm" class="bg-background border-border text-foreground" aria-label="Resource command">
 					<span>{resourceRoot}</span>
 				</Select.Trigger>

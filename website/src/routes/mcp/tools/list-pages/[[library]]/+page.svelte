@@ -4,7 +4,7 @@
 	import { goto } from '$app/navigation';
 	import * as Card from '$lib/components/ui/card';
 	import * as Select from '$lib/components/ui/select';
-	import { handleToolCommandChange, toolCommands } from '$lib/mcp-tools-resource';
+	import { handleToolCommandChange, toolCommands, type ToolCommand } from '$lib/mcp-tools-resource';
 
 	const { data } = $props();
 
@@ -100,7 +100,10 @@
 			<span class="text-foreground/70">$</span>
 
 			<div class="flex items-center">
-				<Select.Root type="single" value={resourceRoot} onValueChange={(v) => handleToolCommandChange(v, resourceRoot)}>
+				<Select.Root
+					type="single"
+					value={resourceRoot}
+					onValueChange={(v) => handleToolCommandChange(v as ToolCommand['id'], resourceRoot)}>
 					<Select.Trigger
 						size="sm"
 						class="bg-background border-border text-foreground px-2 h-7"
