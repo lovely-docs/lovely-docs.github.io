@@ -16,6 +16,12 @@ import {
 
 const debug = dbg("app:mcp");
 
+const isDev = process.env.LOVELY_DOCS_DEV === "1";
+
+function getEnv(key: string): string | undefined {
+  return process.env[key];
+}
+
 // Null object pattern for logger
 class NullLogger {
   info(..._args: any[]) {}
@@ -40,20 +46,56 @@ export const mcpCommand = new Command("mcp")
   )
   .option("--exclude-libs <libs...>", "Exclude specific library keys")
   .option("--exclude-ecosystems <ecosystems...>", "Exclude specific ecosystems")
+  .option("--repo <url>", "Git repository URL")
+  .option("--branch <name>", "Git branch name")
+  .option("--git-cache-dir <path>", "Git cache directory")
+  .option("--git-sync", "Sync git repository before starting")
+  .option("--git-sync-only", "Only sync git repository and exit")
+  .option("--doc-dir <path>", "Direct path to doc_db directory")
   .action(async (options) => {
-    const configManager = new ConfigManager();
-    const config = await configManager.load();
+    // Parse options with environment variable fallbacks
+    const repo =
+      options.repo ??
+      getEnv("LOVELY_DOCS_REPO") ??
+      "https://github.com/xl0/lovely-docs";
+    const branch = options.branch ?? getEnv("LOVELY_DOCS_BRANCH") ?? "master";
+    const gitCacheDir =
+      options.gitCacheDir ?? getEnv("LOVELY_DOCS_GIT_CACHE_DIR");
+    const docDir = options.docDir ?? getEnv("LOVELY_DOCS_DOC_DIR");
+    const gitSync = options.gitSync ?? !isDev;
+    const gitSyncOnly = options.gitSyncOnly;
 
-    if (!config) {
-      console.error(
-        pc.red("Project not initialized. Run `npx lovely-docs init` first.")
-      );
-      process.exit(1);
+    let docDbPath: string;
+
+    // Determine doc_db path
+    if (docDir) {
+      // Explicit doc_db directory
+      docDbPath = docDir;
+      console.error(`Using explicit doc_db: ${docDbPath}`);
+    } else if (isDev && !gitCacheDir) {
+      // Development mode: use local doc_db from repository
+      const { join } = await import("path");
+      const { fileURLToPath } = await import("url");
+      const { dirname } = await import("path");
+      const __filename = fileURLToPath(import.meta.url);
+      const __dirname = dirname(__filename);
+      docDbPath = join(__dirname, "..", "..", "..", "doc_db");
+      console.error(`Development mode: using local doc_db at ${docDbPath}`);
+    } else {
+      // Production or explicit cache: use git sync
+      const docRepo = new DocRepo(gitCacheDir);
+
+      if (gitSync || gitSyncOnly) {
+        docDbPath = await docRepo.sync(repo, branch);
+        console.error(`Git sync completed successfully.`);
+
+        if (gitSyncOnly) {
+          process.exit(0);
+        }
+      } else {
+        docDbPath = docRepo.getDocDbPath(repo);
+      }
     }
-
-    // Initialize DocRepo and get path
-    const docRepo = new DocRepo();
-    const docDbPath = docRepo.getDocDbPath(config.repo);
 
     // Load libraries
     await loadLibrariesFromJson(docDbPath);
@@ -81,7 +123,7 @@ export const mcpCommand = new Command("mcp")
 
     if (options.transport === "http") {
       const port = parseInt(options.port, 10);
-      await startHttpServer(port, filterOptions, logtail, config.repo);
+      await startHttpServer(port, filterOptions, logtail, repo);
     } else {
       const stdio = new StdioServerTransport();
       const server = getServer(filterOptions);

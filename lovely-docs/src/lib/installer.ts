@@ -1,4 +1,4 @@
-import { join, dirname } from "path";
+import { join, dirname, relative } from "path";
 import { readFile, readdir } from "fs/promises";
 import { existsSync } from "fs";
 import fs from "fs-extra";
@@ -41,17 +41,17 @@ export class Installer {
     );
     await this.copyVariant(
       libPath,
-      join(this.targetDir, `${libraryName}.md.fulltext`),
+      join(this.targetDir, `${libraryName}.orig.md`),
       "fulltext"
     );
 
     // 2. Generate LLM_MAP.md
-    const essenceTree = await this.buildEssenceTree(libPath, index.map);
-    const llmMapContent = this.renderEssenceTree(essenceTree);
+    const essenceTree = await this.buildEssenceTree(libPath, index.map, "");
+    const llmMapContent = this.renderEssenceTree(essenceTree, libTargetDir);
     await fs.outputFile(join(libTargetDir, "LLM_MAP.md"), llmMapContent);
 
     // 3. Traverse and copy children
-    await this.processNode(libPath, libTargetDir, index.map);
+    await this.processNode(libPath, libTargetDir, index.map, "");
   }
 
   private async copyVariant(
@@ -61,11 +61,6 @@ export class Installer {
   ) {
     const sourceFile = join(sourceDir, `${variant}.md`);
     if (existsSync(sourceFile)) {
-      // If target is a directory (e.g. sveltejs_svelte), we shouldn't overwrite it with a file?
-      // The target structure says:
-      // .lovely-docs/sveltejs_svelte.md
-      // .lovely-docs/sveltejs_svelte/
-      // So sveltejs_svelte.md is a file, sveltejs_svelte is a dir. This is fine on Linux/macOS/Windows.
       await fs.copy(sourceFile, targetPath);
     }
   }
@@ -73,23 +68,16 @@ export class Installer {
   private async processNode(
     sourcePath: string,
     targetPath: string,
-    node: IndexNode
+    node: IndexNode,
+    relativePath: string
   ) {
     // Process children
     for (const [key, child] of Object.entries(node.children)) {
       const childSourcePath = join(sourcePath, key);
-
-      // Determine target path
-      // If it's a leaf or has content, it goes to targetPath/key.md
-      // But if it has children, it also needs a directory targetPath/key/
-
-      // The structure requested:
-      // runes.md
-      // runes/
-      //   $derived.md
+      const childRelativePath = relativePath ? `${relativePath}/${key}` : key;
 
       const childTargetFile = join(targetPath, `${key}.md`);
-      const childTargetFullFile = join(targetPath, `${key}.md.fulltext`);
+      const childTargetFullFile = join(targetPath, `${key}.orig.md`);
       const childTargetDir = join(targetPath, key);
 
       // Copy files
@@ -99,14 +87,20 @@ export class Installer {
       // Recurse if there are children
       if (Object.keys(child.children).length > 0) {
         await fs.ensureDir(childTargetDir);
-        await this.processNode(childSourcePath, childTargetDir, child);
+        await this.processNode(
+          childSourcePath,
+          childTargetDir,
+          child,
+          childRelativePath
+        );
       }
     }
   }
 
   private async buildEssenceTree(
     path: string,
-    node: IndexNode
+    node: IndexNode,
+    relativePath: string
   ): Promise<EssenceNode> {
     let essence = "";
     const essencePath = join(path, "essence.md");
@@ -116,17 +110,27 @@ export class Installer {
 
     const children: Record<string, EssenceNode> = {};
     for (const [key, child] of Object.entries(node.children)) {
-      children[key] = await this.buildEssenceTree(join(path, key), child);
+      const childRelativePath = relativePath ? `${relativePath}/${key}` : key;
+      children[key] = await this.buildEssenceTree(
+        join(path, key),
+        child,
+        childRelativePath
+      );
     }
 
     return {
       name: node.displayName,
       essence,
       children,
+      relativePath,
     };
   }
 
-  private renderEssenceTree(node: EssenceNode, depth = 0): string {
+  private renderEssenceTree(
+    node: EssenceNode,
+    baseDir: string,
+    depth = 0
+  ): string {
     let output = "";
     const indent = "  ".repeat(depth);
 
@@ -134,17 +138,16 @@ export class Installer {
       output += `# ${node.name} Map\n\n`;
       if (node.essence) output += `${node.essence}\n\n`;
     } else {
-      output += `${indent}- **${node.name}**`;
-      if (node.essence) {
-        // Clean up essence to fit in a list item if needed, or just append
-        const cleanEssence = node.essence.trim().replace(/\n/g, " ");
-        output += `: ${cleanEssence}`;
-      }
-      output += "\n";
+      const mdPath = node.relativePath
+        ? `./${node.relativePath}.md`
+        : "./root.md";
+      output += `${indent}[[${mdPath}]] ${node.essence
+        .trim()
+        .replace(/\n/g, " ")}\n`;
     }
 
     for (const child of Object.values(node.children)) {
-      output += this.renderEssenceTree(child, depth + 1);
+      output += this.renderEssenceTree(child, baseDir, depth + 1);
     }
 
     return output;
@@ -155,4 +158,5 @@ interface EssenceNode {
   name: string;
   essence: string;
   children: Record<string, EssenceNode>;
+  relativePath: string;
 }

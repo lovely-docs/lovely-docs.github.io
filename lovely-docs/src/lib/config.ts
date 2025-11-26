@@ -1,13 +1,18 @@
 import { readFile, writeFile } from "fs/promises";
-import { existsSync } from "fs";
 import { join } from "path";
-import { parse, stringify } from "yaml";
 import * as v from "valibot";
+import { parse, stringify } from "yaml";
 
 const ConfigSchema = v.object({
-  repo: v.optional(v.string(), "https://github.com/xl0/lovely-docs"),
-  branch: v.optional(v.string(), "master"),
-  installed: v.optional(v.array(v.string()), []),
+  source: v.object({
+    type: v.picklist(["git", "local"]),
+    repo: v.optional(v.string()),
+    branch: v.optional(v.string()),
+    gitCacheDir: v.optional(v.string()),
+    docDir: v.optional(v.string()),
+  }),
+  ecosystems: v.optional(v.array(v.string())),
+  installed: v.array(v.string()),
 });
 
 export type Config = v.Output<typeof ConfigSchema>;
@@ -22,26 +27,10 @@ export class ConfigManager {
   }
 
   async load(): Promise<Config | null> {
-    if (!existsSync(this.configPath)) {
-      return null;
-    }
-
     try {
       const content = await readFile(this.configPath, "utf-8");
       const data = parse(content);
-      const result = v.safeParse(ConfigSchema, data);
-      if (result.success) {
-        return result.output;
-      } else {
-        // If invalid, maybe return partial or throw?
-        // For now, let's return defaults merged with what we can
-        return {
-          repo: "https://github.com/xl0/lovely-docs",
-          branch: "master",
-          installed: [],
-          ...data,
-        };
-      }
+      return  v.parse(ConfigSchema, data);
     } catch (e) {
       return null;
     }
@@ -50,9 +39,5 @@ export class ConfigManager {
   async save(config: Config): Promise<void> {
     const content = stringify(config);
     await writeFile(this.configPath, content, "utf-8");
-  }
-
-  exists(): boolean {
-    return existsSync(this.configPath);
   }
 }

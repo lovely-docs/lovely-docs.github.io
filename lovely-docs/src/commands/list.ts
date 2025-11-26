@@ -5,6 +5,7 @@ import { DocRepo } from "../lib/doc-repo.js";
 
 export const listCommand = new Command("list")
   .description("List available documentation libraries")
+  .alias("l")
   .action(async () => {
     const configManager = new ConfigManager();
     const config = await configManager.load();
@@ -16,8 +17,16 @@ export const listCommand = new Command("list")
       process.exit(1);
     }
 
-    const docRepo = new DocRepo();
-    const libraries = await docRepo.listLibraries(config.repo);
+    // Determine doc_db path from config
+    let docDbPath: string;
+    if (config.docDir) {
+      docDbPath = config.docDir;
+    } else {
+      const docRepo = new DocRepo(config.gitCacheDir);
+      docDbPath = docRepo.getDocDbPath(config.repo);
+    }
+
+    const libraries = await new DocRepo().listLibraries(docDbPath);
 
     if (libraries.length === 0) {
       console.log(
@@ -51,9 +60,8 @@ export const listCommand = new Command("list")
         const installed = config.installed.includes(lib.id)
           ? pc.green(" (installed)")
           : "";
-        console.log(
-          `  ${pc.white(lib.name)} ${pc.gray(`(${lib.id})`)}${installed}`
-        );
+        const path = pc.gray(` → .lovely-docs/${lib.id}`);
+        console.log(`  ${pc.white(lib.name)}${path}${installed}`);
       }
     }
 
@@ -63,9 +71,8 @@ export const listCommand = new Command("list")
         const installed = config.installed.includes(lib.id)
           ? pc.green(" (installed)")
           : "";
-        console.log(
-          `  ${pc.white(lib.name)} ${pc.gray(`(${lib.id})`)}${installed}`
-        );
+        const path = pc.gray(` → .lovely-docs/${lib.id}`);
+        console.log(`  ${pc.white(lib.name)}${path}${installed}`);
       }
     }
     console.log("");

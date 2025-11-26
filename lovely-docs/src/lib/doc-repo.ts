@@ -11,7 +11,7 @@ export interface LibraryInfo {
   ecosystems: string[];
 }
 
-function getCacheDir(): string {
+export function getCacheDir(): string {
   if (process.platform === "win32") {
     return process.env.LOCALAPPDATA || join(homedir(), "AppData", "Local");
   }
@@ -21,6 +21,21 @@ function getCacheDir(): string {
   return process.env.XDG_CACHE_HOME || join(homedir(), ".cache");
 }
 
+export function getRepoPath(cacheDir: string, repoUrl: string): string {
+  try {
+    const url = new URL(repoUrl);
+    const hostname = url.hostname;
+    const pathname = url.pathname.replace(/^\//, "").replace(/\.git$/, "");
+    return join(cacheDir, hostname, pathname);
+  } catch (e) {
+    return join(cacheDir, "default");
+  }
+}
+
+export function getDocDbPath(repoPath: string): string {
+  return join(repoPath, "doc_db");
+}
+
 export class DocRepo {
   private cacheBase: string;
 
@@ -28,19 +43,8 @@ export class DocRepo {
     this.cacheBase = cacheDir || join(getCacheDir(), "lovely-docs", "git");
   }
 
-  private getRepoPath(repoUrl: string): string {
-    try {
-      const url = new URL(repoUrl);
-      const hostname = url.hostname;
-      const pathname = url.pathname.replace(/^\//, "").replace(/\.git$/, "");
-      return join(this.cacheBase, hostname, pathname);
-    } catch (e) {
-      return join(this.cacheBase, "default");
-    }
-  }
-
   async sync(repoUrl: string, branch: string): Promise<string> {
-    const targetGitRoot = this.getRepoPath(repoUrl);
+    const targetGitRoot = getRepoPath(this.cacheBase, repoUrl);
     const git = simpleGit();
 
     if (!existsSync(targetGitRoot)) {
@@ -65,12 +69,7 @@ export class DocRepo {
     return join(targetGitRoot, "doc_db");
   }
 
-  getDocDbPath(repoUrl: string): string {
-    return join(this.getRepoPath(repoUrl), "doc_db");
-  }
-
-  async listLibraries(repoUrl: string): Promise<LibraryInfo[]> {
-    const docDbPath = this.getDocDbPath(repoUrl);
+  async listLibraries(docDbPath: string): Promise<LibraryInfo[]> {
     if (!existsSync(docDbPath)) return [];
 
     const entries = await readdir(docDbPath, { withFileTypes: true });

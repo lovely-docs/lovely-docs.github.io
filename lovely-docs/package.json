@@ -27,8 +27,11 @@
   ],
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js",
-    "dev": "bun run src/index.ts"
+    "git-sync": "bun run src/index.ts mcp --git-sync-only",
+    "prepublishOnly": "bun run build",
+    "release": "bun publish",
+    "serve": "bun run dist/index.js mcp --transport http",
+    "dev": "LOVELY_DOCS_DEV=1 bun --watch run src/index.ts mcp --transport http"
   },
   "keywords": [
     "documentation",
