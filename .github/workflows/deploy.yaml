@@ -26,11 +26,11 @@ jobs:
 
       - name: Install MCP package dependencies
         run: bun install
-        working-directory: ./lovely-docs-mcp
+        working-directory: ./lovely-docs
 
       - name: Build MCP package
         run: bunx tsc
-        working-directory: ./lovely-docs-mcp
+        working-directory: ./lovely-docs
 
       - name: Install website dependencies
         run: bun install
