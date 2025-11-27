@@ -29,7 +29,7 @@ export const addCommand = new Command('add')
 		} else {
 			const repoPath = getRepoPath(config.source.gitCacheDir, config.source.repo);
 			const docRepo = new DocRepo(repoPath);
-			docDbPath = getDocDbPath(repoPath);
+			docDbPath = await docRepo.sync(config.source.repo, config.source.branch);
 		}
 
 		const targetDir = join(process.cwd(), config.installDir);

@@ -22,7 +22,8 @@ export const listCommand = new Command('list')
 			docDbPath = config.source.docDir;
 		} else {
 			const repoPath = getRepoPath(config.source.gitCacheDir, config.source.repo);
-			docDbPath = getDocDbPath(repoPath);
+			const docRepo = new DocRepo(repoPath);
+			docDbPath = await docRepo.sync(config.source.repo, config.source.branch);
 		}
 
 		const libraries = await listLibraries(docDbPath);

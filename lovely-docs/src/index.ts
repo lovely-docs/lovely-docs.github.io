@@ -4,6 +4,7 @@ import { addCommand } from './commands/add.js';
 import { initCommand } from './commands/init.js';
 import { listCommand } from './commands/list.js';
 import { removeCommand } from './commands/remove.js';
+import { updateCommand } from './commands/update.js';
 
 import { mcpCommand } from './commands/mcp.js';
 
@@ -20,6 +21,7 @@ program.name('lovely-docs').description('CLI tool to add curated documentation t
 program.addCommand(initCommand);
 program.addCommand(listCommand);
 program.addCommand(addCommand);
+program.addCommand(updateCommand);
 program.addCommand(removeCommand);
 program.addCommand(mcpCommand);
 

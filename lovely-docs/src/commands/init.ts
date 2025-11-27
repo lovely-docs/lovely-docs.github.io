@@ -1,5 +1,7 @@
 import * as p from '@clack/prompts';
 import { Command } from 'commander';
+import fs from 'fs-extra';
+import { dirname, join } from 'path';
 import pc from 'picocolors';
 import { ConfigManager } from '../lib/config.js';
 import { DocRepo, getCacheDir, getRepoPath } from '../lib/doc-repo.js';
@@ -120,6 +122,8 @@ export const initCommand = new Command('init')
 					p.cancel('Operation cancelled.');
 					process.exit(0);
 				}
+
+        docDir = choice;
 			}
 		}
 
@@ -163,6 +167,125 @@ export const initCommand = new Command('init')
 					};
 
 		await configManager.save(config);
+
+		// Update .gitignore
+		// 		const gitignorePath = join(process.cwd(), '.gitignore');
+		// 		try {
+		// 			if (await fs.pathExists(gitignorePath)) {
+		// 				const content = await fs.readFile(gitignorePath, 'utf-8');
+		// 				if (!content.includes(installDir)) {
+		// 					await fs.appendFile(gitignorePath, `\n${installDir}\n`);
+		// 					console.log(pc.gray(`Added ${installDir} to .gitignore`));
+		// 				}
+		// 			} else {
+		// 				await fs.writeFile(gitignorePath, `${installDir}\n`);
+		// 				console.log(pc.gray(`Created .gitignore with ${installDir}`));
+		// 			}
+		// 		} catch (e) {
+		// 			console.error(pc.yellow('Failed to update .gitignore'), e);
+		// 		}
+
+				// Generate Rules
+		// 		if (!options.quiet) {
+		// 			const ruleTargets = [
+		// 				{ label: 'Cursor', value: 'cursor', path: '.cursor/rules/lovely-docs.mdc' },
+		// 				{ label: 'Windsurf', value: 'windsurf', path: '.windsurf/rules/lovely-docs.md' },
+		// 				{ label: 'Google Antigravity', value: 'antigravity', path: '.agent/rules/lovely-docs.md' },
+		// 				{ label: 'Claude Code', value: 'claude', path: '.lovely-docs/CLAUDE.md' },
+		// 				{ label: 'Gemini', value: 'gemini', path: '.lovely-docs/GEMINI.md' },
+		// 				{ label: 'OpenCode', value: 'opencode', path: '.lovely-docs/AGENTS.md' }
+		// 			];
+
+		// 			const initialValues: string[] = [];
+		// 			if (await fs.pathExists(join(process.cwd(), '.cursor'))) initialValues.push('cursor');
+		// 			if (await fs.pathExists(join(process.cwd(), '.windsurf'))) initialValues.push('windsurf');
+		// 			if (await fs.pathExists(join(process.cwd(), '.agent'))) initialValues.push('antigravity');
+		// 			if (await fs.pathExists(join(process.cwd(), 'CLAUDE.md'))) initialValues.push('claude');
+		// 			if (await fs.pathExists(join(process.cwd(), '.gemini'))) initialValues.push('gemini');
+		// 			if (await fs.pathExists(join(process.cwd(), 'opencode.json'))) initialValues.push('opencode');
+
+		// 			const selectedRules = await p.multiselect({
+		// 				message: 'Generate AI Assistant Rules for:',
+		// 				options: ruleTargets.map((t) => ({ value: t.value, label: t.label })),
+		// 				initialValues: initialValues.length > 0 ? initialValues : undefined,
+		// 				required: false
+		// 			});
+
+		// 			if (!p.isCancel(selectedRules)) {
+		// 				const baseContent = `Documentation is located in ${installDir}. Start by reading LLM_MAP.md to locate relevant files. Prefer reading the .md digest files. Only read .full.md files if the digest is insufficient.`;
+
+		// 				for (const val of selectedRules as string[]) {
+		// 					const target = ruleTargets.find((t) => t.value === val);
+		// 					if (target) {
+		// 						const fullPath = join(process.cwd(), target.path);
+		// 						let finalContent = baseContent;
+
+		// 						if (val === 'cursor') {
+		// 							finalContent = `---
+		// alwaysApply: true
+		// ---
+
+		// ${baseContent}`;
+		// 						} else if (val === 'antigravity' || val === 'windsurf') {
+		// 							finalContent = `---
+		// trigger: always_on
+		// ---
+
+		// ${baseContent}`;
+		// 						} else if (val === 'gemini') {
+		// 							finalContent = `## Lovely Docs\n${baseContent}`;
+		// 							// Update .gemini/settings.json
+		// 							const settingsPath = join(process.cwd(), '.gemini/settings.json');
+		// 							try {
+		// 								await fs.ensureDir(dirname(settingsPath));
+		// 								let settings: any = {};
+		// 								if (await fs.pathExists(settingsPath)) {
+		// 									settings = await fs.readJson(settingsPath);
+		// 								}
+		// 								settings.context = settings.context || {};
+		// 								settings.context.fileName = settings.context.fileName || ['GEMINI.md'];
+		// 								if (Array.isArray(settings.context.fileName)) {
+		// 									if (!settings.context.fileName.includes('.lovely-docs/GEMINI.md')) {
+		// 										settings.context.fileName.push('.lovely-docs/GEMINI.md');
+		// 									}
+		// 								} else if (typeof settings.context.fileName === 'string') {
+		// 									settings.context.fileName = [settings.context.fileName, '.lovely-docs/GEMINI.md'];
+		// 								}
+		// 								await fs.writeJson(settingsPath, settings, { spaces: 2 });
+		// 								console.log(pc.green(`✓ Updated .gemini/settings.json`));
+		// 							} catch (e) {
+		// 								console.error(pc.yellow('Failed to update .gemini/settings.json'), e);
+		// 							}
+		// 						} else if (val === 'opencode') {
+		// 							finalContent = `## Lovely Docs\n${baseContent}`;
+		// 							// Update opencode.json
+		// 							const configPath = join(process.cwd(), 'opencode.json');
+		// 							try {
+		// 								let config: any = {};
+		// 								if (await fs.pathExists(configPath)) {
+		// 									config = await fs.readJson(configPath);
+		// 								}
+		// 								config.instructions = config.instructions || [];
+		// 								if (!config.instructions.includes('.lovely-docs/AGENTS.md')) {
+		// 									config.instructions.push('.lovely-docs/AGENTS.md');
+		// 								}
+		// 								await fs.writeJson(configPath, config, { spaces: 2 });
+		// 								console.log(pc.green(`✓ Updated opencode.json`));
+		// 							} catch (e) {
+		// 								console.error(pc.yellow('Failed to update opencode.json'), e);
+		// 							}
+		// 						} else {
+		// 							// Claude
+		// 							finalContent = `## Lovely Docs\n${baseContent}`;
+		// 						}
+
+		// 						await fs.ensureDir(dirname(fullPath));
+		// 						await fs.writeFile(fullPath, finalContent);
+		// 						console.log(pc.green(`✓ Updated ${target.path}`));
+		// 					}
+		// 				}
+		// 			}
+		// 		}
 
 		p.outro(pc.green(`Initialized! Run ${pc.bold('npx lovely-docs add')} to install libraries.`));
 	});
