@@ -3,6 +3,7 @@ export const prerender = true;
 export const ssr = true;
 
 import { browser } from '$app/environment';
+import { asset } from '$app/paths';
 import type { Load } from '@sveltejs/kit';
 
 export const load: Load = async ({ fetch }) => {
@@ -10,7 +11,7 @@ export const load: Load = async ({ fetch }) => {
 	if (browser) {
 		return {
 			// Return the promise directly (streaming) so we don't block navigation
-			searchIndex: fetch('/search-index.json')
+			searchIndex: fetch(asset('/search-index.json'))
 				.then((r) => r.json())
 				.catch((e) => {
 					console.error('Failed to load search index', e);

@@ -85,11 +85,9 @@
 						href={resolve('/human')}>Human view</a>
 				</p>
 				<p>
-					An alternative approach is to use MCP, but it's just not the right protocol for accessing documentation. It's
-					token-inefficient, pollutes the context window even when unused, lacks the flexibility of agent-specific
-					tools, and in practice agents are very reluctant to use it. See <a
-						class="text-primary hover:text-foreground transition-colors"
-						href="#mcp">MCP Server</a> for setup instructions if you really want to use MCP.
+					You can also use Lovely Docs <a class="text-primary hover:text-foreground transition-colors" href="#mcp"
+						>MCP Server</a
+					>, but a local folder works better for AI coding agents.
 				</p>
 			</div>
 		</section>
