@@ -1,0 +1,1 @@
+This section introduces advanced topics and concepts for the AI SDK and RSC API. It emphasizes that working with LLMs requires a different mental model compared to traditional software development. The section aims to help developers understand the paradigms and concepts behind the AI SDK and RSC API to build more sophisticated AI applications.

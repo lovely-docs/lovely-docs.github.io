@@ -1,0 +1,1 @@
+Section index for advanced AI SDK and RSC API concepts requiring different mental models than traditional development.

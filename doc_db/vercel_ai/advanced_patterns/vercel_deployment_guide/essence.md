@@ -1,0 +1,1 @@
+Deploy Next.js AI apps to Vercel with git workflow; configure maxDuration for LLM timeouts; add rate limiting and firewall security.

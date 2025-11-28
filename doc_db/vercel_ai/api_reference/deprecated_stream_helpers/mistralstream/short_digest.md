@@ -1,0 +1,1 @@
+**Deprecated in AI SDK 4.0.** MistralStream transforms Mistral API responses into ReadableStream, supporting Node.js, Edge Runtime, and browsers. Takes a Response object and optional callbacks (onStart, onToken, onCompletion, onFinal). Use the AI SDK Mistral Provider instead.

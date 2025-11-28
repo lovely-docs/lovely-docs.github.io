@@ -1,0 +1,1 @@
+Complete reference for building AI applications with Vercel AI SDK: foundations, getting started, agents, core functions, UI hooks, RSC, patterns, API reference, migrations, troubleshooting, and v6 beta features.

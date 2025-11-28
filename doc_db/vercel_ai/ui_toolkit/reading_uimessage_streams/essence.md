@@ -1,0 +1,1 @@
+readUIMessageStream converts UIMessageChunk streams to AsyncIterableStream of UIMessage objects; supports tool calls (text/tool-call/tool-result parts) and conversation resumption via message parameter.

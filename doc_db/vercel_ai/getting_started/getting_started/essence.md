@@ -1,0 +1,1 @@
+Entry point with quickstart guides and backend framework integration examples (Node.js HTTP, Express, Hono, Fastify, Nest.js).

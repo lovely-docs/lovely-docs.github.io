@@ -1,0 +1,1 @@
+useChat hook for streaming conversational UI with transport-based architecture, tool calling support, automatic resubmission, and granular callbacks for finish/error/data events.

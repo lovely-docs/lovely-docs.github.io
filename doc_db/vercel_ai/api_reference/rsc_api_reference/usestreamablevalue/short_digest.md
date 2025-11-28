@@ -1,0 +1,1 @@
+React hook that consumes streamable values and returns `[data, error, pending]` tuple. Import from `@ai-sdk/rsc`. Handles loading, error, and data states for streamed values passed as props.

@@ -1,0 +1,1 @@
+Fix useChat no response by converting messages to ModelMessage format with convertToModelMessages before streamText

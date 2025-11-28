@@ -1,0 +1,1 @@
+AI_LoadAPIKeyError: error thrown on failed API key loading; detect via LoadAPIKeyError.isInstance()

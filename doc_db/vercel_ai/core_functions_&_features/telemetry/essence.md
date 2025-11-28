@@ -1,0 +1,1 @@
+OpenTelemetry telemetry collection with per-function opt-in via `experimental_telemetry` option; configure with `isEnabled`, `functionId`, `metadata`, `recordInputs/Outputs`, or custom `tracer`; records nested spans for generateText/streamText/generateObject/streamObject/embed/embedMany with model, usage, headers, and semantic convention attributes.

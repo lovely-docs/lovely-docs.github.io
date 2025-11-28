@@ -1,0 +1,1 @@
+Stream custom data alongside AI responses with type-safe data parts, sources, and transient notifications; reconcile updates via ID reuse; handle on client through onData callback and message.parts filtering.

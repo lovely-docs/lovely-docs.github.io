@@ -1,0 +1,1 @@
+Fix missing client-side function calls in OpenAIStream v3.0.20+ by adding experimental_onFunctionCall stub

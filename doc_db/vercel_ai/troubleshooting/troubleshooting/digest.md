@@ -1,0 +1,1 @@
+This is a troubleshooting section designed to help developers identify and resolve common issues encountered with the SDK. The page serves as an entry point to troubleshooting documentation, with a support component included for additional assistance. It provides a structured approach to debugging and resolving problems during development.

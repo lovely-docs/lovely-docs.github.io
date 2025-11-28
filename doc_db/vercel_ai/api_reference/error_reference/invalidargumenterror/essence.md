@@ -1,0 +1,1 @@
+InvalidArgumentError thrown for invalid arguments; check with isInstance() method; exposes parameter name, value, and message.

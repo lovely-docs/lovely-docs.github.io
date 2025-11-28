@@ -1,0 +1,1 @@
+Upgrade AI SDK 5.0 to 6.0 Beta: update packages (ai@6.0.0-beta, @ai-sdk/provider@3.0.0-beta, @ai-sdk/provider-utils@4.0.0-beta, @ai-sdk/*@3.0.0-beta), follow breaking changes, use provided codemods for automatic transformations; beta includes agents and tool approval features.

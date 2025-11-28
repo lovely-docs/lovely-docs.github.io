@@ -1,0 +1,1 @@
+Removed RSC function that streamed LLM-generated UI with tool support; replaced by streamUI.

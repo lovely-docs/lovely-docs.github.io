@@ -30,7 +30,7 @@
     "git-sync": "bun run src/index.ts mcp --git-sync-only",
     "prepublishOnly": "bun run build",
     "release": "bun publish",
-    "serve": "bun run dist/index.js mcp --transport http",
+    "serve": "bun run dist/index.js mcp --transport http --doc-dir dist/git/github.com/xl0/lovely-docs/doc_db",
     "dev": "LOVELY_DOCS_DEV=1 bun --watch run src/index.ts mcp --transport http"
   },
   "keywords": [

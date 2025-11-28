@@ -1,0 +1,1 @@
+Get a mutable copy of AI state for server-side updates. Import from `@ai-sdk/rsc`. Optional `key` parameter to access specific state properties. Methods: `update()` to modify state, `done()` to finalize and close stream. Use for persisting/restoring states in Next.js.

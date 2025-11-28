@@ -1,0 +1,1 @@
+ReadableStream utility that emits array values sequentially with optional initialDelayInMs and chunkDelayInMs delays; useful for testing streaming or simulating time-delayed data.

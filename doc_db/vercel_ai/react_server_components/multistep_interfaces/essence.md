@@ -1,0 +1,1 @@
+Build multi-step conversational UIs by composing tools with `streamUI`, managing UI/AI state with hooks, and rendering interactive React components for each step.

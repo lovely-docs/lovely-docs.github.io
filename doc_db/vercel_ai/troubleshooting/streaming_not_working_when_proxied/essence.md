@@ -1,0 +1,1 @@
+Proxy middleware compression breaks streaming; disable with 'Content-Encoding': 'none' header in toUIMessageStreamResponse()

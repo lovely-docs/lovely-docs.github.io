@@ -1,0 +1,1 @@
+Context provider factory for managing AI/UI states in RSC; accepts server actions, initial states, SSR callback, and persistence callback triggered on state updates

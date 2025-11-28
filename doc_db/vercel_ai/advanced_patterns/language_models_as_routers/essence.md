@@ -1,0 +1,1 @@
+Language models as routers: use function calling to deterministically choose UIs and execute multi-step sequences based on user intent instead of predefined routes.

@@ -1,0 +1,1 @@
+MAJOR.MINOR.PATCH versioning with stable (production-ready), experimental (prefix, pin versions), and deprecated (migrate via guides/codemods) API tiers.

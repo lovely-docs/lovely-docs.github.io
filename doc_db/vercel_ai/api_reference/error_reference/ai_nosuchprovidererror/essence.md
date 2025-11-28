@@ -1,0 +1,1 @@
+Error thrown when provider ID not found; check with NoSuchProviderError.isInstance(); includes providerId, availableProviders, modelId, modelType properties.

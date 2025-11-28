@@ -1,0 +1,1 @@
+Four main modules: **AI SDK Core** (provider-agnostic model switching), **AI SDK RSC** (stream UIs via React Server Components), **AI SDK UI** (React hooks for LLM interaction), **Stream Helpers** (provider streaming utilities).

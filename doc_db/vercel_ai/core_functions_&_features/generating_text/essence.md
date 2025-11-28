@@ -1,0 +1,1 @@
+generateText for complete text generation, streamText for streaming; both support callbacks (onFinish, onError, onChunk), result properties (text, usage, toolCalls, sources, etc.), stream transformations, and provider-specific metadata.

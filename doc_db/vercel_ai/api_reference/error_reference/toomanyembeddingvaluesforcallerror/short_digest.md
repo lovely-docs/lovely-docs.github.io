@@ -1,0 +1,1 @@
+Thrown when embedding call exceeds provider's per-call limit. Check with `TooManyEmbeddingValuesForCallError.isInstance(error)`. Properties: `provider`, `modelId`, `maxEmbeddingsPerCall`, `values`.

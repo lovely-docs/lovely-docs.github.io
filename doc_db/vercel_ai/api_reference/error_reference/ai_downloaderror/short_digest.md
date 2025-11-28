@@ -1,0 +1,1 @@
+Error thrown on download failures. Properties: `url`, `statusCode`, `statusText`, `message`. Check with `DownloadError.isInstance(error)`.

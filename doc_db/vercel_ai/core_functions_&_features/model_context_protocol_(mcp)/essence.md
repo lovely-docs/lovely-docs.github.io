@@ -1,0 +1,1 @@
+Connect to MCP servers via HTTP/SSE/stdio transport to access tools (with schema discovery or explicit Zod schemas), resources (list/read/templates), and prompts (list/get with args); handle elicitation requests for server-initiated client input.

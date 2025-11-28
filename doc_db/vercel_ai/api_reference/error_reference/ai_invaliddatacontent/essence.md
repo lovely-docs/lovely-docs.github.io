@@ -1,0 +1,1 @@
+AI_InvalidDataContent error with content/message/cause properties; detect via InvalidDataContent.isInstance(error)

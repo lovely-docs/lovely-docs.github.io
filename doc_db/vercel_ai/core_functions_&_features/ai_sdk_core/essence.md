@@ -1,0 +1,1 @@
+Unified SDK for LLM text/structured generation, tool calling, embeddings, image/speech/transcription, multi-provider support, middleware, error handling, testing, telemetry.

@@ -1,0 +1,1 @@
+Three SDK components with different purposes: Core (unified LLM API, any JS env), UI (streaming chat/generative UI hooks for React/Vue/Svelte), RSC (experimental server-to-client streaming for Next.js App Router); environment compatibility and feature support varies by framework.

@@ -1,0 +1,1 @@
+Transcribe audio to text using `transcribe()` with configurable models from OpenAI, Groq, Deepgram, and other providers; supports provider options, timeouts, custom headers, and error handling via NoTranscriptGeneratedError.

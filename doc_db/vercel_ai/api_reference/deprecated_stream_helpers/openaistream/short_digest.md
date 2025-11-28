@@ -1,0 +1,1 @@
+**Deprecated in AI SDK 4.0.** Legacy helper that converts OpenAI language model responses to ReadableStream. Accepts Response object and optional callbacks: `onStart()`, `onToken(token)`, `onCompletion(completion)`, `onFinal(completion)`. Use AI SDK OpenAI Provider instead. Requires openai v4+ or openai-edge for Edge Runtime support.

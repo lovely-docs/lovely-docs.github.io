@@ -1,0 +1,1 @@
+Fix "ToolInvocation must have a result" by either adding `execute` functions to tools or providing results via `addToolOutput` in `useChat`'s `onToolCall` handler.

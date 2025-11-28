@@ -1,0 +1,1 @@
+Error thrown on type validation failure. Check with `TypeValidationError.isInstance(error)`. Properties: `value` (failed value), `message` (validation details).

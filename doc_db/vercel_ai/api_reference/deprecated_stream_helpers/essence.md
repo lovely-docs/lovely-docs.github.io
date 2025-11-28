@@ -1,0 +1,1 @@
+Collection of deprecated stream conversion utilities removed in AI SDK 4.0, with active framework adapters for LangChain and LlamaIndex.

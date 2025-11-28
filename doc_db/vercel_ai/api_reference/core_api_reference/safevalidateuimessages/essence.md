@@ -1,0 +1,1 @@
+Non-throwing message validator returning `{success, data|error}` with optional custom Zod schemas for metadata, data parts, and tools.

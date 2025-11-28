@@ -1,0 +1,1 @@
+Documentation index covering six foundational topics: Overview (AI/LLM concepts), Providers and Models (available services), Prompts (definition and usage), Tools (extending capabilities), Streaming (performance benefits), and Agents (building autonomous systems).

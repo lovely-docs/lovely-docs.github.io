@@ -1,0 +1,1 @@
+Standardized interface for text generation, structured data, tool calling, embeddings, reranking, image/speech/transcription with streaming, middleware, provider management, and testing utilities.

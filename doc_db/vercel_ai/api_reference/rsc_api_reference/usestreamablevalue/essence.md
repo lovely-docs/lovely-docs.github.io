@@ -1,0 +1,1 @@
+React hook consuming streamable values, returns [data, error, pending] tuple for handling streamed data with loading/error states.

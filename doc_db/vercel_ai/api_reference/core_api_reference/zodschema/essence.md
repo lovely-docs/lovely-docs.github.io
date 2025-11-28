@@ -1,0 +1,1 @@
+Helper function converting Zod schemas to AI SDK-compatible JSON schemas; supports recursive schemas with `useReferences` option; metadata must be final in schema chain.

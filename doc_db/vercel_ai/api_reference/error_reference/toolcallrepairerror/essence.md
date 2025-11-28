@@ -1,0 +1,1 @@
+ToolCallRepairError: thrown when AI fails to auto-repair invalid tool calls; has originalError, message, cause properties; detect with isInstance()

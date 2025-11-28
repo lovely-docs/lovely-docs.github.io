@@ -1,0 +1,1 @@
+AI_LoadSettingError: error for failed setting loads, detected via LoadSettingError.isInstance()

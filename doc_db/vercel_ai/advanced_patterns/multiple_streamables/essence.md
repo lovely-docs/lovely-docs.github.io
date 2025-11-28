@@ -1,0 +1,1 @@
+Return multiple streamable UIs from a single server action to stream independent components; nest streamables as props for composable UIs that update separately.

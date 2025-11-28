@@ -1,0 +1,1 @@
+Error thrown when server returns invalid response data. Check with `InvalidResponseDataError.isInstance(error)`. Properties: `data` (invalid value), `message` (error description).

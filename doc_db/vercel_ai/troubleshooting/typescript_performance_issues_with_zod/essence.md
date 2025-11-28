@@ -1,0 +1,1 @@
+Zod 4.1.8+ or `moduleResolution: "nodenext"` fixes TypeScript performance crashes with AI SDK 5.

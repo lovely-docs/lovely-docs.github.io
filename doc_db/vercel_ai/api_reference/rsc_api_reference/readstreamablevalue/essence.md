@@ -1,0 +1,1 @@
+Client-side async iterator for consuming server-streamed values created with createStreamableValue; takes StreamableValue parameter and yields emitted values.

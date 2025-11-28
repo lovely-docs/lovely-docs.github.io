@@ -1,0 +1,1 @@
+Deprecated stream helper converting Hugging Face model output to ReadableStream with token normalization and optional lifecycle callbacks.

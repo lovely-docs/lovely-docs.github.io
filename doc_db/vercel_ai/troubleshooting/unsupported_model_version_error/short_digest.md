@@ -1,0 +1,1 @@
+When migrating to AI SDK 5, `AI_UnsupportedModelVersionError` occurs if provider packages still implement v1 specification. Update all `@ai-sdk/*` packages to version `2.0.0` or later, along with `ai@5.0.0+` and `zod@4.1.8+`. For custom providers, verify they have `@ai-sdk/provider@2.0.0+` as a peer dependency.

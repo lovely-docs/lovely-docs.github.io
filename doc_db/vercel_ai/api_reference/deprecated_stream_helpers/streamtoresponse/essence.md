@@ -1,0 +1,1 @@
+Deprecated function (removed in v4.0) that pipes ReadableStream to Node.js ServerResponse with configurable status/headers; use pipeDataStreamToResponse instead.

@@ -1,0 +1,1 @@
+Cache AI responses via language model middleware (wrapGenerate/wrapStream with simulateReadableStream) or onFinish callbacks with KV storage.

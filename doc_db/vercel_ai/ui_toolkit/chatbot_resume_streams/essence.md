@@ -1,0 +1,1 @@
+Resume streams after page reloads with `useChat` + `resumable-stream` + Redis: POST creates resumable stream with ID stored in persistence layer, GET reconnects via `resumeExistingStream`, incompatible with abort.

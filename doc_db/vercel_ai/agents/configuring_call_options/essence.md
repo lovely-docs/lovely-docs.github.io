@@ -1,0 +1,1 @@
+Type-safe runtime agent configuration via callOptionsSchema and prepareCall: dynamically inject context, select models, configure tools, set provider options, fetch RAG data, combine modifications.

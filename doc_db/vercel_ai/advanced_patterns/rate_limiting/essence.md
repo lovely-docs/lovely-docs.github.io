@@ -1,0 +1,1 @@
+Implement API rate limiting with Vercel KV + Upstash Ratelimit: configure fixed window limiter, extract client IP, check limit before processing, return 429 on failure.

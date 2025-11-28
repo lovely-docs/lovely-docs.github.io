@@ -1,0 +1,1 @@
+useActions hook accesses patched Server Actions from clients, returning action dictionary; prevents direct-access errors.

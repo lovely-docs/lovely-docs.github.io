@@ -1,0 +1,1 @@
+Stop condition function that halts tool-calling loops when a specified tool is invoked; accepts tool name string, returns StopCondition for use with generateText/streamText stopWhen parameter.

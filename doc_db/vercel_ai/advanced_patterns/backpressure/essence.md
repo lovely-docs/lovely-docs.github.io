@@ -1,0 +1,1 @@
+Use `ReadableStream.pull()` with manual iteration instead of eager `for await (...)` to implement back-pressure and cancellation, ensuring producers only generate data when consumers request it and stopping automatically when consumption ends.

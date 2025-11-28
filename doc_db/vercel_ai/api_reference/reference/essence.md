@@ -1,0 +1,1 @@
+Four core modules: Core (provider abstraction), RSC (server-side UI streaming), UI (React hooks), Stream Helpers (streaming utilities).

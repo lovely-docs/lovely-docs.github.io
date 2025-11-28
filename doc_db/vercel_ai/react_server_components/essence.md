@@ -1,0 +1,1 @@
+Experimental React Server Components package for streaming LLM-generated UI with split AI/UI state management and Server Actions integration.

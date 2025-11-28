@@ -1,0 +1,1 @@
+**Deprecated in AI SDK 4.0.** ReplicateStream extracts streams from Replicate API Prediction objects and returns a Promise<ReadableStream>. Accepts optional callbacks (onStart, onToken, onCompletion, onFinal) and headers option. Part of legacy Replicate integration, incompatible with AI SDK 3.1.

@@ -1,0 +1,1 @@
+Collection of UI patterns and tools for AI interactions: chatbots with message persistence and tool calling, text completion, object generation, streaming data, UIMessage stream consumption, error handling, and stream protocol specification.

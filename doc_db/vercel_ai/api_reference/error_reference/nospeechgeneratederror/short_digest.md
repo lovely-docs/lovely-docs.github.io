@@ -1,0 +1,1 @@
+Error thrown when audio generation produces no output. Check with `NoSpeechGeneratedError.isInstance(error)`. Has `responses` and `message` properties.

@@ -1,0 +1,1 @@
+streamText fails silently because errors are streamed instead of thrown; use onError callback to log them

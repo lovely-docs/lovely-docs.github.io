@@ -1,0 +1,1 @@
+Fix duplicate assistant messages in useChat by passing originalMessages to toUIMessageStreamResponse() to reuse message IDs instead of generating new ones.

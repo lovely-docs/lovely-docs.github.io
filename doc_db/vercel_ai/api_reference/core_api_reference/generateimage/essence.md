@@ -1,0 +1,1 @@
+Experimental function to generate images from text prompts; accepts model, prompt, and optional n, size, aspectRatio, seed, providerOptions, maxRetries, abortSignal, headers; returns image, images array, warnings, providerMetadata, and responses with GeneratedFile objects containing base64, uint8Array, mediaType.

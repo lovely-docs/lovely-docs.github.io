@@ -1,0 +1,1 @@
+AI_NoSuchToolError: thrown when model calls unavailable tool; detect with isInstance(); includes toolName, availableTools, message properties.

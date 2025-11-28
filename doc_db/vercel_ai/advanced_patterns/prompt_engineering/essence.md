@@ -1,0 +1,1 @@
+LLMs predict text sequences; prompt engineering shapes responses via clear instructions, examples, and temperature tuning (0=deterministic, 1=random); balance cost vs performance across models.

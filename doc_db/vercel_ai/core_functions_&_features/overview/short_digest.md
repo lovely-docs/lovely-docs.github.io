@@ -1,0 +1,1 @@
+AI SDK Core provides standardized functions for LLM integration: `generateText` and `streamText` for text generation (non-interactive and interactive respectively), `generateObject` and `streamObject` for structured data generation with Zod schemas.

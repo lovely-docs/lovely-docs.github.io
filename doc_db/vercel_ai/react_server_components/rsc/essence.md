@@ -1,0 +1,1 @@
+Experimental RSC-based AI framework with streaming components, generative UI state management, state persistence, multi-step interfaces, and authentication.

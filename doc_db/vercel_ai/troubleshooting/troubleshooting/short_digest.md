@@ -1,0 +1,1 @@
+Entry point for troubleshooting common SDK issues with support resources available.

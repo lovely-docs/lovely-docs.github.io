@@ -1,0 +1,1 @@
+AIStream (deprecated in SDK 4.0, use `streamText.toDataStreamResponse()` instead) creates readable streams from fetch responses for AI output. Takes a Response object, optional customParser function for extracting message content, and optional callbacks (onStart, onToken, onCompletion, onFinal). Throws on non-2xx status codes.

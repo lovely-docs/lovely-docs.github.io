@@ -1,0 +1,1 @@
+RSC helper to stream LLM-generated React UI with tools, messages, generation parameters, and event callbacks; returns ReactNode UI and AsyncIterable stream of text/tool/error/finish events.

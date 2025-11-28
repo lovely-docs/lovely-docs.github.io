@@ -1,0 +1,1 @@
+Non-interactive text generation with tool calling, supporting multi-step agentic workflows, structured outputs, and comprehensive token/response metadata.
