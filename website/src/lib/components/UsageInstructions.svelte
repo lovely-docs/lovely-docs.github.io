@@ -33,7 +33,7 @@
 
 	const MCP_SERVER_NAME = 'lovely-docs';
 	const PACKAGE_NAME = 'lovely-docs';
-	const REMOTE_URL = 'https://lovely-docs-production.up.railway.app/mcp';
+	const REMOTE_URL = 'https://lovely-docs.up.railway.app/mcp';
 
 	// ============================================================================
 	// Custom Icons
