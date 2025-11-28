@@ -4,7 +4,7 @@
 	import * as Command from '$lib/components/ui/command';
 	import { createSearchIndex, searchIndex, type SearchResult, type SearchContent } from '$lib/utils/search';
 	import { page } from '$app/state';
-
+	import posthog from 'posthog-js';
 
 	let { libraryFilter, placeholder = 'Search documentation...' }: { libraryFilter?: string; placeholder?: string } =
 		$props();
@@ -69,6 +69,12 @@
 						value={href}
 						keywords={[]}
 						onSelect={() => {
+							posthog.capture('search_result_clicked', {
+								query: searchQuery,
+								href: href,
+								label: displayName,
+								library: libraryName
+							});
 							searchQuery = '';
 							open = false;
 							window.location.href = href;
