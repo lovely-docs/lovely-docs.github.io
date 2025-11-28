@@ -1,0 +1,1 @@
+Complete API reference for text generation, structured outputs, embeddings, agents, tools, MCP integration, schema validation, and provider management.

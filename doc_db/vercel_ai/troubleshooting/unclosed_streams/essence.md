@@ -1,0 +1,1 @@
+Call `.done()` on streamable UI to close streams and fix slow updates.

@@ -1,0 +1,1 @@
+useChat hook-level body config is stale; pass dynamic values via sendMessage's second argument instead, or use useRef with a function for hook-level config.

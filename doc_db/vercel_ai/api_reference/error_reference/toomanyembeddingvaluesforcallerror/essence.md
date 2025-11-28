@@ -1,0 +1,1 @@
+Error thrown when embedding call exceeds maxEmbeddingsPerCall limit; detect with isInstance() method; properties include provider, modelId, maxEmbeddingsPerCall, values.

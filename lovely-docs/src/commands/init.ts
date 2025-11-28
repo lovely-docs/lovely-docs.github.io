@@ -1,7 +1,5 @@
 import * as p from '@clack/prompts';
 import { Command } from 'commander';
-import fs from 'fs-extra';
-import { dirname, join } from 'path';
 import pc from 'picocolors';
 import { ConfigManager } from '../lib/config.js';
 import { DocRepo, getCacheDir, getRepoPath } from '../lib/doc-repo.js';

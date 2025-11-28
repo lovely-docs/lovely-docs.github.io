@@ -1,0 +1,1 @@
+Combine tool calling with structured outputs using generateText/streamText + output option; adjust stopWhen to account for extra structured output generation step.

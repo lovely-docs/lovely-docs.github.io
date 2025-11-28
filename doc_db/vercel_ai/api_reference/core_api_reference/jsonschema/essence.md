@@ -1,0 +1,1 @@
+Helper function creating typed JSON schema objects for structured data generation and tools; accepts JSONSchema7 definition and optional custom validation function.

@@ -1,0 +1,1 @@
+AI SDK 6 beta introduces Agent abstraction with ToolLoopAgent, tool execution approval for human-in-the-loop, stable structured output with tool calling, native reranking support, and upcoming image editing—minimal breaking changes from v5.

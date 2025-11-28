@@ -1,0 +1,1 @@
+Streaming fails in deployed apps while working locally. Solution: add `Transfer-Encoding: chunked` and `Connection: keep-alive` headers to the response via `toUIMessageStreamResponse({ headers: {...} })`.

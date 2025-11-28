@@ -1,0 +1,1 @@
+Middleware applying default LanguageModelV3CallOptions to model calls; explicit parameters override defaults; merges provider metadata.

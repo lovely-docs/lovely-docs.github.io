@@ -1,0 +1,1 @@
+Deprecated utility converting AWS Bedrock responses to ReadableStream with optional lifecycle callbacks; removed in AI SDK 4.0.

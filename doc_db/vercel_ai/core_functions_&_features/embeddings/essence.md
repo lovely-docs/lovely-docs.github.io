@@ -1,0 +1,1 @@
+embed() and embedMany() functions for converting text to vectors; cosineSimilarity() for measuring similarity; configurable via providerOptions, maxParallelCalls, maxRetries, abortSignal, headers; supports OpenAI, Google, Mistral, Cohere, Amazon Bedrock models; middleware support via wrapEmbeddingModel().

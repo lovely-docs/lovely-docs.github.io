@@ -1,0 +1,1 @@
+useCompletion hook for streaming text completions with state management, input control, cancellation, throttling, event callbacks, and customizable requests.

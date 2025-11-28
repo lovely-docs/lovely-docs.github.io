@@ -1,0 +1,1 @@
+Build streaming chat interface with Expo using useChat hook, streamText API route, and optional tools with multi-step execution.

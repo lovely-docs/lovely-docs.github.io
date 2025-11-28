@@ -1,0 +1,1 @@
+Migrate from experimental AI SDK RSC to production-ready AI SDK UI: separate generation (route handler `streamText`) from rendering (client `useChat`), use tool invocation state for UI, replace server action patterns with route handlers and hooks.

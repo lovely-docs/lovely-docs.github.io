@@ -1,0 +1,1 @@
+Framework-agnostic toolkit with hooks for chat/completion/object interactions: `useChat`, `useCompletion`, `useObject`. Utility functions for message conversion, pruning, and streaming. Supports React (full), Svelte (full), Vue.js (partial - no useObject).

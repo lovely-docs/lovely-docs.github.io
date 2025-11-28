@@ -1,0 +1,1 @@
+Fix Jest module resolution for '@ai-sdk/rsc' by mapping it to the dist directory in moduleNameMapper.

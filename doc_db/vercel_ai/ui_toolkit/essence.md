@@ -1,0 +1,1 @@
+Framework-agnostic React/Svelte/Vue/Angular hooks for streaming chat, completions, and structured objects with real-time UI updates, tool integration, message persistence, and resumable streams.

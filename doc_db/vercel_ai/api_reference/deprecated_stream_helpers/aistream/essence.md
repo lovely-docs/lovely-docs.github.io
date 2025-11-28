@@ -1,0 +1,1 @@
+Deprecated stream helper that converts fetch responses to readable streams with custom parsing and callbacks; replaced by streamText.toDataStreamResponse().

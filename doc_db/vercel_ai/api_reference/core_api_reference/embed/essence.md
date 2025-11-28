@@ -1,0 +1,1 @@
+embed() generates embeddings for single values; accepts model, value, optional maxRetries/abortSignal/headers/telemetry; returns embedding vector, value, token usage, response data, and provider metadata.

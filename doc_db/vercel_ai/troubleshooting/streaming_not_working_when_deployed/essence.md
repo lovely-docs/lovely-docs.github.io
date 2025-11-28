@@ -1,0 +1,1 @@
+Fix deployed streaming by adding Transfer-Encoding: chunked and Connection: keep-alive headers to toUIMessageStreamResponse()

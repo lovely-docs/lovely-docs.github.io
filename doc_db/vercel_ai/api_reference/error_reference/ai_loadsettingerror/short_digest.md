@@ -1,0 +1,1 @@
+Error thrown when a setting fails to load. Detect using `LoadSettingError.isInstance(error)` after importing from 'ai'.

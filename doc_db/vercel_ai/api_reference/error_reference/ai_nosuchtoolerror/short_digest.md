@@ -1,0 +1,1 @@
+Error thrown when a model calls a tool that doesn't exist. Check with `NoSuchToolError.isInstance(error)`. Properties: `toolName`, `availableTools`, `message`.

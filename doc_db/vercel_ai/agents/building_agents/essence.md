@@ -1,0 +1,1 @@
+ToolLoopAgent class encapsulates model, tools, and instructions; supports loop control (default 20 steps), tool choice modes, structured output, system instructions for behavior definition, and three usage patterns (generate, stream, createAgentUIStreamResponse) with full TypeScript type inference.

@@ -1,0 +1,1 @@
+embedMany() generates embeddings for multiple values with automatic request chunking, supporting retry configuration, abort signals, custom headers, and experimental telemetry.

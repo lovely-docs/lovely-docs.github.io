@@ -1,0 +1,1 @@
+Attach custom message-level metadata (timestamps, model info, token usage) via Zod schema, send via messageMetadata callback in toUIMessageStreamResponse, access via message.metadata on client.

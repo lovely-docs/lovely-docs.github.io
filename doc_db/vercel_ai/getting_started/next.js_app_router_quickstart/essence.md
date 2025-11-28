@@ -1,0 +1,1 @@
+Build a streaming chat app with Next.js App Router using `streamText` for the backend, `useChat` hook for the frontend, and define tools with Zod schemas for multi-step LLM interactions.

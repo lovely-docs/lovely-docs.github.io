@@ -1,0 +1,1 @@
+Fix streaming timeouts on Vercel by increasing maxDuration (Next.js: export const maxDuration = 600; or vercel.json config); default 300s, Pro/Enterprise up to 800s.

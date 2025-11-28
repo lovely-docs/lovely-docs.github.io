@@ -1,0 +1,1 @@
+Resolve TypeScript type errors in onToolCall by checking toolCall.dynamic before using toolCall.toolName with addToolOutput

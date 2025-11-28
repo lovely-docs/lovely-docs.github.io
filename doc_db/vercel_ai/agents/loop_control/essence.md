@@ -1,0 +1,1 @@
+Control agent loop execution with stopWhen conditions and prepareStep callbacks to modify model, tools, messages, and context between steps; or implement manual loops with generateText/streamText for complete control.

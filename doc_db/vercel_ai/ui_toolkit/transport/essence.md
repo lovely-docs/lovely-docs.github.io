@@ -1,0 +1,1 @@
+Control message transmission in useChat via DefaultChatTransport configuration (API endpoint, headers, credentials, body, request transformation) or implement ChatTransport interface for custom protocols.

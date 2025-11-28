@@ -1,0 +1,1 @@
+Render React components from language model tool calls by returning JSON objects; use @ai-sdk/rsc's createStreamableUI() to render components server-side and stream them to clients, avoiding complex client-side conditional rendering.

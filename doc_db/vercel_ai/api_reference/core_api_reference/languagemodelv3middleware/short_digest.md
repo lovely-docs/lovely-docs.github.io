@@ -1,0 +1,1 @@
+Middleware interface for intercepting and modifying language model calls. Provides `transformParams` to modify call parameters, `wrapGenerate` to wrap generate operations, and `wrapStream` to wrap stream operations. Enables guardrails, RAG, caching, and logging in a model-agnostic way. (Experimental feature)

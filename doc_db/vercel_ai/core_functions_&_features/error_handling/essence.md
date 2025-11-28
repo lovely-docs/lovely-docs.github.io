@@ -1,0 +1,1 @@
+Error handling: try/catch for regular/simple-stream errors; switch on part.type for full-stream errors; onAbort callback or abort part type for stream aborts.

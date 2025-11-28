@@ -1,0 +1,1 @@
+AI_InvalidPromptError thrown for invalid prompts; typically caused by passing UIMessage[] instead of ModelMessage[] - convert with convertToModelMessages().

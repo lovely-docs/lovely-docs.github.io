@@ -1,0 +1,1 @@
+Client-side hook for managing UI state as visual representation of AI state; returns [state, setState] tuple supporting functions and React nodes.

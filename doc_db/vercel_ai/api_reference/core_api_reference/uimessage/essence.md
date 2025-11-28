@@ -1,0 +1,1 @@
+Type-safe message interface with generic METADATA, DATA_PARTS, TOOLS parameters; contains id, role, metadata, and parts array supporting text, reasoning, tool invocations, source URLs/documents, files, custom data, and step boundaries.

@@ -1,0 +1,1 @@
+Fix "Cannot find namespace 'JSX'" error in non-React projects by installing @types/react; AI SDK dependency that will be removed in next major version.

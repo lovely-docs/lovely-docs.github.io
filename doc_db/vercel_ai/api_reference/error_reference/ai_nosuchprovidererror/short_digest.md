@@ -1,0 +1,1 @@
+Thrown when a provider ID is not found. Check with `NoSuchProviderError.isInstance(error)`. Properties include `providerId`, `availableProviders`, `modelId`, `modelType`, and `message`.

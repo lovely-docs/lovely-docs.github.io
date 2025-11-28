@@ -1,0 +1,1 @@
+Handle UI streaming errors with streamableUI.error() and React Error Boundary; handle other streaming errors by returning error objects from try-catch blocks.

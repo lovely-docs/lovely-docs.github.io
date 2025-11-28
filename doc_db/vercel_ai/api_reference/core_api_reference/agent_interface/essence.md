@@ -1,0 +1,1 @@
+Agent interface contract with `generate()` and `stream()` methods for AI agents supporting tools, multi-step workflows, and custom implementations; accepts prompt or messages with optional abort signal.

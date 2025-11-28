@@ -1,0 +1,1 @@
+Error thrown when AI provider fails to generate content. Check with `NoContentGeneratedError.isInstance(error)` after importing from 'ai'.

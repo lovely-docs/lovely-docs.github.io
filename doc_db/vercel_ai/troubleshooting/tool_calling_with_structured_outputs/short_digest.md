@@ -1,0 +1,1 @@
+Use `generateText` or `streamText` with `output` option to combine tool calling with structured outputs (not `generateObject`/`streamObject`). Account for the extra structured output step in `stopWhen`: add 1 to your step count since the flow is tool call → tool result → structured output.

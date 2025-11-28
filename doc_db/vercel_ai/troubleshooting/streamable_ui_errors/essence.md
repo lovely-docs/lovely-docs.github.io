@@ -1,0 +1,1 @@
+Streamable UI errors in server actions are caused by using `.ts` instead of `.tsx` file extension; rename to `.tsx`.

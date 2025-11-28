@@ -1,0 +1,1 @@
+Four message types (system, user, assistant, tool) with parts (text, image, file, tool-call, tool-result) supporting multimodal content and tool interactions; access Zod schemas via exports.

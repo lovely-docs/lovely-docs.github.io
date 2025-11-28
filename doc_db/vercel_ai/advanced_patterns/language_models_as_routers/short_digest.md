@@ -1,0 +1,1 @@
+Language models can act as routers by using function calling to deterministically choose which UI to render based on user queries. Models can route by parameters (generating correct values for dynamic routes) or by sequence (executing multiple function calls in order to complete multi-step tasks). Use `streamUI` to stream generative UIs to clients.

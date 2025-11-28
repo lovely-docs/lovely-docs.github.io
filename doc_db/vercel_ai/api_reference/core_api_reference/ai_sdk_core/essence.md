@@ -1,0 +1,1 @@
+Core API functions for text generation, streaming, structured data, embeddings, image/audio/speech generation, and middleware utilities for language models.

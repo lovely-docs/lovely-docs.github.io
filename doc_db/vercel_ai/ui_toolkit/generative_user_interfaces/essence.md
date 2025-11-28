@@ -1,0 +1,1 @@
+Build dynamic UI by connecting LLM tool calls to React components; define tools with Zod schemas, add to streamText, render based on tool part states (input-available/output-available/output-error).

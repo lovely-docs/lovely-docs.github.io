@@ -1,0 +1,1 @@
+cosineSimilarity(vector1, vector2) returns number between -1 and 1 measuring vector similarity; import from 'ai'

@@ -1,0 +1,1 @@
+Best practices for tool prompts, Zod schema patterns (dates, nullable optionals), temperature=0 for determinism, and debugging via warnings/request bodies.

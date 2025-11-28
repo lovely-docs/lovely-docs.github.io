@@ -1,0 +1,1 @@
+LLM agents use tools in loops via ToolLoopAgent class; define tools with descriptions, input schemas, and execute functions; agent automatically chains tool calls and generates responses; use for flexible task automation, core functions for deterministic workflows.

@@ -1,0 +1,1 @@
+Pass `getErrorMessage` to `toUIMessageStreamResponse()` or `onError` to `createDataStreamResponse()` to unmask error details from `streamText` instead of showing generic "An error occurred".

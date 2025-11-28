@@ -1,0 +1,1 @@
+Pipes ReadableStream<UIMessageChunk> to ServerResponse with HTTP metadata and optional teed stream consumption callback.

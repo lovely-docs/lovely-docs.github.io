@@ -1,0 +1,1 @@
+dynamicTool() creates tools with runtime-determined unknown input/output types for MCP, user-defined, or external tools; requires inputSchema for validation, execute function with runtime type casting, optional toModelOutput converter; returns Tool<unknown, unknown> with type: 'dynamic'; use dynamic flag for type narrowing with mixed static/dynamic tools.

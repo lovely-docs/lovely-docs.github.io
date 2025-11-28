@@ -1,0 +1,1 @@
+Customizable ID generator with prefix, separator, alphabet, and size options; uses non-secure randomization.

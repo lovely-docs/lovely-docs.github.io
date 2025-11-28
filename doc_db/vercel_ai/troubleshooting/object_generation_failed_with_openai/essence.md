@@ -1,0 +1,1 @@
+OpenAI structured outputs reject Zod `.nullish()` and `.optional()` with content-filter errors; use `.nullable()` instead.

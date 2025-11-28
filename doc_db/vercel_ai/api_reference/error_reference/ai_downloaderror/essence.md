@@ -1,0 +1,1 @@
+AI_DownloadError: error for failed downloads with url, statusCode, statusText, message properties; detect via DownloadError.isInstance()

@@ -1,0 +1,1 @@
+Server-to-client React UI streaming via `update()`, `append()`, `done()` (required), and `error()` methods; experimental RSC feature.

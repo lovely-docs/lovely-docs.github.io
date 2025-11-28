@@ -1,0 +1,1 @@
+generateSpeech converts text to audio using OpenAI/ElevenLabs/LMNT/Hume models; supports language, voice, abort signals, custom headers, provider options; throws NoSpeechGeneratedError with response metadata.

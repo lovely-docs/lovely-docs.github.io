@@ -1,0 +1,4054 @@
+{
+  "map": {
+    "origPath": ".",
+    "displayName": "",
+    "relevant": true,
+    "usage": {
+      "input": 16076,
+      "output": 4252,
+      "details": null
+    },
+    "token_counts": {
+      "fulltext": 14879,
+      "digest": 3561,
+      "short_digest": 557
+    },
+    "children": {
+      "foundations": {
+        "origPath": "02-foundations",
+        "displayName": "Foundations",
+        "relevant": true,
+        "usage": {
+          "input": 7520,
+          "output": 1195,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 6396,
+          "digest": 853,
+          "short_digest": 222
+        },
+        "children": {
+          "overview": {
+            "origPath": "02-foundations/01-overview.mdx",
+            "displayName": "Overview",
+            "relevant": true,
+            "usage": {
+              "input": 1792,
+              "output": 501,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 624,
+              "digest": 282,
+              "short_digest": 100
+            },
+            "children": {}
+          },
+          "providers_and_models": {
+            "origPath": "02-foundations/02-providers-and-models.mdx",
+            "displayName": "Providers and Models",
+            "relevant": true,
+            "usage": {
+              "input": 6519,
+              "output": 1810,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 5347,
+              "digest": 1238,
+              "short_digest": 439
+            },
+            "children": {}
+          },
+          "prompts": {
+            "origPath": "02-foundations/03-prompts.mdx",
+            "displayName": "Prompts",
+            "relevant": true,
+            "usage": {
+              "input": 6188,
+              "output": 4102,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 5019,
+              "digest": 3205,
+              "short_digest": 770
+            },
+            "children": {}
+          },
+          "tools": {
+            "origPath": "02-foundations/04-tools.mdx",
+            "displayName": "Tools",
+            "relevant": true,
+            "usage": {
+              "input": 3850,
+              "output": 1709,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2682,
+              "digest": 1078,
+              "short_digest": 471
+            },
+            "children": {}
+          },
+          "streaming": {
+            "origPath": "02-foundations/05-streaming.mdx",
+            "displayName": "Streaming",
+            "relevant": true,
+            "usage": {
+              "input": 1939,
+              "output": 660,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 771,
+              "digest": 359,
+              "short_digest": 177
+            },
+            "children": {}
+          },
+          "foundations": {
+            "origPath": "02-foundations/index.mdx",
+            "displayName": "Foundations",
+            "relevant": false,
+            "usage": {
+              "input": 1490,
+              "output": 381,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 324,
+              "digest": 209,
+              "short_digest": 59
+            },
+            "children": {}
+          }
+        }
+      },
+      "getting_started": {
+        "origPath": "02-getting-started",
+        "displayName": "Getting Started",
+        "relevant": true,
+        "usage": {
+          "input": 11701,
+          "output": 1185,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 10551,
+          "digest": 807,
+          "short_digest": 262
+        },
+        "children": {
+          "navigating_the_library": {
+            "origPath": "02-getting-started/01-navigating-the-library.mdx",
+            "displayName": "Navigating the Library",
+            "relevant": true,
+            "usage": {
+              "input": 2986,
+              "output": 669,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1809,
+              "digest": 399,
+              "short_digest": 118
+            },
+            "children": {}
+          },
+          "next.js_app_router_quickstart": {
+            "origPath": "02-getting-started/02-nextjs-app-router.mdx",
+            "displayName": "Next.js App Router Quickstart",
+            "relevant": true,
+            "usage": {
+              "input": 7448,
+              "output": 2333,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 6271,
+              "digest": 1679,
+              "short_digest": 514
+            },
+            "children": {}
+          },
+          "next.js_pages_router_quickstart": {
+            "origPath": "02-getting-started/03-nextjs-pages-router.mdx",
+            "displayName": "Next.js Pages Router Quickstart",
+            "relevant": true,
+            "usage": {
+              "input": 7318,
+              "output": 2447,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 6141,
+              "digest": 1662,
+              "short_digest": 628
+            },
+            "children": {}
+          },
+          "svelte": {
+            "origPath": "02-getting-started/04-svelte.mdx",
+            "displayName": "Svelte",
+            "relevant": true,
+            "usage": {
+              "input": 7983,
+              "output": 2398,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 6810,
+              "digest": 1453,
+              "short_digest": 796
+            },
+            "children": {}
+          },
+          "nuxt_quickstart": {
+            "origPath": "02-getting-started/05-nuxt.mdx",
+            "displayName": "Nuxt Quickstart",
+            "relevant": true,
+            "usage": {
+              "input": 7363,
+              "output": 1964,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 6190,
+              "digest": 1165,
+              "short_digest": 670
+            },
+            "children": {}
+          },
+          "node.js_quickstart": {
+            "origPath": "02-getting-started/06-nodejs.mdx",
+            "displayName": "Node.js Quickstart",
+            "relevant": true,
+            "usage": {
+              "input": 6138,
+              "output": 1910,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 4966,
+              "digest": 1250,
+              "short_digest": 527
+            },
+            "children": {}
+          },
+          "expo_quickstart": {
+            "origPath": "02-getting-started/07-expo.mdx",
+            "displayName": "Expo Quickstart",
+            "relevant": true,
+            "usage": {
+              "input": 9012,
+              "output": 3341,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 7840,
+              "digest": 2570,
+              "short_digest": 654
+            },
+            "children": {}
+          },
+          "getting_started": {
+            "origPath": "02-getting-started/index.mdx",
+            "displayName": "Getting Started",
+            "relevant": false,
+            "usage": {
+              "input": 1529,
+              "output": 305,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 359,
+              "digest": 133,
+              "short_digest": 53
+            },
+            "children": {}
+          }
+        }
+      },
+      "agents": {
+        "origPath": "03-agents",
+        "displayName": "Agents",
+        "relevant": true,
+        "usage": {
+          "input": 5802,
+          "output": 1173,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 4678,
+          "digest": 944,
+          "short_digest": 113
+        },
+        "children": {
+          "agents_overview": {
+            "origPath": "03-agents/01-overview.mdx",
+            "displayName": "Agents Overview",
+            "relevant": true,
+            "usage": {
+              "input": 2087,
+              "output": 1201,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 919,
+              "digest": 657,
+              "short_digest": 407
+            },
+            "children": {}
+          },
+          "building_agents": {
+            "origPath": "03-agents/02-building-agents.mdx",
+            "displayName": "Building Agents",
+            "relevant": true,
+            "usage": {
+              "input": 3788,
+              "output": 2542,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2618,
+              "digest": 1869,
+              "short_digest": 522
+            },
+            "children": {}
+          },
+          "workflow_patterns": {
+            "origPath": "03-agents/03-workflows.mdx",
+            "displayName": "Workflow Patterns",
+            "relevant": true,
+            "usage": {
+              "input": 4531,
+              "output": 793,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 3363,
+              "digest": 432,
+              "short_digest": 219
+            },
+            "children": {}
+          },
+          "loop_control": {
+            "origPath": "03-agents/04-loop-control.mdx",
+            "displayName": "Loop Control",
+            "relevant": true,
+            "usage": {
+              "input": 3639,
+              "output": 1762,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2469,
+              "digest": 1084,
+              "short_digest": 550
+            },
+            "children": {}
+          },
+          "configuring_call_options": {
+            "origPath": "03-agents/05-configuring-call-options.mdx",
+            "displayName": "Configuring Call Options",
+            "relevant": true,
+            "usage": {
+              "input": 3362,
+              "output": 610,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2189,
+              "digest": 378,
+              "short_digest": 105
+            },
+            "children": {}
+          },
+          "agents": {
+            "origPath": "03-agents/index.mdx",
+            "displayName": "Agents",
+            "relevant": false,
+            "usage": {
+              "input": 1480,
+              "output": 340,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 314,
+              "digest": 164,
+              "short_digest": 56
+            },
+            "children": {}
+          }
+        }
+      },
+      "core_functions_&_features": {
+        "origPath": "03-ai-sdk-core",
+        "displayName": "Core Functions & Features",
+        "relevant": true,
+        "usage": {
+          "input": 26528,
+          "output": 3114,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 25257,
+          "digest": 2498,
+          "short_digest": 485
+        },
+        "children": {
+          "overview": {
+            "origPath": "03-ai-sdk-core/01-overview.mdx",
+            "displayName": "Overview",
+            "relevant": true,
+            "usage": {
+              "input": 1744,
+              "output": 361,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 568,
+              "digest": 181,
+              "short_digest": 59
+            },
+            "children": {}
+          },
+          "generating_text": {
+            "origPath": "03-ai-sdk-core/05-generating-text.mdx",
+            "displayName": "Generating Text",
+            "relevant": true,
+            "usage": {
+              "input": 6362,
+              "output": 2954,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 5184,
+              "digest": 2244,
+              "short_digest": 570
+            },
+            "children": {}
+          },
+          "generating_structured_data": {
+            "origPath": "03-ai-sdk-core/10-generating-structured-data.mdx",
+            "displayName": "Generating Structured Data",
+            "relevant": true,
+            "usage": {
+              "input": 5704,
+              "output": 2739,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 4524,
+              "digest": 1975,
+              "short_digest": 612
+            },
+            "children": {}
+          },
+          "tool_calling": {
+            "origPath": "03-ai-sdk-core/15-tools-and-tool-calling.mdx",
+            "displayName": "Tool Calling",
+            "relevant": true,
+            "usage": {
+              "input": 9086,
+              "output": 6493,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 7904,
+              "digest": 4226,
+              "short_digest": 2088
+            },
+            "children": {}
+          },
+          "model_context_protocol_(mcp)": {
+            "origPath": "03-ai-sdk-core/16-mcp-tools.mdx",
+            "displayName": "Model Context Protocol (MCP)",
+            "relevant": true,
+            "usage": {
+              "input": 3984,
+              "output": 1786,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2805,
+              "digest": 1180,
+              "short_digest": 457
+            },
+            "children": {}
+          },
+          "prompt_engineering": {
+            "origPath": "03-ai-sdk-core/20-prompt-engineering.mdx",
+            "displayName": "Prompt Engineering",
+            "relevant": true,
+            "usage": {
+              "input": 2459,
+              "output": 1023,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1281,
+              "digest": 752,
+              "short_digest": 148
+            },
+            "children": {}
+          },
+          "settings": {
+            "origPath": "03-ai-sdk-core/25-settings.mdx",
+            "displayName": "Settings",
+            "relevant": true,
+            "usage": {
+              "input": 2233,
+              "output": 1103,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1057,
+              "digest": 687,
+              "short_digest": 268
+            },
+            "children": {}
+          },
+          "embeddings": {
+            "origPath": "03-ai-sdk-core/30-embeddings.mdx",
+            "displayName": "Embeddings",
+            "relevant": true,
+            "usage": {
+              "input": 3858,
+              "output": 2006,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2681,
+              "digest": 1471,
+              "short_digest": 366
+            },
+            "children": {}
+          },
+          "reranking": {
+            "origPath": "03-ai-sdk-core/31-reranking.mdx",
+            "displayName": "Reranking",
+            "relevant": true,
+            "usage": {
+              "input": 3415,
+              "output": 1881,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2237,
+              "digest": 1342,
+              "short_digest": 398
+            },
+            "children": {}
+          },
+          "image_generation": {
+            "origPath": "03-ai-sdk-core/35-image-generation.mdx",
+            "displayName": "Image Generation",
+            "relevant": true,
+            "usage": {
+              "input": 7559,
+              "output": 1981,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 6381,
+              "digest": 1421,
+              "short_digest": 400
+            },
+            "children": {}
+          },
+          "transcription": {
+            "origPath": "03-ai-sdk-core/36-transcription.mdx",
+            "displayName": "Transcription",
+            "relevant": true,
+            "usage": {
+              "input": 3330,
+              "output": 1388,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2153,
+              "digest": 976,
+              "short_digest": 267
+            },
+            "children": {}
+          },
+          "speech": {
+            "origPath": "03-ai-sdk-core/37-speech.mdx",
+            "displayName": "Speech",
+            "relevant": true,
+            "usage": {
+              "input": 2835,
+              "output": 1245,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1659,
+              "digest": 799,
+              "short_digest": 305
+            },
+            "children": {}
+          },
+          "language_model_middleware": {
+            "origPath": "03-ai-sdk-core/40-middleware.mdx",
+            "displayName": "Language Model Middleware",
+            "relevant": true,
+            "usage": {
+              "input": 4525,
+              "output": 1556,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 3349,
+              "digest": 1177,
+              "short_digest": 230
+            },
+            "children": {}
+          },
+          "provider_&_model_management": {
+            "origPath": "03-ai-sdk-core/45-provider-management.mdx",
+            "displayName": "Provider & Model Management",
+            "relevant": true,
+            "usage": {
+              "input": 3996,
+              "output": 2126,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2818,
+              "digest": 1646,
+              "short_digest": 343
+            },
+            "children": {}
+          },
+          "error_handling": {
+            "origPath": "03-ai-sdk-core/50-error-handling.mdx",
+            "displayName": "Error Handling",
+            "relevant": true,
+            "usage": {
+              "input": 2234,
+              "output": 970,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1056,
+              "digest": 715,
+              "short_digest": 130
+            },
+            "children": {}
+          },
+          "testing": {
+            "origPath": "03-ai-sdk-core/55-testing.mdx",
+            "displayName": "Testing",
+            "relevant": true,
+            "usage": {
+              "input": 2977,
+              "output": 1746,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1801,
+              "digest": 1451,
+              "short_digest": 161
+            },
+            "children": {}
+          },
+          "telemetry": {
+            "origPath": "03-ai-sdk-core/60-telemetry.mdx",
+            "displayName": "Telemetry",
+            "relevant": true,
+            "usage": {
+              "input": 6043,
+              "output": 2640,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 4865,
+              "digest": 2012,
+              "short_digest": 454
+            },
+            "children": {}
+          },
+          "ai_sdk_core": {
+            "origPath": "03-ai-sdk-core/index.mdx",
+            "displayName": "AI SDK Core",
+            "relevant": false,
+            "usage": {
+              "input": 1948,
+              "output": 511,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 774,
+              "digest": 315,
+              "short_digest": 68
+            },
+            "children": {}
+          }
+        }
+      },
+      "ui_toolkit": {
+        "origPath": "04-ai-sdk-ui",
+        "displayName": "UI Toolkit",
+        "relevant": true,
+        "usage": {
+          "input": 22262,
+          "output": 1384,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 21026,
+          "digest": 984,
+          "short_digest": 269
+        },
+        "children": {
+          "overview": {
+            "origPath": "04-ai-sdk-ui/01-overview.mdx",
+            "displayName": "Overview",
+            "relevant": true,
+            "usage": {
+              "input": 2040,
+              "output": 442,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 864,
+              "digest": 227,
+              "short_digest": 89
+            },
+            "children": {}
+          },
+          "chatbot": {
+            "origPath": "04-ai-sdk-ui/02-chatbot.mdx",
+            "displayName": "Chatbot",
+            "relevant": true,
+            "usage": {
+              "input": 11236,
+              "output": 6697,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 10059,
+              "digest": 5905,
+              "short_digest": 651
+            },
+            "children": {}
+          },
+          "chatbot_message_persistence": {
+            "origPath": "04-ai-sdk-ui/03-chatbot-message-persistence.mdx",
+            "displayName": "Chatbot Message Persistence",
+            "relevant": true,
+            "usage": {
+              "input": 5643,
+              "output": 2899,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 4462,
+              "digest": 2318,
+              "short_digest": 439
+            },
+            "children": {}
+          },
+          "chatbot_resume_streams": {
+            "origPath": "04-ai-sdk-ui/03-chatbot-resume-streams.mdx",
+            "displayName": "Chatbot Resume Streams",
+            "relevant": true,
+            "usage": {
+              "input": 3695,
+              "output": 2301,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2514,
+              "digest": 1704,
+              "short_digest": 453
+            },
+            "children": {}
+          },
+          "chatbot_tool_usage": {
+            "origPath": "04-ai-sdk-ui/03-chatbot-tool-usage.mdx",
+            "displayName": "Chatbot Tool Usage",
+            "relevant": true,
+            "usage": {
+              "input": 6116,
+              "output": 3882,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 4935,
+              "digest": 2554,
+              "short_digest": 1139
+            },
+            "children": {}
+          },
+          "generative_user_interfaces": {
+            "origPath": "04-ai-sdk-ui/04-generative-user-interfaces.mdx",
+            "displayName": "Generative User Interfaces",
+            "relevant": true,
+            "usage": {
+              "input": 4485,
+              "output": 952,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 3304,
+              "digest": 534,
+              "short_digest": 280
+            },
+            "children": {}
+          },
+          "completion": {
+            "origPath": "04-ai-sdk-ui/05-completion.mdx",
+            "displayName": "Completion",
+            "relevant": true,
+            "usage": {
+              "input": 2788,
+              "output": 1169,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1612,
+              "digest": 758,
+              "short_digest": 293
+            },
+            "children": {}
+          },
+          "object_generation": {
+            "origPath": "04-ai-sdk-ui/08-object-generation.mdx",
+            "displayName": "Object Generation",
+            "relevant": true,
+            "usage": {
+              "input": 3650,
+              "output": 1890,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2472,
+              "digest": 1504,
+              "short_digest": 253
+            },
+            "children": {}
+          },
+          "streaming_custom_data": {
+            "origPath": "04-ai-sdk-ui/20-streaming-data.mdx",
+            "displayName": "Streaming Custom Data",
+            "relevant": true,
+            "usage": {
+              "input": 4350,
+              "output": 1456,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 3172,
+              "digest": 1196,
+              "short_digest": 131
+            },
+            "children": {}
+          },
+          "error_handling": {
+            "origPath": "04-ai-sdk-ui/21-error-handling.mdx",
+            "displayName": "Error Handling",
+            "relevant": true,
+            "usage": {
+              "input": 2577,
+              "output": 779,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1399,
+              "digest": 458,
+              "short_digest": 163
+            },
+            "children": {}
+          },
+          "transport": {
+            "origPath": "04-ai-sdk-ui/21-transport.mdx",
+            "displayName": "Transport",
+            "relevant": true,
+            "usage": {
+              "input": 2051,
+              "output": 997,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 875,
+              "digest": 596,
+              "short_digest": 280
+            },
+            "children": {}
+          },
+          "reading_uimessage_streams": {
+            "origPath": "04-ai-sdk-ui/24-reading-ui-message-streams.mdx",
+            "displayName": "Reading UIMessage Streams",
+            "relevant": true,
+            "usage": {
+              "input": 1993,
+              "output": 1147,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 811,
+              "digest": 747,
+              "short_digest": 266
+            },
+            "children": {}
+          },
+          "message_metadata": {
+            "origPath": "04-ai-sdk-ui/25-message-metadata.mdx",
+            "displayName": "Message Metadata",
+            "relevant": true,
+            "usage": {
+              "input": 2463,
+              "output": 1145,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1285,
+              "digest": 695,
+              "short_digest": 320
+            },
+            "children": {}
+          },
+          "stream_protocols": {
+            "origPath": "04-ai-sdk-ui/50-stream-protocol.mdx",
+            "displayName": "Stream Protocols",
+            "relevant": true,
+            "usage": {
+              "input": 4275,
+              "output": 1487,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 3097,
+              "digest": 1096,
+              "short_digest": 239
+            },
+            "children": {}
+          },
+          "ai_sdk_ui": {
+            "origPath": "04-ai-sdk-ui/index.mdx",
+            "displayName": "AI SDK UI",
+            "relevant": false,
+            "usage": {
+              "input": 1733,
+              "output": 382,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 559,
+              "digest": 221,
+              "short_digest": 49
+            },
+            "children": {}
+          }
+        }
+      },
+      "react_server_components": {
+        "origPath": "05-ai-sdk-rsc",
+        "displayName": "React Server Components",
+        "relevant": true,
+        "usage": {
+          "input": 12065,
+          "output": 1552,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 10876,
+          "digest": 1143,
+          "short_digest": 295
+        },
+        "children": {
+          "overview": {
+            "origPath": "05-ai-sdk-rsc/01-overview.mdx",
+            "displayName": "Overview",
+            "relevant": true,
+            "usage": {
+              "input": 2075,
+              "output": 626,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 897,
+              "digest": 330,
+              "short_digest": 167
+            },
+            "children": {}
+          },
+          "streaming_react_components": {
+            "origPath": "05-ai-sdk-rsc/02-streaming-react-components.mdx",
+            "displayName": "Streaming React Components",
+            "relevant": true,
+            "usage": {
+              "input": 3673,
+              "output": 1578,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2491,
+              "digest": 1090,
+              "short_digest": 362
+            },
+            "children": {}
+          },
+          "managing_generative_ui_state": {
+            "origPath": "05-ai-sdk-rsc/03-generative-ui-state.mdx",
+            "displayName": "Managing Generative UI State",
+            "relevant": true,
+            "usage": {
+              "input": 3889,
+              "output": 1923,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2706,
+              "digest": 1390,
+              "short_digest": 378
+            },
+            "children": {}
+          },
+          "saving_and_restoring_states": {
+            "origPath": "05-ai-sdk-rsc/03-saving-and-restoring-states.mdx",
+            "displayName": "Saving and Restoring States",
+            "relevant": true,
+            "usage": {
+              "input": 2216,
+              "output": 752,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1031,
+              "digest": 533,
+              "short_digest": 90
+            },
+            "children": {}
+          },
+          "multistep_interfaces": {
+            "origPath": "05-ai-sdk-rsc/04-multistep-interfaces.mdx",
+            "displayName": "Multistep Interfaces",
+            "relevant": true,
+            "usage": {
+              "input": 3839,
+              "output": 1740,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2657,
+              "digest": 1339,
+              "short_digest": 277
+            },
+            "children": {}
+          },
+          "streaming_values": {
+            "origPath": "05-ai-sdk-rsc/05-streaming-values.mdx",
+            "displayName": "Streaming Values",
+            "relevant": true,
+            "usage": {
+              "input": 2717,
+              "output": 1161,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1537,
+              "digest": 816,
+              "short_digest": 226
+            },
+            "children": {}
+          },
+          "handling_loading_state": {
+            "origPath": "05-ai-sdk-rsc/06-loading-state.mdx",
+            "displayName": "Handling Loading State",
+            "relevant": true,
+            "usage": {
+              "input": 3388,
+              "output": 1885,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2208,
+              "digest": 1606,
+              "short_digest": 154
+            },
+            "children": {}
+          },
+          "error_handling": {
+            "origPath": "05-ai-sdk-rsc/08-error-handling.mdx",
+            "displayName": "Error Handling",
+            "relevant": true,
+            "usage": {
+              "input": 1974,
+              "output": 827,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 794,
+              "digest": 570,
+              "short_digest": 138
+            },
+            "children": {}
+          },
+          "handling_authentication": {
+            "origPath": "05-ai-sdk-rsc/09-authentication.mdx",
+            "displayName": "Handling Authentication",
+            "relevant": true,
+            "usage": {
+              "input": 1560,
+              "output": 504,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 382,
+              "digest": 300,
+              "short_digest": 91
+            },
+            "children": {}
+          },
+          "migrating_from_rsc_to_ui": {
+            "origPath": "05-ai-sdk-rsc/10-migrating-to-ui.mdx",
+            "displayName": "Migrating from RSC to UI",
+            "relevant": true,
+            "usage": {
+              "input": 7212,
+              "output": 3039,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 6029,
+              "digest": 2475,
+              "short_digest": 418
+            },
+            "children": {}
+          },
+          "rsc": {
+            "origPath": "05-ai-sdk-rsc/index.mdx",
+            "displayName": "RSC",
+            "relevant": false,
+            "usage": {
+              "input": 1704,
+              "output": 364,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 528,
+              "digest": 194,
+              "short_digest": 55
+            },
+            "children": {}
+          }
+        }
+      },
+      "advanced_patterns": {
+        "origPath": "06-advanced",
+        "displayName": "Advanced Patterns",
+        "relevant": true,
+        "usage": {
+          "input": 8142,
+          "output": 1232,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 6946,
+          "digest": 752,
+          "short_digest": 370
+        },
+        "children": {
+          "prompt_engineering": {
+            "origPath": "06-advanced/01-prompt-engineering.mdx",
+            "displayName": "Prompt Engineering",
+            "relevant": true,
+            "usage": {
+              "input": 2555,
+              "output": 865,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1385,
+              "digest": 580,
+              "short_digest": 157
+            },
+            "children": {}
+          },
+          "stopping_streams": {
+            "origPath": "06-advanced/02-stopping-streams.mdx",
+            "displayName": "Stopping Streams",
+            "relevant": true,
+            "usage": {
+              "input": 2689,
+              "output": 1207,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1519,
+              "digest": 861,
+              "short_digest": 206
+            },
+            "children": {}
+          },
+          "backpressure": {
+            "origPath": "06-advanced/03-backpressure.mdx",
+            "displayName": "Backpressure",
+            "relevant": true,
+            "usage": {
+              "input": 3368,
+              "output": 903,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2197,
+              "digest": 544,
+              "short_digest": 224
+            },
+            "children": {}
+          },
+          "caching": {
+            "origPath": "06-advanced/04-caching.mdx",
+            "displayName": "Caching",
+            "relevant": true,
+            "usage": {
+              "input": 2900,
+              "output": 1409,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1731,
+              "digest": 1081,
+              "short_digest": 207
+            },
+            "children": {}
+          },
+          "multiple_streamables": {
+            "origPath": "06-advanced/05-multiple-streamables.mdx",
+            "displayName": "Multiple Streamables",
+            "relevant": true,
+            "usage": {
+              "input": 1853,
+              "output": 751,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 682,
+              "digest": 515,
+              "short_digest": 117
+            },
+            "children": {}
+          },
+          "rate_limiting": {
+            "origPath": "06-advanced/06-rate-limiting.mdx",
+            "displayName": "Rate Limiting",
+            "relevant": true,
+            "usage": {
+              "input": 1734,
+              "output": 567,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 564,
+              "digest": 358,
+              "short_digest": 79
+            },
+            "children": {}
+          },
+          "rendering_ui_with_language_models": {
+            "origPath": "06-advanced/07-rendering-ui-with-language-models.mdx",
+            "displayName": "Rendering UI with Language Models",
+            "relevant": true,
+            "usage": {
+              "input": 3243,
+              "output": 939,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2067,
+              "digest": 584,
+              "short_digest": 216
+            },
+            "children": {}
+          },
+          "language_models_as_routers": {
+            "origPath": "06-advanced/08-model-as-router.mdx",
+            "displayName": "Language Models as Routers",
+            "relevant": true,
+            "usage": {
+              "input": 2546,
+              "output": 769,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1374,
+              "digest": 573,
+              "short_digest": 75
+            },
+            "children": {}
+          },
+          "multistep_interfaces": {
+            "origPath": "06-advanced/09-multistep-interfaces.mdx",
+            "displayName": "Multistep Interfaces",
+            "relevant": true,
+            "usage": {
+              "input": 2868,
+              "output": 1185,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1696,
+              "digest": 765,
+              "short_digest": 301
+            },
+            "children": {}
+          },
+          "sequential_generations": {
+            "origPath": "06-advanced/09-sequential-generations.mdx",
+            "displayName": "Sequential Generations",
+            "relevant": true,
+            "usage": {
+              "input": 1715,
+              "output": 350,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 545,
+              "digest": 197,
+              "short_digest": 45
+            },
+            "children": {}
+          },
+          "vercel_deployment_guide": {
+            "origPath": "06-advanced/10-vercel-deployment-guide.mdx",
+            "displayName": "Vercel Deployment Guide",
+            "relevant": true,
+            "usage": {
+              "input": 2600,
+              "output": 652,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1427,
+              "digest": 455,
+              "short_digest": 73
+            },
+            "children": {}
+          },
+          "advanced": {
+            "origPath": "06-advanced/index.mdx",
+            "displayName": "Advanced",
+            "relevant": false,
+            "usage": {
+              "input": 1274,
+              "output": 211,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 108,
+              "digest": 70,
+              "short_digest": 37
+            },
+            "children": {}
+          }
+        }
+      },
+      "api_reference": {
+        "origPath": "07-reference",
+        "displayName": "API Reference",
+        "relevant": true,
+        "usage": {
+          "input": 4185,
+          "output": 1984,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 3071,
+          "digest": 1477,
+          "short_digest": 389
+        },
+        "children": {
+          "core_api_reference": {
+            "origPath": "07-reference/01-ai-sdk-core",
+            "displayName": "Core API Reference",
+            "relevant": true,
+            "usage": {
+              "input": 31146,
+              "output": 1609,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 29595,
+              "digest": 1052,
+              "short_digest": 441
+            },
+            "children": {
+              "generatetext": {
+                "origPath": "07-reference/01-ai-sdk-core/01-generate-text.mdx",
+                "displayName": "generateText",
+                "relevant": true,
+                "usage": {
+                  "input": 16016,
+                  "output": 1994,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 14830,
+                  "digest": 1465,
+                  "short_digest": 413
+                },
+                "children": {}
+              },
+              "streamtext": {
+                "origPath": "07-reference/01-ai-sdk-core/02-stream-text.mdx",
+                "displayName": "streamText",
+                "relevant": true,
+                "usage": {
+                  "input": 24357,
+                  "output": 2902,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 23171,
+                  "digest": 2314,
+                  "short_digest": 460
+                },
+                "children": {}
+              },
+              "generateobject": {
+                "origPath": "07-reference/01-ai-sdk-core/03-generate-object.mdx",
+                "displayName": "generateObject",
+                "relevant": true,
+                "usage": {
+                  "input": 7343,
+                  "output": 2475,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 6157,
+                  "digest": 1498,
+                  "short_digest": 850
+                },
+                "children": {}
+              },
+              "streamobject": {
+                "origPath": "07-reference/01-ai-sdk-core/04-stream-object.mdx",
+                "displayName": "streamObject",
+                "relevant": true,
+                "usage": {
+                  "input": 9821,
+                  "output": 2629,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 8635,
+                  "digest": 1774,
+                  "short_digest": 730
+                },
+                "children": {}
+              },
+              "embed": {
+                "origPath": "07-reference/01-ai-sdk-core/05-embed.mdx",
+                "displayName": "embed",
+                "relevant": true,
+                "usage": {
+                  "input": 2512,
+                  "output": 1009,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 1328,
+                  "digest": 589,
+                  "short_digest": 288
+                },
+                "children": {}
+              },
+              "embedmany": {
+                "origPath": "07-reference/01-ai-sdk-core/06-embed-many.mdx",
+                "displayName": "embedMany",
+                "relevant": true,
+                "usage": {
+                  "input": 2455,
+                  "output": 829,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 1269,
+                  "digest": 558,
+                  "short_digest": 153
+                },
+                "children": {}
+              },
+              "rerank": {
+                "origPath": "07-reference/01-ai-sdk-core/06-rerank.mdx",
+                "displayName": "rerank",
+                "relevant": true,
+                "usage": {
+                  "input": 3486,
+                  "output": 1738,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 2301,
+                  "digest": 1042,
+                  "short_digest": 557
+                },
+                "children": {}
+              },
+              "generateimage": {
+                "origPath": "07-reference/01-ai-sdk-core/10-generate-image.mdx",
+                "displayName": "generateImage",
+                "relevant": true,
+                "usage": {
+                  "input": 2654,
+                  "output": 829,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 1468,
+                  "digest": 489,
+                  "short_digest": 179
+                },
+                "children": {}
+              },
+              "transcribe": {
+                "origPath": "07-reference/01-ai-sdk-core/11-transcribe.mdx",
+                "displayName": "transcribe",
+                "relevant": true,
+                "usage": {
+                  "input": 2186,
+                  "output": 863,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 1001,
+                  "digest": 460,
+                  "short_digest": 284
+                },
+                "children": {}
+              },
+              "generatespeech": {
+                "origPath": "07-reference/01-ai-sdk-core/12-generate-speech.mdx",
+                "displayName": "generateSpeech",
+                "relevant": true,
+                "usage": {
+                  "input": 2738,
+                  "output": 990,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 1552,
+                  "digest": 642,
+                  "short_digest": 210
+                },
+                "children": {}
+              },
+              "agent_interface": {
+                "origPath": "07-reference/01-ai-sdk-core/15-agent.mdx",
+                "displayName": "Agent Interface",
+                "relevant": true,
+                "usage": {
+                  "input": 3166,
+                  "output": 1365,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 1982,
+                  "digest": 850,
+                  "short_digest": 389
+                },
+                "children": {}
+              },
+              "toolloopagent": {
+                "origPath": "07-reference/01-ai-sdk-core/16-tool-loop-agent.mdx",
+                "displayName": "ToolLoopAgent",
+                "relevant": true,
+                "usage": {
+                  "input": 4608,
+                  "output": 1864,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 3420,
+                  "digest": 1281,
+                  "short_digest": 464
+                },
+                "children": {}
+              },
+              "createagentuistream": {
+                "origPath": "07-reference/01-ai-sdk-core/17-create-agent-ui-stream.mdx",
+                "displayName": "createAgentUIStream",
+                "relevant": true,
+                "usage": {
+                  "input": 2484,
+                  "output": 1189,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 1294,
+                  "digest": 783,
+                  "short_digest": 274
+                },
+                "children": {}
+              },
+              "createagentuistreamresponse": {
+                "origPath": "07-reference/01-ai-sdk-core/18-create-agent-ui-stream-response.mdx",
+                "displayName": "createAgentUIStreamResponse",
+                "relevant": true,
+                "usage": {
+                  "input": 2518,
+                  "output": 909,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 1326,
+                  "digest": 540,
+                  "short_digest": 225
+                },
+                "children": {}
+              },
+              "pipeagentuistreamtoresponse": {
+                "origPath": "07-reference/01-ai-sdk-core/18-pipe-agent-ui-stream-to-response.mdx",
+                "displayName": "pipeAgentUIStreamToResponse",
+                "relevant": true,
+                "usage": {
+                  "input": 2596,
+                  "output": 1306,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 1402,
+                  "digest": 889,
+                  "short_digest": 281
+                },
+                "children": {}
+              },
+              "tool": {
+                "origPath": "07-reference/01-ai-sdk-core/20-tool.mdx",
+                "displayName": "tool",
+                "relevant": true,
+                "usage": {
+                  "input": 2919,
+                  "output": 1034,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 1735,
+                  "digest": 688,
+                  "short_digest": 228
+                },
+                "children": {}
+              },
+              "dynamictool": {
+                "origPath": "07-reference/01-ai-sdk-core/22-dynamic-tool.mdx",
+                "displayName": "dynamicTool",
+                "relevant": true,
+                "usage": {
+                  "input": 2540,
+                  "output": 1282,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 1354,
+                  "digest": 826,
+                  "short_digest": 292
+                },
+                "children": {}
+              },
+              "experimental_createmcpclient": {
+                "origPath": "07-reference/01-ai-sdk-core/23-create-mcp-client.mdx",
+                "displayName": "experimental_createMCPClient",
+                "relevant": true,
+                "usage": {
+                  "input": 4149,
+                  "output": 1625,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 2960,
+                  "digest": 1019,
+                  "short_digest": 444
+                },
+                "children": {}
+              },
+              "experimental_stdiomcptransport": {
+                "origPath": "07-reference/01-ai-sdk-core/24-mcp-stdio-transport.mdx",
+                "displayName": "Experimental_StdioMCPTransport",
+                "relevant": true,
+                "usage": {
+                  "input": 1683,
+                  "output": 492,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 494,
+                  "digest": 230,
+                  "short_digest": 137
+                },
+                "children": {}
+              },
+              "jsonschema": {
+                "origPath": "07-reference/01-ai-sdk-core/25-json-schema.mdx",
+                "displayName": "jsonSchema",
+                "relevant": true,
+                "usage": {
+                  "input": 1898,
+                  "output": 838,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 712,
+                  "digest": 430,
+                  "short_digest": 295
+                },
+                "children": {}
+              },
+              "zodschema": {
+                "origPath": "07-reference/01-ai-sdk-core/26-zod-schema.mdx",
+                "displayName": "zodSchema",
+                "relevant": true,
+                "usage": {
+                  "input": 2078,
+                  "output": 895,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 891,
+                  "digest": 503,
+                  "short_digest": 271
+                },
+                "children": {}
+              },
+              "valibotschema": {
+                "origPath": "07-reference/01-ai-sdk-core/27-valibot-schema.mdx",
+                "displayName": "valibotSchema",
+                "relevant": true,
+                "usage": {
+                  "input": 1568,
+                  "output": 484,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 380,
+                  "digest": 247,
+                  "short_digest": 119
+                },
+                "children": {}
+              },
+              "modelmessage": {
+                "origPath": "07-reference/01-ai-sdk-core/30-model-message.mdx",
+                "displayName": "ModelMessage",
+                "relevant": true,
+                "usage": {
+                  "input": 3621,
+                  "output": 1347,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 2435,
+                  "digest": 834,
+                  "short_digest": 380
+                },
+                "children": {}
+              },
+              "uimessage": {
+                "origPath": "07-reference/01-ai-sdk-core/31-ui-message.mdx",
+                "displayName": "UIMessage",
+                "relevant": true,
+                "usage": {
+                  "input": 2811,
+                  "output": 2020,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 1625,
+                  "digest": 1275,
+                  "short_digest": 604
+                },
+                "children": {}
+              },
+              "validateuimessages": {
+                "origPath": "07-reference/01-ai-sdk-core/32-validate-ui-messages.mdx",
+                "displayName": "validateUIMessages",
+                "relevant": true,
+                "usage": {
+                  "input": 1843,
+                  "output": 995,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 655,
+                  "digest": 692,
+                  "short_digest": 189
+                },
+                "children": {}
+              },
+              "safevalidateuimessages": {
+                "origPath": "07-reference/01-ai-sdk-core/33-safe-validate-ui-messages.mdx",
+                "displayName": "safeValidateUIMessages",
+                "relevant": true,
+                "usage": {
+                  "input": 1966,
+                  "output": 1123,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 776,
+                  "digest": 771,
+                  "short_digest": 229
+                },
+                "children": {}
+              },
+              "createproviderregistry": {
+                "origPath": "07-reference/01-ai-sdk-core/40-provider-registry.mdx",
+                "displayName": "createProviderRegistry",
+                "relevant": true,
+                "usage": {
+                  "input": 2512,
+                  "output": 1061,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 1326,
+                  "digest": 607,
+                  "short_digest": 327
+                },
+                "children": {}
+              },
+              "customprovider": {
+                "origPath": "07-reference/01-ai-sdk-core/42-custom-provider.mdx",
+                "displayName": "customProvider",
+                "relevant": true,
+                "usage": {
+                  "input": 2093,
+                  "output": 808,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 907,
+                  "digest": 510,
+                  "short_digest": 160
+                },
+                "children": {}
+              },
+              "cosinesimilarity": {
+                "origPath": "07-reference/01-ai-sdk-core/50-cosine-similarity.mdx",
+                "displayName": "cosineSimilarity",
+                "relevant": true,
+                "usage": {
+                  "input": 1576,
+                  "output": 551,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 389,
+                  "digest": 284,
+                  "short_digest": 143
+                },
+                "children": {}
+              },
+              "wraplanguagemodel": {
+                "origPath": "07-reference/01-ai-sdk-core/60-wrap-language-model.mdx",
+                "displayName": "wrapLanguageModel",
+                "relevant": true,
+                "usage": {
+                  "input": 1634,
+                  "output": 451,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 446,
+                  "digest": 234,
+                  "short_digest": 96
+                },
+                "children": {}
+              },
+              "languagemodelv3middleware": {
+                "origPath": "07-reference/01-ai-sdk-core/65-language-model-v2-middleware.mdx",
+                "displayName": "LanguageModelV3Middleware",
+                "relevant": true,
+                "usage": {
+                  "input": 1626,
+                  "output": 445,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 435,
+                  "digest": 224,
+                  "short_digest": 81
+                },
+                "children": {}
+              },
+              "extractreasoningmiddleware": {
+                "origPath": "07-reference/01-ai-sdk-core/66-extract-reasoning-middleware.mdx",
+                "displayName": "extractReasoningMiddleware",
+                "relevant": true,
+                "usage": {
+                  "input": 1676,
+                  "output": 585,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 488,
+                  "digest": 285,
+                  "short_digest": 146
+                },
+                "children": {}
+              },
+              "simulatestreamingmiddleware": {
+                "origPath": "07-reference/01-ai-sdk-core/67-simulate-streaming-middleware.mdx",
+                "displayName": "simulateStreamingMiddleware",
+                "relevant": true,
+                "usage": {
+                  "input": 1656,
+                  "output": 601,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 468,
+                  "digest": 339,
+                  "short_digest": 133
+                },
+                "children": {}
+              },
+              "defaultsettingsmiddleware": {
+                "origPath": "07-reference/01-ai-sdk-core/68-default-settings-middleware.mdx",
+                "displayName": "defaultSettingsMiddleware",
+                "relevant": true,
+                "usage": {
+                  "input": 1715,
+                  "output": 654,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 527,
+                  "digest": 399,
+                  "short_digest": 138
+                },
+                "children": {}
+              },
+              "stepcountis": {
+                "origPath": "07-reference/01-ai-sdk-core/70-step-count-is.mdx",
+                "displayName": "stepCountIs",
+                "relevant": true,
+                "usage": {
+                  "input": 1767,
+                  "output": 648,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 579,
+                  "digest": 374,
+                  "short_digest": 146
+                },
+                "children": {}
+              },
+              "hastoolcall": {
+                "origPath": "07-reference/01-ai-sdk-core/71-has-tool-call.mdx",
+                "displayName": "hasToolCall",
+                "relevant": true,
+                "usage": {
+                  "input": 2000,
+                  "output": 826,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 812,
+                  "digest": 499,
+                  "short_digest": 197
+                },
+                "children": {}
+              },
+              "simulatereadablestream": {
+                "origPath": "07-reference/01-ai-sdk-core/75-simulate-readable-stream.mdx",
+                "displayName": "simulateReadableStream",
+                "relevant": true,
+                "usage": {
+                  "input": 1886,
+                  "output": 841,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 698,
+                  "digest": 450,
+                  "short_digest": 261
+                },
+                "children": {}
+              },
+              "smoothstream": {
+                "origPath": "07-reference/01-ai-sdk-core/80-smooth-stream.mdx",
+                "displayName": "smoothStream",
+                "relevant": true,
+                "usage": {
+                  "input": 2194,
+                  "output": 1135,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 1008,
+                  "digest": 624,
+                  "short_digest": 388
+                },
+                "children": {}
+              },
+              "generateid": {
+                "origPath": "07-reference/01-ai-sdk-core/90-generate-id.mdx",
+                "displayName": "generateId",
+                "relevant": true,
+                "usage": {
+                  "input": 1419,
+                  "output": 282,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 233,
+                  "digest": 123,
+                  "short_digest": 54
+                },
+                "children": {}
+              },
+              "createidgenerator": {
+                "origPath": "07-reference/01-ai-sdk-core/91-create-id-generator.mdx",
+                "displayName": "createIdGenerator",
+                "relevant": true,
+                "usage": {
+                  "input": 1799,
+                  "output": 488,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 611,
+                  "digest": 279,
+                  "short_digest": 99
+                },
+                "children": {}
+              },
+              "ai_sdk_core": {
+                "origPath": "07-reference/01-ai-sdk-core/index.mdx",
+                "displayName": "AI SDK Core",
+                "relevant": false,
+                "usage": {
+                  "input": 2571,
+                  "output": 745,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 1389,
+                  "digest": 462,
+                  "short_digest": 165
+                },
+                "children": {}
+              }
+            }
+          },
+          "ui_hooks_&_utilities": {
+            "origPath": "07-reference/02-ai-sdk-ui",
+            "displayName": "UI Hooks & Utilities",
+            "relevant": true,
+            "usage": {
+              "input": 7922,
+              "output": 853,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 6719,
+              "digest": 539,
+              "short_digest": 192
+            },
+            "children": {
+              "usechat": {
+                "origPath": "07-reference/02-ai-sdk-ui/01-use-chat.mdx",
+                "displayName": "useChat",
+                "relevant": true,
+                "usage": {
+                  "input": 4904,
+                  "output": 1483,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 3718,
+                  "digest": 1088,
+                  "short_digest": 273
+                },
+                "children": {}
+              },
+              "usecompletion": {
+                "origPath": "07-reference/02-ai-sdk-ui/02-use-completion.mdx",
+                "displayName": "useCompletion",
+                "relevant": true,
+                "usage": {
+                  "input": 2631,
+                  "output": 955,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 1445,
+                  "digest": 625,
+                  "short_digest": 212
+                },
+                "children": {}
+              },
+              "useobject": {
+                "origPath": "07-reference/02-ai-sdk-ui/03-use-object.mdx",
+                "displayName": "useObject",
+                "relevant": true,
+                "usage": {
+                  "input": 2536,
+                  "output": 986,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 1350,
+                  "digest": 622,
+                  "short_digest": 236
+                },
+                "children": {}
+              },
+              "converttomodelmessages": {
+                "origPath": "07-reference/02-ai-sdk-ui/31-convert-to-model-messages.mdx",
+                "displayName": "convertToModelMessages",
+                "relevant": true,
+                "usage": {
+                  "input": 2968,
+                  "output": 1307,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 1778,
+                  "digest": 887,
+                  "short_digest": 293
+                },
+                "children": {}
+              },
+              "prunemessages": {
+                "origPath": "07-reference/02-ai-sdk-ui/32-prune-messages.mdx",
+                "displayName": "pruneMessages",
+                "relevant": true,
+                "usage": {
+                  "input": 2221,
+                  "output": 960,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 1034,
+                  "digest": 613,
+                  "short_digest": 232
+                },
+                "children": {}
+              },
+              "createuimessagestream": {
+                "origPath": "07-reference/02-ai-sdk-ui/40-create-ui-message-stream.mdx",
+                "displayName": "createUIMessageStream",
+                "relevant": true,
+                "usage": {
+                  "input": 2351,
+                  "output": 1068,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 1161,
+                  "digest": 609,
+                  "short_digest": 325
+                },
+                "children": {}
+              },
+              "createuimessagestreamresponse": {
+                "origPath": "07-reference/02-ai-sdk-ui/41-create-ui-message-stream-response.mdx",
+                "displayName": "createUIMessageStreamResponse",
+                "relevant": true,
+                "usage": {
+                  "input": 1908,
+                  "output": 945,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 716,
+                  "digest": 504,
+                  "short_digest": 319
+                },
+                "children": {}
+              },
+              "pipeuimessagestreamtoresponse": {
+                "origPath": "07-reference/02-ai-sdk-ui/42-pipe-ui-message-stream-to-response.mdx",
+                "displayName": "pipeUIMessageStreamToResponse",
+                "relevant": true,
+                "usage": {
+                  "input": 1727,
+                  "output": 513,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 533,
+                  "digest": 281,
+                  "short_digest": 115
+                },
+                "children": {}
+              },
+              "readuimessagestream": {
+                "origPath": "07-reference/02-ai-sdk-ui/43-read-ui-message-stream.mdx",
+                "displayName": "readUIMessageStream",
+                "relevant": true,
+                "usage": {
+                  "input": 1616,
+                  "output": 507,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 426,
+                  "digest": 245,
+                  "short_digest": 133
+                },
+                "children": {}
+              },
+              "inferuitools": {
+                "origPath": "07-reference/02-ai-sdk-ui/46-infer-ui-tools.mdx",
+                "displayName": "InferUITools",
+                "relevant": true,
+                "usage": {
+                  "input": 1876,
+                  "output": 1058,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 687,
+                  "digest": 542,
+                  "short_digest": 383
+                },
+                "children": {}
+              },
+              "inferuitool": {
+                "origPath": "07-reference/02-ai-sdk-ui/47-infer-ui-tool.mdx",
+                "displayName": "InferUITool",
+                "relevant": true,
+                "usage": {
+                  "input": 1653,
+                  "output": 469,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 464,
+                  "digest": 297,
+                  "short_digest": 63
+                },
+                "children": {}
+              },
+              "ai_sdk_ui": {
+                "origPath": "07-reference/02-ai-sdk-ui/index.mdx",
+                "displayName": "AI SDK UI",
+                "relevant": false,
+                "usage": {
+                  "input": 2126,
+                  "output": 492,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 944,
+                  "digest": 303,
+                  "short_digest": 72
+                },
+                "children": {}
+              }
+            }
+          },
+          "rsc_api_reference": {
+            "origPath": "07-reference/03-ai-sdk-rsc",
+            "displayName": "RSC API Reference",
+            "relevant": true,
+            "usage": {
+              "input": 5317,
+              "output": 955,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 4102,
+              "digest": 628,
+              "short_digest": 217
+            },
+            "children": {
+              "streamui": {
+                "origPath": "07-reference/03-ai-sdk-rsc/01-stream-ui.mdx",
+                "displayName": "streamUI",
+                "relevant": true,
+                "usage": {
+                  "input": 6328,
+                  "output": 1770,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 5140,
+                  "digest": 1315,
+                  "short_digest": 324
+                },
+                "children": {}
+              },
+              "createai": {
+                "origPath": "07-reference/03-ai-sdk-rsc/02-create-ai.mdx",
+                "displayName": "createAI",
+                "relevant": true,
+                "usage": {
+                  "input": 1869,
+                  "output": 496,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 681,
+                  "digest": 272,
+                  "short_digest": 103
+                },
+                "children": {}
+              },
+              "createstreamableui": {
+                "origPath": "07-reference/03-ai-sdk-rsc/03-create-streamable-ui.mdx",
+                "displayName": "createStreamableUI",
+                "relevant": true,
+                "usage": {
+                  "input": 1866,
+                  "output": 517,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 675,
+                  "digest": 291,
+                  "short_digest": 102
+                },
+                "children": {}
+              },
+              "createstreamablevalue": {
+                "origPath": "07-reference/03-ai-sdk-rsc/04-create-streamable-value.mdx",
+                "displayName": "createStreamableValue",
+                "relevant": true,
+                "usage": {
+                  "input": 1515,
+                  "output": 425,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 324,
+                  "digest": 194,
+                  "short_digest": 117
+                },
+                "children": {}
+              },
+              "readstreamablevalue": {
+                "origPath": "07-reference/03-ai-sdk-rsc/05-read-streamable-value.mdx",
+                "displayName": "readStreamableValue",
+                "relevant": true,
+                "usage": {
+                  "input": 1698,
+                  "output": 502,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 507,
+                  "digest": 300,
+                  "short_digest": 83
+                },
+                "children": {}
+              },
+              "getaistate": {
+                "origPath": "07-reference/03-ai-sdk-rsc/06-get-ai-state.mdx",
+                "displayName": "getAIState",
+                "relevant": true,
+                "usage": {
+                  "input": 1513,
+                  "output": 376,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 323,
+                  "digest": 160,
+                  "short_digest": 90
+                },
+                "children": {}
+              },
+              "getmutableaistate": {
+                "origPath": "07-reference/03-ai-sdk-rsc/07-get-mutable-ai-state.mdx",
+                "displayName": "getMutableAIState",
+                "relevant": true,
+                "usage": {
+                  "input": 1654,
+                  "output": 401,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 461,
+                  "digest": 201,
+                  "short_digest": 77
+                },
+                "children": {}
+              },
+              "useaistate": {
+                "origPath": "07-reference/03-ai-sdk-rsc/08-use-ai-state.mdx",
+                "displayName": "useAIState",
+                "relevant": true,
+                "usage": {
+                  "input": 1437,
+                  "output": 292,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 247,
+                  "digest": 125,
+                  "short_digest": 49
+                },
+                "children": {}
+              },
+              "useactions": {
+                "origPath": "07-reference/03-ai-sdk-rsc/09-use-actions.mdx",
+                "displayName": "useActions",
+                "relevant": true,
+                "usage": {
+                  "input": 1554,
+                  "output": 355,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 366,
+                  "digest": 199,
+                  "short_digest": 48
+                },
+                "children": {}
+              },
+              "useuistate": {
+                "origPath": "07-reference/03-ai-sdk-rsc/10-use-ui-state.mdx",
+                "displayName": "useUIState",
+                "relevant": true,
+                "usage": {
+                  "input": 1487,
+                  "output": 314,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 297,
+                  "digest": 128,
+                  "short_digest": 70
+                },
+                "children": {}
+              },
+              "usestreamablevalue": {
+                "origPath": "07-reference/03-ai-sdk-rsc/11-use-streamable-value.mdx",
+                "displayName": "useStreamableValue",
+                "relevant": true,
+                "usage": {
+                  "input": 1571,
+                  "output": 383,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 380,
+                  "digest": 212,
+                  "short_digest": 56
+                },
+                "children": {}
+              },
+              "render_(removed)": {
+                "origPath": "07-reference/03-ai-sdk-rsc/20-render.mdx",
+                "displayName": "render (Removed)",
+                "relevant": true,
+                "usage": {
+                  "input": 3116,
+                  "output": 514,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 1930,
+                  "digest": 318,
+                  "short_digest": 85
+                },
+                "children": {}
+              },
+              "ai_sdk_rsc": {
+                "origPath": "07-reference/03-ai-sdk-rsc/index.mdx",
+                "displayName": "AI SDK RSC",
+                "relevant": false,
+                "usage": {
+                  "input": 1841,
+                  "output": 606,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 657,
+                  "digest": 317,
+                  "short_digest": 141
+                },
+                "children": {}
+              }
+            }
+          },
+          "deprecated_stream_helpers": {
+            "origPath": "07-reference/04-stream-helpers",
+            "displayName": "Deprecated Stream Helpers",
+            "relevant": false,
+            "usage": {
+              "input": 6072,
+              "output": 923,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 4847,
+              "digest": 565,
+              "short_digest": 236
+            },
+            "children": {
+              "aistream": {
+                "origPath": "07-reference/04-stream-helpers/01-ai-stream.mdx",
+                "displayName": "AIStream",
+                "relevant": true,
+                "usage": {
+                  "input": 1889,
+                  "output": 518,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 707,
+                  "digest": 318,
+                  "short_digest": 85
+                },
+                "children": {}
+              },
+              "streamingtextresponse": {
+                "origPath": "07-reference/04-stream-helpers/02-streaming-text-response.mdx",
+                "displayName": "StreamingTextResponse",
+                "relevant": true,
+                "usage": {
+                  "input": 1831,
+                  "output": 566,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 647,
+                  "digest": 315,
+                  "short_digest": 124
+                },
+                "children": {}
+              },
+              "streamtoresponse": {
+                "origPath": "07-reference/04-stream-helpers/05-stream-to-response.mdx",
+                "displayName": "streamToResponse",
+                "relevant": true,
+                "usage": {
+                  "input": 2010,
+                  "output": 832,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 826,
+                  "digest": 520,
+                  "short_digest": 186
+                },
+                "children": {}
+              },
+              "openaistream": {
+                "origPath": "07-reference/04-stream-helpers/07-openai-stream.mdx",
+                "displayName": "OpenAIStream",
+                "relevant": true,
+                "usage": {
+                  "input": 1837,
+                  "output": 470,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 654,
+                  "digest": 238,
+                  "short_digest": 97
+                },
+                "children": {}
+              },
+              "anthropicstream": {
+                "origPath": "07-reference/04-stream-helpers/08-anthropic-stream.mdx",
+                "displayName": "AnthropicStream",
+                "relevant": true,
+                "usage": {
+                  "input": 1813,
+                  "output": 489,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 630,
+                  "digest": 231,
+                  "short_digest": 121
+                },
+                "children": {}
+              },
+              "awsbedrockstream": {
+                "origPath": "07-reference/04-stream-helpers/09-aws-bedrock-stream.mdx",
+                "displayName": "AWSBedrockStream",
+                "relevant": false,
+                "usage": {
+                  "input": 1895,
+                  "output": 476,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 710,
+                  "digest": 270,
+                  "short_digest": 89
+                },
+                "children": {}
+              },
+              "awsbedrockanthropicstream": {
+                "origPath": "07-reference/04-stream-helpers/10-aws-bedrock-anthropic-stream.mdx",
+                "displayName": "AWSBedrockAnthropicStream",
+                "relevant": false,
+                "usage": {
+                  "input": 1931,
+                  "output": 494,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 743,
+                  "digest": 285,
+                  "short_digest": 83
+                },
+                "children": {}
+              },
+              "awsbedrockanthropicmessagesstream": {
+                "origPath": "07-reference/04-stream-helpers/10-aws-bedrock-messages-stream.mdx",
+                "displayName": "AWSBedrockAnthropicMessagesStream",
+                "relevant": true,
+                "usage": {
+                  "input": 1942,
+                  "output": 495,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 755,
+                  "digest": 293,
+                  "short_digest": 73
+                },
+                "children": {}
+              },
+              "awsbedrockcoherestream": {
+                "origPath": "07-reference/04-stream-helpers/11-aws-bedrock-cohere-stream.mdx",
+                "displayName": "AWSBedrockCohereStream",
+                "relevant": true,
+                "usage": {
+                  "input": 1920,
+                  "output": 488,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 732,
+                  "digest": 275,
+                  "short_digest": 89
+                },
+                "children": {}
+              },
+              "awsbedrockllama2stream": {
+                "origPath": "07-reference/04-stream-helpers/12-aws-bedrock-llama-2-stream.mdx",
+                "displayName": "AWSBedrockLlama2Stream",
+                "relevant": false,
+                "usage": {
+                  "input": 1928,
+                  "output": 477,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 738,
+                  "digest": 278,
+                  "short_digest": 73
+                },
+                "children": {}
+              },
+              "coherestream": {
+                "origPath": "07-reference/04-stream-helpers/13-cohere-stream.mdx",
+                "displayName": "CohereStream",
+                "relevant": false,
+                "usage": {
+                  "input": 1810,
+                  "output": 490,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 627,
+                  "digest": 238,
+                  "short_digest": 110
+                },
+                "children": {}
+              },
+              "googlegenerativeaistream": {
+                "origPath": "07-reference/04-stream-helpers/14-google-generative-ai-stream.mdx",
+                "displayName": "GoogleGenerativeAIStream",
+                "relevant": true,
+                "usage": {
+                  "input": 1887,
+                  "output": 510,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 700,
+                  "digest": 269,
+                  "short_digest": 117
+                },
+                "children": {}
+              },
+              "huggingfacestream": {
+                "origPath": "07-reference/04-stream-helpers/15-hugging-face-stream.mdx",
+                "displayName": "HuggingFaceStream",
+                "relevant": false,
+                "usage": {
+                  "input": 1945,
+                  "output": 517,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 760,
+                  "digest": 307,
+                  "short_digest": 93
+                },
+                "children": {}
+              },
+              "langchain_adapter": {
+                "origPath": "07-reference/04-stream-helpers/16-langchain-adapter.mdx",
+                "displayName": "LangChain Adapter",
+                "relevant": true,
+                "usage": {
+                  "input": 2043,
+                  "output": 931,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 860,
+                  "digest": 664,
+                  "short_digest": 127
+                },
+                "children": {}
+              },
+              "llamaindex_adapter": {
+                "origPath": "07-reference/04-stream-helpers/16-llamaindex-adapter.mdx",
+                "displayName": "LlamaIndex Adapter",
+                "relevant": true,
+                "usage": {
+                  "input": 1764,
+                  "output": 638,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 580,
+                  "digest": 401,
+                  "short_digest": 103
+                },
+                "children": {}
+              },
+              "mistralstream": {
+                "origPath": "07-reference/04-stream-helpers/17-mistral-stream.mdx",
+                "displayName": "MistralStream",
+                "relevant": true,
+                "usage": {
+                  "input": 1810,
+                  "output": 468,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 627,
+                  "digest": 260,
+                  "short_digest": 78
+                },
+                "children": {}
+              },
+              "replicatestream": {
+                "origPath": "07-reference/04-stream-helpers/18-replicate-stream.mdx",
+                "displayName": "ReplicateStream",
+                "relevant": true,
+                "usage": {
+                  "input": 1909,
+                  "output": 487,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 726,
+                  "digest": 275,
+                  "short_digest": 87
+                },
+                "children": {}
+              },
+              "inkeepstream": {
+                "origPath": "07-reference/04-stream-helpers/19-inkeep-stream.mdx",
+                "displayName": "InkeepStream",
+                "relevant": true,
+                "usage": {
+                  "input": 1826,
+                  "output": 488,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 642,
+                  "digest": 259,
+                  "short_digest": 107
+                },
+                "children": {}
+              },
+              "stream_helpers": {
+                "origPath": "07-reference/04-stream-helpers/index.mdx",
+                "displayName": "Stream Helpers",
+                "relevant": false,
+                "usage": {
+                  "input": 2199,
+                  "output": 739,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 1021,
+                  "digest": 414,
+                  "short_digest": 162
+                },
+                "children": {}
+              }
+            }
+          },
+          "error_reference": {
+            "origPath": "07-reference/05-ai-sdk-errors",
+            "displayName": "Error Reference",
+            "relevant": true,
+            "usage": {
+              "input": 6364,
+              "output": 1080,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 4969,
+              "digest": 732,
+              "short_digest": 243
+            },
+            "children": {
+              "ai_apicallerror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-api-call-error.mdx",
+                "displayName": "AI_APICallError",
+                "relevant": true,
+                "usage": {
+                  "input": 1403,
+                  "output": 372,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 215,
+                  "digest": 179,
+                  "short_digest": 67
+                },
+                "children": {}
+              },
+              "ai_downloaderror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-download-error.mdx",
+                "displayName": "AI_DownloadError",
+                "relevant": true,
+                "usage": {
+                  "input": 1359,
+                  "output": 304,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 173,
+                  "digest": 136,
+                  "short_digest": 43
+                },
+                "children": {}
+              },
+              "ai_emptyresponsebodyerror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-empty-response-body-error.mdx",
+                "displayName": "AI_EmptyResponseBodyError",
+                "relevant": true,
+                "usage": {
+                  "input": 1328,
+                  "output": 254,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 138,
+                  "digest": 96,
+                  "short_digest": 39
+                },
+                "children": {}
+              },
+              "invalidargumenterror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-invalid-argument-error.mdx",
+                "displayName": "InvalidArgumentError",
+                "relevant": true,
+                "usage": {
+                  "input": 1333,
+                  "output": 294,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 145,
+                  "digest": 119,
+                  "short_digest": 61
+                },
+                "children": {}
+              },
+              "invaliddatacontenterror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-invalid-data-content-error.mdx",
+                "displayName": "InvalidDataContentError",
+                "relevant": true,
+                "usage": {
+                  "input": 1368,
+                  "output": 299,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 178,
+                  "digest": 130,
+                  "short_digest": 51
+                },
+                "children": {}
+              },
+              "ai_invaliddatacontent": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-invalid-data-content.mdx",
+                "displayName": "AI_InvalidDataContent",
+                "relevant": true,
+                "usage": {
+                  "input": 1331,
+                  "output": 381,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 143,
+                  "digest": 159,
+                  "short_digest": 107
+                },
+                "children": {}
+              },
+              "invalidmessageroleerror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-invalid-message-role-error.mdx",
+                "displayName": "InvalidMessageRoleError",
+                "relevant": true,
+                "usage": {
+                  "input": 1336,
+                  "output": 296,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 146,
+                  "digest": 138,
+                  "short_digest": 43
+                },
+                "children": {}
+              },
+              "ai_invalidprompterror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-invalid-prompt-error.mdx",
+                "displayName": "AI_InvalidPromptError",
+                "relevant": true,
+                "usage": {
+                  "input": 1456,
+                  "output": 477,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 268,
+                  "digest": 229,
+                  "short_digest": 123
+                },
+                "children": {}
+              },
+              "invalidresponsedataerror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-invalid-response-data-error.mdx",
+                "displayName": "InvalidResponseDataError",
+                "relevant": true,
+                "usage": {
+                  "input": 1334,
+                  "output": 267,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 144,
+                  "digest": 105,
+                  "short_digest": 46
+                },
+                "children": {}
+              },
+              "invalidtoolinputerror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-invalid-tool-input-error.mdx",
+                "displayName": "InvalidToolInputError",
+                "relevant": true,
+                "usage": {
+                  "input": 1354,
+                  "output": 326,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 164,
+                  "digest": 163,
+                  "short_digest": 46
+                },
+                "children": {}
+              },
+              "ai_jsonparseerror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-json-parse-error.mdx",
+                "displayName": "AI_JSONParseError",
+                "relevant": true,
+                "usage": {
+                  "input": 1334,
+                  "output": 276,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 146,
+                  "digest": 111,
+                  "short_digest": 46
+                },
+                "children": {}
+              },
+              "ai_loadapikeyerror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-load-api-key-error.mdx",
+                "displayName": "AI_LoadAPIKeyError",
+                "relevant": true,
+                "usage": {
+                  "input": 1321,
+                  "output": 282,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 131,
+                  "digest": 119,
+                  "short_digest": 47
+                },
+                "children": {}
+              },
+              "ai_loadsettingerror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-load-setting-error.mdx",
+                "displayName": "AI_LoadSettingError",
+                "relevant": true,
+                "usage": {
+                  "input": 1319,
+                  "output": 263,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 131,
+                  "digest": 109,
+                  "short_digest": 38
+                },
+                "children": {}
+              },
+              "messageconversionerror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-message-conversion-error.mdx",
+                "displayName": "MessageConversionError",
+                "relevant": true,
+                "usage": {
+                  "input": 1334,
+                  "output": 294,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 146,
+                  "digest": 127,
+                  "short_digest": 53
+                },
+                "children": {}
+              },
+              "nocontentgeneratederror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-no-content-generated-error.mdx",
+                "displayName": "NoContentGeneratedError",
+                "relevant": true,
+                "usage": {
+                  "input": 1328,
+                  "output": 249,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 138,
+                  "digest": 97,
+                  "short_digest": 39
+                },
+                "children": {}
+              },
+              "ai_noimagegeneratederror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-no-image-generated-error.mdx",
+                "displayName": "AI_NoImageGeneratedError",
+                "relevant": true,
+                "usage": {
+                  "input": 1460,
+                  "output": 471,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 270,
+                  "digest": 219,
+                  "short_digest": 134
+                },
+                "children": {}
+              },
+              "ai_noobjectgeneratederror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-no-object-generated-error.mdx",
+                "displayName": "AI_NoObjectGeneratedError",
+                "relevant": true,
+                "usage": {
+                  "input": 1618,
+                  "output": 483,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 428,
+                  "digest": 288,
+                  "short_digest": 62
+                },
+                "children": {}
+              },
+              "nospeechgeneratederror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-no-speech-generated-error.mdx",
+                "displayName": "NoSpeechGeneratedError",
+                "relevant": true,
+                "usage": {
+                  "input": 1349,
+                  "output": 281,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 159,
+                  "digest": 118,
+                  "short_digest": 43
+                },
+                "children": {}
+              },
+              "nosuchmodelerror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-no-such-model-error.mdx",
+                "displayName": "NoSuchModelError",
+                "relevant": true,
+                "usage": {
+                  "input": 1352,
+                  "output": 333,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 162,
+                  "digest": 168,
+                  "short_digest": 45
+                },
+                "children": {}
+              },
+              "ai_nosuchprovidererror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-no-such-provider-error.mdx",
+                "displayName": "AI_NoSuchProviderError",
+                "relevant": true,
+                "usage": {
+                  "input": 1383,
+                  "output": 341,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 193,
+                  "digest": 154,
+                  "short_digest": 57
+                },
+                "children": {}
+              },
+              "ai_nosuchtoolerror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-no-such-tool-error.mdx",
+                "displayName": "AI_NoSuchToolError",
+                "relevant": true,
+                "usage": {
+                  "input": 1357,
+                  "output": 349,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 167,
+                  "digest": 176,
+                  "short_digest": 49
+                },
+                "children": {}
+              },
+              "notranscriptgeneratederror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-no-transcript-generated-error.mdx",
+                "displayName": "NoTranscriptGeneratedError",
+                "relevant": true,
+                "usage": {
+                  "input": 1349,
+                  "output": 286,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 159,
+                  "digest": 128,
+                  "short_digest": 41
+                },
+                "children": {}
+              },
+              "ai_retryerror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-retry-error.mdx",
+                "displayName": "AI_RetryError",
+                "relevant": true,
+                "usage": {
+                  "input": 1349,
+                  "output": 315,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 163,
+                  "digest": 146,
+                  "short_digest": 44
+                },
+                "children": {}
+              },
+              "toomanyembeddingvaluesforcallerror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-too-many-embedding-values-for-call-error.mdx",
+                "displayName": "TooManyEmbeddingValuesForCallError",
+                "relevant": true,
+                "usage": {
+                  "input": 1430,
+                  "output": 426,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 234,
+                  "digest": 223,
+                  "short_digest": 65
+                },
+                "children": {}
+              },
+              "toolcallrepairerror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-tool-call-repair-error.mdx",
+                "displayName": "ToolCallRepairError",
+                "relevant": true,
+                "usage": {
+                  "input": 1404,
+                  "output": 356,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 214,
+                  "digest": 166,
+                  "short_digest": 65
+                },
+                "children": {}
+              },
+              "typevalidationerror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-type-validation-error.mdx",
+                "displayName": "TypeValidationError",
+                "relevant": true,
+                "usage": {
+                  "input": 1329,
+                  "output": 260,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 141,
+                  "digest": 105,
+                  "short_digest": 44
+                },
+                "children": {}
+              },
+              "ai_unsupportedfunctionalityerror": {
+                "origPath": "07-reference/05-ai-sdk-errors/ai-unsupported-functionality-error.mdx",
+                "displayName": "AI_UnsupportedFunctionalityError",
+                "relevant": true,
+                "usage": {
+                  "input": 1364,
+                  "output": 326,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 174,
+                  "digest": 157,
+                  "short_digest": 44
+                },
+                "children": {}
+              },
+              "ai_sdk_errors": {
+                "origPath": "07-reference/05-ai-sdk-errors/index.mdx",
+                "displayName": "AI SDK Errors",
+                "relevant": false,
+                "usage": {
+                  "input": 2075,
+                  "output": 813,
+                  "details": null
+                },
+                "token_counts": {
+                  "fulltext": 893,
+                  "digest": 489,
+                  "short_digest": 210
+                },
+                "children": {}
+              }
+            }
+          },
+          "reference": {
+            "origPath": "07-reference/index.mdx",
+            "displayName": "Reference",
+            "relevant": false,
+            "usage": {
+              "input": 1404,
+              "output": 357,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 238,
+              "digest": 175,
+              "short_digest": 64
+            },
+            "children": {}
+          }
+        }
+      },
+      "migration_guides": {
+        "origPath": "08-migration-guides",
+        "displayName": "Migration Guides",
+        "relevant": true,
+        "usage": {
+          "input": 11220,
+          "output": 2136,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 10022,
+          "digest": 1561,
+          "short_digest": 459
+        },
+        "children": {
+          "versioning": {
+            "origPath": "08-migration-guides/00-versioning.mdx",
+            "displayName": "Versioning",
+            "relevant": true,
+            "usage": {
+              "input": 1543,
+              "output": 444,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 370,
+              "digest": 235,
+              "short_digest": 82
+            },
+            "children": {}
+          },
+          "migrate_data_to_ai_sdk_5.0": {
+            "origPath": "08-migration-guides/25-migration-guide-5-0-data.mdx",
+            "displayName": "Migrate Data to AI SDK 5.0",
+            "relevant": true,
+            "usage": {
+              "input": 8797,
+              "output": 2754,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 7617,
+              "digest": 1959,
+              "short_digest": 549
+            },
+            "children": {}
+          },
+          "migrate_ai_sdk_4.0_to_5.0": {
+            "origPath": "08-migration-guides/26-migration-guide-5-0.mdx",
+            "displayName": "Migrate AI SDK 4.0 to 5.0",
+            "relevant": true,
+            "usage": {
+              "input": 28740,
+              "output": 3261,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 27562,
+              "digest": 2518,
+              "short_digest": 527
+            },
+            "children": {}
+          },
+          "migrate_ai_sdk_4.1_to_4.2": {
+            "origPath": "08-migration-guides/27-migration-guide-4-2.mdx",
+            "displayName": "Migrate AI SDK 4.1 to 4.2",
+            "relevant": true,
+            "usage": {
+              "input": 2112,
+              "output": 972,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 934,
+              "digest": 588,
+              "short_digest": 225
+            },
+            "children": {}
+          },
+          "migrate_ai_sdk_5.0_to_6.0_beta": {
+            "origPath": "08-migration-guides/27-migration-guide-6-0.mdx",
+            "displayName": "Migrate AI SDK 5.0 to 6.0 Beta",
+            "relevant": true,
+            "usage": {
+              "input": 1807,
+              "output": 781,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 629,
+              "digest": 395,
+              "short_digest": 187
+            },
+            "children": {}
+          },
+          "migrate_4.0_to_4.1": {
+            "origPath": "08-migration-guides/28-migration-guide-4-1.mdx",
+            "displayName": "Migrate 4.0 to 4.1",
+            "relevant": true,
+            "usage": {
+              "input": 1302,
+              "output": 212,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 124,
+              "digest": 71,
+              "short_digest": 29
+            },
+            "children": {}
+          },
+          "migrate_ai_sdk_3.4_to_4.0": {
+            "origPath": "08-migration-guides/29-migration-guide-4-0.mdx",
+            "displayName": "Migrate AI SDK 3.4 to 4.0",
+            "relevant": true,
+            "usage": {
+              "input": 11229,
+              "output": 2102,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 10051,
+              "digest": 1533,
+              "short_digest": 352
+            },
+            "children": {}
+          },
+          "migrate_3.3_to_3.4": {
+            "origPath": "08-migration-guides/36-migration-guide-3-4.mdx",
+            "displayName": "Migrate 3.3 to 3.4",
+            "relevant": true,
+            "usage": {
+              "input": 1302,
+              "output": 215,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 124,
+              "digest": 71,
+              "short_digest": 29
+            },
+            "children": {}
+          },
+          "migrate_ai_sdk_3.2_to_3.3": {
+            "origPath": "08-migration-guides/37-migration-guide-3-3.mdx",
+            "displayName": "Migrate AI SDK 3.2 to 3.3",
+            "relevant": true,
+            "usage": {
+              "input": 2091,
+              "output": 746,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 913,
+              "digest": 477,
+              "short_digest": 105
+            },
+            "children": {}
+          },
+          "migrate_ai_sdk_3.1_to_3.2": {
+            "origPath": "08-migration-guides/38-migration-guide-3-2.mdx",
+            "displayName": "Migrate AI SDK 3.1 to 3.2",
+            "relevant": true,
+            "usage": {
+              "input": 1647,
+              "output": 435,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 469,
+              "digest": 203,
+              "short_digest": 91
+            },
+            "children": {}
+          },
+          "migrate_ai_sdk_3.0_to_3.1": {
+            "origPath": "08-migration-guides/39-migration-guide-3-1.mdx",
+            "displayName": "Migrate AI SDK 3.0 to 3.1",
+            "relevant": true,
+            "usage": {
+              "input": 2997,
+              "output": 1734,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1819,
+              "digest": 1070,
+              "short_digest": 506
+            },
+            "children": {}
+          },
+          "migration_guides": {
+            "origPath": "08-migration-guides/index.mdx",
+            "displayName": "Migration Guides",
+            "relevant": false,
+            "usage": {
+              "input": 1502,
+              "output": 298,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 332,
+              "digest": 156,
+              "short_digest": 33
+            },
+            "children": {}
+          }
+        }
+      },
+      "troubleshooting": {
+        "origPath": "09-troubleshooting",
+        "displayName": "Troubleshooting",
+        "relevant": true,
+        "usage": {
+          "input": 11502,
+          "output": 1318,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 10076,
+          "digest": 921,
+          "short_digest": 279
+        },
+        "children": {
+          "azure_openai_slow_to_stream": {
+            "origPath": "09-troubleshooting/01-azure-stream-slow.mdx",
+            "displayName": "Azure OpenAI Slow to Stream",
+            "relevant": true,
+            "usage": {
+              "input": 1427,
+              "output": 448,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 249,
+              "digest": 227,
+              "short_digest": 97
+            },
+            "children": {}
+          },
+          "client-side_function_calls_not_invoked": {
+            "origPath": "09-troubleshooting/02-client-side-function-calls-not-invoked.mdx",
+            "displayName": "Client-Side Function Calls Not Invoked",
+            "relevant": true,
+            "usage": {
+              "input": 1384,
+              "output": 371,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 199,
+              "digest": 150,
+              "short_digest": 97
+            },
+            "children": {}
+          },
+          "server_actions_in_client_components": {
+            "origPath": "09-troubleshooting/03-server-actions-in-client-components.mdx",
+            "displayName": "Server Actions in Client Components",
+            "relevant": true,
+            "usage": {
+              "input": 1501,
+              "output": 467,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 319,
+              "digest": 272,
+              "short_digest": 75
+            },
+            "children": {}
+          },
+          "stream_output_contains_protocol_markers_instead_of_text": {
+            "origPath": "09-troubleshooting/04-strange-stream-output.mdx",
+            "displayName": "Stream output contains protocol markers instead of text",
+            "relevant": true,
+            "usage": {
+              "input": 1550,
+              "output": 445,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 372,
+              "digest": 253,
+              "short_digest": 56
+            },
+            "children": {}
+          },
+          "streamable_ui_errors": {
+            "origPath": "09-troubleshooting/05-streamable-ui-errors.mdx",
+            "displayName": "Streamable UI Errors",
+            "relevant": true,
+            "usage": {
+              "input": 1289,
+              "output": 288,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 110,
+              "digest": 118,
+              "short_digest": 51
+            },
+            "children": {}
+          },
+          "tool_invocation_missing_result_error": {
+            "origPath": "09-troubleshooting/05-tool-invocation-missing-result.mdx",
+            "displayName": "Tool Invocation Missing Result Error",
+            "relevant": true,
+            "usage": {
+              "input": 2035,
+              "output": 1030,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 854,
+              "digest": 651,
+              "short_digest": 244
+            },
+            "children": {}
+          },
+          "streaming_not_working_when_deployed": {
+            "origPath": "09-troubleshooting/06-streaming-not-working-when-deployed.mdx",
+            "displayName": "Streaming Not Working When Deployed",
+            "relevant": true,
+            "usage": {
+              "input": 1384,
+              "output": 314,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 202,
+              "digest": 140,
+              "short_digest": 55
+            },
+            "children": {}
+          },
+          "streaming_not_working_when_proxied": {
+            "origPath": "09-troubleshooting/06-streaming-not-working-when-proxied.mdx",
+            "displayName": "Streaming Not Working When Proxied",
+            "relevant": true,
+            "usage": {
+              "input": 1380,
+              "output": 356,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 197,
+              "digest": 152,
+              "short_digest": 82
+            },
+            "children": {}
+          },
+          "getting_timeouts_when_deploying_on_vercel": {
+            "origPath": "09-troubleshooting/06-timeout-on-vercel.mdx",
+            "displayName": "Getting Timeouts When Deploying on Vercel",
+            "relevant": true,
+            "usage": {
+              "input": 1696,
+              "output": 482,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 517,
+              "digest": 266,
+              "short_digest": 72
+            },
+            "children": {}
+          },
+          "unclosed_streams": {
+            "origPath": "09-troubleshooting/07-unclosed-streams.mdx",
+            "displayName": "Unclosed Streams",
+            "relevant": true,
+            "usage": {
+              "input": 1458,
+              "output": 346,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 281,
+              "digest": 174,
+              "short_digest": 65
+            },
+            "children": {}
+          },
+          "usechat_failed_to_parse_stream": {
+            "origPath": "09-troubleshooting/08-use-chat-failed-to-parse-stream.mdx",
+            "displayName": "useChat Failed to Parse Stream",
+            "relevant": true,
+            "usage": {
+              "input": 1570,
+              "output": 504,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 386,
+              "digest": 239,
+              "short_digest": 123
+            },
+            "children": {}
+          },
+          "server_action_plain_objects_error": {
+            "origPath": "09-troubleshooting/09-client-stream-error.mdx",
+            "displayName": "Server Action Plain Objects Error",
+            "relevant": true,
+            "usage": {
+              "input": 1525,
+              "output": 339,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 347,
+              "digest": 169,
+              "short_digest": 54
+            },
+            "children": {}
+          },
+          "usechat_no_response": {
+            "origPath": "09-troubleshooting/10-use-chat-tools-no-response.mdx",
+            "displayName": "useChat No Response",
+            "relevant": true,
+            "usage": {
+              "input": 1449,
+              "output": 420,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 267,
+              "digest": 227,
+              "short_digest": 83
+            },
+            "children": {}
+          },
+          "custom_headers,_body,_and_credentials_not_working_with_usechat": {
+            "origPath": "09-troubleshooting/11-use-chat-custom-request-options.mdx",
+            "displayName": "Custom headers, body, and credentials not working with useChat",
+            "relevant": true,
+            "usage": {
+              "input": 2354,
+              "output": 1107,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1172,
+              "digest": 722,
+              "short_digest": 248
+            },
+            "children": {}
+          },
+          "typescript_performance_issues_with_zod": {
+            "origPath": "09-troubleshooting/12-typescript-performance-zod.mdx",
+            "displayName": "TypeScript performance issues with Zod",
+            "relevant": true,
+            "usage": {
+              "input": 1591,
+              "output": 483,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 412,
+              "digest": 266,
+              "short_digest": 91
+            },
+            "children": {}
+          },
+          "usechat_\"an_error_occurred\"_troubleshooting": {
+            "origPath": "09-troubleshooting/12-use-chat-an-error-occurred.mdx",
+            "displayName": "useChat \"An error occurred\" Troubleshooting",
+            "relevant": true,
+            "usage": {
+              "input": 1545,
+              "output": 630,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 363,
+              "digest": 288,
+              "short_digest": 196
+            },
+            "children": {}
+          },
+          "repeated_assistant_messages_in_usechat": {
+            "origPath": "09-troubleshooting/13-repeated-assistant-messages.mdx",
+            "displayName": "Repeated assistant messages in useChat",
+            "relevant": true,
+            "usage": {
+              "input": 1746,
+              "output": 626,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 568,
+              "digest": 381,
+              "short_digest": 123
+            },
+            "children": {}
+          },
+          "onfinish_not_called_when_stream_is_aborted": {
+            "origPath": "09-troubleshooting/14-stream-abort-handling.mdx",
+            "displayName": "onFinish not called when stream is aborted",
+            "relevant": true,
+            "usage": {
+              "input": 1806,
+              "output": 660,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 628,
+              "digest": 380,
+              "short_digest": 151
+            },
+            "children": {}
+          },
+          "tool_calling_with_structured_outputs": {
+            "origPath": "09-troubleshooting/14-tool-calling-with-structured-outputs.mdx",
+            "displayName": "Tool calling with structured outputs",
+            "relevant": true,
+            "usage": {
+              "input": 1630,
+              "output": 531,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 448,
+              "digest": 337,
+              "short_digest": 75
+            },
+            "children": {}
+          },
+          "abort_breaks_resumable_streams": {
+            "origPath": "09-troubleshooting/15-abort-breaks-resumable-streams.mdx",
+            "displayName": "Abort breaks resumable streams",
+            "relevant": true,
+            "usage": {
+              "input": 1591,
+              "output": 462,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 410,
+              "digest": 254,
+              "short_digest": 92
+            },
+            "children": {}
+          },
+          "streamtext_fails_silently": {
+            "origPath": "09-troubleshooting/15-stream-text-not-working.mdx",
+            "displayName": "streamText fails silently",
+            "relevant": true,
+            "usage": {
+              "input": 1435,
+              "output": 433,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 255,
+              "digest": 210,
+              "short_digest": 111
+            },
+            "children": {}
+          },
+          "streaming_status_shows_but_no_text_appears": {
+            "origPath": "09-troubleshooting/16-streaming-status-delay.mdx",
+            "displayName": "Streaming Status Shows But No Text Appears",
+            "relevant": true,
+            "usage": {
+              "input": 1631,
+              "output": 728,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 453,
+              "digest": 410,
+              "short_digest": 160
+            },
+            "children": {}
+          },
+          "stale_body_values_with_usechat": {
+            "origPath": "09-troubleshooting/17-use-chat-stale-body-data.mdx",
+            "displayName": "Stale body values with useChat",
+            "relevant": true,
+            "usage": {
+              "input": 2260,
+              "output": 874,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1077,
+              "digest": 590,
+              "short_digest": 157
+            },
+            "children": {}
+          },
+          "type_error_with_ontoolcall": {
+            "origPath": "09-troubleshooting/18-ontoolcall-type-narrowing.mdx",
+            "displayName": "Type Error with onToolCall",
+            "relevant": true,
+            "usage": {
+              "input": 1747,
+              "output": 574,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 565,
+              "digest": 373,
+              "short_digest": 82
+            },
+            "children": {}
+          },
+          "unsupported_model_version_error": {
+            "origPath": "09-troubleshooting/19-unsupported-model-version.mdx",
+            "displayName": "Unsupported model version error",
+            "relevant": true,
+            "usage": {
+              "input": 1759,
+              "output": 705,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 579,
+              "digest": 437,
+              "short_digest": 111
+            },
+            "children": {}
+          },
+          "object_generation_failed_with_openai": {
+            "origPath": "09-troubleshooting/20-no-object-generated-content-filter.mdx",
+            "displayName": "Object generation failed with OpenAI",
+            "relevant": true,
+            "usage": {
+              "input": 2029,
+              "output": 780,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 847,
+              "digest": 497,
+              "short_digest": 159
+            },
+            "children": {}
+          },
+          "model_is_not_assignable_to_type_languagemodelv1": {
+            "origPath": "09-troubleshooting/30-model-is-not-assignable-to-type.mdx",
+            "displayName": "Model is not assignable to type LanguageModelV1",
+            "relevant": true,
+            "usage": {
+              "input": 1355,
+              "output": 317,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 170,
+              "digest": 113,
+              "short_digest": 84
+            },
+            "children": {}
+          },
+          "typescript_error_\"cannot_find_namespace_'jsx'\"": {
+            "origPath": "09-troubleshooting/40-typescript-cannot-find-namespace-jsx.mdx",
+            "displayName": "TypeScript error \"Cannot find namespace 'JSX'\"",
+            "relevant": true,
+            "usage": {
+              "input": 1364,
+              "output": 313,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 182,
+              "digest": 112,
+              "short_digest": 68
+            },
+            "children": {}
+          },
+          "react_maximum_update_depth_exceeded": {
+            "origPath": "09-troubleshooting/50-react-maximum-update-depth-exceeded.mdx",
+            "displayName": "React Maximum Update Depth Exceeded",
+            "relevant": true,
+            "usage": {
+              "input": 1481,
+              "output": 474,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 299,
+              "digest": 228,
+              "short_digest": 111
+            },
+            "children": {}
+          },
+          "jest:_cannot_find_module_'@ai-sdk_rsc'": {
+            "origPath": "09-troubleshooting/60-jest-cannot-find-module-ai-rsc.mdx",
+            "displayName": "Jest: cannot find module '@ai-sdk/rsc'",
+            "relevant": true,
+            "usage": {
+              "input": 1373,
+              "output": 346,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 188,
+              "digest": 153,
+              "short_digest": 70
+            },
+            "children": {}
+          },
+          "troubleshooting": {
+            "origPath": "09-troubleshooting/index.mdx",
+            "displayName": "Troubleshooting",
+            "relevant": false,
+            "usage": {
+              "input": 1253,
+              "output": 190,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 81,
+              "digest": 66,
+              "short_digest": 22
+            },
+            "children": {}
+          }
+        }
+      },
+      "ai_sdk_by_vercel": {
+        "origPath": "00-introduction/index.mdx",
+        "displayName": "AI SDK by Vercel",
+        "relevant": false,
+        "usage": {
+          "input": 1844,
+          "output": 506,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 678,
+          "digest": 264,
+          "short_digest": 110
+        },
+        "children": {}
+      },
+      "ai_sdk_6_beta": {
+        "origPath": "01-announcing-ai-sdk-6-beta/index.mdx",
+        "displayName": "AI SDK 6 Beta",
+        "relevant": true,
+        "usage": {
+          "input": 5092,
+          "output": 3034,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 3910,
+          "digest": 2557,
+          "short_digest": 333
+        },
+        "children": {}
+      }
+    }
+  },
+  "name": "vercel/ai",
+  "ecosystems": [
+    "js"
+  ],
+  "source_type": "git",
+  "source": {
+    "name": "vercel/ai",
+    "comment": null,
+    "ecosystems": [
+      "js"
+    ],
+    "include": null,
+    "exclude": null,
+    "doc_dir": "content/docs",
+    "repo": "https://github.com/vercel/ai",
+    "commit": "84bfff95214fa19919d3821de05889b4e5be0e8b"
+  },
+  "date": "2025-11-28T03:34:29.173904+00:00",
+  "model": "claude-haiku-4.5",
+  "commit": "2c4bf0c7fa6373b1d34ead5d097eafca3fdf7205-dirty"
+}

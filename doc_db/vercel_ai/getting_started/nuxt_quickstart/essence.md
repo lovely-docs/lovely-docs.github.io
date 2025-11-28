@@ -1,0 +1,1 @@
+Build streaming chat UI in Nuxt with API route using streamText, Chat class for message management, tools with Zod schemas, and multi-step tool calling via stopWhen.

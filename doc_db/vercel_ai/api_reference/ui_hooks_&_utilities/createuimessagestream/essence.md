@@ -1,0 +1,1 @@
+Function creating a readable stream for UI messages with writer API for emitting chunks, merging streams, error handling, and onFinish callbacks; chunks use consistent IDs across text-start/delta/end lifecycle.

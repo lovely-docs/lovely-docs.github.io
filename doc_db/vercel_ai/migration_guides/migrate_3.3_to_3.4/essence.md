@@ -1,0 +1,1 @@
+AI SDK 3.3 to 3.4 upgrade has no breaking changes.

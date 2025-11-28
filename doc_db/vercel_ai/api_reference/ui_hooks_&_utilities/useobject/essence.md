@@ -1,0 +1,1 @@
+React/Svelte/Vue hook for streaming and parsing JSON objects with schema validation; pairs with backend streamObject; returns submit function, current object state, error/loading status, and control methods.

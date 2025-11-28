@@ -1,0 +1,1 @@
+Server Actions must be exported from separate files or passed via props to Client Components; inline `"use server"` definitions in Client Components are not allowed.

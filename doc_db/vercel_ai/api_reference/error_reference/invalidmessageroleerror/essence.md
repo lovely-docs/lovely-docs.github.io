@@ -1,0 +1,1 @@
+InvalidMessageRoleError: thrown for invalid message roles; detect with isInstance() method; exposes role and message properties.

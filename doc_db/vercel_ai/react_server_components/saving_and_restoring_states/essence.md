@@ -1,0 +1,1 @@
+Save AI state via onSetAIState callback and restore with initialAIState prop; reconstruct UI state from AI state using onGetUIState by comparing database vs app history.

@@ -1,0 +1,1 @@
+Hook to access Server Actions from client components. Returns `Record<string, Action>` dictionary. Must be used to avoid "Cannot find Client Component" errors from direct server action access. Currently experimental.

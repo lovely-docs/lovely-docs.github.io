@@ -1,0 +1,1 @@
+Streaming displays LLM response chunks incrementally instead of waiting for complete generation, dramatically improving UX; implement with `streamText` function and async iteration over `textStream`.

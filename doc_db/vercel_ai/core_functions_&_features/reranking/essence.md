@@ -1,0 +1,1 @@
+Rerank documents by query relevance using trained models; supports strings and objects; configure with topN, providerOptions, maxRetries, abortSignal, headers; available from Cohere, Bedrock, Together.ai.

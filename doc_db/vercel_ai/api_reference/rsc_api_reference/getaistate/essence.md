@@ -1,0 +1,1 @@
+getAIState() retrieves current AI state in RSC, optionally extracting a specific key from the state object; experimental feature with production recommendation to use AI SDK UI instead.

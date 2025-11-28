@@ -1,0 +1,1 @@
+AI SDK UI provides three hooks for building AI applications: **useChat** (real-time chat streaming), **useCompletion** (text completions), and **useObject** (streamed JSON). Supports React, Svelte, Vue.js, and Angular. All frameworks support useChat and useCompletion; useObject works in React, Svelte, and Angular.

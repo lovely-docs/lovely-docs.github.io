@@ -1,0 +1,1 @@
+Registry for managing multiple providers and models with centralized access via `providerId:modelId` identifiers; supports language models, embeddings, and image generation with customizable separator.

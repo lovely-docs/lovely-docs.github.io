@@ -1,0 +1,1 @@
+Foundational concepts for building AI applications: generative models, 50+ standardized provider integrations, multi-modal prompts, tools, and streaming.

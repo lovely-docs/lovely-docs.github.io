@@ -1,0 +1,1 @@
+Build streaming chat with Svelte: create gateway provider, POST endpoint with streamText/convertToModelMessages, Chat class UI component with message.parts rendering, add tools with tool() and z.object() schemas, enable multi-step with stopWhen: stepCountIs(N).

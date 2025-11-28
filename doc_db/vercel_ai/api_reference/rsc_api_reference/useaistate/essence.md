@@ -1,0 +1,1 @@
+Hook that reads/updates globally-shared AI state (system messages, function responses) under `<AI/>` provider; returns [state].

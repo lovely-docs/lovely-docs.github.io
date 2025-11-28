@@ -1,0 +1,1 @@
+AI_JSONParseError: JSON parse failure error with text and message properties; detect via JSONParseError.isInstance()

@@ -1,0 +1,1 @@
+wrapLanguageModel() wraps LanguageModelV3 with middleware (single or array); supports optional modelId/providerId overrides.

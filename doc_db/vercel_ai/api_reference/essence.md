@@ -1,0 +1,1 @@
+Complete API reference for text generation, structured outputs, embeddings, agents, tools, MCP, React hooks, RSC integration, and error types.

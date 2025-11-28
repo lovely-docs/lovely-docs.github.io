@@ -67,6 +67,7 @@ def build_markdown_doc_tree(
     path: Path = Path(),
     include: list | None = None,  # Relative prefixes, don't start with '/'
     exclude: list | None = None,
+    extensions: list[str] = [".md"],
 ) -> DocItem:
     """Recursively build a documentation tree from markdown files.
 
@@ -102,7 +103,7 @@ def build_markdown_doc_tree(
         if not _is_included(rel_path) or _is_excluded(rel_path):
             continue
 
-        if item.is_file() and item.suffix == ".md":
+        if item.is_file() and item.suffix in extensions:
             # We'll process files later, just record them
             fulltext = item.read_text()
             if fulltext:
@@ -111,7 +112,7 @@ def build_markdown_doc_tree(
                     DocItem(origPath=rel_path, name=name, displayName=name, fulltext=fulltext)
                 )
         if item.is_dir():
-            subtree = build_markdown_doc_tree(root, item.relative_to(root), include, exclude)
+            subtree = build_markdown_doc_tree(root, item.relative_to(root), include, exclude, extensions)
             if subtree:
                 children.append(subtree)
 

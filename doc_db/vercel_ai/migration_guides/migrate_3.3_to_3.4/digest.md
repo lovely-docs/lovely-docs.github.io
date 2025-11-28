@@ -1,0 +1,1 @@
+This migration guide covers upgrading from AI SDK version 3.3 to 3.4. The release contains no breaking changes, meaning existing code will continue to work without modifications. For detailed information about new features and improvements in this release, refer to the AI SDK 3.4 release blog post.

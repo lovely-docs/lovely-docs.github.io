@@ -1,0 +1,1 @@
+Deprecated MistralStream helper converts Mistral API responses to ReadableStream with optional callbacks for token/completion events; removed in SDK 4.0, use Mistral Provider instead.

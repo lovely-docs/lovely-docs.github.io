@@ -1,0 +1,1 @@
+Standardized interface for 50+ LLM providers (official, OpenAI-compatible, community) with capability matrix for 40+ models across image input, object generation, tool usage, and streaming.

@@ -1,0 +1,1 @@
+SDK 3.0.20+ stream protocol shows raw format (0: "text") instead of plain text; use streamText().toTextStreamResponse() or revert to 3.0.19

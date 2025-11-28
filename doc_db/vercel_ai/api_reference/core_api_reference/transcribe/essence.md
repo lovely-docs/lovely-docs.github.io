@@ -1,0 +1,1 @@
+Experimental transcribe() function converts audio files to text using transcription models, returning transcript text, segments with timing, language, duration, and provider metadata.

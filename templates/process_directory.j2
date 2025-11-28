@@ -22,7 +22,7 @@ You are summarizing a directory of documentation for {{ libname }}.
 
 Based on the information above, in this order:
 - Come up with a short directory name that perfectly encompasses the contents.
-    - Keep the original if it's good already. Use the title from frontmatter is present.
+    - Keep the original if it's good already. Use the title from frontmatter if present.
     - Don't include the name of the library in the name, e.g. "overview" instead of "svelte overview"
     - If the original starts with a number, don't include it.
 
@@ -35,13 +35,13 @@ Based on the information above, in this order:
 
 - More condensed digest (should be useful without reading the full digest).
     - Keep only the most important information.
-    - Keep all example though.
+    - Keep all examples though.
 - One-line essence of the contents.
 - Is the content you saw relevant to a programmer who is already somewhat familiar with {{ libname }}?
     - Ignore various marker/meta files used to structure the documentation.
 
 Output one entry for the whole directory.
 {%- if extra -%}
-Additional instructoins for this directory:
+Additional instructions for this directory:
 {{ extra }}
 {%- endif -%}

@@ -1,0 +1,1 @@
+Experimental RSC module with streaming utilities (streamUI, createStreamableUI, createStreamableValue) and state management (createAI, getAIState, getMutableAIState, useAIState, useUIState, useActions) for client-server AI applications.

@@ -1,0 +1,1 @@
+**Deprecated in AI SDK 4.0.** Transforms AWS Bedrock API responses into ReadableStream using AIStream. Accepts AWSBedrockResponse with optional async iterable body and optional callbacks (onStart, onToken, onCompletion, onFinal). Returns ReadableStream.

@@ -1,0 +1,3 @@
+## Agents
+
+`ToolLoopAgent` encapsulates LLM, tools, and behavior for automatic loop orchestration. Configure with model, instructions, tools, and stop conditions. Control execution via `prepareStep` callbacks and `callOptionsSchema` for runtime configuration. Use `generate()`, `stream()`, or `createAgentUIStreamResponse()` to invoke. Five workflow patterns (sequential, routing, parallel, orchestrator-worker, evaluator-optimizer) add structure and reliability.
