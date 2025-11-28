@@ -5,6 +5,7 @@
 	import { Tabs, TabsContent, TabsList, TabsTrigger } from '$lib/components/ui/tabs';
 	import UsageInstructions from '$lib/components/UsageInstructions.svelte';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
+	import Footer from '$lib/components/Footer.svelte';
 
 	// Package manager state
 	type PackageManager = 'npm' | 'pnpm' | 'yarn' | 'bun';
@@ -232,3 +233,5 @@ Complete reference for Svelte 5 framework covering runes-based reactivity, templ
 		</section>
 	</div>
 </div>
+<Footer />
+
