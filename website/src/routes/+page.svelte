@@ -77,7 +77,20 @@
 
 		// LLM Map (Inside library directory)
 		if (includeLlmMap) {
-			items.push({ name: 'LLM_MAP.md', type: 'file', desc: 'Hierarchical essence tree', level: 1 });
+			items.push({ name: 'LLM_MAP.md', type: 'file', desc: 'Hierarchical essence tree', level: 1, link: '/LLM_MAP.md' });
+		}
+
+		// Introduction summaries
+		if (includeSummaries) {
+			if (installMode === 'digest') {
+				items.push({ name: 'introduction.md', type: 'file', desc: 'Section digest', level: 1, link: 'sveltejs_svelte/introduction#digest' });
+			} else if (installMode === 'fulltext') {
+				items.push({ name: 'introduction.md', type: 'file', desc: 'Section fulltext', level: 1, link: 'sveltejs_svelte/introduction#fulltext' });
+			} else {
+				// both
+				items.push({ name: 'introduction.md', type: 'file', desc: 'Section digest', level: 1, link: 'sveltejs_svelte/introduction#digest' });
+				items.push({ name: 'introduction.orig.md', type: 'file', desc: 'Section fulltext', level: 1, link: 'sveltejs_svelte/introduction#fulltext' });
+			}
 		}
 
 		// Introduction Directory
@@ -384,7 +397,7 @@
 									<File class="size-4 text-muted-foreground" />
 								{/if}
 								{#if item.link}
-									<a href={resolve(`/human/${item.link}`)} class="hover:underline decoration-primary/50 underline-offset-4 transition-all">
+									<a href={item.link.startsWith('/') ? resolve(item.link) : resolve(`/human/${item.link}`)} class="hover:underline decoration-primary/50 underline-offset-4 transition-all">
 										<span class={item.type === 'folder' ? 'font-bold text-foreground' : 'text-foreground'}>
 											{item.name}
 										</span>
