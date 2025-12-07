@@ -1,1 +1,1 @@
-SQL join types (INNER, LEFT, RIGHT, FULL, CROSS, LATERAL variants) with type-safe syntax, partial select with field-level type inference, table aliases for self-joins, and aggregation patterns for many-to-one/many-to-many relationships.
+SQL join operations with type-safe syntax: leftJoin, rightJoin, innerJoin, fullJoin, crossJoin (with Lateral variants); partial select with field-level or object-level nullability control; table aliases for self-joins; result aggregation patterns for many-to-one and many-to-many relationships.

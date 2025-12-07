@@ -1,6 +1,6 @@
 ## Context Menu
 
-A component that displays a menu triggered by right-click, containing actions, functions, or options.
+A component that displays a menu triggered by right-click, containing actions, functions, and interactive elements.
 
 ### Installation
 
@@ -28,22 +28,37 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 </ContextMenu.Root>
 ```
 
-### Components
+### Features
 
-- **Root**: Container for the context menu
-- **Trigger**: Element that triggers the menu on right-click
-- **Content**: Menu container with optional `class` prop for styling (e.g., `w-52`)
-- **Item**: Menu item with optional `inset` and `disabled` props
-- **Shortcut**: Displays keyboard shortcut text within an item
-- **Sub/SubTrigger/SubContent**: Nested submenu structure
-- **Separator**: Visual divider between menu sections
-- **CheckboxItem**: Menu item with checkbox state, use `bind:checked` for reactivity
-- **RadioGroup/RadioItem**: Radio button group within menu, use `bind:value` for selection
-- **Group/GroupHeading**: Groups related items with optional heading
+**Structure:**
+- `ContextMenu.Root` - wrapper component
+- `ContextMenu.Trigger` - element that triggers the menu on right-click
+- `ContextMenu.Content` - container for menu items
 
-### Example with All Features
+**Item Types:**
+- `ContextMenu.Item` - basic menu item with optional `inset` and `disabled` props
+- `ContextMenu.Shortcut` - displays keyboard shortcut text within items
+- `ContextMenu.Separator` - divider between item groups
+- `ContextMenu.CheckboxItem` - toggleable item with `bind:checked` for state binding
+- `ContextMenu.RadioItem` - radio button item within `ContextMenu.RadioGroup`
+- `ContextMenu.Group` - groups related items
+- `ContextMenu.GroupHeading` - label for item groups
+
+**Nested Menus:**
+- `ContextMenu.Sub` - container for submenu
+- `ContextMenu.SubTrigger` - opens submenu on hover/click
+- `ContextMenu.SubContent` - submenu content container
+
+### Complete Example
 
 ```svelte
+<script lang="ts">
+  import * as ContextMenu from "$lib/components/ui/context-menu/index.js";
+  let showBookmarks = $state(false);
+  let showFullURLs = $state(true);
+  let value = $state("pedro");
+</script>
+
 <ContextMenu.Root>
   <ContextMenu.Trigger class="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
     Right click here
@@ -57,16 +72,28 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
       Forward
       <ContextMenu.Shortcut>]</ContextMenu.Shortcut>
     </ContextMenu.Item>
+    <ContextMenu.Item inset>
+      Reload
+      <ContextMenu.Shortcut>R</ContextMenu.Shortcut>
+    </ContextMenu.Item>
     <ContextMenu.Sub>
       <ContextMenu.SubTrigger inset>More Tools</ContextMenu.SubTrigger>
       <ContextMenu.SubContent class="w-48">
-        <ContextMenu.Item>Save Page As...<ContextMenu.Shortcut>S</ContextMenu.Shortcut></ContextMenu.Item>
+        <ContextMenu.Item>Save Page As... <ContextMenu.Shortcut>S</ContextMenu.Shortcut></ContextMenu.Item>
+        <ContextMenu.Item>Create Shortcut...</ContextMenu.Item>
+        <ContextMenu.Item>Name Window...</ContextMenu.Item>
         <ContextMenu.Separator />
         <ContextMenu.Item>Developer Tools</ContextMenu.Item>
       </ContextMenu.SubContent>
     </ContextMenu.Sub>
     <ContextMenu.Separator />
-    <ContextMenu.CheckboxItem bind:checked={showBookmarks}>Show Bookmarks</ContextMenu.CheckboxItem>
+    <ContextMenu.CheckboxItem bind:checked={showBookmarks}>
+      Show Bookmarks
+    </ContextMenu.CheckboxItem>
+    <ContextMenu.CheckboxItem bind:checked={showFullURLs}>
+      Show Full URLs
+    </ContextMenu.CheckboxItem>
+    <ContextMenu.Separator />
     <ContextMenu.RadioGroup bind:value>
       <ContextMenu.Group>
         <ContextMenu.GroupHeading inset>People</ContextMenu.GroupHeading>
@@ -77,18 +104,3 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
   </ContextMenu.Content>
 </ContextMenu.Root>
 ```
-
-### State Management
-
-Use reactive state variables with `$state()` for checkbox and radio items:
-
-```svelte
-<script lang="ts">
-  let showBookmarks = $state(false);
-  let value = $state("pedro");
-</script>
-```
-
-### Documentation
-
-Full API reference available at bits-ui documentation for context-menu component.

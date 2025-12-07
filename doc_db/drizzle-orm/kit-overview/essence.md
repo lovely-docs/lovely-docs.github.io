@@ -1,0 +1,1 @@
+Drizzle Kit CLI tool for SQL migrations: generate/migrate/push/pull/studio/check/up commands; configured via drizzle.config.ts with dialect and schema path; supports multiple config files per environment.

@@ -1,20 +1,20 @@
 ## Set Operations
 
-SQL set operations combine results from multiple query blocks into a single result. Drizzle-orm supports: UNION, INTERSECT, EXCEPT, and their ALL variants.
+SQL set operations combine results from multiple query blocks. Drizzle-orm supports: `UNION`, `UNION ALL`, `INTERSECT`, `INTERSECT ALL`, `EXCEPT`, `EXCEPT ALL`.
 
-### UNION
-Combines all results from two queries, removing duplicates.
+### Union
+Removes duplicates from combined results of two queries.
 
 ```typescript
 import { union } from 'drizzle-orm/pg-core'
+import { users, customers } from './schema'
+
 const result = await union(
   db.select({ name: users.name }).from(users),
   db.select({ name: customers.name }).from(customers)
 ).limit(10);
-```
 
-Builder pattern alternative:
-```typescript
+// Or builder pattern:
 const result = await db
   .select({ name: users.name })
   .from(users)
@@ -22,121 +22,106 @@ const result = await db
   .limit(10);
 ```
 
-### UNION ALL
-Combines all results from two queries, keeping duplicates. Useful when you want to preserve all records without deduplication.
+Supported in: PostgreSQL, MySQL, SQLite, SingleStore
+
+### Union All
+Keeps duplicates when combining results.
 
 ```typescript
 import { unionAll } from 'drizzle-orm/pg-core'
+
 const result = await unionAll(
   db.select({ transaction: onlineSales.transactionId }).from(onlineSales),
   db.select({ transaction: inStoreSales.transactionId }).from(inStoreSales)
 );
-```
 
-Builder pattern:
-```typescript
+// Or:
 const result = await db
   .select({ transaction: onlineSales.transactionId })
   .from(onlineSales)
   .unionAll(db.select({ transaction: inStoreSales.transactionId }).from(inStoreSales));
 ```
 
-Note: SingleStore has different ORDER BY behavior with UNION ALL compared to MySQL.
+Supported in: PostgreSQL, MySQL, SQLite, SingleStore (with ORDER BY behavior differences)
 
-### INTERSECT
-Returns only rows that appear in both query results, removing duplicates.
+### Intersect
+Returns only rows present in both query results, removing duplicates.
 
 ```typescript
 import { intersect } from 'drizzle-orm/pg-core'
+
 const result = await intersect(
   db.select({ courseName: depA.courseName }).from(depA),
   db.select({ courseName: depB.courseName }).from(depB)
 );
-```
 
-Builder pattern:
-```typescript
+// Or:
 const result = await db
   .select({ courseName: depA.courseName })
   .from(depA)
   .intersect(db.select({ courseName: depB.courseName }).from(depB));
 ```
 
-### INTERSECT ALL
-Returns only rows that appear in both query results, keeping duplicates.
+Supported in: PostgreSQL, MySQL, SQLite, SingleStore
+
+### Intersect All
+Returns only rows present in both query results, keeping duplicates.
 
 ```typescript
 import { intersectAll } from 'drizzle-orm/pg-core'
+
 const result = await intersectAll(
-  db.select({ productId: regularCustomerOrders.productId, quantityOrdered: regularCustomerOrders.quantityOrdered }).from(regularCustomerOrders),
-  db.select({ productId: vipCustomerOrders.productId, quantityOrdered: vipCustomerOrders.quantityOrdered }).from(vipCustomerOrders)
+  db.select({ productId: regularOrders.productId, quantityOrdered: regularOrders.quantityOrdered }).from(regularOrders),
+  db.select({ productId: vipOrders.productId, quantityOrdered: vipOrders.quantityOrdered }).from(vipOrders)
 );
-```
 
-Builder pattern:
-```typescript
+// Or:
 const result = await db
-  .select({ productId: regularCustomerOrders.productId, quantityOrdered: regularCustomerOrders.quantityOrdered })
-  .from(regularCustomerOrders)
-  .intersectAll(
-    db.select({ productId: vipCustomerOrders.productId, quantityOrdered: vipCustomerOrders.quantityOrdered }).from(vipCustomerOrders)
-  );
+  .select({ productId: regularOrders.productId, quantityOrdered: regularOrders.quantityOrdered })
+  .from(regularOrders)
+  .intersectAll(db.select({ productId: vipOrders.productId, quantityOrdered: vipOrders.quantityOrdered }).from(vipOrders));
 ```
 
-Supported in PostgreSQL and MySQL only.
+Supported in: PostgreSQL, MySQL (not SingleStore)
 
-### EXCEPT
-Returns all rows from the first query that are not in the second query, removing duplicates.
+### Except
+Returns rows from first query that are not in second query, removing duplicates.
 
 ```typescript
 import { except } from 'drizzle-orm/pg-core'
+
 const result = await except(
   db.select({ courseName: depA.projectsName }).from(depA),
   db.select({ courseName: depB.projectsName }).from(depB)
 );
-```
 
-Builder pattern:
-```typescript
+// Or:
 const result = await db
   .select({ courseName: depA.projectsName })
   .from(depA)
   .except(db.select({ courseName: depB.projectsName }).from(depB));
 ```
 
-### EXCEPT ALL
-Returns all rows from the first query that are not in the second query, keeping duplicates.
+Supported in: PostgreSQL, MySQL, SQLite, SingleStore
+
+### Except All
+Returns rows from first query that are not in second query, keeping duplicates.
 
 ```typescript
 import { exceptAll } from 'drizzle-orm/pg-core'
+
 const result = await exceptAll(
-  db.select({ productId: regularCustomerOrders.productId, quantityOrdered: regularCustomerOrders.quantityOrdered }).from(regularCustomerOrders),
-  db.select({ productId: vipCustomerOrders.productId, quantityOrdered: vipCustomerOrders.quantityOrdered }).from(vipCustomerOrders)
+  db.select({ productId: regularOrders.productId, quantityOrdered: regularOrders.quantityOrdered }).from(regularOrders),
+  db.select({ productId: vipOrders.productId, quantityOrdered: vipOrders.quantityOrdered }).from(vipOrders)
 );
-```
 
-Builder pattern:
-```typescript
+// Or:
 const result = await db
-  .select({ productId: regularCustomerOrders.productId, quantityOrdered: regularCustomerOrders.quantityOrdered })
-  .from(regularCustomerOrders)
-  .exceptAll(
-    db.select({ productId: vipCustomerOrders.productId, quantityOrdered: vipCustomerOrders.quantityOrdered }).from(vipCustomerOrders)
-  );
+  .select({ productId: regularOrders.productId, quantityOrdered: regularOrders.quantityOrdered })
+  .from(regularOrders)
+  .exceptAll(db.select({ productId: vipOrders.productId, quantityOrdered: vipOrders.quantityOrdered }).from(vipOrders));
 ```
 
-Supported in PostgreSQL and MySQL only.
+Supported in: PostgreSQL, MySQL (not SingleStore)
 
-## Database Support
-
-- **UNION, UNION ALL, INTERSECT, EXCEPT**: PostgreSQL, MySQL, SQLite, SingleStore
-- **INTERSECT ALL, EXCEPT ALL**: PostgreSQL, MySQL only
-
-## Import Paths
-
-- PostgreSQL: `drizzle-orm/pg-core`
-- MySQL: `drizzle-orm/mysql-core`
-- SQLite: `drizzle-orm/sqlite-core`
-- SingleStore: `drizzle-orm/singlestore-core`
-
-Both import-pattern (function-based) and builder-pattern (method-based) syntaxes are supported for all operations.
+All operations support both import-pattern (function-based) and builder-pattern (method-based) syntax. Database-specific imports are required: `drizzle-orm/pg-core`, `drizzle-orm/mysql-core`, `drizzle-orm/sqlite-core`, `drizzle-orm/singlestore-core`.

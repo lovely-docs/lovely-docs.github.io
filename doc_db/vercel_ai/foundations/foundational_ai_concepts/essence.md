@@ -1,0 +1,1 @@
+Three foundational AI concepts: generative models produce outputs from learned patterns; LLMs predict text sequences but hallucinate on unknown data; embeddings convert data to semantic vectors.

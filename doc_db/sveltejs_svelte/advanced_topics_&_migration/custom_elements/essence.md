@@ -1,1 +1,0 @@
-Compile Svelte components to web components with customElement option, configure properties and lifecycle, be aware of style encapsulation and slot rendering differences.

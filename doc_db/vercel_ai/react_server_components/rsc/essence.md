@@ -1,1 +1,1 @@
-Experimental RSC-based AI framework with streaming components, generative UI state management, state persistence, multi-step interfaces, and authentication.
+Experimental RSC module for streaming React components and managing AI-generated UI state; production should use AI SDK UI instead.

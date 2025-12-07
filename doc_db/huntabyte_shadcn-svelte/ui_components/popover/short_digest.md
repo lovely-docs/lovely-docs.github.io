@@ -17,6 +17,8 @@ npx shadcn-svelte@latest add popover -y -o
 
 <Popover.Root>
   <Popover.Trigger>Open</Popover.Trigger>
-  <Popover.Content>Place content for the popover here.</Popover.Content>
+  <Popover.Content>Content here</Popover.Content>
 </Popover.Root>
 ```
+
+Wrap trigger and content in `Popover.Root`. Apply custom classes to `Popover.Trigger` and `Popover.Content` as needed.

@@ -1,1 +1,1 @@
-Overview of all supported SvelteKit application types and deployment patterns with their respective adapters and configuration options.
+SvelteKit deployment options: SSR+CSR (default), SSG (adapter-static/ISR), SPA, MPA, separate backend, serverless (adapter-auto/vercel/netlify/cloudflare), node, containers, libraries, PWA, mobile (Tauri/Capacitor), desktop (Tauri/Wails/Electron), browser extensions, embedded devices; use bundleStrategy: 'single' for limited connections.

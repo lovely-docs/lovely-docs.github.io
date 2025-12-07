@@ -1,0 +1,1 @@
+Complete Next.js todo app tutorial using Drizzle ORM with Neon Postgres: setup database connection, define schema, create server actions for CRUD operations, build client components with state management, and integrate with Next.js pages.

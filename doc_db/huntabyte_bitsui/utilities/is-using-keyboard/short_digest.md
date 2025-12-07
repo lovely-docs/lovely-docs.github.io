@@ -1,0 +1,1 @@
+Utility to track active keyboard usage. Instantiate with `new IsUsingKeyboard()` and access state via `.current` property. Uses global shared state to prevent duplicate listeners.

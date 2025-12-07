@@ -2,68 +2,78 @@
 ## Directories
 
 ### utilities
-Collection of reactive utilities for DOM tracking, state management, async operations, event handling, and user interaction in Svelte.
+Comprehensive collection of reactive utilities for DOM interaction, state management, async operations, and browser APIs.
 
 ## Reactive DOM & State Utilities
 
-**Element Tracking**
-- `activeElement` - Reactive access to focused element with Shadow DOM support
-- `ElementRect` - Reactive DOMRect tracking with individual property accessors
-- `ElementSize` - Reactive width/height tracking
-- `IsFocusWithin` - Tracks if any descendant has focus
-- `IsInViewport` - Viewport visibility detection via Intersection Observer
+Collection of reactive wrappers and utilities for common browser APIs and state management patterns.
 
-**State Management**
-- `Context` - Type-safe Svelte Context API wrapper with get/set/exists
-- `PersistedState` - Reactive state with automatic browser storage persistence and cross-tab sync
-- `Debounced` - Debounced state wrapper with `.current`, `.cancel()`, `.setImmediately()`, `.updateImmediately()`
-- `Throttled` - Throttled state wrapper with `.current`, `.cancel()`, `.setImmediately()`
-- `Previous` - Tracks previous getter values for state comparisons
-- `StateHistory` - Undo/redo with `undo()`, `redo()`, `clear()`, `canUndo`, `canRedo`
+### Focus & Visibility
+- **activeElement**: Reactive access to `document.activeElement` with Shadow DOM support. Returns `null` when no element focused. Use `new ActiveElement({ document: shadowRoot })` for custom scopes.
+- **IsDocumentVisible**: Tracks `document.hidden` via Page Visibility API. `visible.current` is boolean, updates on `visibilitychange` events.
+- **IsFocusWithin**: Tracks if any descendant has focus in container. `new IsFocusWithin(() => element)` exposes `current` boolean.
 
-**Async & Timing**
-- `resource` - Reactive async data fetcher with loading/error states, debounce/throttle, cleanup hooks, pre-render support
-- `AnimationFrames` - Declarative requestAnimationFrame wrapper with FPS limiting and frame metrics
-- `useInterval` - Reactive setInterval with pause/resume and tick counter
-- `useDebounce` - Debounce callback with `pending`, `runScheduledNow()`, `cancel()`
-- `useThrottle` - Throttle callback execution to once per interval
+### Element Measurements
+- **ElementRect**: Reactive DOMRect tracking with individual properties (`width`, `height`, `top`, `left`, `right`, `bottom`, `x`, `y`) and complete `current` object. Updates on size/position changes.
+- **ElementSize**: Simplified version tracking only `width` and `height`.
+- **ScrollState**: Tracks scroll position (`x`, `y`), direction (`left`, `right`, `top`, `bottom`), edge arrival (`arrived`), and progress. Supports programmatic scrolling (`scrollTo()`, `scrollToTop()`, `scrollToBottom()`), RTL, and debounced stop callbacks.
 
-**Event & Observer Hooks**
-- `useEventListener` - Auto-disposed event listener with automatic cleanup
-- `useIntersectionObserver` - Intersection Observer with pause/resume/stop control
-- `useResizeObserver` - Resize Observer with stop control
-- `useMutationObserver` - Mutation Observer with stop control
-- `onClickOutside` - Detect clicks outside element with start/stop/enabled control
-- `onCleanup` - Register cleanup function on effect disposal
+### Animation & Timing
+- **AnimationFrames**: Declarative `requestAnimationFrame` wrapper with FPS limiting and frame metrics. `new AnimationFrames((args) => {}, { fpsLimit: () => 10 })` provides `fps` property and `delta` (ms since last frame). Methods: `start()`, `stop()`.
+- **useInterval**: Reactive `setInterval` wrapper with pause/resume, tick counter, and optional callback. `useInterval(() => delay, { callback: (count) => {} })` with `counter`, `isActive`, `pause()`, `resume()`, `reset()`.
 
-**User Interaction**
-- `IsIdle` - Idle state tracking with configurable timeout and events
-- `IsDocumentVisible` - Document visibility tracking via Page Visibility API
-- `IsMounted` - Component mount state tracking
-- `PressedKeys` - Keyboard key press tracker with `has()`, `all`, `onKeys()`
-- `ScrollState` - Scroll position/direction tracking with edge detection and programmatic scrolling
+### User Interaction
+- **PressedKeys**: Tracks currently pressed keyboard keys. `keys.has("ArrowDown")` or `keys.has("Control", "a")` for combinations. `keys.all` for all pressed keys. `keys.onKeys(["meta", "k"], callback)` for key combo listeners.
+- **IsIdle**: Detects user idle state based on activity (mousemove, keydown, touch, etc.). `new IsIdle({ timeout: 1000 })` exposes `current` (boolean) and `lastActive` (timestamp). Options: `events`, `timeout`, `detectVisibilityChanges`, `initialState`.
+- **onClickOutside**: Detects clicks outside element. `onClickOutside(() => element, callback, { immediate: true, detectIframe: false })` returns `{ start(), stop(), enabled }`.
 
-**Geolocation & Search**
-- `useGeolocation` - Reactive Geolocation API wrapper with pause/resume
-- `useSearchParams` - Type-safe, schema-validated URL search params with compression, debouncing, custom codecs
+### Async & Data Fetching
+- **resource**: Reactive async data fetcher with automatic request cancellation, loading/error states, debounce/throttle. `resource(() => id, async (id, prevId, { signal, onCleanup }) => {}, { debounce: 300 })` provides `current`, `loading`, `error`, `mutate()`, `refetch()`. Supports multiple dependencies as array. `resource.pre()` for pre-render execution.
+- **PersistedState**: Reactive state with localStorage/sessionStorage persistence and cross-tab sync. `new PersistedState("key", initialValue, { storage: "local", syncTabs: true, connected: true, serializer: {} })`. Methods: `connect()`, `disconnect()`. Plain objects/arrays deeply reactive; class instances require full replacement.
 
-**Utilities**
-- `boolAttr` - Convert values to `""` or `undefined` for HTML boolean attributes
-- `extract` - Resolve MaybeGetter<T> to plain value with optional fallback
-- `FiniteStateMachine` - Strongly-typed FSM with state/event config, lifecycle hooks, wildcard fallback, debounced transitions
-- `TextareaAutosize` - Auto-resize textarea by measuring off-screen clone
-- `watch` - Manually track specific reactive dependencies with callback; variants: `watch.pre`, `watchOnce`
+### State Management
+- **Context**: Type-safe Context API wrapper. `new Context<T>("name")` with `.set(value)` in parent init, `.get()` or `.getOr(fallback)` in child init. `.exists()` to check if set.
+- **Debounced**: Debounced state wrapper. `new Debounced(() => value, 500)` with `current` property. Methods: `cancel()`, `setImmediately(value)`, `updateImmediately()`.
+- **Throttled**: Throttled state wrapper. `new Throttled(() => value, 500)` with `current` property. Methods: `cancel()`, `setImmediately(value)`.
+- **Previous**: Maintains previous getter value. `new Previous(() => count)` exposes `current` (undefined initially, then previous value).
+- **StateHistory**: Undo/redo tracking. `new StateHistory(() => count, (c) => count = c)` with `undo()`, `redo()`, `clear()`, `log` array, `canUndo`, `canRedo`.
+- **IsMounted**: Mount state tracker. `new IsMounted()` with `current` boolean (false initially, true after mount).
+
+### Reactive Utilities
+- **watch**: Manually track specific reactive dependencies. `watch(() => count, (curr, prev) => {})` or `watch([() => a, () => b], ([a, b]) => {})`. Options: `lazy: true`. Variants: `watch.pre`, `watchOnce`, `watchOnce.pre`.
+- **extract**: Unwraps `MaybeGetter<T>` (function or static value) to T. `extract(input, fallback)` handles functions returning undefined, static values, and fallbacks.
+- **boolAttr**: Converts truthy/falsy to `""` or `undefined` for HTML boolean attributes. `boolAttr(value)` returns `""` when truthy, `undefined` when falsy.
+
+### DOM Observers
+- **useIntersectionObserver**: Observe element intersection. `useIntersectionObserver(() => target, (entries) => {}, { root: () => rootEl })` with `pause()`, `resume()`, `stop()`, `isActive` getter.
+- **useResizeObserver**: Observe element size changes. `useResizeObserver(() => el, (entries) => { const { width, height } = entries[0].contentRect; })` with `stop()`.
+- **useMutationObserver**: Observe DOM mutations. `useMutationObserver(() => el, (mutations) => {}, { attributes: true })` with `stop()`.
+- **IsInViewport**: Tracks viewport visibility via Intersection Observer. `new IsInViewport(() => element)` with `current` boolean.
+
+### Event Handling
+- **useEventListener**: Auto-disposed event listeners. `useEventListener(() => document.body, "click", callback)` with automatic cleanup on component destroy or element change.
+- **onCleanup**: Register cleanup function for effect context disposal. `onCleanup(() => { /* cleanup */ })` replaces `onDestroy`, works in components and `$effect.root`.
+
+### Specialized Utilities
+- **TextareaAutosize**: Auto-adjusts textarea height to content. `new TextareaAutosize({ element: () => el, input: () => value, styleProp: "height", maxHeight: 500 })` with `onResize` callback.
+- **FiniteStateMachine**: Strongly-typed FSM. `new FiniteStateMachine<States, Events>("initial", { state: { event: "nextState" } })` with action functions, `_enter`/`_exit` lifecycle hooks, wildcard `"*"` handlers, and `debounce(ms, event)` scheduling.
+- **useGeolocation**: Reactive Geolocation API wrapper. `useGeolocation()` provides `position`, `error`, `isSupported`, `isPaused`, `pause()`, `resume()`.
+- **useSearchParams**: Type-safe URL search params with schema validation (Zod/Valibot/Arktype). `useSearchParams(schema, { debounce: 300, compress: true })` with `update()`, `reset()`, `toURLSearchParams()`. Supports date formatting, compression, history control. Server-side: `validateSearchParams(url, schema)`.
+
+### Debounce & Throttle
+- **useDebounce**: Debounce callback execution. `useDebounce(callback, () => duration)` with `runScheduledNow()`, `cancel()`, `pending` property.
+- **useThrottle**: Throttle callback execution. `useThrottle(callback, () => duration)` limits execution to once per interval.
 
 
 
 ## Pages
 
-### getting_started
-Install via npm; import utilities into .svelte or .svelte.js|ts files; use reactively with $state and $effect.
+### getting-started
+Install via npm; import utilities into Svelte components/modules; use with $state and $effect for reactivity (e.g., activeElement.current).
 
 ## Installation
 
-Install Runed via npm:
+Install via npm:
 ```bash
 npm install runed
 ```
@@ -72,32 +82,26 @@ npm install runed
 
 Import utilities into `.svelte` or `.svelte.js|ts` files.
 
-**In Svelte components:**
+**Example in Svelte component:**
 ```svelte
 <script lang="ts">
 	import { activeElement } from "runed";
-
 	let inputElement = $state<HTMLInputElement | undefined>();
 </script>
 
 <input bind:this={inputElement} />
-
 {#if activeElement.current === inputElement}
 	The input element is active!
 {/if}
 ```
 
-**In JavaScript/TypeScript modules:**
+**Example in module:**
 ```ts
 import { activeElement } from "runed";
 
-function logActiveElement() {
-	$effect(() => {
-		console.log("Active element is ", activeElement.current);
-	});
-}
-
-logActiveElement();
+$effect(() => {
+	console.log("Active element is ", activeElement.current);
+});
 ```
 
 Utilities can be used reactively with `$effect` to track state changes.

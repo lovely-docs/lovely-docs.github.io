@@ -1,1 +1,1 @@
-Connect Drizzle ORM to Cloudflare D1: install packages, configure wrangler.json with D1 binding, initialize driver with `drizzle(env.BINDING_NAME)`, execute queries.
+Connect Drizzle ORM to Cloudflare D1: install packages, configure wrangler.json with D1 binding (database_name, database_id, migrations_dir), initialize with drizzle(env.BINDING_NAME), use standard Drizzle queries.

@@ -1,1 +1,1 @@
-Advanced SvelteKit features for routing, hooks, error handling, service workers, server-only modules, state management, observability, and component library packaging.
+Advanced SvelteKit features: routing with parameters/matchers/layout groups, server/client/universal hooks for request handling and error management, link navigation customization, service workers, server-only module enforcement, state snapshots, shallow routing for modals, OpenTelemetry observability, and component library packaging.

@@ -1,0 +1,1 @@
+Set up local PostgreSQL with Docker: pull image, run container with password and port mapping, connect via postgres://postgres:password@localhost:5432/postgres

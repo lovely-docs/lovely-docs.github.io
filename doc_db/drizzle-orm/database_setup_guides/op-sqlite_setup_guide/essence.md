@@ -1,1 +1,1 @@
-Step-by-step setup for Drizzle ORM with OP-SQLite in Expo React Native: create project, install packages, configure Metro/Babel, define schema, generate migrations, apply migrations with useMigrations hook, and perform database operations.
+Step-by-step setup for Drizzle ORM with OP-SQLite in Expo: create project, install packages, initialize db connection, define schema, configure drizzle/metro/babel, generate migrations, apply migrations with useMigrations hook, run queries, and execute app.

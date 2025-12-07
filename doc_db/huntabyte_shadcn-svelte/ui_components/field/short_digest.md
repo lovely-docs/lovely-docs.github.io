@@ -1,67 +1,94 @@
-## Field Component
+# Field Component
 
-Composable form field components for building accessible forms.
+Composable form field components for accessible forms with labels, controls, help text, and validation.
 
-### Core Components
-
-- `Field.Set`: Wrapper with optional legend and description
-- `Field.Group`: Container to stack fields
-- `Field.Field`: Individual field with `orientation` prop ("vertical", "horizontal", "responsive")
-- `Field.Label`, `Field.Description`, `Field.Error`: Label, helper text, and error messages
-- `Field.Legend`, `Field.Content`, `Field.Separator`, `Field.Title`: Semantic and layout helpers
-
-### Installation
+## Installation
 
 ```bash
 npx shadcn-svelte@latest add field -y -o
 ```
 
-### Examples
+## Core Components
 
-**Input fields:**
+`Field`, `FieldSet`, `FieldLegend`, `FieldGroup`, `FieldLabel`, `FieldDescription`, `FieldError`, `FieldContent`, `FieldSeparator`, `FieldTitle`
+
+## Orientation
+
+- Default (vertical): stacks label, control, helper text
+- `orientation="horizontal"`: side-by-side with `FieldContent` for aligned descriptions
+- `orientation="responsive"`: automatic column layouts with container queries
+
+## Examples
+
+**Basic input:**
 ```svelte
 <Field.Set>
-  <Field.Legend>Profile</Field.Legend>
   <Field.Group>
     <Field.Field>
-      <Field.Label for="name">Full name</Field.Label>
-      <Input id="name" placeholder="Evil Rabbit" />
-      <Field.Description>This appears on invoices.</Field.Description>
+      <Field.Label for="username">Username</Field.Label>
+      <Input id="username" placeholder="Max Leiter" />
+      <Field.Description>Choose a unique username.</Field.Description>
     </Field.Field>
   </Field.Group>
 </Field.Set>
 ```
 
-**Checkbox:**
-```svelte
-<Field.Field orientation="horizontal">
-  <Checkbox id="sync" checked />
-  <Field.Label for="sync" class="font-normal">Sync folders</Field.Label>
-</Field.Field>
-```
-
-**Radio:**
+**Fieldset with multiple fields:**
 ```svelte
 <Field.Set>
-  <Field.Label>Plan</Field.Label>
-  <RadioGroup.Root bind:value={plan}>
-    <Field.Field orientation="horizontal">
-      <RadioGroup.Item value="monthly" id="monthly" />
-      <Field.Label for="monthly" class="font-normal">Monthly</Field.Label>
+  <Field.Legend>Address Information</Field.Legend>
+  <Field.Description>We need your address to deliver your order.</Field.Description>
+  <Field.Group>
+    <Field.Field>
+      <Field.Label for="street">Street Address</Field.Label>
+      <Input id="street" placeholder="123 Main St" />
     </Field.Field>
-  </RadioGroup.Root>
+    <div class="grid grid-cols-2 gap-4">
+      <Field.Field>
+        <Field.Label for="city">City</Field.Label>
+        <Input id="city" placeholder="New York" />
+      </Field.Field>
+      <Field.Field>
+        <Field.Label for="zip">Postal Code</Field.Label>
+        <Input id="zip" placeholder="90502" />
+      </Field.Field>
+    </div>
+  </Field.Group>
 </Field.Set>
 ```
 
-**Switch:**
+**Horizontal checkbox/radio/switch:**
 ```svelte
+<Field.Field orientation="horizontal">
+  <Checkbox id="newsletter" />
+  <Field.Label for="newsletter">Subscribe to the newsletter</Field.Label>
+</Field.Field>
+
+<Field.Field orientation="horizontal">
+  <RadioGroup.Item value="monthly" id="plan-monthly" />
+  <Field.Label for="plan-monthly" class="font-normal">Monthly ($9.99/month)</Field.Label>
+</Field.Field>
+
 <Field.Field orientation="horizontal">
   <Field.Content>
     <Field.Label for="2fa">Multi-factor authentication</Field.Label>
-    <Field.Description>Enable 2FA for security.</Field.Description>
+    <Field.Description>Enable for added security.</Field.Description>
   </Field.Content>
   <Switch id="2fa" />
 </Field.Field>
+```
+
+**Choice card (selectable field groups):**
+```svelte
+<Field.Label for="kubernetes">
+  <Field.Field orientation="horizontal">
+    <Field.Content>
+      <Field.Title>Kubernetes</Field.Title>
+      <Field.Description>Run GPU workloads on a K8s cluster.</Field.Description>
+    </Field.Content>
+    <RadioGroup.Item value="kubernetes" id="kubernetes" />
+  </Field.Field>
+</Field.Label>
 ```
 
 **Validation:**
@@ -73,14 +100,6 @@ npx shadcn-svelte@latest add field -y -o
 </Field.Field>
 ```
 
-### Layouts
+## Accessibility
 
-- **Vertical** (default): Stacks label, control, helper text
-- **Horizontal**: `orientation="horizontal"` aligns label and control side-by-side
-- **Responsive**: `orientation="responsive"` with `@container/field-group` for breakpoint-aware layouts
-
-### Accessibility
-
-- FieldSet and FieldLegend group related controls for keyboard/assistive tech users
-- Field outputs `role="group"` for inherited labeling
-- Use FieldSeparator sparingly for clear section boundaries
+`FieldSet`/`FieldLegend` group controls for keyboard/assistive tech. `Field` outputs `role="group"`. Use `FieldSeparator` sparingly.

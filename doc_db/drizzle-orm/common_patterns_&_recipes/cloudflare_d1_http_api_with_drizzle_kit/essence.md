@@ -1,1 +1,0 @@
-Configure Drizzle Kit for Cloudflare D1 HTTP API with driver 'd1-http' and credentials from Cloudflare dashboard; supports migrate/push/introspect/studio commands.

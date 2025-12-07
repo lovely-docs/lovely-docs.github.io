@@ -1,1 +1,0 @@
-3.2→3.3 upgrade: no breaking changes; adds OpenTelemetry, useObject hook, useChat enhancements (attachments, streaming tool calls, onFinish), JSON schema support, AWS Bedrock, LangChain StreamEvent v2, UI framework expansions.

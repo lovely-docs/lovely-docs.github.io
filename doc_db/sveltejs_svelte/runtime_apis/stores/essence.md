@@ -1,1 +1,1 @@
-Reactive state management through stores with automatic subscription handling via $ prefix, plus API for creating writable, readable, and derived stores.
+Reactive state containers with `.subscribe()` contract; `svelte/store` provides writable/readable/derived/readonly/get utilities; use `$` prefix in components for auto-subscription; largely superseded by Svelte 5 runes for basic state but still useful for async streams.

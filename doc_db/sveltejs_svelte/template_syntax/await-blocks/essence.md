@@ -1,0 +1,1 @@
+Await blocks branch on Promise states with optional pending/then/catch blocks; supports lazy component loading via dynamic imports.

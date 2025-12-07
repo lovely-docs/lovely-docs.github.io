@@ -1,1 +1,1 @@
-Generate SQL migrations from Drizzle schema by comparing current schema snapshot against previous migrations; supports custom names, multiple configs, and custom SQL migrations.
+Generate SQL migrations from Drizzle schema by comparing against previous snapshots; supports custom names, empty migrations for manual SQL, multiple configs, and glob patterns for schema files.

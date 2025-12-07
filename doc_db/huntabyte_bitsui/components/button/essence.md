@@ -1,0 +1,1 @@
+Button/anchor hybrid component; renders as button by default, anchor when href provided; supports disabled state and DOM ref binding.

@@ -1,1 +1,1 @@
-Build a streaming chat app with Next.js App Router using `streamText` for the backend, `useChat` hook for the frontend, and define tools with Zod schemas for multi-step LLM interactions.
+Build streaming chat app with Next.js App Router: setup with Vercel AI Gateway, create POST route with streamText(), wire useChat() hook to UI, add tools with Zod schemas and multi-step execution via stopWhen.

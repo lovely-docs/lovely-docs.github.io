@@ -1,1 +1,1 @@
-useActions hook accesses patched Server Actions from clients, returning action dictionary; prevents direct-access errors.
+useActions hook accesses patched Server Actions from client; returns Record<string, Action>; required to avoid "Cannot find Client Component" errors.

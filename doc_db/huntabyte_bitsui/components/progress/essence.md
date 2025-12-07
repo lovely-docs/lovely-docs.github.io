@@ -1,0 +1,1 @@
+Progress component for task completion tracking with value/min/max props, indeterminate state support, and accessibility attributes.

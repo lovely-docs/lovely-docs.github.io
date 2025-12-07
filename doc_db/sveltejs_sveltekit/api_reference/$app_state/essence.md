@@ -1,1 +1,1 @@
-Read-only reactive state objects for navigation, page data, and app updates in SvelteKit.
+Three read-only state objects: navigating (navigation state), page (current page data/form/state/metadata, rune-reactive only), updated (version polling with current flag and check method).

@@ -1,1 +1,0 @@
-Warnings (prefixed "AI SDK Warning:") appear for unsupported features/compatibility issues; control via globalThis.AI_SDK_LOG_WARNINGS. Error object from hooks enables UI error display; use regenerate() or setMessages() for recovery; onError callback for custom handling; throw errors in route handlers for testing.

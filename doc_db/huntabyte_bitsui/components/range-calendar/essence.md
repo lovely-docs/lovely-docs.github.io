@@ -1,0 +1,1 @@
+Date range calendar with min/max day constraints, disabled date handling, multi-month display, and comprehensive data attributes for styling range states.

@@ -1,0 +1,1 @@
+Azure OpenAI slow streaming: change Azure content filter to "Asynchronous Filter" or use smoothStream() transformation

@@ -1,1 +1,1 @@
-70+ UI components available including form inputs (Input, Checkbox, Select, etc.), display elements (Badge, Avatar, Card, etc.), navigation (Button, Tabs, Pagination), dialogs (Dialog, Drawer, Popover), data components (Table, Calendar, Chart), and layout utilities. Install with `npx shadcn-svelte@latest add <component> -y -o`.
+70+ UI components available: form inputs (Button, Input, Select, Checkbox, etc.), layout (Card, Sidebar, Drawer, etc.), display (Avatar, Badge, Table, etc.), and utilities (Command, Dialog, Toast, etc.).

@@ -1,0 +1,1 @@
+createUIMessageStream creates a readable stream for UI messages with writer methods (write/merge), error handling, and onFinish callback; returns ReadableStream<UIMessageChunk>.

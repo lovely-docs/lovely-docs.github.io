@@ -1,6 +1,6 @@
 ## Turso Cloud Setup
 
-Turso is a libSQL-powered edge SQLite database. Install `drizzle-orm` and `@libsql/client`, then initialize:
+Install `drizzle-orm` and `@libsql/client`. Initialize driver with URL and auth token:
 
 ```typescript
 import { drizzle } from 'drizzle-orm/libsql';
@@ -13,7 +13,8 @@ const db = drizzle({
   })
 });
 
-const result = await db.select().from(users).all();
+const users = sqliteTable("users", { id: integer(), name: text() });
+const result = await db.select().from(users);
 ```
 
-Web environment uses `drizzle-orm/libsql/web` and `@libsql/client/web`. Alternatively pass connection config directly to `drizzle()`.
+Use `drizzle-orm/libsql/web` for browser environments.

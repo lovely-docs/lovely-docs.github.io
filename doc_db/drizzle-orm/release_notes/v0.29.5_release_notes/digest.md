@@ -1,7 +1,8 @@
-## WITH Clauses for DML Statements
+## WITH Statements for INSERT, UPDATE, DELETE
 
-WITH (CTE) support added for INSERT, UPDATE, and DELETE statements. Example with DELETE:
+You can now use `WITH` (CTE) clauses with INSERT, UPDATE, and DELETE statements.
 
+Example with DELETE:
 ```ts
 const averageAmount = db.$with('average_amount').as(
 	db.select({ value: sql`avg(${orders.amount})`.as('value') }).from(orders),
@@ -14,11 +15,17 @@ const result = await db
 	.returning({ id: orders.id });
 ```
 
-Generates: `with "average_amount" as (select avg("amount") as "value" from "orders") delete from "orders" where "orders"."amount" > (select * from "average_amount") returning "id";`
+Generates:
+```sql
+with "average_amount" as (select avg("amount") as "value" from "orders") 
+delete from "orders" 
+where "orders"."amount" > (select * from "average_amount") 
+returning "id";
+```
 
-## Custom Migrations Configuration
+## Custom Migrations Table and Schema
 
-**Custom migrations table name** - Use `migrationsTable` option to specify table name (default: `__drizzle_migrations`):
+**Custom migrations table name** (all databases):
 ```ts
 await migrate(db, {
 	migrationsFolder: './drizzle',
@@ -26,7 +33,9 @@ await migrate(db, {
 });
 ```
 
-**Custom migrations schema** - PostgreSQL only, use `migrationsSchema` option (default: `drizzle` schema):
+By default migrations are stored in `__drizzle_migrations` table (in `drizzle` schema for PostgreSQL).
+
+**Custom migrations schema** (PostgreSQL only):
 ```ts
 await migrate(db, {
 	migrationsFolder: './drizzle',
@@ -34,19 +43,27 @@ await migrate(db, {
 });
 ```
 
-## SQLite Proxy Enhancements
+## SQLite Proxy Batch and Relational Queries
 
-- Relational queries support: `.query.findFirst()` and `.query.findMany()` now work with sqlite proxy driver
-- Batch requests support: Pass a batch callback function as second parameter to `drizzle()` to handle multiple queries:
+SQLite proxy driver now supports:
+- Relational queries: `.query.findFirst()` and `.query.findMany()`
+- Batch requests via `db.batch([])`
 
+Batch callback setup:
 ```ts
+import { drizzle } from 'drizzle-orm/sqlite-proxy';
+
+type ResponseType = { rows: any[][] | any[] }[];
+
 const db = drizzle(
-	async (sql, params, method) => { /* single query */ },
+	async (sql, params, method) => {
+		// single query logic
+	},
 	async (queries: { sql: string; params: any[]; method: 'all' | 'run' | 'get' | 'values' }[]) => {
-		const result = await axios.post('http://localhost:3000/batch', { queries });
-		return result; // array of raw values in same order as sent
+		const result: ResponseType = await axios.post('http://localhost:3000/batch', { queries });
+		return result;
 	},
 );
-
-await db.batch([/* queries */]);
 ```
+
+Response must be an array of raw values in the same order as sent queries.

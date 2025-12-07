@@ -1,0 +1,1 @@
+React hook for streaming text completions. Returns `completion`, `input`, `isLoading`, `error` states and `handleInputChange`, `handleSubmit`, `setInput`, `stop` functions. Supports event callbacks (`onResponse`, `onFinish`, `onError`), UI throttling with `experimental_throttle`, and request customization via `headers`, `body`, `credentials` options.

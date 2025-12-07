@@ -1,0 +1,1 @@
+Increment column values using `update().set()` with `sql` operator: `sql`${table.counter} + 1`` or create a reusable `increment(column, value)` helper function. Works on PostgreSQL, MySQL, SQLite.

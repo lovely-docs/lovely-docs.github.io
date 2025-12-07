@@ -1,0 +1,1 @@
+This page is a stub for getting started with Drizzle ORM in an existing Expo project. It acknowledges that there is no dedicated guide for this scenario and redirects users to the general Expo getting started guide for new projects, suggesting that the setup process is similar enough that the new project guide should be sufficient for existing projects as well.

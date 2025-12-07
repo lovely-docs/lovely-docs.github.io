@@ -1,0 +1,1 @@
+Server Actions can't return non-serializable objects from streamText/streamObject; use createStreamableValue and extract only serializable data.

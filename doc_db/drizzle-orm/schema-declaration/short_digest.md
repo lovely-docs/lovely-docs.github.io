@@ -1,23 +1,68 @@
-## Schema Declaration
+## Schema Organization
 
-Define TypeScript schemas that serve as source of truth for queries and migrations. Export all models for Drizzle-Kit.
+Single file: `schema: './src/db/schema.ts'` or multiple files: `schema: './src/db/schema'` in drizzle.config.ts.
 
-**Organization**: Single `schema.ts` file or multiple files in a `schema/` folder (Drizzle recursively finds tables).
+## Tables & Columns
 
-**Tables**: Use dialect-specific functions (pgTable, mysqlTable, sqliteTable) with at least 1 column:
+Use dialect-specific functions (pgTable, mysqlTable, sqliteTable). TypeScript keys become column names; use second parameter for aliases.
+
 ```ts
+// PostgreSQL
+import { pgTable, integer, varchar } from "drizzle-orm/pg-core";
 export const users = pgTable('users', {
   id: integer(),
-  firstName: varchar('first_name')  // alias for DB column name
+  firstName: varchar('first_name')
+})
+
+// MySQL
+import { mysqlTable, int, varchar } from "drizzle-orm/mysql-core";
+export const users = mysqlTable('users', {
+  id: int(),
+  firstName: varchar('first_name', { length: 256 })
+})
+
+// SQLite
+import { sqliteTable, integer, text } from "drizzle-orm/sqlite-core";
+export const users = sqliteTable('users', {
+  id: integer(),
+  firstName: text('first_name')
 })
 ```
 
-**Camel to snake_case**: Use `casing: 'snake_case'` in DB initialization to auto-map TypeScript names.
+## Camel/Snake Case Mapping
 
-**Reusable columns**: Define common columns (timestamps, etc.) and spread across tables.
+```ts
+const db = drizzle({ connection: process.env.DATABASE_URL, casing: 'snake_case' })
+```
 
-**PostgreSQL schemas**: Use `pgSchema()` to create namespace containers.
+## Reusable Columns
 
-**MySQL schemas**: Equivalent to databases; can be used in queries but not in migrations.
+```ts
+const timestamps = {
+  updated_at: timestamp(),
+  created_at: timestamp().defaultNow().notNull(),
+  deleted_at: timestamp(),
+}
 
-**SQLite**: No schema support - single file context only.
+export const users = pgTable('users', { id: integer(), ...timestamps })
+```
+
+## PostgreSQL Schemas
+
+```ts
+export const customSchema = pgSchema('custom');
+export const users = customSchema.table('users', { id: integer() })
+```
+
+## MySQL Schemas
+
+Equivalent to databases; defined but not included in migrations:
+
+```ts
+export const customSchema = mysqlSchema('custom');
+export const users = customSchema.table('users', { id: int() })
+```
+
+## SQLite
+
+No schema support; single file context only.

@@ -1,0 +1,1 @@
+readUIMessageStream converts UIMessageChunk streams to AsyncIterableStream<UIMessage> for terminal UIs, custom client consumption, or RSCs; accepts optional starting message, error handler, and termination flag.

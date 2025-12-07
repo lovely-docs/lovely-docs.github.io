@@ -1,1 +1,1 @@
-App-wide functions that hook into SvelteKit's request lifecycle and initialization for fine-grained framework control.
+App-wide hooks for request handling, error management, initialization, URL routing, and type serialization across server/client boundary.

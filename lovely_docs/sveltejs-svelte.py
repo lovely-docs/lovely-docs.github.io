@@ -35,6 +35,8 @@ source.commit = commit # Replace the literal commit (master) with the hash
 tree = build_markdown_doc_tree(clone_dir/source.doc_dir)
 
 # %% ../nbs/10_sveltejs-svelte.ipynb 11
+# extra = "You can sckip the <script> tag in examples that only have code without markup"
+
 processed_tree = await process_tree_depth_first(settings, tree, source.name)
 
 # %% ../nbs/10_sveltejs-svelte.ipynb 15

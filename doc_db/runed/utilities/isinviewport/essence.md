@@ -1,1 +1,0 @@
-Class that reactively tracks viewport visibility of DOM elements via Intersection Observer; exposes boolean `current` property.

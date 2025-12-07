@@ -1,1 +1,1 @@
-Debug tag for logging variable changes and pausing execution in Svelte templates.
+Debug tag for logging variable changes and pausing execution; accepts comma-separated variable names only, not expressions.

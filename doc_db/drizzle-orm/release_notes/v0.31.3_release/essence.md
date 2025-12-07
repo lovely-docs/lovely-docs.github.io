@@ -1,0 +1,1 @@
+v0.31.3: Fixed RQB schema handling and RDS Data API types; added Prisma extension for native Drizzle query integration via `$extends(drizzle())`

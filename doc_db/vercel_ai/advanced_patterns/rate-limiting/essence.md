@@ -1,0 +1,1 @@
+Rate limit API endpoints with Vercel KV + Upstash Ratelimit using fixed window limiter; check IP-based limits and return 429 on exceeded threshold.

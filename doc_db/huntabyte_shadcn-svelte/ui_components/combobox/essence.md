@@ -1,1 +1,1 @@
-Autocomplete input and command palette composed from Popover and Command; supports basic selection, status indicators with icons, dropdown menu integration, and form submission with proper accessibility attributes.
+Searchable dropdown/autocomplete built from Popover + Command; use $state/$derived for open/value, closeAndFocusTrigger() after selection, Form.Control for form integration.

@@ -1,0 +1,1 @@
+Class utility that tracks viewport visibility of DOM elements via Intersection Observer; constructor takes element/getter and optional config, exposes `current` boolean property.

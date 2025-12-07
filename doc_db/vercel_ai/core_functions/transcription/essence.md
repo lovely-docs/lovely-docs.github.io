@@ -1,0 +1,1 @@
+Transcribe audio to text using `transcribe()` with support for OpenAI, Groq, Deepgram, ElevenLabs, and other providers; accepts audio as Uint8Array/Buffer/base64/URL; returns text, segments with timestamps, language, duration; supports provider options, abort signals, custom headers, and error handling.

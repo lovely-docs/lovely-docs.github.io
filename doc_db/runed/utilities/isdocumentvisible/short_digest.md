@@ -1,1 +1,0 @@
-Reactive boolean tracking document visibility via Page Visibility API. Access current state with `visible.current`. Defaults to `false` in non-browser contexts.

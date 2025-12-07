@@ -1,0 +1,1 @@
+Step-by-step migration from Prisma to Drizzle ORM with setup (config, introspection, connection) and query examples (insert, select with joins/filtering/aggregations, update, delete with transactions).

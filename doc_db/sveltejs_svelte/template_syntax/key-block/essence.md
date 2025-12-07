@@ -1,0 +1,1 @@
+Block that destroys/recreates contents and reinitializes components or replays transitions when expression value changes

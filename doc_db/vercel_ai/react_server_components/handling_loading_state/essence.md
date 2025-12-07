@@ -1,1 +1,0 @@
-Three patterns for loading state in AI SDK RSC: client-side state management, server-streamed loading state, or streaming React components via `streamUI` with generator functions.

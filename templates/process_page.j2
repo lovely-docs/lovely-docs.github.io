@@ -6,28 +6,31 @@ This page is part of documentation for '{{ libname }}'
 
 Based on the page above, in this order:
 - Come up with a short filename that perfectly encompasses the contents.
-    - Keep the original if it's good already. Use the title from frontmatter if present.
+    - Keep the original if it's good already. Use the title from frontmatter if present, unless it's too long.
     - Don't include the name of the library in the name.
     - If the original starts with a number, don't include it.
 - Create a digest of the page.
     - Extract all bits that are important to a programmer who does not know how to use the library.
     - Include both high-level purpose and low-level details.
-    - Don't include any extra notes. Be concise, no "guide to" or "documentation for", no water.
-    - One example per use case - don't repeat yourself.
-    - Include all important examples. You can combine 2 or more simple examples into one.
+    - IMPORTANT: Include all examples.
+        - You can combine 2 or more simple examples into one.
+        - You can consdense verbose examples to their essence.
+    - Don't repeat boilerplate and imports. Include it in the first example but compress the rest.
     - Avoid markdown links, describe the target instead of linking.
-
-Note: Some pages are full of information, some are minimal.
-Make sure to preserve all important information in large pages, even if it's long.
+    - Don't include any extra notes. Be concise, no "guide to" or "documentation for", no water.
+    - If a page has a lot of information, the digest can be proportionally long.
+    - For short pages, or pages that don't have anything important, the digest can also be very short, down to 1 word in extreme cases.
 
 - More condensed digest (should be useful without reading the full digest).
     - Keep only the most important information.
-    - Keep all examples though.
+    - Try to combine as many examples as practical into one comprehensive example, or one comprehensice example per section.
+
 - Short, one-line essence of the page contents.
     - Maximize information content.
     - Avoid saying things like "documentation/guide/reference for"
     - be very terse, but cram as much details as possible.
-- Is the content you saw relevant to a programmer who is already somewhat familiar with {{ libname }}?
+
+- Decide is the content is relevant to a programmer who is already somewhat familiar with {{ libname }}.
     - Some pages are used to structure the docs and don't contain actual information - they are not relevant by themselves
 {% if extra %}
 Additional instructions for this file:

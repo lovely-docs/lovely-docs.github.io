@@ -1,1 +1,1 @@
-Legacy documentation index for older Svelte and Tailwind version combinations
+Links to previous documentation versions: Svelte 5 + Tailwind v3, and Svelte 4 + Tailwind v3.

@@ -1,18 +1,1 @@
-Context allows child components to access parent values without prop-drilling.
-
-**Basic usage:**
-```svelte
-// Parent
-import { setContext } from 'svelte';
-setContext('my-context', 'value');
-
-// Child
-import { getContext } from 'svelte';
-const value = getContext('my-context');
-```
-
-**Reactive state:** Store `$state` objects in context and mutate them (don't reassign).
-
-**Type-safe:** Use `createContext<T>()` to get typed getter/setter functions without needing keys.
-
-**Advantage over global state:** Context is request-isolated, preventing data leakage in SSR.
+Context allows parent components to share values with descendants without prop-drilling. Use `setContext(key, value)` in parent and `getContext(key)` in child. For type safety, use `createContext<T>()` which returns getter/setter pair. Store reactive state in context by mutating the object directly, not reassigning. Context is request-isolated, unlike module-level state.

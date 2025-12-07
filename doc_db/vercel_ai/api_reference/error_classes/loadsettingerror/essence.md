@@ -1,0 +1,1 @@
+LoadSettingError: thrown on failed setting load; detect via LoadSettingError.isInstance()

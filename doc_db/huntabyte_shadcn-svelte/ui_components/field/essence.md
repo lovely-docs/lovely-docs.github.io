@@ -1,1 +1,1 @@
-Composable form field components with labels, descriptions, errors, and validation; supports vertical/horizontal/responsive layouts; works with inputs, textareas, selects, sliders, checkboxes, radios, and switches.
+Composable form field components with labels, descriptions, errors, and validation; supports vertical/horizontal/responsive orientations and choice cards.

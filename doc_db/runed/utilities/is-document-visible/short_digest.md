@@ -1,0 +1,1 @@
+Reactive boolean tracking document visibility via Page Visibility API. Constructor accepts optional `window` and `document` options. Access state via `visible.current` property.

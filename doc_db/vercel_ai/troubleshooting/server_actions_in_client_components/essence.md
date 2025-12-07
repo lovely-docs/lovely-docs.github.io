@@ -1,1 +1,1 @@
-Server Actions must be exported from separate files or passed via props to Client Components; inline `"use server"` definitions in Client Components are not allowed.
+Cannot inline `"use server"` in Client Components; export from separate file, pass via props from Server Component, or use `createAI`/`useActions` hooks.

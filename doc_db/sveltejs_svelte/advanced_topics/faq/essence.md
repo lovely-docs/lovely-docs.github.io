@@ -1,0 +1,1 @@
+FAQ covering getting started (tutorial), support channels, tooling (VS Code, prettier), component documentation syntax, testing strategies (unit/component/E2E), routing (SvelteKit), mobile development (Tauri/Capacitor), style scoping with :global(), and HMR setup.

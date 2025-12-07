@@ -1,0 +1,1 @@
+Special element for attaching event listeners and actions to document.body; supports body-specific events like mouseenter/mouseleave; top-level only.

@@ -1,1 +1,1 @@
-Accordion component with Root, Item, Trigger, and Content subcomponents; supports single/multiple type; WAI-ARIA accessible; install with `npx shadcn-svelte@latest add accordion -y -o`
+Accordion component with single/multiple expand modes, WAI-ARIA accessible, installed via `npx shadcn-svelte@latest add accordion -y -o`.

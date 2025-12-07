@@ -1,1 +1,0 @@
-Deprecated stream helper (removed in v4.0) that converts AWS Bedrock Cohere responses to ReadableStream with optional lifecycle callbacks.

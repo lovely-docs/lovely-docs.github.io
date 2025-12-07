@@ -1,0 +1,1 @@
+streamText doesn't throw errors; use onError callback to log them since errors become part of the stream to prevent server crashes.

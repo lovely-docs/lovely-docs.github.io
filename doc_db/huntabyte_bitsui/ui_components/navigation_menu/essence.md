@@ -1,1 +1,0 @@
-Hierarchical navigation menu component with support for dropdowns, submenus, animations, and flexible layouts.

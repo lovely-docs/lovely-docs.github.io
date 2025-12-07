@@ -1,0 +1,1 @@
+Debug SvelteKit with breakpoints via VSCode debug terminal/launch.json, browser DevTools with NODE_OPTIONS="--inspect", or other editor-specific tools.

@@ -1,21 +1,11 @@
-## Setup Drizzle ORM with Bun SQL for existing PostgreSQL project
+**Install:** `npm install drizzle-orm dotenv` + `npm install -D drizzle-kit @types/bun`
 
-**Prerequisites:** dotenv, bun, Bun SQL
+**Setup:** Create `.env` with `DATABASE_URL`, configure `drizzle.config.ts` with PostgreSQL dialect, introspect database with `drizzle-kit introspect:pg`
 
-**Note:** Bun 1.2.0 has concurrent statement execution issues (tracked in GitHub).
+**Connect:** `const db = drizzle(sql)` from `drizzle-orm/bun` and `bun:sql`
 
-**Installation:**
-```bash
-npm install drizzle-orm dotenv
-npm install -D drizzle-kit @types/bun
-```
+**Query:** `await db.query.users.findMany()`
 
-**Setup steps:**
-1. Create `.env` with `DATABASE_URL`
-2. Create `drizzle.config.ts` with `dialect: 'postgresql'`
-3. Introspect existing PostgreSQL database
-4. Transfer generated schema to schema file
-5. Connect using Bun SQL bindings
-6. Write queries with Bun SQL dialect
-7. Run with `bun src/index.ts`
-8. (Optional) Update schema and apply migrations
+**Run:** `bun src/index.ts`
+
+**Note:** Bun v1.2.0 has concurrent statement execution issues

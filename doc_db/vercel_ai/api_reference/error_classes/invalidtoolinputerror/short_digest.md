@@ -1,0 +1,1 @@
+Error thrown for invalid tool input. Check with `InvalidToolInputError.isInstance(error)`. Properties: `toolName`, `toolInput`, `message`, `cause`.

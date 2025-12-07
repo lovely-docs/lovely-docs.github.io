@@ -1,1 +1,0 @@
-Comprehensive guide to building and deploying SvelteKit applications with official adapters for various platforms and instructions for writing custom adapters.

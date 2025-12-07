@@ -1,0 +1,1 @@
+8-step setup guide for Drizzle ORM with PGlite: install packages, set DATABASE_URL, initialize PGlite client with drizzle(), define schema, configure drizzle.config.ts (PostgreSQL), apply migrations, seed/query database.

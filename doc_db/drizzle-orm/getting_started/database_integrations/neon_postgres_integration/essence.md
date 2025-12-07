@@ -1,0 +1,1 @@
+Complete setup guide for Drizzle ORM with Neon Postgres: connection via neon-http driver, schema definition with foreign keys and timestamps, migrations via drizzle-kit, and CRUD examples including joins and aggregations.

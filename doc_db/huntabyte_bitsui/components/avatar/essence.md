@@ -1,0 +1,1 @@
+Avatar component with Root/Image/Fallback primitives; handles image loading states, supports delayMs, loadingStatus binding, and fallback display on load failure.

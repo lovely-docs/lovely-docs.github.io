@@ -1,9 +1,1 @@
-## createAI
-
-Creates a client-server context provider for managing UI and AI states.
-
-**Parameters**: `actions` (server actions), `initialAIState`, `initialUIState`, `onGetUIState` (SSR callback), `onSetAIState` (persistence callback with `state` and `done` properties)
-
-**Returns**: `<AI/>` context provider
-
-**Note**: Experimental; use AI SDK UI for production
+Creates a context provider for managing UI and AI states. Takes server actions, initial states, and callbacks for SSR and state persistence. Returns an `<AI/>` provider component. (Experimental - use AI SDK UI for production.)

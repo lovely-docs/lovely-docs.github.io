@@ -1,1 +1,1 @@
-v0.28.2: MySQL timestamp milliseconds fix, SQLite `.get()` type correction, sqlite-proxy double-execution fix, Typebox package added
+v0.28.2: fixes for MySQL timestamp milliseconds, SQLite .get() typing, SQLite proxy double-execution; adds Typebox support

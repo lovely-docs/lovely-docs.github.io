@@ -1,1 +1,0 @@
-TypeScript interfaces for typing Svelte actions and their return values with element types, parameters, and custom attributes/events.

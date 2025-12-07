@@ -1,0 +1,1 @@
+Deprecated AWS Bedrock Cohere stream helper (removed in SDK 4.0); transforms Bedrock responses to ReadableStream with optional onStart/onToken/onCompletion/onFinal callbacks.

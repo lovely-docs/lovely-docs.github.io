@@ -1,19 +1,28 @@
 ## Spring & Tween Classes
 
-Animate values smoothly:
+Animate values with spring physics or smooth tweening.
 
 ```js
 import { Spring, Tween } from 'svelte/motion';
+
 const spring = new Spring(0);
+spring.target = 100; // bounces to target with stiffness/damping
+
 const tween = new Tween(0);
-spring.target = 100; // animates with spring physics
-tween.target = 100;  // animates over fixed duration
+tween.target = 100; // smoothly animates over duration/easing
 ```
 
-**Spring**: Physics-based animation with `stiffness` and `damping`. Methods: `set(value, options)`, `Spring.of(fn)`.
+Both have `target`, `current`, `set(value, options)`, and `static of(fn, options)` for binding to reactive values.
 
-**Tween**: Time-based animation with `duration` and `easing`. Methods: `set(value, options)`, `Tween.of(fn)`.
+## prefersReducedMotion
 
-**prefersReducedMotion**: Media query for accessibility - disable animations when user prefers reduced motion.
+Media query for user's reduced motion preference:
 
-Legacy: `spring()` and `tweened()` functions are deprecated.
+```js
+import { prefersReducedMotion } from 'svelte/motion';
+transition:fly={{ y: prefersReducedMotion.current ? 0 : 200 }}
+```
+
+## Legacy
+
+`spring()` and `tweened()` functions are deprecated; use Spring and Tween classes instead.

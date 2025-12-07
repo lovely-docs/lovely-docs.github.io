@@ -1,0 +1,1 @@
+useCompletion hook: streams AI text completions with state management (completion, input, isLoading, error), input control (handleInputChange, handleSubmit, setInput), cancellation (stop), throttling (experimental_throttle), callbacks (onResponse, onFinish, onError), and request options (headers, body, credentials).

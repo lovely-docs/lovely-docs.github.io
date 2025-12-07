@@ -1,11 +1,10 @@
-## What is a Tool
+## What is a tool?
 
-A tool is an object an LLM can invoke to perform tasks and interact with external systems. Tools consist of `description`, `inputSchema` (Zod or JSON schema), and optional `execute` async function. Results are returned as tool result objects and can be automatically passed back to the LLM.
+A tool is an object the LLM can invoke, consisting of `description`, `inputSchema` (Zod or JSON), and optional `execute` async function. Tools are passed to `generateText`/`streamText` via the `tools` parameter. When the LLM calls a tool, it generates a tool call; tools with `execute` run automatically and return results that can be fed back to the LLM.
 
 ## Schemas
 
-Use Zod (`pnpm add zod`) or JSON schemas to define tool parameters:
-
+Use Zod or JSON schemas to define tool parameters. Install Zod with `pnpm add zod`. Example:
 ```ts
 import z from 'zod';
 const recipeSchema = z.object({
@@ -17,11 +16,12 @@ const recipeSchema = z.object({
 });
 ```
 
-## Using Tools
+## Tool Packages
 
-Pass tools to `generateText` or `streamText`:
-
+Import ready-made tools from npm packages and pass to `generateText`/`streamText`:
 ```ts
+import { generateText } from 'ai';
+import { searchTool } from 'some-tool-package';
 const { text } = await generateText({
   model: 'anthropic/claude-haiku-4.5',
   prompt: 'When was Vercel Ship AI?',
@@ -29,18 +29,12 @@ const { text } = await generateText({
 });
 ```
 
-## Publishing Tools
+Publish your own tools by exporting tool objects with `description`, `inputSchema`, and `execute`.
 
-Export tool objects from npm packages:
+## Toolsets
 
-```ts
-export const myTool = {
-  description: 'A helpful tool',
-  inputSchema: z.object({ query: z.string() }),
-  execute: async ({ query }) => result,
-};
-```
+Ready-made packages: @exalabs/ai-sdk (web search), @parallel-web/ai-sdk-tools, Stripe agent tools, StackOne, agentic (20+ tools), AWS Bedrock AgentCore, Composio (250+ tools), JigsawStack, AI Tools Registry, Toolhouse.
 
-## Ready-to-Use Packages
+MCP servers: Smithery (6,000+ MCPs), Pipedream (3,000+ integrations), Apify (web scraping/automation).
 
-Web search: @exalabs/ai-sdk, @parallel-web/ai-sdk-tools | Integrations: Stripe, StackOne (100+ SaaS), Composio (250+ tools) | APIs: agentic (20+ tools), AWS Bedrock AgentCore (Browser, Code Interpreter) | Utilities: JigsawStack (30+ models), AI Tools Registry, Toolhouse (25+ actions) | MCP: Smithery (6,000+), Pipedream (3,000+), Apify (web scraping/automation)
+Tutorials: browserbase, browserless, AI Tool Maker (OpenAPI to tools), Interlify, DeepAgent (50+ tools).

@@ -1,1 +1,1 @@
-No dedicated guide for OP-SQLite in existing projects; refer to the general getting started guide.
+No dedicated guide for OP-SQLite in existing projects; use the new project guide instead.

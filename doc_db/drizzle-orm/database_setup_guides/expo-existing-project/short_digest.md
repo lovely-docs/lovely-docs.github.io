@@ -1,0 +1,1 @@
+Stub page redirecting to the Expo new project guide for setup in existing projects.

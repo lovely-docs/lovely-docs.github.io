@@ -1,1 +1,1 @@
-Modal overlay component with Root, Trigger, Content, Header, Title, Description, and Footer subcomponents; install with `npx shadcn-svelte@latest add dialog -y -o`.
+Modal dialog overlay component with composable subcomponents (Root, Trigger, Content, Header, Title, Description, Footer); install via CLI with -y -o flags.

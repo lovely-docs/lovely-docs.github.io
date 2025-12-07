@@ -1,0 +1,1 @@
+Reference index of 9 main functions (text/object generation, embeddings, image/audio) and 14 helper functions (tools, schemas, middleware, utilities).

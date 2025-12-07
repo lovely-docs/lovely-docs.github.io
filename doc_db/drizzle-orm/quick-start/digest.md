@@ -1,6 +1,6 @@
 ## Installation
 
-Install `drizzle-orm` and `drizzle-kit`:
+Install drizzle-orm and drizzle-kit:
 ```
 npm install drizzle-orm postgres
 npm install -D drizzle-kit
@@ -8,7 +8,7 @@ npm install -D drizzle-kit
 
 ## Schema Definition
 
-Create `src/schema.ts` to define your database tables:
+Create `src/schema.ts` with table definitions using drizzle-orm/pg-core:
 ```ts
 import { serial, text, timestamp, pgTable } from "drizzle-orm/pg-core";
 
@@ -25,7 +25,7 @@ export const user = pgTable("user", {
 
 ## Configuration
 
-Create `drizzle.config.ts` at project root:
+Create `drizzle.config.ts`:
 ```ts
 import { defineConfig } from "drizzle-kit";
 
@@ -48,16 +48,16 @@ Add scripts to `package.json`:
 }
 ```
 
-## Generate and Run Migrations
+## Running Migrations
 
-Generate SQL migration files:
+Generate migration files:
 ```shell
 npm run generate
 ```
 
-This creates migration files in the `drizzle/` directory (e.g., `drizzle/0000_pale_mister_fear.sql`).
+This creates SQL migration files in the `drizzle/` directory (e.g., `drizzle/0000_pale_mister_fear.sql`).
 
-Run migrations to apply schema to database:
+Apply migrations to database:
 ```shell
 npm run migrate
 ```

@@ -13,15 +13,13 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 ### Usage
 
 Import the table components:
-
 ```svelte
 <script lang="ts">
   import * as Table from "$lib/components/ui/table/index.js";
 </script>
 ```
 
-Build tables using the following structure:
-
+Basic table structure with header, body, and footer:
 ```svelte
 <Table.Root>
   <Table.Caption>A list of your recent invoices.</Table.Caption>
@@ -52,13 +50,12 @@ Build tables using the following structure:
 </Table.Root>
 ```
 
-### Components
-
-- `Table.Root`: Container for the entire table
-- `Table.Caption`: Optional caption/title for the table
-- `Table.Header`: Header section containing column definitions
-- `Table.Body`: Body section containing data rows
-- `Table.Footer`: Optional footer section for totals or summary
-- `Table.Row`: Individual row container
-- `Table.Head`: Header cell
-- `Table.Cell`: Data cell (supports `colspan` attribute and custom classes for alignment/styling)
+Components available:
+- `Table.Root` - wrapper element
+- `Table.Caption` - table caption
+- `Table.Header` - header section
+- `Table.Body` - body section
+- `Table.Footer` - footer section
+- `Table.Row` - table row
+- `Table.Head` - header cell
+- `Table.Cell` - data cell (supports `colspan` attribute and custom classes for styling)

@@ -1,0 +1,1 @@
+Dropdown menu with Root/Trigger/Content/Item/Group/Separator/Sub/CheckboxItem/RadioGroup components; supports disabled items, shortcuts, and nested submenus.

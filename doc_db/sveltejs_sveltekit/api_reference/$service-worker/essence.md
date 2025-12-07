@@ -1,1 +1,1 @@
-API reference for the $service-worker module that provides build-time constants for caching and deployment configuration in service workers.
+$service-worker module exports base, build, files, prerendered, version for service worker caching and deployment metadata.

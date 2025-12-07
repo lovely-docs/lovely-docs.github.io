@@ -1,6 +1,6 @@
 ## Button Component
 
-Displays a button or a component that looks like a button.
+A reusable button component that can render as `<button>` or `<a>` element with multiple style variants.
 
 ### Installation
 
@@ -8,82 +8,67 @@ Displays a button or a component that looks like a button.
 npx shadcn-svelte@latest add button -y -o
 ```
 
-The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
+Flags: `-y` skips confirmation prompt, `-o` overwrites existing files.
 
 ### Basic Usage
-
-Import and render a button:
 
 ```svelte
 <script lang="ts">
   import { Button } from "$lib/components/ui/button/index.js";
 </script>
+
+<!-- Default button -->
 <Button>Button</Button>
-```
 
-### Variants
+<!-- With variant -->
+<Button variant="outline">Button</Button>
 
-The `variant` prop controls the button's appearance:
-
-```svelte
-<Button variant="outline">Outline</Button>
-<Button variant="secondary">Secondary</Button>
-<Button variant="destructive">Destructive</Button>
-<Button variant="ghost">Ghost</Button>
-<Button variant="link">Link</Button>
-```
-
-### Link Conversion
-
-Convert the button to an `<a>` element by passing an `href` prop:
-
-```svelte
+<!-- As link -->
 <Button href="/dashboard">Dashboard</Button>
 ```
 
-Alternatively, use the `buttonVariants` helper to style a link as a button:
-
+Alternatively, use `buttonVariants` helper to style links as buttons:
 ```svelte
-<script lang="ts">
-  import { buttonVariants } from "$lib/components/ui/button";
-</script>
 <a href="/dashboard" class={buttonVariants({ variant: "outline" })}>
   Dashboard
 </a>
 ```
 
-### Size and Icons
+### Variants
 
-Use the `size` prop to control button size. The `size="icon"` variant creates icon-only buttons:
+- `default` (primary): Default button style
+- `secondary`: Secondary button style
+- `destructive`: Red/danger button style
+- `outline`: Outlined button style
+- `ghost`: Minimal button style
+- `link`: Link-styled button
+
+### Examples
 
 ```svelte
-<script lang="ts">
-  import GitBranchIcon from "@lucide/svelte/icons/git-branch";
-  import ChevronRightIcon from "@lucide/svelte/icons/chevron-right";
-  import { Button } from "$lib/components/ui/button/index.js";
-</script>
+<Button>Primary</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="destructive">Destructive</Button>
+<Button variant="outline">Outline</Button>
+<Button variant="ghost">Ghost</Button>
+<Button variant="link">Link</Button>
+
+<!-- With icon -->
 <Button variant="outline" size="sm">
   <GitBranchIcon />
   Login with Email
 </Button>
+
+<!-- Icon only -->
 <Button variant="secondary" size="icon" class="size-8">
   <ChevronRightIcon />
 </Button>
-```
 
-### Disabled State
-
-Disable buttons with the `disabled` attribute. Commonly used with loading indicators:
-
-```svelte
-<script lang="ts">
-  import Loader2Icon from "@lucide/svelte/icons/loader-2";
-  import { Button } from "$lib/components/ui/button/index.js";
-</script>
+<!-- Loading state -->
 <Button disabled>
   <Loader2Icon class="animate-spin" />
   Please wait
 </Button>
 ```
 
-See Bits UI Button documentation for full API reference.
+Supports `size` prop (e.g., `sm`, `icon`) and standard HTML button attributes.

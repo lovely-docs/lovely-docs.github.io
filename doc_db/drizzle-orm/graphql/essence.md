@@ -1,0 +1,1 @@
+Auto-generate GraphQL servers from Drizzle schemas; customize via entities object to select/override queries, mutations, and resolvers.

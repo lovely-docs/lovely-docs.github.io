@@ -1,0 +1,1 @@
+Core functions for text generation (streaming/non-streaming), structured data generation, embeddings, image generation, transcription, and speech synthesis. Helper functions for tools, schemas, middleware, MCP clients, and utilities.

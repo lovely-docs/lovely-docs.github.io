@@ -1,29 +1,20 @@
-## Chart
+## Chart Component
 
-Beautiful, customizable charts built on LayerChart. Copy and paste into your apps.
+Composable charts built on LayerChart. Install with `npx shadcn-svelte@latest add chart -y -o`.
 
-**Installation:**
-```bash
-npx shadcn-svelte@latest add chart -y -o
-```
+**Core**: Build charts using LayerChart components, import custom components like `ChartTooltip` only when needed. Not wrapped, so you follow official upgrade paths.
 
-### Basic Usage
-
-Define data, config, and build chart using LayerChart components:
-
-```ts
-const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-];
-
-const chartConfig = {
-  desktop: { label: "Desktop", color: "#2563eb" },
-  mobile: { label: "Mobile", color: "#60a5fa" },
-} satisfies Chart.ChartConfig;
-```
-
+**Basic example**:
 ```svelte
+<script lang="ts">
+  import * as Chart from "$lib/components/ui/chart/index.js";
+  import { BarChart } from "layerchart";
+  const chartData = [{ month: "January", desktop: 186, mobile: 80 }, ...];
+  const chartConfig = {
+    desktop: { label: "Desktop", color: "#2563eb" },
+    mobile: { label: "Mobile", color: "#60a5fa" }
+  } satisfies Chart.ChartConfig;
+</script>
 <Chart.Container config={chartConfig} class="min-h-[200px] w-full">
   <BarChart
     data={chartData}
@@ -35,6 +26,7 @@ const chartConfig = {
       { key: "desktop", label: chartConfig.desktop.label, color: chartConfig.desktop.color },
       { key: "mobile", label: chartConfig.mobile.label, color: chartConfig.mobile.color }
     ]}
+    props={{ xAxis: { format: (d) => d.slice(0, 3) } }}
   >
     {#snippet tooltip()}
       <Chart.Tooltip />
@@ -43,40 +35,6 @@ const chartConfig = {
 </Chart.Container>
 ```
 
-### Customization
+**Theming**: Use CSS variables (`--chart-1`, `--chart-2`, etc.) or hex/hsl/oklch colors. Reference with `var(--chart-1)` in config, `var(--color-KEY)` in components/data.
 
-Format axis ticks with `props`:
-```svelte
-<BarChart {data} props={{ xAxis: { format: (d) => d.slice(0, 3) } }} />
-```
-
-Add legend: `<BarChart {data} legend />`
-
-### Theming
-
-Define CSS variables (recommended):
-```css
-:root { --chart-1: oklch(0.646 0.222 41.116); }
-```
-
-Use in config: `color: "var(--chart-1)"` or direct values like `"#2563eb"`
-
-Reference in components: `fill="var(--color-desktop)"`
-
-### Tooltip Props
-
-| Prop | Type | Description |
-|------|------|-------------|
-| `labelKey` | string | Config/data key for label |
-| `nameKey` | string | Config/data key for name |
-| `indicator` | `dot` \| `line` \| `dashed` | Indicator style |
-| `hideLabel` | boolean | Hide label |
-| `hideIndicator` | boolean | Hide indicator |
-| `label` | string | Custom label |
-| `labelFormatter` | function | Format label |
-| `formatter` | Snippet | Custom rendering |
-
-Custom keys example:
-```svelte
-<Chart.Tooltip labelKey="visitors" nameKey="browser" />
-```
+**Tooltip**: `<Chart.Tooltip>` with props `labelKey`, `nameKey`, `indicator` (dot|line|dashed), `hideLabel`, `hideIndicator`, `label`, `labelFormatter`, `formatter`.

@@ -3,14 +3,13 @@
 
 ## How it works
 1. Reads all `.sql` migration files from the migrations folder
-2. Connects to the database and fetches entries from the drizzle migrations log table (`__drizzle_migrations`)
+2. Connects to database and fetches entries from the drizzle migrations log table (`__drizzle_migrations`)
 3. Determines which migrations haven't been applied yet
 4. Runs new SQL migrations and logs them to the migrations table
 
 ## Configuration
-Requires `dialect` and database connection credentials via either `drizzle.config.ts` or CLI options.
+Requires `dialect` and database connection credentials via `drizzle.config.ts` or CLI options:
 
-**Via config file:**
 ```ts
 // drizzle.config.ts
 import { defineConfig } from "drizzle-kit";
@@ -21,35 +20,21 @@ export default defineConfig({
   dbCredentials: {
     url: "postgresql://user:password@host:port/dbname"
   },
+  migrations: {
+    table: '__drizzle_migrations', // customizable
+    schema: 'drizzle', // PostgreSQL only
+  },
 });
 ```
+
 ```shell
 npx drizzle-kit migrate
-```
-
-**Via CLI options:**
-```shell
+# or with CLI options
 npx drizzle-kit migrate --dialect=postgresql --url=postgresql://user:password@host:port/dbname
 ```
 
-## Migrations log table
-Successfully applied migrations are stored in `__drizzle_migrations` table by default. Customize the table name and schema (PostgreSQL only) in config:
-```ts
-export default defineConfig({
-  dialect: "postgresql",
-  schema: "./src/schema.ts",
-  dbCredentials: {
-    url: "postgresql://user:password@host:port/dbname"
-  },
-  migrations: {
-    table: 'my-migrations-table',
-    schema: 'public', // PostgreSQL only, 'drizzle' by default
-  },
-});
-```
-
-## Multiple configuration files
-Use `--config` flag to specify different config files for different database stages:
+## Multiple configurations
+Support multiple config files for different database stages:
 ```shell
 npx drizzle-kit migrate --config=drizzle-dev.config.ts
 npx drizzle-kit migrate --config=drizzle-prod.config.ts
@@ -59,26 +44,11 @@ npx drizzle-kit migrate --config=drizzle-prod.config.ts
 1. Define schema in `src/schema.ts`:
 ```ts
 import * as p from "drizzle-orm/pg-core";
-
 export const users = p.pgTable("users", {
   id: p.serial().primaryKey(),
   name: p.text(),
 })
 ```
 
-2. Generate migration:
-```shell
-npx drizzle-kit generate --name=init
-```
-Creates `drizzle/0000_init.sql`:
-```sql
-CREATE TABLE "users"(
-  id serial primary key,
-  name text
-)
-```
-
-3. Apply migration:
-```shell
-npx drizzle-kit migrate
-```
+2. Generate migration: `npx drizzle-kit generate --name=init` creates `0000_init.sql`
+3. Apply migration: `npx drizzle-kit migrate` runs the SQL and logs it to database

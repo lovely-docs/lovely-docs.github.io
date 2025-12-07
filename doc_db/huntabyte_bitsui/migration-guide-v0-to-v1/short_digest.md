@@ -1,0 +1,11 @@
+## Key Changes v0 → v1
+- `el` → `ref`, `asChild` → `child` snippet, `let:` → snippet props, `transition` props removed
+- Components with `multiple` prop now use required `type: 'single' | 'multiple'` discriminant
+- `selected` prop → `value` prop (Combobox, Select)
+- Indicator components removed; use `children` snippet to access state (Checkbox, Combobox, Select, Radio Group, Menu)
+- Auto-portalling removed; explicitly wrap content in `*.Portal` component (Combobox, Select, Menu, Popover)
+- `Checkbox.Input` removed (auto-renders with `name` prop); `Checkbox.Indicator` removed; `indeterminate` is separate state
+- `AlertDialog.Action` no longer auto-closes
+- `Pin Input` completely overhauled for OTP use
+- `Slider` requires `type` prop; new `onValueCommit` callback
+- `Tooltip.Provider` required for shared context

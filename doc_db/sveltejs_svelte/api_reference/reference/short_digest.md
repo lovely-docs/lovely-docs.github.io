@@ -1,1 +1,1 @@
-Reference documentation index page for Svelte API and language reference.
+Documentation index page for the reference section with no actual content.

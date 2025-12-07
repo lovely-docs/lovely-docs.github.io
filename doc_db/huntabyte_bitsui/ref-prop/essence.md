@@ -1,0 +1,1 @@
+Bindable ref prop accesses underlying HTML elements for DOM manipulation; works with child snippets via IDs; use WithElementRef helper for custom components.

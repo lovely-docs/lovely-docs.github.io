@@ -1,0 +1,1 @@
+Netlify adapter: install, configure with edge/split options, set up netlify.toml, use _redirects for routing, prerender forms, access platform context in endpoints, use $app/server read() for files.

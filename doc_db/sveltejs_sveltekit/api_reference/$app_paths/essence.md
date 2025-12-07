@@ -1,1 +1,1 @@
-API for resolving asset URLs and pathnames with base path prefixing and dynamic route parameter population.
+$app/paths exports asset(), resolve(), and deprecated assets/base/resolveRoute for URL/path resolution with base path and assets prefix handling.

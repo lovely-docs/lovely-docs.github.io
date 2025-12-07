@@ -1,0 +1,1 @@
+Apply conditional filters with `.where()` and logical operators (`and()`, `or()`). Pass `undefined` to skip a filter, or build filters dynamically in an array. Create custom operators using `sql` template expressions.

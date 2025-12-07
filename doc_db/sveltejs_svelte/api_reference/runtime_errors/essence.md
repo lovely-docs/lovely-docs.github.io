@@ -1,1 +1,0 @@
-Reference documentation for all runtime errors in Svelte with explanations and solutions.

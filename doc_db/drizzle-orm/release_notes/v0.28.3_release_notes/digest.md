@@ -1,30 +1,28 @@
 ## Fixes
-- Fixed sqlite-proxy and SQL.js response from `.get()` when the result is empty
+- Fixed sqlite-proxy and SQL.js `.get()` response when result is empty
 
 ## New Features
 
 ### SQLite Simplified Query API
-Added a simplified query API for SQLite databases.
+Added simplified query API for SQLite.
 
-### Column Builder Default Methods
-Added `.$defaultFn()` and `.$default()` methods to column builders for specifying runtime default values. These methods accept a function that can implement any logic (e.g., `cuid()` for generating IDs). The default value is only used at runtime in drizzle-orm and does not affect drizzle-kit behavior.
+### Column Builder Methods: `.$defaultFn()` / `.$default()`
+Define runtime default values for columns with custom logic. Available for PostgreSQL, MySQL, and SQLite.
 
-Example:
 ```ts
 import { varchar, mysqlTable } from "drizzle-orm/mysql-core";
 import { createId } from '@paralleldrive/cuid2';
 
 const table = mysqlTable('table', {
-	id: varchar('id', { length: 128 }).$defaultFn(() => createId()),
+  id: varchar('id', { length: 128 }).$defaultFn(() => createId()),
 });
 ```
 
-Available for PostgreSQL, MySQL, and SQLite column types.
+Note: Runtime defaults only affect drizzle-orm behavior, not drizzle-kit.
 
-### Table Model Type Inference
-Added `table.$inferSelect` / `table._.inferSelect` and `table.$inferInsert` / `table._.inferInsert` methods for convenient table model type inference. These replace the deprecated `InferModel` type.
+### Table Model Type Inference: `$inferSelect` / `$inferInsert`
+Convenient methods for inferring table types. Replaces deprecated `InferModel`.
 
-Example:
 ```ts
 import { InferSelectModel, InferInsertModel } from 'drizzle-orm'
 
@@ -36,9 +34,11 @@ const usersTable = pgTable('users', {
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 });
 
+// New approach
 type SelectUser = typeof usersTable.$inferSelect;
 type InsertUser = typeof usersTable.$inferInsert;
 
+// Legacy approach (deprecated)
 type SelectUser2 = InferSelectModel<typeof usersTable>;
 type InsertUser2 = InferInsertModel<typeof usersTable>;
 ```

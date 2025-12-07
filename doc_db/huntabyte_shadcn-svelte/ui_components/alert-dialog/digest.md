@@ -12,18 +12,12 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Usage
 
-Import the AlertDialog components:
-
 ```svelte
 <script lang="ts">
   import * as AlertDialog from "$lib/components/ui/alert-dialog/index.js";
   import { buttonVariants } from "$lib/components/ui/button/index.js";
 </script>
-```
 
-Basic structure with all available sub-components:
-
-```svelte
 <AlertDialog.Root>
   <AlertDialog.Trigger class={buttonVariants({ variant: "outline" })}>
     Show Dialog
@@ -56,4 +50,4 @@ Basic structure with all available sub-components:
 - `AlertDialog.Cancel` - Cancel button
 - `AlertDialog.Action` - Action/confirm button
 
-The component is built on Bits UI. See Bits UI documentation for API reference and additional configuration options.
+See Bits UI documentation for full API reference.

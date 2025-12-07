@@ -1,22 +1,24 @@
 ## Setup
 
-Create a Next.js app with App Router and Tailwind CSS:
-```
+Prerequisites: Node.js 18+, pnpm, Vercel AI Gateway API key.
+
+Create Next.js app with App Router and Tailwind CSS:
+```bash
 pnpm create next-app@latest my-ai-app
 cd my-ai-app
 ```
 
 Install dependencies:
-```
+```bash
 pnpm add ai@beta @ai-sdk/react@beta zod
 ```
 
-Create `.env.local` with your Vercel AI Gateway API key:
+Configure API key in `.env.local`:
 ```env
-AI_GATEWAY_API_KEY=your_key_here
+AI_GATEWAY_API_KEY=xxxxxxxxx
 ```
 
-## Route Handler
+## Basic Chat Route Handler
 
 Create `app/api/chat/route.ts`:
 ```tsx
@@ -34,22 +36,29 @@ export async function POST(req: Request) {
 }
 ```
 
-`streamText` accepts a model and messages array. `UIMessage` includes metadata like timestamps; convert to `ModelMessage[]` using `convertToModelMessages()` which strips UI-specific data. The function returns a `StreamTextResult` with `toUIMessageStreamResponse()` method to stream the response to the client.
+Key concepts:
+- `streamText()` accepts model provider and messages array
+- `UIMessage[]` contains conversation history with metadata (timestamps, sender info)
+- `convertToModelMessages()` strips UI metadata to convert `UIMessage[]` to `ModelMessage[]` format
+- `toUIMessageStreamResponse()` converts result to streamed response
 
 ## Provider Configuration
 
-By default, the Vercel AI Gateway provider is used. Reference models as strings:
+Default uses Vercel AI Gateway (included in `ai` package). Access models with string:
 ```ts
 model: 'anthropic/claude-sonnet-4.5'
 ```
 
-Or explicitly import:
+Or explicitly:
 ```ts
 import { gateway } from 'ai';
 model: gateway('anthropic/claude-sonnet-4.5');
 ```
 
-To use other providers, install their package and create an instance:
+To use other providers, install and import:
+```bash
+pnpm add @ai-sdk/openai@beta
+```
 ```ts
 import { openai } from '@ai-sdk/openai';
 model: openai('gpt-5.1');
@@ -57,7 +66,7 @@ model: openai('gpt-5.1');
 
 ## Chat UI
 
-Create `app/page.tsx` with the `useChat` hook:
+Create `app/page.tsx`:
 ```tsx
 'use client';
 
@@ -99,46 +108,21 @@ export default function Chat() {
 }
 ```
 
-`useChat` hook provides `messages` (array with `id`, `role`, `parts` properties) and `sendMessage` function. Messages are accessed via `message.parts` array where each part can be text or other types. Run with `pnpm run dev` and visit `http://localhost:3000`.
+`useChat()` hook provides:
+- `messages` - array of chat messages with `id`, `role`, `parts` properties
+- `sendMessage()` - function to send message to `/api/chat` endpoint
+- Message `parts` array contains ordered components of model output (text, reasoning tokens, etc.)
+
+Run with `pnpm run dev` and visit http://localhost:3000.
 
 ## Tools
 
-Add tools to the `streamText` configuration:
-```tsx
-import { streamText, UIMessage, convertToModelMessages, tool } from 'ai';
-import { z } from 'zod';
+Tools allow LLMs to invoke actions and receive results for next response. Example: weather tool.
 
-export async function POST(req: Request) {
-  const { messages }: { messages: UIMessage[] } = await req.json();
-
-  const result = streamText({
-    model: 'anthropic/claude-sonnet-4.5',
-    messages: convertToModelMessages(messages),
-    tools: {
-      weather: tool({
-        description: 'Get the weather in a location (fahrenheit)',
-        inputSchema: z.object({
-          location: z.string().describe('The location to get the weather for'),
-        }),
-        execute: async ({ location }) => {
-          const temperature = Math.round(Math.random() * (90 - 32) + 32);
-          return { location, temperature };
-        },
-      }),
-    },
-  });
-
-  return result.toUIMessageStreamResponse();
-}
-```
-
-Tools have a description, `inputSchema` (Zod schema for inputs), and `execute` async function. Tool parts are named `tool-{toolName}` and appear in `message.parts` array.
-
-## Multi-Step Tool Calls
-
-Enable multi-step tool calling with `stopWhen`:
+Update `app/api/chat/route.ts`:
 ```tsx
 import { streamText, UIMessage, convertToModelMessages, tool, stepCountIs } from 'ai';
+import { z } from 'zod';
 
 export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
@@ -175,7 +159,16 @@ export async function POST(req: Request) {
 }
 ```
 
-By default `stopWhen` is `stepCountIs(1)`. Setting it to `stepCountIs(5)` allows the model to use up to 5 steps, enabling it to call tools, receive results, and generate follow-up responses. Update the UI to handle new tool parts:
+Tool definition includes:
+- `description` - helps model understand when to use it
+- `inputSchema` - Zod schema defining required inputs; model extracts from context or asks user
+- `execute` - async function running on server; can fetch from external APIs
+
+`stopWhen: stepCountIs(5)` allows model to use up to 5 steps, enabling multi-step tool calls where model uses tool results to answer original query.
+
+Tool parts in message are named `tool-{toolName}`, e.g., `tool-weather`.
+
+Update `app/page.tsx` to display tool results:
 ```tsx
 case 'tool-weather':
 case 'tool-convertFahrenheitToCelsius':
@@ -185,3 +178,5 @@ case 'tool-convertFahrenheitToCelsius':
     </pre>
   );
 ```
+
+Example flow: "What's the weather in New York in celsius?" → model calls weather tool → displays result → calls temperature conversion tool → provides natural language response.

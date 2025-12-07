@@ -1,0 +1,1 @@
+Creates tools with runtime-determined input/output types. Use `z.unknown()` or `z.any()` for inputSchema. Check `toolCall.dynamic` flag for type narrowing when mixing with static tools. Appears as `dynamic-tool` parts in useChat.

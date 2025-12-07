@@ -1,1 +1,1 @@
-Section index for advanced AI SDK and RSC API concepts requiring different mental models than traditional development.
+Index page for advanced SDK/RSC API topics; covers LLM-specific paradigms and mental models.

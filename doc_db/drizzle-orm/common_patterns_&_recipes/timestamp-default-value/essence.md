@@ -1,0 +1,1 @@
+Set SQL timestamp defaults with defaultNow() or sql operator: PostgreSQL now()/extract(epoch from now()), MySQL now()/unix_timestamp(), SQLite current_timestamp/unixepoch(); control app representation with mode option.

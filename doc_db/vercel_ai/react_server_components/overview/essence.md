@@ -1,1 +1,0 @@
-Experimental RSC package for streaming LLM-generated UI from server to client via streamUI, useUIState/useAIState, createStreamableValue/UI, and createAI context provider.

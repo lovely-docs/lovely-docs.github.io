@@ -1,0 +1,1 @@
+Configure drizzle.config.ts with dialect: 'sqlite', driver: 'd1-http', and D1 credentials (accountId, databaseId, token from Cloudflare dashboard) to use Drizzle Kit with Cloudflare D1 HTTP API for migrations and database management.

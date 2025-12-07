@@ -1,0 +1,1 @@
+Middleware that converts non-streaming model responses into simulated streams, preserving text, reasoning, tool calls, and metadata.

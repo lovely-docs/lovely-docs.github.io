@@ -1,0 +1,1 @@
+Resume streams after page reloads using `resume: true`, Redis, `resumable-stream` package, and POST/GET endpoints; incompatible with abort.

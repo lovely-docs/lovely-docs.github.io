@@ -1,1 +1,1 @@
-Transaction API with nested savepoints, conditional rollback, return values, and dialect-specific isolation/access configuration for PostgreSQL, MySQL, SQLite, and SingleStore.
+Execute grouped SQL statements atomically with commit/rollback; supports nested transactions, conditional rollback, return values, and dialect-specific isolation/access configs.

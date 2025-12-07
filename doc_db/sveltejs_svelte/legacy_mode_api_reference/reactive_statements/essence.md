@@ -1,1 +1,0 @@
-Legacy Svelte reactive statements using $: prefix automatically re-run when their directly-referenced dependencies change, with topological ordering and compile-time dependency detection.

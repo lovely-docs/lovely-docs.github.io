@@ -1,11 +1,14 @@
 ## Setup
-```
+Prerequisites: Node.js 18+, pnpm, Vercel AI Gateway API key.
+```bash
 pnpm create next-app@latest my-ai-app
+cd my-ai-app
 pnpm add ai@beta @ai-sdk/react@beta zod
 ```
-Create `.env.local` with `AI_GATEWAY_API_KEY`.
+`.env.local`: `AI_GATEWAY_API_KEY=xxxxxxxxx`
 
 ## Route Handler
+`app/api/chat/route.ts`:
 ```tsx
 import { streamText, UIMessage, convertToModelMessages } from 'ai';
 
@@ -18,35 +21,45 @@ export async function POST(req: Request) {
   return result.toUIMessageStreamResponse();
 }
 ```
+- `streamText()` takes model and messages
+- `convertToModelMessages()` strips UI metadata from `UIMessage[]` to `ModelMessage[]`
+- `toUIMessageStreamResponse()` streams result to client
 
-## Chat UI
+## UI
+`app/page.tsx`:
 ```tsx
 'use client';
 import { useChat } from '@ai-sdk/react';
+import { useState } from 'react';
 
 export default function Chat() {
+  const [input, setInput] = useState('');
   const { messages, sendMessage } = useChat();
   return (
-    <div>
+    <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
       {messages.map(message => (
         <div key={message.id}>
+          {message.role === 'user' ? 'User: ' : 'AI: '}
           {message.parts.map((part, i) => 
-            part.type === 'text' && <div key={i}>{part.text}</div>
+            part.type === 'text' ? <div key={i}>{part.text}</div> : null
           )}
         </div>
       ))}
       <form onSubmit={e => {
         e.preventDefault();
         sendMessage({ text: input });
+        setInput('');
       }}>
-        <input placeholder="Say something..." />
+        <input value={input} onChange={e => setInput(e.currentTarget.value)} />
       </form>
     </div>
   );
 }
 ```
+`useChat()` provides `messages` array and `sendMessage()` function. Message `parts` array contains ordered output components.
 
 ## Tools
+Add tools to route handler with `tool()` function and Zod schema:
 ```tsx
 tools: {
   weather: tool({
@@ -55,14 +68,10 @@ tools: {
       location: z.string().describe('The location to get the weather for'),
     }),
     execute: async ({ location }) => {
-      return { location, temperature: 72 };
+      const temperature = Math.round(Math.random() * (90 - 32) + 32);
+      return { location, temperature };
     },
   }),
 }
 ```
-
-## Multi-Step Tool Calls
-```tsx
-stopWhen: stepCountIs(5),
-```
-Allows model to use up to 5 steps for tool calling and response generation. Tool parts appear as `tool-{toolName}` in `message.parts`.
+Use `stopWhen: stepCountIs(5)` to enable multi-step tool calls where model uses tool results to answer queries. Tool parts in messages are named `tool-{toolName}`.

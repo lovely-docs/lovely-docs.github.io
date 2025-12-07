@@ -1,39 +1,49 @@
 ## Fixes
-- Fixed withReplica feature to correctly forward arguments
-- Fixed selectDistinctOn to work with multiple columns
+
+- **withReplica**: Fixed argument forwarding when using the withReplica feature
+- **selectDistinctOn**: Fixed issue where selectDistinctOn was not working with multiple columns
 
 ## New Features
 
-### Enhanced JSDoc Documentation
-All query builders across all dialects now include detailed JSDoc with hints, documentation links, and IDE integration support.
+### Detailed JSDoc for Query Builders
+JSDoc documentation is now available for all query builders across all dialects, providing hints and documentation links directly in IDEs.
 
 ### Aggregate Function Helpers
 New SQL helper functions for aggregation operations (typically used with GROUP BY):
 
-- `count()` / `count(column)` - equivalent to `sql\`count('*')\`` or `sql\`count(${column})\``
-- `countDistinct(column)` - equivalent to `sql\`count(distinct ${column})\``
-- `avg(column)` / `avgDistinct(column)` - equivalent to `sql\`avg(${column})\`` or `sql\`avg(distinct ${column})\``
-- `sum(column)` / `sumDistinct(column)` - equivalent to `sql\`sum(${column})\`` or `sql\`sum(distinct ${column})\``
-- `max(column)` / `min(column)` - equivalent to `sql\`max(${column})\`` or `sql\`min(${column})\``
-
-Example usage:
 ```ts
+// count
 await db.select({ value: count() }).from(users);
+await db.select({ value: count(users.id) }).from(users);
+
+// countDistinct
 await db.select({ value: countDistinct(users.id) }).from(users);
+
+// avg / avgDistinct
 await db.select({ value: avg(users.id) }).from(users);
+await db.select({ value: avgDistinct(users.id) }).from(users);
+
+// sum / sumDistinct
+await db.select({ value: sum(users.id) }).from(users);
+await db.select({ value: sumDistinct(users.id) }).from(users);
+
+// max / min
+await db.select({ value: max(users.id) }).from(users);
+await db.select({ value: min(users.id) }).from(users);
 ```
 
-## New Package: Drizzle ESLint Plugin
+These are equivalent to using `sql` template with `.mapWith()` for type mapping.
 
-ESLint plugin providing rules for scenarios where type checking is insufficient or produces unclear error messages.
+### ESLint Drizzle Plugin
+New package `eslint-plugin-drizzle` for enforcing best practices where type checking is insufficient.
 
-### Installation
+**Installation**:
 ```
-npm install eslint eslint-plugin-drizzle @typescript-eslint/eslint-plugin @typescript-eslint/parser
+npm install eslint eslint-plugin-drizzle
+npm install @typescript-eslint/eslint-plugin @typescript-eslint/parser
 ```
 
-### Configuration
-Create `.eslintrc.yml`:
+**Configuration** (`.eslintrc.yml`):
 ```yaml
 root: true
 parser: '@typescript-eslint/parser'
@@ -41,22 +51,22 @@ parserOptions:
   project: './tsconfig.json'
 plugins:
   - drizzle
-extends:
-  - "plugin:drizzle/recommended"
 rules:
   'drizzle/enforce-delete-with-where': "error"
   'drizzle/enforce-update-with-where': "error"
 ```
 
-### Rules
-
-**enforce-delete-with-where**: Prevents accidental deletion of all table rows by requiring `.where()` clause in delete statements. Optionally configure `drizzleObjectName` to target specific objects (e.g., only `db.delete()`, not other class delete methods).
-
-**enforce-update-with-where**: Prevents accidental update of all table rows by requiring `.where()` clause in update statements. Same `drizzleObjectName` configuration option available.
-
-Example with drizzleObjectName:
-```json
-"rules": {
-  "drizzle/enforce-delete-with-where": ["error", { "drizzleObjectName": ["db"] }]
-}
+Or use the `all`/`recommended` config:
+```yaml
+extends:
+  - "plugin:drizzle/all"
 ```
+
+**Rules**:
+
+1. **enforce-delete-with-where**: Requires `.where()` clause in `.delete()` statements to prevent accidental deletion of all rows. Optionally configure `drizzleObjectName` to target specific objects:
+```json
+"drizzle/enforce-delete-with-where": ["error", { "drizzleObjectName": ["db"] }]
+```
+
+2. **enforce-update-with-where**: Requires `.where()` clause in `.update()` statements to prevent accidental updates of all rows. Same `drizzleObjectName` option available.

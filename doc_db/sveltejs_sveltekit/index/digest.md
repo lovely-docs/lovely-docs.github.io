@@ -1,0 +1,1 @@
+This is the main entry point for SvelteKit documentation. The page itself contains only frontmatter metadata and a note indicating it is auto-generated from a script at `apps/svelte.dev/scripts/sync-docs/index.ts`. No actual content, examples, or information is present on this page.

@@ -1,0 +1,1 @@
+Testing frameworks (Vitest, Storybook, Playwright) for unit, component, and E2E tests with setup, rune support in tests, component mounting, and interaction testing examples.

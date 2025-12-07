@@ -1,1 +1,1 @@
-Guide to working with immutable DateValue objects from @internationalized/date in Bits UI components.
+DateValue types (CalendarDate, CalendarDateTime, ZonedDateTime) from @internationalized/date for locale/timezone-aware date handling; immutable with .set/.add/.subtract/.cycle methods; 1-indexed months; DateFormatter for formatting; placeholder prop for initial values and calendar navigation.

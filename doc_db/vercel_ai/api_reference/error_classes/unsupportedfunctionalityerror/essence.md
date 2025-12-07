@@ -1,0 +1,1 @@
+UnsupportedFunctionalityError: thrown for unsupported features, detectable via isInstance() method, contains functionality name and message

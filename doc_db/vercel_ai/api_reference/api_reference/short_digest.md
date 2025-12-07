@@ -1,0 +1,1 @@
+Four main API modules: **Core** (provider abstraction), **RSC** (React Server Components streaming), **UI** (hooks for LLM interaction), **Stream Helpers** (provider streaming utilities).

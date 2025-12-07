@@ -1,0 +1,1 @@
+Right-click menu with submenus, checkboxes, radio groups, and keyboard navigation. State via `bind:open` or function binding. Supports transitions with `forceMount`. Key components: Root, Trigger, Portal, Content, Item, CheckboxItem/Group, RadioItem/Group, Sub/SubTrigger/SubContent, Separator, Arrow, Group/GroupHeading.

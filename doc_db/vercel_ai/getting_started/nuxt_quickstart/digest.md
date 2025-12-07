@@ -1,7 +1,26 @@
 ## Setup
-Create a Nuxt app with `pnpm create nuxt my-ai-app`. Install dependencies: `pnpm add ai@beta @ai-sdk/vue@beta zod`. Configure API key in `.env` as `NUXT_AI_GATEWAY_API_KEY=xxxxxxxxx` and add to `nuxt.config.ts` runtime config.
+
+Create a Nuxt app with `pnpm create nuxt my-ai-app`, then install dependencies:
+```
+pnpm add ai@beta @ai-sdk/vue@beta zod
+```
+
+Configure API key in `.env`:
+```env
+NUXT_AI_GATEWAY_API_KEY=your_key
+```
+
+And in `nuxt.config.ts`:
+```ts
+export default defineNuxtConfig({
+  runtimeConfig: {
+    aiGatewayApiKey: '',
+  },
+});
+```
 
 ## API Route
+
 Create `server/api/chat.ts`:
 ```typescript
 import { streamText, UIMessage, convertToModelMessages, createGateway } from 'ai';
@@ -21,9 +40,16 @@ export default defineLazyEventHandler(async () => {
   });
 });
 ```
-The route receives `UIMessage[]` (includes metadata like timestamps), converts to `ModelMessage[]` (stripped of metadata) for the model, and returns a streamed response.
+
+Key points:
+- `createGateway()` creates a provider instance
+- Extract `messages` from request body (UIMessage[] type with metadata)
+- `streamText()` accepts model and messages, returns StreamTextResult
+- `convertToModelMessages()` strips UI metadata to convert UIMessage[] to ModelMessage[]
+- `toUIMessageStreamResponse()` converts result to streamed response
 
 ## UI Component
+
 Create `pages/index.vue`:
 ```typescript
 <script setup lang="ts">
@@ -54,9 +80,16 @@ const handleSubmit = (e: Event) => {
     </div>
 </template>
 ```
-The `Chat` class manages messages and provides `sendMessage()`. Messages have `id`, `role`, and `parts` array. Each part has a `type` (e.g., 'text') and corresponding data.
+
+Chat hook provides:
+- `messages` - array of objects with `id`, `role`, `parts` properties
+- `sendMessage()` - function to send message to API
+- Message `parts` array contains ordered components (text, reasoning, etc.) in generation order
+
+Run with `pnpm run dev` and visit http://localhost:3000.
 
 ## Tools
+
 Add tools to `streamText()` config:
 ```typescript
 tools: {
@@ -82,7 +115,8 @@ tools: {
   }),
 }
 ```
-Tool parts appear in `message.parts` as `tool-{toolName}` (e.g., `tool-weather`). Display them in the UI:
+
+Tool parts appear in message.parts as `tool-{toolName}`. Update UI to display them:
 ```typescript
 <pre v-if="part.type === 'tool-weather' || part.type === 'tool-convertFahrenheitToCelsius'">
   {{ JSON.stringify(part, null, 2) }}
@@ -90,7 +124,24 @@ Tool parts appear in `message.parts` as `tool-{toolName}` (e.g., `tool-weather`)
 ```
 
 ## Multi-Step Tool Calls
+
 Enable with `stopWhen: stepCountIs(5)` in `streamText()` config. This allows the model to use tool results to generate follow-up responses across multiple steps (up to 5 in this example), enabling complex interactions where the model gathers information and uses it to answer the original query.
 
 ## Provider Options
-Default is Vercel AI Gateway: `model: gateway('anthropic/claude-sonnet-4.5')`. To use OpenAI: `pnpm add @ai-sdk/openai@beta` then `import { openai } from '@ai-sdk/openai'` and `model: openai('gpt-5.1')`. The AI SDK supports dozens of providers through first-party, OpenAI-compatible, and community packages.
+
+Default uses Vercel AI Gateway via string: `model: 'anthropic/claude-sonnet-4.5'`
+
+Or explicitly:
+```ts
+import { gateway } from 'ai';
+model: gateway('anthropic/claude-sonnet-4.5');
+```
+
+For other providers like OpenAI:
+```
+pnpm add @ai-sdk/openai@beta
+```
+```ts
+import { openai } from '@ai-sdk/openai';
+model: openai('gpt-5.1');
+```

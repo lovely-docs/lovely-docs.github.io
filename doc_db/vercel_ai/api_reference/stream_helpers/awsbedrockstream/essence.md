@@ -1,0 +1,1 @@
+Deprecated AWS Bedrock stream helper that converts Bedrock responses to ReadableStream with lifecycle callbacks; removed in SDK 4.0.

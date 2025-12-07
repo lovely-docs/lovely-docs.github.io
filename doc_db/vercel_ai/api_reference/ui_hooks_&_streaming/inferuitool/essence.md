@@ -1,0 +1,1 @@
+Type helper extracting input/output types from tool definitions for type-safe UI message integration.

@@ -1,1 +1,1 @@
-Experimental feature enabling await expressions in component scripts, derived declarations, and markup with synchronized updates and concurrency control.
+Experimental async/await support in components (5.36+) with synchronized updates, parallel concurrency, boundary-based loading states, SSR support, and fork-based preloading; requires opt-in flag.

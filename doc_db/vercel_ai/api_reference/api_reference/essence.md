@@ -1,0 +1,1 @@
+Index page listing four API reference modules: Core (provider-agnostic), RSC (server-side streaming), UI (client hooks), Stream Helpers (streaming utilities).

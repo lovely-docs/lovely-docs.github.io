@@ -1,0 +1,1 @@
+Drizzle connects to databases via drivers; instantiate with drizzle(connectionString) or drizzle({client}); supports PostgreSQL, MySQL, SQLite across multiple providers and serverless runtimes.

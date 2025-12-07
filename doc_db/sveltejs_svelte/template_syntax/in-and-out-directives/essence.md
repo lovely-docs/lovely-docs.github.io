@@ -1,0 +1,1 @@
+in: and out: directives apply unidirectional transitions that play independently rather than reversing each other

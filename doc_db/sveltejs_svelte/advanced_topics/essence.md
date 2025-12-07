@@ -1,0 +1,1 @@
+Testing frameworks, TypeScript support, custom elements/web components, Svelte 4→5 migration guides, and FAQ on tooling, routing, mobile development.

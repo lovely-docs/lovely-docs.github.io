@@ -1,0 +1,1 @@
+Type actions with `Action<Element, Parameter, Attributes>` interface. Actions are element lifecycle functions that can return `update` and `destroy` methods. Specify additional attributes/events via the `Attributes` type parameter.

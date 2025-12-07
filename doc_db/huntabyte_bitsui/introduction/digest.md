@@ -1,17 +1,15 @@
-## Bits UI Overview
+Bits UI is a headless component library for Svelte focused on developer experience, accessibility, and creative control.
 
-Bits UI is a headless component library for Svelte emphasizing developer experience, accessibility, and creative control.
+**Key Features:**
 
-### Key Features
+- **Unstyled Components**: Most components ship completely unstyled except where required for core functionality. No CSS resets or design system assumptions. Styling via standard `class` props or `data-*` attributes.
 
-**Unstyled Components**: Most components ship completely unstyled with no CSS resets or design system assumptions. Styling is applied via standard `class` props or `data-*` attributes.
+- **Developer Experience**: Full TypeScript coverage, stable and predictable APIs, flexible event override system, great defaults that are easily overridden, comprehensive documentation and examples.
 
-**Developer Experience**: Full TypeScript coverage, stable APIs, flexible event override system, great defaults that are easily overridden, and comprehensive documentation.
+- **Accessibility**: WAI-ARIA compliance, keyboard navigation by default, focus management handled automatically, screen reader support built-in.
 
-**Accessibility**: WAI-ARIA compliant, keyboard navigation by default, built-in focus management and screen reader support.
+- **Composability**: Components are primitives, not black boxes. Features include render delegation for total flexibility, chainable events and callbacks, override-friendly defaults, and minimal dependencies.
 
-**Composable Design**: Components are primitives that compose cleanly. Supports render delegation for flexibility, chainable events and callbacks, override-friendly defaults, and minimal dependencies.
+**Community & Credits:**
 
-### Community & Credits
-
-Maintained by Hunter Johnston with design support from Pavel Stianko and Bitworks Studio, and tooling support from Adrian Gonz. Built on inspiration from Melt UI (internal architecture), Radix UI (API design), and React Spectrum (date/time components and accessibility patterns).
+Built and maintained by Hunter Johnston with design support from Pavel Stianko and his team at Bitworks Studio, and tooling support from Adrian Gonz. Inspired by Melt UI (internal architecture), Radix UI (API design), and React Spectrum (date/time components and accessibility patterns).

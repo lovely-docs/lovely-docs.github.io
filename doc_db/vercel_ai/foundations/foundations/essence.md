@@ -1,1 +1,1 @@
-Index page organizing foundational documentation: Overview, Providers/Models, Prompts, Tools, Streaming, Agents.
+Navigation hub for core AI SDK concepts: LLM fundamentals, providers/models, prompts, tools, streaming, and agents.

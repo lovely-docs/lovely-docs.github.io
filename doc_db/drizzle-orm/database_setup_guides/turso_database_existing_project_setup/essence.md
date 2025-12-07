@@ -1,1 +1,0 @@
-Step-by-step integration of Drizzle ORM with Turso Database in existing projects: install packages, configure environment and drizzle.config.ts, introspect existing database, connect via drizzle(), perform insert/select/update/delete operations, optionally update schema and run migrations.

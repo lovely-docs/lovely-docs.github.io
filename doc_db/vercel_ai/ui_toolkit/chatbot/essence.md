@@ -1,1 +1,0 @@
-useChat hook for real-time streaming chat UIs with state management, customizable requests, metadata, error handling, message manipulation, cancellation/regeneration, reasoning tokens, sources, image generation, file attachments, and tool type inference.

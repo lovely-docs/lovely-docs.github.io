@@ -1,0 +1,1 @@
+Split state into AI State (serializable JSON for LLM, server/client accessible) and UI State (client-only React elements); use createAI context with useUIState/useAIState/getAIState/getMutableAIState hooks and useActions to manage them.

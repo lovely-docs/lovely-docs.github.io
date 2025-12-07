@@ -1,6 +1,6 @@
-## Progress Component
+## Progress
 
-Displays a visual indicator showing task completion progress, typically as a progress bar.
+Displays a progress bar indicator showing task completion.
 
 ### Installation
 
@@ -10,17 +10,7 @@ npx shadcn-svelte@latest add progress -y -o
 
 The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
-### Basic Usage
-
-```svelte
-<script lang="ts">
-  import { Progress } from "$lib/components/ui/progress/index.js";
-</script>
-
-<Progress value={33} />
-```
-
-### With Dynamic Value
+### Usage
 
 ```svelte
 <script lang="ts">
@@ -38,10 +28,9 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 <Progress {value} max={100} class="w-[60%]" />
 ```
 
-### Props
-
-- `value`: Current progress value (number)
-- `max`: Maximum value (default: 100)
+The component accepts:
+- `value`: current progress value (number)
+- `max`: maximum value (default: 100)
 - `class`: CSS classes for styling
 
-The component is built on Bits UI's progress component (see Bits UI docs for full API reference).
+Reference: Bits UI Progress component documentation and API reference available in upstream docs.

@@ -1,0 +1,1 @@
+Legacy mode props access: `$$props` (all props) and `$$restProps` (all except declared exports). Use to forward props to child elements while filtering specific ones. Performance penalty in Svelte 3/4.

@@ -1,0 +1,1 @@
+AI SDK 3.0.20+ stream protocol outputs raw data format; use streamText().toTextStreamResponse() to get plain text stream.

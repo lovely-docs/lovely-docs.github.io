@@ -1,0 +1,1 @@
+Tri-state checkbox component with checked/unchecked/indeterminate states, form integration, groups, accessibility, and flexible state management (two-way binding or fully controlled).

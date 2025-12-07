@@ -1,1 +1,0 @@
-useChat no longer accepts direct headers/body/credentials; use DefaultChatTransport for static values or pass options to sendMessage() for dynamic values; request-level options override hook-level.

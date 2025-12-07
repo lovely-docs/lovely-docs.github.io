@@ -1,0 +1,1 @@
+Type-safe message container for UI state with id, role, optional metadata, and polymorphic parts (text, reasoning, tool invocations, files, sources, custom data, step markers).

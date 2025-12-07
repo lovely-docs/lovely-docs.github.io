@@ -1,0 +1,1 @@
+Toggle switch component with state binding, form support, data attributes for styling, and WAI-ARIA accessibility.

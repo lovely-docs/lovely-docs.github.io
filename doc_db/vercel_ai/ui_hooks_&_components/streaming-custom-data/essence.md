@@ -1,0 +1,1 @@
+Stream custom data (persistent, transient, or sources) alongside model responses; reconcile updates by ID; handle transient data via onData callback, persistent data via message.parts filtering.

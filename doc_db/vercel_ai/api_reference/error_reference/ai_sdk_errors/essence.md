@@ -1,1 +1,0 @@
-29 error types covering API failures, configuration issues, input validation, generation failures, processing errors, and operational problems.

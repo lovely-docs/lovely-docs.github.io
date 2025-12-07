@@ -1,0 +1,1 @@
+Safe wrapper around message validation returning result object with success flag, validated data, or error instead of throwing.

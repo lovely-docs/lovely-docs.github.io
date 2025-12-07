@@ -1,0 +1,1 @@
+Reference of 50+ runtime errors in Svelte 5: client-side (deriveds, bindings, effects, state mutations, snippets), server-side (async rendering, lifecycle), and shared (context, snippets, lifecycle scope); includes error messages and solutions with code examples.

@@ -1,1 +1,1 @@
-Connect Drizzle to Turso Cloud (libSQL edge SQLite): install @libsql/client, create client with URL and auth token, initialize drizzle with client or connection config.
+Connect Drizzle to Turso Cloud (libSQL edge SQLite) via @libsql/client driver with URL and auth token.

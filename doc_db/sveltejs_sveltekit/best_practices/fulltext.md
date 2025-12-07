@@ -3,107 +3,329 @@
 ## Pages
 
 ### auth
-Guide to implementing authentication and authorization in SvelteKit using sessions or tokens, with recommendations for session-based approaches using Lucia.
+Authentication/authorization: session IDs vs JWT tradeoffs; check cookies in server hooks and store user data in locals; use Lucia for session-based auth.
 
-**Sessions vs Tokens**: Session IDs require DB queries but can be revoked immediately; JWTs offer better latency but cannot be revoked.
+## Sessions vs Tokens
 
-**SvelteKit Integration**: Check auth cookies in server hooks, store user info in `locals`.
+After user authentication via credentials, subsequent requests need to maintain authentication state using either:
 
-**Recommended**: Use Lucia for session-based auth with `npx sv add lucia`.
+- **Session IDs**: Stored in database, can be immediately revoked, but require a database query per request
+- **JWT (JSON Web Tokens)**: Not checked against datastore, cannot be immediately revoked, better latency and lower datastore load
+
+## Integration Points
+
+Auth cookies can be checked inside server hooks. When a user matches provided credentials, store user information in `locals` via server hooks.
+
+## Implementation
+
+Use Lucia for session-based auth - it provides example code and projects for SvelteKit. Add it with `npx sv create` (new project) or `npx sv add lucia` (existing project).
+
+Auth systems are tightly coupled to web frameworks since most code involves validating user input, handling errors, and routing users appropriately. Generic JS auth libraries often include multiple web frameworks, so SvelteKit-specific guides like Lucia are preferred over multi-framework solutions.
 
 ### performance
-Practical performance optimization techniques for SvelteKit apps: diagnosing issues, optimizing assets, reducing code size, improving navigation, and hosting considerations.
+Performance optimization guide covering SvelteKit's built-in features (code-splitting, preloading, caching, request coalescing, data inlining), diagnostic tools (PageSpeed Insights, WebPageTest, browser devtools), asset optimization (images with enhanced-img, video compression/lazy-loading, font preloading/subsetting), code reduction (latest Svelte, package analysis, third-party script minimization, dynamic imports), navigation optimization (link preloading, promise-based data loading, waterfall prevention via server load functions and database joins), and hosting (co-location, edge deployment, CDN, HTTP/2+).
 
-## Built-in Optimizations
-SvelteKit provides code-splitting, asset preloading, file hashing, request coalescing, parallel loading, data inlining, conservative invalidation, prerendering, and link preloading.
+## Built-in Performance Features
 
-## Diagnosing Issues
-Use PageSpeed Insights, WebPageTest, or browser devtools (Lighthouse, Network, Performance tabs). Test in preview mode, not dev mode.
+SvelteKit automatically provides:
+- Code-splitting (load only code for current page)
+- Asset preloading (prevent waterfalls)
+- File hashing (cache assets forever)
+- Request coalescing (group separate server load functions into single HTTP request)
+- Parallel loading (universal load functions fetch simultaneously)
+- Data inlining (replay fetch requests made during server rendering without new request)
+- Conservative invalidation (re-run load functions only when necessary)
+- Prerendering (serve pages without dynamic data instantly)
+- Link preloading (eagerly anticipate data/code for client-side navigation)
 
-## Asset Optimization
-- **Images**: Use `@sveltejs/enhanced-img`
-- **Videos**: Compress to `.webm`/`.mp4`; lazy-load with `preload="none"`; strip audio with FFmpeg
-- **Fonts**: Preload via `handle` hook's `resolve` with `preload` filter; subset fonts
+## Diagnosing Performance Issues
 
-## Code Size
-- Use latest Svelte version
-- Identify large packages with `rollup-plugin-visualizer`
-- Replace JS analytics with server-side implementations
-- Use dynamic `import(...)` for conditional code loading
+Use Google PageSpeed Insights and WebPageTest for deployed sites. Browser devtools:
+- Chrome: Lighthouse, Network, Performance tabs
+- Edge: Lighthouse, Network, Performance tabs
+- Firefox: Network, Performance tabs
+- Safari: Web Inspector performance tools
+
+Test in preview mode after building, not dev mode. Instrument backends with OpenTelemetry or Server-Timing headers to diagnose slow API calls.
+
+## Optimizing Assets
+
+**Images**: Use `@sveltejs/enhanced-img` package. Lighthouse identifies worst offenders.
+
+**Videos**: Compress with Handbrake, convert to `.webm` or `.mp4`. Lazy-load below-fold videos with `preload="none"`. Strip audio from muted videos with FFmpeg.
+
+**Fonts**: SvelteKit doesn't preload fonts by default (may download unused weights). In your `handle` hook, call `resolve` with a `preload` filter to include fonts. Subset fonts to reduce file size.
+
+## Reducing Code Size
+
+**Svelte version**: Use latest Svelte (5 is smaller/faster than 4, which is smaller/faster than 3).
+
+**Packages**: Use `rollup-plugin-visualizer` to identify large packages. Inspect build output with `build: { minify: false }` in Vite config (remember to undo before deploying).
+
+**External scripts**: Minimize third-party scripts. Use server-side analytics (Cloudflare, Netlify, Vercel) instead of JavaScript-based. Run third-party scripts in web worker with Partytown's SvelteKit integration to avoid blocking main thread.
+
+**Selective loading**: Static `import` declarations bundle automatically. Use dynamic `import(...)` to lazy-load code conditionally.
 
 ## Navigation
-- Preload code/data with link options
-- Return promises from `load` functions to stream non-essential data
-- Avoid waterfalls: use server `load` functions instead of universal ones; use database joins
+
+**Preloading**: Speed up client-side navigation with link options (configured by default on `<body>`).
+
+**Non-essential data**: Return promises from `load` functions instead of data itself for slow-loading data. Server load functions will stream data after navigation.
+
+**Preventing waterfalls**: Waterfalls are sequential request chains that kill performance, especially on slow/distant networks.
+
+Browser waterfalls: SvelteKit adds `modulepreload` tags/headers, but check devtools Network tab for additional preloading needs. Web fonts need manual handling. SPA mode causes waterfalls (empty page → fetch JS → render).
+
+Backend waterfalls: Avoid sequential API calls (fetch user → fetch items → fetch item details). Use server load functions to make backend requests from server instead of browser (avoids high-latency round trips). Even server load functions can have waterfalls; prefer single database query with joins over multiple sequential queries.
 
 ## Hosting
-- Colocate frontend/backend; deploy to edge for distributed users
-- Serve images from CDN; use HTTP/2+
+
+Place frontend in same data center as backend to minimize latency. For sites without central backend, deploy to edge (many adapters support this, some support per-route configuration). Serve images from CDN. Use HTTP/2 or newer (Vite's code splitting creates many small files that benefit from parallel loading).
+
+## General Resources
+
+Apply Core Web Vitals principles to any web experience.
 
 ### icons
-Best practices for including icons in SvelteKit: use CSS-based Iconify or choose Svelte icon libraries that don't create individual .svelte files per icon to avoid Vite optimization problems.
+Two icon approaches: CSS-based via Iconify (supports many sets, integrates with Tailwind/UnoCSS); Svelte libraries (avoid per-icon .svelte files due to Vite optimization issues).
 
-**CSS approach**: Use Iconify for CSS-based icons with Tailwind or UnoCSS plugins.
+## CSS Icons
 
-**Svelte approach**: Avoid icon libraries with one `.svelte` file per icon due to Vite pre-bundling performance issues.
+Use Iconify to define icons purely via CSS. Iconify supports many popular icon sets available at icon-sets.iconify.design. Icons can be included via CSS and integrated with popular CSS frameworks using the Iconify Tailwind CSS plugin or UnoCSS plugin. This approach doesn't require importing each icon into `.svelte` files.
+
+## Svelte Icons
+
+Many icon libraries exist for Svelte. When choosing an icon library, avoid those that provide one `.svelte` file per icon, as these can have thousands of files that significantly slow down Vite's dependency optimization. This performance issue is especially problematic when icons are imported both via umbrella imports and subpath imports, as documented in the vite-plugin-svelte FAQ.
 
 ### images
-Optimize images using Vite's built-in handling, the @sveltejs/enhanced-img build plugin for automatic format conversion and responsive sizing, or CDN-based solutions for runtime images.
+Image optimization via Vite built-in handling, @sveltejs/enhanced-img plugin (auto format/size/EXIF), or CDN dynamic loading; use `<enhanced:img>` with optional `sizes` and `?w=` query params; provide 2x resolution originals, set fetchpriority/width/height for performance.
 
-## Image Optimization
+## Image Optimization Techniques
 
-**Vite built-in**: Auto-processes imported assets with hashing and inlining.
+Three approaches for optimizing images in SvelteKit projects:
+
+### Vite's Built-in Handling
+Automatically processes imported assets with hashing for caching and inlining of small assets:
 ```svelte
-import logo from '$lib/assets/logo.png';
-<img src={logo} />
+<script>
+	import logo from '$lib/assets/logo.png';
+</script>
+<img alt="The project logo" src={logo} />
 ```
 
-**@sveltejs/enhanced-img**: Build-time plugin generating avif/webp, multiple sizes, intrinsic dimensions. Install and add to vite.config.js before sveltekit plugin.
-```svelte
-<enhanced:img src="./image.jpg" alt="text" />
+### @sveltejs/enhanced-img Plugin
+Provides automatic image optimization with multiple formats (avif, webp), responsive sizing, intrinsic dimensions, and EXIF stripping. Only works with build-time accessible images.
+
+**Setup:**
+```sh
+npm i -D @sveltejs/enhanced-img
+```
+```js
+import { enhancedImages } from '@sveltejs/enhanced-img';
+export default defineConfig({
+	plugins: [enhancedImages(), sveltekit()]
+});
 ```
 
-Dynamic imports:
+**Basic usage:**
 ```svelte
-import MyImage from './image.jpg?enhanced';
-<enhanced:img src={MyImage} alt="text" />
+<enhanced:img src="./path/to/your/image.jpg" alt="An alt text" />
 ```
 
-Specify `sizes` for responsive images:
+**Dynamic imports:**
 ```svelte
-<enhanced:img src="./image.png" sizes="min(1280px, 100vw)" />
+<script>
+	import MyImage from './path/to/your/image.jpg?enhanced';
+</script>
+<enhanced:img src={MyImage} alt="some alt text" />
 ```
 
-Custom widths:
+**With glob:**
 ```svelte
-<enhanced:img src="./image.png?w=1280;640;400" sizes="(min-width:1920px) 1280px, (min-width:1080px) 640px, (min-width:768px) 400px" />
+<script>
+	const imageModules = import.meta.glob(
+		'/path/to/assets/*.{avif,gif,heif,jpeg,jpg,png,tiff,webp,svg}',
+		{ eager: true, query: { enhanced: true } }
+	)
+</script>
+{#each Object.entries(imageModules) as [_path, module]}
+	<enhanced:img src={module.default} alt="some alt text" />
+{/each}
 ```
 
-Per-image transforms:
+**Responsive sizing with srcset:**
 ```svelte
-<enhanced:img src="./image.jpg?blur=15" alt="text" />
+<enhanced:img src="./image.png" sizes="min(1280px, 100vw)"/>
 ```
 
-**CDN approach**: For runtime images from CMS/database. Use `@unpic/svelte` or provider-specific libraries.
+**Custom widths:**
+```svelte
+<enhanced:img
+  src="./image.png?w=1280;640;400"
+  sizes="(min-width:1920px) 1280px, (min-width:1080px) 640px, (min-width:768px) 400px"
+/>
+```
 
-**Best practices**: Mix approaches per project, serve via CDN, provide 2x resolution images, use `sizes` for large images, set `fetchpriority="high"` for LCP images, always provide `alt` text, avoid `em`/`rem` in `sizes`.
+**Per-image transforms:**
+```svelte
+<enhanced:img src="./path/to/your/image.jpg?blur=15" alt="An alt text" />
+```
+
+Width and height are automatically inferred and added to prevent layout shift. Use CSS to override dimensions if needed.
+
+### CDN-based Dynamic Loading
+For images not accessible at build time (CMS, database, backend). Provides dynamic optimization and flexibility but may have setup overhead and costs. Libraries like `@unpic/svelte` provide CDN-agnostic support; specific CDNs (Cloudinary) and CMS platforms (Contentful, Storyblok, Contentstack) offer Svelte integrations.
+
+## Best Practices
+
+- Mix and match all three solutions in one project as appropriate
+- Serve all images via CDN to reduce latency
+- Provide original images at 2x display width for HiDPI devices; processing can downscale but not upscale
+- For large images (hero images, >400px width), specify `sizes` to serve smaller versions on smaller devices
+- For important images (LCP), set `fetchpriority="high"` and avoid `loading="lazy"`
+- Constrain images with container/styling and use `width`/`height` to prevent layout shift
+- Always provide good `alt` text
+- Don't use `em` or `rem` in `sizes` declarations; they're relative to user's default font-size, not CSS-modified values
 
 ### accessibility
-Built-in accessibility features in SvelteKit: route announcements via page titles, focus management after navigation, and language attribute configuration.
+SvelteKit accessibility: route announcements via page titles, automatic focus management with customization hooks, and language attribute configuration for assistive technology.
 
 ## Route announcements
-Set unique page titles in `<svelte:head>` so screen readers announce page changes during client-side navigation.
+
+SvelteKit uses client-side routing, so page navigations don't trigger full reloads. To compensate, SvelteKit injects a live region that announces the new page title to screen readers after navigation. Every page must have a unique, descriptive `<title>` in a `<svelte:head>` block:
+
+```svelte
+<svelte:head>
+	<title>Todo List</title>
+</svelte:head>
+```
 
 ## Focus management
-SvelteKit focuses `<body>` after navigation (or an `autofocus` element if present). Customize with `afterNavigate` hook or use `goto` with `keepFocus` option.
 
-## Lang attribute
-Set `lang` attribute on `<html>` in `src/app.html`. For multi-language apps, use the server handle hook to replace `%lang%` placeholder based on current page language.
+SvelteKit automatically focuses the `<body>` element after navigation and form submission to simulate traditional server-rendered behavior. If an element has the `autofocus` attribute, that element is focused instead.
+
+Customize focus management with the `afterNavigate` hook:
+
+```js
+import { afterNavigate } from '$app/navigation';
+
+afterNavigate(() => {
+	const to_focus = document.querySelector('.focus-me');
+	to_focus?.focus();
+});
+```
+
+The `goto()` function accepts a `keepFocus` option to preserve the currently-focused element instead of resetting focus. Ensure the focused element still exists after navigation.
+
+## The "lang" attribute
+
+Set the `lang` attribute on the `<html>` element in `src/app.html` to the document's language for correct assistive technology pronunciation:
+
+```html
+<html lang="de">
+```
+
+For multi-language content, set `lang` dynamically using the server hook:
+
+```html
+<!-- src/app.html -->
+<html lang="%lang%">
+```
+
+```js
+// src/hooks.server.js
+export function handle({ event, resolve }) {
+	return resolve(event, {
+		transformPageChunk: ({ html }) => html.replace('%lang%', get_lang(event))
+	});
+}
+```
+
+SvelteKit provides accessible defaults but you remain responsible for accessible application code. Svelte's compile-time accessibility checks apply to SvelteKit apps.
 
 ### seo
-Technical SEO best practices for SvelteKit: leverage built-in SSR and performance, set page titles/descriptions, create sitemaps, and optionally support AMP.
+SEO techniques for SvelteKit: leverage default SSR and performance, normalize URLs, set page titles/descriptions from load functions, create XML sitemaps via endpoints, optionally support AMP with style inlining and HTML transformation.
 
-**Out of box**: SSR enabled by default (better indexing), minimal performance overhead, automatic URL normalization.
+## SEO Best Practices for SvelteKit
 
-**Manual setup**: Add unique `<title>` and `<meta name="description">` to each page. Create sitemaps via endpoint. For AMP support, set `inlineStyleThreshold: Infinity`, disable CSR, add `amp` to HTML, and transform with `@sveltejs/amp` in hooks.
+### Out of the Box Features
+
+**SSR (Server-Side Rendering)**
+- SvelteKit uses SSR by default, which is more reliably indexed by search engines than client-side rendering
+- Can be disabled in `handle` hook but not recommended unless necessary
+- Dynamic rendering is possible if needed but not generally recommended
+
+**Performance**
+- Core Web Vitals impact search engine ranking
+- Svelte/SvelteKit have minimal overhead, making high-performance sites easier to build
+- Test with Google PageSpeed Insights or Lighthouse
+- Use hybrid rendering mode and optimize images to improve speed
+
+**Normalized URLs**
+- SvelteKit automatically redirects trailing slash variants to maintain canonical URLs (configurable via `trailingSlash` option)
+
+### Manual Setup
+
+**Title and Meta Tags**
+- Every page needs unique `<title>` and `<meta name="description">` in `<svelte:head>`
+- Common pattern: return SEO data from page `load` functions, use in root layout's `<svelte:head>` via `page.data`
+
+**Sitemaps**
+- Create dynamically using an endpoint at `src/routes/sitemap.xml/+server.js`:
+```js
+export async function GET() {
+	return new Response(
+		`<?xml version="1.0" encoding="UTF-8" ?>
+		<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9" ...>
+			<!-- <url> elements go here -->
+		</urlset>`.trim(),
+		{ headers: { 'Content-Type': 'application/xml' } }
+	);
+}
+```
+
+**AMP (Accelerated Mobile Pages)**
+- Set `inlineStyleThreshold: Infinity` in `svelte.config.js` to inline all styles (since `<link rel="stylesheet">` isn't allowed in AMP)
+- Disable CSR in root layout: `export const csr = false;`
+- Add `amp` attribute to `<html>` in `app.html`
+- Transform HTML in `src/hooks.server.js`:
+```js
+import * as amp from '@sveltejs/amp';
+
+export async function handle({ event, resolve }) {
+	let buffer = '';
+	return await resolve(event, {
+		transformPageChunk: ({ html, done }) => {
+			buffer += html;
+			if (done) return amp.transform(buffer);
+		}
+	});
+}
+```
+- Optionally use `dropcss` to remove unused CSS after AMP transformation:
+```js
+import * as amp from '@sveltejs/amp';
+import dropcss from 'dropcss';
+
+export async function handle({ event, resolve }) {
+	let buffer = '';
+	return await resolve(event, {
+		transformPageChunk: ({ html, done }) => {
+			buffer += html;
+			if (done) {
+				let css = '';
+				const markup = amp.transform(buffer)
+					.replace('⚡', 'amp')
+					.replace(/<style amp-custom([^>]*?)>([^]+?)<\/style>/, (match, attributes, contents) => {
+						css = contents;
+						return `<style amp-custom${attributes}></style>`;
+					});
+				css = dropcss({ css, html: markup }).css;
+				return markup.replace('</style>', `${css}</style>`);
+			}
+		}
+	});
+}
+```
+- Validate transformed HTML with `amphtml-validator` in `handle` hook (only for prerendered pages due to performance)
 

@@ -1,0 +1,1 @@
+INSERT operations: single/multiple rows, type inference, RETURNING (PostgreSQL/SQLite), $returningId (MySQL/SingleStore), conflict resolution (onConflictDoNothing/onConflictDoUpdate/onDuplicateKeyUpdate with targetWhere/setWhere), WITH clauses, INSERT...SELECT from query builder/callback/SQL.

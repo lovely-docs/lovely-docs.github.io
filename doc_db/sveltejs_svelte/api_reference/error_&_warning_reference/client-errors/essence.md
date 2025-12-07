@@ -1,1 +1,1 @@
-Reference of runtime error messages and explanations for Svelte client-side code.
+Complete reference of Svelte runtime errors with causes and solutions: reactivity constraints ($derived/$effect rules), binding restrictions, component API changes, state mutation rules, async/fork limitations, and boundary error handling.

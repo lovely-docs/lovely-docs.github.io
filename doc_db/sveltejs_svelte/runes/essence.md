@@ -1,1 +1,1 @@
-Compiler-controlled `$`-prefixed keywords that manage reactive state, derived values, side effects, component inputs, and debugging in Svelte.
+Svelte 5 compiler keywords for reactive state, derived values, side effects, component props, and debugging.

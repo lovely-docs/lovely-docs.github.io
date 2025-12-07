@@ -1,1 +1,0 @@
-Upgrade to 3.1 with `pnpm add ai@3.1`; migrate from provider SDKs to unified AI SDK Core API using streamText; migrate render to streamUI with AI SDK providers, replacing provider/model params and render/generate tool keys.

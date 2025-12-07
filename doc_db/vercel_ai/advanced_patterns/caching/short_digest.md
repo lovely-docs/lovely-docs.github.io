@@ -1,14 +1,7 @@
-## Caching Responses
+Two caching approaches:
 
-**Language Model Middleware (Recommended):**
-- Implement `LanguageModelV3Middleware` with `wrapGenerate` and `wrapStream` methods
-- For `wrapGenerate`: cache result directly from `doGenerate()`
-- For `wrapStream`: cache array of `LanguageModelV3StreamPart[]`, replay with `simulateReadableStream()` using `initialDelayInMs` and `chunkDelayInMs`
-- Use `TransformStream` to collect chunks and cache after streaming completes
+1. **Language Model Middleware** (recommended): Intercept calls with `wrapGenerate` and `wrapStream` methods. For streams, use `simulateReadableStream()` to replay cached chunks.
 
-**Lifecycle Callbacks:**
-- Use `onFinish` callback to cache response after generation
-- Check cache before calling model, return cached response if available
-- Set TTL with `redis.expire(key, seconds)`
+2. **Lifecycle Callbacks**: Use `onFinish` callback to cache response after generation.
 
-Both approaches use KV storage (Upstash Redis example shown, any provider works).
+Both examples use Upstash Redis but work with any KV provider. Middleware approach shown with full implementation; callback approach shown with 1-hour expiration example.

@@ -1,6 +1,8 @@
-The `WithoutChild` type helper excludes the `child` snippet prop from a component. Use it when building custom component wrappers that populate the `children` prop and don't expose a custom `child` snippet.
+## WithoutChild Type Helper
 
-Example: Creating a custom accordion header that wraps `Accordion.Header` and `Accordion.Trigger`:
+Excludes the `child` snippet prop from a component. Useful when building custom component wrappers that populate the `children` prop and don't expose a custom `child` snippet.
+
+### Example
 
 ```svelte
 <script lang="ts">
@@ -14,4 +16,4 @@ Example: Creating a custom accordion header that wraps `Accordion.Header` and `A
 </Accordion.Header>
 ```
 
-This pattern allows you to create a simplified component interface by removing the `child` snippet prop while still accepting other props through `restProps`.
+Use `WithoutChild<ComponentProps>` to type a component that wraps another component and manages its children internally, preventing consumers from passing a custom `child` snippet.

@@ -1,13 +1,10 @@
 ## Problem
-When using `useChat` with `streamText` on the server, assistant messages appear duplicated in the UI—showing both previous and new messages, or repeating the same message multiple times. This occurs with tool calls or complex message flows.
-
-## Root Cause
-`toUIMessageStreamResponse` generates new message IDs for each message, causing the client to treat them as new messages instead of updates to existing ones.
+When using `useChat` with `streamText` on the server, assistant messages appear duplicated in the UI - showing both previous and new messages, or the same message multiple times. This occurs because `toUIMessageStreamResponse` generates new message IDs for each message.
 
 ## Solution
-Pass the original messages array to `toUIMessageStreamResponse` via the `originalMessages` option. This allows the method to reuse existing message IDs instead of generating new ones, ensuring the client updates existing messages rather than creating duplicates.
+Pass the original messages array to `toUIMessageStreamResponse` using the `originalMessages` option. This allows the method to reuse existing message IDs instead of generating new ones, ensuring the client updates existing messages rather than creating duplicates.
 
-## Implementation
+## Example
 ```tsx
 export async function POST(req: Request) {
   const { messages } = await req.json();
@@ -37,5 +34,3 @@ export async function POST(req: Request) {
   });
 }
 ```
-
-The key change is passing `originalMessages: messages` to `toUIMessageStreamResponse()` to prevent duplicate message IDs.

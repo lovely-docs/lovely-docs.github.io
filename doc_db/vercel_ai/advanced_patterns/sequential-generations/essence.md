@@ -1,0 +1,1 @@
+Sequential generations chain multiple AI calls where each output feeds into the next prompt for dependent multi-step workflows.

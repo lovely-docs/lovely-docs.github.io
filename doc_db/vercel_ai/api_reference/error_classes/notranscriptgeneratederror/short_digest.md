@@ -1,0 +1,1 @@
+Error when transcript generation fails. Check with `NoTranscriptGeneratedError.isInstance(error)`. Has `responses` and `message` properties.

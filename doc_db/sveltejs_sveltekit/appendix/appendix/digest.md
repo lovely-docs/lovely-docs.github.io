@@ -1,1 +1,0 @@
-This page serves as an appendix section for the SvelteKit documentation. It is a generated file that is automatically synced from the documentation source. The page itself contains no substantive content - it is a structural/organizational page that likely contains links or references to appendix-related topics.

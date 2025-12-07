@@ -1,0 +1,1 @@
+Step-by-step migration from Sequelize to Drizzle ORM with introspection, schema generation, and query pattern replacements (insert, select with joins/aggregations, update, delete with transactions).

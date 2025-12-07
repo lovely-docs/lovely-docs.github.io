@@ -1,1 +1,1 @@
-Directive for attaching reactive functions to DOM elements with lifecycle management.
+Attachments are reactive functions that run in effects on element mount/state changes with optional cleanup; support factories, inline definitions, component props via Symbols, and conversion from actions.

@@ -1,1 +1,1 @@
-Fix deployed streaming by adding Transfer-Encoding: chunked and Connection: keep-alive headers to toUIMessageStreamResponse()
+Add Transfer-Encoding: chunked and Connection: keep-alive headers to toUIMessageStreamResponse() when streaming fails in deployed environments.

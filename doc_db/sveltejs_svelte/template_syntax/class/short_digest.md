@@ -1,14 +1,1 @@
-## Setting Classes
-
-**Attribute approach (preferred):**
-- Primitive: `class={condition ? 'large' : 'small'}`
-- Objects: `class={{ cool, lame: !cool }}`
-- Arrays: `class={[faded && 'saturate-0', large && 'scale-200']}`
-- Type-safe: `import type { ClassValue } from 'svelte/elements'`
-
-**Directive approach (legacy):**
-```svelte
-<div class:cool={cool} class:lame={!cool}>...</div>
-<!-- or shorthand -->
-<div class:cool class:lame={!cool}>...</div>
-```
+**Class attribute** supports primitives, objects (truthy keys), and arrays (truthy values, flattened). Objects/arrays use clsx for conversion. **Class directive** (`class:name={condition}`) is older alternative with shorthand support. Prefer attribute form for composability.

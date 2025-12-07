@@ -1,1 +1,1 @@
-Astro dark mode via Tailwind's class strategy: inline script for theme persistence + mode-watcher library + toggle components (light switch or dropdown menu)
+Astro dark mode: inline script for localStorage persistence + FUOC prevention, mode-watcher library with ModeWatcher component, light switch or dropdown toggle components using toggleMode/setMode/resetMode.

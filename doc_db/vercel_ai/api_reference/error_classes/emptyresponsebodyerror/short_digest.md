@@ -1,0 +1,1 @@
+Error thrown when server returns empty response body. Check with `EmptyResponseBodyError.isInstance(error)`.

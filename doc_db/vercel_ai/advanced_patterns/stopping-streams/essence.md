@@ -1,0 +1,1 @@
+Cancel streams via abortSignal (server-side) or stop() hook (client-side); use onAbort callback for cleanup; UI message streams require consumeStream function.

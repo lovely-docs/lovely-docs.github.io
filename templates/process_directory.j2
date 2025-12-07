@@ -1,44 +1,50 @@
 You are summarizing a directory of documentation for {{ libname }}.
 <dir path="{{ path }}" name="{{ dirname }}">
-{%- if subdirs -%}
-<subdirectories>
+    {%- if subdirs -%}
+    <subdirectories>
 {%- for subdir in subdirs -%}{{ raise("subdir.digest cannot be None or empty for subdir: " + (subdir.better_name or subdir.name)) if not subdir.digest }}{{ raise("subdir.essence cannot be None or empty for subdir: " + (subdir.better_name or subdir.name)) if not subdir.essence }}
-<subdir name="{{ subdir.name }}" title="{{ subdir.essence }}">
-{{ subdir.digest }}
-</subdir>
-{%- endfor -%}
-</subdirectories>
-{%- endif -%}
-{%- if pages %}
-<pages>
+        <subdir name="{{ subdir.name }}" title="{{ subdir.essence }}">
+            {{ subdir.digest }}
+        </subdir>
+        {%- endfor -%}
+    </subdirectories>
+    {%- endif -%}
+    {%- if pages %}
+    <pages>
 {%- for page in pages -%}{{ raise("page.essence cannot be None or empty for page: " + (page.better_filename or page.name)) if not page.essence }}{{ raise("page.short_digest cannot be None or empty for page: " + (page.better_filename or page.name)) if not page.short_digest }}
-<page path="{{ page.path }}" name="{{ page.name }}" title="{{ page.essence }}">
-{{ page.digest }}
-</page>
-{%- endfor -%}
-</pages>
-{%- endif -%}
+        <page path="{{ page.path }}" name="{{ page.name }}" title="{{ page.essence }}">
+            {{ page.digest }}
+        </page>
+        {%- endfor -%}
+    </pages>
+    {%- endif -%}
 </dir>
 
 Based on the information above, in this order:
-- Come up with a short directory name that perfectly encompasses the contents.
-    - Keep the original if it's good already. Use the title from frontmatter if present.
-    - Don't include the name of the library in the name, e.g. "overview" instead of "svelte overview"
+1. Come up with a short directory name that perfectly encompasses the contents.
+    - Keep the original if it's good already. Use the title from frontmatter if present, unless it's too long.
+    - Don't include the name of the library in the name.
     - If the original starts with a number, don't include it.
+2. Create a digest of the directory.
+    - Extract all bits that are important to a programmer who does not know how to use the library.
+    - Include both high-level purpose and low-level details.
+    - Include all important examples. You can combine 2 or more simple examples into one.
+    - Don't repeat boilerplate. You may include it in the first example but compress the rest.
+    - Avoid markdown links, describe the target instead of linking.
+    - Don't include any extra notes. Be concise, no "guide to" or "documentation for", no water.
+    - If a directory has a lot of information, don't skip anything important - the digest can be proportionally long.
+    - For short directories, or directories that don't have anything important, the digest can also be very short, down to 1 word in extreme cases.
 
-- Condense the information in the directory.
-    - Extract bits that are important to a programmer.
-    - Don't include any extra notes. Be concise.
-    - One example per use case max.
-    - Don't skip important examples. You can combine 2 or more simple examples into one more complex.
-    - Write in a declarative style stating what things ARE or DO, not "guide to" or "documentation for".
-
-- More condensed digest (should be useful without reading the full digest).
+3. More condensed digest (should be useful without reading the full digest).
     - Keep only the most important information.
-    - Keep all examples though.
-- One-line essence of the contents.
-- Is the content you saw relevant to a programmer who is already somewhat familiar with {{ libname }}?
-    - Ignore various marker/meta files used to structure the documentation.
+    - Try to combine as many examples as practical into one comprehensive example, or one comprehensive example per section.
+    - Short, one-line essence of the directory contents.
+    - Maximize information content.
+    - Avoid saying things like "documentation/guide/reference for"
+    - be very terse, but cram as much details as possible.
+
+4. Decide if the content is relevant to a programmer who is already somewhat familiar with {{ libname }}.
+    - Some directories are used to structure the docs and don't contain actual information - they are not relevant by themselves
 
 Output one entry for the whole directory.
 {%- if extra -%}

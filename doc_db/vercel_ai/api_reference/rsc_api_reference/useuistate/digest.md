@@ -1,9 +1,10 @@
-Hook for reading and updating UI state on the client side. The UI state is the visual representation of AI state and can contain functions, React nodes, and other data.
+Hook for reading and updating UI state in RSC applications. Returns an array similar to useState with current UI state as first element and update function as second element. UI state is client-side only and can contain functions, React nodes, and other data, serving as the visual representation of AI state.
 
-Returns an array similar to useState with two elements: the current UI state and a function to update it.
+**Note:** AI SDK RSC is experimental; AI SDK UI is recommended for production. Migration guide available.
 
-Import: `import { useUIState } from "@ai-sdk/rsc"`
+**Import:**
+```
+import { useUIState } from "@ai-sdk/rsc"
+```
 
-Note: AI SDK RSC is experimental; AI SDK UI is recommended for production. Migration guide available for transitioning from RSC to UI.
-
-Example use case: Managing AI and UI states in Next.js applications.
+**Example:** Managing AI and UI states in Next.js applications (see state-management/ai-ui-states example).

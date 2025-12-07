@@ -1,1 +1,0 @@
-A customizable rating component supporting half-ratings, form integration, keyboard navigation, and full accessibility with slider pattern ARIA implementation.

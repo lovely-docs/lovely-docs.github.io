@@ -1,1 +1,0 @@
-Type helper to add a ref prop to custom components following Bits UI's pattern.

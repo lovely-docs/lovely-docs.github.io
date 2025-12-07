@@ -1,0 +1,1 @@
+AI SDK Core provides unified APIs for: text generation, structured data generation, tool calling, embeddings, image generation, audio transcription/speech synthesis, prompt engineering, multi-provider support, middleware, error handling, testing utilities, and telemetry.

@@ -1,0 +1,1 @@
+Setup Drizzle with Vercel Postgres: install `@vercel/postgres`, set `POSTGRES_URL` env var, connect with `drizzle()`, configure `drizzle.config.ts`, run migrations, then use insert/select/update/delete operations.

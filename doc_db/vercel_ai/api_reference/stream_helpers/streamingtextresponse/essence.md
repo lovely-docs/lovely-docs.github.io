@@ -1,0 +1,1 @@
+Deprecated utility for streaming text responses; replaced by streamText.toDataStreamResponse() in AI SDK 4.0

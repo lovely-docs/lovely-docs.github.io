@@ -1,0 +1,1 @@
+stepCountIs(count) creates a StopCondition for tool-calling loops; stops after specified step count; combinable with other conditions via array.

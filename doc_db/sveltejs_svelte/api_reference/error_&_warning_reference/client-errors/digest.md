@@ -1,52 +1,116 @@
 ## Client-side Error Reference
 
-Comprehensive list of runtime errors that can occur in Svelte applications:
+Comprehensive list of runtime errors that can occur in Svelte applications with explanations and solutions.
 
-**Reactivity & State**
-- `async_derived_orphan`: Cannot use `await` in `$derived` outside effect tree. Async deriveds require effect context.
-- `derived_references_self`: Derived values cannot reference themselves recursively.
-- `state_unsafe_mutation`: Cannot update state inside `$derived`, `$inspect`, or template expressions. Use `$effect` for side effects instead.
-- `state_descriptors_fixed`: Property descriptors on `$state` objects must have `value` and be `enumerable`, `configurable`, `writable`.
-- `state_prototype_fixed`: Cannot set prototype of `$state` object.
-- `effect_update_depth_exceeded`: Effect reads and writes same state causing infinite loop. Example: `$effect(() => { count += 1; })` or `$effect(() => { array.push('item'); })`. Use `untrack()` if state mutation is necessary.
+### Reactivity Errors
 
-**Effects**
-- `effect_orphan`: Runes like `$effect` only work inside component initialization or other effects.
-- `effect_in_teardown`: Cannot use runes inside effect cleanup functions.
-- `effect_in_unowned_derived`: Effects cannot be created inside `$derived` unless the derived itself is in an effect.
-- `effect_pending_outside_reaction`: `$effect.pending()` only works inside effects or deriveds.
-- `flush_sync_in_effect`: Cannot call `flushSync()` inside an effect (only after state changes).
+**async_derived_orphan**: Cannot create `$derived(...)` with `await` outside effect tree. Deriveds run lazily and can be garbage collected, but async deriveds need effects to call promises proactively. Solution: create async deriveds inside effects.
 
-**Binding**
-- `bind_invalid_checkbox_value`: Use `bind:checked` instead of `bind:value` for checkboxes.
-- `bind_invalid_export`: Cannot bind to exported properties; use `bind:this` and access properties on instance instead.
-- `bind_not_bindable`: Cannot bind to non-bindable properties. Mark as bindable: `let { key = $bindable() } = $props()`.
-- `props_invalid_value`: Cannot bind to `undefined` when property has fallback value.
-- `props_rest_readonly`: Rest element properties from `$props()` are readonly.
+**derived_references_self**: A derived cannot reference itself recursively.
 
-**Components**
-- `component_api_changed`: Calling methods on component instances invalid in Svelte 5.
-- `component_api_invalid_new`: Cannot instantiate components with `new` in Svelte 5. Set `compatibility.componentApi: 4` for legacy support.
+**effect_in_unowned_derived**: Effects cannot be created inside `$derived` values that weren't themselves created inside an effect.
 
-**Loops & Keys**
-- `each_key_duplicate`: Keyed each blocks have duplicate keys at specified indexes.
+**effect_orphan**: `$rune%` can only be used inside effects or during component initialization.
 
-**Context & Lifecycle**
-- `set_context_after_init`: `setContext` must be called during component initialization, not in effects or after `await`.
-- `lifecycle_legacy_only`: Legacy lifecycle functions cannot be used in runes mode.
+**effect_in_teardown**: `%rune%` cannot be used inside effect cleanup functions.
 
-**Snippets & Rendering**
-- `invalid_snippet`: Cannot render null/undefined snippet; use optional chaining `{@render snippet?.()}`.
+**effect_pending_outside_reaction**: `$effect.pending()` can only be called inside effects or deriveds.
 
-**Error Boundaries**
-- `svelte_boundary_reset_onerror`: `<svelte:boundary>` reset function cannot be called synchronously in onerror; use `await tick()` first.
+**effect_update_depth_exceeded**: Maximum update depth exceeded, typically when an effect reads and writes the same state. Example causing infinite loop:
+```js
+let count = $state(0);
+$effect(() => {
+	count += 1; // reads and writes count
+});
+```
+Same issue with array mutations:
+```js
+let array = $state(['hello']);
+$effect(() => {
+	array.push('goodbye'); // reads and writes array
+});
+```
+Solution: use `untrack()` to read state without adding dependency, or make non-state values (like logs arrays) regular variables instead of `$state()`.
 
-**Async & Experimental**
-- `experimental_async_fork`: `fork()` requires `experimental.async` compiler option.
-- `fork_timing`: Cannot create fork inside effect or when state changes pending.
-- `fork_discarded`: Cannot commit already-discarded fork.
+**state_unsafe_mutation**: Updating state inside `$derived(...)`, `$inspect(...)` or template expressions is forbidden. Example:
+```svelte
+<script>
+	let count = $state(0);
+	let even = $state(true);
+	let odd = $derived.by(() => {
+		even = count % 2 === 0; // forbidden
+		return !even;
+	});
+</script>
+```
+Solution: make everything derived:
+```js
+let count = 0;
+let even = $derived(count % 2 === 0);
+let odd = $derived(!even);
+```
+Or use `$effect` for side-effects.
 
-**Other**
-- `rune_outside_svelte`: Runes only available in `.svelte` and `.svelte.js/ts` files.
-- `get_abort_signal_outside_reaction`: `getAbortSignal()` only works inside effects or deriveds.
-- `hydration_failed`: Application hydration failed.
+### Binding Errors
+
+**bind_invalid_checkbox_value**: Using `bind:value` with checkbox input is not allowed. Use `bind:checked` instead.
+
+**bind_invalid_export**: Component has export that consumer tries to access via `bind:%key%`, which is disallowed. Solution: use `bind:this` to bind component instance, then access property on it.
+
+**bind_not_bindable**: Attempting to bind to non-bindable property. Solution: mark property as bindable with `let { %key% = $bindable() } = $props()`.
+
+**props_invalid_value**: Cannot do `bind:%key%={undefined}` when `%key%` has a fallback value.
+
+**props_rest_readonly**: Rest element properties of `$props()` are readonly.
+
+### Component Errors
+
+**component_api_changed**: Calling `%method%` on component instance is no longer valid in Svelte 5.
+
+**component_api_invalid_new**: Attempted to instantiate component with `new %name%`, no longer valid in Svelte 5. Solution: set `compatibility.componentApi` compiler option to `4` to keep working.
+
+### Loop Errors
+
+**each_key_duplicate**: Keyed each block has duplicate key at indexes or with value `%value%` at indexes.
+
+### Context & Lifecycle Errors
+
+**set_context_after_init**: `setContext` must be called during component initialization, not in subsequent effects or after `await`. (Applies with `experimental.async` option, default in Svelte 6)
+
+**lifecycle_legacy_only**: `%name%(...)` cannot be used in runes mode.
+
+### State Errors
+
+**state_descriptors_fixed**: Property descriptors on `$state` objects must contain `value` and be `enumerable`, `configurable`, and `writable`.
+
+**state_prototype_fixed**: Cannot set prototype of `$state` object.
+
+### Async/Fork Errors
+
+**experimental_async_fork**: Cannot use `fork(...)` unless `experimental.async` compiler option is `true`.
+
+**fork_discarded**: Cannot commit fork that was already discarded.
+
+**fork_timing**: Cannot create fork inside effect or when state changes are pending.
+
+**flush_sync_in_effect**: Cannot use `flushSync` inside effect. Can call after state change but not during effect flushing. (Applies with `experimental.async` option)
+
+### Other Errors
+
+**get_abort_signal_outside_reaction**: `getAbortSignal()` can only be called inside effects or deriveds.
+
+**hydration_failed**: Failed to hydrate the application.
+
+**invalid_snippet**: Could not `{@render}` snippet because expression is `null` or `undefined`. Solution: use optional chaining `{@render snippet?.()}`.
+
+**rune_outside_svelte**: `%rune%` rune only available inside `.svelte` and `.svelte.js/ts` files.
+
+**svelte_boundary_reset_onerror**: `<svelte:boundary>` `reset` function cannot be called while error is being handled. Solution: wait for boundary to settle before calling `reset()`, e.g. with `await tick()`:
+```svelte
+<svelte:boundary onerror={async (error, reset) => {
+	fixTheError();
+	await tick();
+	reset();
+}>
+</svelte:boundary>
+```

@@ -1,0 +1,1 @@
+Migration guide for v0.21.0: move dialect from CLI to mandatory config field, unify connection params to `url`, add optional driver for special databases, auto-select drivers by dialect, upgrade snapshots, extract relations from FKs, add custom migration naming and direct migrate command.

@@ -1,1 +1,1 @@
-Reactive async data fetcher with automatic cancellation, loading/error states, debounce/throttle, cleanup hooks, and pre-render support.
+Reactive async data fetching utility with automatic request cancellation, loading/error states, debounce/throttle, cleanup hooks, multiple dependencies, and pre-render support.

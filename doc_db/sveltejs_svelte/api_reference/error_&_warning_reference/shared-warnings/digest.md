@@ -1,14 +1,16 @@
 ## dynamic_void_element_content
 
-Void elements like `<input>` cannot have content. When using `<svelte:element this="%tag%">` with a void element, any children passed will be ignored.
+Void elements like `<input>` cannot have content. When using `<svelte:element this="%tag%">` with a void element tag, any children passed will be ignored.
 
 ## state_snapshot_uncloneable
 
-`$state.snapshot()` attempts to clone a value to return a reference that no longer changes. Some objects cannot be cloned (like DOM elements), so the original value is returned instead.
+`$state.snapshot()` attempts to clone a value to return a reference that no longer changes. Some objects cannot be cloned and the original value is returned instead.
 
 Example:
 ```js
 const object = $state({ property: 'this is cloneable', window })
 const snapshot = $state.snapshot(object);
-// property is cloned, but window (a DOM element) is not
+// property is cloned, but window (DOM element) is not cloneable
 ```
+
+Properties that cannot be cloned are listed in the warning message.

@@ -1,0 +1,1 @@
+Stream typed structured objects with schema validation; supports object/array/enum/no-schema modes; returns partial streams, full event stream, and final object with token usage.

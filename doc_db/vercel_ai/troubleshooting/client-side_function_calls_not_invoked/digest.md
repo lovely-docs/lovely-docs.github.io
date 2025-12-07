@@ -1,6 +1,6 @@
-When upgrading to AI SDK v3.0.20 or newer, client-side function calls may stop being invoked when using OpenAIStream. This occurs because the function call forwarding mechanism to the client is not properly enabled.
+**Issue**: After upgrading to AI SDK v3.0.20 or newer, client-side function calls are no longer invoked when using `OpenAIStream`.
 
-To fix this issue, add a stub for `experimental_onFunctionCall` to the OpenAIStream options:
+**Solution**: Add a stub for `experimental_onFunctionCall` to `OpenAIStream` to enable correct forwarding of function calls to the client:
 
 ```tsx
 const stream = OpenAIStream(response, {
@@ -9,5 +9,3 @@ const stream = OpenAIStream(response, {
   },
 });
 ```
-
-This empty async function enables the correct forwarding of function calls from the stream to the client side, restoring the expected behavior after the upgrade.

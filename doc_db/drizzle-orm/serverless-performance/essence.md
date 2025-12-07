@@ -1,1 +1,1 @@
-Reuse database connections and prepared statements in serverless by declaring them outside handler scope; edge functions don't support this.
+Serverless functions reuse connections/prepared statements across 15-min lifetime when declared outside handler; edge functions don't.

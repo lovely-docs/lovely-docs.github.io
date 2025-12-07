@@ -1,1 +1,1 @@
-The sequence helper chains multiple handle middleware functions with different execution orders for different options.
+sequence() chains handle middleware: transformPageChunk applies in reverse order, preload/filterSerializedResponseHeaders apply forward with first winning

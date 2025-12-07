@@ -1,1 +1,1 @@
-SQL set operations (UNION, UNION ALL, INTERSECT, INTERSECT ALL, EXCEPT, EXCEPT ALL) combining multiple query results with function or builder syntax; INTERSECT ALL and EXCEPT ALL PostgreSQL/MySQL only.
+Six SQL set operations (UNION, UNION ALL, INTERSECT, INTERSECT ALL, EXCEPT, EXCEPT ALL) for combining query results with function-based or method-based syntax; support varies by database.

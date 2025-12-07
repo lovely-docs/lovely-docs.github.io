@@ -1,8 +1,10 @@
-## Snippets
+# Snippets in Svelte
 
-Snippets are reusable chunks of markup declared with `{#snippet name()}...{/snippet}` syntax. They can accept parameters with default values and destructuring, but not rest parameters.
+Snippets are reusable chunks of markup declared with `{#snippet name()}...{/snippet}` syntax. They reduce code duplication by extracting repeated template patterns.
 
-### Basic Usage
+## Basic Usage
+
+Snippets can have parameters with default values and destructuring:
 
 ```svelte
 {#snippet figure(image)}
@@ -13,52 +15,168 @@ Snippets are reusable chunks of markup declared with `{#snippet name()}...{/snip
 {/snippet}
 
 {#each images as image}
-	{@render figure(image)}
+	{#if image.href}
+		<a href={image.href}>{@render figure(image)}</a>
+	{:else}
+		{@render figure(image)}
+	{/if}
 {/each}
 ```
 
-### Scope
+Rendered with `{@render snippetName(args)}`.
 
-Snippets can reference values from their lexical scope (script tag, parent blocks). They're visible to siblings and their children in the same scope. Snippets can reference themselves and each other recursively.
+## Scope
 
-### Passing to Components
-
-Snippets are values and can be passed as props:
+Snippets can reference values from their enclosing scope (script, each blocks, etc.) and are visible to siblings and their children in the same lexical scope:
 
 ```svelte
+<script>
+	let { message = `it's great!` } = $props();
+</script>
+
+{#snippet hello(name)}
+	<p>hello {name}! {message}!</p>
+{/snippet}
+
+{@render hello('alice')}
+```
+
+Snippets can reference themselves and each other for recursion:
+
+```svelte
+{#snippet countdown(n)}
+	{#if n > 0}
+		<span>{n}...</span>
+		{@render countdown(n - 1)}
+	{:else}
+		{@render blastoff()}
+	{/if}
+{/snippet}
+
+{#snippet blastoff()}
+	<span>🚀</span>
+{/snippet}
+
+{@render countdown(10)}
+```
+
+## Passing Snippets to Components
+
+### Explicit Props
+Snippets are values and can be passed as component props:
+
+```svelte
+{#snippet header()}
+	<th>fruit</th>
+	<th>qty</th>
+{/snippet}
+
+{#snippet row(d)}
+	<td>{d.name}</td>
+	<td>{d.qty}</td>
+{/snippet}
+
 <Table data={fruits} {header} {row} />
 ```
 
-Snippets declared directly inside a component implicitly become props on that component. Any non-snippet content inside component tags implicitly becomes the `children` snippet.
+### Implicit Props
+Snippets declared directly inside a component implicitly become props:
 
-### Optional Snippets
+```svelte
+<Table data={fruits}>
+	{#snippet header()}
+		<th>fruit</th>
+		<th>qty</th>
+	{/snippet}
 
-Use optional chaining or conditional rendering for optional snippet props:
+	{#snippet row(d)}
+		<td>{d.name}</td>
+		<td>{d.qty}</td>
+	{/snippet}
+</Table>
+```
+
+### Implicit `children` Snippet
+Content inside component tags that isn't a snippet declaration becomes the `children` snippet:
+
+```svelte
+<!-- App.svelte -->
+<Button>click me</Button>
+
+<!-- Button.svelte -->
+<script>
+	let { children } = $props();
+</script>
+<button>{@render children()}</button>
+```
+
+### Optional Snippet Props
+Use optional chaining or conditional rendering for optional snippets:
 
 ```svelte
 {@render children?.()}
-{#if children}{@render children()}{:else}fallback{/if}
+
+{#if children}
+	{@render children()}
+{:else}
+	fallback content
+{/if}
 ```
 
-### Typing
+## Typing Snippets
 
-Import `Snippet` from `'svelte'` and use it as a generic type where the type argument is a tuple of parameter types:
+Import `Snippet` from `'svelte'` and use it in type definitions. The type argument is a tuple of parameter types:
+
+```svelte
+<script lang="ts">
+	import type { Snippet } from 'svelte';
+
+	interface Props {
+		data: any[];
+		children: Snippet;
+		row: Snippet<[any]>;
+	}
+
+	let { data, children, row }: Props = $props();
+</script>
+```
+
+Use generics to tie data and snippet types together:
 
 ```svelte
 <script lang="ts" generics="T">
 	import type { Snippet } from 'svelte';
-	let { data, row }: { data: T[]; row: Snippet<[T]> } = $props();
+
+	let {
+		data,
+		children,
+		row
+	}: {
+		data: T[];
+		children: Snippet;
+		row: Snippet<[T]>;
+	} = $props();
 </script>
 ```
 
-### Exporting
+## Exporting Snippets
 
-Top-level snippets can be exported from `<script module>` if they don't reference non-module script declarations (requires Svelte 5.5.0+).
+Snippets at the top level can be exported from `<script module>` if they don't reference non-module script declarations (requires Svelte 5.5.0+):
 
-### Programmatic Creation
+```svelte
+<script module>
+	export { add };
+</script>
+
+{#snippet add(a, b)}
+	{a} + {b} = {a + b}
+{/snippet}
+```
+
+## Programmatic Snippets
 
 Use `createRawSnippet` API for advanced programmatic snippet creation.
 
-### Slots Deprecation
+## Snippets vs Slots
 
 Snippets replace the deprecated Svelte 4 slots feature with more power and flexibility.

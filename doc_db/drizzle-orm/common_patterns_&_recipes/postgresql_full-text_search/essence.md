@@ -1,1 +1,0 @@
-PostgreSQL full-text search with to_tsvector/to_tsquery, GIN indexes, multi-column search with setweight, and ranking with ts_rank/ts_rank_cd.

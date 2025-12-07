@@ -1,1 +1,1 @@
-Entry point for troubleshooting common SDK issues with support resources available.
+Index page for troubleshooting common AI SDK issues. Contains a Support component for additional help.

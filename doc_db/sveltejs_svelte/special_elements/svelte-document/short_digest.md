@@ -1,7 +1,5 @@
-`<svelte:document>` attaches event listeners and actions to the document object. Must be at component top level.
+Add event listeners and actions to `document`. Bindable readonly properties: `activeElement`, `fullscreenElement`, `pointerLockElement`, `visibilityState`. Must be at component top level.
 
 ```svelte
-<svelte:document onvisibilitychange={handleVisibilityChange} use:someAction />
+<svelte:document onvisibilitychange={handleVisibilityChange} use:someAction bind:visibilityState={state} />
 ```
-
-Bindable readonly properties: `activeElement`, `fullscreenElement`, `pointerLockElement`, `visibilityState`

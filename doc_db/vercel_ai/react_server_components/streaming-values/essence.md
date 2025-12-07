@@ -1,0 +1,1 @@
+RSC API provides `createStreamableValue` and `createStreamableUI` for server-to-client streaming with `.update()` and `.done()` methods; read with `readStreamableValue` async iterator or direct component rendering.

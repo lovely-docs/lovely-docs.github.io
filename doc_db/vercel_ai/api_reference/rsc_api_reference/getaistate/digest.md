@@ -8,12 +8,10 @@ import { getAIState } from "@ai-sdk/rsc"
 ```
 
 **Parameters:**
-- `key` (string, optional): Returns the value of the specified key in the AI state if the state is an object.
+- `key` (string, optional): Returns the value of the specified key in the AI state if it's an object.
 
-**Returns:**
-The AI state value.
+**Returns:** The AI state.
 
-**Usage:**
-Call `getAIState()` to access the current AI state. Optionally pass a key to extract a specific property from the state object.
+**Note:** AI SDK RSC is experimental. For production use, AI SDK UI is recommended. Migration guide available.
 
-**Note:** AI SDK RSC is experimental. The recommended approach for production is AI SDK UI, with a migration guide available.
+**Example:** Render a React component during a tool call made by a language model in Next.js (see examples/next-app/tools/render-interface-during-tool-call).

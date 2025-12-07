@@ -1,19 +1,19 @@
 ## Child Snippet
 
-Override default element rendering in Bits UI components using the `child` snippet.
+Override default element rendering in Bits UI components using the `child` snippet for custom elements, Svelte features, and precise DOM control.
 
-**Basic usage:**
+**Basic usage:** Pass `child` snippet with `props` parameter, spread `{...props}` onto custom element:
 ```svelte
-<Accordion.Trigger id="my-id" onclick={handler}>
+<Accordion.Trigger>
   {#snippet child({ props })}
-    <button {...props} class="custom">Toggle</button>
+    <button {...props}>Custom trigger</button>
   {/snippet}
 </Accordion.Trigger>
 ```
 
-**Floating components** (tooltips, popovers, dropdowns) require two-level structure:
+**Floating components** (tooltips, popovers, etc.) require two-level structure with `wrapperProps` (unstyled, handles positioning) and `props` (styled content):
 ```svelte
-<Popover.Content>
+<Tooltip.Content>
   {#snippet child({ wrapperProps, props, open })}
     {#if open}
       <div {...wrapperProps}>
@@ -21,11 +21,7 @@ Override default element rendering in Bits UI components using the `child` snipp
       </div>
     {/if}
   {/snippet}
-</Popover.Content>
+</Tooltip.Content>
 ```
 
-Key points:
-- Spread `{...props}` onto your custom element
-- For floating components: wrapper element unstyled, inner element styled
-- Use `open` parameter for conditional rendering with transitions
-- Always include `{...props}` spread
+**Key points:** Always spread `{...props}`, custom attributes/handlers merge into props, don't style wrapper in floating components, use `open` for conditional rendering.

@@ -1,0 +1,1 @@
+**Generative AI**: Models generating outputs (text, images, audio) from learned patterns. **LLMs**: Text-focused models predicting next word sequences; trained on massive text; prone to hallucination on unknown info. **Embeddings**: Convert data to vector representations for semantic relationships; don't generate new content.

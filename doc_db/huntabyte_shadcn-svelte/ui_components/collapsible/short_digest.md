@@ -1,6 +1,6 @@
 ## Collapsible
 
-Interactive expand/collapse panel component.
+Expandable/collapsible panel component.
 
 ### Installation
 
@@ -16,9 +16,9 @@ npx shadcn-svelte@latest add collapsible -y -o
 </script>
 
 <Collapsible.Root>
-  <Collapsible.Trigger>Toggle label</Collapsible.Trigger>
+  <Collapsible.Trigger>Toggle</Collapsible.Trigger>
   <Collapsible.Content>Hidden content</Collapsible.Content>
 </Collapsible.Root>
 ```
 
-Three main parts: `Root` (container), `Trigger` (toggle button), `Content` (expandable panel). Trigger can be styled with button variants and icons. Supports custom classes for layout.
+Three main components: `Root` (container), `Trigger` (toggle button), `Content` (expandable section).

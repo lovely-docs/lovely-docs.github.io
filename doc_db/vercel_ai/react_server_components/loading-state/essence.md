@@ -1,0 +1,1 @@
+Three patterns for loading state: client-side state management, server-streamed loading state via separate streamable value, or streaming React components via streamUI with generator functions.

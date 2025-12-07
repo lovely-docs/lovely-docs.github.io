@@ -1,16 +1,9 @@
-## Multiple Streamable UIs
+Return multiple independent streamable UIs in a single response, or nest streamables as props to child components. Each updates asynchronously based on data resolution.
 
-Return multiple streamable UIs in a single request to stream components independently:
 ```tsx
-return {
-  weather: weatherUI.value,
-  forecast: forecastUI.value,
-};
-```
+// Multiple streamables
+return { weather: weatherUI.value, forecast: forecastUI.value };
 
-## Nested Streamable UIs
-
-Pass streamables as props to parent components for complex, composable UIs that update independently:
-```tsx
-ui.done(<StockCard historyChart={historyChart.value} price={price} />);
+// Nested streamables
+ui.done(<StockCard historyChart={historyChart.value} />);
 ```

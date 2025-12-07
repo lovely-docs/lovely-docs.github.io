@@ -1,0 +1,1 @@
+data-sveltekit-* attributes customize link navigation: preload-data/code (hover/tap/eager/viewport), reload (full-page), replacestate (history), keepfocus, noscroll; disable with "false".

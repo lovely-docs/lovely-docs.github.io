@@ -1,1 +1,1 @@
-Client-side async iterator for consuming server-streamed values created with createStreamableValue; takes StreamableValue parameter and yields emitted values.
+readStreamableValue: async iterator for consuming server-streamed values created with createStreamableValue in RSC; takes StreamableValue parameter, yields values via for-await-of loop.

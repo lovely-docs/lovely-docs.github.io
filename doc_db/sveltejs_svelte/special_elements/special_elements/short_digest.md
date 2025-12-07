@@ -1,1 +1,0 @@
-Index page for Svelte's special elements - built-in components and directives like `<svelte:self>`, `<svelte:component>`, `<svelte:window>`, `<svelte:body>`, `<svelte:head>`, `<svelte:options>`, and `<svelte:fragment>` that provide core component functionality.

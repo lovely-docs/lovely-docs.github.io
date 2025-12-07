@@ -1,6 +1,10 @@
-The `WithoutChildrenOrChild` type helper excludes the `child` and `children` props from a component. This is useful when building custom component wrappers that populate the `children` prop internally and don't expose it to users.
+## WithoutChildrenOrChild Type Helper
 
-**Example:**
+A type helper that excludes the `child` and `children` props from a component's type definition.
+
+**Purpose**: Use when building custom component wrappers that internally populate the `children` prop and don't expose it to users.
+
+**Example**:
 ```svelte
 <script lang="ts">
   import { Accordion, type WithoutChildrenOrChild } from "bits-ui";
@@ -18,4 +22,6 @@ The `WithoutChildrenOrChild` type helper excludes the `child` and `children` pro
 </Accordion.Trigger>
 ```
 
-The `CustomAccordionTrigger` component exposes all root component props except `children` and `child`, which are managed internally.
+The `CustomAccordionTrigger` component exposes all root component props except `children` and `child`. This prevents users from passing conflicting children while still allowing other customization through inherited props.
+
+Related: `child` snippet prop (see delegation documentation), `WithoutChildren` type helper

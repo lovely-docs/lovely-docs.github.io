@@ -8,12 +8,11 @@ An input component where users select a value from a given range.
 npx shadcn-svelte@latest add slider -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
-### Basic Usage
+### Usage
 
 Single value slider:
-
 ```svelte
 <script lang="ts">
   import { Slider } from "$lib/components/ui/slider/index.js";
@@ -22,10 +21,7 @@ Single value slider:
 <Slider type="single" bind:value max={100} step={1} />
 ```
 
-### Multiple Thumbs
-
-Range slider with two handles:
-
+Multiple thumbs (range slider):
 ```svelte
 <script lang="ts">
   import { Slider } from "$lib/components/ui/slider/index.js";
@@ -34,23 +30,20 @@ Range slider with two handles:
 <Slider type="multiple" bind:value max={100} step={1} />
 ```
 
-### Vertical Orientation
-
+Vertical orientation:
 ```svelte
 <script lang="ts">
   import { Slider } from "$lib/components/ui/slider/index.js";
   let value = $state(50);
 </script>
-<Slider type="single" orientation="vertical" bind:value max={100} step={1} />
+<Slider type="vertical" orientation="vertical" bind:value max={100} step={1} />
 ```
 
 ### Props
 
-- `type`: "single" or "multiple" - determines if one or multiple thumbs are used
+- `type`: "single" or "multiple" - determines if one or multiple values can be selected
 - `bind:value`: reactive binding to the selected value(s)
 - `max`: maximum value of the range
-- `step`: increment step size
+- `step`: increment between selectable values
 - `orientation`: "vertical" for vertical layout (default is horizontal)
 - `class`: CSS classes for styling
-
-Reference: Bits UI Slider documentation and API reference available in external docs.

@@ -1,0 +1,1 @@
+Connect Drizzle to Supabase Postgres via postgres-js driver, define schema with pgTable, configure drizzle-kit for migrations, perform CRUD with insert/select/update/delete queries.

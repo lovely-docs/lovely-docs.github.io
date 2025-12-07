@@ -1,1 +1,1 @@
-Svelte special element for error boundaries and async state management with pending and failed UI snippets.
+Error boundary element with pending/failed snippets and onerror handler; catches rendering/effect errors only, not event handler or external async errors.

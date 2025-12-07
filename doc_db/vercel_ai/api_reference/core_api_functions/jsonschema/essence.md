@@ -1,0 +1,1 @@
+jsonSchema() creates typed JSON schema objects for structured data generation and tools; alternative to Zod with optional custom validation function.

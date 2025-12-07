@@ -1,0 +1,1 @@
+Reactive store API: readable/writable for state, derived for computed values, get for sync reads, readonly/fromStore/toStore for conversions; all stores use subscribe(callback) pattern.

@@ -1,1 +1,0 @@
-Guidelines for writing consistent changelog entries using changesets with type, scope, and description format.

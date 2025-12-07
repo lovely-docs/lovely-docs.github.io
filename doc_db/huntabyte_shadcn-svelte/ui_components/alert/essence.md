@@ -1,1 +1,1 @@
-Alert component with Root/Title/Description subcomponents; supports default and destructive variants; accepts icons and rich content.
+Alert component for callouts with optional icon, title, description; supports default and destructive variants.

@@ -1,0 +1,1 @@
+Setup Drizzle with Neon serverless Postgres: install @neondatabase/serverless, configure DATABASE_URL, choose neon-http (single queries) or neon-websockets (sessions), define schema, apply migrations, query with tsx.

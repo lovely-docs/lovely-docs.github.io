@@ -1,1 +1,1 @@
-Index page for Svelte Runes - the reactive state management system.
+Index page for Svelte Runes documentation - introduces the runes system for reactivity and state management.

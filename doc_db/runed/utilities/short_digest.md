@@ -1,15 +1,1 @@
-## Reactive DOM & State Utilities
-
-**Element Tracking**: `activeElement`, `ElementRect`, `ElementSize`, `IsFocusWithin`, `IsInViewport`
-
-**State Management**: `Context`, `PersistedState`, `Debounced`, `Throttled`, `Previous`, `StateHistory`
-
-**Async & Timing**: `resource`, `AnimationFrames`, `useInterval`, `useDebounce`, `useThrottle`
-
-**Event & Observer Hooks**: `useEventListener`, `useIntersectionObserver`, `useResizeObserver`, `useMutationObserver`, `onClickOutside`, `onCleanup`
-
-**User Interaction**: `IsIdle`, `IsDocumentVisible`, `IsMounted`, `PressedKeys`, `ScrollState`
-
-**Geolocation & Search**: `useGeolocation`, `useSearchParams`
-
-**Utilities**: `boolAttr`, `extract`, `FiniteStateMachine`, `TextareaAutosize`, `watch`
+Reactive wrappers for DOM APIs (focus, visibility, measurements, observers), user interaction (keyboard, idle, clicks), async data (resource fetching, persistence), state management (context, debounce, throttle, history, undo/redo), event handling, and specialized utilities (textarea autosize, FSM, geolocation, URL search params, debounce/throttle).

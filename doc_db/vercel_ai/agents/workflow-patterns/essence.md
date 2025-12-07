@@ -1,0 +1,1 @@
+Five agent workflow patterns: sequential (chained steps), routing (context-based path selection), parallel (concurrent independent tasks), orchestrator-worker (coordinator + specialists), evaluator-optimizer (feedback loops with quality gates).

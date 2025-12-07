@@ -1,1 +1,1 @@
-TanStack Table v8 integration with Svelte 5: define columns with ColumnDef, create table with createSvelteTable, render with FlexRender, add pagination/sorting/filtering/visibility/selection via state managers and row models.
+TanStack Table v8 integration for building customizable data tables with pagination, sorting, filtering, column visibility, row selection, and cell formatting using Svelte 5 snippets and components.

@@ -1,0 +1,1 @@
+v0.31.2 adds TiDB Cloud Serverless driver support via `drizzle-orm/tidb-serverless` module with standard connection pattern.

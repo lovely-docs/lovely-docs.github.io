@@ -1,8 +1,13 @@
-React hook that consumes streamable values created with `createStreamableValue`. Returns a tuple of `[data, error, pending]` where data is the current streamed value, error is any exception thrown during streaming, and pending is a boolean indicating if the stream is still in progress.
+React hook for consuming streamable values created with `createStreamableValue`.
 
-Import: `import { useStreamableValue } from "@ai-sdk/rsc"`
+**Purpose**: Unwraps a streamable value and provides access to its current data, error state, and pending status.
 
-Usage example:
+**Import**:
+```tsx
+import { useStreamableValue } from "@ai-sdk/rsc"
+```
+
+**Usage**:
 ```tsx
 function MyComponent({ streamableValue }) {
   const [data, error, pending] = useStreamableValue(streamableValue);
@@ -14,4 +19,9 @@ function MyComponent({ streamableValue }) {
 }
 ```
 
-Typical use case is consuming streamable values passed as component props from server-side streaming operations. Note: AI SDK RSC is experimental; AI SDK UI is recommended for production.
+**Returns**: Array tuple with three elements:
+1. `data` - The current value from the stream
+2. `error` - Error object if thrown during streaming, otherwise undefined
+3. `pending` - Boolean indicating if the value is still being streamed
+
+**Note**: AI SDK RSC is experimental; AI SDK UI is recommended for production.

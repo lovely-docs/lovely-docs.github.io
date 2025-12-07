@@ -1,0 +1,1 @@
+Per-component compiler options via `<svelte:options>`: control runes mode, namespace (html/svg/mathml), custom element compilation, and CSS injection strategy. Deprecated: `immutable` and `accessors` options.

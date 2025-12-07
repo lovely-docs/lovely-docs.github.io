@@ -1,0 +1,1 @@
+PostGIS geometry point support: create extension, define geometry columns with GIST indexes, insert via xy/tuple/SQL modes, query nearest with <-> operator and ST_Distance(), filter within bounds with ST_Within/ST_MakeEnvelope.

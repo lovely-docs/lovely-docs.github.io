@@ -1,1 +1,0 @@
-Error thrown when AI provider fails to generate a parsable object matching schema. Check with `NoObjectGeneratedError.isInstance(error)` and inspect properties: `text`, `cause`, `response`, `usage`, `finishReason` for debugging.

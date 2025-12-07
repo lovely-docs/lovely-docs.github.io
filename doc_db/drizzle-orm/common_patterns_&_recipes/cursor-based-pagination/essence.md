@@ -1,0 +1,1 @@
+Cursor-based pagination: use cursor (last row pointer) with gt/lt comparisons and orderBy; supports multi-column cursors for non-unique columns, non-sequential PKs, dynamic ordering, and relational queries; requires indexing cursor columns.

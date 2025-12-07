@@ -1,0 +1,1 @@
+**v0.23.2 fixes**: PostgreSQL schemaFilter now correctly ignores enums outside filtered schemas; `drizzle-kit up` command restored functionality.

@@ -1,1 +1,1 @@
-Opt-in or global query caching with Upstash Redis integration; manual invalidation by table/tag; custom cache implementation via Cache class extension; not supported for raw queries, batch ops, transactions, relational queries, or certain drivers.
+Opt-in query caching with Upstash Redis or custom implementation; explicit strategy by default, global caching optional; manual invalidation by tables or tags; doesn't support raw queries, batch, transactions, relational queries, or certain drivers.

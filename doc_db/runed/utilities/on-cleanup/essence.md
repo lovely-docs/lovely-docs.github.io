@@ -1,0 +1,1 @@
+onCleanup(cb): registers cleanup function for effect context disposal; replaces onDestroy; works in components and $effect.root

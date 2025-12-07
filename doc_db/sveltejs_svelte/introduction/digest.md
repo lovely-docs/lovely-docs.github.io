@@ -1,54 +1,55 @@
-## Overview
+## Project Setup
 
-Svelte is a compiler-based framework that transforms declarative components into optimized JavaScript. Components are written in `.svelte` files combining HTML, CSS, and JavaScript.
-
-## Setup
-
-**SvelteKit (recommended):**
+**SvelteKit (Recommended):**
 ```sh
 npx sv create myapp
 cd myapp
+npm install
 npm run dev
 ```
+Official framework from Svelte team, powered by Vite, supports most application types.
 
-**Vite:**
+**Vite Alternative:**
 ```sh
-npm create vite@latest
-npm run build
+npm create vite@latest  # select svelte option
+npm run build  # generates dist/
 ```
+Uses vite-plugin-svelte; most projects need separate routing library. Other bundlers have plugins but Vite is recommended.
 
-## Component Structure
+## Editor & Help
 
-`.svelte` files contain three optional sections:
+- VS Code extension (maintained by Svelte team)
+- Command-line checking: `sv check`
+- Community support via Discord and Stack Overflow (tag: svelte)
+
+## .svelte File Structure
+
+Components use `.svelte` files (superset of HTML) with optional sections:
 
 ```svelte
 <script module>
-	// runs once at module load
+	// runs once when module evaluates
+	let total = 0;
 </script>
 
 <script>
 	// runs per component instance
-	let count = 0;
+	total += 1;
 </script>
 
-<button onclick={() => count++}>{count}</button>
+<!-- markup -->
 
 <style>
-	button { font-size: 2em; }
+	/* scoped to component only */
+	p { color: burlywood; }
 </style>
 ```
 
-- `<script>`: Instance-level logic; top-level variables accessible in markup
-- `<script module>`: Module-level logic; can export bindings (not default export)
-- `<style>`: Scoped CSS affecting only this component
+- `<script>`: Instance-level logic; top-level variables accessible in markup; use runes for props/reactivity; supports TypeScript with `lang="ts"`
+- `<script module>`: Module-level logic (rarely used); can export bindings but not `export default` (component is default export); variables accessible in component but not vice versa
+- `<style>`: CSS scoped to component only
+- All sections optional
 
-## Reactive Modules
+## .svelte.js and .svelte.ts Files
 
-`.svelte.js` and `.svelte.ts` files support Svelte runes for reusable reactive logic and state sharing across the application (introduced in Svelte 5).
-
-## Resources
-
-- Interactive tutorial for learning
-- VS Code extension for editor support
-- Playground and StackBlitz for online environments
-- Discord and Stack Overflow for help
+Module files that support runes for reactive logic and state sharing across application. Cannot export reassigned state. Introduced in Svelte 5.

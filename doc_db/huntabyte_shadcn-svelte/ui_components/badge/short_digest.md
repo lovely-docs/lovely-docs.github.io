@@ -1,30 +1,20 @@
-## Badge Component
+## Badge
 
-Displays styled badge elements with multiple variants (default, secondary, destructive, outline).
+Displays a badge component with variants: default, secondary, destructive, outline.
 
-### Installation
+Install: `npx shadcn-svelte@latest add badge -y -o`
 
-```bash
-npx shadcn-svelte@latest add badge -y -o
-```
-
-### Usage
-
+Usage:
 ```svelte
 <script lang="ts">
-  import { Badge } from "$lib/components/ui/badge/index.js";
+  import { Badge, badgeVariants } from "$lib/components/ui/badge/index.js";
 </script>
 
 <Badge variant="outline">Badge</Badge>
+<Badge variant="secondary" class="bg-blue-500"><Icon />Verified</Badge>
+<Badge class="rounded-full">8</Badge>
+
+<a href="/dashboard" class={badgeVariants({ variant: "outline" })}>Link Badge</a>
 ```
 
-### Features
-
-- Multiple built-in variants for different styles
-- Customizable with additional CSS classes
-- `badgeVariants` helper to style links as badges
-- Supports icons and custom content
-
-```svelte
-<a href="/dashboard" class={badgeVariants({ variant: "outline" })}>Badge</a>
-```
+Variants: default, secondary, destructive, outline.

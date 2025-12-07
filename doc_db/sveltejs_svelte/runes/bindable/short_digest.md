@@ -1,0 +1,1 @@
+The `$bindable()` rune marks props as bidirectional, allowing child components to communicate changes back to parents via the `bind:` directive. Supports fallback values: `let { value = $bindable('fallback') } = $props();`

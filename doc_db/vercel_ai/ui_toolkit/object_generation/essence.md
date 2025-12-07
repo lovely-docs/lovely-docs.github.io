@@ -1,1 +1,0 @@
-useObject hook streams structured JSON objects in React/Svelte/Vue with partial results; pair with server-side streamObject; supports enum classification mode; includes loading/error states, stop handler, and lifecycle callbacks.

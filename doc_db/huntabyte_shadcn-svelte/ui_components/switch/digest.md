@@ -1,6 +1,6 @@
-## Switch Component
+## Switch
 
-A toggle control for binary states (checked/unchecked).
+A toggle control for checked/unchecked states.
 
 ### Installation
 
@@ -8,14 +8,14 @@ A toggle control for binary states (checked/unchecked).
 npx shadcn-svelte@latest add switch -y -o
 ```
 
-Use `-y` to skip confirmation and `-o` to overwrite existing files.
+Flags: `-y` skips confirmation prompt, `-o` overwrites existing files.
 
 ### Basic Usage
 
 ```svelte
 <script lang="ts">
-  import { Switch } from "$lib/components/ui/switch/index.js";
   import { Label } from "$lib/components/ui/label/index.js";
+  import { Switch } from "$lib/components/ui/switch/index.js";
 </script>
 
 <div class="flex items-center space-x-2">
@@ -26,7 +26,7 @@ Use `-y` to skip confirmation and `-o` to overwrite existing files.
 
 ### Form Integration
 
-Use with sveltekit-superforms and Zod validation:
+Use with sveltekit-superforms and zod validation:
 
 ```svelte
 <script lang="ts" module>
@@ -43,15 +43,15 @@ Use with sveltekit-superforms and Zod validation:
   import { toast } from "svelte-sonner";
   import * as Form from "$lib/components/ui/form/index.js";
   import { Switch } from "$lib/components/ui/switch/index.js";
-
+  
   const form = superForm(defaults(zod4(formSchema)), {
     validators: zod4(formSchema),
     SPA: true,
     onUpdate: ({ form: f }) => {
       if (f.valid) {
-        toast.success(`You submitted ${JSON.stringify(f.data, null, 2)}`);
+        toast.success(`Submitted: ${JSON.stringify(f.data, null, 2)}`);
       } else {
-        toast.error("Please fix the errors in the form.");
+        toast.error("Please fix errors.");
       }
     }
   });
@@ -62,42 +62,26 @@ Use with sveltekit-superforms and Zod validation:
   <fieldset>
     <legend class="mb-4 text-lg font-medium">Email Notifications</legend>
     <div class="space-y-4">
-      <Form.Field
-        {form}
-        name="marketing_emails"
-        class="flex flex-row items-center justify-between rounded-lg border p-4"
-      >
+      <Form.Field {form} name="marketing_emails" class="flex flex-row items-center justify-between rounded-lg border p-4">
         <Form.Control>
           {#snippet children({ props })}
             <div class="space-y-0.5">
               <Form.Label>Marketing emails</Form.Label>
-              <Form.Description>
-                Receive emails about new products, features, and more.
-              </Form.Description>
+              <Form.Description>Receive emails about new products, features, and more.</Form.Description>
             </div>
             <Switch {...props} bind:checked={$formData.marketing_emails} />
           {/snippet}
         </Form.Control>
       </Form.Field>
-      <Form.Field
-        {form}
-        name="security_emails"
-        class="flex flex-row items-center justify-between rounded-lg border p-4"
-      >
+      
+      <Form.Field {form} name="security_emails" class="flex flex-row items-center justify-between rounded-lg border p-4">
         <Form.Control>
           {#snippet children({ props })}
             <div class="space-y-0.5">
               <Form.Label>Security emails</Form.Label>
-              <Form.Description>
-                Receive emails about your account security.
-              </Form.Description>
+              <Form.Description>Receive emails about your account security.</Form.Description>
             </div>
-            <Switch
-              {...props}
-              aria-readonly
-              disabled
-              bind:checked={$formData.security_emails}
-            />
+            <Switch {...props} aria-readonly disabled bind:checked={$formData.security_emails} />
           {/snippet}
         </Form.Control>
       </Form.Field>
@@ -107,4 +91,4 @@ Use with sveltekit-superforms and Zod validation:
 </form>
 ```
 
-Switches support `disabled` and `aria-readonly` attributes for accessibility.
+Supports `disabled` and `aria-readonly` attributes. Bind to `checked` property for reactive state.

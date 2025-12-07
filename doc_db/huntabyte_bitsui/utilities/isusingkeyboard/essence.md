@@ -1,1 +1,0 @@
-Utility to track whether the user is actively using the keyboard, with global state shared across instances.

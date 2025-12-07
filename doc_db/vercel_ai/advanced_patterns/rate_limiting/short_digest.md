@@ -1,1 +1,0 @@
-Protect API endpoints using Vercel KV and Upstash Ratelimit. Create a rate limiter with `Ratelimit.fixedWindow(5, '30s')`, then call `ratelimit.limit(ip)` in your route handler. Return HTTP 429 if `success` is false.

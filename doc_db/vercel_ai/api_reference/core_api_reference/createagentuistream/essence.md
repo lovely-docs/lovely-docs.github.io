@@ -1,1 +1,0 @@
-Async iterable function that streams agent UI messages incrementally; validates messages, converts to model format, invokes agent.stream(), yields UIMessageChunks; supports AbortSignal cancellation.

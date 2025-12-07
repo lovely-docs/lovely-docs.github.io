@@ -1,0 +1,1 @@
+Tabbed content organizer with horizontal/vertical orientation, automatic/manual activation modes, bindable value state, and keyboard navigation with looping.

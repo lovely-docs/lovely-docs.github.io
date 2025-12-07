@@ -1,1 +1,1 @@
-Client-side hook for managing UI state as visual representation of AI state; returns [state, setState] tuple supporting functions and React nodes.
+useUIState hook: read/update client-side UI state (functions, React nodes, data) as visual representation of AI state; returns [state, setState] array; RSC experimental, use AI SDK UI for production.

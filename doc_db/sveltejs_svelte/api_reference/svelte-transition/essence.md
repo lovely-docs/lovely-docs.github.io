@@ -1,0 +1,1 @@
+Built-in transition functions (blur, fade, fly, scale, slide, draw for SVG, crossfade for paired morphing) with configurable delay/duration/easing and custom css/tick callbacks.

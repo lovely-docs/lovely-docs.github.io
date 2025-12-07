@@ -1,1 +1,0 @@
-Resize observer utility that tracks element dimension changes via callback, with manual stop control.

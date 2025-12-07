@@ -1,1 +1,1 @@
-LLM-based agents using tools in loops; covers Agent class, building, workflows, loop control (stopWhen, prepareStep), and runtime configuration.
+Agents: LLM-based tool-using systems with Agent class, workflow patterns, loop control (stopWhen/prepareStep), and runtime configuration.

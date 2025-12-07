@@ -1,1 +1,0 @@
-Thrown when an invalid message role is provided. Detect using `InvalidMessageRoleError.isInstance(error)`. Has `role` and `message` properties.

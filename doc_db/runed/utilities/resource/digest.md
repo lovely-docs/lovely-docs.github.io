@@ -1,67 +1,37 @@
 ## Purpose
-`resource` is a utility that combines reactive state management with async data fetching. It runs after rendering by default, with a pre-render option via `resource.pre()`. Built on top of `watch`, it's designed for component-level reactive data fetching when you need more flexibility than SvelteKit's load functions.
+Reactive async data fetching utility that combines state management with automatic request handling. Built on `watch`, runs after rendering by default with optional pre-render support via `resource.pre()`.
 
-## Core API
+## Basic Usage
 ```svelte
-const searchResource = resource(
-  () => id,  // source: reactive dependency
-  async (id, prevId, { data, refetching, onCleanup, signal }) => {
-    // fetcher function
-    const response = await fetch(`api/posts?id=${id}`, { signal });
-    return response.json();
-  },
-  { debounce: 300 }  // options
-);
+import { resource } from "runed";
 
-// Properties
-searchResource.current;    // current value
-searchResource.loading;    // boolean
-searchResource.error;      // Error | undefined
-searchResource.mutate(value);  // direct update (optimistic updates)
-searchResource.refetch();  // re-run fetcher
-```
-
-## Fetcher Parameters
-- `value`: current source value
-- `previousValue`: previous source value
-- `data`: previous fetcher return value
-- `refetching`: boolean or custom value passed to `refetch(info)`
-- `onCleanup(fn)`: register cleanup before refetch
-- `signal`: AbortSignal for cancelling requests
-
-## Configuration Options
-- `lazy`: skip initial fetch, only fetch on dependency changes or `refetch()`
-- `once`: fetch only once, ignore subsequent dependency changes
-- `initialValue`: provide initial value before first fetch completes
-- `debounce`: milliseconds to debounce rapid changes (cancels pending requests, executes last one after delay)
-- `throttle`: milliseconds to throttle rapid changes (spaces requests by delay, returns pending promise if called too soon)
-- Note: use either debounce or throttle, not both; debounce takes precedence
-
-## Features
-- Automatic request cancellation when dependencies change
-- Built-in loading and error states
-- Debouncing and throttling for rate limiting
-- Full TypeScript support with inferred types
-- Multiple dependencies support: `resource([() => query, () => page], async ([query, page]) => ...)`
-- Custom cleanup functions via `onCleanup()`
-- Pre-render execution via `resource.pre()`
-
-## Examples
-
-**Basic usage with single dependency:**
-```svelte
 let id = $state(1);
+
 const searchResource = resource(
   () => id,
-  async (id, prevId, { signal }) => {
+  async (id, prevId, { data, refetching, onCleanup, signal }) => {
     const response = await fetch(`api/posts?id=${id}`, { signal });
     return response.json();
   },
   { debounce: 300 }
 );
+
+// Access: searchResource.current, searchResource.loading, searchResource.error
+// Methods: searchResource.mutate(), searchResource.refetch()
 ```
 
-**Multiple dependencies:**
+## Features
+- **Automatic Request Cancellation**: In-flight requests canceled when dependencies change
+- **Loading & Error States**: Built-in `loading` and `error` properties
+- **Debouncing & Throttling**: Optional rate limiting (debounce takes precedence if both specified)
+- **Type Safety**: Full TypeScript support with inferred types
+- **Multiple Dependencies**: Track multiple reactive dependencies as array
+- **Custom Cleanup**: `onCleanup()` callback runs before refetching
+- **Pre-render Support**: `resource.pre()` for pre-render execution
+
+## Advanced Examples
+
+**Multiple Dependencies:**
 ```svelte
 const results = resource(
   [() => query, () => page],
@@ -72,7 +42,7 @@ const results = resource(
 );
 ```
 
-**Custom cleanup (e.g., EventSource):**
+**Custom Cleanup:**
 ```svelte
 const stream = resource(
   () => streamId,
@@ -85,7 +55,7 @@ const stream = resource(
 );
 ```
 
-**Pre-render execution:**
+**Pre-render:**
 ```svelte
 const data = resource.pre(
   () => query,
@@ -95,3 +65,25 @@ const data = resource.pre(
   }
 );
 ```
+
+## Configuration Options
+- `lazy`: Skip initial fetch, only fetch on dependency changes or `refetch()`
+- `once`: Fetch only once, ignore subsequent dependency changes
+- `initialValue`: Provide initial value before first fetch completes
+- `debounce`: Milliseconds to debounce rapid changes (cancels pending requests)
+- `throttle`: Milliseconds to throttle rapid changes (spaces requests by delay)
+
+## API
+- `current`: Current resource value
+- `loading`: Boolean loading state
+- `error`: Error object if fetch failed
+- `mutate(value)`: Update resource value directly (optimistic updates)
+- `refetch(info?)`: Re-run fetcher with current watching values
+
+## Fetcher Parameters
+- `value`: Current source value(s)
+- `previousValue`: Previous source value(s)
+- `data`: Previous fetcher return value
+- `refetching`: Boolean or value passed to `refetch()`
+- `onCleanup`: Register cleanup function
+- `signal`: AbortSignal for canceling fetch requests

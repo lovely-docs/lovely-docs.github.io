@@ -1,1 +1,1 @@
-ToolLoopAgent automates LLM-based task execution by orchestrating tool calls in loops with configurable control flow and runtime options.
+LLM agents with tools, loop control, and workflow patterns for multi-step task automation.

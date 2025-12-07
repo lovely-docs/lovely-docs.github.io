@@ -1,1 +1,1 @@
-The $derived rune creates reactive computed values that automatically update when their dependencies change, with support for complex derivations via $derived.by and temporary value overrides.
+$derived creates reactive computed state from expressions; $derived.by for complex logic; side-effect free; can override temporarily; push-pull reactivity with lazy evaluation; destructuring creates reactive properties.

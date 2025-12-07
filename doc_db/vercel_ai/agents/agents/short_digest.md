@@ -1,1 +1,1 @@
-Agents enable LLMs to use tools in loops to complete tasks. Key topics: Agent class overview, building agents, workflow patterns, loop control with `stopWhen` and `prepareStep`, and type-safe runtime configuration.
+Agents are LLM systems that use tools in loops. Topics: Agent class overview, building agents, workflow patterns, loop control (stopWhen, prepareStep), and configuring call options.

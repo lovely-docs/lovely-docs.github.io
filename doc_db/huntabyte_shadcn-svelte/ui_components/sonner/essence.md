@@ -1,1 +1,1 @@
-Toast notifications with success/error types, descriptions, and action buttons; dark mode support via system preference or mode-watcher.
+Svelte toast component; install via CLI, add Toaster to layout, call toast() with message and optional description/action callback.

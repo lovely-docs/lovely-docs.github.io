@@ -1,0 +1,1 @@
+Runes are `$`-prefixed Svelte compiler keywords (not functions) that control language behavior; can't be imported, assigned, or passed as arguments; introduced in Svelte 5.

@@ -1,0 +1,1 @@
+The `ref` prop provides direct access to underlying HTML elements. Bind it with `bind:ref={variable}` to manipulate DOM. Works with child snippets via element IDs; pass custom IDs to parent component, not child. May be `null` until mount. Use `WithElementRef` type helper for custom components.

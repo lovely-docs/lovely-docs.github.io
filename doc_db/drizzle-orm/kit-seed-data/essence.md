@@ -1,0 +1,1 @@
+Placeholder documentation page for Kit data seeding feature, awaiting drizzle-seed package release.

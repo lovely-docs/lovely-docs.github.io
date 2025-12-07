@@ -1,0 +1,1 @@
+Svelte 4 migration: Node 16+, TypeScript 5+, bundler browser condition required; removed CJS; stricter types for createEventDispatcher/Action/onMount; customElement replaces tag; SvelteComponentTyped→SvelteComponent; transitions local by default; preprocessor execution order changed; eslint-plugin-svelte3→eslint-plugin-svelte; svelte.JSX→svelteHTML namespace.

@@ -1,10 +1,15 @@
 ## Date Picker
 
-A composable date picker component built from Popover and Calendar/RangeCalendar components.
+A date picker component combining Popover and Calendar (or RangeCalendar) components for selecting single dates, date ranges, or dates with presets.
 
 ### Installation
 
-The Date Picker is a composition of `<Popover />` and either `<Calendar />` or `<RangeCalendar />` components. Install dependencies via the Popover, Calendar, and Range Calendar component installation instructions.
+Install via the CLI (skip confirmation and overwrite existing files):
+```
+npx shadcn-svelte@latest add date-picker -y -o
+```
+
+Requires Popover, Calendar, and RangeCalendar components.
 
 ### Basic Usage
 
@@ -13,25 +18,21 @@ The Date Picker is a composition of `<Popover />` and either `<Calendar />` or `
   import CalendarIcon from "@lucide/svelte/icons/calendar";
   import { DateFormatter, type DateValue, getLocalTimeZone } from "@internationalized/date";
   import { cn } from "$lib/utils.js";
-  import { Button } from "$lib/components/ui/button/index.js";
+  import { buttonVariants } from "$lib/components/ui/button/index.js";
   import { Calendar } from "$lib/components/ui/calendar/index.js";
   import * as Popover from "$lib/components/ui/popover/index.js";
   
   const df = new DateFormatter("en-US", { dateStyle: "long" });
-  let value = $state<DateValue>();
+  let value = $state<DateValue | undefined>();
 </script>
 
 <Popover.Root>
-  <Popover.Trigger>
-    {#snippet child({ props })}
-      <Button variant="outline" class={cn("w-[280px] justify-start text-left font-normal", !value && "text-muted-foreground")} {...props}>
-        <CalendarIcon class="mr-2 size-4" />
-        {value ? df.format(value.toDate(getLocalTimeZone())) : "Select a date"}
-      </Button>
-    {/snippet}
+  <Popover.Trigger class={cn(buttonVariants({ variant: "outline", class: "w-[280px] justify-start text-left font-normal" }), !value && "text-muted-foreground")}>
+    <CalendarIcon />
+    {value ? df.format(value.toDate(getLocalTimeZone())) : "Pick a date"}
   </Popover.Trigger>
   <Popover.Content class="w-auto p-0">
-    <Calendar bind:value type="single" initialFocus />
+    <Calendar type="single" bind:value />
   </Popover.Content>
 </Popover.Root>
 ```
@@ -40,13 +41,9 @@ The Date Picker is a composition of `<Popover />` and either `<Calendar />` or `
 
 ```svelte
 <script lang="ts">
-  import CalendarIcon from "@lucide/svelte/icons/calendar";
-  import type { DateRange } from "bits-ui";
   import { CalendarDate, DateFormatter, type DateValue, getLocalTimeZone } from "@internationalized/date";
-  import { cn } from "$lib/utils.js";
-  import { buttonVariants } from "$lib/components/ui/button/index.js";
+  import type { DateRange } from "bits-ui";
   import { RangeCalendar } from "$lib/components/ui/range-calendar/index.js";
-  import * as Popover from "$lib/components/ui/popover/index.js";
   
   const df = new DateFormatter("en-US", { dateStyle: "medium" });
   let value: DateRange = $state({
@@ -56,39 +53,32 @@ The Date Picker is a composition of `<Popover />` and either `<Calendar />` or `
   let startValue: DateValue | undefined = $state(undefined);
 </script>
 
-<div class="grid gap-2">
-  <Popover.Root>
-    <Popover.Trigger class={cn(buttonVariants({ variant: "outline" }), !value && "text-muted-foreground")}>
-      <CalendarIcon class="mr-2 size-4" />
-      {#if value && value.start}
-        {#if value.end}
-          {df.format(value.start.toDate(getLocalTimeZone()))} - {df.format(value.end.toDate(getLocalTimeZone()))}
-        {:else}
-          {df.format(value.start.toDate(getLocalTimeZone()))}
-        {/if}
-      {:else if startValue}
-        {df.format(startValue.toDate(getLocalTimeZone()))}
+<Popover.Root>
+  <Popover.Trigger class={cn(buttonVariants({ variant: "outline" }), !value && "text-muted-foreground")}>
+    <CalendarIcon class="mr-2 size-4" />
+    {#if value?.start}
+      {#if value.end}
+        {df.format(value.start.toDate(getLocalTimeZone()))} - {df.format(value.end.toDate(getLocalTimeZone()))}
       {:else}
-        Pick a date
+        {df.format(value.start.toDate(getLocalTimeZone()))}
       {/if}
-    </Popover.Trigger>
-    <Popover.Content class="w-auto p-0" align="start">
-      <RangeCalendar bind:value onStartValueChange={(v) => { startValue = v; }} numberOfMonths={2} />
-    </Popover.Content>
-  </Popover.Root>
-</div>
+    {:else if startValue}
+      {df.format(startValue.toDate(getLocalTimeZone()))}
+    {:else}
+      Pick a date
+    {/if}
+  </Popover.Trigger>
+  <Popover.Content class="w-auto p-0" align="start">
+    <RangeCalendar bind:value onStartValueChange={(v) => { startValue = v; }} numberOfMonths={2} />
+  </Popover.Content>
+</Popover.Root>
 ```
 
 ### With Presets
 
 ```svelte
 <script lang="ts">
-  import CalendarIcon from "@lucide/svelte/icons/calendar";
   import { DateFormatter, type DateValue, getLocalTimeZone, today } from "@internationalized/date";
-  import { cn } from "$lib/utils.js";
-  import { buttonVariants } from "$lib/components/ui/button/index.js";
-  import { Calendar } from "$lib/components/ui/calendar/index.js";
-  import * as Popover from "$lib/components/ui/popover/index.js";
   import * as Select from "$lib/components/ui/select/index.js";
   
   const df = new DateFormatter("en-US", { dateStyle: "long" });
@@ -108,7 +98,7 @@ The Date Picker is a composition of `<Popover />` and either `<Calendar />` or `
     {value ? df.format(value.toDate(getLocalTimeZone())) : "Pick a date"}
   </Popover.Trigger>
   <Popover.Content class="flex w-auto flex-col space-y-2 p-2">
-    <Select.Root type="single" bind:value={() => valueString, (v) => { if (!v) return; value = today(getLocalTimeZone()).add({ days: Number.parseInt(v) }); }}>
+    <Select.Root type="single" bind:value={() => valueString, (v) => { if (v) value = today(getLocalTimeZone()).add({ days: Number.parseInt(v) }); }}>
       <Select.Trigger>{valueString}</Select.Trigger>
       <Select.Content>
         {#each items as item (item.value)}
@@ -134,15 +124,11 @@ The Date Picker is a composition of `<Popover />` and either `<Calendar />` or `
 </script>
 
 <script lang="ts">
-  import CalendarIcon from "@lucide/svelte/icons/calendar";
   import { CalendarDate, DateFormatter, type DateValue, getLocalTimeZone, parseDate, today } from "@internationalized/date";
   import { defaults, superForm } from "sveltekit-superforms";
   import { zod4 } from "sveltekit-superforms/adapters";
   import { toast } from "svelte-sonner";
-  import { cn } from "$lib/utils.js";
-  import { Button, buttonVariants } from "$lib/components/ui/button/index.js";
-  import { Calendar } from "$lib/components/ui/calendar/index.js";
-  import * as Popover from "$lib/components/ui/popover/index.js";
+  import { Button } from "$lib/components/ui/button/index.js";
   import * as Form from "$lib/components/ui/form/index.js";
   
   const form = superForm(defaults(zod4(formSchema)), {
@@ -156,7 +142,6 @@ The Date Picker is a composition of `<Popover />` and either `<Calendar />` or `
       }
     }
   });
-  
   const { form: formData, enhance } = form;
   const df = new DateFormatter("en-US", { dateStyle: "long" });
   let value = $derived($formData.dob ? parseDate($formData.dob) : undefined);
@@ -174,7 +159,7 @@ The Date Picker is a composition of `<Popover />` and either `<Calendar />` or `
             <CalendarIcon class="ml-auto size-4 opacity-50" />
           </Popover.Trigger>
           <Popover.Content class="w-auto p-0" side="top">
-            <Calendar type="single" value={value as DateValue} bind:placeholder minValue={new CalendarDate(1900, 1, 1)} maxValue={today(getLocalTimeZone())} calendarLabel="Date of birth" onValueChange={(v) => { if (v) { $formData.dob = v.toString(); } else { $formData.dob = ""; } }} />
+            <Calendar type="single" value={value as DateValue} bind:placeholder minValue={new CalendarDate(1900, 1, 1)} maxValue={today(getLocalTimeZone())} calendarLabel="Date of birth" onValueChange={(v) => { $formData.dob = v ? v.toString() : ""; }} />
           </Popover.Content>
         </Popover.Root>
         <Form.Description>Your date of birth is used to calculate your age</Form.Description>

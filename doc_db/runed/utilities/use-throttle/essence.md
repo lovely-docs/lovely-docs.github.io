@@ -1,0 +1,1 @@
+useThrottle(callback, durationFn) - throttles callback execution to max once per duration returned by durationFn

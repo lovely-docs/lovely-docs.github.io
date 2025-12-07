@@ -1,1 +1,0 @@
-customProvider() maps model IDs to LanguageModel/EmbeddingModel/ImageModel instances with optional fallback provider; returns Provider with languageModel(id), embeddingModel(id), imageModel(id) methods.

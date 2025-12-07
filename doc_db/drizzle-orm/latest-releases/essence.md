@@ -1,1 +1,0 @@
-Latest releases and version updates display page

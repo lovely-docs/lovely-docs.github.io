@@ -1,1 +1,1 @@
-Dark mode implementation guide for Svelte and Astro frameworks
+Dark mode implementation for Svelte and Astro frameworks.

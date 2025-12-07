@@ -1,0 +1,1 @@
+Step-by-step guide to set up Drizzle ORM with MySQL using mysql2 driver: install mysql2, configure DATABASE_URL env var, connect via drizzle-orm/mysql2, define schema, create drizzle.config.ts with mysql dialect, apply migrations, seed/query database with TypeScript.

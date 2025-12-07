@@ -1,0 +1,1 @@
+Six migration strategies: database-first pull, or codebase-first via direct push, SQL file generation with CLI/runtime application, manual application, or export for external tools.

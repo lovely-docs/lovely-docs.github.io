@@ -1,1 +1,0 @@
-Reference for all easing functions available in the svelte/easing module for controlling animation timing.

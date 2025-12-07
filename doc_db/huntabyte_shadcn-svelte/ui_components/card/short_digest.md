@@ -1,6 +1,6 @@
 ## Card Component
 
-Composable card with Header, Title, Description, Action, Content, and Footer sub-components.
+Composable card with Root, Header, Title, Description, Action, Content, and Footer sub-components.
 
 ### Installation
 
@@ -8,33 +8,21 @@ Composable card with Header, Title, Description, Action, Content, and Footer sub
 npx shadcn-svelte@latest add card -y -o
 ```
 
-### Basic Usage
+### Example
 
 ```svelte
 <script lang="ts">
   import * as Card from "$lib/components/ui/card/index.js";
+  import { Button } from "$lib/components/ui/button/index.js";
+  import { Label } from "$lib/components/ui/label/index.js";
+  import { Input } from "$lib/components/ui/input/index.js";
 </script>
 
-<Card.Root>
-  <Card.Header>
-    <Card.Title>Title</Card.Title>
-    <Card.Description>Description</Card.Description>
-  </Card.Header>
-  <Card.Content>Content</Card.Content>
-  <Card.Footer>Footer</Card.Footer>
-</Card.Root>
-```
-
-### Example: Login Form
-
-```svelte
 <Card.Root class="w-full max-w-sm">
   <Card.Header>
     <Card.Title>Login to your account</Card.Title>
     <Card.Description>Enter your email below to login</Card.Description>
-    <Card.Action>
-      <Button variant="link">Sign Up</Button>
-    </Card.Action>
+    <Card.Action><Button variant="link">Sign Up</Button></Card.Action>
   </Card.Header>
   <Card.Content>
     <form>

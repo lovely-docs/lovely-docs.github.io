@@ -1,1 +1,0 @@
-GitHub Issues track confirmed bugs and accepted feature requests; Discussions are for proposing and refining features before implementation.

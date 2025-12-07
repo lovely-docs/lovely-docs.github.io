@@ -1,15 +1,11 @@
-## Quick Fixes
+**Streaming**: Azure slow streaming → use `smoothStream()` or change content filter; deployed/proxied failures → add headers (`Transfer-Encoding: chunked`, `Connection: keep-alive`, `Content-Encoding: none`); Vercel timeouts → increase `maxDuration`; v3.0.20+ protocol data → use `toTextStreamResponse()` or `streamProtocol: 'text'`
 
-**Streaming**: Azure slow → use `smoothStream()`; deployed → add `Transfer-Encoding: chunked` header; proxied → add `Content-Encoding: none`; Vercel timeout → increase `maxDuration`
+**useChat**: Tool calls missing response → use `convertToModelMessages()`; duplicate messages → pass `originalMessages`; custom headers/body → use `DefaultChatTransport` or `sendMessage()` options; stale data → pass dynamic values to `sendMessage()`; type errors with tools → check `toolCall.dynamic`; update throttling → use `experimental_throttle`
 
-**useChat**: Parse error → `streamProtocol: 'text'`; no response → `convertToModelMessages()`; stale body → pass to `sendMessage()` not hook; status but no text → check `lastMessage?.parts?.length === 0`
+**Server Actions**: Can't inline "use server" → export from separate file or use `createAI`/`useActions`; Streamable UI errors → use `.tsx` extension; non-serializable objects → extract serializable data only
 
-**Tools**: Missing result → add `execute` or use `addToolOutput`; type errors → check `toolCall.dynamic` first
+**Tools**: Missing result → add `execute` function or use `useChat` with `addToolOutput`; structured outputs → use `streamText` with `output` option and adjust `stopWhen` step count; onFinish not called on abort → add `consumeSseStream: consumeStream`
 
-**Server Actions**: Use separate file with `"use server"` or pass via props; `.tsx` for Streamable UI
+**Errors**: Generic messages → use `getErrorMessage` callback; silent failures → use `onError` callback
 
-**Errors**: Generic error → use `getErrorMessage`; silent failure → add `onError` callback
-
-**Schema**: Zod perf → upgrade to 4.1.8+; OpenAI structured → use `.nullable()` not `.optional()`
-
-**Versions**: Model error → update `@ai-sdk/*` to 2.0.0+, `ai` to 5.0.0+
+**Compatibility**: Zod performance → upgrade to 4.1.8+ or set `moduleResolution: "nodenext"`; AI SDK 5 → update `@ai-sdk/*` to 2.0.0+; OpenAI schemas → use `.nullable()` not `.nullish()`; Jest RSC → add moduleNameMapper; resume/abort conflict → choose one

@@ -1,0 +1,1 @@
+Error for invalid data content in multi-modal messages. Check with `InvalidDataContentError.isInstance(error)`. Has `content` and `message` properties.

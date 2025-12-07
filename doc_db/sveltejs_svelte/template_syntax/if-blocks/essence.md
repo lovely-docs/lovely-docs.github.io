@@ -1,1 +1,1 @@
-Conditional rendering in Svelte templates using if/else if/else blocks.
+Conditional rendering: {#if expr}...{:else if expr}...{:else}...{/if} wraps elements or text

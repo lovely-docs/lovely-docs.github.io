@@ -1,0 +1,1 @@
+Changelog entries use format `- <type>(<scope>): <description>`. Types: `fix`, `feat`, `improve`, `chore`, `docs`. Scope is component name or general term. Description is concise, lowercase, verb-first, with backticks for code, max 10-15 words.

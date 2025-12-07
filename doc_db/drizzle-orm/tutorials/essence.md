@@ -1,1 +1,1 @@
-Tutorial index page that renders aggregated tutorial content through a component.
+Documentation hub page that displays tutorial listings and links.

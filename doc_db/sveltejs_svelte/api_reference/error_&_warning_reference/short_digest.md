@@ -1,15 +1,1 @@
-## Error & Warning Reference
-
-Complete reference for Svelte compiler and runtime errors and warnings across client, server, and shared contexts.
-
-**Key Client Errors**: Reactivity violations (`state_unsafe_mutation`, `effect_update_depth_exceeded`), binding issues (`bind_not_bindable`), lifecycle restrictions (`effect_orphan`, `set_context_after_init`), component API changes (`component_api_invalid_new`)
-
-**Key Client Warnings**: Reactivity tracking (`await_reactivity_loss`), state proxies (`state_proxy_equality_mismatch`, `console_log_state`), hydration mismatches
-
-**Key Compiler Errors**: Animation/binding/block structure violations, CSS scoping issues, rune usage errors, snippet/state declaration problems, svelte meta element restrictions
-
-**Key Compiler Warnings**: Accessibility (a11y_*) violations, code quality issues (unused exports, non-reactive updates, component naming), deprecated options and patterns
-
-**Server Errors**: Async rendering restrictions, deprecated properties, lifecycle unavailability
-
-**Shared Errors**: Snippet rendering requirements, lifecycle scope restrictions, context/store shape requirements
+**Reactivity**: `async_derived_orphan`, `effect_update_depth_exceeded` (use `untrack()`), `state_unsafe_mutation` (use derived/effects). **Binding**: `bind_invalid_checkbox_value` (use `bind:checked`), `bind_not_bindable` (use `$bindable()`). **Each blocks**: `each_item_invalid_assignment` (use index in runes mode). **CSS**: `:global` mixing rules. **Snippets**: `snippet_invalid_export`, `snippet_without_render_tag` (use `{@render}`). **HTML repair**: `node_invalid_placement` breaks structure. **Accessibility**: 40+ a11y rules (aria attributes, labels, roles, keyboard handlers). **Async**: `experimental_async` option needed for await in deriveds/templates. **Server**: `await_invalid` (wrap in boundary), `lifecycle_function_unavailable`. **Shared**: `invalid_default_snippet` (use named snippets), `missing_context`, `store_invalid_shape`.

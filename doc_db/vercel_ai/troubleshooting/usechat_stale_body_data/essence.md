@@ -1,0 +1,1 @@
+useChat body parameter captures values at initialization; pass dynamic values to sendMessage's second argument instead, or use useRef with hook-level function config.

@@ -1,0 +1,2 @@
+- Added `@vercel/postgres` package mappings
+- Fixed interval mapping for `neon` drivers

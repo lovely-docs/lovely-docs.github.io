@@ -1,6 +1,6 @@
 ## Hover Card
 
-A component that displays preview content when users hover over a link, useful for showing additional information without navigation.
+A component that displays preview content when hovering over a link, useful for showing additional information to sighted users.
 
 ### Installation
 
@@ -8,7 +8,7 @@ A component that displays preview content when users hover over a link, useful f
 npx shadcn-svelte@latest add hover-card -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Basic Usage
 
@@ -25,7 +25,7 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </HoverCard.Root>
 ```
 
-### Complete Example with Avatar
+### Example with Avatar and Metadata
 
 ```svelte
 <script lang="ts">
@@ -64,10 +64,10 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </HoverCard.Root>
 ```
 
-### Structure
+### Components
 
 - `HoverCard.Root`: Container component
-- `HoverCard.Trigger`: The element that triggers the hover preview (can be a link with href, target, rel attributes)
-- `HoverCard.Content`: The preview content displayed on hover (supports custom styling with class prop)
+- `HoverCard.Trigger`: The element that triggers the hover card (can be a link with href)
+- `HoverCard.Content`: The content displayed on hover
 
-The component is built on Bits UI's link-preview component. See Bits UI documentation for full API reference.
+See Bits UI documentation for full API reference.

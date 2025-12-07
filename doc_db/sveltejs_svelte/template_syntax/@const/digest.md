@@ -9,5 +9,5 @@ The `{@const ...}` tag defines a local constant within a block scope.
 ```
 
 **Constraints:**
-- `{@const}` can only be used as an immediate child of a block (`{#if ...}`, `{#each ...}`, `{#snippet ...}`, etc.), a `<Component />`, or a `<svelte:boundary>`
-- The constant is scoped to that block
+- Only allowed as an immediate child of a block (`{#if ...}`, `{#each ...}`, `{#snippet ...}`, etc.), a `<Component />`, or a `<svelte:boundary>`
+- Creates a variable that is scoped to the containing block

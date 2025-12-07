@@ -1,117 +1,81 @@
-## SQL Select
-
-Type-safe, composable select queries with automatic type inference.
-
-### Selection
-
-Select all columns or specific fields:
-```typescript
+## Basic Select
+```ts
 const result = await db.select().from(users);
-const result = await db.select({ id: users.id, name: users.name }).from(users);
 ```
+Result type inferred from table definition. Drizzle explicitly lists columns instead of `select *`.
 
-Use expressions and computed fields:
-```typescript
+## Partial Select & Expressions
+```ts
 const result = await db.select({
-  id: users.id,
+  field1: users.id,
   lowerName: sql<string>`lower(${users.name})`,
 }).from(users);
 ```
 
-Advanced selection with `getTableColumns()`:
-```typescript
-const { content, ...rest } = getTableColumns(posts);
-await db.select({ ...rest }).from(posts);
+## Distinct
+```ts
+await db.selectDistinct().from(users).orderBy(users.id);
+// PostgreSQL only: await db.selectDistinctOn([users.id]).from(users);
 ```
 
-Distinct selection:
-```typescript
-await db.selectDistinct().from(users);
-await db.selectDistinctOn([users.id]).from(users); // PostgreSQL only
+## Advanced Select
+```ts
+import { getTableColumns } from 'drizzle-orm';
+await db.select({ ...getTableColumns(posts), titleLength: sql<number>`length(${posts.title})` }).from(posts);
+// Or: await db.query.posts.findMany({ columns: { title: true } });
 ```
 
-### Filters
-
-Filter with operators or custom SQL:
-```typescript
-import { eq, lt, gte, ne, and, or, not } from 'drizzle-orm';
-
+## Filters
+```ts
+import { eq, lt, gte, ne, not, and, or } from 'drizzle-orm';
 await db.select().from(users).where(eq(users.id, 42));
 await db.select().from(users).where(and(eq(users.id, 42), eq(users.name, 'Dan')));
-await db.select().from(users).where(sql`${users.id} < 42`);
+// Custom: await db.select().from(users).where(sql`${users.id} < 42`);
 ```
+All values parameterized automatically.
 
-All values are automatically parameterized.
-
-### Pagination
-
-Limit, offset, and ordering:
-```typescript
+## Limit, Offset, Order By
+```ts
 import { asc, desc } from 'drizzle-orm';
-
 await db.select().from(users).limit(10).offset(10);
-await db.select().from(users).orderBy(asc(users.name));
+await db.select().from(users).orderBy(asc(users.name), desc(users.age));
 ```
 
-Cursor-based pagination:
-```typescript
-const nextUserPage = async (cursor?: number, pageSize = 3) => {
-  await db.select().from(users)
-    .where(cursor ? gt(users.id, cursor) : undefined)
-    .limit(pageSize)
-    .orderBy(asc(users.id));
-};
+## Pagination
+```ts
+// Limit-offset: .orderBy(asc(users.id)).limit(pageSize).offset((page - 1) * pageSize)
+// Cursor-based: .where(cursor ? gt(users.id, cursor) : undefined).limit(pageSize).orderBy(asc(users.id))
 ```
 
-### WITH Clause (CTEs)
-
-```typescript
+## WITH Clause (CTEs)
+```ts
 const sq = db.$with('sq').as(db.select().from(users).where(eq(users.id, 42)));
 const result = await db.with(sq).select().from(sq);
+// Also supports insert/update/delete in WITH
 ```
 
-Use insert/update/delete in WITH and add aliases for arbitrary SQL values.
-
-### Subqueries
-
-```typescript
+## Subqueries
+```ts
 const sq = db.select().from(users).where(eq(users.id, 42)).as('sq');
 const result = await db.select().from(sq);
-await db.select().from(users).leftJoin(sq, eq(users.id, sq.id));
+// Use in joins: .leftJoin(sq, eq(users.id, sq.id))
 ```
 
-### Aggregations
-
-Group and aggregate with helpers:
-```typescript
+## Aggregations
+```ts
 import { count, countDistinct, avg, sum, max, min } from 'drizzle-orm';
-
-await db.select({
-  age: users.age,
-  count: count(),
-}).from(users).groupBy(users.age);
-
-await db.select({
-  age: users.age,
-  count: count(),
-}).from(users).groupBy(users.age).having(({ count }) => gt(count, 1));
+await db.select({ age: users.age, count: count() }).from(users).groupBy(users.age);
+await db.select({ age: users.age, count: count() }).from(users).groupBy(users.age).having(({ count }) => gt(count, 1));
 ```
 
-### Iterator
-
-**MySQL only** - Stream large result sets:
-```typescript
+## Iterator (MySQL only)
+```ts
 const iterator = await db.select().from(users).iterator();
-for await (const row of iterator) {
-  console.log(row);
-}
+for await (const row of iterator) { console.log(row); }
 ```
 
-### Index Hints
-
-**MySQL only** - USE INDEX, IGNORE INDEX, FORCE INDEX:
-```typescript
-await db.select().from(users, { useIndex: indexName }).where(...);
-await db.select().from(users, { ignoreIndex: indexName }).where(...);
-await db.select().from(users, { forceIndex: indexName }).where(...);
+## Index Hints (MySQL only)
+```ts
+// useIndex, ignoreIndex, forceIndex options on .from() and .leftJoin()
+await db.select().from(users, { useIndex: indexName }).where(eq(users.name, 'David'));
 ```

@@ -1,1 +1,0 @@
-Error thrown when functionality is not supported. Check with `UnsupportedFunctionalityError.isInstance(error)`. Has `functionality` and `message` properties.

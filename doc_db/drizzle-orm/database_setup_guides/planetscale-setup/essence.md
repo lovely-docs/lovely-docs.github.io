@@ -1,0 +1,1 @@
+Setup Drizzle with PlanetScale MySQL via HTTP driver: install @planetscale/database, configure credentials in .env, connect, define schema, setup mysql config, apply migrations, seed/query database.

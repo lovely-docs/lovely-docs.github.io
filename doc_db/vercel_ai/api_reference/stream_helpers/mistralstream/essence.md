@@ -1,0 +1,1 @@
+Deprecated MistralStream helper (removed in SDK 4.0) converted Mistral responses to ReadableStream with onStart/onToken/onCompletion/onFinal callbacks; replaced by Mistral Provider.

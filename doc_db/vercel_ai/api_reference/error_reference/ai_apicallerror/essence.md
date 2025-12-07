@@ -1,1 +1,0 @@
-AI_APICallError: error for failed API calls with url, status code, response headers/body, retry status, and detection via APICallError.isInstance()

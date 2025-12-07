@@ -1,1 +1,0 @@
-Strongly-typed FSM with state/event configuration, conditional actions, lifecycle hooks (_enter/_exit), wildcard fallback (*), and debounced transitions.

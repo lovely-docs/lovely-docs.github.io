@@ -1,0 +1,1 @@
+This page is a placeholder for documentation on Drizzle Kit's data seeding functionality. The actual content will be added after the release of the `drizzle-seed` package. Currently, the page only contains import statements for various MDX components and a notice that the section is pending the package release.

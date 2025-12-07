@@ -1,8 +1,8 @@
-## Chart
+## Chart Component
 
-Beautiful, customizable charts built on LayerChart. Copy and paste into your apps.
+Beautiful, composable charts built on LayerChart. Copy-paste components into your apps.
 
-**Important:** LayerChart v2 is in pre-release and actively evolving. Only use if comfortable with potential breaking changes. Track development status on GitHub.
+**Important:** LayerChart v2 is in pre-release with potential breaking changes. Track development at the LayerChart PR #449.
 
 ### Installation
 
@@ -10,11 +10,11 @@ Beautiful, customizable charts built on LayerChart. Copy and paste into your app
 npx shadcn-svelte@latest add chart -y -o
 ```
 
-Flags: `-y` skips confirmation prompt, `-o` overwrites existing files.
+Flags: `-y` skips confirmation, `-o` overwrites existing files.
 
-### Component Design
+### Core Concept
 
-Charts use composition with LayerChart components. You build charts using LayerChart components and only bring in custom components like `ChartTooltip` when needed. LayerChart is not wrapped, so you're not locked into an abstraction and can follow official upgrade paths.
+Charts use composition with LayerChart components. You build charts using LayerChart's components and only import custom components like `ChartTooltip` when needed. LayerChart is not wrapped, so you're not locked into an abstraction and can follow official upgrade paths.
 
 ```svelte
 <script lang="ts">
@@ -33,8 +33,7 @@ Charts use composition with LayerChart components. You build charts using LayerC
 
 ### Building Your First Chart
 
-Define data in any shape using `dataKey` prop to map to the chart:
-
+**1. Define data** (any shape; use `dataKey` prop to map):
 ```ts
 const chartData = [
   { month: "January", desktop: 186, mobile: 80 },
@@ -43,23 +42,15 @@ const chartData = [
 ];
 ```
 
-Define chart config with labels, icons, and colors:
-
+**2. Define chart config** (labels, icons, colors):
 ```ts
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "#2563eb",
-  },
-  mobile: {
-    label: "Mobile",
-    color: "#60a5fa",
-  },
+  desktop: { label: "Desktop", color: "#2563eb" },
+  mobile: { label: "Mobile", color: "#60a5fa" },
 } satisfies Chart.ChartConfig;
 ```
 
-Build chart using LayerChart's simplified components (e.g., `BarChart`):
-
+**3. Build chart with LayerChart components**:
 ```svelte
 <Chart.Container config={chartConfig} class="min-h-[200px] w-full">
   <BarChart
@@ -72,53 +63,20 @@ Build chart using LayerChart's simplified components (e.g., `BarChart`):
       { key: "desktop", label: chartConfig.desktop.label, color: chartConfig.desktop.color },
       { key: "mobile", label: chartConfig.mobile.label, color: chartConfig.mobile.color }
     ]}
-  />
+    props={{
+      xAxis: { format: (d) => d.slice(0, 3) }
+    }}
+  >
+    {#snippet tooltip()}
+      <Chart.Tooltip />
+    {/snippet}
+  </BarChart>
 </Chart.Container>
 ```
 
-### Customizing Axis Ticks
+### Chart Config
 
-Use `props` prop to pass custom props to chart components. Format x-axis ticks:
-
-```svelte
-<BarChart
-  {data}
-  {/* ... */}
-  props={{
-    xAxis: {
-      format: (d) => d.slice(0, 3),
-    },
-  }}
-/>
-```
-
-### Adding Tooltip
-
-Replace `tooltip={false}` with `tooltip` snippet containing `Chart.Tooltip`:
-
-```svelte
-<BarChart {data} {/* ... */}>
-  {#snippet tooltip()}
-    <Chart.Tooltip />
-  {/snippet}
-</BarChart>
-```
-
-### Adding Legend
-
-Set `legend` prop to `true`:
-
-```svelte
-<BarChart {data} {/* ... */} legend>
-  {#snippet tooltip()}
-    <Chart.Tooltip />
-  {/snippet}
-</BarChart>
-```
-
-## Chart Config
-
-Chart config holds labels, icons, and colors. Intentionally decoupled from chart data to share config and color tokens between charts.
+Decoupled from chart data. Holds labels, icons, and colors. Supports theme objects with light/dark variants:
 
 ```ts
 const chartConfig = {
@@ -126,21 +84,15 @@ const chartConfig = {
     label: "Desktop",
     icon: MonitorIcon,
     color: "#2563eb",
-    // OR theme object with 'light' and 'dark' keys
-    theme: {
-      light: "#2563eb",
-      dark: "#dc2626",
-    },
-  },
+    // OR theme object:
+    theme: { light: "#2563eb", dark: "#dc2626" }
+  }
 } satisfies Chart.ChartConfig;
 ```
 
-## Theming
+### Theming
 
-### CSS Variables (Recommended)
-
-Define colors in CSS:
-
+**CSS Variables (recommended)**:
 ```css
 :root {
   --chart-1: oklch(0.646 0.222 41.116);
@@ -152,72 +104,50 @@ Define colors in CSS:
 }
 ```
 
-Add to chart config:
-
+Reference in config:
 ```ts
 const chartConfig = {
   desktop: { label: "Desktop", color: "var(--chart-1)" },
-  mobile: { label: "Mobile", color: "var(--chart-2)" },
+  mobile: { label: "Mobile", color: "var(--chart-2)" }
 } satisfies Chart.ChartConfig;
 ```
 
-### Direct Color Values
+Use in components: `<Bar fill="var(--color-desktop)" />`
 
-Use hex, hsl, or oklch directly:
+Use in data: `{ browser: "chrome", visitors: 275, color: "var(--color-chrome)" }`
 
-```ts
-const chartConfig = {
-  desktop: { label: "Desktop", color: "#2563eb" },
-} satisfies Chart.ChartConfig;
-```
+Use in Tailwind: `<Label class="fill-(--color-desktop)" />`
 
-### Using Colors
+Also supports hex, hsl, oklch directly in config.
 
-Reference colors using `var(--color-KEY)` format:
+### Tooltip Component
 
-In components: `<Bar fill="var(--color-desktop)" />`
+`<Chart.Tooltip>` customizes tooltips with label, name, indicator, and value.
 
-In chart data: `{ browser: "chrome", visitors: 275, color: "var(--color-chrome)" }`
+**Props**:
+- `labelKey` (string): Config/data key for label
+- `nameKey` (string): Config/data key for name
+- `indicator` (`dot` | `line` | `dashed`): Indicator style
+- `hideLabel` (boolean): Hide label
+- `hideIndicator` (boolean): Hide indicator
+- `label` (string): Custom label
+- `labelFormatter` (function): Format label
+- `formatter` (Snippet): Custom tooltip rendering
 
-In Tailwind: `<Label class="fill-(--color-desktop)" />`
-
-## Tooltip
-
-Chart tooltip contains label, name, indicator, and value. Customize using `hideLabel`, `hideIndicator` props and `indicator` prop (values: `dot`, `line`, `dashed`).
-
-Use `labelKey` and `nameKey` to use custom keys for tooltip label and name.
-
-### Chart.Tooltip Props
-
-| Prop | Type | Description |
-|------|------|-------------|
-| `labelKey` | string | Config or data key for label |
-| `nameKey` | string | Config or data key for name |
-| `indicator` | `dot` \| `line` \| `dashed` | Indicator style |
-| `hideLabel` | boolean | Hide label |
-| `hideIndicator` | boolean | Hide indicator |
-| `label` | string | Custom label |
-| `labelFormatter` | function | Format label |
-| `formatter` | Snippet | Flexible tooltip rendering |
-
-Colors automatically reference chart config.
-
-### Custom Tooltip Keys
-
-```ts
-const chartData = [
-  { browser: "chrome", visitors: 187 },
-  { browser: "safari", visitors: 200 },
-];
-const chartConfig = {
-  visitors: { label: "Total Visitors" },
-  chrome: { label: "Chrome", color: "var(--chart-1)" },
-  safari: { label: "Safari", color: "var(--chart-2)" },
-} satisfies ChartConfig;
-```
-
+**Example with custom keys**:
 ```svelte
+<script lang="ts">
+  const chartData = [
+    { browser: "chrome", visitors: 187 },
+    { browser: "safari", visitors: 200 }
+  ];
+  const chartConfig = {
+    visitors: { label: "Total Visitors" },
+    chrome: { label: "Chrome", color: "var(--chart-1)" },
+    safari: { label: "Safari", color: "var(--chart-2)" }
+  } satisfies ChartConfig;
+</script>
 <Chart.Tooltip labelKey="visitors" nameKey="browser" />
 ```
 
-Uses "Total Visitors" for label and "Chrome"/"Safari" for names.
+Colors are automatically referenced from chart config.

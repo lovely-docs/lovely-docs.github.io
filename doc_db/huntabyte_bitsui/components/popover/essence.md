@@ -1,0 +1,1 @@
+Floating panel component with positioning, focus management, scroll lock, escape/outside-click handling, custom anchoring, and transition support.

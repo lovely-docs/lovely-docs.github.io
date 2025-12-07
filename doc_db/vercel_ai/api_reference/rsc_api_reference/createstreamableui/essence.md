@@ -1,1 +1,1 @@
-Server-to-client React UI streaming via `update()`, `append()`, `done()` (required), and `error()` methods; experimental RSC feature.
+createStreamableUI: stream React components from server to client with update/append/done/error methods; done() call required to close stream.

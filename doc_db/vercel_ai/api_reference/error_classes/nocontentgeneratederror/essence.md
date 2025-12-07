@@ -1,0 +1,1 @@
+NoContentGeneratedError: thrown when AI provider fails to generate content; check with isInstance() method.

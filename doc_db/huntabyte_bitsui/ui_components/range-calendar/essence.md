@@ -1,1 +1,0 @@
-Calendar component for selecting date ranges with constraints, date disabling, and customizable formatting.

@@ -1,30 +1,39 @@
-## Generated Types for Routes
+## Generated types
 
-SvelteKit automatically generates `.d.ts` files for each endpoint and page, providing typed `RequestHandler` and `Load` functions based on route parameters.
+SvelteKit automatically generates `.d.ts` files for each endpoint and page, providing typed `RequestHandler` and `Load` functions with route parameters.
 
 Instead of manually typing params:
 ```js
-/** @type {import('@sveltejs/kit').RequestHandler<{foo: string; bar: string; baz: string}>} */
+/** @type {import('@sveltejs/kit').RequestHandler<{
+    foo: string;
+    bar: string;
+    baz: string
+  }>} */
 export async function GET({ params }) {}
 ```
 
-Use the generated `$types` module:
+SvelteKit generates `.svelte-kit/types/src/routes/[foo]/[bar]/[baz]/$types.d.ts`:
+```ts
+import type * as Kit from '@sveltejs/kit';
+type RouteParams = { foo: string; bar: string; baz: string; };
+export type RequestHandler = Kit.RequestHandler<RouteParams>;
+export type PageLoad = Kit.Load<RouteParams>;
+```
+
+Import via `$types` module (enabled by `rootDirs` in tsconfig):
 ```js
+// +server.js
 /** @type {import('./$types').RequestHandler} */
 export async function GET({ params }) {}
+
+// +page.js
+/** @type {import('./$types').PageLoad} */
+export async function load({ params, fetch }) {}
 ```
 
-The generated `.svelte-kit/types/src/routes/[foo]/[bar]/[baz]/$types.d.ts` exports `RequestHandler` and `PageLoad` types with route params automatically inferred.
+Return types available as `PageData` and `LayoutData` from `$types`. Union of all `Actions` available as `ActionData`.
 
-## Type Exports from $types
-
-- `PageData`: Return type of page `load` functions
-- `LayoutData`: Return type of layout `load` functions
-- `ActionData`: Union of all `Actions` return types
-- `PageProps` (v2.16.0+): Combines `data: PageData` and `form: ActionData`
-- `LayoutProps` (v2.16.0+): Combines `data: LayoutData` and `children: Snippet`
-
-Usage in components:
+Since v2.16.0, helper types `PageProps` (includes `data: PageData` and `form: ActionData`) and `LayoutProps` (includes `data: LayoutData` and `children: Snippet`):
 ```svelte
 <script>
 	/** @type {import('./$types').PageProps} */
@@ -32,26 +41,77 @@ Usage in components:
 </script>
 ```
 
-## TypeScript Configuration
-
-Your `tsconfig.json` or `jsconfig.json` must extend `.svelte-kit/tsconfig.json`:
-```json
-{ "extends": "./.svelte-kit/tsconfig.json" }
+Legacy (pre-2.16.0 or Svelte 4):
+```svelte
+<script>
+	/** @type {{ data: import('./$types').PageData, form: import('./$types').ActionData }} */
+	let { data, form } = $props();
+	// or with Svelte 4:
+	export let data; // @type {import('./$types').PageData}
+	export let form; // @type {import('./$types').ActionData}
+</script>
 ```
 
-The generated config uses `rootDirs` to allow importing `$types` as siblings. Key compiler options include `verbatimModuleSyntax: true`, `isolatedModules: true`, `noEmit: true`, and `moduleResolution: "bundler"`.
+Requires `tsconfig.json` to extend `.svelte-kit/tsconfig.json`: `{ "extends": "./.svelte-kit/tsconfig.json" }`
 
-Extend or modify the generated config using the `typescript.config` setting in `svelte.config.js`.
+## Default tsconfig.json
 
-## $lib Alias
+Generated `.svelte-kit/tsconfig.json` contains programmatically-generated options (paths, rootDirs) and required options for SvelteKit:
+- `verbatimModuleSyntax: true` - ensures types imported with `import type`
+- `isolatedModules: true` - Vite compiles one module at a time
+- `noEmit: true` - type-checking only
+- `lib: ["esnext", "DOM", "DOM.Iterable"]`
+- `moduleResolution: "bundler"`
+- `module: "esnext"`
+- `target: "esnext"`
 
-`$lib` is an alias to `src/lib` (or configured `config.kit.files.lib`). `$lib/server` is a subdirectory where SvelteKit prevents client-side imports.
+Extend or modify via `typescript.config` in `svelte.config.js`.
 
-## app.d.ts Ambient Types
+## $lib
 
-The `App` namespace in `app.d.ts` defines:
-- `App.Error`: Shape of errors (has `message: string`)
-- `App.Locals`: Type of `event.locals` in hooks and server functions
-- `App.PageData`: Shared data across all pages
-- `App.PageState`: Shape of `page.state` for `pushState`/`replaceState`
-- `App.Platform`: Platform-specific context from adapters
+Alias to `src/lib` (or configured `config.kit.files.lib`). Avoids relative path imports.
+
+### $lib/server
+
+Subdirectory of `$lib`. SvelteKit prevents importing `$lib/server` modules into client-side code (server-only modules).
+
+## app.d.ts
+
+Contains ambient types available without explicit imports. Includes `App` namespace with types influencing SvelteKit features.
+
+### App.Error
+
+Shape of expected/unexpected errors. Expected errors thrown via `error()` function. Unexpected errors handled by `handleError` hooks.
+```ts
+interface Error {
+  message: string;
+}
+```
+
+### App.Locals
+
+Interface defining `event.locals`, accessible in server hooks (`handle`, `handleError`), server-only `load` functions, and `+server.js` files.
+```ts
+interface Locals {}
+```
+
+### App.PageData
+
+Shape of `page.data` state and `$page.data` store (data shared between all pages). `Load` and `ServerLoad` functions narrowed accordingly. Use optional properties for page-specific data; avoid index signatures.
+```ts
+interface PageData {}
+```
+
+### App.PageState
+
+Shape of `page.state` object, manipulated via `pushState()` and `replaceState()` from `$app/navigation`.
+```ts
+interface PageState {}
+```
+
+### App.Platform
+
+Platform-specific context from adapter via `event.platform`.
+```ts
+interface Platform {}
+```

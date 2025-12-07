@@ -1,0 +1,1 @@
+Hierarchical navigation menu with dropdowns, submenus, and animations. Root manages state with `value`, `orientation`, `delayDuration`. Item wraps Trigger+Content or Link. Viewport renders content with smooth transitions using `data-motion` and CSS variables. Indicator highlights active trigger. Supports force mounting for SEO and `openOnHover={false}` for click-based menus.

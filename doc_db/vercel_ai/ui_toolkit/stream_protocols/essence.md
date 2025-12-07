@@ -1,1 +1,0 @@
-Two stream protocols for AI SDK UI: text streams (plain text chunks, `toTextStreamResponse()`) and data streams (SSE-based, `toUIMessageStreamResponse()`, supports text/reasoning/tool/source/file/custom-data parts, ends with `[DONE]`).

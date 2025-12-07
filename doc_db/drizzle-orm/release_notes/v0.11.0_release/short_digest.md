@@ -1,0 +1,1 @@
+TypeScript ORM with fully typed schema. Define tables as classes with columns, enums, indexes, and foreign keys. Query with typed select/insert/update/delete, filters (eq/and/or), joins (including many-to-many), and pagination. CLI auto-generates SQL migrations from schema.

@@ -1,30 +1,36 @@
-## Prompt Types
+## Prompts
 
-The AI SDK supports three prompt structures:
+Prompts are instructions given to LLMs. The AI SDK supports three prompt types:
 
 ### Text Prompts
-Simple string prompts set via the `prompt` property. Ideal for simple generation use cases. Supports template literals for dynamic data injection.
+Simple string prompts, ideal for repeated generation with variants. Set via `prompt` property:
 
 ```ts
 const result = await generateText({
   model: 'anthropic/claude-sonnet-4.5',
-  prompt: `I am planning a trip to ${destination} for ${lengthOfStay} days. Please suggest the best tourist activities.`,
+  prompt: 'Invent a new holiday and describe its traditions.',
+});
+
+// With template literals for dynamic data:
+const result = await generateText({
+  model: 'anthropic/claude-sonnet-4.5',
+  prompt: `I am planning a trip to ${destination} for ${lengthOfStay} days. Please suggest the best tourist activities for me to do.`,
 });
 ```
 
 ### System Prompts
-Initial instructions that guide and constrain model behavior. Set via the `system` property, works with both `prompt` and `messages` properties.
+Initial instructions that guide model behavior. Set via `system` property, works with both `prompt` and `messages`:
 
 ```ts
 const result = await generateText({
   model: 'anthropic/claude-sonnet-4.5',
-  system: 'You help planning travel itineraries. Respond with a list of the best stops.',
-  prompt: `I am planning a trip to ${destination} for ${lengthOfStay} days.`,
+  system: `You help planning travel itineraries. Respond to the users' request with a list of the best stops to make in their destination.`,
+  prompt: `I am planning a trip to ${destination} for ${lengthOfStay} days. Please suggest the best tourist activities for me to do.`,
 });
 ```
 
 ### Message Prompts
-Arrays of user, assistant, and tool messages for chat interfaces and complex multi-modal prompts. Set via the `messages` property. Each message has a `role` and `content` property.
+Array of user, assistant, and tool messages for chat interfaces and complex multi-modal prompts. Set via `messages` property. Each message has `role` and `content`:
 
 ```ts
 const result = await generateText({
@@ -37,11 +43,12 @@ const result = await generateText({
 });
 ```
 
-## Provider Options
+Content can be text string or array of parts (text, images, files, tool calls).
 
+### Provider Options
 Pass provider-specific metadata at three levels:
 
-**Function call level** - for general provider options:
+**Function level** - for general provider options:
 ```ts
 const { text } = await generateText({
   model: azure('your-deployment-name'),
@@ -77,7 +84,7 @@ const messages: ModelMessage[] = [
       },
       {
         type: 'image',
-        image: 'https://example.com/image.png',
+        image: 'https://github.com/vercel/ai/blob/main/examples/ai-core/data/comic-cat.png?raw=true',
         providerOptions: { openai: { imageDetail: 'low' } },
       },
     ],
@@ -85,13 +92,9 @@ const messages: ModelMessage[] = [
 ];
 ```
 
-Note: UI hooks like `useChat` return `UIMessage` objects without provider options support. Use `convertToModelMessages` to convert to `ModelMessage` objects first.
+### User Messages
 
-## User Messages
-
-### Text Parts
-Text content is the most common type. Can be a string directly or within an array of content parts.
-
+**Text parts** - most common content type:
 ```ts
 const result = await generateText({
   model: 'anthropic/claude-sonnet-4.5',
@@ -106,103 +109,40 @@ const result = await generateText({
 });
 ```
 
-### Image Parts
-User messages can include images in multiple formats:
-- Base64-encoded: `string` with base-64 content or data URL `data:image/png;base64,...`
-- Binary: `ArrayBuffer`, `Uint8Array`, or `Buffer`
-- URL: http(s) URL `string` or `URL` object
-
+**Image parts** - can be base64-encoded, binary (ArrayBuffer/Uint8Array/Buffer), or URL:
 ```ts
-// Binary image (Buffer)
-const result = await generateText({
-  model,
-  messages: [
-    {
-      role: 'user',
-      content: [
-        { type: 'text', text: 'Describe the image in detail.' },
-        { type: 'image', image: fs.readFileSync('./data/comic-cat.png') },
-      ],
-    },
-  ],
-});
+// Binary (Buffer):
+{ type: 'image', image: fs.readFileSync('./data/comic-cat.png') }
 
-// Base64 encoded image
-const result = await generateText({
-  model: 'anthropic/claude-sonnet-4.5',
-  messages: [
-    {
-      role: 'user',
-      content: [
-        { type: 'text', text: 'Describe the image in detail.' },
-        { type: 'image', image: fs.readFileSync('./data/comic-cat.png').toString('base64') },
-      ],
-    },
-  ],
-});
+// Base64 string:
+{ type: 'image', image: fs.readFileSync('./data/comic-cat.png').toString('base64') }
 
-// Image URL
-const result = await generateText({
-  model: 'anthropic/claude-sonnet-4.5',
-  messages: [
-    {
-      role: 'user',
-      content: [
-        { type: 'text', text: 'Describe the image in detail.' },
-        { type: 'image', image: 'https://example.com/image.png' },
-      ],
-    },
-  ],
-});
+// URL string:
+{ type: 'image', image: 'https://github.com/vercel/ai/blob/main/examples/ai-core/data/comic-cat.png?raw=true' }
+
+// URL object:
+{ type: 'image', image: new URL('https://example.com/image.png') }
 ```
 
-### File Parts
-Only supported by Google Generative AI, Google Vertex AI, OpenAI (wav/mp3 audio with gpt-4o-audio-preview, and pdf), and Anthropic. Requires specifying the MIME type.
-
+**File parts** - supported by Google Generative AI, Google Vertex AI, OpenAI (wav/mp3 audio, pdf), Anthropic. Requires MIME type:
 ```ts
-// PDF file from Buffer
-import { google } from '@ai-sdk/google';
-const result = await generateText({
-  model: google('gemini-1.5-flash'),
-  messages: [
-    {
-      role: 'user',
-      content: [
-        { type: 'text', text: 'What is the file about?' },
-        {
-          type: 'file',
-          mediaType: 'application/pdf',
-          data: fs.readFileSync('./data/example.pdf'),
-          filename: 'example.pdf',
-        },
-      ],
-    },
-  ],
-});
+// PDF from Buffer:
+{
+  type: 'file',
+  mediaType: 'application/pdf',
+  data: fs.readFileSync('./data/example.pdf'),
+  filename: 'example.pdf', // optional
+}
 
-// MP3 audio file from Buffer
-import { openai } from '@ai-sdk/openai';
-const result = await generateText({
-  model: openai('gpt-4o-audio-preview'),
-  messages: [
-    {
-      role: 'user',
-      content: [
-        { type: 'text', text: 'What is the audio saying?' },
-        {
-          type: 'file',
-          mediaType: 'audio/mpeg',
-          data: fs.readFileSync('./data/galileo.mp3'),
-        },
-      ],
-    },
-  ],
-});
+// MP3 audio from Buffer:
+{
+  type: 'file',
+  mediaType: 'audio/mpeg',
+  data: fs.readFileSync('./data/galileo.mp3'),
+}
 ```
 
-### Custom Download Function (Experimental)
-Implement throttling, retries, authentication, caching via the `experimental_download` property. The default implementation automatically downloads files in parallel when not supported by the model.
-
+**Custom download function** (experimental) - implement throttling, retries, authentication, caching:
 ```ts
 const result = await generateText({
   model: 'anthropic/claude-sonnet-4.5',
@@ -234,73 +174,44 @@ const result = await generateText({
 });
 ```
 
-## Assistant Messages
-
-Messages with role `assistant` are typically previous responses from the assistant. Can contain text, reasoning, and tool call parts.
+### Assistant Messages
+Messages with role `assistant`, typically previous responses. Can contain text, reasoning, and tool call parts:
 
 ```ts
-// Text content
-const result = await generateText({
-  model: 'anthropic/claude-sonnet-4.5',
-  messages: [
-    { role: 'user', content: 'Hi!' },
-    { role: 'assistant', content: 'Hello, how can I help?' },
-  ],
-});
+// Text content:
+{ role: 'assistant', content: 'Hello, how can I help?' }
 
-// Text content in array
-const result = await generateText({
-  model: 'anthropic/claude-sonnet-4.5',
-  messages: [
-    { role: 'user', content: 'Hi!' },
+// Text in array:
+{ role: 'assistant', content: [{ type: 'text', text: 'Hello, how can I help?' }] }
+
+// Tool call content:
+{
+  role: 'assistant',
+  content: [
     {
-      role: 'assistant',
-      content: [{ type: 'text', text: 'Hello, how can I help?' }],
+      type: 'tool-call',
+      toolCallId: '12345',
+      toolName: 'get-nutrition-data',
+      input: { cheese: 'Roquefort' },
     },
   ],
-});
+}
 
-// Tool call content
-const result = await generateText({
-  model: 'anthropic/claude-sonnet-4.5',
-  messages: [
-    { role: 'user', content: 'How many calories are in this block of cheese?' },
+// File content (model-generated, limited support):
+{
+  role: 'assistant',
+  content: [
     {
-      role: 'assistant',
-      content: [
-        {
-          type: 'tool-call',
-          toolCallId: '12345',
-          toolName: 'get-nutrition-data',
-          input: { cheese: 'Roquefort' },
-        },
-      ],
+      type: 'file',
+      mediaType: 'image/png',
+      data: fs.readFileSync('./data/roquefort.jpg'),
     },
   ],
-});
-
-// File content (model-generated, only few models support)
-const result = await generateText({
-  model: 'anthropic/claude-sonnet-4.5',
-  messages: [
-    { role: 'user', content: 'Generate an image of a roquefort cheese!' },
-    {
-      role: 'assistant',
-      content: [
-        {
-          type: 'file',
-          mediaType: 'image/png',
-          data: fs.readFileSync('./data/roquefort.jpg'),
-        },
-      ],
-    },
-  ],
-});
+}
 ```
 
-## Tool Messages
-
-For models supporting tool calls, assistant messages can contain tool call parts and tool messages can contain tool output parts. A single assistant message can call multiple tools, and a single tool message can contain multiple tool results.
+### Tool Messages
+For models supporting tool calls. Assistant messages contain tool call parts, tool messages contain tool output parts. Single assistant message can call multiple tools, single tool message can contain multiple results:
 
 ```ts
 const result = await generateText({
@@ -347,55 +258,42 @@ const result = await generateText({
 });
 ```
 
-### Multi-modal Tool Results (Experimental)
-Tool results can be multi-part and multi-modal (text and image). Only supported by Anthropic. Use the `experimental_content` property on tool parts.
-
+**Multi-modal tool results** (experimental, Anthropic only) - use `experimental_content` for multi-part results:
 ```ts
-const result = await generateText({
-  model: 'anthropic/claude-sonnet-4.5',
-  messages: [
+{
+  role: 'tool',
+  content: [
     {
-      role: 'tool',
-      content: [
-        {
-          type: 'tool-result',
-          toolCallId: '12345',
-          toolName: 'get-nutrition-data',
-          output: {
-            type: 'json',
-            value: {
-              name: 'Cheese, roquefort',
-              calories: 369,
-              fat: 31,
-              protein: 22,
-            },
+      type: 'tool-result',
+      toolCallId: '12345',
+      toolName: 'get-nutrition-data',
+      output: {
+        type: 'json',
+        value: { name: 'Cheese, roquefort', calories: 369, fat: 31, protein: 22 },
+      },
+    },
+    {
+      type: 'tool-result',
+      toolCallId: '12345',
+      toolName: 'get-nutrition-data',
+      output: {
+        type: 'content',
+        value: [
+          { type: 'text', text: 'Here is an image of the nutrition data for the cheese:' },
+          {
+            type: 'media',
+            data: fs.readFileSync('./data/roquefort-nutrition-data.png').toString('base64'),
+            mediaType: 'image/png',
           },
-        },
-        {
-          type: 'tool-result',
-          toolCallId: '12345',
-          toolName: 'get-nutrition-data',
-          output: {
-            type: 'content',
-            value: [
-              { type: 'text', text: 'Here is an image of the nutrition data:' },
-              {
-                type: 'media',
-                data: fs.readFileSync('./data/roquefort-nutrition-data.png').toString('base64'),
-                mediaType: 'image/png',
-              },
-            ],
-          },
-        },
-      ],
+        ],
+      },
     },
   ],
-});
+}
 ```
 
-## System Messages
-
-System messages are sent before user messages to guide assistant behavior. Can be set via `messages` array with role `system` or via the `system` property.
+### System Messages
+Messages sent before user messages to guide assistant behavior. Alternative to `system` property:
 
 ```ts
 const result = await generateText({
@@ -404,7 +302,7 @@ const result = await generateText({
     { role: 'system', content: 'You help planning travel itineraries.' },
     {
       role: 'user',
-      content: 'I am planning a trip to Berlin for 3 days. Please suggest the best tourist activities.',
+      content: 'I am planning a trip to Berlin for 3 days. Please suggest the best tourist activities for me to do.',
     },
   ],
 });

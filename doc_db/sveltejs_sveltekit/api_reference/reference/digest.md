@@ -1,1 +1,1 @@
-This is a documentation index page for SvelteKit reference materials. The page itself contains no substantive content - it serves as a structural entry point to organize and link to various reference documentation sections.
+This is a reference documentation index page for SvelteKit. The page itself contains no substantive content - it serves as a structural container and entry point for the reference section of the documentation. The actual reference materials are organized in separate pages linked from this index.

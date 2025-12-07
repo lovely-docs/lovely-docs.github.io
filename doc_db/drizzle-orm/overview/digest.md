@@ -1,16 +1,25 @@
-## What is Drizzle ORM
+## Headless TypeScript ORM
 
-Drizzle ORM is a headless TypeScript ORM designed to be lightweight, performant, typesafe, and serverless-ready. It's a library and collection of opt-in tools that lets you build projects your way without forcing you to structure code around the framework.
+Drizzle is a headless TypeScript ORM designed to let you build projects your way without forcing a specific structure. Unlike traditional data frameworks, Drizzle doesn't require building projects around it.
 
-## Core Philosophy
+### Core Philosophy
 
-Unlike traditional data frameworks (Django-like, Spring-like) that require building projects around them, Drizzle is non-intrusive. It provides tools you use when needed without interfering with your project structure.
+**SQL-like API**: If you know SQL, you know Drizzle. The library embraces SQL rather than abstracting it away, eliminating the double learning curve of learning both SQL and a framework API.
 
-## SQL-Like Query API
+**Relational Query API**: For common scenarios where SQL-like queries aren't optimal, Drizzle provides a Queries API for fetching nested relational data conveniently. Drizzle always outputs exactly 1 SQL query, making it serverless-friendly.
 
-Drizzle embraces SQL as its core design principle. If you know SQL, you know Drizzle - there's minimal learning curve because the API mirrors SQL syntax rather than abstracting it away.
+### Key Features
 
-Example schema definition:
+- **Dual Query APIs**: Both SQL-like and relational query interfaces
+- **Schema Definition**: Define and manage database schemas in TypeScript
+- **Automatic Migrations**: Generate migrations from schema changes
+- **Zero Dependencies**: 31KB slim library, serverless-ready by design
+- **Multi-Database Support**: PostgreSQL, MySQL, SQLite, SingleStore with native driver support
+- **Type-Safe**: Full TypeScript support
+
+### Examples
+
+Schema definition:
 ```typescript
 export const countries = pgTable('countries', {
   id: serial('id').primaryKey(),
@@ -24,7 +33,7 @@ export const cities = pgTable('cities', {
 });
 ```
 
-SQL-like query example:
+SQL-like query:
 ```typescript
 await db
   .select()
@@ -33,12 +42,7 @@ await db
   .where(eq(countries.id, 10))
 ```
 
-This generates corresponding SQL migrations automatically.
-
-## Relational Query API
-
-For scenarios where SQL-like queries aren't optimal, Drizzle provides a Queries API for fetching nested relational data conveniently. Drizzle always outputs exactly 1 SQL query, making it suitable for serverless databases without performance concerns.
-
+Relational query:
 ```typescript
 const result = await db.query.users.findMany({
   with: {
@@ -47,14 +51,19 @@ const result = await db.query.users.findMany({
 });
 ```
 
-## Key Features
+Generated migration:
+```sql
+CREATE TABLE IF NOT EXISTS "countries" (
+  "id" serial PRIMARY KEY NOT NULL,
+  "name" varchar(256)
+);
 
-- **Zero dependencies**: Drizzle has exactly 0 dependencies, making it slim and serverless-ready by design
-- **Dialect-specific**: Best-in-class support for PostgreSQL, MySQL, SQLite, and SingleStore
-- **Native drivers**: Operates through industry-standard database drivers
-- **TypeScript schema management**: Define and manage database schemas in TypeScript
-- **Automatic migrations**: Generate migrations from schema definitions
+CREATE TABLE IF NOT EXISTS "cities" (
+  "id" serial PRIMARY KEY NOT NULL,
+  "name" varchar(256),
+  "country_id" integer
+);
 
-## Use Cases
-
-Define schemas in TypeScript, query data using either SQL-like syntax or relational API, and leverage opt-in tools for enhanced developer experience. Works with PostgreSQL, MySQL, SQLite, or SingleStore databases.
+ALTER TABLE "cities" ADD CONSTRAINT "cities_country_id_countries_id_fk" 
+FOREIGN KEY ("country_id") REFERENCES "countries"("id");
+```

@@ -1,6 +1,7 @@
-Public environment variables that are safely exposed to client-side code. Only includes variables beginning with the configured public prefix (defaults to `PUBLIC_`). Values are replaced statically at build time.
+Public environment variables that are safely exposed to client-side code.
 
-Import public environment variables:
+Only includes variables beginning with the configured public prefix (defaults to `PUBLIC_`). Values are replaced statically at build time, not at runtime.
+
 ```ts
 import { PUBLIC_BASE_URL } from '$env/static/public';
 ```

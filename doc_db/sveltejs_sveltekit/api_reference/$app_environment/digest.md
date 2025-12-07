@@ -1,25 +1,15 @@
-The `$app/environment` module exports four constants for runtime environment detection:
+Module that exports environment-related constants for SvelteKit applications.
 
-- `browser: boolean` — `true` when running in the browser, `false` on the server
-- `building: boolean` — `true` during the build step and prerendering, `false` otherwise
-- `dev: boolean` — `true` when the dev server is running (not guaranteed to match `NODE_ENV` or `MODE`)
-- `version: string` — the value of `config.kit.version.name`
+**Exports:**
 
-Example usage:
+- `browser: boolean` — True if the app is running in the browser (false during server-side rendering or build)
+- `building: boolean` — True during the build step and prerendering when SvelteKit analyzes the app
+- `dev: boolean` — True when the dev server is running (not guaranteed to match NODE_ENV or MODE)
+- `version: string` — The value of `config.kit.version.name`
+
+**Usage:**
 ```js
 import { browser, building, dev, version } from '$app/environment';
-
-if (browser) {
-  // Browser-only code
-}
-
-if (building) {
-  // Build/prerender-only code
-}
-
-if (dev) {
-  // Dev server code
-}
-
-console.log(version);
 ```
+
+Use these to conditionally execute code based on the runtime environment.

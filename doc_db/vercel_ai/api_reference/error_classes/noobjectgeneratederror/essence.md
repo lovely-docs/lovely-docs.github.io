@@ -1,0 +1,1 @@
+NoObjectGeneratedError: thrown when generateObject() fails to produce parsable schema-conforming object; properties include text, response metadata, usage, finishReason, and cause; check with isInstance().

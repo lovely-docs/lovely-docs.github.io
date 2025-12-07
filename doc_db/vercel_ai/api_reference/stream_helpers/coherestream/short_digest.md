@@ -1,0 +1,1 @@
+**Deprecated in SDK 4.0**. Converts Cohere API responses to ReadableStream with optional callbacks (onStart, onToken, onCompletion, onFinal). Legacy integration, incompatible with SDK 3.1.

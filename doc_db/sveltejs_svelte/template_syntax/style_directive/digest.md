@@ -1,8 +1,9 @@
-The `style:` directive provides a shorthand for setting inline styles on elements.
+The `style:` directive provides a shorthand for setting CSS styles on elements.
 
 **Basic usage:**
 ```svelte
 <div style:color="red">...</div>
+<!-- equivalent to: <div style="color: red;">...</div> -->
 ```
 
 **Dynamic values:**
@@ -10,7 +11,7 @@ The `style:` directive provides a shorthand for setting inline styles on element
 <div style:color={myColor}>...</div>
 ```
 
-**Shorthand form** (uses variable name as value):
+**Shorthand form** (uses variable with same name as property):
 ```svelte
 <div style:color>...</div>
 ```
@@ -25,7 +26,8 @@ The `style:` directive provides a shorthand for setting inline styles on element
 <div style:color|important="red">...</div>
 ```
 
-**Precedence:** `style:` directives take precedence over `style` attributes and `!important` properties:
+**Precedence:** When `style:` directives are combined with `style` attributes, directives take precedence even over `!important` properties:
 ```svelte
+<div style:color="red" style="color: blue">This will be red</div>
 <div style:color="red" style="color: blue !important">This will still be red</div>
 ```

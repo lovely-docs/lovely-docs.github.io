@@ -1,0 +1,1 @@
+Create history entries without navigation via pushState/replaceState; access state through page.state; use preloadData to fetch route data for modals; requires JavaScript.

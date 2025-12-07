@@ -1,1 +1,0 @@
-Documentation index page for miscellaneous Svelte topics. No substantive content provided.

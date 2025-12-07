@@ -1,1 +1,0 @@
-API for server-side rendering of Svelte components with the render function.

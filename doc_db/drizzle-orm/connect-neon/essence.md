@@ -1,1 +1,1 @@
-Connect Drizzle to Neon Postgres using neon-http (serverless HTTP), neon-websockets (interactive transactions), or PostgresJS (serverful) drivers.
+Connect to Neon serverless Postgres via neon-http (single queries) or neon-websockets (sessions); supports node-postgres and postgres.js drivers for serverful Node.js.

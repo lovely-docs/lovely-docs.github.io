@@ -1,0 +1,1 @@
+useChat transport system: default HTTP POST to /api/chat, configurable via DefaultChatTransport with headers/body/credentials (static or dynamic functions), request transformation via prepareSendMessagesRequest, or implement custom ChatTransport interface.

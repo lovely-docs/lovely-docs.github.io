@@ -2,46 +2,46 @@
   "map": {
     "origPath": ".",
     "displayName": "",
-    "relevant": true,
+    "relevant": false,
     "usage": {
-      "input": 85847,
-      "output": 1987,
+      "input": 100273,
+      "output": 1910,
       "details": null
     },
     "token_counts": {
-      "fulltext": 83724,
-      "digest": 1255,
-      "short_digest": 602
+      "fulltext": 97710,
+      "digest": 1663,
+      "short_digest": 136
     },
     "children": {
-      "column_types_reference": {
+      "column_types": {
         "origPath": "column-types",
-        "displayName": "Column Types Reference",
+        "displayName": "Column Types",
         "relevant": true,
         "usage": {
-          "input": 6296,
-          "output": 1323,
+          "input": 8327,
+          "output": 1878,
           "details": null
         },
         "token_counts": {
-          "fulltext": 5182,
-          "digest": 960,
-          "short_digest": 251
+          "fulltext": 7040,
+          "digest": 1559,
+          "short_digest": 209
         },
         "children": {
-          "mysql_column_types": {
+          "mysql-column-types": {
             "origPath": "column-types/mysql.mdx",
-            "displayName": "MySQL column types",
+            "displayName": "mysql-column-types",
             "relevant": true,
             "usage": {
-              "input": 5702,
-              "output": 1617,
+              "input": 5776,
+              "output": 1092,
               "details": null
             },
             "token_counts": {
               "fulltext": 4534,
-              "digest": 1172,
-              "short_digest": 261
+              "digest": 832,
+              "short_digest": 127
             },
             "children": {}
           },
@@ -50,30 +50,30 @@
             "displayName": "PostgreSQL column types",
             "relevant": true,
             "usage": {
-              "input": 8849,
-              "output": 2678,
+              "input": 8923,
+              "output": 4989,
               "details": null
             },
             "token_counts": {
               "fulltext": 7681,
-              "digest": 1962,
-              "short_digest": 515
+              "digest": 3181,
+              "short_digest": 1594
             },
             "children": {}
           },
-          "singlestore_column_types": {
+          "singlestore-column-types": {
             "origPath": "column-types/singlestore.mdx",
-            "displayName": "SingleStore column types",
+            "displayName": "singlestore-column-types",
             "relevant": true,
             "usage": {
-              "input": 5495,
-              "output": 1407,
+              "input": 5569,
+              "output": 1958,
               "details": null
             },
             "token_counts": {
               "fulltext": 4325,
-              "digest": 855,
-              "short_digest": 360
+              "digest": 1434,
+              "short_digest": 327
             },
             "children": {}
           },
@@ -82,14 +82,14 @@
             "displayName": "SQLite column types",
             "relevant": true,
             "usage": {
-              "input": 3932,
-              "output": 1282,
+              "input": 4006,
+              "output": 1699,
               "details": null
             },
             "token_counts": {
               "fulltext": 2764,
-              "digest": 811,
-              "short_digest": 329
+              "digest": 1208,
+              "short_digest": 311
             },
             "children": {}
           }
@@ -100,14 +100,14 @@
         "displayName": "PostgreSQL extensions",
         "relevant": true,
         "usage": {
-          "input": 3323,
-          "output": 1490,
+          "input": 3397,
+          "output": 1427,
           "details": null
         },
         "token_counts": {
           "fulltext": 2159,
-          "digest": 1053,
-          "short_digest": 317
+          "digest": 1062,
+          "short_digest": 203
         },
         "children": {}
       },
@@ -116,14 +116,14 @@
         "displayName": "Database Setup Guides",
         "relevant": true,
         "usage": {
-          "input": 22900,
-          "output": 2201,
+          "input": 23574,
+          "output": 1640,
           "details": null
         },
         "token_counts": {
-          "fulltext": 21378,
-          "digest": 1569,
-          "short_digest": 495
+          "fulltext": 21762,
+          "digest": 1406,
+          "short_digest": 130
         },
         "children": {
           "bun-sql-existing": {
@@ -131,30 +131,30 @@
             "displayName": "bun-sql-existing",
             "relevant": true,
             "usage": {
-              "input": 2132,
-              "output": 839,
+              "input": 2206,
+              "output": 721,
               "details": null
             },
             "token_counts": {
               "fulltext": 959,
-              "digest": 447,
-              "short_digest": 204
+              "digest": 401,
+              "short_digest": 165
             },
             "children": {}
           },
-          "getting_started_with_bun:sqlite": {
+          "get-started-bun-sql": {
             "origPath": "get-started/bun-sql-new.mdx",
-            "displayName": "Getting Started with Bun:SQLite",
+            "displayName": "get-started-bun-sql",
             "relevant": true,
             "usage": {
-              "input": 1981,
-              "output": 533,
+              "input": 2055,
+              "output": 565,
               "details": null
             },
             "token_counts": {
               "fulltext": 808,
-              "digest": 253,
-              "short_digest": 134
+              "digest": 295,
+              "short_digest": 121
             },
             "children": {}
           },
@@ -163,110 +163,110 @@
             "displayName": "bun-sqlite-existing",
             "relevant": true,
             "usage": {
-              "input": 2132,
-              "output": 597,
+              "input": 2206,
+              "output": 642,
               "details": null
             },
             "token_counts": {
               "fulltext": 959,
-              "digest": 297,
-              "short_digest": 160
+              "digest": 391,
+              "short_digest": 106
             },
             "children": {}
           },
-          "bun_sqlite_setup": {
+          "bun-sqlite-new": {
             "origPath": "get-started/bun-sqlite-new.mdx",
-            "displayName": "Bun SQLite Setup",
+            "displayName": "bun-sqlite-new",
             "relevant": true,
             "usage": {
-              "input": 1955,
-              "output": 500,
+              "input": 2029,
+              "output": 531,
               "details": null
             },
             "token_counts": {
               "fulltext": 782,
-              "digest": 258,
-              "short_digest": 89
+              "digest": 286,
+              "short_digest": 91
             },
             "children": {}
           },
-          "d1_setup_guide": {
+          "d1-new": {
             "origPath": "get-started/d1-new.mdx",
-            "displayName": "D1 Setup Guide",
+            "displayName": "d1-new",
             "relevant": true,
             "usage": {
-              "input": 2446,
-              "output": 1017,
+              "input": 2520,
+              "output": 979,
               "details": null
             },
             "token_counts": {
               "fulltext": 1275,
-              "digest": 692,
-              "short_digest": 150
+              "digest": 575,
+              "short_digest": 235
             },
             "children": {}
           },
-          "sqlite_durable_objects_setup": {
+          "sqlite-durable-objects-setup": {
             "origPath": "get-started/do-new.mdx",
-            "displayName": "SQLite Durable Objects Setup",
+            "displayName": "sqlite-durable-objects-setup",
             "relevant": true,
             "usage": {
-              "input": 3689,
-              "output": 1781,
+              "input": 3763,
+              "output": 2058,
               "details": null
             },
             "token_counts": {
               "fulltext": 2519,
-              "digest": 1256,
-              "short_digest": 356
+              "digest": 1384,
+              "short_digest": 473
             },
             "children": {}
           },
-          "expo-existing": {
+          "expo-existing-project": {
             "origPath": "get-started/expo-existing.mdx",
-            "displayName": "expo-existing",
+            "displayName": "expo-existing-project",
             "relevant": false,
             "usage": {
-              "input": 1267,
-              "output": 214,
+              "input": 1341,
+              "output": 210,
               "details": null
             },
             "token_counts": {
               "fulltext": 97,
-              "digest": 75,
-              "short_digest": 33
+              "digest": 79,
+              "short_digest": 25
             },
             "children": {}
           },
-          "expo_setup": {
+          "expo-sqlite-setup": {
             "origPath": "get-started/expo-new.mdx",
-            "displayName": "Expo Setup",
+            "displayName": "expo-sqlite-setup",
             "relevant": true,
             "usage": {
-              "input": 3304,
-              "output": 1584,
+              "input": 3378,
+              "output": 1721,
               "details": null
             },
             "token_counts": {
               "fulltext": 2134,
-              "digest": 1174,
-              "short_digest": 263
+              "digest": 1214,
+              "short_digest": 380
             },
             "children": {}
           },
-          "gel_in_existing_project": {
+          "gel-existing-project": {
             "origPath": "get-started/gel-existing.mdx",
-            "displayName": "Gel in Existing Project",
+            "displayName": "gel-existing-project",
             "relevant": true,
             "usage": {
-              "input": 2702,
-              "output": 1010,
+              "input": 2776,
+              "output": 856,
               "details": null
             },
             "token_counts": {
               "fulltext": 1532,
-              "digest": 728,
-              "short_digest": 147
+              "digest": 637,
+              "short_digest": 97
             },
             "children": {}
           },
@@ -275,110 +275,110 @@
             "displayName": "Getting Started with Gel",
             "relevant": true,
             "usage": {
-              "input": 2947,
-              "output": 1113,
+              "input": 3021,
+              "output": 806,
               "details": null
             },
             "token_counts": {
               "fulltext": 1777,
-              "digest": 715,
-              "short_digest": 270
+              "digest": 566,
+              "short_digest": 99
             },
             "children": {}
           },
-          "mysql_existing_project_setup": {
+          "mysql-existing-project": {
             "origPath": "get-started/mysql-existing.mdx",
-            "displayName": "MySQL Existing Project Setup",
+            "displayName": "mysql-existing-project",
             "relevant": true,
             "usage": {
-              "input": 1975,
-              "output": 609,
+              "input": 2049,
+              "output": 538,
               "details": null
             },
             "token_counts": {
               "fulltext": 805,
-              "digest": 344,
-              "short_digest": 107
+              "digest": 323,
+              "short_digest": 74
             },
             "children": {}
           },
-          "mysql_setup": {
+          "mysql-setup": {
             "origPath": "get-started/mysql-new.mdx",
-            "displayName": "MySQL Setup",
+            "displayName": "mysql-setup",
             "relevant": true,
             "usage": {
-              "input": 1974,
-              "output": 559,
+              "input": 2048,
+              "output": 664,
               "details": null
             },
             "token_counts": {
               "fulltext": 804,
-              "digest": 306,
-              "short_digest": 115
+              "digest": 408,
+              "short_digest": 96
             },
             "children": {}
           },
-          "neon-existing": {
+          "neon-existing-project": {
             "origPath": "get-started/neon-existing.mdx",
-            "displayName": "neon-existing",
+            "displayName": "neon-existing-project",
             "relevant": true,
             "usage": {
-              "input": 2004,
-              "output": 699,
+              "input": 2078,
+              "output": 676,
               "details": null
             },
             "token_counts": {
               "fulltext": 833,
-              "digest": 417,
-              "short_digest": 143
+              "digest": 400,
+              "short_digest": 107
             },
             "children": {}
           },
-          "getting_started_with_neon": {
+          "neon-setup": {
             "origPath": "get-started/neon-new.mdx",
-            "displayName": "Getting Started with Neon",
+            "displayName": "neon-setup",
             "relevant": true,
             "usage": {
-              "input": 2012,
-              "output": 609,
+              "input": 2086,
+              "output": 620,
               "details": null
             },
             "token_counts": {
               "fulltext": 841,
-              "digest": 328,
-              "short_digest": 126
+              "digest": 382,
+              "short_digest": 93
             },
             "children": {}
           },
-          "nile_existing_project_setup": {
+          "nile-existing-project": {
             "origPath": "get-started/nile-existing.mdx",
-            "displayName": "Nile Existing Project Setup",
+            "displayName": "nile-existing-project",
             "relevant": true,
             "usage": {
-              "input": 2916,
-              "output": 799,
+              "input": 2990,
+              "output": 1091,
               "details": null
             },
             "token_counts": {
               "fulltext": 1745,
-              "digest": 529,
-              "short_digest": 124
+              "digest": 661,
+              "short_digest": 268
             },
             "children": {}
           },
-          "getting_started_with_nile": {
+          "nile-setup": {
             "origPath": "get-started/nile-new.mdx",
-            "displayName": "Getting Started with Nile",
+            "displayName": "nile-setup",
             "relevant": true,
             "usage": {
-              "input": 2150,
-              "output": 1081,
+              "input": 2224,
+              "output": 1023,
               "details": null
             },
             "token_counts": {
               "fulltext": 979,
-              "digest": 610,
-              "short_digest": 326
+              "digest": 601,
+              "short_digest": 267
             },
             "children": {}
           },
@@ -387,14 +387,14 @@
             "displayName": "op-sqlite-existing",
             "relevant": false,
             "usage": {
-              "input": 1277,
-              "output": 205,
+              "input": 1351,
+              "output": 202,
               "details": null
             },
             "token_counts": {
               "fulltext": 105,
-              "digest": 67,
-              "short_digest": 28
+              "digest": 66,
+              "short_digest": 27
             },
             "children": {}
           },
@@ -403,110 +403,110 @@
             "displayName": "OP-SQLite Setup Guide",
             "relevant": true,
             "usage": {
-              "input": 3296,
-              "output": 1680,
+              "input": 3370,
+              "output": 1520,
               "details": null
             },
             "token_counts": {
               "fulltext": 2124,
-              "digest": 1288,
-              "short_digest": 242
+              "digest": 1155,
+              "short_digest": 208
             },
             "children": {}
           },
-          "pglite-existing": {
+          "pglite-existing-project": {
             "origPath": "get-started/pglite-existing.mdx",
-            "displayName": "pglite-existing",
+            "displayName": "pglite-existing-project",
             "relevant": true,
             "usage": {
-              "input": 2034,
-              "output": 725,
+              "input": 2108,
+              "output": 853,
               "details": null
             },
             "token_counts": {
               "fulltext": 862,
-              "digest": 430,
-              "short_digest": 128
+              "digest": 543,
+              "short_digest": 170
             },
             "children": {}
           },
-          "pglite_setup": {
+          "pglite-setup": {
             "origPath": "get-started/pglite-new.mdx",
-            "displayName": "PGlite Setup",
+            "displayName": "pglite-setup",
             "relevant": true,
             "usage": {
-              "input": 1868,
-              "output": 536,
+              "input": 1942,
+              "output": 565,
               "details": null
             },
             "token_counts": {
               "fulltext": 696,
-              "digest": 304,
-              "short_digest": 76
+              "digest": 328,
+              "short_digest": 87
             },
             "children": {}
           },
-          "planetscale_existing_project_setup": {
+          "planetscale-existing-project": {
             "origPath": "get-started/planetscale-existing.mdx",
-            "displayName": "PlanetScale Existing Project Setup",
+            "displayName": "planetscale-existing-project",
             "relevant": true,
             "usage": {
-              "input": 2444,
-              "output": 1015,
+              "input": 2518,
+              "output": 951,
               "details": null
             },
             "token_counts": {
               "fulltext": 1272,
-              "digest": 651,
-              "short_digest": 219
+              "digest": 615,
+              "short_digest": 188
             },
             "children": {}
           },
-          "planetscale_setup_guide": {
+          "planetscale-setup": {
             "origPath": "get-started/planetscale-new.mdx",
-            "displayName": "PlanetScale Setup Guide",
+            "displayName": "planetscale-setup",
             "relevant": true,
             "usage": {
-              "input": 2022,
-              "output": 610,
+              "input": 2096,
+              "output": 606,
               "details": null
             },
             "token_counts": {
               "fulltext": 850,
-              "digest": 355,
-              "short_digest": 100
+              "digest": 383,
+              "short_digest": 88
             },
             "children": {}
           },
-          "postgresql_existing_project_setup": {
+          "postgresql-existing-project": {
             "origPath": "get-started/postgresql-existing.mdx",
-            "displayName": "PostgreSQL Existing Project Setup",
+            "displayName": "postgresql-existing-project",
             "relevant": true,
             "usage": {
-              "input": 2094,
-              "output": 570,
+              "input": 2168,
+              "output": 742,
               "details": null
             },
             "token_counts": {
               "fulltext": 924,
-              "digest": 349,
-              "short_digest": 81
+              "digest": 475,
+              "short_digest": 126
             },
             "children": {}
           },
-          "postgresql_new_project_setup": {
+          "postgresql-setup": {
             "origPath": "get-started/postgresql-new.mdx",
-            "displayName": "PostgreSQL New Project Setup",
+            "displayName": "postgresql-setup",
             "relevant": true,
             "usage": {
-              "input": 2000,
-              "output": 656,
+              "input": 2074,
+              "output": 595,
               "details": null
             },
             "token_counts": {
               "fulltext": 830,
-              "digest": 370,
-              "short_digest": 137
+              "digest": 381,
+              "short_digest": 74
             },
             "children": {}
           },
@@ -515,62 +515,62 @@
             "displayName": "singlestore-existing-project",
             "relevant": true,
             "usage": {
-              "input": 1974,
-              "output": 631,
+              "input": 2048,
+              "output": 513,
               "details": null
             },
             "token_counts": {
               "fulltext": 802,
-              "digest": 353,
-              "short_digest": 132
+              "digest": 257,
+              "short_digest": 124
             },
             "children": {}
           },
-          "singlestore_setup": {
+          "singlestore-setup": {
             "origPath": "get-started/singlestore-new.mdx",
-            "displayName": "SingleStore Setup",
+            "displayName": "singlestore-setup",
             "relevant": true,
             "usage": {
-              "input": 1916,
-              "output": 650,
+              "input": 1990,
+              "output": 564,
               "details": null
             },
             "token_counts": {
               "fulltext": 744,
-              "digest": 400,
-              "short_digest": 95
+              "digest": 336,
+              "short_digest": 75
             },
             "children": {}
           },
-          "sqlite_cloud_existing_project_setup": {
+          "sqlite-cloud-existing-project": {
             "origPath": "get-started/sqlite-cloud-existing.mdx",
-            "displayName": "SQLite Cloud Existing Project Setup",
+            "displayName": "sqlite-cloud-existing-project",
             "relevant": true,
             "usage": {
-              "input": 2706,
-              "output": 911,
+              "input": 2780,
+              "output": 689,
               "details": null
             },
             "token_counts": {
               "fulltext": 1534,
-              "digest": 518,
-              "short_digest": 250
+              "digest": 450,
+              "short_digest": 110
             },
             "children": {}
           },
-          "sqlite_cloud_setup": {
+          "sqlite-cloud-setup": {
             "origPath": "get-started/sqlite-cloud-new.mdx",
-            "displayName": "SQLite Cloud Setup",
+            "displayName": "sqlite-cloud-setup",
             "relevant": true,
             "usage": {
-              "input": 2221,
-              "output": 726,
+              "input": 2295,
+              "output": 633,
               "details": null
             },
             "token_counts": {
               "fulltext": 1049,
-              "digest": 357,
-              "short_digest": 236
+              "digest": 404,
+              "short_digest": 95
             },
             "children": {}
           },
@@ -579,126 +579,126 @@
             "displayName": "sqlite-existing-project",
             "relevant": true,
             "usage": {
-              "input": 2123,
-              "output": 703,
+              "input": 2197,
+              "output": 613,
               "details": null
             },
             "token_counts": {
               "fulltext": 953,
-              "digest": 410,
-              "short_digest": 143
+              "digest": 353,
+              "short_digest": 130
             },
             "children": {}
           },
-          "sqlite_new_project_setup": {
+          "sqlite-new": {
             "origPath": "get-started/sqlite-new.mdx",
-            "displayName": "SQLite New Project Setup",
+            "displayName": "sqlite-new",
             "relevant": true,
             "usage": {
-              "input": 2075,
-              "output": 612,
+              "input": 2149,
+              "output": 614,
               "details": null
             },
             "token_counts": {
               "fulltext": 905,
-              "digest": 341,
-              "short_digest": 118
+              "digest": 326,
+              "short_digest": 132
             },
             "children": {}
           },
-          "supabase-existing": {
+          "supabase-existing-project": {
             "origPath": "get-started/supabase-existing.mdx",
-            "displayName": "supabase-existing",
+            "displayName": "supabase-existing-project",
             "relevant": true,
             "usage": {
-              "input": 1992,
-              "output": 665,
+              "input": 2066,
+              "output": 683,
               "details": null
             },
             "token_counts": {
               "fulltext": 820,
-              "digest": 409,
-              "short_digest": 109
+              "digest": 395,
+              "short_digest": 137
             },
             "children": {}
           },
-          "supabase_setup": {
+          "supabase-new": {
             "origPath": "get-started/supabase-new.mdx",
-            "displayName": "Supabase Setup",
+            "displayName": "supabase-new",
             "relevant": false,
             "usage": {
-              "input": 1826,
-              "output": 502,
+              "input": 1900,
+              "output": 461,
               "details": null
             },
             "token_counts": {
               "fulltext": 654,
-              "digest": 296,
-              "short_digest": 70
+              "digest": 251,
+              "short_digest": 66
             },
             "children": {}
           },
-          "tidb_existing_project_setup": {
+          "tidb-existing-project": {
             "origPath": "get-started/tidb-existing.mdx",
-            "displayName": "TiDB Existing Project Setup",
+            "displayName": "tidb-existing-project",
             "relevant": true,
             "usage": {
-              "input": 2038,
-              "output": 638,
+              "input": 2112,
+              "output": 517,
               "details": null
             },
             "token_counts": {
               "fulltext": 867,
-              "digest": 400,
-              "short_digest": 80
+              "digest": 297,
+              "short_digest": 75
             },
             "children": {}
           },
-          "tidb_setup_guide": {
+          "tidb-serverless-setup": {
             "origPath": "get-started/tidb-new.mdx",
-            "displayName": "TiDB Setup Guide",
+            "displayName": "tidb-serverless-setup",
             "relevant": true,
             "usage": {
-              "input": 1931,
-              "output": 548,
+              "input": 2005,
+              "output": 603,
               "details": null
             },
             "token_counts": {
               "fulltext": 760,
-              "digest": 319,
-              "short_digest": 86
+              "digest": 356,
+              "short_digest": 92
             },
             "children": {}
           },
-          "turso_database_existing_project_setup": {
+          "turso-database-existing": {
             "origPath": "get-started/turso-database-existing.mdx",
-            "displayName": "Turso Database Existing Project Setup",
+            "displayName": "turso-database-existing",
             "relevant": true,
             "usage": {
-              "input": 2768,
-              "output": 963,
+              "input": 2842,
+              "output": 975,
               "details": null
             },
             "token_counts": {
               "fulltext": 1595,
-              "digest": 528,
-              "short_digest": 276
+              "digest": 549,
+              "short_digest": 281
             },
             "children": {}
           },
-          "getting_started_with_turso_database": {
+          "turso-database-setup": {
             "origPath": "get-started/turso-database-new.mdx",
-            "displayName": "Getting Started with Turso Database",
+            "displayName": "turso-database-setup",
             "relevant": true,
             "usage": {
-              "input": 2280,
-              "output": 671,
+              "input": 2354,
+              "output": 840,
               "details": null
             },
             "token_counts": {
               "fulltext": 1107,
-              "digest": 409,
-              "short_digest": 129
+              "digest": 445,
+              "short_digest": 259
             },
             "children": {}
           },
@@ -707,14 +707,14 @@
             "displayName": "turso-existing",
             "relevant": true,
             "usage": {
-              "input": 2659,
-              "output": 1209,
+              "input": 2733,
+              "output": 1162,
               "details": null
             },
             "token_counts": {
               "fulltext": 1488,
-              "digest": 655,
-              "short_digest": 384
+              "digest": 621,
+              "short_digest": 361
             },
             "children": {}
           },
@@ -723,78 +723,78 @@
             "displayName": "turso-new",
             "relevant": true,
             "usage": {
-              "input": 2504,
-              "output": 1007,
+              "input": 2578,
+              "output": 949,
               "details": null
             },
             "token_counts": {
               "fulltext": 1333,
-              "digest": 621,
-              "short_digest": 219
+              "digest": 591,
+              "short_digest": 205
             },
             "children": {}
           },
-          "vercel_postgres_existing_project_setup": {
+          "vercel-postgres-existing-project": {
             "origPath": "get-started/vercel-existing.mdx",
-            "displayName": "Vercel Postgres Existing Project Setup",
+            "displayName": "vercel-postgres-existing-project",
             "relevant": true,
             "usage": {
-              "input": 2745,
-              "output": 739,
+              "input": 2819,
+              "output": 792,
               "details": null
             },
             "token_counts": {
               "fulltext": 1574,
-              "digest": 409,
-              "short_digest": 176
+              "digest": 578,
+              "short_digest": 67
             },
             "children": {}
           },
-          "vercel_postgres_setup": {
+          "vercel-postgres-setup": {
             "origPath": "get-started/vercel-new.mdx",
-            "displayName": "Vercel Postgres Setup",
+            "displayName": "vercel-postgres-setup",
             "relevant": true,
             "usage": {
-              "input": 2259,
-              "output": 706,
-              "details": null
-            },
-            "token_counts": {
-              "fulltext": 1088,
-              "digest": 362,
-              "short_digest": 182
-            },
-            "children": {}
-          },
-          "xata-existing": {
-            "origPath": "get-started/xata-existing.mdx",
-            "displayName": "xata-existing",
-            "relevant": true,
-            "usage": {
-              "input": 2014,
+              "input": 2333,
               "output": 602,
               "details": null
             },
             "token_counts": {
-              "fulltext": 843,
-              "digest": 344,
-              "short_digest": 109
+              "fulltext": 1088,
+              "digest": 407,
+              "short_digest": 69
             },
             "children": {}
           },
-          "getting_started_with_xata": {
-            "origPath": "get-started/xata-new.mdx",
-            "displayName": "Getting Started with Xata",
-            "relevant": false,
+          "xata-existing-project": {
+            "origPath": "get-started/xata-existing.mdx",
+            "displayName": "xata-existing-project",
+            "relevant": true,
             "usage": {
-              "input": 1848,
-              "output": 547,
+              "input": 2088,
+              "output": 587,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 843,
+              "digest": 341,
+              "short_digest": 114
+            },
+            "children": {}
+          },
+          "xata-new": {
+            "origPath": "get-started/xata-new.mdx",
+            "displayName": "xata-new",
+            "relevant": true,
+            "usage": {
+              "input": 1922,
+              "output": 582,
               "details": null
             },
             "token_counts": {
               "fulltext": 677,
-              "digest": 284,
-              "short_digest": 114
+              "digest": 318,
+              "short_digest": 110
             },
             "children": {}
           }
@@ -805,109 +805,109 @@
         "displayName": "Common Patterns & Recipes",
         "relevant": true,
         "usage": {
-          "input": 18848,
-          "output": 1839,
+          "input": 19893,
+          "output": 9569,
           "details": null
         },
         "token_counts": {
-          "fulltext": 17484,
-          "digest": 1190,
-          "short_digest": 529
+          "fulltext": 18293,
+          "digest": 8661,
+          "short_digest": 781
         },
         "children": {
-          "conditional_filters_in_query": {
+          "conditional-filters-in-query": {
             "origPath": "guides/conditional-filters-in-query.mdx",
-            "displayName": "Conditional filters in query",
+            "displayName": "conditional-filters-in-query",
             "relevant": true,
             "usage": {
-              "input": 2297,
-              "output": 862,
+              "input": 2371,
+              "output": 926,
               "details": null
             },
             "token_counts": {
               "fulltext": 1127,
-              "digest": 525,
-              "short_digest": 218
+              "digest": 745,
+              "short_digest": 55
             },
             "children": {}
           },
-          "count_rows": {
+          "count-rows": {
             "origPath": "guides/count-rows.mdx",
-            "displayName": "Count rows",
+            "displayName": "count-rows",
             "relevant": true,
             "usage": {
-              "input": 2813,
-              "output": 1101,
+              "input": 2887,
+              "output": 1015,
               "details": null
             },
             "token_counts": {
               "fulltext": 1647,
-              "digest": 675,
-              "short_digest": 301
+              "digest": 633,
+              "short_digest": 259
             },
             "children": {}
           },
-          "cursor-based_pagination": {
+          "cursor-based-pagination": {
             "origPath": "guides/cursor-based-pagination.mdx",
-            "displayName": "Cursor-based pagination",
+            "displayName": "cursor-based-pagination",
             "relevant": true,
             "usage": {
-              "input": 4040,
-              "output": 1484,
+              "input": 4114,
+              "output": 1578,
               "details": null
             },
             "token_counts": {
               "fulltext": 2872,
-              "digest": 1100,
-              "short_digest": 247
+              "digest": 1212,
+              "short_digest": 222
             },
             "children": {}
           },
-          "cloudflare_d1_http_api_with_drizzle_kit": {
+          "d1_http_api_configuration": {
             "origPath": "guides/d1-http-with-drizzle-kit.mdx",
-            "displayName": "Cloudflare D1 HTTP API with Drizzle Kit",
+            "displayName": "D1 HTTP API Configuration",
             "relevant": true,
             "usage": {
-              "input": 1830,
-              "output": 607,
+              "input": 1904,
+              "output": 688,
               "details": null
             },
             "token_counts": {
               "fulltext": 655,
-              "digest": 367,
-              "short_digest": 96
+              "digest": 444,
+              "short_digest": 87
             },
             "children": {}
           },
-          "sql_decrement_value": {
+          "decrementing-a-value": {
             "origPath": "guides/decrementing-a-value.mdx",
-            "displayName": "SQL Decrement Value",
+            "displayName": "decrementing-a-value",
             "relevant": true,
             "usage": {
-              "input": 1647,
-              "output": 501,
+              "input": 1721,
+              "output": 471,
               "details": null
             },
             "token_counts": {
               "fulltext": 477,
-              "digest": 285,
-              "short_digest": 100
+              "digest": 283,
+              "short_digest": 64
             },
             "children": {}
           },
-          "empty_array_as_a_default_value": {
+          "empty-array-default-value": {
             "origPath": "guides/empty-array-default-value.mdx",
-            "displayName": "Empty array as a default value",
+            "displayName": "empty-array-default-value",
             "relevant": true,
             "usage": {
-              "input": 2400,
-              "output": 984,
+              "input": 2474,
+              "output": 861,
               "details": null
             },
             "token_counts": {
               "fulltext": 1230,
-              "digest": 659,
-              "short_digest": 160
+              "digest": 581,
+              "short_digest": 128
             },
             "children": {}
           },
@@ -916,302 +916,302 @@
             "displayName": "full-text-search-with-generated-columns",
             "relevant": true,
             "usage": {
-              "input": 2830,
-              "output": 1361,
+              "input": 2904,
+              "output": 1167,
               "details": null
             },
             "token_counts": {
               "fulltext": 1656,
-              "digest": 876,
-              "short_digest": 359
+              "digest": 685,
+              "short_digest": 340
             },
             "children": {}
           },
-          "gel_auth_extension": {
+          "gel-auth-extension": {
             "origPath": "guides/gel-ext-auth.mdx",
-            "displayName": "Gel auth extension",
+            "displayName": "gel-auth-extension",
             "relevant": true,
             "usage": {
-              "input": 2198,
-              "output": 1120,
+              "input": 2272,
+              "output": 1039,
               "details": null
             },
             "token_counts": {
               "fulltext": 1030,
-              "digest": 811,
-              "short_digest": 170
+              "digest": 767,
+              "short_digest": 125
             },
             "children": {}
           },
-          "include_or_exclude_columns_in_query": {
+          "include-or-exclude-columns": {
             "origPath": "guides/include-or-exclude-columns.mdx",
-            "displayName": "Include or Exclude Columns in Query",
+            "displayName": "include-or-exclude-columns",
             "relevant": true,
             "usage": {
-              "input": 4294,
-              "output": 1377,
-              "details": null
-            },
-            "token_counts": {
-              "fulltext": 3124,
-              "digest": 913,
-              "short_digest": 323
-            },
-            "children": {}
-          },
-          "sql_increment_value": {
-            "origPath": "guides/incrementing-a-value.mdx",
-            "displayName": "SQL Increment value",
-            "relevant": true,
-            "usage": {
-              "input": 1639,
-              "output": 477,
-              "details": null
-            },
-            "token_counts": {
-              "fulltext": 470,
-              "digest": 274,
-              "short_digest": 82
-            },
-            "children": {}
-          },
-          "limit_offset_pagination": {
-            "origPath": "guides/limit-offset-pagination.mdx",
-            "displayName": "Limit/Offset Pagination",
-            "relevant": true,
-            "usage": {
-              "input": 3910,
-              "output": 1214,
-              "details": null
-            },
-            "token_counts": {
-              "fulltext": 2742,
-              "digest": 783,
-              "short_digest": 309
-            },
-            "children": {}
-          },
-          "mysql_local_setup": {
-            "origPath": "guides/mysql-local-setup.mdx",
-            "displayName": "MySQL Local Setup",
-            "relevant": true,
-            "usage": {
-              "input": 1996,
-              "output": 584,
-              "details": null
-            },
-            "token_counts": {
-              "fulltext": 828,
-              "digest": 371,
-              "short_digest": 95
-            },
-            "children": {}
-          },
-          "point_datatype_in_postgresql": {
-            "origPath": "guides/point-datatype-psql.mdx",
-            "displayName": "Point datatype in PostgreSQL",
-            "relevant": true,
-            "usage": {
-              "input": 2215,
-              "output": 723,
-              "details": null
-            },
-            "token_counts": {
-              "fulltext": 1045,
-              "digest": 513,
-              "short_digest": 81
-            },
-            "children": {}
-          },
-          "postgis_geometry_point": {
-            "origPath": "guides/postgis-geometry-point.mdx",
-            "displayName": "PostGIS geometry point",
-            "relevant": true,
-            "usage": {
-              "input": 2569,
-              "output": 683,
-              "details": null
-            },
-            "token_counts": {
-              "fulltext": 1400,
-              "digest": 373,
-              "short_digest": 154
-            },
-            "children": {}
-          },
-          "postgresql_full-text_search": {
-            "origPath": "guides/postgresql-full-text-search.mdx",
-            "displayName": "PostgreSQL full-text search",
-            "relevant": true,
-            "usage": {
-              "input": 5108,
-              "output": 1603,
-              "details": null
-            },
-            "token_counts": {
-              "fulltext": 3938,
-              "digest": 1208,
-              "short_digest": 261
-            },
-            "children": {}
-          },
-          "postgresql_local_setup": {
-            "origPath": "guides/postgresql-local-setup.mdx",
-            "displayName": "PostgreSQL Local Setup",
-            "relevant": true,
-            "usage": {
-              "input": 2014,
-              "output": 617,
-              "details": null
-            },
-            "token_counts": {
-              "fulltext": 846,
-              "digest": 345,
-              "short_digest": 122
-            },
-            "children": {}
-          },
-          "seeding_with_one-to-many_relations": {
-            "origPath": "guides/seeding-using-with-option.mdx",
-            "displayName": "Seeding with One-to-Many Relations",
-            "relevant": true,
-            "usage": {
-              "input": 4385,
-              "output": 1180,
-              "details": null
-            },
-            "token_counts": {
-              "fulltext": 3214,
-              "digest": 728,
-              "short_digest": 322
-            },
-            "children": {}
-          },
-          "seeding_partially_exposed_tables_with_foreign_keys": {
-            "origPath": "guides/seeding-with-partially-exposed-schema.mdx",
-            "displayName": "Seeding Partially Exposed Tables with Foreign Keys",
-            "relevant": true,
-            "usage": {
-              "input": 2512,
-              "output": 694,
-              "details": null
-            },
-            "token_counts": {
-              "fulltext": 1339,
-              "digest": 385,
-              "short_digest": 179
-            },
-            "children": {}
-          },
-          "select_parent_rows_with_at_least_one_related_child_row": {
-            "origPath": "guides/select-parent-rows-with-at-least-one-related-child-row.mdx",
-            "displayName": "Select parent rows with at least one related child row",
-            "relevant": true,
-            "usage": {
-              "input": 2665,
+              "input": 4368,
               "output": 859,
               "details": null
             },
             "token_counts": {
-              "fulltext": 1483,
-              "digest": 547,
-              "short_digest": 176
+              "fulltext": 3124,
+              "digest": 520,
+              "short_digest": 203
             },
             "children": {}
           },
-          "sql_timestamp_as_default_value": {
-            "origPath": "guides/timestamp-default-value.mdx",
-            "displayName": "SQL Timestamp as Default Value",
+          "incrementing-a-value": {
+            "origPath": "guides/incrementing-a-value.mdx",
+            "displayName": "incrementing-a-value",
             "relevant": true,
             "usage": {
-              "input": 3943,
-              "output": 1262,
+              "input": 1713,
+              "output": 462,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 470,
+              "digest": 273,
+              "short_digest": 63
+            },
+            "children": {}
+          },
+          "limit-offset-pagination": {
+            "origPath": "guides/limit-offset-pagination.mdx",
+            "displayName": "limit-offset-pagination",
+            "relevant": true,
+            "usage": {
+              "input": 3984,
+              "output": 1423,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 2742,
+              "digest": 906,
+              "short_digest": 380
+            },
+            "children": {}
+          },
+          "mysql-local-setup": {
+            "origPath": "guides/mysql-local-setup.mdx",
+            "displayName": "mysql-local-setup",
+            "relevant": true,
+            "usage": {
+              "input": 2070,
+              "output": 627,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 828,
+              "digest": 382,
+              "short_digest": 127
+            },
+            "children": {}
+          },
+          "point-datatype-psql": {
+            "origPath": "guides/point-datatype-psql.mdx",
+            "displayName": "point-datatype-psql",
+            "relevant": true,
+            "usage": {
+              "input": 2289,
+              "output": 905,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1045,
+              "digest": 689,
+              "short_digest": 83
+            },
+            "children": {}
+          },
+          "postgis-geometry-point": {
+            "origPath": "guides/postgis-geometry-point.mdx",
+            "displayName": "postgis-geometry-point",
+            "relevant": true,
+            "usage": {
+              "input": 2643,
+              "output": 1334,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1400,
+              "digest": 981,
+              "short_digest": 206
+            },
+            "children": {}
+          },
+          "postgresql-full-text-search": {
+            "origPath": "guides/postgresql-full-text-search.mdx",
+            "displayName": "postgresql-full-text-search",
+            "relevant": true,
+            "usage": {
+              "input": 5182,
+              "output": 2016,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 3938,
+              "digest": 1508,
+              "short_digest": 346
+            },
+            "children": {}
+          },
+          "postgresql-local-setup": {
+            "origPath": "guides/postgresql-local-setup.mdx",
+            "displayName": "postgresql-local-setup",
+            "relevant": true,
+            "usage": {
+              "input": 2088,
+              "output": 603,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 846,
+              "digest": 356,
+              "short_digest": 124
+            },
+            "children": {}
+          },
+          "seeding-with-option": {
+            "origPath": "guides/seeding-using-with-option.mdx",
+            "displayName": "seeding-with-option",
+            "relevant": true,
+            "usage": {
+              "input": 4459,
+              "output": 929,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 3214,
+              "digest": 565,
+              "short_digest": 247
+            },
+            "children": {}
+          },
+          "seeding-with-partially-exposed-schema": {
+            "origPath": "guides/seeding-with-partially-exposed-schema.mdx",
+            "displayName": "seeding-with-partially-exposed-schema",
+            "relevant": true,
+            "usage": {
+              "input": 2586,
+              "output": 863,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1339,
+              "digest": 550,
+              "short_digest": 181
+            },
+            "children": {}
+          },
+          "select-parent-rows-with-at-least-one-related-child-row": {
+            "origPath": "guides/select-parent-rows-with-at-least-one-related-child-row.mdx",
+            "displayName": "select-parent-rows-with-at-least-one-related-child-row",
+            "relevant": true,
+            "usage": {
+              "input": 2739,
+              "output": 939,
+              "details": null
+            },
+            "token_counts": {
+              "fulltext": 1483,
+              "digest": 667,
+              "short_digest": 137
+            },
+            "children": {}
+          },
+          "timestamp-default-value": {
+            "origPath": "guides/timestamp-default-value.mdx",
+            "displayName": "timestamp-default-value",
+            "relevant": true,
+            "usage": {
+              "input": 4017,
+              "output": 1113,
               "details": null
             },
             "token_counts": {
               "fulltext": 2775,
-              "digest": 903,
-              "short_digest": 186
+              "digest": 804,
+              "short_digest": 167
             },
             "children": {}
           },
-          "sql_toggle_value": {
+          "toggling-a-boolean-field": {
             "origPath": "guides/toggling-a-boolean-field.mdx",
-            "displayName": "SQL Toggle value",
+            "displayName": "toggling-a-boolean-field",
             "relevant": true,
             "usage": {
-              "input": 1568,
-              "output": 329,
+              "input": 1642,
+              "output": 390,
               "details": null
             },
             "token_counts": {
               "fulltext": 397,
-              "digest": 174,
-              "short_digest": 46
+              "digest": 182,
+              "short_digest": 92
             },
             "children": {}
           },
-          "unique_and_case-insensitive_email_handling": {
+          "case-insensitive-unique-email": {
             "origPath": "guides/unique-case-insensitive-email.mdx",
-            "displayName": "Unique and Case-Insensitive Email Handling",
+            "displayName": "case-insensitive-unique-email",
             "relevant": true,
             "usage": {
-              "input": 3225,
-              "output": 1361,
+              "input": 3299,
+              "output": 1243,
               "details": null
             },
             "token_counts": {
               "fulltext": 2053,
-              "digest": 982,
-              "short_digest": 242
+              "digest": 899,
+              "short_digest": 195
             },
             "children": {}
           },
-          "update_many_with_different_values_for_each_row": {
+          "update-many-with-different-values": {
             "origPath": "guides/update-many-with-different-value.mdx",
-            "displayName": "Update many with different values for each row",
+            "displayName": "update-many-with-different-values",
             "relevant": true,
             "usage": {
-              "input": 1784,
-              "output": 853,
+              "input": 1858,
+              "output": 783,
               "details": null
             },
             "token_counts": {
               "fulltext": 612,
-              "digest": 473,
-              "short_digest": 267
+              "digest": 469,
+              "short_digest": 196
             },
             "children": {}
           },
-          "upsert_query": {
+          "upsert": {
             "origPath": "guides/upsert.mdx",
-            "displayName": "Upsert Query",
+            "displayName": "upsert",
             "relevant": true,
             "usage": {
-              "input": 5375,
-              "output": 1783,
+              "input": 5449,
+              "output": 1863,
               "details": null
             },
             "token_counts": {
               "fulltext": 4209,
-              "digest": 1215,
-              "short_digest": 410
+              "digest": 1308,
+              "short_digest": 409
             },
             "children": {}
           },
-          "vector_similarity_search_with_pgvector": {
+          "vector-similarity-search": {
             "origPath": "guides/vector-similarity-search.mdx",
-            "displayName": "Vector similarity search with pgvector",
+            "displayName": "vector-similarity-search",
             "relevant": true,
             "usage": {
-              "input": 2699,
-              "output": 1252,
+              "input": 2773,
+              "output": 1052,
               "details": null
             },
             "token_counts": {
               "fulltext": 1531,
-              "digest": 781,
-              "short_digest": 338
+              "digest": 709,
+              "short_digest": 219
             },
             "children": {}
           }
@@ -1222,45 +1222,45 @@
         "displayName": "Release Notes",
         "relevant": true,
         "usage": {
-          "input": 18507,
-          "output": 1536,
+          "input": 19595,
+          "output": 1680,
           "details": null
         },
         "token_counts": {
-          "fulltext": 17009,
-          "digest": 1072,
-          "short_digest": 333
+          "fulltext": 17828,
+          "digest": 1362,
+          "short_digest": 197
         },
         "children": {
-          "v0.23.2_release_notes": {
+          "v0.23.2_release": {
             "origPath": "latest-releases/drizzle-kit-v0232.mdx",
-            "displayName": "v0.23.2 Release Notes",
+            "displayName": "v0.23.2 release",
             "relevant": true,
             "usage": {
-              "input": 1285,
-              "output": 272,
+              "input": 1359,
+              "output": 248,
               "details": null
             },
             "token_counts": {
               "fulltext": 109,
-              "digest": 95,
-              "short_digest": 58
+              "digest": 85,
+              "short_digest": 44
             },
             "children": {}
           },
-          "drizzleorm_v0.11.0_release": {
+          "v0.11.0_release": {
             "origPath": "latest-releases/drizzle-orm-v0110.mdx",
-            "displayName": "DrizzleORM v0.11.0 Release",
+            "displayName": "v0.11.0 Release",
             "relevant": true,
             "usage": {
-              "input": 3180,
-              "output": 1826,
+              "input": 3254,
+              "output": 1791,
               "details": null
             },
             "token_counts": {
               "fulltext": 2004,
-              "digest": 1115,
-              "short_digest": 585
+              "digest": 1597,
+              "short_digest": 72
             },
             "children": {}
           },
@@ -1269,46 +1269,46 @@
             "displayName": "v0.16.2 Release Notes",
             "relevant": true,
             "usage": {
-              "input": 3380,
-              "output": 1153,
+              "input": 3454,
+              "output": 1081,
               "details": null
             },
             "token_counts": {
               "fulltext": 2204,
-              "digest": 684,
-              "short_digest": 344
+              "digest": 751,
+              "short_digest": 214
             },
             "children": {}
           },
-          "unique_constraints_support": {
+          "v0.27.2_-_unique_constraints_support": {
             "origPath": "latest-releases/drizzle-orm-v0272.mdx",
-            "displayName": "UNIQUE constraints support",
+            "displayName": "v0.27.2 - UNIQUE constraints support",
             "relevant": true,
             "usage": {
-              "input": 2006,
-              "output": 1154,
+              "input": 2080,
+              "output": 892,
               "details": null
             },
             "token_counts": {
               "fulltext": 830,
-              "digest": 769,
-              "short_digest": 250
+              "digest": 611,
+              "short_digest": 137
             },
             "children": {}
           },
           "v0.28.0_release_notes": {
             "origPath": "latest-releases/drizzle-orm-v0280.mdx",
-            "displayName": "v0.28.0 Release Notes",
+            "displayName": "v0.28.0 release notes",
             "relevant": true,
             "usage": {
-              "input": 3234,
-              "output": 973,
+              "input": 3308,
+              "output": 1279,
               "details": null
             },
             "token_counts": {
               "fulltext": 2058,
-              "digest": 639,
-              "short_digest": 176
+              "digest": 982,
+              "short_digest": 152
             },
             "children": {}
           },
@@ -1317,30 +1317,30 @@
             "displayName": "v0.28.1 release",
             "relevant": true,
             "usage": {
-              "input": 1306,
-              "output": 234,
+              "input": 1380,
+              "output": 210,
               "details": null
             },
             "token_counts": {
               "fulltext": 130,
-              "digest": 80,
-              "short_digest": 39
+              "digest": 66,
+              "short_digest": 31
             },
             "children": {}
           },
           "v0.28.2_release_notes": {
             "origPath": "latest-releases/drizzle-orm-v0282.mdx",
-            "displayName": "v0.28.2 Release Notes",
+            "displayName": "v0.28.2 release notes",
             "relevant": true,
             "usage": {
-              "input": 1464,
-              "output": 301,
+              "input": 1538,
+              "output": 375,
               "details": null
             },
             "token_counts": {
               "fulltext": 288,
-              "digest": 124,
-              "short_digest": 47
+              "digest": 176,
+              "short_digest": 70
             },
             "children": {}
           },
@@ -1349,13 +1349,13 @@
             "displayName": "v0.28.3 Release Notes",
             "relevant": true,
             "usage": {
-              "input": 1826,
-              "output": 826,
+              "input": 1900,
+              "output": 761,
               "details": null
             },
             "token_counts": {
               "fulltext": 650,
-              "digest": 524,
+              "digest": 471,
               "short_digest": 146
             },
             "children": {}
@@ -1365,30 +1365,30 @@
             "displayName": "v0.28.4 release",
             "relevant": true,
             "usage": {
-              "input": 1355,
-              "output": 287,
+              "input": 1429,
+              "output": 278,
               "details": null
             },
             "token_counts": {
               "fulltext": 179,
               "digest": 97,
-              "short_digest": 62
+              "short_digest": 53
             },
             "children": {}
           },
-          "v0.28.5_release_-_opentelemetry_type_import_fix": {
+          "v0.28.5_release_notes": {
             "origPath": "latest-releases/drizzle-orm-v0285.mdx",
-            "displayName": "v0.28.5 Release - OpenTelemetry Type Import Fix",
+            "displayName": "v0.28.5 release notes",
             "relevant": true,
             "usage": {
-              "input": 1539,
-              "output": 461,
+              "input": 1613,
+              "output": 355,
               "details": null
             },
             "token_counts": {
               "fulltext": 363,
-              "digest": 241,
-              "short_digest": 74
+              "digest": 178,
+              "short_digest": 54
             },
             "children": {}
           },
@@ -1397,30 +1397,30 @@
             "displayName": "v0.28.6 Release Notes",
             "relevant": true,
             "usage": {
-              "input": 2746,
-              "output": 1076,
+              "input": 2820,
+              "output": 1040,
               "details": null
             },
             "token_counts": {
               "fulltext": 1570,
-              "digest": 718,
-              "short_digest": 208
+              "digest": 741,
+              "short_digest": 147
             },
             "children": {}
           },
-          "v0.29.0_release": {
+          "v0.29.0_release_notes": {
             "origPath": "latest-releases/drizzle-orm-v0290.mdx",
-            "displayName": "v0.29.0 Release",
+            "displayName": "v0.29.0 release notes",
             "relevant": true,
             "usage": {
-              "input": 4842,
-              "output": 1773,
+              "input": 4916,
+              "output": 2041,
               "details": null
             },
             "token_counts": {
               "fulltext": 3666,
-              "digest": 1356,
-              "short_digest": 258
+              "digest": 1583,
+              "short_digest": 293
             },
             "children": {}
           },
@@ -1429,14 +1429,14 @@
             "displayName": "v0.29.1 Release Notes",
             "relevant": true,
             "usage": {
-              "input": 3598,
-              "output": 1073,
+              "input": 3672,
+              "output": 1032,
               "details": null
             },
             "token_counts": {
               "fulltext": 2422,
-              "digest": 688,
-              "short_digest": 218
+              "digest": 681,
+              "short_digest": 197
             },
             "children": {}
           },
@@ -1445,46 +1445,46 @@
             "displayName": "v0.29.2 Release Notes",
             "relevant": true,
             "usage": {
-              "input": 2359,
-              "output": 1062,
+              "input": 2433,
+              "output": 1059,
               "details": null
             },
             "token_counts": {
               "fulltext": 1183,
-              "digest": 675,
-              "short_digest": 232
+              "digest": 669,
+              "short_digest": 235
             },
             "children": {}
           },
           "v0.29.3_release": {
             "origPath": "latest-releases/drizzle-orm-v0293.mdx",
-            "displayName": "v0.29.3 Release",
+            "displayName": "v0.29.3 release",
             "relevant": true,
             "usage": {
-              "input": 1307,
-              "output": 219,
+              "input": 1381,
+              "output": 241,
               "details": null
             },
             "token_counts": {
               "fulltext": 131,
-              "digest": 77,
-              "short_digest": 30
+              "digest": 93,
+              "short_digest": 32
             },
             "children": {}
           },
           "v0.29.4_release_notes": {
             "origPath": "latest-releases/drizzle-orm-v0294.mdx",
-            "displayName": "v0.29.4 Release Notes",
+            "displayName": "v0.29.4 release notes",
             "relevant": true,
             "usage": {
-              "input": 2101,
-              "output": 645,
+              "input": 2175,
+              "output": 759,
               "details": null
             },
             "token_counts": {
               "fulltext": 925,
-              "digest": 424,
-              "short_digest": 89
+              "digest": 418,
+              "short_digest": 208
             },
             "children": {}
           },
@@ -1493,14 +1493,14 @@
             "displayName": "v0.29.5 Release Notes",
             "relevant": true,
             "usage": {
-              "input": 2198,
-              "output": 898,
+              "input": 2272,
+              "output": 970,
               "details": null
             },
             "token_counts": {
               "fulltext": 1022,
-              "digest": 531,
-              "short_digest": 245
+              "digest": 575,
+              "short_digest": 268
             },
             "children": {}
           },
@@ -1509,302 +1509,302 @@
             "displayName": "v0.30.0 Release Notes",
             "relevant": true,
             "usage": {
-              "input": 2159,
-              "output": 603,
+              "input": 2233,
+              "output": 554,
               "details": null
             },
             "token_counts": {
               "fulltext": 983,
-              "digest": 374,
-              "short_digest": 86
+              "digest": 356,
+              "short_digest": 61
             },
             "children": {}
           },
           "v0.30.1_release_notes": {
             "origPath": "latest-releases/drizzle-orm-v0301.mdx",
-            "displayName": "v0.30.1 Release Notes",
+            "displayName": "v0.30.1 release notes",
             "relevant": true,
             "usage": {
-              "input": 1399,
-              "output": 335,
+              "input": 1473,
+              "output": 285,
               "details": null
             },
             "token_counts": {
               "fulltext": 223,
-              "digest": 156,
-              "short_digest": 61
+              "digest": 122,
+              "short_digest": 46
             },
             "children": {}
           },
-          "v0.30.10_release_notes": {
+          "v0.30.10_release": {
             "origPath": "latest-releases/drizzle-orm-v03010.mdx",
-            "displayName": "v0.30.10 Release Notes",
+            "displayName": "v0.30.10 release",
             "relevant": true,
             "usage": {
-              "input": 1393,
-              "output": 329,
+              "input": 1467,
+              "output": 274,
               "details": null
             },
             "token_counts": {
               "fulltext": 217,
-              "digest": 137,
-              "short_digest": 77
+              "digest": 125,
+              "short_digest": 29
             },
             "children": {}
           },
           "v0.30.2_release_notes": {
             "origPath": "latest-releases/drizzle-orm-v0302.mdx",
-            "displayName": "v0.30.2 Release Notes",
+            "displayName": "v0.30.2 release notes",
             "relevant": true,
             "usage": {
-              "input": 1439,
-              "output": 232,
+              "input": 1513,
+              "output": 210,
               "details": null
             },
             "token_counts": {
               "fulltext": 263,
-              "digest": 81,
-              "short_digest": 35
+              "digest": 66,
+              "short_digest": 28
             },
             "children": {}
           },
           "v0.30.3_release_notes": {
             "origPath": "latest-releases/drizzle-orm-v0303.mdx",
-            "displayName": "v0.30.3 Release Notes",
+            "displayName": "v0.30.3 release notes",
             "relevant": true,
             "usage": {
-              "input": 1429,
-              "output": 286,
+              "input": 1503,
+              "output": 259,
               "details": null
             },
             "token_counts": {
               "fulltext": 253,
-              "digest": 97,
+              "digest": 64,
               "short_digest": 64
             },
             "children": {}
           },
-          "xata_driver_support": {
+          "xata-http-driver-support": {
             "origPath": "latest-releases/drizzle-orm-v0304.mdx",
-            "displayName": "Xata driver support",
+            "displayName": "xata-http-driver-support",
             "relevant": true,
             "usage": {
-              "input": 1591,
-              "output": 524,
+              "input": 1665,
+              "output": 521,
               "details": null
             },
             "token_counts": {
               "fulltext": 415,
-              "digest": 239,
-              "short_digest": 145
+              "digest": 249,
+              "short_digest": 142
             },
             "children": {}
           },
-          "drizzleorm_v0.30.5_release": {
+          "v0.30.5_release_notes": {
             "origPath": "latest-releases/drizzle-orm-v0305.mdx",
-            "displayName": "DrizzleORM v0.30.5 release",
+            "displayName": "v0.30.5 release notes",
             "relevant": true,
             "usage": {
-              "input": 1578,
-              "output": 585,
+              "input": 1652,
+              "output": 450,
               "details": null
             },
             "token_counts": {
               "fulltext": 402,
-              "digest": 313,
-              "short_digest": 138
+              "digest": 283,
+              "short_digest": 41
             },
             "children": {}
           },
           "pglite_driver_support": {
             "origPath": "latest-releases/drizzle-orm-v0306.mdx",
-            "displayName": "PGlite Driver Support",
+            "displayName": "PGlite driver support",
             "relevant": true,
             "usage": {
-              "input": 1513,
-              "output": 498,
+              "input": 1587,
+              "output": 414,
               "details": null
             },
             "token_counts": {
               "fulltext": 337,
-              "digest": 240,
-              "short_digest": 125
+              "digest": 213,
+              "short_digest": 59
             },
             "children": {}
           },
-          "v0.30.7_release_notes": {
+          "v0.30.7_release": {
             "origPath": "latest-releases/drizzle-orm-v0307.mdx",
-            "displayName": "v0.30.7 Release Notes",
+            "displayName": "v0.30.7 release",
             "relevant": true,
             "usage": {
-              "input": 1400,
-              "output": 281,
+              "input": 1474,
+              "output": 271,
               "details": null
             },
             "token_counts": {
               "fulltext": 224,
-              "digest": 108,
-              "short_digest": 54
+              "digest": 125,
+              "short_digest": 30
             },
             "children": {}
           },
           "v0.30.8_release_notes": {
             "origPath": "latest-releases/drizzle-orm-v0308.mdx",
-            "displayName": "v0.30.8 Release Notes",
+            "displayName": "v0.30.8 release notes",
             "relevant": true,
             "usage": {
-              "input": 2246,
-              "output": 741,
+              "input": 2320,
+              "output": 578,
               "details": null
             },
             "token_counts": {
               "fulltext": 1070,
-              "digest": 388,
-              "short_digest": 204
+              "digest": 359,
+              "short_digest": 86
             },
             "children": {}
           },
-          "v0.30.9_release_notes": {
+          "v0.30.9_release": {
             "origPath": "latest-releases/drizzle-orm-v0309.mdx",
-            "displayName": "v0.30.9 Release Notes",
+            "displayName": "v0.30.9 release",
             "relevant": true,
             "usage": {
-              "input": 1589,
-              "output": 599,
+              "input": 1663,
+              "output": 495,
               "details": null
             },
             "token_counts": {
               "fulltext": 413,
-              "digest": 319,
-              "short_digest": 133
+              "digest": 292,
+              "short_digest": 65
             },
             "children": {}
           },
           "v0.31.0_release_notes": {
             "origPath": "latest-releases/drizzle-orm-v0310.mdx",
-            "displayName": "v0.31.0 Release Notes",
+            "displayName": "v0.31.0 release notes",
             "relevant": true,
             "usage": {
-              "input": 5089,
-              "output": 2243,
+              "input": 5163,
+              "output": 2254,
               "details": null
             },
             "token_counts": {
               "fulltext": 3913,
-              "digest": 1615,
-              "short_digest": 468
+              "digest": 1889,
+              "short_digest": 198
             },
             "children": {}
           },
-          "live_queries_with_expo_sqlite": {
+          "live-queries": {
             "origPath": "latest-releases/drizzle-orm-v0311.mdx",
-            "displayName": "Live Queries with Expo SQLite",
+            "displayName": "live-queries",
             "relevant": true,
             "usage": {
-              "input": 1680,
-              "output": 673,
+              "input": 1754,
+              "output": 667,
               "details": null
             },
             "token_counts": {
               "fulltext": 504,
-              "digest": 390,
-              "short_digest": 160
+              "digest": 335,
+              "short_digest": 202
             },
             "children": {}
           },
-          "tidb_cloud_serverless_driver_support": {
+          "v0.31.2_tidb_cloud_serverless_support": {
             "origPath": "latest-releases/drizzle-orm-v0312.mdx",
-            "displayName": "TiDB Cloud Serverless driver support",
+            "displayName": "v0.31.2 TiDB Cloud Serverless Support",
             "relevant": true,
             "usage": {
-              "input": 1318,
-              "output": 388,
+              "input": 1392,
+              "output": 350,
               "details": null
             },
             "token_counts": {
               "fulltext": 142,
-              "digest": 180,
-              "short_digest": 77
+              "digest": 160,
+              "short_digest": 54
             },
             "children": {}
           },
-          "v0.31.3_release_notes": {
+          "v0.31.3_release": {
             "origPath": "latest-releases/drizzle-orm-v0313.mdx",
-            "displayName": "v0.31.3 Release Notes",
+            "displayName": "v0.31.3 release",
             "relevant": true,
             "usage": {
-              "input": 1395,
-              "output": 465,
+              "input": 1469,
+              "output": 417,
               "details": null
             },
             "token_counts": {
               "fulltext": 219,
-              "digest": 230,
-              "short_digest": 103
+              "digest": 201,
+              "short_digest": 79
             },
             "children": {}
           },
-          "v0.31.4_release_notes": {
+          "v0.31.4_release": {
             "origPath": "latest-releases/drizzle-orm-v0314.mdx",
-            "displayName": "v0.31.4 Release Notes",
+            "displayName": "v0.31.4 release",
             "relevant": true,
             "usage": {
-              "input": 1236,
-              "output": 173,
+              "input": 1310,
+              "output": 171,
               "details": null
             },
             "token_counts": {
               "fulltext": 60,
-              "digest": 43,
-              "short_digest": 23
+              "digest": 42,
+              "short_digest": 22
             },
             "children": {}
           },
           "v0.32.0_release_notes": {
             "origPath": "latest-releases/drizzle-orm-v0320.mdx",
-            "displayName": "v0.32.0 Release Notes",
+            "displayName": "v0.32.0 release notes",
             "relevant": true,
             "usage": {
-              "input": 3712,
-              "output": 1818,
+              "input": 3786,
+              "output": 1625,
               "details": null
             },
             "token_counts": {
               "fulltext": 2536,
-              "digest": 1286,
-              "short_digest": 388
+              "digest": 1302,
+              "short_digest": 176
             },
             "children": {}
           },
           "v0.32.1_release_notes": {
             "origPath": "latest-releases/drizzle-orm-v0321.mdx",
-            "displayName": "v0.32.1 Release Notes",
+            "displayName": "v0.32.1 release notes",
             "relevant": true,
             "usage": {
-              "input": 1343,
-              "output": 344,
+              "input": 1417,
+              "output": 334,
               "details": null
             },
             "token_counts": {
               "fulltext": 167,
-              "digest": 142,
-              "short_digest": 68
+              "digest": 138,
+              "short_digest": 65
             },
             "children": {}
           },
-          "v0.32.2_release_notes": {
+          "v0.32.2_release": {
             "origPath": "latest-releases/drizzle-orm-v0322.mdx",
-            "displayName": "v0.32.2 Release Notes",
+            "displayName": "v0.32.2 release",
             "relevant": true,
             "usage": {
-              "input": 1298,
-              "output": 345,
+              "input": 1372,
+              "output": 300,
               "details": null
             },
             "token_counts": {
               "fulltext": 122,
-              "digest": 144,
-              "short_digest": 73
+              "digest": 108,
+              "short_digest": 64
             },
             "children": {}
           }
@@ -1815,95 +1815,95 @@
         "displayName": "Migration Guides",
         "relevant": true,
         "usage": {
-          "input": 6371,
-          "output": 1204,
+          "input": 10054,
+          "output": 2813,
           "details": null
         },
         "token_counts": {
-          "fulltext": 5271,
-          "digest": 878,
-          "short_digest": 197
+          "fulltext": 8784,
+          "digest": 2367,
+          "short_digest": 318
         },
         "children": {
-          "documentation_components_reference": {
+          "components": {
             "origPath": "migrate/components.mdx",
-            "displayName": "Documentation Components Reference",
+            "displayName": "components",
             "relevant": false,
             "usage": {
-              "input": 3657,
-              "output": 1023,
+              "input": 3731,
+              "output": 992,
               "details": null
             },
             "token_counts": {
               "fulltext": 2493,
-              "digest": 576,
-              "short_digest": 292
+              "digest": 759,
+              "short_digest": 93
             },
             "children": {}
           },
-          "migrate_from_prisma": {
+          "migrate_from_prisma_to_drizzle": {
             "origPath": "migrate/migrate-from-prisma.mdx",
-            "displayName": "Migrate from Prisma",
+            "displayName": "Migrate from Prisma to Drizzle",
             "relevant": true,
             "usage": {
-              "input": 8921,
-              "output": 1748,
+              "input": 8995,
+              "output": 3220,
               "details": null
             },
             "token_counts": {
               "fulltext": 7752,
-              "digest": 1275,
-              "short_digest": 325
+              "digest": 2427,
+              "short_digest": 646
             },
             "children": {}
           },
-          "migrate_from_sequelize_to_drizzle": {
+          "migrate-from-sequelize": {
             "origPath": "migrate/migrate-from-sequelize.mdx",
-            "displayName": "Migrate from Sequelize to Drizzle",
+            "displayName": "migrate-from-sequelize",
             "relevant": true,
             "usage": {
-              "input": 10065,
-              "output": 3196,
+              "input": 10139,
+              "output": 3822,
               "details": null
             },
             "token_counts": {
               "fulltext": 8896,
-              "digest": 2292,
-              "short_digest": 755
+              "digest": 3124,
+              "short_digest": 560
             },
             "children": {}
           },
-          "migrate_from_typeorm": {
+          "migrate-from-typeorm": {
             "origPath": "migrate/migrate-from-typeorm.mdx",
-            "displayName": "Migrate from TypeORM",
+            "displayName": "migrate-from-typeorm",
             "relevant": true,
             "usage": {
-              "input": 9928,
-              "output": 1987,
+              "input": 10002,
+              "output": 4406,
               "details": null
             },
             "token_counts": {
               "fulltext": 8759,
-              "digest": 1515,
-              "short_digest": 323
+              "digest": 3043,
+              "short_digest": 1202
             },
             "children": {}
           }
         }
       },
-      "integration_tutorials": {
+      "getting_started": {
         "origPath": "tutorials",
-        "displayName": "Integration Tutorials",
+        "displayName": "Getting Started",
         "relevant": true,
         "usage": {
-          "input": 5415,
-          "output": 1864,
+          "input": 7011,
+          "output": 5399,
           "details": null
         },
         "token_counts": {
-          "fulltext": 4310,
-          "digest": 1573,
-          "short_digest": 183
+          "fulltext": 5736,
+          "digest": 5109,
+          "short_digest": 171
         },
         "children": {
           "edge_functions_integration": {
@@ -1911,14 +1911,14 @@
             "displayName": "Edge Functions Integration",
             "relevant": true,
             "usage": {
-              "input": 5302,
-              "output": 1244,
+              "input": 6069,
+              "output": 1589,
               "details": null
             },
             "token_counts": {
-              "fulltext": 4181,
-              "digest": 764,
-              "short_digest": 355
+              "fulltext": 4775,
+              "digest": 1184,
+              "short_digest": 265
             },
             "children": {
               "netlify_edge_functions_with_neon_postgres": {
@@ -1926,14 +1926,14 @@
                 "displayName": "Netlify Edge Functions with Neon Postgres",
                 "relevant": true,
                 "usage": {
-                  "input": 3581,
-                  "output": 1336,
+                  "input": 3655,
+                  "output": 1568,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 2383,
-                  "digest": 895,
-                  "short_digest": 263
+                  "digest": 994,
+                  "short_digest": 419
                 },
                 "children": {}
               },
@@ -1942,30 +1942,30 @@
                 "displayName": "Netlify Edge Functions with Supabase",
                 "relevant": true,
                 "usage": {
-                  "input": 3535,
-                  "output": 1348,
+                  "input": 3609,
+                  "output": 1477,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 2336,
-                  "digest": 865,
-                  "short_digest": 330
+                  "digest": 746,
+                  "short_digest": 564
                 },
                 "children": {}
               },
-              "drizzle_with_supabase_edge_functions": {
+              "supabase_edge_functions_integration": {
                 "origPath": "tutorials/drizzle-on-the-edge/drizzle-with-supabase-edge-functions.mdx",
-                "displayName": "Drizzle with Supabase Edge Functions",
+                "displayName": "Supabase Edge Functions Integration",
                 "relevant": true,
                 "usage": {
-                  "input": 3884,
-                  "output": 1508,
+                  "input": 3958,
+                  "output": 1076,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 2688,
-                  "digest": 967,
-                  "short_digest": 390
+                  "digest": 781,
+                  "short_digest": 164
                 },
                 "children": {}
               },
@@ -1974,47 +1974,47 @@
                 "displayName": "Drizzle with Vercel Edge Functions",
                 "relevant": true,
                 "usage": {
-                  "input": 7706,
-                  "output": 1730,
+                  "input": 7780,
+                  "output": 2792,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 6511,
-                  "digest": 1151,
-                  "short_digest": 422
+                  "digest": 1980,
+                  "short_digest": 654
                 },
                 "children": {}
               }
             }
           },
-          "database_integration_tutorials": {
+          "database_integrations": {
             "origPath": "tutorials/drizzle-with-db",
-            "displayName": "Database Integration Tutorials",
+            "displayName": "Database Integrations",
             "relevant": true,
             "usage": {
-              "input": 10887,
-              "output": 1270,
+              "input": 10649,
+              "output": 2061,
               "details": null
             },
             "token_counts": {
-              "fulltext": 9744,
-              "digest": 759,
-              "short_digest": 373
+              "fulltext": 9327,
+              "digest": 1788,
+              "short_digest": 140
             },
             "children": {
-              "drizzle_with_neon_postgres": {
+              "neon_postgres_integration": {
                 "origPath": "tutorials/drizzle-with-db/drizzle-with-neon.mdx",
-                "displayName": "Drizzle with Neon Postgres",
+                "displayName": "Neon Postgres Integration",
                 "relevant": true,
                 "usage": {
-                  "input": 4962,
-                  "output": 1901,
+                  "input": 5036,
+                  "output": 1872,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 3775,
-                  "digest": 1304,
-                  "short_digest": 448
+                  "digest": 1363,
+                  "short_digest": 366
                 },
                 "children": {}
               },
@@ -2023,78 +2023,78 @@
                 "displayName": "Drizzle with Nile Database",
                 "relevant": true,
                 "usage": {
-                  "input": 5187,
-                  "output": 2706,
+                  "input": 5261,
+                  "output": 2662,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 4000,
-                  "digest": 2007,
-                  "short_digest": 570
+                  "digest": 1955,
+                  "short_digest": 545
                 },
                 "children": {}
               },
-              "drizzle_with_supabase": {
+              "supabase_integration": {
                 "origPath": "tutorials/drizzle-with-db/drizzle-with-supabase.mdx",
-                "displayName": "Drizzle with Supabase",
+                "displayName": "Supabase Integration",
                 "relevant": true,
                 "usage": {
-                  "input": 5049,
-                  "output": 1949,
+                  "input": 5123,
+                  "output": 2395,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 3861,
-                  "digest": 1327,
-                  "short_digest": 479
+                  "digest": 1368,
+                  "short_digest": 890
                 },
                 "children": {}
               },
-              "drizzle_with_turso": {
+              "drizzle-with-turso": {
                 "origPath": "tutorials/drizzle-with-db/drizzle-with-turso.mdx",
-                "displayName": "Drizzle with Turso",
+                "displayName": "drizzle-with-turso",
                 "relevant": true,
                 "usage": {
-                  "input": 5289,
-                  "output": 2259,
+                  "input": 5363,
+                  "output": 2083,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 4102,
-                  "digest": 1753,
-                  "short_digest": 372
+                  "digest": 1526,
+                  "short_digest": 384
                 },
                 "children": {}
               },
-              "drizzle_with_vercel_postgres": {
+              "vercel-postgres-setup": {
                 "origPath": "tutorials/drizzle-with-db/drizzle-with-vercel.mdx",
-                "displayName": "Drizzle with Vercel Postgres",
+                "displayName": "vercel-postgres-setup",
                 "relevant": true,
                 "usage": {
-                  "input": 4535,
-                  "output": 2154,
+                  "input": 4609,
+                  "output": 1867,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 3348,
-                  "digest": 1545,
-                  "short_digest": 477
+                  "digest": 1401,
+                  "short_digest": 322
                 },
                 "children": {}
               },
-              "drizzle_with_xata": {
+              "xata_integration": {
                 "origPath": "tutorials/drizzle-with-db/drizzle-with-xata.mdx",
-                "displayName": "Drizzle with Xata",
+                "displayName": "Xata Integration",
                 "relevant": true,
                 "usage": {
-                  "input": 4971,
-                  "output": 2095,
+                  "input": 5045,
+                  "output": 1862,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 3784,
-                  "digest": 1504,
-                  "short_digest": 453
+                  "digest": 1351,
+                  "short_digest": 386
                 },
                 "children": {}
               }
@@ -2105,14 +2105,14 @@
             "displayName": "Todo App with Neon Postgres",
             "relevant": true,
             "usage": {
-              "input": 7455,
-              "output": 3499,
+              "input": 7529,
+              "output": 3099,
               "details": null
             },
             "token_counts": {
               "fulltext": 6267,
-              "digest": 2644,
-              "short_digest": 728
+              "digest": 2591,
+              "short_digest": 363
             },
             "children": {}
           }
@@ -2123,14 +2123,14 @@
         "displayName": "arktype",
         "relevant": true,
         "usage": {
-          "input": 4830,
-          "output": 3152,
+          "input": 4904,
+          "output": 2911,
           "details": null
         },
         "token_counts": {
           "fulltext": 3667,
-          "digest": 2629,
-          "short_digest": 389
+          "digest": 2477,
+          "short_digest": 291
         },
         "children": {}
       },
@@ -2139,14 +2139,14 @@
         "displayName": "batch-api",
         "relevant": true,
         "usage": {
-          "input": 2208,
-          "output": 785,
+          "input": 2282,
+          "output": 872,
           "details": null
         },
         "token_counts": {
           "fulltext": 1044,
-          "digest": 482,
-          "short_digest": 174
+          "digest": 487,
+          "short_digest": 262
         },
         "children": {}
       },
@@ -2155,30 +2155,30 @@
         "displayName": "cache",
         "relevant": true,
         "usage": {
-          "input": 4393,
-          "output": 2326,
+          "input": 4467,
+          "output": 1850,
           "details": null
         },
         "token_counts": {
           "fulltext": 3231,
-          "digest": 1752,
-          "short_digest": 437
+          "digest": 1395,
+          "short_digest": 315
         },
         "children": {}
       },
-      "aws_data_api_mysql": {
+      "connect-aws-data-api-mysql": {
         "origPath": "connect-aws-data-api-mysql.mdx",
-        "displayName": "AWS Data API MySQL",
+        "displayName": "connect-aws-data-api-mysql",
         "relevant": false,
         "usage": {
-          "input": 1236,
-          "output": 164,
+          "input": 1310,
+          "output": 157,
           "details": null
         },
         "token_counts": {
           "fulltext": 66,
-          "digest": 43,
-          "short_digest": 24
+          "digest": 31,
+          "short_digest": 23
         },
         "children": {}
       },
@@ -2187,14 +2187,14 @@
         "displayName": "connect-aws-data-api-pg",
         "relevant": true,
         "usage": {
-          "input": 1774,
-          "output": 703,
+          "input": 1848,
+          "output": 628,
           "details": null
         },
         "token_counts": {
           "fulltext": 604,
-          "digest": 415,
-          "short_digest": 156
+          "digest": 419,
+          "short_digest": 88
         },
         "children": {}
       },
@@ -2203,14 +2203,14 @@
         "displayName": "connect-bun-sql",
         "relevant": true,
         "usage": {
-          "input": 1666,
-          "output": 553,
+          "input": 1740,
+          "output": 479,
           "details": null
         },
         "token_counts": {
           "fulltext": 499,
-          "digest": 295,
-          "short_digest": 123
+          "digest": 267,
+          "short_digest": 79
         },
         "children": {}
       },
@@ -2219,14 +2219,14 @@
         "displayName": "connect-bun-sqlite",
         "relevant": true,
         "usage": {
-          "input": 1845,
-          "output": 569,
+          "input": 1919,
+          "output": 546,
           "details": null
         },
         "token_counts": {
           "fulltext": 678,
-          "digest": 340,
-          "short_digest": 91
+          "digest": 317,
+          "short_digest": 97
         },
         "children": {}
       },
@@ -2235,14 +2235,14 @@
         "displayName": "connect-cloudflare-d1",
         "relevant": true,
         "usage": {
-          "input": 2027,
-          "output": 828,
+          "input": 2101,
+          "output": 806,
           "details": null
         },
         "token_counts": {
           "fulltext": 858,
-          "digest": 534,
-          "short_digest": 152
+          "digest": 509,
+          "short_digest": 141
         },
         "children": {}
       },
@@ -2251,46 +2251,46 @@
         "displayName": "connect-cloudflare-do",
         "relevant": true,
         "usage": {
-          "input": 2740,
-          "output": 1422,
+          "input": 2814,
+          "output": 995,
           "details": null
         },
         "token_counts": {
           "fulltext": 1572,
-          "digest": 954,
-          "short_digest": 308
+          "digest": 753,
+          "short_digest": 94
         },
         "children": {}
       },
-      "http_proxy_driver": {
+      "http-proxy-driver": {
         "origPath": "connect-drizzle-proxy.mdx",
-        "displayName": "HTTP Proxy Driver",
+        "displayName": "http-proxy-driver",
         "relevant": true,
         "usage": {
-          "input": 3438,
-          "output": 2046,
+          "input": 3512,
+          "output": 1640,
           "details": null
         },
         "token_counts": {
           "fulltext": 2270,
-          "digest": 1510,
-          "short_digest": 410
+          "digest": 1208,
+          "short_digest": 302
         },
         "children": {}
       },
-      "expo_sqlite_integration": {
+      "expo-sqlite": {
         "origPath": "connect-expo-sqlite.mdx",
-        "displayName": "Expo SQLite Integration",
+        "displayName": "expo-sqlite",
         "relevant": true,
         "usage": {
-          "input": 2473,
-          "output": 1331,
+          "input": 2547,
+          "output": 1195,
           "details": null
         },
         "token_counts": {
           "fulltext": 1307,
-          "digest": 910,
-          "short_digest": 298
+          "digest": 789,
+          "short_digest": 280
         },
         "children": {}
       },
@@ -2299,14 +2299,14 @@
         "displayName": "connect-neon",
         "relevant": true,
         "usage": {
-          "input": 2916,
-          "output": 1086,
+          "input": 2990,
+          "output": 1080,
           "details": null
         },
         "token_counts": {
           "fulltext": 1751,
-          "digest": 673,
-          "short_digest": 285
+          "digest": 711,
+          "short_digest": 237
         },
         "children": {}
       },
@@ -2315,46 +2315,46 @@
         "displayName": "connect-nile",
         "relevant": true,
         "usage": {
-          "input": 2729,
-          "output": 1288,
+          "input": 2803,
+          "output": 1152,
           "details": null
         },
         "token_counts": {
           "fulltext": 1564,
-          "digest": 884,
-          "short_digest": 264
+          "digest": 768,
+          "short_digest": 248
         },
         "children": {}
       },
-      "op_sqlite_integration": {
+      "op-sqlite-setup": {
         "origPath": "connect-op-sqlite.mdx",
-        "displayName": "OP SQLite Integration",
+        "displayName": "op-sqlite-setup",
         "relevant": true,
         "usage": {
-          "input": 2144,
-          "output": 996,
+          "input": 2218,
+          "output": 964,
           "details": null
         },
         "token_counts": {
           "fulltext": 978,
-          "digest": 645,
-          "short_digest": 222
+          "digest": 630,
+          "short_digest": 201
         },
         "children": {}
       },
-      "database-connection": {
+      "database-connection-overview": {
         "origPath": "connect-overview.mdx",
-        "displayName": "database-connection",
+        "displayName": "database-connection-overview",
         "relevant": true,
         "usage": {
-          "input": 3028,
-          "output": 1086,
+          "input": 3102,
+          "output": 1180,
           "details": null
         },
         "token_counts": {
           "fulltext": 1864,
-          "digest": 745,
-          "short_digest": 197
+          "digest": 864,
+          "short_digest": 179
         },
         "children": {}
       },
@@ -2363,14 +2363,14 @@
         "displayName": "connect-pglite",
         "relevant": true,
         "usage": {
-          "input": 1923,
-          "output": 669,
+          "input": 1997,
+          "output": 702,
           "details": null
         },
         "token_counts": {
           "fulltext": 757,
-          "digest": 392,
-          "short_digest": 150
+          "digest": 331,
+          "short_digest": 209
         },
         "children": {}
       },
@@ -2379,14 +2379,14 @@
         "displayName": "connect-planetscale",
         "relevant": true,
         "usage": {
-          "input": 1858,
-          "output": 681,
+          "input": 1932,
+          "output": 638,
           "details": null
         },
         "token_counts": {
           "fulltext": 692,
-          "digest": 371,
-          "short_digest": 180
+          "digest": 327,
+          "short_digest": 188
         },
         "children": {}
       },
@@ -2395,14 +2395,14 @@
         "displayName": "connect-prisma-postgres",
         "relevant": true,
         "usage": {
-          "input": 1961,
-          "output": 640,
+          "input": 2035,
+          "output": 639,
           "details": null
         },
         "token_counts": {
           "fulltext": 794,
-          "digest": 349,
-          "short_digest": 177
+          "digest": 352,
+          "short_digest": 168
         },
         "children": {}
       },
@@ -2411,14 +2411,14 @@
         "displayName": "react-native-sqlite-setup",
         "relevant": true,
         "usage": {
-          "input": 1337,
-          "output": 248,
+          "input": 1411,
+          "output": 209,
           "details": null
         },
         "token_counts": {
           "fulltext": 169,
-          "digest": 82,
-          "short_digest": 52
+          "digest": 62,
+          "short_digest": 34
         },
         "children": {}
       },
@@ -2427,14 +2427,14 @@
         "displayName": "connect-sqlite-cloud",
         "relevant": true,
         "usage": {
-          "input": 1718,
-          "output": 572,
+          "input": 1792,
+          "output": 460,
           "details": null
         },
         "token_counts": {
           "fulltext": 552,
-          "digest": 306,
-          "short_digest": 144
+          "digest": 257,
+          "short_digest": 90
         },
         "children": {}
       },
@@ -2443,14 +2443,14 @@
         "displayName": "connect-supabase",
         "relevant": true,
         "usage": {
-          "input": 1858,
-          "output": 561,
+          "input": 1932,
+          "output": 524,
           "details": null
         },
         "token_counts": {
           "fulltext": 692,
-          "digest": 353,
-          "short_digest": 79
+          "digest": 321,
+          "short_digest": 74
         },
         "children": {}
       },
@@ -2459,14 +2459,14 @@
         "displayName": "connect-tidb-serverless",
         "relevant": true,
         "usage": {
-          "input": 1813,
-          "output": 660,
+          "input": 1887,
+          "output": 581,
           "details": null
         },
         "token_counts": {
           "fulltext": 648,
-          "digest": 323,
-          "short_digest": 200
+          "digest": 288,
+          "short_digest": 167
         },
         "children": {}
       },
@@ -2475,14 +2475,14 @@
         "displayName": "connect-turso-database",
         "relevant": true,
         "usage": {
-          "input": 1695,
-          "output": 557,
+          "input": 1769,
+          "output": 417,
           "details": null
         },
         "token_counts": {
           "fulltext": 528,
-          "digest": 280,
-          "short_digest": 138
+          "digest": 249,
+          "short_digest": 57
         },
         "children": {}
       },
@@ -2491,14 +2491,14 @@
         "displayName": "connect-turso",
         "relevant": true,
         "usage": {
-          "input": 2033,
-          "output": 792,
+          "input": 2107,
+          "output": 739,
           "details": null
         },
         "token_counts": {
           "fulltext": 868,
-          "digest": 468,
-          "short_digest": 191
+          "digest": 441,
+          "short_digest": 178
         },
         "children": {}
       },
@@ -2507,14 +2507,14 @@
         "displayName": "connect-vercel-postgres",
         "relevant": true,
         "usage": {
-          "input": 2007,
-          "output": 665,
+          "input": 2081,
+          "output": 551,
           "details": null
         },
         "token_counts": {
           "fulltext": 840,
-          "digest": 380,
-          "short_digest": 154
+          "digest": 321,
+          "short_digest": 96
         },
         "children": {}
       },
@@ -2523,14 +2523,14 @@
         "displayName": "connect-xata",
         "relevant": true,
         "usage": {
-          "input": 1695,
-          "output": 546,
+          "input": 1769,
+          "output": 412,
           "details": null
         },
         "token_counts": {
           "fulltext": 530,
-          "digest": 283,
-          "short_digest": 143
+          "digest": 214,
+          "short_digest": 75
         },
         "children": {}
       },
@@ -2539,30 +2539,30 @@
         "displayName": "custom-types",
         "relevant": true,
         "usage": {
-          "input": 3406,
-          "output": 1996,
+          "input": 3480,
+          "output": 1451,
           "details": null
         },
         "token_counts": {
           "fulltext": 2242,
-          "digest": 1254,
-          "short_digest": 600
+          "digest": 1221,
+          "short_digest": 100
         },
         "children": {}
       },
-      "queries_and_crud_operations": {
+      "queries-and-crud": {
         "origPath": "data-querying.mdx",
-        "displayName": "Queries and CRUD Operations",
+        "displayName": "queries-and-crud",
         "relevant": true,
         "usage": {
-          "input": 2575,
-          "output": 541,
+          "input": 2649,
+          "output": 842,
           "details": null
         },
         "token_counts": {
           "fulltext": 1410,
-          "digest": 359,
-          "short_digest": 69
+          "digest": 575,
+          "short_digest": 131
         },
         "children": {}
       },
@@ -2571,46 +2571,46 @@
         "displayName": "delete",
         "relevant": true,
         "usage": {
-          "input": 2143,
-          "output": 985,
+          "input": 2217,
+          "output": 783,
           "details": null
         },
         "token_counts": {
           "fulltext": 981,
-          "digest": 553,
-          "short_digest": 316
+          "digest": 515,
+          "short_digest": 150
         },
         "children": {}
       },
-      "configuration_file": {
+      "drizzle-config-file": {
         "origPath": "drizzle-config-file.mdx",
-        "displayName": "Configuration File",
+        "displayName": "drizzle-config-file",
         "relevant": true,
         "usage": {
-          "input": 6930,
-          "output": 1959,
+          "input": 7004,
+          "output": 2463,
           "details": null
         },
         "token_counts": {
           "fulltext": 5762,
-          "digest": 1395,
-          "short_digest": 439
+          "digest": 1806,
+          "short_digest": 505
         },
         "children": {}
       },
-      "check": {
+      "check-migrations": {
         "origPath": "drizzle-kit-check.mdx",
-        "displayName": "check",
+        "displayName": "check-migrations",
         "relevant": true,
         "usage": {
-          "input": 2138,
-          "output": 659,
+          "input": 2212,
+          "output": 751,
           "details": null
         },
         "token_counts": {
           "fulltext": 970,
-          "digest": 361,
-          "short_digest": 182
+          "digest": 458,
+          "short_digest": 169
         },
         "children": {}
       },
@@ -2619,14 +2619,14 @@
         "displayName": "export",
         "relevant": true,
         "usage": {
-          "input": 2847,
-          "output": 1013,
+          "input": 2921,
+          "output": 1147,
           "details": null
         },
         "token_counts": {
           "fulltext": 1679,
-          "digest": 603,
-          "short_digest": 285
+          "digest": 679,
+          "short_digest": 343
         },
         "children": {}
       },
@@ -2635,14 +2635,14 @@
         "displayName": "generate",
         "relevant": true,
         "usage": {
-          "input": 3693,
-          "output": 1203,
+          "input": 3767,
+          "output": 1385,
           "details": null
         },
         "token_counts": {
           "fulltext": 2525,
-          "digest": 791,
-          "short_digest": 295
+          "digest": 899,
+          "short_digest": 364
         },
         "children": {}
       },
@@ -2651,46 +2651,46 @@
         "displayName": "migrate",
         "relevant": true,
         "usage": {
-          "input": 3003,
-          "output": 1071,
+          "input": 3077,
+          "output": 697,
           "details": null
         },
         "token_counts": {
           "fulltext": 1835,
-          "digest": 651,
-          "short_digest": 277
+          "digest": 496,
+          "short_digest": 83
         },
         "children": {}
       },
-      "drizzle-kit_pull": {
+      "pull": {
         "origPath": "drizzle-kit-pull.mdx",
-        "displayName": "drizzle-kit pull",
+        "displayName": "pull",
         "relevant": true,
         "usage": {
-          "input": 3765,
-          "output": 1389,
+          "input": 3839,
+          "output": 1881,
           "details": null
         },
         "token_counts": {
           "fulltext": 2597,
-          "digest": 863,
-          "short_digest": 384
+          "digest": 1315,
+          "short_digest": 431
         },
         "children": {}
       },
-      "drizzle-kit-push": {
+      "push": {
         "origPath": "drizzle-kit-push.mdx",
-        "displayName": "drizzle-kit-push",
+        "displayName": "push",
         "relevant": true,
         "usage": {
-          "input": 4200,
-          "output": 1780,
+          "input": 4274,
+          "output": 1670,
           "details": null
         },
         "token_counts": {
           "fulltext": 3032,
-          "digest": 1293,
-          "short_digest": 360
+          "digest": 1111,
+          "short_digest": 415
         },
         "children": {}
       },
@@ -2699,14 +2699,14 @@
         "displayName": "studio",
         "relevant": true,
         "usage": {
-          "input": 2594,
-          "output": 967,
+          "input": 2668,
+          "output": 968,
           "details": null
         },
         "token_counts": {
           "fulltext": 1426,
-          "digest": 571,
-          "short_digest": 267
+          "digest": 511,
+          "short_digest": 324
         },
         "children": {}
       },
@@ -2715,13 +2715,13 @@
         "displayName": "drizzle-kit-up",
         "relevant": true,
         "usage": {
-          "input": 2123,
-          "output": 802,
+          "input": 2197,
+          "output": 695,
           "details": null
         },
         "token_counts": {
           "fulltext": 955,
-          "digest": 474,
+          "digest": 356,
           "short_digest": 214
         },
         "children": {}
@@ -2731,14 +2731,14 @@
         "displayName": "dynamic-query-building",
         "relevant": true,
         "usage": {
-          "input": 2727,
-          "output": 957,
+          "input": 2801,
+          "output": 1073,
           "details": null
         },
         "token_counts": {
           "fulltext": 1561,
-          "digest": 592,
-          "short_digest": 231
+          "digest": 726,
+          "short_digest": 207
         },
         "children": {}
       },
@@ -2747,14 +2747,14 @@
         "displayName": "eslint-plugin",
         "relevant": true,
         "usage": {
-          "input": 2437,
-          "output": 969,
+          "input": 2511,
+          "output": 761,
           "details": null
         },
         "token_counts": {
           "fulltext": 1272,
-          "digest": 605,
-          "short_digest": 241
+          "digest": 558,
+          "short_digest": 78
         },
         "children": {}
       },
@@ -2763,14 +2763,14 @@
         "displayName": "faq",
         "relevant": true,
         "usage": {
-          "input": 1660,
-          "output": 492,
+          "input": 1734,
+          "output": 471,
           "details": null
         },
         "token_counts": {
           "fulltext": 497,
-          "digest": 287,
-          "short_digest": 90
+          "digest": 276,
+          "short_digest": 75
         },
         "children": {}
       },
@@ -2779,14 +2779,14 @@
         "displayName": "generated-columns",
         "relevant": true,
         "usage": {
-          "input": 4820,
-          "output": 1498,
+          "input": 4894,
+          "output": 1706,
           "details": null
         },
         "token_counts": {
           "fulltext": 3656,
-          "digest": 1120,
-          "short_digest": 227
+          "digest": 1299,
+          "short_digest": 268
         },
         "children": {}
       },
@@ -2795,110 +2795,110 @@
         "displayName": "gel-setup",
         "relevant": true,
         "usage": {
-          "input": 1740,
-          "output": 584,
+          "input": 1814,
+          "output": 454,
           "details": null
         },
         "token_counts": {
           "fulltext": 574,
-          "digest": 316,
-          "short_digest": 152
+          "digest": 275,
+          "short_digest": 62
         },
         "children": {}
       },
-      "mysql_setup": {
+      "mysql-setup": {
         "origPath": "get-started-mysql.mdx",
-        "displayName": "MySQL Setup",
+        "displayName": "mysql-setup",
         "relevant": true,
         "usage": {
-          "input": 1860,
-          "output": 791,
+          "input": 1934,
+          "output": 603,
           "details": null
         },
         "token_counts": {
           "fulltext": 694,
-          "digest": 451,
-          "short_digest": 215
+          "digest": 367,
+          "short_digest": 116
         },
         "children": {}
       },
-      "postgresql_setup": {
+      "postgresql-setup": {
         "origPath": "get-started-postgresql.mdx",
-        "displayName": "PostgreSQL Setup",
+        "displayName": "postgresql-setup",
         "relevant": true,
         "usage": {
-          "input": 2348,
-          "output": 1021,
+          "input": 2422,
+          "output": 819,
           "details": null
         },
         "token_counts": {
           "fulltext": 1182,
-          "digest": 616,
-          "short_digest": 291
-        },
-        "children": {}
-      },
-      "singlestore_setup": {
-        "origPath": "get-started-singlestore.mdx",
-        "displayName": "SingleStore Setup",
-        "relevant": true,
-        "usage": {
-          "input": 2094,
-          "output": 733,
-          "details": null
-        },
-        "token_counts": {
-          "fulltext": 926,
-          "digest": 416,
-          "short_digest": 178
-        },
-        "children": {}
-      },
-      "sqlite_setup": {
-        "origPath": "get-started-sqlite.mdx",
-        "displayName": "SQLite Setup",
-        "relevant": true,
-        "usage": {
-          "input": 2261,
-          "output": 1000,
-          "details": null
-        },
-        "token_counts": {
-          "fulltext": 1095,
-          "digest": 626,
+          "digest": 470,
           "short_digest": 237
         },
         "children": {}
       },
-      "get_started": {
+      "singlestore-setup": {
+        "origPath": "get-started-singlestore.mdx",
+        "displayName": "singlestore-setup",
+        "relevant": true,
+        "usage": {
+          "input": 2168,
+          "output": 653,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 926,
+          "digest": 427,
+          "short_digest": 87
+        },
+        "children": {}
+      },
+      "sqlite-setup": {
+        "origPath": "get-started-sqlite.mdx",
+        "displayName": "sqlite-setup",
+        "relevant": true,
+        "usage": {
+          "input": 2335,
+          "output": 799,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 1095,
+          "digest": 453,
+          "short_digest": 223
+        },
+        "children": {}
+      },
+      "get-started": {
         "origPath": "get-started.mdx",
-        "displayName": "Get started",
+        "displayName": "get-started",
         "relevant": false,
         "usage": {
-          "input": 1260,
-          "output": 214,
+          "input": 1334,
+          "output": 219,
           "details": null
         },
         "token_counts": {
           "fulltext": 96,
-          "digest": 86,
-          "short_digest": 28
+          "digest": 94,
+          "short_digest": 26
         },
         "children": {}
       },
-      "goodies": {
+      "type-helpers-and-utilities": {
         "origPath": "goodies.mdx",
-        "displayName": "Goodies",
+        "displayName": "type-helpers-and-utilities",
         "relevant": true,
         "usage": {
-          "input": 5460,
-          "output": 1309,
+          "input": 5534,
+          "output": 1740,
           "details": null
         },
         "token_counts": {
           "fulltext": 4299,
-          "digest": 845,
-          "short_digest": 330
+          "digest": 1352,
+          "short_digest": 257
         },
         "children": {}
       },
@@ -2907,30 +2907,30 @@
         "displayName": "gotchas",
         "relevant": false,
         "usage": {
-          "input": 1288,
-          "output": 258,
+          "input": 1362,
+          "output": 221,
           "details": null
         },
         "token_counts": {
           "fulltext": 124,
-          "digest": 117,
-          "short_digest": 41
+          "digest": 80,
+          "short_digest": 33
         },
         "children": {}
       },
-      "graphql_integration": {
+      "graphql": {
         "origPath": "graphql.mdx",
-        "displayName": "GraphQL Integration",
+        "displayName": "graphql",
         "relevant": true,
         "usage": {
-          "input": 3033,
-          "output": 1251,
+          "input": 3107,
+          "output": 1186,
           "details": null
         },
         "token_counts": {
           "fulltext": 1870,
-          "digest": 792,
-          "short_digest": 342
+          "digest": 1010,
+          "short_digest": 61
         },
         "children": {}
       },
@@ -2939,14 +2939,14 @@
         "displayName": "guides",
         "relevant": false,
         "usage": {
-          "input": 1187,
-          "output": 213,
+          "input": 1261,
+          "output": 187,
           "details": null
         },
         "token_counts": {
           "fulltext": 25,
-          "digest": 88,
-          "short_digest": 27
+          "digest": 71,
+          "short_digest": 20
         },
         "children": {}
       },
@@ -2955,30 +2955,30 @@
         "displayName": "indexes-constraints",
         "relevant": true,
         "usage": {
-          "input": 10732,
-          "output": 1860,
+          "input": 10806,
+          "output": 1492,
           "details": null
         },
         "token_counts": {
           "fulltext": 9568,
-          "digest": 1333,
-          "short_digest": 391
+          "digest": 1153,
+          "short_digest": 215
         },
         "children": {}
       },
-      "insert": {
+      "insert.mdx": {
         "origPath": "insert.mdx",
-        "displayName": "insert",
+        "displayName": "insert.mdx",
         "relevant": true,
         "usage": {
-          "input": 4300,
-          "output": 2079,
+          "input": 4374,
+          "output": 1783,
           "details": null
         },
         "token_counts": {
           "fulltext": 3138,
-          "digest": 1380,
-          "short_digest": 556
+          "digest": 1231,
+          "short_digest": 384
         },
         "children": {}
       },
@@ -2987,30 +2987,30 @@
         "displayName": "joins",
         "relevant": true,
         "usage": {
-          "input": 4467,
-          "output": 2642,
+          "input": 4541,
+          "output": 2070,
           "details": null
         },
         "token_counts": {
           "fulltext": 3305,
-          "digest": 1794,
-          "short_digest": 701
+          "digest": 1567,
+          "short_digest": 344
         },
         "children": {}
       },
-      "custom_migrations": {
+      "custom-migrations": {
         "origPath": "kit-custom-migrations.mdx",
-        "displayName": "Custom Migrations",
+        "displayName": "custom-migrations",
         "relevant": true,
         "usage": {
-          "input": 1814,
-          "output": 477,
+          "input": 1888,
+          "output": 524,
           "details": null
         },
         "token_counts": {
           "fulltext": 648,
-          "digest": 282,
-          "short_digest": 66
+          "digest": 331,
+          "short_digest": 64
         },
         "children": {}
       },
@@ -3019,110 +3019,110 @@
         "displayName": "migrations-for-teams",
         "relevant": false,
         "usage": {
-          "input": 1242,
-          "output": 213,
+          "input": 1316,
+          "output": 188,
           "details": null
         },
         "token_counts": {
           "fulltext": 74,
-          "digest": 68,
-          "short_digest": 34
+          "digest": 61,
+          "short_digest": 26
         },
         "children": {}
       },
-      "kit_overview": {
+      "kit-overview": {
         "origPath": "kit-overview.mdx",
-        "displayName": "Kit Overview",
+        "displayName": "kit-overview",
         "relevant": true,
         "usage": {
-          "input": 2696,
-          "output": 890,
+          "input": 2770,
+          "output": 992,
           "details": null
         },
         "token_counts": {
           "fulltext": 1532,
-          "digest": 587,
-          "short_digest": 179
+          "digest": 678,
+          "short_digest": 177
         },
         "children": {}
       },
-      "data_seeding": {
+      "kit-seed-data": {
         "origPath": "kit-seed-data.mdx",
-        "displayName": "Data Seeding",
+        "displayName": "kit-seed-data",
         "relevant": false,
         "usage": {
-          "input": 1350,
-          "output": 207,
+          "input": 1424,
+          "output": 212,
           "details": null
         },
         "token_counts": {
           "fulltext": 184,
+          "digest": 71,
+          "short_digest": 31
+        },
+        "children": {}
+      },
+      "migrations-web-mobile": {
+        "origPath": "kit-web-mobile.mdx",
+        "displayName": "migrations-web-mobile",
+        "relevant": false,
+        "usage": {
+          "input": 1458,
+          "output": 218,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 218,
+          "digest": 60,
+          "short_digest": 40
+        },
+        "children": {}
+      },
+      "releases": {
+        "origPath": "latest-releases.mdx",
+        "displayName": "releases",
+        "relevant": false,
+        "usage": {
+          "input": 1275,
+          "output": 198,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 37,
           "digest": 74,
           "short_digest": 29
         },
         "children": {}
       },
-      "migrations_in_web_and_mobile_environments": {
-        "origPath": "kit-web-mobile.mdx",
-        "displayName": "Migrations in Web and Mobile Environments",
-        "relevant": false,
-        "usage": {
-          "input": 1384,
-          "output": 232,
-          "details": null
-        },
-        "token_counts": {
-          "fulltext": 218,
-          "digest": 72,
-          "short_digest": 42
-        },
-        "children": {}
-      },
-      "latest-releases": {
-        "origPath": "latest-releases.mdx",
-        "displayName": "latest-releases",
-        "relevant": false,
-        "usage": {
-          "input": 1201,
-          "output": 186,
-          "details": null
-        },
-        "token_counts": {
-          "fulltext": 37,
-          "digest": 66,
-          "short_digest": 25
-        },
-        "children": {}
-      },
-      "migrations-fundamentals": {
+      "migrations": {
         "origPath": "migrations.mdx",
-        "displayName": "migrations-fundamentals",
+        "displayName": "migrations",
         "relevant": true,
         "usage": {
-          "input": 5589,
-          "output": 980,
+          "input": 5663,
+          "output": 964,
           "details": null
         },
         "token_counts": {
           "fulltext": 4427,
-          "digest": 622,
-          "short_digest": 233
+          "digest": 595,
+          "short_digest": 246
         },
         "children": {}
       },
-      "operators": {
+      "filter-and-conditional-operators": {
         "origPath": "operators.mdx",
-        "displayName": "operators",
+        "displayName": "filter-and-conditional-operators",
         "relevant": true,
         "usage": {
-          "input": 4973,
-          "output": 2349,
+          "input": 5047,
+          "output": 2475,
           "details": null
         },
         "token_counts": {
           "fulltext": 3811,
-          "digest": 1718,
-          "short_digest": 447
+          "digest": 1851,
+          "short_digest": 436
         },
         "children": {}
       },
@@ -3131,14 +3131,14 @@
         "displayName": "overview",
         "relevant": true,
         "usage": {
-          "input": 4179,
-          "output": 969,
+          "input": 4253,
+          "output": 930,
           "details": null
         },
         "token_counts": {
           "fulltext": 3017,
-          "digest": 601,
-          "short_digest": 243
+          "digest": 600,
+          "short_digest": 199
         },
         "children": {}
       },
@@ -3147,14 +3147,14 @@
         "displayName": "prepared-statements",
         "relevant": true,
         "usage": {
-          "input": 2705,
-          "output": 1187,
+          "input": 2779,
+          "output": 1018,
           "details": null
         },
         "token_counts": {
           "fulltext": 1540,
-          "digest": 764,
-          "short_digest": 261
+          "digest": 656,
+          "short_digest": 209
         },
         "children": {}
       },
@@ -3163,14 +3163,14 @@
         "displayName": "serverless-performance",
         "relevant": true,
         "usage": {
-          "input": 1357,
-          "output": 430,
+          "input": 1431,
+          "output": 412,
           "details": null
         },
         "token_counts": {
           "fulltext": 191,
-          "digest": 213,
-          "short_digest": 103
+          "digest": 205,
+          "short_digest": 92
         },
         "children": {}
       },
@@ -3179,14 +3179,14 @@
         "displayName": "prisma-extension",
         "relevant": true,
         "usage": {
-          "input": 2172,
-          "output": 915,
+          "input": 2246,
+          "output": 654,
           "details": null
         },
         "token_counts": {
           "fulltext": 1009,
-          "digest": 487,
-          "short_digest": 256
+          "digest": 388,
+          "short_digest": 108
         },
         "children": {}
       },
@@ -3195,30 +3195,30 @@
         "displayName": "query-utils",
         "relevant": false,
         "usage": {
-          "input": 1284,
-          "output": 203,
+          "input": 1358,
+          "output": 160,
           "details": null
         },
         "token_counts": {
           "fulltext": 120,
-          "digest": 86,
-          "short_digest": 20
+          "digest": 46,
+          "short_digest": 18
         },
         "children": {}
       },
       "quick-start": {
         "origPath": "quick.mdx",
         "displayName": "quick-start",
-        "relevant": false,
+        "relevant": true,
         "usage": {
-          "input": 1886,
-          "output": 811,
+          "input": 1960,
+          "output": 814,
           "details": null
         },
         "token_counts": {
           "fulltext": 724,
-          "digest": 391,
-          "short_digest": 293
+          "digest": 387,
+          "short_digest": 283
         },
         "children": {}
       },
@@ -3227,14 +3227,14 @@
         "displayName": "read-replicas",
         "relevant": true,
         "usage": {
-          "input": 2831,
-          "output": 1590,
+          "input": 2905,
+          "output": 995,
           "details": null
         },
         "token_counts": {
           "fulltext": 1666,
-          "digest": 1199,
-          "short_digest": 274
+          "digest": 633,
+          "short_digest": 245
         },
         "children": {}
       },
@@ -3243,78 +3243,78 @@
         "displayName": "relations",
         "relevant": true,
         "usage": {
-          "input": 4931,
-          "output": 2287,
+          "input": 5005,
+          "output": 2211,
           "details": null
         },
         "token_counts": {
           "fulltext": 3769,
-          "digest": 1733,
-          "short_digest": 408
+          "digest": 1610,
+          "short_digest": 431
         },
         "children": {}
       },
-      "row-level_security": {
+      "rls.mdx": {
         "origPath": "rls.mdx",
-        "displayName": "Row-Level Security",
+        "displayName": "rls.mdx",
         "relevant": true,
         "usage": {
-          "input": 5818,
-          "output": 3638,
+          "input": 5892,
+          "output": 3380,
           "details": null
         },
         "token_counts": {
           "fulltext": 4655,
-          "digest": 2968,
-          "short_digest": 462
+          "digest": 2966,
+          "short_digest": 276
         },
         "children": {}
       },
-      "relational_queries": {
+      "relational-queries": {
         "origPath": "rqb.mdx",
-        "displayName": "Relational Queries",
+        "displayName": "relational-queries",
         "relevant": true,
         "usage": {
-          "input": 7788,
-          "output": 2406,
+          "input": 7862,
+          "output": 2356,
           "details": null
         },
         "token_counts": {
           "fulltext": 6624,
-          "digest": 1979,
-          "short_digest": 295
+          "digest": 1936,
+          "short_digest": 297
         },
         "children": {}
       },
-      "table_schemas": {
+      "schemas": {
         "origPath": "schemas.mdx",
-        "displayName": "Table Schemas",
+        "displayName": "schemas",
         "relevant": true,
         "usage": {
-          "input": 2046,
-          "output": 884,
+          "input": 2120,
+          "output": 845,
           "details": null
         },
         "token_counts": {
           "fulltext": 884,
-          "digest": 522,
-          "short_digest": 240
+          "digest": 518,
+          "short_digest": 210
         },
         "children": {}
       },
-      "seed_generators_reference": {
+      "seed-generators": {
         "origPath": "seed-functions.mdx",
-        "displayName": "Seed Generators Reference",
+        "displayName": "seed-generators",
         "relevant": true,
         "usage": {
-          "input": 9176,
-          "output": 1669,
+          "input": 9250,
+          "output": 2654,
           "details": null
         },
         "token_counts": {
           "fulltext": 8012,
-          "digest": 1289,
-          "short_digest": 209
+          "digest": 2132,
+          "short_digest": 396
         },
         "children": {}
       },
@@ -3323,14 +3323,14 @@
         "displayName": "seed-limitations",
         "relevant": true,
         "usage": {
-          "input": 1177,
-          "output": 194,
+          "input": 1251,
+          "output": 207,
           "details": null
         },
         "token_counts": {
           "fulltext": 13,
-          "digest": 71,
-          "short_digest": 28
+          "digest": 77,
+          "short_digest": 25
         },
         "children": {}
       },
@@ -3339,30 +3339,30 @@
         "displayName": "seed-overview",
         "relevant": true,
         "usage": {
-          "input": 7248,
-          "output": 1951,
+          "input": 7322,
+          "output": 1927,
           "details": null
         },
         "token_counts": {
           "fulltext": 6084,
-          "digest": 1430,
-          "short_digest": 402
+          "digest": 1369,
+          "short_digest": 429
         },
         "children": {}
       },
-      "versioning": {
+      "seed-versioning": {
         "origPath": "seed-versioning.mdx",
-        "displayName": "Versioning",
+        "displayName": "seed-versioning",
         "relevant": true,
         "usage": {
-          "input": 5215,
-          "output": 1014,
+          "input": 5289,
+          "output": 1024,
           "details": null
         },
         "token_counts": {
           "fulltext": 4050,
-          "digest": 712,
-          "short_digest": 178
+          "digest": 739,
+          "short_digest": 162
         },
         "children": {}
       },
@@ -3371,14 +3371,14 @@
         "displayName": "select",
         "relevant": true,
         "usage": {
-          "input": 9734,
-          "output": 4687,
+          "input": 9808,
+          "output": 4937,
           "details": null
         },
         "token_counts": {
           "fulltext": 8572,
-          "digest": 3644,
-          "short_digest": 928
+          "digest": 3938,
+          "short_digest": 881
         },
         "children": {}
       },
@@ -3387,14 +3387,14 @@
         "displayName": "sequences",
         "relevant": true,
         "usage": {
-          "input": 1940,
-          "output": 886,
+          "input": 2014,
+          "output": 806,
           "details": null
         },
         "token_counts": {
           "fulltext": 778,
-          "digest": 525,
-          "short_digest": 224
+          "digest": 517,
+          "short_digest": 127
         },
         "children": {}
       },
@@ -3403,14 +3403,14 @@
         "displayName": "set-operations",
         "relevant": true,
         "usage": {
-          "input": 13125,
-          "output": 2100,
+          "input": 13199,
+          "output": 1632,
           "details": null
         },
         "token_counts": {
           "fulltext": 11961,
-          "digest": 1392,
-          "short_digest": 569
+          "digest": 1285,
+          "short_digest": 211
         },
         "children": {}
       },
@@ -3419,30 +3419,30 @@
         "displayName": "schema-declaration",
         "relevant": true,
         "usage": {
-          "input": 5808,
-          "output": 1827,
+          "input": 5882,
+          "output": 2690,
           "details": null
         },
         "token_counts": {
           "fulltext": 4642,
-          "digest": 1455,
-          "short_digest": 243
+          "digest": 2047,
+          "short_digest": 487
         },
         "children": {}
       },
-      "sql": {
+      "sql-template": {
         "origPath": "sql.mdx",
-        "displayName": "sql",
+        "displayName": "sql-template",
         "relevant": true,
         "usage": {
-          "input": 5781,
-          "output": 2597,
+          "input": 5855,
+          "output": 1865,
           "details": null
         },
         "token_counts": {
           "fulltext": 4619,
-          "digest": 1976,
-          "short_digest": 501
+          "digest": 1507,
+          "short_digest": 232
         },
         "children": {}
       },
@@ -3451,14 +3451,14 @@
         "displayName": "transactions",
         "relevant": true,
         "usage": {
-          "input": 2825,
-          "output": 1102,
+          "input": 2899,
+          "output": 1049,
           "details": null
         },
         "token_counts": {
           "fulltext": 1663,
-          "digest": 844,
-          "short_digest": 137
+          "digest": 763,
+          "short_digest": 167
         },
         "children": {}
       },
@@ -3467,14 +3467,14 @@
         "displayName": "tutorials",
         "relevant": false,
         "usage": {
-          "input": 1187,
-          "output": 214,
+          "input": 1261,
+          "output": 178,
           "details": null
         },
         "token_counts": {
           "fulltext": 25,
-          "digest": 84,
-          "short_digest": 32
+          "digest": 65,
+          "short_digest": 18
         },
         "children": {}
       },
@@ -3483,14 +3483,14 @@
         "displayName": "typebox",
         "relevant": true,
         "usage": {
-          "input": 5139,
-          "output": 2180,
+          "input": 5213,
+          "output": 2269,
           "details": null
         },
         "token_counts": {
           "fulltext": 3976,
-          "digest": 1716,
-          "short_digest": 325
+          "digest": 1907,
+          "short_digest": 228
         },
         "children": {}
       },
@@ -3499,30 +3499,30 @@
         "displayName": "update",
         "relevant": true,
         "usage": {
-          "input": 2794,
-          "output": 1119,
+          "input": 2868,
+          "output": 1037,
           "details": null
         },
         "token_counts": {
           "fulltext": 1632,
-          "digest": 805,
-          "short_digest": 192
+          "digest": 744,
+          "short_digest": 169
         },
         "children": {}
       },
-      "migrate_to_0.21.0": {
+      "upgrade-to-0.21.0": {
         "origPath": "upgrade-21.mdx",
-        "displayName": "Migrate to 0.21.0",
+        "displayName": "upgrade-to-0.21.0",
         "relevant": true,
         "usage": {
-          "input": 2588,
-          "output": 1090,
+          "input": 2662,
+          "output": 767,
           "details": null
         },
         "token_counts": {
           "fulltext": 1424,
-          "digest": 583,
-          "short_digest": 343
+          "digest": 501,
+          "short_digest": 111
         },
         "children": {}
       },
@@ -3531,14 +3531,14 @@
         "displayName": "valibot",
         "relevant": true,
         "usage": {
-          "input": 4740,
-          "output": 2036,
+          "input": 4814,
+          "output": 2323,
           "details": null
         },
         "token_counts": {
           "fulltext": 3576,
-          "digest": 1704,
-          "short_digest": 200
+          "digest": 2001,
+          "short_digest": 182
         },
         "children": {}
       },
@@ -3547,30 +3547,30 @@
         "displayName": "views",
         "relevant": true,
         "usage": {
-          "input": 4628,
-          "output": 1712,
+          "input": 4702,
+          "output": 1814,
           "details": null
         },
         "token_counts": {
           "fulltext": 3466,
-          "digest": 1014,
-          "short_digest": 563
+          "digest": 1151,
+          "short_digest": 543
         },
         "children": {}
       },
-      "introduction": {
+      "why-drizzle": {
         "origPath": "why-drizzle.mdx",
-        "displayName": "introduction",
+        "displayName": "why-drizzle",
         "relevant": true,
         "usage": {
-          "input": 4148,
-          "output": 1029,
+          "input": 4222,
+          "output": 985,
           "details": null
         },
         "token_counts": {
           "fulltext": 2982,
-          "digest": 724,
-          "short_digest": 177
+          "digest": 628,
+          "short_digest": 236
         },
         "children": {}
       },
@@ -3579,14 +3579,14 @@
         "displayName": "zod",
         "relevant": true,
         "usage": {
-          "input": 5092,
-          "output": 1837,
+          "input": 5166,
+          "output": 2192,
           "details": null
         },
         "token_counts": {
           "fulltext": 3929,
-          "digest": 1320,
-          "short_digest": 368
+          "digest": 1806,
+          "short_digest": 250
         },
         "children": {}
       }
@@ -3609,7 +3609,7 @@
     "repo": "https://github.com/drizzle-team/drizzle-orm-docs",
     "commit": "11695b74b84979f2ba9641009608d38fe0efbbe8"
   },
-  "date": "2025-11-29T19:09:39.053225+00:00",
+  "date": "2025-12-07T02:56:45.975996+00:00",
   "model": "claude-haiku-4.5",
-  "commit": "252261cef6ad355e020592d6750e7412344373ea-dirty"
+  "commit": "89d7a82f10a43f14d4fd63c518b2eaed000cc5c9-dirty"
 }

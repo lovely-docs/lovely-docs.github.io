@@ -1,1 +1,1 @@
-Three prompt types (text, system, message) with multi-modal content support (text, images, files, tool calls) and provider-specific options at function/message/part levels.
+Text/system/message prompts; message content types (text, images, files, tool calls); provider options at function/message/part levels; user/assistant/tool/system message structures.

@@ -1,1 +1,0 @@
-Run `npx sv create my-app` to scaffold a project, then `npm run dev` to start the dev server on localhost:5173. Pages are Svelte components in `src/routes` that are server-rendered initially then hydrated client-side.

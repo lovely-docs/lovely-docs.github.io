@@ -1,0 +1,1 @@
+LinkPreview component for displaying content previews on hover/focus with Floating UI positioning, state management, transitions, custom anchoring, and configurable interaction behavior.

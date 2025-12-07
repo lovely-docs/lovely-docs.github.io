@@ -1,0 +1,1 @@
+Global context provider for setting default props (portal targets, locales) across Bits UI components. Supports scoped defaults, inheritance with overrides, and component-level prop overrides. Resolution order: direct prop → nearest parent config → inherited config → built-in default.

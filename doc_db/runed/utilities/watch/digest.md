@@ -2,16 +2,20 @@
 
 Manually specify which reactive values should trigger a callback, unlike `$effect` which automatically tracks all dependencies.
 
-**Basic usage:**
+**watch(source, callback, options?)**
+
+Runs callback when source changes. Source is a getter function returning the dependency value(s).
+
 ```ts
 import { watch } from "runed";
+
 let count = $state(0);
-watch(() => count, () => {
-	console.log(count);
+watch(() => count, (curr, prev) => {
+	console.log(`count is ${curr}, was ${prev}`);
 });
 ```
 
-**Deep watching objects:**
+Watch entire objects with `$state.snapshot()`:
 ```ts
 let user = $state({ name: 'bob', age: 20 });
 watch(() => $state.snapshot(user), () => {
@@ -19,34 +23,25 @@ watch(() => $state.snapshot(user), () => {
 });
 ```
 
-**Watching specific nested values:**
+Watch specific nested values:
 ```ts
-let user = $state({ name: 'bob', age: 20 });
 watch(() => user.age, () => {
 	console.log(`User is now ${user.age} years old`);
 });
 ```
 
-**Multiple sources as array:**
+Watch multiple sources as array:
 ```ts
 let age = $state(20);
 let name = $state("bob");
 watch([() => age, () => name], ([age, name], [prevAge, prevName]) => {
-	// callback receives current and previous values
-});
-```
-
-**Callback receives current and previous values:**
-```ts
-let count = $state(0);
-watch(() => count, (curr, prev) => {
-	console.log(`count is ${curr}, was ${prev}`);
+	// callback receives current and previous values as arrays
 });
 ```
 
 **Options:**
 - `lazy: true` - First run only happens after sources change (default: false)
 
-**Variants:**
-- `watch.pre` - Uses `$effect.pre` under the hood for pre-effect timing
-- `watchOnce` / `watchOnce.pre` - Runs callback only once, no options object accepted
+**watch.pre** - Uses `$effect.pre` instead of `$effect` under the hood.
+
+**watchOnce / watchOnce.pre** - Runs callback only once, then stops. Same behavior as `watch`/`watch.pre` but no options parameter.

@@ -1,0 +1,1 @@
+Comprehensive headless component library for Svelte with flexible state management, keyboard navigation, accessibility, and customizable styling.

@@ -1,0 +1,1 @@
+Decrement column values using `sql` operator in `update().set()`: `sql`${table.counter} - 1`` or create a reusable `decrement(column, value)` helper function. Works on PostgreSQL, MySQL, SQLite.

@@ -1,0 +1,1 @@
+TimeField: customizable time input with segments (hour/minute/second/dayPeriod/timeZoneName), validation (min/max/custom), granularity control, localization, state binding, readonly segments, form submission support.

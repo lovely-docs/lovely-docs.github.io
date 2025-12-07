@@ -1,0 +1,1 @@
+Step-by-step setup for Drizzle ORM with Bun and SQLite: install packages, configure DB_FILE_NAME env var, connect to database, define schema, setup drizzle.config.ts, apply migrations, seed/query data, run with bun.

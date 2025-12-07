@@ -1,0 +1,1 @@
+Fix "Cannot find namespace 'JSX'" error in non-React projects by installing @types/react; this dependency will be removed in next major version.

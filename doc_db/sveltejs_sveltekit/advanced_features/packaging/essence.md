@@ -1,1 +1,1 @@
-Configure and build reusable component libraries using @sveltejs/package with proper package.json exports, type definitions, and entry points.
+Building Svelte component libraries: use @sveltejs/package with src/lib as public API, configure package.json exports with types/svelte conditions, auto-generate type definitions, avoid SvelteKit-specific modules, use typesVersions for non-root exports, require fully-specified imports with extensions.

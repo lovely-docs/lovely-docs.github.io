@@ -1,0 +1,1 @@
+Compile Svelte components to web components with customElement option; configure tag, shadow DOM, prop reflection/types, and lifecycle via extend function; styles encapsulated and inlined; slotted content eager; context isolated per element.

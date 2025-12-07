@@ -1,1 +1,1 @@
-Range input with single/multiple thumbs, vertical/horizontal orientation, configurable max and step values.
+Range input with single/multiple thumbs, configurable max/step/orientation

@@ -1,1 +1,1 @@
-Avatar component with Image and Fallback subcomponents; displays user image or initials fallback text.
+Avatar component: image with fallback text, composed of Root/Image/Fallback subcomponents, styleable via class prop.

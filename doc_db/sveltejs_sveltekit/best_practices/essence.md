@@ -1,1 +1,1 @@
-Practical guidance on authentication, performance optimization, accessibility, SEO, and asset handling in SvelteKit applications.
+Production-ready patterns for authentication, performance optimization, accessibility, SEO, and asset handling in SvelteKit applications.

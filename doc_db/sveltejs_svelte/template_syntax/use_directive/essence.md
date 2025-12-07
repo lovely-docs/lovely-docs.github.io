@@ -1,1 +1,1 @@
-The use: directive attaches lifecycle-managed functions to DOM elements.
+use: directive mounts actions on elements with $effect-based lifecycle; accepts typed parameters and custom event handlers; runs once, not reactive to argument changes.

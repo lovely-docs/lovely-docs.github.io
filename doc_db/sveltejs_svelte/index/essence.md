@@ -1,1 +1,1 @@
-Documentation index page that serves as a structural entry point with no actual programming information.
+Root documentation index; auto-generated entry point with no substantive content.

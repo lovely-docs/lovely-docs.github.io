@@ -1,1 +1,1 @@
-Connect Turso SQLite database to Drizzle ORM via @tursodatabase/database driver; initialize with drizzle('sqlite.db') or pass existing Database instance to drizzle({ client }).
+Connect Turso database to Drizzle ORM via direct path or existing driver instance.

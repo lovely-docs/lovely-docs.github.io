@@ -1,0 +1,1 @@
+11-step guide to integrate Drizzle ORM with Neon serverless Postgres into existing project: install @neondatabase/serverless, configure DATABASE_URL env var, setup drizzle.config.ts, introspect existing schema, connect via drizzle(new Client(url)), query database, optionally update schema and apply migrations.

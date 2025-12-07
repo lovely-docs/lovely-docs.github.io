@@ -1,1 +1,0 @@
-Converts useChat messages to ModelMessage objects; supports multi-modal tool responses via toModelOutput and custom data part conversion with type-safe generics for URL/code attachments.

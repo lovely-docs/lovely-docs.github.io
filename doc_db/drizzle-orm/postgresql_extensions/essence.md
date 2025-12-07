@@ -1,1 +1,1 @@
-pg_vector and PostGIS extensions: vector columns with distance-based indexes and queries; geometry columns with GIST indexes and xy/tuple modes.
+PostgreSQL extensions: pg_vector for vector similarity search (vector columns, HNSW indexes, distance helper functions l2Distance/l1Distance/innerProduct/cosineDistance/hammingDistance/jaccardDistance); PostGIS for geospatial data (geometry columns with point type, tuple/xy modes, GIST indexes).

@@ -1,1 +1,0 @@
-Pagination component for navigating through pages with customizable state management and keyboard navigation support.

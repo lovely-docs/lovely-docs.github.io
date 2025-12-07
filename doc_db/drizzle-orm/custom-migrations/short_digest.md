@@ -1,0 +1,1 @@
+Generate custom SQL migration files with `drizzle-kit generate --custom --name=<name>`, write custom SQL (for unsupported DDL or data seeding), and run with `drizzle-kit migrate`. JavaScript/TypeScript migration support is planned.

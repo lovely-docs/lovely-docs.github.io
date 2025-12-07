@@ -1,1 +1,0 @@
-A composable date picker component combining segmented input field and calendar interface with flexible state management and date constraints.

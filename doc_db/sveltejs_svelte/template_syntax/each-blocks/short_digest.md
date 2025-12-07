@@ -1,0 +1,1 @@
+Iterate with `{#each expr as item}` or `{#each expr as item, i}`. Use keyed blocks `{#each expr as item (key)}` for intelligent list updates. Supports destructuring, rest patterns, and `{:else}` for empty lists. Can omit `as` to render n times.

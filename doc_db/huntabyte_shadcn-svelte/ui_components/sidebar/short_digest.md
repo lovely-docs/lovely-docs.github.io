@@ -3,103 +3,83 @@
 Composable, themeable sidebar with collapse-to-icons support.
 
 ### Installation
-
 ```bash
 npx shadcn-svelte@latest add sidebar -y -o
 ```
 
-Add CSS variables to `src/app.css` (light and dark modes with oklch colors).
+Add CSS variables for theming (light/dark modes with oklch colors).
 
-### Basic Setup
-
-`src/routes/+layout.svelte`:
+### Basic Structure
 ```svelte
 <Sidebar.Provider>
-  <AppSidebar />
+  <Sidebar.Root>
+    <Sidebar.Header />
+    <Sidebar.Content>
+      <Sidebar.Group>
+        <Sidebar.GroupLabel>Label</Sidebar.GroupLabel>
+        <Sidebar.GroupContent>
+          <Sidebar.Menu>
+            {#each items as item}
+              <Sidebar.MenuItem>
+                <Sidebar.MenuButton>
+                  {#snippet child({ props })}
+                    <a href={item.url} {...props}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </a>
+                  {/snippet}
+                </Sidebar.MenuButton>
+              </Sidebar.MenuItem>
+            {/each}
+          </Sidebar.Menu>
+        </Sidebar.GroupContent>
+      </Sidebar.Group>
+    </Sidebar.Content>
+    <Sidebar.Footer />
+  </Sidebar.Root>
   <main>
     <Sidebar.Trigger />
-    {@render children?.()}
   </main>
 </Sidebar.Provider>
 ```
 
-`src/lib/components/app-sidebar.svelte`:
-```svelte
-<Sidebar.Root>
-  <Sidebar.Header />
-  <Sidebar.Content>
-    <Sidebar.Group />
-  </Sidebar.Content>
-  <Sidebar.Footer />
-</Sidebar.Root>
-```
-
-### Menu Example
-
-```svelte
-<Sidebar.Root>
-  <Sidebar.Content>
-    <Sidebar.Group>
-      <Sidebar.GroupLabel>Application</Sidebar.GroupLabel>
-      <Sidebar.GroupContent>
-        <Sidebar.Menu>
-          {#each items as item}
-            <Sidebar.MenuItem>
-              <Sidebar.MenuButton>
-                {#snippet child({ props })}
-                  <a href={item.url} {...props}>
-                    <item.icon />
-                    <span>{item.title}</span>
-                  </a>
-                {/snippet}
-              </Sidebar.MenuButton>
-            </Sidebar.MenuItem>
-          {/each}
-        </Sidebar.Menu>
-      </Sidebar.GroupContent>
-    </Sidebar.Group>
-  </Sidebar.Content>
-</Sidebar.Root>
-```
-
 ### Key Components
 
-- `Sidebar.Provider` - Context provider, handles state
-- `Sidebar.Root` - Main container (props: `side`, `variant`, `collapsible`)
-- `Sidebar.Header/Footer` - Sticky sections
-- `Sidebar.Content` - Scrollable area
-- `Sidebar.Group` - Section with label, content, optional action
-- `Sidebar.Menu/MenuItem/MenuButton/MenuAction/MenuSub` - Menu structure
-- `Sidebar.MenuBadge` - Badge in menu item
-- `Sidebar.MenuSkeleton` - Loading skeleton
-- `Sidebar.Separator` - Visual separator
-- `Sidebar.Trigger` - Toggle button
-- `Sidebar.Rail` - Rail for toggling
+**Sidebar.Provider** - Context wrapper. Props: `open` (bindable), `onOpenChange` callback. Configure width with `--sidebar-width` CSS var or constants.
 
-### useSidebar Hook
+**Sidebar.Root** - Main container. Props: `side` (left/right), `variant` (sidebar/floating/inset), `collapsible` (offcanvas/icon/none).
 
+**useSidebar()** - Hook for state: `state`, `open`, `setOpen()`, `openMobile`, `setOpenMobile()`, `isMobile`, `toggle()`.
+
+**Sidebar.Header/Footer** - Sticky sections. Example with dropdown menu shown in digest.
+
+**Sidebar.Content** - Scrollable wrapper for groups.
+
+**Sidebar.Group** - Section with label, content, optional action. Can be wrapped in `Collapsible.Root` for collapse.
+
+**Sidebar.MenuButton** - Menu item button. Use `child` snippet for links. Props: `isActive`.
+
+**Sidebar.MenuAction** - Independent action button. Works with `DropdownMenu`.
+
+**Sidebar.MenuSub** - Submenu. Wrap in `Collapsible.Root` for collapse.
+
+**Sidebar.MenuBadge** - Badge display.
+
+**Sidebar.MenuSkeleton** - Loading skeleton.
+
+**Sidebar.Separator** - Divider line.
+
+**Sidebar.Trigger** - Toggle button. Custom trigger via `useSidebar().toggle()`.
+
+**Sidebar.Rail** - Rail for toggling.
+
+### Controlled State
 ```svelte
-const sidebar = useSidebar();
-sidebar.state; // "expanded" or "collapsed"
-sidebar.open; // boolean
-sidebar.isMobile; // boolean
-sidebar.toggle(); // toggle
+<Sidebar.Provider bind:open>
+  <Sidebar.Root />
+</Sidebar.Provider>
 ```
 
-### Configuration
-
-**Width:** Use `--sidebar-width` and `--sidebar-width-mobile` CSS variables or constants.
-
-**Keyboard:** Change `SIDEBAR_KEYBOARD_SHORTCUT` constant (default: `"b"`).
-
-**Collapsible modes:** `"offcanvas"` (slides), `"icon"` (collapses to icons), `"none"` (fixed).
-
-**Variants:** `"sidebar"`, `"floating"`, `"inset"` (wrap content in `Sidebar.Inset`).
-
-### Advanced
-
-- Wrap `Sidebar.Group` or `Sidebar.Menu` in `Collapsible.Root` for collapsible sections
-- Use `MenuButton` `child` snippet for custom elements (links, etc.)
-- `MenuAction` works independently from `MenuButton`
-- Controlled state with `bind:open` on `Sidebar.Provider`
-- Style based on states: `group-data-[collapsible=icon]:hidden`, `peer-data-[active=true]/menu-button:opacity-100`
+### Styling
+- Hide in icon mode: `class="group-data-[collapsible=icon]:hidden"`
+- Style action on active button: `class="peer-data-[active=true]/menu-button:opacity-100"`

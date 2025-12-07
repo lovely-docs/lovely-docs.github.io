@@ -1,1 +1,0 @@
-Type helper that extracts input/output types from a ToolSet for type-safe UI tool handling; maps each tool to {input, output} types inferred from Zod schemas and execute functions.

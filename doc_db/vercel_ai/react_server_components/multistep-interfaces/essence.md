@@ -1,0 +1,1 @@
+Build multi-step UIs with tool composition and application context; tools use async generators to yield intermediate UI then final components; client components use useActions/useUIState for interactivity.

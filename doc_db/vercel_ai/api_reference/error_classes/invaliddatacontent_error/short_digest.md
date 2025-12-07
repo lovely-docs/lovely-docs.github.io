@@ -1,0 +1,1 @@
+Error thrown for invalid data content. Check with `InvalidDataContent.isInstance(error)`. Properties: `content`, `message`, `cause`.

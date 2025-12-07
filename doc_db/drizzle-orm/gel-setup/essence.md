@@ -1,1 +1,1 @@
-Install drizzle-orm and gel, initialize driver with connection string/options/client, execute queries via db.execute().
+Setup Gel database driver: install drizzle-orm + gel, initialize with connection string/options or existing client, execute queries.

@@ -1,1 +1,0 @@
-Keyboard key press tracker with methods to check individual/combined keys, list all pressed keys, and register key combination callbacks.

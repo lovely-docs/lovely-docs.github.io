@@ -1,9 +1,16 @@
 ## Fixes
-- Fixed sqlite-proxy and SQL.js `.get()` response when result is empty
+- Fixed sqlite-proxy and SQL.js `.get()` with empty results
 
 ## Features
-- **SQLite Simplified Query API**: New simplified query interface for SQLite
-- **Column Default Methods**: `.$defaultFn()` / `.$default()` for runtime defaults with custom logic
-- **Table Type Inference**: `$inferSelect` / `$inferInsert` methods replacing deprecated `InferModel`
-- **Deprecation**: `InferModel` replaced by `InferSelectModel` and `InferInsertModel`
-- **Build**: Disabled `.d.ts` files bundling
+- SQLite simplified query API
+- Column `.$defaultFn()` / `.$default()` for runtime defaults
+- Table `.$inferSelect` / `.$inferInsert` for type inference (replaces deprecated `InferModel`)
+
+```ts
+const table = mysqlTable('table', {
+  id: varchar('id').$defaultFn(() => createId()),
+});
+
+type SelectUser = typeof usersTable.$inferSelect;
+type InsertUser = typeof usersTable.$inferInsert;
+```

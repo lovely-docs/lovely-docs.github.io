@@ -1,1 +1,0 @@
-Cancel streams server-side with abortSignal/onAbort or client-side with stop() hook; handle cleanup via onAbort callback receiving completed steps; UI message streams use onFinish with isAborted parameter and consumeStream function.

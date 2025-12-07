@@ -1,1 +1,1 @@
-Documentation index page for Svelte runtime features.
+Index page for runtime documentation section; actual content in child pages.

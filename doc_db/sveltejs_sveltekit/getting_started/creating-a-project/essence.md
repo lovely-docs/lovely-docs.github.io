@@ -1,0 +1,1 @@
+Initialize project with `npx sv create my-app`, run `npm run dev` on localhost:5173; pages are Svelte components in src/routes with server-side rendering then client-side takeover; VS Code + Svelte extension recommended.

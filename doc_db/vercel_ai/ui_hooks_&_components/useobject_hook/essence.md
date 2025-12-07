@@ -1,0 +1,1 @@
+useObject hook streams structured JSON generation with partial results; pairs with server-side streamObject; supports enum classification mode; provides isLoading/error states, submit/stop functions, and onFinish/onError callbacks.

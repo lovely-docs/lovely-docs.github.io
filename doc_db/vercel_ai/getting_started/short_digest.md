@@ -1,30 +1,16 @@
-## SDK Components
+**SDK Overview**: Three components - Core (unified LLM API for any JS env), UI (streaming chat/generative UI hooks for React/Vue/Svelte), RSC (server-to-client streaming for Next.js App Router, experimental).
 
-- **Core**: Unified LLM API for any JS environment
-- **UI**: Framework hooks (React/Svelte/Vue) for streaming chat
-- **RSC**: Experimental server-to-client streaming for Next.js App Router
+**Quickstarts** for each environment:
+- **Next.js App Router**: `streamText()` route handler with `useChat()` hook, tools with Zod schemas, multi-step execution via `stopWhen: stepCountIs(5)`
+- **Next.js Pages Router**: Same pattern as App Router
+- **Node.js**: CLI chat agent with `streamText()`, message history, tools with `execute` functions, `onStepFinish` callback
+- **Svelte**: `Chat` class (reference-based reactivity), API route with `createGateway()`, tool parts as `tool-{toolName}`
+- **Nuxt/Vue**: `Chat` class with `useChat()` hook, runtime config for API key
+- **Expo**: `useChat()` with `DefaultChatTransport` and `expo/fetch`, requires polyfills for `structuredClone` and text encoding
 
-## Pattern
-
-1. API route: `streamText()` → `toUIMessageStreamResponse()`
-2. UI: `useChat()` hook or `Chat` class
-3. Messages: `{ id, role, parts[] }` where parts have `type` and data
-
-## Tools & Multi-Step
-
-```ts
-tools: {
-  weather: tool({
-    description: 'Get weather',
-    inputSchema: z.object({ location: z.string() }),
-    execute: async ({ location }) => ({ temp: 72 }),
-  }),
-}
-
-stopWhen: stepCountIs(5)  // Enable multi-step tool use
-```
-
-## Providers
-
-Default: Vercel AI Gateway with string refs (`'anthropic/claude-sonnet-4.5'`)
-Alternative: Install package and import (`openai('gpt-5.1')`)
+**Common patterns**: 
+- `streamText({ model, messages, tools?, stopWhen? })` returns result with `toUIMessageStreamResponse()` or `textStream`
+- `convertToModelMessages()` strips UI metadata from `UIMessage[]`
+- Tools defined with `tool({ description, inputSchema: z.object(...), execute })`, appear as `tool-{name}` parts
+- `stopWhen: stepCountIs(N)` enables multi-step tool calling
+- Default provider is Vercel AI Gateway (string model refs like `'anthropic/claude-sonnet-4.5'`), or import specific providers like `openai`

@@ -1,0 +1,1 @@
+Function creating tools with unknown types for runtime schemas; requires runtime validation; use dynamic flag for type narrowing with static tools.

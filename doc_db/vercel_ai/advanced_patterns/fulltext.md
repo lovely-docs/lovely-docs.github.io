@@ -3,54 +3,67 @@
 ## Pages
 
 ### prompt_engineering
-LLMs predict text sequences; prompt engineering shapes responses via clear instructions, examples, and temperature tuning (0=deterministic, 1=random); balance cost vs performance across models.
+LLMs predict text sequences; prompt engineering shapes responses via specific instructions, examples, and temperature settings (0=deterministic, 1=creative).
 
 ## What is a Large Language Model (LLM)?
 
-LLMs are prediction engines that take word sequences as input and predict the most likely sequences to follow by assigning probabilities. They generate text iteratively until meeting a stopping criterion. Trained on massive text corpuses, they excel at tasks matching their training data (e.g., models trained on GitHub understand code well). Generated sequences can appear plausible but may not be grounded in reality.
+LLMs are prediction engines that take word sequences as input and predict the most likely sequences to follow by assigning probabilities. They generate text until meeting a stopping criterion. Trained on massive text corpuses, they excel at some use cases better than others (e.g., models trained on GitHub understand code well). Generated sequences can seem plausible but may not be grounded in reality.
 
 ## What is a prompt?
 
-Prompts are the starting inputs that trigger LLMs to generate text. Prompt engineering encompasses crafting prompts and understanding related concepts: hidden prompts, tokens, token limits, and prompt hacking (jailbreaks, leaks).
+Prompts are starting points for LLMs—inputs that trigger text generation. Prompt engineering encompasses crafting prompts and understanding related concepts: hidden prompts, tokens, token limits, and prompt hacking (jailbreaks, leaks).
 
 ## Why is prompt engineering needed?
 
-Prompt engineering shapes LLM responses and enables them to handle broader query ranges using techniques like semantic search, command grammars, and ReActive architecture. Different models have varying performance, context windows, and costs—GPT-4 is more expensive and slower than GPT-3.5-turbo but more effective at certain tasks. Prompt engineering helps optimize the cost-performance tradeoff.
+Prompt engineering shapes LLM responses and enables tweaking models for broader query ranges using techniques like semantic search, command grammars, and ReActive architecture. Different models have varying performance, context windows, and costs (e.g., GPT-4 is more expensive and slower than GPT-3.5-turbo but more effective at certain tasks). Trade-offs exist between cost and performance.
 
 ## Example: Slogan Generator
 
-**Start with an instruction:** Clear instructions influence completions. "Create a slogan for a coffee shop" generates basic results, while "Create a slogan for an organic coffee shop" produces more targeted output by adding descriptive terms.
+**Start with an instruction:**
+- Basic: `Create a slogan for a coffee shop.`
+- More specific: `Create a slogan for an organic coffee shop.`
 
-**Include examples:** Demonstrating expected output patterns improves results. Instead of "Create three slogans for a coffee shop with live music" (which may miss details), provide examples:
+Adding descriptive terms influences completions—prompts "instruct" or "program" the model.
+
+**Include examples:**
+- Simple request: `Create three slogans for a coffee shop with live music.` (model may miss details)
+- With examples:
 ```
+Create three slogans for a business with unique features.
+
 Business: Bookstore with cats
 Slogans: "Purr-fect Pages", "Books and Whiskers", "Novels and Nuzzles"
 Business: Gym with rock climbing
 Slogans: "Peak Performance", "Reach New Heights", "Climb Your Way Fit"
 Business: Coffee shop with live music
-Slogans: [model generates better results]
+Slogans:
 ```
 
-**Tweak settings - Temperature:** Temperature (0-1) controls prediction confidence. At 0, identical prompts yield identical/nearly identical completions. At higher values (e.g., 1), the same prompt produces varied results. Lower temperature = more deterministic, precise completions; higher temperature = broader range of completions. For a slogan generator needing diverse suggestions, use moderate temperature around 0.6.
+Demonstrating expected output patterns helps the model generate better results.
 
-## Resources
+**Tweak settings:**
 
-- Vercel AI Playground for comparing model performance side-by-side and generating code
-- Brex Prompt Engineering guide
-- Prompt Engineering Guide by Dair AI
+Temperature (0 to 1) governs model confidence in predictions:
+- Temperature 0: Same prompt yields identical/nearly identical completions (deterministic)
+- Temperature > 0: Same prompt yields varied completions (creative)
+- Lower temperature: More precise, deterministic completions
+- Higher temperature: Broader range of completions
 
-### stopping_streams
-Cancel streams server-side with abortSignal/onAbort or client-side with stop() hook; handle cleanup via onAbort callback receiving completed steps; UI message streams use onFinish with isAborted parameter and consumeStream function.
+For a slogan generator needing diverse suggestions, use moderate temperature around 0.6.
+
+### stopping-streams
+Cancel streams via abortSignal (server-side) or stop() hook (client-side); use onAbort callback for cleanup; UI message streams require consumeStream function.
 
 ## Cancelling Streams
 
-Streams can be cancelled when users want to stop responses or from server-side logic.
+Streams can be cancelled in different parts of the AI SDK:
 
 ### AI SDK Core
-
 Use the `abortSignal` argument to cancel streams from server to LLM API, typically by forwarding the request's abort signal:
 
 ```tsx
+import { streamText } from 'ai';
+
 const result = streamText({
   model: 'anthropic/claude-sonnet-4.5',
   prompt,
@@ -60,19 +73,20 @@ const result = streamText({
     // Persist partial results to database
   },
 });
+
 return result.toTextStreamResponse();
 ```
 
 ### AI SDK UI
-
 Hooks like `useChat` and `useCompletion` provide a `stop()` helper function to cancel streams from client to server:
 
 ```tsx
-const { input, completion, stop, status, handleSubmit, handleInputChange } = useCompletion();
+const { completion, stop, status, handleSubmit, handleInputChange } = useCompletion();
+
 return (
   <div>
     {(status === 'submitted' || status === 'streaming') && (
-      <button type="button" onClick={() => stop()}>Stop</button>
+      <button onClick={() => stop()}>Stop</button>
     )}
     {completion}
     <form onSubmit={handleSubmit}>
@@ -82,10 +96,9 @@ return (
 );
 ```
 
-**Warning**: Stream abort is incompatible with stream resumption (`resume: true`). Choose one or the other.
+**Note:** Stream abort is incompatible with stream resumption (`resume: true`). Choose one or the other.
 
 ### Handling Stream Abort Cleanup
-
 The `onAbort` callback is called when a stream is aborted via `AbortSignal`, distinct from `onFinish` which handles normal completion:
 
 ```tsx
@@ -94,20 +107,18 @@ const result = streamText({
   prompt: 'Write a long story...',
   abortSignal: controller.signal,
   onAbort: ({ steps }) => {
+    // Called on abort - persist partial results
     await savePartialResults(steps);
     await logAbortEvent(steps.length);
   },
   onFinish: ({ steps, totalUsage }) => {
+    // Called on normal completion
     await saveFinalResults(steps, totalUsage);
   },
 });
 ```
 
-The `onAbort` callback receives `steps` (array of completed steps before abort). Use it for:
-- Persisting partial conversation history
-- Saving partial progress for later continuation
-- Cleaning up server-side resources
-- Logging abort events for analytics
+The `onAbort` callback receives `steps` (array of completed steps before abort). Use cases: persisting partial conversation history, saving progress for continuation, cleaning up resources, logging abort events.
 
 You can also handle abort events directly in the stream:
 
@@ -122,10 +133,11 @@ for await (const part of result.fullStream) {
 ```
 
 ### UI Message Streams
-
 For `toUIMessageStreamResponse`, the `onFinish` callback receives an `isAborted` parameter. Pass the `consumeStream` function for proper abort handling:
 
 ```tsx
+import { consumeStream, convertToModelMessages, streamText } from 'ai';
+
 const result = streamText({
   model: 'anthropic/claude-sonnet-4.5',
   messages: convertToModelMessages(messages),
@@ -147,21 +159,26 @@ return result.toUIMessageStreamResponse({
 The `consumeStream` function ensures proper stream consumption even when aborted, preventing memory leaks or hanging connections.
 
 ### AI SDK RSC
-
 Stream stopping is not currently supported in AI SDK RSC.
 
 ### backpressure
-Use `ReadableStream.pull()` with manual iteration instead of eager `for await (...)` to implement back-pressure and cancellation, ensuring producers only generate data when consumers request it and stopping automatically when consumption ends.
+Use `ReadableStream.pull()` with manual iteration instead of eager `for await (...)` to implement back-pressure and cancellation, preventing unbounded buffering and memory leaks when streaming AI responses.
 
 ## Back-pressure and Cancellation with Streams
 
-Back-pressure is the signal from a consumer to a producer that more values aren't needed yet. Cancellation is the ability to stop producing values when the consumer stops consuming them.
+Back-pressure is the signal from a consumer to a producer that more values aren't needed yet. When wrapping a generator into a `ReadableStream` using an eager `for await (...)` loop in the `start` handler, the stream doesn't respect back-pressure. The generator continuously pushes values as fast as possible, causing the stream's internal buffer to grow unbounded.
 
-### The Problem: Eager Approach
-
-When wrapping a generator into a `ReadableStream` using an eager `for await (...)` loop in the `start` handler, the stream doesn't respect back-pressure:
-
+**Eager approach (problematic):**
 ```jsx
+async function* integers() {
+  let i = 1;
+  while (true) {
+    console.log(`yielding ${i}`);
+    yield i++;
+    await sleep(100);
+  }
+}
+
 function createStream(iterator) {
   return new ReadableStream({
     async start(controller) {
@@ -172,20 +189,26 @@ function createStream(iterator) {
     },
   });
 }
+
+async function run() {
+  const stream = createStream(integers());
+  const reader = stream.getReader();
+  for (let i = 0; i < 10_000; i++) {
+    const { value } = await reader.read();
+    console.log(`read ${value}`);
+    await sleep(1_000);
+  }
+}
 ```
 
-This spawns a perpetual loop that pushes data as fast as possible, regardless of whether the consumer needs it. The stream's internal buffer grows unbounded, and there's no way to signal the producer to stop. If a consumer stops reading (e.g., user navigates away), the producer continues indefinitely, consuming memory until the program crashes.
+With this approach, the generator yields ~10 values for every 1 value read, because the generator (100ms per yield) runs 10x faster than the reader (1000ms per read). The stream buffer grows unbounded.
 
-### The Solution: Lazy Approach
-
-Use the `pull` handler instead, which is called only when the consumer attempts to read more data:
-
+**Lazy approach (correct):**
 ```jsx
 function createStream(iterator) {
   return new ReadableStream({
     async pull(controller) {
       const { value, done } = await iterator.next();
-
       if (done) {
         controller.close();
       } else {
@@ -196,21 +219,20 @@ function createStream(iterator) {
 }
 ```
 
-This approach:
-- Manually calls `iterator.next()` to get the next value
-- Only produces data when requested by the consumer
-- Ties the producer's lifetime to the consumer's lifetime
-- Keeps the internal buffer minimal (typically 1 item)
-- Automatically stops producing when the consumer stops consuming
+Using the `pull` handler instead of `start`, values are produced only when the consumer requests them. The `pull` handler is called each time the consumer reads from the stream. This ties the producer's lifetime to the consumer's lifetime.
 
-### Real-world Example: AI Streaming
+## Cancellation
 
-When streaming infinite AI responses (e.g., "count from 1 to infinity"), the eager approach causes the server to continue requesting data from the AI service even after the user navigates away. The fetch connection doesn't abort, and memory grows unbounded.
+When a consumer stops reading from a stream (e.g., user navigates away), the eager approach continues yielding values indefinitely, buffering them in memory until the program runs out of memory. The eager `for await (...)` loop has no signal to stop.
 
-With the lazy approach, when the user navigates away and the fetch connection aborts, the `ReadableStream` stops requesting new data from the AI service. The connection is freed and can be garbage collected. This is how the AI SDK handles streaming responses.
+With the lazy approach, when the consumer stops reading, `pull` is no longer called, so the generator stops yielding. This naturally frees resources and allows garbage collection.
+
+## Application to AI Responses
+
+When streaming AI responses (e.g., from an API endpoint), if the client disconnects (user navigates away, page reloads), an eager approach would continue fetching data from the AI service and buffering it server-side until memory is exhausted. A lazy approach ensures that when the fetch connection aborts, the stream stops requesting data, the `ReadableStream` can be garbage collected, and the connection to the AI service is freed.
 
 ### caching
-Cache AI responses via language model middleware (wrapGenerate/wrapStream with simulateReadableStream) or onFinish callbacks with KV storage.
+Cache AI responses using language model middleware (intercept with wrapGenerate/wrapStream) or onFinish callbacks; replay cached streams with simulateReadableStream.
 
 ## Caching Responses
 
@@ -220,17 +242,15 @@ Two approaches to cache AI provider responses:
 
 Use `LanguageModelV3Middleware` with `wrapGenerate` and `wrapStream` methods to intercept model calls.
 
-For `wrapGenerate` (used by `generateText` and `generateObject`):
-- Create a cache key from params
+For `wrapGenerate` (used by `generateText`, `generateObject`):
+- Create cache key from params: `const cacheKey = JSON.stringify(params)`
 - Check cache before calling `doGenerate()`
 - Store result in cache after generation
-- Restore timestamp fields from cached Date objects
 
-For `wrapStream` (used by `streamText` and `streamObject`):
-- Create a cache key from params
-- If cached, use `simulateReadableStream()` to return cached `LanguageModelV3StreamPart[]` array chunk-by-chunk
-- Control replay timing with `initialDelayInMs` and `chunkDelayInMs` parameters
-- If not cached, pipe the stream through a `TransformStream` that collects all chunks and stores them in cache on flush
+For `wrapStream` (used by `streamText`, `streamObject`):
+- Check cache before calling `doStream()`
+- If cached, use `simulateReadableStream()` to return cached chunks with configurable delays (`initialDelayInMs`, `chunkDelayInMs`)
+- If not cached, pipe stream through `TransformStream` to collect chunks and store in cache on flush
 
 Example using Upstash Redis:
 ```ts
@@ -244,7 +264,7 @@ export const cacheMiddleware: LanguageModelV3Middleware = {
     const cacheKey = JSON.stringify(params);
     const cached = await redis.get(cacheKey);
     if (cached !== null) {
-      return { ...cached, response: { ...cached.response, timestamp: new Date(cached.response.timestamp) } };
+      return { ...cached, response: { ...cached.response, timestamp: cached?.response?.timestamp ? new Date(cached?.response?.timestamp) : undefined } };
     }
     const result = await doGenerate();
     redis.set(cacheKey, result);
@@ -261,14 +281,9 @@ export const cacheMiddleware: LanguageModelV3Middleware = {
     }
     const { stream, ...rest } = await doStream();
     const fullResponse: LanguageModelV3StreamPart[] = [];
-    const transformStream = new TransformStream({
-      transform(chunk, controller) {
-        fullResponse.push(chunk);
-        controller.enqueue(chunk);
-      },
-      flush() {
-        redis.set(cacheKey, fullResponse);
-      },
+    const transformStream = new TransformStream({ 
+      transform(chunk, controller) { fullResponse.push(chunk); controller.enqueue(chunk); },
+      flush() { redis.set(cacheKey, fullResponse); }
     });
     return { stream: stream.pipeThrough(transformStream), ...rest };
   },
@@ -277,12 +292,12 @@ export const cacheMiddleware: LanguageModelV3Middleware = {
 
 ### Lifecycle Callbacks
 
-Use the `onFinish` callback in `streamText`, `generateText`, etc. to cache responses after generation completes.
+Use `onFinish` callback in `streamText` to cache response after generation completes.
 
-Example with Upstash Redis in Next.js:
-```tsx
+Example with Upstash Redis and 1-hour expiration:
+```ts
 import { openai } from '@ai-sdk/openai';
-import { streamText } from 'ai';
+import { formatDataStreamPart, streamText } from 'ai';
 import { Redis } from '@upstash/redis';
 
 const redis = new Redis({ url: process.env.KV_URL, token: process.env.KV_TOKEN });
@@ -293,10 +308,7 @@ export async function POST(req: Request) {
   
   const cached = await redis.get(key);
   if (cached != null) {
-    return new Response(formatDataStreamPart('text', cached), {
-      status: 200,
-      headers: { 'Content-Type': 'text/plain' },
-    });
+    return new Response(formatDataStreamPart('text', cached), { status: 200, headers: { 'Content-Type': 'text/plain' } });
   }
 
   const result = streamText({
@@ -304,7 +316,7 @@ export async function POST(req: Request) {
     messages,
     async onFinish({ text }) {
       await redis.set(key, text);
-      await redis.expire(key, 60 * 60); // 1 hour TTL
+      await redis.expire(key, 60 * 60);
     },
   });
 
@@ -312,17 +324,19 @@ export async function POST(req: Request) {
 }
 ```
 
-Any KV storage provider can be used instead of Upstash Redis. The middleware approach is recommended as it's more transparent and works with all SDK functions.
+Works with any KV storage provider, not just Upstash Redis.
 
 ### multiple_streamables
-Return multiple streamable UIs from a single server action to stream independent components; nest streamables as props for composable UIs that update separately.
+Compose multiple streamable UI components in single response or nest them as props; each updates independently as async data resolves.
 
 ## Multiple Streamable UIs
 
-The RSC APIs allow composing and returning multiple streamable UIs along with other data in a single request. This decouples UI into smaller components that stream independently.
+Return multiple streamable UI components in a single server action response. Each streamable can update independently based on async operations.
 
-Example: Create multiple streamable UIs, update them with loading states, then resolve them with actual data:
 ```tsx
+'use server';
+import { createStreamableUI } from '@ai-sdk/rsc';
+
 export async function getWeather() {
   const weatherUI = createStreamableUI();
   const forecastUI = createStreamableUI();
@@ -346,17 +360,15 @@ export async function getWeather() {
 }
 ```
 
-The client receives a data structure with multiple streamable UI fields that update independently based on when their data resolves.
+The returned object contains both streamable UIs and other data fields. Components update independently based on when their data resolves.
 
 ## Nested Streamable UIs
 
-Stream UI components within other UI components to build complex UIs from reusable parts. Pass a streamable as a prop to a parent component, which renders it and automatically updates as the server responds.
+Stream UI components within other UI components by passing streamables as props. Child components automatically update as the server sends new data.
 
-Example: Pass a `historyChart` streamable to a `StockCard` component:
 ```tsx
-async function getStockHistoryChart({ symbol: string }) {
-  'use server';
-
+'use server';
+async function getStockHistoryChart({ symbol }: { symbol: string }) {
   const ui = createStreamableUI(<Spinner />);
 
   (async () => {
@@ -372,30 +384,33 @@ async function getStockHistoryChart({ symbol: string }) {
 }
 ```
 
-The parent component renders immediately with a spinner, then the nested streamable updates independently once data arrives.
+Wrap async operations in an IIFE to avoid blocking. Parent components render child streamables which update independently.
 
-### rate_limiting
-Implement API rate limiting with Vercel KV + Upstash Ratelimit: configure fixed window limiter, extract client IP, check limit before processing, return 429 on failure.
+### rate-limiting
+Rate limit API endpoints with Vercel KV + Upstash Ratelimit using fixed window limiter; check IP-based limits and return 429 on exceeded threshold.
+
+## Rate Limiting
 
 Rate limiting protects APIs from abuse by setting a maximum threshold on requests per timeframe, preventing excessive usage that degrades performance and increases costs.
 
-**Implementation with Vercel KV and Upstash Ratelimit:**
+### Implementation with Vercel KV and Upstash Ratelimit
 
-Create a rate limiter instance using Upstash Ratelimit with Vercel KV as the Redis backend:
+Protect API endpoints using Vercel KV (Redis) and Upstash Ratelimit library:
 
 ```tsx
 import kv from '@vercel/kv';
+import { openai } from '@ai-sdk/openai';
+import { streamText } from 'ai';
 import { Ratelimit } from '@upstash/ratelimit';
+import { NextRequest } from 'next/server';
+
+export const maxDuration = 30;
 
 const ratelimit = new Ratelimit({
   redis: kv,
   limiter: Ratelimit.fixedWindow(5, '30s'),
 });
-```
 
-In your API route, extract the client IP and check the rate limit before processing:
-
-```tsx
 export async function POST(req: NextRequest) {
   const ip = req.ip ?? 'ip';
   const { success, remaining } = await ratelimit.limit(ip);
@@ -404,24 +419,28 @@ export async function POST(req: NextRequest) {
     return new Response('Ratelimited!', { status: 429 });
   }
 
-  // Process request
+  const { messages } = await req.json();
+  const result = streamText({
+    model: 'anthropic/claude-sonnet-4.5',
+    messages,
+  });
+
+  return result.toUIMessageStreamResponse();
 }
 ```
 
-The `fixedWindow(5, '30s')` configuration allows 5 requests per 30-second window. The `limit()` method returns `success` (boolean) and `remaining` (count) to determine if the request should be blocked. Return HTTP 429 status for rate-limited requests.
+The pattern: create a Ratelimit instance with Redis backend and fixed window limiter (5 requests per 30 seconds), extract client IP from request, call `ratelimit.limit(ip)` to check if request is allowed, return 429 status if rate limit exceeded, otherwise proceed with normal request handling.
 
-Ratelimit can be configured with different strategies and parameters - refer to Upstash Ratelimit documentation for advanced configuration options.
-
-### rendering_ui_with_language_models
-Render React components from language model tool calls by returning JSON objects; use @ai-sdk/rsc's createStreamableUI() to render components server-side and stream them to clients, avoiding complex client-side conditional rendering.
+### rendering-ui-with-language-models
+Return JSON from tools to render React components; use @ai-sdk/rsc's createStreamableUI() to render components server-side and stream them to client instead of managing multiple conditional renders client-side.
 
 ## Rendering User Interfaces with Language Models
 
 Language models generate text, but you can render React components by having tools return JSON objects instead of text strings.
 
-### Basic Approach: Client-Side Rendering
+### Basic Pattern
 
-Instead of tools returning text:
+Instead of returning text from a tool:
 ```tsx
 execute: async ({ city, unit }) => {
   const weather = getWeather({ city, unit });
@@ -429,25 +448,20 @@ execute: async ({ city, unit }) => {
 }
 ```
 
-Return structured data:
+Return a JSON object:
 ```tsx
 execute: async ({ city, unit }) => {
   const weather = getWeather({ city, unit });
-  return {
-    temperature,
-    unit,
-    description,
-    forecast,
-  };
+  return { temperature, unit, description, forecast };
 }
 ```
 
-Then conditionally render components on the client based on tool call results:
+Then render components on the client based on the tool response:
 ```tsx
 {messages.map(message => {
   if (message.role === 'function') {
     const { temperature, unit, description, forecast } = message.content;
-    return <WeatherCard weather={{ temperature, unit, description, forecast }} />
+    return <WeatherCard weather={{ temperature, unit, description, forecast }} />;
   }
 })}
 ```
@@ -456,30 +470,37 @@ Then conditionally render components on the client based on tool call results:
 
 As applications grow with multiple tools (search courses, search people, meetings, buildings, events, meals), client-side conditional rendering becomes complex with nested ternaries.
 
-### Server-Side Rendering with AI SDK RSC
+### Server-Side Rendering with RSC
 
-The `@ai-sdk/rsc` module provides `createStreamableUI()` to render React components on the server and stream them to the client during model generation:
+The `@ai-sdk/rsc` module provides `createStreamableUI()` to render React components on the server and stream them to the client, eliminating client-side conditional logic.
 
 ```tsx
-import { createStreamableUI } from '@ai-sdk/rsc'
+import { createStreamableUI } from '@ai-sdk/rsc';
 
 const uiStream = createStreamableUI();
 
 const text = generateText({
   model: 'anthropic/claude-sonnet-4.5',
+  system: 'you are a friendly assistant',
+  prompt: 'what is the weather in SF?',
   tools: {
     getWeather: {
+      description: 'Get the weather for a location',
+      parameters: z.object({
+        city: z.string().describe('The city to get the weather for'),
+        unit: z.enum(['C', 'F']).describe('The unit to display the temperature in')
+      }),
       execute: async ({ city, unit }) => {
-        const weather = getWeather({ city, unit })
+        const weather = getWeather({ city, unit });
         uiStream.done(
           <WeatherCard weather={{ temperature: 47, unit: 'F', description: 'sunny', forecast }} />
-        )
+        );
       }
     }
   }
-})
+});
 
-return { display: uiStream.value }
+return { display: uiStream.value };
 ```
 
 On the client, simply render the streamed UI:
@@ -489,21 +510,20 @@ On the client, simply render the streamed UI:
 ))}
 ```
 
-This eliminates the need for client-side conditional rendering logic. The server handles component rendering and streaming, while the client only renders what arrives from the server. All operations from language model generation to UI rendering happen on the server using React Server Components.
+This simplifies the flow: user prompt → model generates tool call → tool renders component → stream to client → client renders directly.
 
-### language_models_as_routers
-Language models as routers: use function calling to deterministically choose UIs and execute multi-step sequences based on user intent instead of predefined routes.
+### language-models-as-routers
+Language models can replace explicit routing logic by using function calling to reason about which operations to perform and which UIs to render based on user intent, supporting both parameter-based and sequential multi-step routing.
 
 ## Generative User Interfaces
 
-Language models can render user interfaces as part of their generations, creating generative user interfaces that are probabilistic rather than deterministic.
+Language models can render user interfaces as part of their generations, creating non-deterministic but predictable experiences through function calling.
 
-## Deterministic Routes with Probabilistic Reasoning
+### Deterministic Routes via Function Calling
 
-While generative UIs are non-deterministic by nature, language models can be constrained to deterministic outputs using function calling. When provided with function definitions, models either execute the most relevant function or execute none if the query is out of bounds.
+Language models can be constrained to deterministic outputs by providing function definitions. The model either executes the most relevant function or executes none if the query is out of bounds.
 
-Example: A weather assistant with a `getWeather` function will call it for weather queries but not for unrelated queries like "What events are happening in London?"
-
+Example: Weather assistant with function calling
 ```tsx
 const sendMessage = (prompt: string) =>
   generateText({
@@ -523,87 +543,72 @@ const sendMessage = (prompt: string) =>
       },
     },
   });
+
+sendMessage('What is the weather in San Francisco?'); // getWeather is called
+sendMessage('What is the weather in New York?'); // getWeather is called
+sendMessage('What events are happening in London?'); // No function is called
 ```
 
-This model ability to reason about which function to execute is considered emergent reasoning behavior.
+This ability to reason about which function to execute is an emergent capability that enables models to act as routers.
 
-## Language Models as Routers
+### Language Models as Routers
 
-Traditionally, developers write routing logic to connect application parts. Language models can replace this by deciding which UI to render based on user state, enabling conversational interaction instead of navigating predefined routes.
+Instead of developers managing explicit routing logic (like `/login`, `/user/john`, `/api/events?limit=5`), language models can decide which UI to render based on user state and intent, enabling conversational navigation.
 
-### Routing by Parameters
+**Routing by parameters**: Models generate correct parameters for dynamic routes. Example: In a search app, ask the model to search for artworks by different artists—it calls the search function with the artist name and renders results.
 
-Models can generate correct parameters for dynamic routes like `/profile/[username]`, `/search?q=[query]`, `/media/[id]`. In a search application, users ask the model to search for artworks by different artists, and the model calls the search function with the artist name and renders results.
+**Routing by sequence**: Models execute sequences of function calls to complete multi-step tasks. Example: In a calendar app, ask to schedule a happy hour with friends. The model:
+1. Looks up your calendar
+2. Looks up friends' calendars
+3. Determines best time
+4. Searches for nearby happy hour spots
+5. Creates event and sends invites
 
-### Routing by Sequence
-
-Models can generate sequences of function calls to complete multi-step tasks. In a calendar application, asking to "schedule a happy hour with friends" triggers the model to:
-1. Lookup your calendar
-2. Lookup friends' calendars
-3. Determine best time
-4. Search for nearby happy hour spots
-5. Create event and send invites
-
-By defining functions for lookups, calendar pulls, and location searches, the model sequentially navigates routes automatically.
-
-Use `streamUI` function to stream generative user interfaces to the client based on model responses.
+By defining functions for lookups, calendar pulls, and location searches, the model sequentially navigates routes automatically. Use `streamUI` to stream generative UIs to the client based on model responses.
 
 ### multistep_interfaces
-Design multistep interfaces by composing tools to populate application context, reducing user steps and enabling models to complete complex tasks without additional prompts.
+Design multistep UIs by composing tools and managing application context so model output in one step uses information from previous steps.
 
 ## Multistep Interfaces
 
-Multistep interfaces are UIs requiring multiple independent steps to complete a task. Two core concepts underpin their design:
+Multistep interfaces are UIs requiring multiple independent steps to complete a task. Two core concepts:
 
-**Tool Composition**: Combining multiple tools to create new tools, breaking complex tasks into manageable steps. The composition strategy directly affects both user experience and the model's ability to generate correct outputs.
+**Tool Composition**: Combining multiple tools to create new tools, breaking complex tasks into manageable steps.
 
-**Application Context**: The conversation history and state between user and language model. In multistep interfaces, user input in one step affects model output in subsequent steps, making rich context essential for coherent responses.
+**Application Context**: The state of the application including user input, model output, and relevant information. In multistep interfaces, user input in one step affects model output in the next step.
 
 ### Application Context Example
 
-In a meal logging app with `log_meal` and `delete_meal` tools, the model must reference previous actions:
+Meal logging app with `log_meal` and `delete_meal` tools:
 
 ```
 User: Log a chicken shawarma for lunch.
 Tool: log_meal("chicken shawarma", "250g", "12:00 PM")
 Model: Chicken shawarma has been logged for lunch.
-...
+
 User: I skipped lunch today, can you update my log?
 Tool: delete_meal("chicken shawarma")
 Model: Chicken shawarma has been deleted from your log.
 ```
 
-The model uses context from the first step to correctly identify which meal to delete.
+The model references previous context to identify which meal to delete.
 
 ### Tool Composition Example
 
-A flight booking assistant with `searchFlights`, `lookupFlight`, and `bookFlight` tools demonstrates composition:
+Flight booking assistant with `searchFlights`, `lookupFlight`, `bookFlight`, `lookupContacts`, and `lookupBooking` tools:
 
 ```
 User: I want to book a flight from New York to London.
 Tool: searchFlights("New York", "London")
 Model: Here are the available flights from New York to London.
-User: I want to book flight number BA123 on 12th December for myself and my wife.
-Tool: lookupFlight("BA123") -> "4 seats available"
-Model: Sure, there are seats available! Can you provide the names of the passengers?
-User: John Doe and Jane Doe.
-Tool: bookFlight("BA123", "12th December", ["John Doe", "Jane Doe"])
-Model: Your flight has been booked!
-```
 
-This can be optimized by composing with a `lookupContacts` tool to auto-populate passenger details:
-
-```
-User: I want to book a flight from New York to London.
-Tool: searchFlights("New York", "London")
-Model: Here are the available flights from New York to London.
 User: I want to book flight number BA123 on 12th December for myself and my wife.
 Tool: lookupContacts() -> ["John Doe", "Jane Doe"]
 Tool: bookFlight("BA123", "12th December", ["John Doe", "Jane Doe"])
 Model: Your flight has been booked!
 ```
 
-Further composition with `lookupBooking` enables complex queries:
+The `lookupContacts` tool populates context before `bookFlight`, reducing user steps.
 
 ```
 User: What's the status of my wife's upcoming flight?
@@ -613,51 +618,60 @@ Tool: lookupFlight("BA123") -> "Flight BA123 is scheduled to depart on 12th Dece
 Model: Your wife's flight BA123 is confirmed and scheduled to depart on 12th December.
 ```
 
-The more tools designed to compose together, the more complex and powerful the application becomes. Tool composition reduces user steps by allowing the model to call tools that populate context before using that information to complete tasks.
+Composing tools together enables complex, powerful applications by allowing the model to chain tool calls and use their outputs as context for subsequent calls.
 
-### sequential_generations
-Sequential generations chain multiple generateText() calls with outputs feeding into subsequent prompts for multi-step workflows.
+### sequential-generations
+Sequential generations chain multiple AI calls where each output feeds into the next prompt for dependent multi-step workflows.
 
-Sequential generations (chains/pipes) allow you to create workflows where the output of one generation becomes the input for the next, enabling dependent multi-step AI operations.
+## Sequential Generations (Chains)
 
-**Use Case**: Breaking down complex tasks into smaller, manageable steps where each step builds on the previous result.
+Create sequences of dependent generations where each step's output becomes the next step's input.
 
-**Implementation**: Use `generateText()` multiple times, passing the output from one call as input to the next. Example workflow:
-1. Generate blog post ideas with `generateText()` using a prompt
-2. Pass the generated ideas to another `generateText()` call to pick the best idea
-3. Pass the selected idea to a third `generateText()` call to create an outline
+### Example: Blog Post Workflow
 
-Each generation is awaited sequentially, allowing you to access the full text output (via the `.text` property or direct string interpolation) and use it in subsequent prompts. This pattern works with any model available through the SDK.
+```typescript
+import { openai } from '@ai-sdk/openai';
+import { generateText } from 'ai';
+
+async function sequentialActions() {
+  // Step 1: Generate ideas
+  const ideasGeneration = await generateText({
+    model: 'anthropic/claude-sonnet-4.5',
+    prompt: 'Generate 10 ideas for a blog post about making spaghetti.',
+  });
+
+  // Step 2: Pick best idea (uses output from step 1)
+  const bestIdeaGeneration = await generateText({
+    model: 'anthropic/claude-sonnet-4.5',
+    prompt: `Here are some blog post ideas about making spaghetti:
+${ideasGeneration}
+
+Pick the best idea from the list above and explain why it's the best.`,
+  });
+
+  // Step 3: Generate outline (uses output from step 2)
+  const outlineGeneration = await generateText({
+    model: 'anthropic/claude-sonnet-4.5',
+    prompt: `We've chosen the following blog post idea about making spaghetti:
+${bestIdeaGeneration}
+
+Create a detailed outline for a blog post based on this idea.`,
+  });
+}
+
+sequentialActions().catch(console.error);
+```
+
+Each `generateText()` call uses the previous generation's output embedded in the prompt string. This pattern enables breaking down complex tasks into smaller, dependent steps where later steps build on earlier results.
 
 ### vercel_deployment_guide
-Deploy Next.js AI apps to Vercel with git workflow; configure maxDuration for LLM timeouts; add rate limiting and firewall security.
+Deploy Next.js AI app to Vercel with git integration, configure maxDuration for LLM timeouts, add rate limiting and firewall security.
 
-## Deploying AI Applications to Vercel
+## Deployment Steps
 
-Deploy Next.js AI applications to Vercel using git-centered workflow with automatic deployments on main branch pushes.
+1. **Commit Changes**: Ensure `.gitignore` excludes `.env` and `node_modules`, then commit with `git add .` and `git commit -m "init"`
 
-### Prerequisites
-- Vercel account
-- Git provider account (GitHub, GitLab, or Bitbucket)
-- OpenAI API key
-
-### Setup Steps
-
-**1. Prepare Local Repository**
-Ensure `.gitignore` excludes `.env` and `node_modules`:
-```bash
-git add .
-git commit -m "init"
-```
-
-**2. Create Git Repository**
-Create repository on GitHub, then push existing repository:
-```bash
-git remote add origin <repository-url>
-git branch -M main
-git push -u origin main
-```
-If "remote origin already exists" error occurs:
+2. **Create Git Repository**: Create a new repository on GitHub, then push your local code using the commands GitHub provides. If you get "remote origin already exists" error, run:
 ```bash
 rm -rf .git
 git init
@@ -665,31 +679,28 @@ git add .
 git commit -m "init"
 ```
 
-**3. Import to Vercel**
-- Go to vercel.com/new
-- Select Git provider and authenticate
-- Click Import on your repository
-- Expand "Environment Variables" section and paste `.env.local` contents (Vercel auto-parses key:value format)
-- Click Deploy button
+3. **Import to Vercel**: Go to vercel.com/new, select your Git provider, sign in, and click Import next to your repository
 
-### Infrastructure Considerations
+4. **Add Environment Variables**: Expand "Environment Variables" section and paste your `.env.local` file contents. Vercel automatically parses variables into key:value format
 
-**Function Duration**
-Vercel serverless functions default to 10 second maximum on Hobby Tier. LLM responses may exceed this. Set custom duration in route handler or server action:
+5. **Deploy**: Click Deploy button. View your deployment by selecting the Project and clicking Domain
+
+## Infrastructure Considerations
+
+**Function Duration**: Vercel serverless functions default to 10 second max on Hobby Tier. LLM calls may exceed this. Increase with route segment config:
 ```ts
 export const maxDuration = 30;
 ```
-Maximum 60 seconds on Hobby Tier; check documentation for other tier limits.
+Max 60 seconds on Hobby Tier; check documentation for other tiers.
 
-### Security Measures
+## Security
 
-**Rate Limiting**
-Implement rate limiting to regulate requests per client within time frame. Reference Vercel's rate limiting guide.
+**Rate Limiting**: Implement to prevent abuse from high LLM costs. Follow Vercel's rate limiting guide.
 
-**Firewall**
-Use Vercel Firewall for DDoS protection and unauthorized access prevention. Enterprise teams get custom IP blocking rules and dedicated support.
+**Firewall**: Use Vercel Firewall for DDoS protection and unauthorized access prevention. Enterprise teams get custom IP blocking rules.
 
-### Troubleshooting
+## Troubleshooting
+
 - Streaming not working when proxied
 - Timeouts on Vercel
 

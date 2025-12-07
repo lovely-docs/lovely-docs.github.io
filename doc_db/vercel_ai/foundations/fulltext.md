@@ -2,99 +2,157 @@
 
 ## Pages
 
-### overview
-Foundational AI concepts: generative models produce outputs from patterns; LLMs predict text sequences but can hallucinate; embeddings convert data to semantic vectors.
+### foundational_ai_concepts
+Three foundational AI concepts: generative models produce outputs from learned patterns; LLMs predict text sequences but hallucinate on unknown data; embeddings convert data to semantic vectors.
 
-The AI SDK standardizes integration with AI models across multiple providers, allowing developers to focus on building applications rather than handling provider-specific details.
+## Generative Artificial Intelligence
+Models that predict and generate outputs (text, images, audio) based on statistical patterns from training data. Examples: generating image captions from photos, transcriptions from audio, images from text descriptions.
 
-**Generative Artificial Intelligence**: Models that predict and generate outputs (text, images, audio) based on statistical patterns learned from training data. Examples: generating image captions from photos, transcriptions from audio, or images from text descriptions.
+## Large Language Models (LLM)
+Subset of generative models focused on text. Takes a sequence of words as input and predicts the most likely sequence to follow by assigning probabilities to potential next sequences. Continues generating until a stopping criterion is met. Trained on massive text collections, so performance varies by domain (e.g., models trained on GitHub understand source code patterns well). Key limitation: hallucination—when asked about unknown or absent information, LLMs may fabricate answers. Effectiveness depends on how well the required information is represented in the training data.
 
-**Large Language Models (LLMs)**: A subset of generative models focused on text. Takes a sequence of words as input and predicts the most likely sequence to follow by assigning probabilities to potential next sequences. Continues generating until a stopping criterion is met. LLMs train on massive text collections, making them better suited for some use cases than others (e.g., a model trained on GitHub data understands source code patterns well). Important limitation: LLMs can "hallucinate" or fabricate information when asked about less-known or absent information, so consider how well-represented your needed information is in the model's training data.
-
-**Embedding Models**: Convert complex data (words, images) into dense vector representations (lists of numbers). Unlike generative models, they don't generate new text or data but provide representations of semantic and syntactic relationships between entities for use as input to other models or NLP tasks.
+## Embedding Models
+Convert complex data (words, images) into dense vector representations (lists of numbers). Unlike generative models, they don't generate new text/data but provide semantic and syntactic relationship representations usable as input for other models or NLP tasks.
 
 ### providers_and_models
-Standardized interface for 50+ LLM providers (official, OpenAI-compatible, community) with capability matrix for 40+ models across image input, object generation, tool usage, and streaming.
+Unified interface for 50+ LLM providers (OpenAI, Anthropic, Google, Mistral, xAI, Groq, etc.) with capability matrix showing image input, object generation, tool usage, and streaming support across models.
 
 ## Overview
 
-The AI SDK provides a standardized interface for interacting with large language models (LLMs) from different providers through a unified language model specification. This abstraction layer eliminates vendor lock-in and allows switching between providers without changing application code.
+The AI SDK provides a standardized interface for interacting with large language models (LLMs) from different providers through a unified language model specification. This abstraction layer allows switching between providers without changing application code, avoiding vendor lock-in.
 
 ## Architecture
 
-The AI SDK uses a language model specification (published as open-source) that abstracts provider differences, enabling the same API to work across all providers.
+The AI SDK uses a provider architecture that abstracts differences between provider APIs, enabling the same code to work across different LLM providers.
 
-## Official Providers
+## Available Providers
 
-The SDK includes 25+ official providers:
+**Official AI SDK Providers:**
+- xAI Grok (`@ai-sdk/xai`)
+- OpenAI (`@ai-sdk/openai`)
+- Azure OpenAI (`@ai-sdk/azure`)
+- Anthropic (`@ai-sdk/anthropic`)
+- Amazon Bedrock (`@ai-sdk/amazon-bedrock`)
+- Google Generative AI (`@ai-sdk/google`)
+- Google Vertex (`@ai-sdk/google-vertex`)
+- Mistral (`@ai-sdk/mistral`)
+- Together.ai (`@ai-sdk/togetherai`)
+- Cohere (`@ai-sdk/cohere`)
+- Fireworks (`@ai-sdk/fireworks`)
+- DeepInfra (`@ai-sdk/deepinfra`)
+- DeepSeek (`@ai-sdk/deepseek`)
+- Cerebras (`@ai-sdk/cerebras`)
+- Groq (`@ai-sdk/groq`)
+- Perplexity (`@ai-sdk/perplexity`)
+- ElevenLabs (`@ai-sdk/elevenlabs`)
+- LMNT (`@ai-sdk/lmnt`)
+- Hume (`@ai-sdk/hume`)
+- Rev.ai (`@ai-sdk/revai`)
+- Deepgram (`@ai-sdk/deepgram`)
+- Gladia (`@ai-sdk/gladia`)
+- AssemblyAI (`@ai-sdk/assemblyai`)
+- Baseten (`@ai-sdk/baseten`)
 
-- **LLM Providers**: xAI Grok, OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Google Generative AI, Google Vertex, Mistral, Together.ai, Cohere, Fireworks, DeepInfra, DeepSeek, Cerebras, Groq, Perplexity
-- **Specialized Providers**: ElevenLabs, LMNT, Hume, Rev.ai, Deepgram, Gladia, AssemblyAI, Baseten, Vercel
-
-## OpenAI-Compatible Providers
-
-For APIs compatible with OpenAI specification:
+**OpenAI-Compatible Providers:**
 - LM Studio
 - Heroku
 
-## Community Providers
-
-The open-source community has created 25+ additional providers including: Ollama, FriendliAI, Portkey, Cloudflare Workers AI, OpenRouter, Aihubmix, Requesty, Crosshatch, Mixedbread, Voyage AI, Mem0, Letta, Supermemory, Spark, AnthropicVertex, LangDB, Dify, Sarvam, Claude Code, Built-in AI, Gemini CLI, A2A, SAP-AI, AI/ML API, MCP Sampling, ACP.
+**Community Providers:**
+- Ollama (`ollama-ai-provider`)
+- FriendliAI (`@friendliai/ai-provider`)
+- Portkey (`@portkey-ai/vercel-provider`)
+- Cloudflare Workers AI (`workers-ai-provider`)
+- OpenRouter (`@openrouter/ai-sdk-provider`)
+- Aihubmix (`@aihubmix/ai-sdk-provider`)
+- Requesty (`@requesty/ai-sdk`)
+- Crosshatch (`@crosshatch/ai-provider`)
+- Mixedbread (`mixedbread-ai-provider`)
+- Voyage AI (`voyage-ai-provider`)
+- Mem0 (`@mem0/vercel-ai-provider`)
+- Letta (`@letta-ai/vercel-ai-sdk-provider`)
+- Supermemory (`@supermemory/tools`)
+- Spark (`spark-ai-provider`)
+- AnthropicVertex (`anthropic-vertex-ai`)
+- LangDB (`@langdb/vercel-provider`)
+- Dify (`dify-ai-provider`)
+- Sarvam (`sarvam-ai-provider`)
+- Claude Code (`ai-sdk-provider-claude-code`)
+- Built-in AI (`built-in-ai`)
+- Gemini CLI (`ai-sdk-provider-gemini-cli`)
+- A2A (`a2a-ai-provider`)
+- SAP-AI (`@mymediset/sap-ai-provider`)
+- AI/ML API (`@ai-ml.api/aimlapi-vercel-ai`)
+- MCP Sampling (`@mcpc-tech/mcp-sampling-ai-provider`)
+- ACP (`@mcpc-tech/acp-ai-provider`)
 
 ## Self-Hosted Models
 
-Access self-hosted models through: Ollama, LM Studio, Baseten, Built-in AI, or any provider supporting OpenAI specification.
+Self-hosted models can be accessed via:
+- Ollama
+- LM Studio
+- Baseten
+- Built-in AI
+- Any provider supporting OpenAI specification via OpenAI Compatible Provider
 
 ## Model Capabilities
 
-Popular models support varying capabilities:
+Popular models and their capabilities:
 
 | Provider | Model | Image Input | Object Generation | Tool Usage | Tool Streaming |
 |----------|-------|-------------|-------------------|------------|----------------|
-| xAI Grok | grok-4, grok-3, grok-3-fast, grok-3-mini, grok-3-mini-fast, grok-2-1212 | ✗ | ✓ | ✓ | ✓ |
-| xAI Grok | grok-2-vision-1212, grok-vision-beta | ✓ | ✓/✗ | ✓/✗ | ✓/✗ |
+| xAI Grok | grok-4, grok-3, grok-3-fast, grok-3-mini, grok-3-mini-fast, grok-2-1212, grok-beta | ✗ (except grok-2-vision-1212, grok-vision-beta) | ✓ | ✓ | ✓ |
+| xAI Grok | grok-2-vision-1212, grok-vision-beta | ✓ | ✓ (except grok-vision-beta) | ✓ (except grok-vision-beta) | ✓ (except grok-vision-beta) |
+| Vercel | v0-1.0-md | ✓ | ✓ | ✓ | ✓ |
 | OpenAI | gpt-5, gpt-5-mini, gpt-5-nano, gpt-5.1-chat-latest, gpt-5.1-codex-mini, gpt-5.1-codex, gpt-5.1, gpt-5-codex, gpt-5-chat-latest | ✓ | ✓ | ✓ | ✓ |
 | Anthropic | claude-opus-4-5, claude-opus-4-1, claude-opus-4-0, claude-sonnet-4-0, claude-3-7-sonnet-latest, claude-3-5-haiku-latest | ✓ | ✓ | ✓ | ✓ |
-| Mistral | pixtral-large-latest, mistral-large-latest, mistral-medium-latest, mistral-medium-2505, mistral-small-latest, pixtral-12b-2409 | ✓/✗ | ✓ | ✓ | ✓ |
+| Mistral | pixtral-large-latest, pixtral-12b-2409 | ✓ | ✓ | ✓ | ✓ |
+| Mistral | mistral-large-latest, mistral-medium-latest, mistral-medium-2505, mistral-small-latest | ✗ | ✓ | ✓ | ✓ |
 | Google Generative AI | gemini-2.0-flash-exp, gemini-1.5-flash, gemini-1.5-pro | ✓ | ✓ | ✓ | ✓ |
 | Google Vertex | gemini-2.0-flash-exp, gemini-1.5-flash, gemini-1.5-pro | ✓ | ✓ | ✓ | ✓ |
-| DeepSeek | deepseek-chat, deepseek-reasoner | ✗ | ✓/✗ | ✓/✗ | ✓/✗ |
+| DeepSeek | deepseek-chat | ✗ | ✓ | ✓ | ✓ |
+| DeepSeek | deepseek-reasoner | ✗ | ✗ | ✗ | ✗ |
 | Cerebras | llama3.1-8b, llama3.1-70b, llama3.3-70b | ✗ | ✓ | ✓ | ✓ |
-| Groq | meta-llama/llama-4-scout-17b-16e-instruct, llama-3.3-70b-versatile, llama-3.1-8b-instant, mixtral-8x7b-32768, gemma2-9b-it | ✓/✗ | ✓ | ✓ | ✓ |
-| Vercel | v0-1.0-md | ✓ | ✓ | ✓ | ✓ |
+| Groq | meta-llama/llama-4-scout-17b-16e-instruct | ✓ | ✓ | ✓ | ✓ |
+| Groq | llama-3.3-70b-versatile, llama-3.1-8b-instant, mixtral-8x7b-32768, gemma2-9b-it | ✗ | ✓ | ✓ | ✓ |
 
-Additional models available in provider documentation.
+The language model specification is open-source and can be used to create custom providers.
 
 ### prompts
-Three prompt types (text, system, message) with multi-modal content support (text, images, files, tool calls) and provider-specific options at function/message/part levels.
+Text/system/message prompts; message content types (text, images, files, tool calls); provider options at function/message/part levels; user/assistant/tool/system message structures.
 
-## Prompt Types
+## Prompts
 
-The AI SDK supports three prompt structures:
+Prompts are instructions given to LLMs. The AI SDK supports three prompt types:
 
 ### Text Prompts
-Simple string prompts set via the `prompt` property. Ideal for simple generation use cases. Supports template literals for dynamic data injection.
+Simple string prompts, ideal for repeated generation with variants. Set via `prompt` property:
 
 ```ts
 const result = await generateText({
   model: 'anthropic/claude-sonnet-4.5',
-  prompt: `I am planning a trip to ${destination} for ${lengthOfStay} days. Please suggest the best tourist activities.`,
+  prompt: 'Invent a new holiday and describe its traditions.',
+});
+
+// With template literals for dynamic data:
+const result = await generateText({
+  model: 'anthropic/claude-sonnet-4.5',
+  prompt: `I am planning a trip to ${destination} for ${lengthOfStay} days. Please suggest the best tourist activities for me to do.`,
 });
 ```
 
 ### System Prompts
-Initial instructions that guide and constrain model behavior. Set via the `system` property, works with both `prompt` and `messages` properties.
+Initial instructions that guide model behavior. Set via `system` property, works with both `prompt` and `messages`:
 
 ```ts
 const result = await generateText({
   model: 'anthropic/claude-sonnet-4.5',
-  system: 'You help planning travel itineraries. Respond with a list of the best stops.',
-  prompt: `I am planning a trip to ${destination} for ${lengthOfStay} days.`,
+  system: `You help planning travel itineraries. Respond to the users' request with a list of the best stops to make in their destination.`,
+  prompt: `I am planning a trip to ${destination} for ${lengthOfStay} days. Please suggest the best tourist activities for me to do.`,
 });
 ```
 
 ### Message Prompts
-Arrays of user, assistant, and tool messages for chat interfaces and complex multi-modal prompts. Set via the `messages` property. Each message has a `role` and `content` property.
+Array of user, assistant, and tool messages for chat interfaces and complex multi-modal prompts. Set via `messages` property. Each message has `role` and `content`:
 
 ```ts
 const result = await generateText({
@@ -107,11 +165,12 @@ const result = await generateText({
 });
 ```
 
-## Provider Options
+Content can be text string or array of parts (text, images, files, tool calls).
 
+### Provider Options
 Pass provider-specific metadata at three levels:
 
-**Function call level** - for general provider options:
+**Function level** - for general provider options:
 ```ts
 const { text } = await generateText({
   model: azure('your-deployment-name'),
@@ -147,7 +206,7 @@ const messages: ModelMessage[] = [
       },
       {
         type: 'image',
-        image: 'https://example.com/image.png',
+        image: 'https://github.com/vercel/ai/blob/main/examples/ai-core/data/comic-cat.png?raw=true',
         providerOptions: { openai: { imageDetail: 'low' } },
       },
     ],
@@ -155,13 +214,9 @@ const messages: ModelMessage[] = [
 ];
 ```
 
-Note: UI hooks like `useChat` return `UIMessage` objects without provider options support. Use `convertToModelMessages` to convert to `ModelMessage` objects first.
+### User Messages
 
-## User Messages
-
-### Text Parts
-Text content is the most common type. Can be a string directly or within an array of content parts.
-
+**Text parts** - most common content type:
 ```ts
 const result = await generateText({
   model: 'anthropic/claude-sonnet-4.5',
@@ -176,103 +231,40 @@ const result = await generateText({
 });
 ```
 
-### Image Parts
-User messages can include images in multiple formats:
-- Base64-encoded: `string` with base-64 content or data URL `data:image/png;base64,...`
-- Binary: `ArrayBuffer`, `Uint8Array`, or `Buffer`
-- URL: http(s) URL `string` or `URL` object
-
+**Image parts** - can be base64-encoded, binary (ArrayBuffer/Uint8Array/Buffer), or URL:
 ```ts
-// Binary image (Buffer)
-const result = await generateText({
-  model,
-  messages: [
-    {
-      role: 'user',
-      content: [
-        { type: 'text', text: 'Describe the image in detail.' },
-        { type: 'image', image: fs.readFileSync('./data/comic-cat.png') },
-      ],
-    },
-  ],
-});
+// Binary (Buffer):
+{ type: 'image', image: fs.readFileSync('./data/comic-cat.png') }
 
-// Base64 encoded image
-const result = await generateText({
-  model: 'anthropic/claude-sonnet-4.5',
-  messages: [
-    {
-      role: 'user',
-      content: [
-        { type: 'text', text: 'Describe the image in detail.' },
-        { type: 'image', image: fs.readFileSync('./data/comic-cat.png').toString('base64') },
-      ],
-    },
-  ],
-});
+// Base64 string:
+{ type: 'image', image: fs.readFileSync('./data/comic-cat.png').toString('base64') }
 
-// Image URL
-const result = await generateText({
-  model: 'anthropic/claude-sonnet-4.5',
-  messages: [
-    {
-      role: 'user',
-      content: [
-        { type: 'text', text: 'Describe the image in detail.' },
-        { type: 'image', image: 'https://example.com/image.png' },
-      ],
-    },
-  ],
-});
+// URL string:
+{ type: 'image', image: 'https://github.com/vercel/ai/blob/main/examples/ai-core/data/comic-cat.png?raw=true' }
+
+// URL object:
+{ type: 'image', image: new URL('https://example.com/image.png') }
 ```
 
-### File Parts
-Only supported by Google Generative AI, Google Vertex AI, OpenAI (wav/mp3 audio with gpt-4o-audio-preview, and pdf), and Anthropic. Requires specifying the MIME type.
-
+**File parts** - supported by Google Generative AI, Google Vertex AI, OpenAI (wav/mp3 audio, pdf), Anthropic. Requires MIME type:
 ```ts
-// PDF file from Buffer
-import { google } from '@ai-sdk/google';
-const result = await generateText({
-  model: google('gemini-1.5-flash'),
-  messages: [
-    {
-      role: 'user',
-      content: [
-        { type: 'text', text: 'What is the file about?' },
-        {
-          type: 'file',
-          mediaType: 'application/pdf',
-          data: fs.readFileSync('./data/example.pdf'),
-          filename: 'example.pdf',
-        },
-      ],
-    },
-  ],
-});
+// PDF from Buffer:
+{
+  type: 'file',
+  mediaType: 'application/pdf',
+  data: fs.readFileSync('./data/example.pdf'),
+  filename: 'example.pdf', // optional
+}
 
-// MP3 audio file from Buffer
-import { openai } from '@ai-sdk/openai';
-const result = await generateText({
-  model: openai('gpt-4o-audio-preview'),
-  messages: [
-    {
-      role: 'user',
-      content: [
-        { type: 'text', text: 'What is the audio saying?' },
-        {
-          type: 'file',
-          mediaType: 'audio/mpeg',
-          data: fs.readFileSync('./data/galileo.mp3'),
-        },
-      ],
-    },
-  ],
-});
+// MP3 audio from Buffer:
+{
+  type: 'file',
+  mediaType: 'audio/mpeg',
+  data: fs.readFileSync('./data/galileo.mp3'),
+}
 ```
 
-### Custom Download Function (Experimental)
-Implement throttling, retries, authentication, caching via the `experimental_download` property. The default implementation automatically downloads files in parallel when not supported by the model.
-
+**Custom download function** (experimental) - implement throttling, retries, authentication, caching:
 ```ts
 const result = await generateText({
   model: 'anthropic/claude-sonnet-4.5',
@@ -304,73 +296,44 @@ const result = await generateText({
 });
 ```
 
-## Assistant Messages
-
-Messages with role `assistant` are typically previous responses from the assistant. Can contain text, reasoning, and tool call parts.
+### Assistant Messages
+Messages with role `assistant`, typically previous responses. Can contain text, reasoning, and tool call parts:
 
 ```ts
-// Text content
-const result = await generateText({
-  model: 'anthropic/claude-sonnet-4.5',
-  messages: [
-    { role: 'user', content: 'Hi!' },
-    { role: 'assistant', content: 'Hello, how can I help?' },
-  ],
-});
+// Text content:
+{ role: 'assistant', content: 'Hello, how can I help?' }
 
-// Text content in array
-const result = await generateText({
-  model: 'anthropic/claude-sonnet-4.5',
-  messages: [
-    { role: 'user', content: 'Hi!' },
+// Text in array:
+{ role: 'assistant', content: [{ type: 'text', text: 'Hello, how can I help?' }] }
+
+// Tool call content:
+{
+  role: 'assistant',
+  content: [
     {
-      role: 'assistant',
-      content: [{ type: 'text', text: 'Hello, how can I help?' }],
+      type: 'tool-call',
+      toolCallId: '12345',
+      toolName: 'get-nutrition-data',
+      input: { cheese: 'Roquefort' },
     },
   ],
-});
+}
 
-// Tool call content
-const result = await generateText({
-  model: 'anthropic/claude-sonnet-4.5',
-  messages: [
-    { role: 'user', content: 'How many calories are in this block of cheese?' },
+// File content (model-generated, limited support):
+{
+  role: 'assistant',
+  content: [
     {
-      role: 'assistant',
-      content: [
-        {
-          type: 'tool-call',
-          toolCallId: '12345',
-          toolName: 'get-nutrition-data',
-          input: { cheese: 'Roquefort' },
-        },
-      ],
+      type: 'file',
+      mediaType: 'image/png',
+      data: fs.readFileSync('./data/roquefort.jpg'),
     },
   ],
-});
-
-// File content (model-generated, only few models support)
-const result = await generateText({
-  model: 'anthropic/claude-sonnet-4.5',
-  messages: [
-    { role: 'user', content: 'Generate an image of a roquefort cheese!' },
-    {
-      role: 'assistant',
-      content: [
-        {
-          type: 'file',
-          mediaType: 'image/png',
-          data: fs.readFileSync('./data/roquefort.jpg'),
-        },
-      ],
-    },
-  ],
-});
+}
 ```
 
-## Tool Messages
-
-For models supporting tool calls, assistant messages can contain tool call parts and tool messages can contain tool output parts. A single assistant message can call multiple tools, and a single tool message can contain multiple tool results.
+### Tool Messages
+For models supporting tool calls. Assistant messages contain tool call parts, tool messages contain tool output parts. Single assistant message can call multiple tools, single tool message can contain multiple results:
 
 ```ts
 const result = await generateText({
@@ -417,55 +380,42 @@ const result = await generateText({
 });
 ```
 
-### Multi-modal Tool Results (Experimental)
-Tool results can be multi-part and multi-modal (text and image). Only supported by Anthropic. Use the `experimental_content` property on tool parts.
-
+**Multi-modal tool results** (experimental, Anthropic only) - use `experimental_content` for multi-part results:
 ```ts
-const result = await generateText({
-  model: 'anthropic/claude-sonnet-4.5',
-  messages: [
+{
+  role: 'tool',
+  content: [
     {
-      role: 'tool',
-      content: [
-        {
-          type: 'tool-result',
-          toolCallId: '12345',
-          toolName: 'get-nutrition-data',
-          output: {
-            type: 'json',
-            value: {
-              name: 'Cheese, roquefort',
-              calories: 369,
-              fat: 31,
-              protein: 22,
-            },
+      type: 'tool-result',
+      toolCallId: '12345',
+      toolName: 'get-nutrition-data',
+      output: {
+        type: 'json',
+        value: { name: 'Cheese, roquefort', calories: 369, fat: 31, protein: 22 },
+      },
+    },
+    {
+      type: 'tool-result',
+      toolCallId: '12345',
+      toolName: 'get-nutrition-data',
+      output: {
+        type: 'content',
+        value: [
+          { type: 'text', text: 'Here is an image of the nutrition data for the cheese:' },
+          {
+            type: 'media',
+            data: fs.readFileSync('./data/roquefort-nutrition-data.png').toString('base64'),
+            mediaType: 'image/png',
           },
-        },
-        {
-          type: 'tool-result',
-          toolCallId: '12345',
-          toolName: 'get-nutrition-data',
-          output: {
-            type: 'content',
-            value: [
-              { type: 'text', text: 'Here is an image of the nutrition data:' },
-              {
-                type: 'media',
-                data: fs.readFileSync('./data/roquefort-nutrition-data.png').toString('base64'),
-                mediaType: 'image/png',
-              },
-            ],
-          },
-        },
-      ],
+        ],
+      },
     },
   ],
-});
+}
 ```
 
-## System Messages
-
-System messages are sent before user messages to guide assistant behavior. Can be set via `messages` array with role `system` or via the `system` property.
+### System Messages
+Messages sent before user messages to guide assistant behavior. Alternative to `system` property:
 
 ```ts
 const result = await generateText({
@@ -474,31 +424,37 @@ const result = await generateText({
     { role: 'system', content: 'You help planning travel itineraries.' },
     {
       role: 'user',
-      content: 'I am planning a trip to Berlin for 3 days. Please suggest the best tourist activities.',
+      content: 'I am planning a trip to Berlin for 3 days. Please suggest the best tourist activities for me to do.',
     },
   ],
 });
 ```
 
 ### tools
-Tools are LLM-callable objects with description, inputSchema (Zod/JSON), and optional execute function; use with generateText/streamText; distribute via npm; extensive ecosystem of ready-made packages (web search, Stripe, Composio 250+ tools, AWS Bedrock with Browser/Code Interpreter, MCP servers).
+Tools are LLM-callable objects with description, inputSchema (Zod/JSON), and optional execute function; pass to generateText/streamText; extensive ecosystem of ready-made packages and MCP servers available.
 
-## What is a Tool
+## What is a tool?
 
-A tool is an object that an LLM can invoke to perform discrete tasks and interact with the outside world. Tools enable LLMs to fetch real-time data (like weather), perform calculations, or call external APIs. When an LLM decides to use a tool, it generates a tool call with arguments, which are validated and executed.
+A tool is an object that an LLM can invoke to perform discrete tasks and interact with the outside world. Tools are passed to `generateText` and `streamText` via the `tools` parameter.
 
 A tool consists of three properties:
-- `description`: Optional description influencing when the tool is picked
-- `inputSchema`: Zod or JSON schema defining required input, consumed by the LLM and used to validate tool calls
-- `execute`: Optional async function called with arguments from the tool call
+- **`description`**: Optional description influencing when the tool is picked
+- **`inputSchema`**: Zod or JSON schema defining required input, consumed by the LLM and used to validate tool calls
+- **`execute`**: Optional async function called with arguments from the tool call
 
-Tools with an `execute` function run automatically when called. Tool results are returned as tool result objects and can be automatically passed back to the LLM using multi-step calls with `streamText` and `generateText`.
+When an LLM decides to use a tool, it generates a tool call. Tools with an `execute` function run automatically, and their output is returned as tool result objects. Tool results can be automatically passed back to the LLM using multi-step calls with `streamText` and `generateText`.
 
 ## Schemas
 
 Schemas define tool parameters and validate tool calls. The AI SDK supports raw JSON schemas (using `jsonSchema` function) and Zod schemas (directly or using `zodSchema` function).
 
-Install Zod with: `pnpm add zod`, `npm install zod`, `yarn add zod`, or `bun add zod`
+Install Zod:
+```bash
+pnpm add zod
+npm install zod
+yarn add zod
+bun add zod
+```
 
 Example Zod schema:
 ```ts
@@ -518,14 +474,21 @@ const recipeSchema = z.object({
 });
 ```
 
-Schemas can also be used for structured output generation with `generateObject` and `streamObject`.
+Schemas can also be used with `generateObject` and `streamObject` for structured output generation.
 
-## Using Tools
+## Tool Packages
 
-Pass tools to `generateText` or `streamText` via the `tools` parameter:
+Tools are JavaScript objects that can be packaged and distributed via npm.
+
+### Using Ready-Made Tool Packages
+
+Install and import tools:
+```bash
+pnpm add some-tool-package
+```
 
 ```ts
-import { generateText } from 'ai';
+import { generateText, stepCountIs } from 'ai';
 import { searchTool } from 'some-tool-package';
 
 const { text } = await generateText({
@@ -534,19 +497,13 @@ const { text } = await generateText({
   tools: {
     webSearch: searchTool,
   },
+  stopWhen: stepCountIs(10),
 });
 ```
 
-## Tool Packages
+### Publishing Your Own Tools
 
-Tools are JavaScript objects that can be packaged and distributed via npm. Install a tool package and import tools directly:
-
-```bash
-pnpm add some-tool-package
-```
-
-To publish your own tools, export tool objects from your package:
-
+Export tool objects from your package:
 ```ts
 // my-tools/index.ts
 export const myTool = {
@@ -562,50 +519,54 @@ export const myTool = {
 
 Use the AI SDK Tool Package Template for a ready-to-use starting point.
 
-## Ready-to-Use Tool Packages
+## Toolsets
 
-- **@exalabs/ai-sdk** - Web search tool for real-time information
-- **@parallel-web/ai-sdk-tools** - Web search and extract tools via Parallel Web API
+Ready-to-use tool packages:
+- **@exalabs/ai-sdk** - Web search tool
+- **@parallel-web/ai-sdk-tools** - Web search and extract tools
 - **Stripe agent tools** - Stripe interactions
-- **StackOne ToolSet** - Integrations for 100+ enterprise SaaS platforms
-- **agentic** - 20+ tools connecting to Exa, E2B, and other external APIs
-- **AWS Bedrock AgentCore** - Managed AI agent services with Browser (cloud-based browser runtime) and Code Interpreter (Python, JavaScript, TypeScript sandbox)
-- **Composio** - 250+ tools including GitHub, Gmail, Salesforce
-- **JigsawStack** - 30+ custom fine-tuned models for specific uses
-- **AI Tools Registry** - Shadcn-compatible tool definitions and components registry
-- **Toolhouse** - Function-calling for 25+ different actions
+- **StackOne ToolSet** - Enterprise SaaS integrations
+- **agentic** - 20+ tools connecting to Exa, E2B, etc.
+- **AWS Bedrock AgentCore** - Browser runtime and code interpreter
+- **Composio** - 250+ tools (GitHub, Gmail, Salesforce, etc.)
+- **JigsawStack** - 30+ custom fine-tuned models
+- **AI Tools Registry** - Shadcn-compatible tool definitions
+- **Toolhouse** - 25+ actions in 3 lines of code
 
-## MCP Tools
-
-Pre-built tools available as MCP servers:
-- **Smithery** - 6,000+ MCPs including Browserbase and Exa
+MCP server tools:
+- **Smithery** - 6,000+ MCPs marketplace
 - **Pipedream** - 3,000+ integrations
-- **Apify** - Marketplace with thousands of tools for web scraping, data extraction, and browser automation
+- **Apify** - Web scraping, data extraction, browser automation
 
-## Tool Building Tutorials
-
-- **browserbase** - Building browser tools with headless browser
-- **browserless** - Browser automation integration (self-hosted or cloud)
-- **AI Tool Maker** - CLI to generate AI SDK tools from OpenAPI specs
-- **Interlify** - Converting APIs into tools
-- **DeepAgent** - 50+ AI tools and integrations with Tavily, E2B, Airtable, etc.
+Tool building tutorials:
+- **browserbase** - Headless browser tools
+- **browserless** - Browser automation integration
+- **AI Tool Maker** - CLI to generate tools from OpenAPI specs
+- **Interlify** - Convert APIs to tools
+- **DeepAgent** - 50+ AI tools and integrations
 
 ### streaming
-Streaming displays LLM response chunks incrementally instead of waiting for complete generation, dramatically improving UX; implement with `streamText` function and async iteration over `textStream`.
+Streaming displays LLM response parts incrementally instead of waiting for full generation; use `streamText` with `for await` iteration to stream text chunks.
 
 ## Why Streaming Matters
 
-Large language models generate long outputs slowly, causing poor user experience with blocking UIs where users wait 5-40+ seconds for complete responses before anything displays. Streaming UIs mitigate this by displaying response parts as they become available, significantly improving perceived performance and user satisfaction in conversational applications.
+Large language models generate long outputs slowly (5-40s latency). Blocking UIs force users to wait for the entire response before displaying anything, causing poor UX. Streaming UIs display response parts as they become available, improving perceived performance and user experience.
 
 ## Blocking vs Streaming
 
-**Blocking UI**: Waits for entire response generation before displaying anything. Results in long loading spinner waits.
+**Blocking UI**: Waits for full response generation before displaying anything.
 
-**Streaming UI**: Transmits and displays response parts incrementally as they're generated. Users see content appearing immediately, reducing perceived latency.
+**Streaming UI**: Transmits and displays response parts incrementally as they're generated.
+
+Real-world example: Generating the first 200 characters of a Harry Potter book shows streaming displays results much faster than blocking because it doesn't wait for completion.
+
+## When to Use Streaming
+
+Streaming greatly enhances UX with larger models, but isn't always necessary. Smaller, faster models may not need streaming and can lead to simpler development.
 
 ## Implementation
 
-The AI SDK simplifies streaming implementation. Stream text generation from OpenAI's gpt-4.1 (or other models like Anthropic Claude) in under 10 lines using the `streamText` function:
+The AI SDK makes streaming simple. Stream text generation from OpenAI's gpt-4.1 in under 10 lines using `streamText`:
 
 ```ts
 import { streamText } from 'ai';
@@ -620,9 +581,5 @@ for await (const textPart of textStream) {
 }
 ```
 
-The `textStream` is an async iterable that yields text chunks as they're generated.
-
-## When to Use Streaming
-
-Streaming is beneficial for long-output LLM responses and conversational applications. However, if a smaller, faster model can achieve desired functionality without streaming, that simpler approach may be preferable for easier development. Regardless of model speed, the SDK makes streaming implementation straightforward.
+The `streamText` function returns a `textStream` that can be iterated with `for await` to process each text chunk as it arrives.
 

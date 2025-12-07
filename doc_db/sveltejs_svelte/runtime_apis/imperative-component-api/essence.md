@@ -1,1 +1,1 @@
-API for imperatively creating, mounting, rendering, and hydrating Svelte components.
+mount/unmount/render/hydrate functions for component instantiation, DOM attachment, server rendering, and hydration; effects require flushSync() to run immediately.

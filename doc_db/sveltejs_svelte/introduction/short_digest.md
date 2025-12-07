@@ -1,13 +1,1 @@
-## Setup
-
-**SvelteKit:** `npx sv create myapp && npm run dev`
-
-**Vite:** `npm create vite@latest && npm run build`
-
-## Component Structure
-
-`.svelte` files contain optional `<script>`, `<script module>`, markup, and `<style>` sections. Instance scripts run per component, module scripts run once. Styles are scoped to the component.
-
-## Reactive Modules
-
-`.svelte.js` and `.svelte.ts` files support runes for reactive logic and state sharing.
+**Setup:** `npx sv create` (SvelteKit) or `npm create vite` (Vite). **File structure:** `.svelte` files with optional `<script>`, `<script module>`, markup, `<style>` (scoped). Use runes for props/reactivity. **Modules:** `.svelte.js/.ts` files support runes for reactive logic/state sharing (no reassigned exports).

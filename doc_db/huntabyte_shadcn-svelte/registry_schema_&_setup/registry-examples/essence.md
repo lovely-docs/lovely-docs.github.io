@@ -1,0 +1,1 @@
+Registry item JSON schema examples for styles, themes, blocks, CSS variables, custom CSS layers, utilities, and animations with light/dark mode support.

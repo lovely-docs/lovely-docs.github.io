@@ -1,1 +1,0 @@
-Step-by-step setup for Drizzle ORM with Bun's native SQLite driver: install packages, configure DB_FILE_NAME env var, connect to database, define schema, setup drizzle config, apply migrations, seed/query data, run with bun.

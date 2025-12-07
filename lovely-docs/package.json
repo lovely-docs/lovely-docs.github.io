@@ -1,70 +1,78 @@
 {
-  "name": "lovely-docs",
-  "version": "0.0.4",
-  "type": "module",
-  "description": "CLI tool to add curated documentation to your project",
-  "main": "dist/index.js",
-  "bin": {
-    "lovely-docs": "dist/index.js"
-  },
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    },
-    "./doc-cache": {
-      "types": "./dist/lib/doc-cache.d.ts",
-      "default": "./dist/lib/doc-cache.js"
-    },
-    "./handlers": {
-      "types": "./dist/lib/handlers.d.ts",
-      "default": "./dist/lib/handlers.js"
-    }
-  },
-  "files": [
-    "dist",
-    "README.md"
-  ],
-  "scripts": {
-    "build": "tsc",
-    "git-sync": "bun run src/index.ts mcp --git-sync-only",
-    "prepublishOnly": "bun run build",
-    "release": "bun publish",
-    "serve": "bun run dist/index.js mcp --transport http --doc-dir dist/git/github.com/xl0/lovely-docs/doc_db",
-    "dev": "LOVELY_DOCS_DEV=1 bun --watch run src/index.ts mcp --transport http"
-  },
-  "keywords": [
-    "documentation",
-    "cli",
-    "ai",
-    "llm",
-    "mcp",
-    "mcp-server"
-  ],
-  "author": "Alexey Zaytsev",
-  "license": "MIT",
-  "dependencies": {
-    "@clack/prompts": "^0.7.0",
-    "@logtail/node": "^0.5.6",
-    "@modelcontextprotocol/sdk": "^1.23.0",
-    "cli-highlight": "^2.1.11",
-    "commander": "^11.1.0",
-    "cors": "^2.8.5",
-    "debug": "^4.4.3",
-    "express": "^5.1.0",
-    "fs-extra": "^11.2.0",
-    "neverthrow": "^8.2.0",
-    "picocolors": "^1.0.0",
-    "simple-git": "^3.2.0",
-    "valibot": "^0.26.0",
-    "yaml": "^2.3.4"
-  },
-  "devDependencies": {
-    "@types/cors": "^2.8.19",
-    "@types/debug": "^4.1.12",
-    "@types/express": "^5.0.5",
-    "@types/fs-extra": "^11.0.4",
-    "@types/node": "^20.11.0",
-    "typescript": "^5.3.3"
-  }
+	"name": "lovely-docs",
+	"version": "0.0.4",
+	"type": "module",
+	"description": "CLI tool to add curated documentation to your project",
+	"homepage": "https://lovely-docs.github.io",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/xl0/lovely-docs.git"
+	},
+	"bugs": {
+		"url": "https://github.com/xl0/lovely-docs/issues"
+	},
+	"main": "dist/index.js",
+	"bin": {
+		"lovely-docs": "dist/index.js"
+	},
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		},
+		"./doc-cache": {
+			"types": "./dist/lib/doc-cache.d.ts",
+			"default": "./dist/lib/doc-cache.js"
+		},
+		"./handlers": {
+			"types": "./dist/lib/handlers.d.ts",
+			"default": "./dist/lib/handlers.js"
+		}
+	},
+	"files": [
+		"dist",
+		"README.md"
+	],
+	"scripts": {
+		"build": "tsc",
+		"git-sync": "bun run src/index.ts mcp --git-sync-only",
+		"prepublishOnly": "bun run build",
+		"release": "bun publish",
+		"serve": "bun run dist/index.js mcp --transport http --doc-dir dist/git/github.com/xl0/lovely-docs/doc_db",
+		"dev": "LOVELY_DOCS_DEV=1 bun --watch run src/index.ts mcp --transport http"
+	},
+	"keywords": [
+		"documentation",
+		"cli",
+		"ai",
+		"llm",
+		"mcp",
+		"mcp-server"
+	],
+	"author": "Alexey Zaytsev",
+	"license": "MIT",
+	"dependencies": {
+		"@clack/prompts": "^0.7.0",
+		"@logtail/node": "^0.5.6",
+		"@modelcontextprotocol/sdk": "^1.23.0",
+		"cli-highlight": "^2.1.11",
+		"commander": "^11.1.0",
+		"cors": "^2.8.5",
+		"debug": "^4.4.3",
+		"express": "^5.1.0",
+		"fs-extra": "^11.2.0",
+		"neverthrow": "^8.2.0",
+		"picocolors": "^1.0.0",
+		"simple-git": "^3.2.0",
+		"valibot": "^0.26.0",
+		"yaml": "^2.3.4"
+	},
+	"devDependencies": {
+		"@types/cors": "^2.8.19",
+		"@types/debug": "^4.1.12",
+		"@types/express": "^5.0.5",
+		"@types/fs-extra": "^11.0.4",
+		"@types/node": "^20.11.0",
+		"typescript": "^5.3.3"
+	}
 }

@@ -1,1 +1,0 @@
-Textarea utility that auto-resizes vertically by measuring an off-screen clone; supports grow-only mode via minHeight and optional max-height limit.

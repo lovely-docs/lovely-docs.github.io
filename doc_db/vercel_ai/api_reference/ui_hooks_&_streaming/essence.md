@@ -1,0 +1,1 @@
+Hooks and utilities for building chat/completion UIs with streaming, message management, tool calling, and type-safe message conversion.

@@ -1,1 +1,1 @@
-shadcn-svelte is a Svelte/SvelteKit port of shadcn/ui maintained by Huntabyte and CokaKoala. Built on Bits UI (headless components), Formsnap (forms), Paneforge (resizable), Vaul Svelte (drawers), and Radix UI. Typography from Nextra, button styles from Cal. MIT licensed.
+Svelte/SvelteKit port of shadcn/ui maintained by Huntabyte and CokaKoala. Built on Bits UI, Formsnap, Paneforge, Vaul Svelte, and Radix UI. MIT licensed.

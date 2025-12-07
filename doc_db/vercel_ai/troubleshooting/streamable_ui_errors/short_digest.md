@@ -1,1 +1,1 @@
-Streamable UI errors like "Variable Not Found" or "Cannot find `div`" occur when using `.ts` instead of `.tsx` files. Rename to `.tsx` to enable JSX support.
+Streamable UI errors (Variable Not Found, Cannot find `div`, Component type errors) occur when using `.ts` instead of `.tsx` files. Use `.tsx` extension for JSX support.

@@ -1,7 +1,2 @@
 ## $app/state
-
-Three read-only reactive state objects:
-
-- **navigating**: In-progress navigation with `from`, `to`, `type`, `delta` properties (null when idle)
-- **page**: Current page info including `data`, `form`, `state`, `url`, `route`, `params`. Use `$derived()` for reactivity, not `$:` syntax
-- **updated**: Boolean `current` value and `check()` method for app version polling
+Three read-only state objects (v2.12+): `navigating` (in-progress navigation with `from`, `to`, `type`, `delta`), `page` (current page data, form, state, metadata—reactive only with runes), and `updated` (app version polling with `current` boolean and `check()` method).

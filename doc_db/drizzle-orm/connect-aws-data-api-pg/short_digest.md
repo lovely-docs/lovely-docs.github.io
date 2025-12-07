@@ -1,17 +1,3 @@
-## AWS Data API PostgreSQL Connection
+## AWS Data API Postgres
 
-Install `drizzle-orm` and `@aws-sdk/client-rds-data`. Initialize with:
-
-```typescript
-import { drizzle } from 'drizzle-orm/aws-data-api/pg';
-
-const db = drizzle({ 
-  connection: {
-    database: process.env['DATABASE']!,
-    secretArn: process.env['SECRET_ARN']!,
-    resourceArn: process.env['RESOURCE_ARN']!,
-  }
-});
-```
-
-Or pass an existing RDSDataClient instance to drizzle with the same connection config.
+Install `drizzle-orm` and `@aws-sdk/client-rds-data`. Initialize with `drizzle()` from `drizzle-orm/aws-data-api/pg`, providing `database`, `secretArn`, and `resourceArn` either directly or via an existing RDSDataClient instance.

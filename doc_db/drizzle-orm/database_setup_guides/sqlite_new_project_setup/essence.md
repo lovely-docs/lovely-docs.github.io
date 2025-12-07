@@ -1,1 +1,0 @@
-Step-by-step setup for new SQLite project with libsql driver: install @libsql/client, configure DB_FILE_NAME env var with file: prefix, connect ORM, define schema, setup drizzle.config, apply migrations, seed/query, run with tsx.

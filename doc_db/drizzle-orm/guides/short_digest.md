@@ -1,1 +1,1 @@
-Index page that displays a collection of guides and tutorials via the Guides component. No direct content.
+Index page displaying available guides and tutorials via a Guides component.

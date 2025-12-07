@@ -1,5 +1,1 @@
-## Core Functions
-- **`mount(Component, { target, props })`** — Instantiate and mount component to DOM. Effects don't run; use `flushSync()` if needed.
-- **`unmount(app, { outro })`** — Remove component, optionally playing transitions. Returns Promise.
-- **`render(Component, { props })`** — Server-only; returns `{ body, head }` for SSR.
-- **`hydrate(Component, { target, props })`** — Mount component reusing SSR HTML. Effects don't run; use `flushSync()` if needed.
+Four functions for component lifecycle: `mount()` instantiates and attaches to DOM, `unmount()` removes with optional transitions, `render()` (server-only) converts to HTML strings, `hydrate()` reuses server HTML and makes it interactive. Effects don't run during mount/hydrate without `flushSync()`.

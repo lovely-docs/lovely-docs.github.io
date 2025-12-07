@@ -1,1 +1,1 @@
-Links to legacy documentation for Svelte 5 + Tailwind v3 and Svelte 4 + Tailwind v3. Current docs cover Svelte 5 + Tailwind v4.
+Navigation page linking to legacy documentation for Svelte 5 + Tailwind v3 and Svelte 4 + Tailwind v3.

@@ -1,0 +1,1 @@
+Utility to create a ReadableStream emitting array values with configurable initial and inter-chunk delays for testing/simulating streamed data.

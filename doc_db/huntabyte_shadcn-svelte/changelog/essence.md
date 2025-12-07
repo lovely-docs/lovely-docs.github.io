@@ -1,1 +1,1 @@
-Changelog documenting component additions (Calendar, Carousel, Drawer, Sonner, Pagination, Command, Combobox, Breadcrumb, Scroll Area, Resizable, Toggle Group), Tailwind v4 support, icon import optimization, Formsnap rewrite with breaking changes, custom registry support, and form component API updates.
+Release history: June 2025 Calendar overhaul; May 2025 Tailwind v4, Charts, custom registries; Feb 2024 deep icon imports for perf, Formsnap rewrite; Jan 2024 Carousel/Drawer/Sonner/Pagination; Oct 2023 Command/Combobox, Form.Label store syntax, Form.Control.

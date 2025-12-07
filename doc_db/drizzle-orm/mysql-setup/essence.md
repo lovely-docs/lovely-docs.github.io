@@ -1,0 +1,1 @@
+Setup Drizzle with MySQL via mysql2 driver: install packages, initialize with URL or existing connection (client for migrations, pool for queries).

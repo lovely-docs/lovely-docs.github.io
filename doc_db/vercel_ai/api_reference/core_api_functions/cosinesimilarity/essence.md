@@ -1,0 +1,1 @@
+cosineSimilarity(vector1, vector2) → number [-1, 1]: compares embedding similarity

@@ -1,11 +1,10 @@
-## Tool Invocation Missing Result Error
+## Issue
+When using `generateText()` or `streamText()`, the error "ToolInvocation must have a result" occurs when a tool without an `execute` function is called.
 
-When using `generateText()` or `streamText()`, the error "ToolInvocation must have a result" occurs when a tool without an `execute` function is called but no result is provided.
+## Cause
+Tools require a result before the model can continue. Without a result, the conversation state becomes invalid.
 
-### Root Cause
-Each tool invocation requires the model to receive a result before continuing. Without a result, the model cannot determine success/failure and the conversation state becomes invalid.
-
-### Solutions
+## Solutions
 
 **Option 1: Server-side execution with `execute` function**
 ```tsx
@@ -49,15 +48,14 @@ const { messages, sendMessage, addToolOutput } = useChat({
     }
   },
 });
-```
 
-For interactive UI elements, call `addToolOutput` from event handlers:
-```tsx
+// For interactive UI:
 const { messages, sendMessage, addToolOutput } = useChat({
   transport: new DefaultChatTransport({ api: '/api/chat' }),
   sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithToolCalls,
 });
 
+// In JSX:
 <button
   onClick={() =>
     addToolOutput({
@@ -71,4 +69,4 @@ const { messages, sendMessage, addToolOutput } = useChat({
 </button>
 ```
 
-**Critical**: Every tool call must have a corresponding result before conversation continues. When handling tools client-side, don't await inside `onToolCall` to avoid deadlocks.
+Each tool call must have a corresponding result before the conversation can continue.

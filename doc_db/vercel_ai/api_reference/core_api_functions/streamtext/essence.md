@@ -1,0 +1,1 @@
+Stream text from LLMs with tools, structured outputs, multi-step generation, and comprehensive callbacks; returns promises and async streams for text/events/parsed outputs.

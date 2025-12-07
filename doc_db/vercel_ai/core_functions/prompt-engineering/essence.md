@@ -1,0 +1,1 @@
+Best practices for tool-calling prompts, Zod schema patterns (dates, optional params, temperature), and debugging via warnings and request inspection.

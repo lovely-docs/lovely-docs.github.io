@@ -1,1 +1,0 @@
-Middleware converting non-streaming model responses into simulated streams; wraps model with `wrapLanguageModel()` and enables uniform streaming interface via `result.fullStream` iteration.

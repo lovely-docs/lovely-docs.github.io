@@ -1,0 +1,1 @@
+MDX components for documentation: Npm (package installation), AnchorCards (navigation), Callout (highlighted boxes), CodeTabs (tabbed code), IsSupportedChipGroup (database support), Section (code pairs), Tabs (multi-database examples), SimpleLinkCards (related docs), Steps (numbered instructions), YoutubeCards (video embeds), collapsable code blocks.

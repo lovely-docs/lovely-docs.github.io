@@ -1,0 +1,1 @@
+Handle warnings via globalThis.AI_SDK_LOG_WARNINGS flag or custom handler; use error object from hooks to display errors, disable inputs, and implement retry/replace-message patterns; pass onError callback to hooks for error processing.

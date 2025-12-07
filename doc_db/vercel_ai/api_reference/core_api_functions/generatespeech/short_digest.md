@@ -1,0 +1,1 @@
+Converts text to speech audio using providers like OpenAI or ElevenLabs. Returns audio in base64/Uint8Array with configurable voice, format, speed, language, and provider-specific options.

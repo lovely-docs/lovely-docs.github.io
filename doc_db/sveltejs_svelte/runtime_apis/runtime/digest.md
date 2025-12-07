@@ -1,1 +1,1 @@
-This page serves as an index/entry point for runtime documentation. The actual content appears to be generated automatically and the page itself contains no substantive information about runtime APIs or functionality.
+This is a documentation index page for the Runtime section of Svelte. The page itself contains no substantive content—it only includes frontmatter metadata indicating this is an auto-generated file. The actual runtime documentation content would be found in child pages within this section.

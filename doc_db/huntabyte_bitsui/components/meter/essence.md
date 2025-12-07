@@ -1,0 +1,1 @@
+Meter component for displaying static measurements within a range; props: value/min/max, data attributes for styling, accessibility via aria-labelledby/aria-label/aria-valuetext.

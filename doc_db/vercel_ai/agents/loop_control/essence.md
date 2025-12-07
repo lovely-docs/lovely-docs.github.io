@@ -1,1 +1,1 @@
-Control agent loop execution with stopWhen conditions and prepareStep callbacks to modify model, tools, messages, and context between steps; or implement manual loops with generateText/streamText for complete control.
+Control agent loop execution with stopWhen conditions (built-in: stepCountIs, hasToolCall; custom via step inspection) and prepareStep callback to dynamically modify model, tools, messages, and settings per step; or implement manual loop with generateText/streamText for full control.

@@ -4,14 +4,14 @@
     "displayName": "",
     "relevant": true,
     "usage": {
-      "input": 12323,
-      "output": 3488,
+      "input": 16943,
+      "output": 7161,
       "details": null
     },
     "token_counts": {
-      "fulltext": 11169,
-      "digest": 2630,
-      "short_digest": 726
+      "fulltext": 15608,
+      "digest": 5131,
+      "short_digest": 1909
     },
     "children": {
       "getting_started": {
@@ -19,14 +19,14 @@
         "displayName": "Getting Started",
         "relevant": true,
         "usage": {
-          "input": 2878,
-          "output": 1300,
+          "input": 3758,
+          "output": 1779,
           "details": null
         },
         "token_counts": {
-          "fulltext": 548,
-          "digest": 1008,
-          "short_digest": 182
+          "fulltext": 2463,
+          "digest": 1346,
+          "short_digest": 326
         },
         "children": {
           "introduction": {
@@ -34,30 +34,30 @@
             "displayName": "Introduction",
             "relevant": false,
             "usage": {
-              "input": 1795,
-              "output": 318,
+              "input": 1968,
+              "output": 470,
               "details": null
             },
             "token_counts": {
               "fulltext": 715,
-              "digest": 126,
-              "short_digest": 76
+              "digest": 278,
+              "short_digest": 59
             },
             "children": {}
           },
-          "creating_a_project": {
+          "creating-a-project": {
             "origPath": "10-getting-started/20-creating-a-project.md",
-            "displayName": "Creating a project",
+            "displayName": "creating-a-project",
             "relevant": true,
             "usage": {
-              "input": 1467,
-              "output": 307,
+              "input": 1640,
+              "output": 390,
               "details": null
             },
             "token_counts": {
               "fulltext": 383,
-              "digest": 140,
-              "short_digest": 64
+              "digest": 186,
+              "short_digest": 60
             },
             "children": {}
           },
@@ -66,14 +66,14 @@
             "displayName": "Project types",
             "relevant": true,
             "usage": {
-              "input": 2813,
-              "output": 687,
+              "input": 2986,
+              "output": 924,
               "details": null
             },
             "token_counts": {
               "fulltext": 1731,
-              "digest": 449,
-              "short_digest": 130
+              "digest": 544,
+              "short_digest": 192
             },
             "children": {}
           },
@@ -82,30 +82,30 @@
             "displayName": "Project structure",
             "relevant": true,
             "usage": {
-              "input": 2653,
-              "output": 818,
+              "input": 2826,
+              "output": 1165,
               "details": null
             },
             "token_counts": {
               "fulltext": 1571,
-              "digest": 576,
-              "short_digest": 141
+              "digest": 887,
+              "short_digest": 104
             },
             "children": {}
           },
-          "web_standards": {
+          "web-standards": {
             "origPath": "10-getting-started/40-web-standards.md",
-            "displayName": "Web standards",
+            "displayName": "web-standards",
             "relevant": true,
             "usage": {
-              "input": 2635,
-              "output": 717,
+              "input": 2808,
+              "output": 759,
               "details": null
             },
             "token_counts": {
               "fulltext": 1553,
-              "digest": 482,
-              "short_digest": 104
+              "digest": 547,
+              "short_digest": 82
             },
             "children": {}
           },
@@ -114,14 +114,14 @@
             "displayName": "Getting started",
             "relevant": false,
             "usage": {
-              "input": 1122,
-              "output": 202,
+              "input": 1295,
+              "output": 207,
               "details": null
             },
             "token_counts": {
               "fulltext": 44,
-              "digest": 76,
-              "short_digest": 27
+              "digest": 77,
+              "short_digest": 26
             },
             "children": {}
           }
@@ -132,14 +132,14 @@
         "displayName": "Core Concepts",
         "relevant": true,
         "usage": {
-          "input": 6716,
-          "output": 1670,
+          "input": 11780,
+          "output": 2703,
           "details": null
         },
         "token_counts": {
-          "fulltext": 1793,
-          "digest": 1161,
-          "short_digest": 392
+          "fulltext": 10455,
+          "digest": 2063,
+          "short_digest": 508
         },
         "children": {
           "routing": {
@@ -147,94 +147,94 @@
             "displayName": "Routing",
             "relevant": true,
             "usage": {
-              "input": 6267,
-              "output": 1133,
+              "input": 6440,
+              "output": 2163,
               "details": null
             },
             "token_counts": {
               "fulltext": 5187,
-              "digest": 740,
-              "short_digest": 277
+              "digest": 1358,
+              "short_digest": 585
             },
             "children": {}
           },
-          "loading_data": {
+          "load": {
             "origPath": "20-core-concepts/20-load.md",
-            "displayName": "Loading data",
+            "displayName": "load",
             "relevant": true,
             "usage": {
-              "input": 10206,
-              "output": 2031,
+              "input": 10379,
+              "output": 2940,
               "details": null
             },
             "token_counts": {
               "fulltext": 9126,
-              "digest": 1550,
-              "short_digest": 350
+              "digest": 2314,
+              "short_digest": 444
             },
             "children": {}
           },
-          "form_actions": {
+          "form-actions": {
             "origPath": "20-core-concepts/30-form-actions.md",
-            "displayName": "Form actions",
+            "displayName": "form-actions",
             "relevant": true,
             "usage": {
-              "input": 6239,
-              "output": 1326,
+              "input": 6412,
+              "output": 2875,
               "details": null
             },
             "token_counts": {
               "fulltext": 5157,
-              "digest": 961,
-              "short_digest": 245
+              "digest": 2267,
+              "short_digest": 474
             },
             "children": {}
           },
-          "page_options": {
+          "page-options": {
             "origPath": "20-core-concepts/40-page-options.md",
-            "displayName": "Page options",
+            "displayName": "page-options",
             "relevant": true,
             "usage": {
-              "input": 4614,
-              "output": 842,
+              "input": 4787,
+              "output": 1451,
               "details": null
             },
             "token_counts": {
               "fulltext": 3532,
-              "digest": 491,
-              "short_digest": 230
+              "digest": 1024,
+              "short_digest": 279
             },
             "children": {}
           },
-          "state_management": {
+          "state-management": {
             "origPath": "20-core-concepts/50-state-management.md",
-            "displayName": "State management",
+            "displayName": "state-management",
             "relevant": true,
             "usage": {
-              "input": 3300,
-              "output": 1017,
+              "input": 3473,
+              "output": 1151,
               "details": null
             },
             "token_counts": {
               "fulltext": 2218,
-              "digest": 700,
-              "short_digest": 194
+              "digest": 856,
+              "short_digest": 164
             },
             "children": {}
           },
-          "remote_functions": {
+          "remote-functions": {
             "origPath": "20-core-concepts/60-remote-functions.md",
-            "displayName": "Remote Functions",
+            "displayName": "remote-functions",
             "relevant": true,
             "usage": {
-              "input": 12372,
-              "output": 1305,
+              "input": 12545,
+              "output": 2846,
               "details": null
             },
             "token_counts": {
               "fulltext": 11290,
-              "digest": 908,
-              "short_digest": 277
+              "digest": 2207,
+              "short_digest": 505
             },
             "children": {}
           },
@@ -243,207 +243,207 @@
             "displayName": "Core Concepts",
             "relevant": false,
             "usage": {
-              "input": 1122,
-              "output": 166,
+              "input": 1295,
+              "output": 184,
               "details": null
             },
             "token_counts": {
               "fulltext": 44,
-              "digest": 53,
+              "digest": 71,
               "short_digest": 15
             },
             "children": {}
           }
         }
       },
-      "build_and_deploy": {
+      "adapters_and_deployment": {
         "origPath": "25-build-and-deploy",
-        "displayName": "Build and Deploy",
+        "displayName": "Adapters and Deployment",
         "relevant": true,
         "usage": {
-          "input": 6967,
-          "output": 2746,
+          "input": 9657,
+          "output": 2703,
           "details": null
         },
         "token_counts": {
-          "fulltext": 2204,
-          "digest": 2023,
-          "short_digest": 608
+          "fulltext": 8255,
+          "digest": 2040,
+          "short_digest": 552
         },
         "children": {
-          "building_your_app": {
+          "building-your-app": {
             "origPath": "25-build-and-deploy/10-building-your-app.md",
-            "displayName": "Building your app",
+            "displayName": "building-your-app",
             "relevant": true,
             "usage": {
-              "input": 1466,
-              "output": 469,
+              "input": 1639,
+              "output": 472,
               "details": null
             },
             "token_counts": {
               "fulltext": 378,
-              "digest": 242,
-              "short_digest": 103
+              "digest": 266,
+              "short_digest": 69
             },
             "children": {}
           },
           "adapters": {
             "origPath": "25-build-and-deploy/20-adapters.md",
-            "displayName": "Adapters",
+            "displayName": "adapters",
             "relevant": true,
             "usage": {
-              "input": 1591,
-              "output": 404,
+              "input": 1764,
+              "output": 485,
               "details": null
             },
             "token_counts": {
               "fulltext": 506,
-              "digest": 238,
-              "short_digest": 60
+              "digest": 282,
+              "short_digest": 72
             },
             "children": {}
           },
-          "zero-config_deployments": {
+          "zero-config-deployments": {
             "origPath": "25-build-and-deploy/30-adapter-auto.md",
-            "displayName": "Zero-config deployments",
+            "displayName": "zero-config-deployments",
             "relevant": true,
             "usage": {
-              "input": 1629,
-              "output": 475,
+              "input": 1802,
+              "output": 510,
               "details": null
             },
             "token_counts": {
               "fulltext": 543,
-              "digest": 271,
-              "short_digest": 86
+              "digest": 310,
+              "short_digest": 58
             },
             "children": {}
           },
-          "node_servers": {
+          "adapter-node": {
             "origPath": "25-build-and-deploy/40-adapter-node.md",
-            "displayName": "Node servers",
+            "displayName": "adapter-node",
             "relevant": true,
             "usage": {
-              "input": 4778,
-              "output": 1399,
+              "input": 4951,
+              "output": 1532,
               "details": null
             },
             "token_counts": {
               "fulltext": 3692,
-              "digest": 900,
-              "short_digest": 381
+              "digest": 1105,
+              "short_digest": 214
             },
             "children": {}
           },
-          "static_site_generation": {
+          "adapter-static": {
             "origPath": "25-build-and-deploy/50-adapter-static.md",
-            "displayName": "Static site generation",
+            "displayName": "adapter-static",
             "relevant": true,
             "usage": {
-              "input": 2843,
-              "output": 832,
+              "input": 3016,
+              "output": 1079,
               "details": null
             },
             "token_counts": {
               "fulltext": 1757,
-              "digest": 465,
-              "short_digest": 246
+              "digest": 859,
+              "short_digest": 98
             },
             "children": {}
           },
-          "single-page_apps": {
+          "single-page-apps": {
             "origPath": "25-build-and-deploy/55-single-page-apps.md",
-            "displayName": "Single-page apps",
+            "displayName": "single-page-apps",
             "relevant": true,
             "usage": {
-              "input": 2283,
-              "output": 704,
+              "input": 2456,
+              "output": 844,
               "details": null
             },
             "token_counts": {
               "fulltext": 1195,
-              "digest": 441,
-              "short_digest": 143
+              "digest": 605,
+              "short_digest": 108
             },
             "children": {}
           },
-          "cloudflare": {
+          "adapter-cloudflare": {
             "origPath": "25-build-and-deploy/60-adapter-cloudflare.md",
-            "displayName": "Cloudflare",
+            "displayName": "adapter-cloudflare",
             "relevant": true,
             "usage": {
-              "input": 4499,
-              "output": 1173,
+              "input": 4672,
+              "output": 1640,
               "details": null
             },
             "token_counts": {
               "fulltext": 3411,
-              "digest": 819,
-              "short_digest": 231
+              "digest": 1259,
+              "short_digest": 201
             },
             "children": {}
           },
-          "cloudflare_workers_adapter": {
+          "adapter-cloudflare-workers": {
             "origPath": "25-build-and-deploy/70-adapter-cloudflare-workers.md",
-            "displayName": "Cloudflare Workers Adapter",
+            "displayName": "adapter-cloudflare-workers",
             "relevant": true,
             "usage": {
-              "input": 2980,
-              "output": 689,
+              "input": 3153,
+              "output": 952,
               "details": null
             },
             "token_counts": {
               "fulltext": 1890,
-              "digest": 483,
-              "short_digest": 85
+              "digest": 689,
+              "short_digest": 130
             },
             "children": {}
           },
-          "netlify_adapter": {
+          "adapter-netlify": {
             "origPath": "25-build-and-deploy/80-adapter-netlify.md",
-            "displayName": "Netlify Adapter",
+            "displayName": "adapter-netlify",
             "relevant": true,
             "usage": {
-              "input": 3008,
-              "output": 640,
+              "input": 3181,
+              "output": 884,
               "details": null
             },
             "token_counts": {
               "fulltext": 1921,
-              "digest": 407,
-              "short_digest": 106
+              "digest": 612,
+              "short_digest": 135
             },
             "children": {}
           },
-          "vercel_adapter": {
+          "adapter-vercel": {
             "origPath": "25-build-and-deploy/90-adapter-vercel.md",
-            "displayName": "Vercel Adapter",
+            "displayName": "adapter-vercel",
             "relevant": true,
             "usage": {
-              "input": 3960,
-              "output": 1129,
+              "input": 4133,
+              "output": 1422,
               "details": null
             },
             "token_counts": {
               "fulltext": 2873,
-              "digest": 761,
-              "short_digest": 247
+              "digest": 1088,
+              "short_digest": 188
             },
             "children": {}
           },
-          "writing_adapters": {
+          "writing-adapters": {
             "origPath": "25-build-and-deploy/99-writing-adapters.md",
-            "displayName": "Writing adapters",
+            "displayName": "writing-adapters",
             "relevant": true,
             "usage": {
-              "input": 1911,
-              "output": 645,
+              "input": 2084,
+              "output": 787,
               "details": null
             },
             "token_counts": {
               "fulltext": 824,
-              "digest": 376,
-              "short_digest": 160
+              "digest": 486,
+              "short_digest": 123
             },
             "children": {}
           },
@@ -452,14 +452,14 @@
             "displayName": "Build and deploy",
             "relevant": false,
             "usage": {
-              "input": 1127,
-              "output": 162,
+              "input": 1300,
+              "output": 193,
               "details": null
             },
             "token_counts": {
               "fulltext": 45,
-              "digest": 46,
-              "short_digest": 15
+              "digest": 74,
+              "short_digest": 20
             },
             "children": {}
           }
@@ -470,45 +470,45 @@
         "displayName": "Advanced Features",
         "relevant": true,
         "usage": {
-          "input": 6961,
-          "output": 1914,
+          "input": 10727,
+          "output": 2167,
           "details": null
         },
         "token_counts": {
-          "fulltext": 2071,
-          "digest": 1283,
-          "short_digest": 510
+          "fulltext": 9344,
+          "digest": 1611,
+          "short_digest": 402
         },
         "children": {
-          "advanced_routing": {
+          "advanced-routing": {
             "origPath": "30-advanced/10-advanced-routing.md",
-            "displayName": "Advanced Routing",
+            "displayName": "advanced-routing",
             "relevant": true,
             "usage": {
-              "input": 4743,
-              "output": 1101,
+              "input": 4916,
+              "output": 2141,
               "details": null
             },
             "token_counts": {
               "fulltext": 3665,
-              "digest": 687,
-              "short_digest": 298
+              "digest": 1771,
+              "short_digest": 233
             },
             "children": {}
           },
           "hooks": {
             "origPath": "30-advanced/20-hooks.md",
-            "displayName": "Hooks",
+            "displayName": "hooks",
             "relevant": true,
             "usage": {
-              "input": 5607,
-              "output": 1002,
+              "input": 5780,
+              "output": 2130,
               "details": null
             },
             "token_counts": {
               "fulltext": 4531,
-              "digest": 689,
-              "short_digest": 201
+              "digest": 1752,
+              "short_digest": 266
             },
             "children": {}
           },
@@ -517,110 +517,110 @@
             "displayName": "Errors",
             "relevant": true,
             "usage": {
-              "input": 2602,
-              "output": 847,
+              "input": 2775,
+              "output": 1090,
               "details": null
             },
             "token_counts": {
               "fulltext": 1526,
-              "digest": 536,
-              "short_digest": 202
+              "digest": 718,
+              "short_digest": 235
             },
             "children": {}
           },
-          "link_options": {
+          "link-options": {
             "origPath": "30-advanced/30-link-options.md",
-            "displayName": "Link options",
+            "displayName": "link-options",
             "relevant": true,
             "usage": {
-              "input": 2997,
-              "output": 770,
+              "input": 3170,
+              "output": 1186,
               "details": null
             },
             "token_counts": {
               "fulltext": 1919,
-              "digest": 452,
-              "short_digest": 200
+              "digest": 823,
+              "short_digest": 218
             },
             "children": {}
           },
-          "service_workers": {
+          "service-workers": {
             "origPath": "30-advanced/40-service-workers.md",
-            "displayName": "Service workers",
+            "displayName": "service-workers",
             "relevant": true,
             "usage": {
-              "input": 2650,
-              "output": 852,
+              "input": 2823,
+              "output": 1099,
               "details": null
             },
             "token_counts": {
               "fulltext": 1572,
-              "digest": 634,
-              "short_digest": 115
+              "digest": 841,
+              "short_digest": 120
             },
             "children": {}
           },
-          "server-only_modules": {
+          "server-only-modules": {
             "origPath": "30-advanced/50-server-only-modules.md",
-            "displayName": "Server-only modules",
+            "displayName": "server-only-modules",
             "relevant": true,
             "usage": {
-              "input": 1830,
-              "output": 708,
+              "input": 2003,
+              "output": 713,
               "details": null
             },
             "token_counts": {
               "fulltext": 750,
-              "digest": 401,
-              "short_digest": 185
+              "digest": 469,
+              "short_digest": 96
             },
             "children": {}
           },
           "snapshots": {
             "origPath": "30-advanced/65-snapshots.md",
-            "displayName": "Snapshots",
+            "displayName": "snapshots",
             "relevant": true,
             "usage": {
-              "input": 1563,
-              "output": 372,
+              "input": 1736,
+              "output": 440,
               "details": null
             },
             "token_counts": {
               "fulltext": 486,
-              "digest": 206,
-              "short_digest": 62
+              "digest": 284,
+              "short_digest": 48
             },
             "children": {}
           },
-          "shallow_routing": {
+          "shallow-routing": {
             "origPath": "30-advanced/67-shallow-routing.md",
-            "displayName": "Shallow routing",
+            "displayName": "shallow-routing",
             "relevant": true,
             "usage": {
-              "input": 2442,
-              "output": 801,
+              "input": 2615,
+              "output": 930,
               "details": null
             },
             "token_counts": {
               "fulltext": 1364,
-              "digest": 523,
-              "short_digest": 168
+              "digest": 601,
+              "short_digest": 206
             },
             "children": {}
           },
           "observability": {
             "origPath": "30-advanced/68-observability.md",
-            "displayName": "Observability",
+            "displayName": "observability",
             "relevant": true,
             "usage": {
-              "input": 2500,
-              "output": 678,
+              "input": 2673,
+              "output": 914,
               "details": null
             },
             "token_counts": {
               "fulltext": 1423,
-              "digest": 462,
-              "short_digest": 109
+              "digest": 651,
+              "short_digest": 119
             },
             "children": {}
           },
@@ -629,14 +629,14 @@
             "displayName": "Packaging",
             "relevant": true,
             "usage": {
-              "input": 5167,
-              "output": 1331,
+              "input": 5340,
+              "output": 1271,
               "details": null
             },
             "token_counts": {
               "fulltext": 4091,
-              "digest": 931,
-              "short_digest": 283
+              "digest": 962,
+              "short_digest": 154
             },
             "children": {}
           },
@@ -645,14 +645,14 @@
             "displayName": "Advanced",
             "relevant": false,
             "usage": {
-              "input": 1117,
-              "output": 158,
+              "input": 1290,
+              "output": 170,
               "details": null
             },
             "token_counts": {
               "fulltext": 43,
-              "digest": 41,
-              "short_digest": 21
+              "digest": 57,
+              "short_digest": 17
             },
             "children": {}
           }
@@ -663,29 +663,29 @@
         "displayName": "Best Practices",
         "relevant": true,
         "usage": {
-          "input": 3858,
-          "output": 1673,
+          "input": 5160,
+          "output": 2267,
           "details": null
         },
         "token_counts": {
-          "fulltext": 1325,
-          "digest": 1173,
-          "short_digest": 387
+          "fulltext": 3835,
+          "digest": 1672,
+          "short_digest": 481
         },
         "children": {
           "auth": {
             "origPath": "40-best-practices/03-auth.md",
-            "displayName": "Auth",
+            "displayName": "auth",
             "relevant": true,
             "usage": {
-              "input": 1565,
-              "output": 392,
+              "input": 1738,
+              "output": 422,
               "details": null
             },
             "token_counts": {
               "fulltext": 485,
-              "digest": 197,
-              "short_digest": 82
+              "digest": 224,
+              "short_digest": 79
             },
             "children": {}
           },
@@ -694,127 +694,127 @@
             "displayName": "Performance",
             "relevant": true,
             "usage": {
-              "input": 3619,
-              "output": 1029,
+              "input": 3792,
+              "output": 1456,
               "details": null
             },
             "token_counts": {
               "fulltext": 2539,
-              "digest": 592,
-              "short_digest": 318
+              "digest": 859,
+              "short_digest": 372
             },
             "children": {}
           },
           "icons": {
             "origPath": "40-best-practices/06-icons.md",
-            "displayName": "Icons",
+            "displayName": "icons",
             "relevant": true,
             "usage": {
-              "input": 1454,
-              "output": 309,
+              "input": 1627,
+              "output": 391,
               "details": null
             },
             "token_counts": {
               "fulltext": 374,
-              "digest": 117,
-              "short_digest": 63
+              "digest": 172,
+              "short_digest": 84
             },
             "children": {}
           },
           "images": {
             "origPath": "40-best-practices/07-images.md",
-            "displayName": "Images",
+            "displayName": "images",
             "relevant": true,
             "usage": {
-              "input": 4109,
-              "output": 1366,
+              "input": 4282,
+              "output": 1250,
               "details": null
             },
             "token_counts": {
               "fulltext": 3029,
-              "digest": 827,
-              "short_digest": 410
+              "digest": 891,
+              "short_digest": 195
             },
             "children": {}
           },
           "accessibility": {
             "origPath": "40-best-practices/10-accessibility.md",
-            "displayName": "Accessibility",
+            "displayName": "accessibility",
             "relevant": true,
             "usage": {
-              "input": 2518,
-              "output": 639,
+              "input": 2691,
+              "output": 682,
               "details": null
             },
             "token_counts": {
               "fulltext": 1438,
-              "digest": 387,
-              "short_digest": 137
+              "digest": 455,
+              "short_digest": 111
             },
             "children": {}
           },
           "seo": {
             "origPath": "40-best-practices/20-seo.md",
-            "displayName": "SEO",
+            "displayName": "seo",
             "relevant": true,
             "usage": {
-              "input": 2795,
-              "output": 609,
+              "input": 2968,
+              "output": 1147,
               "details": null
             },
             "token_counts": {
               "fulltext": 1714,
-              "digest": 381,
-              "short_digest": 104
+              "digest": 854,
+              "short_digest": 157
             },
             "children": {}
           },
-          "best_practices": {
+          "best-practices": {
             "origPath": "40-best-practices/index.md",
-            "displayName": "Best practices",
+            "displayName": "best-practices",
             "relevant": false,
             "usage": {
-              "input": 1122,
-              "output": 192,
+              "input": 1295,
+              "output": 189,
               "details": null
             },
             "token_counts": {
               "fulltext": 44,
-              "digest": 64,
-              "short_digest": 31
+              "digest": 74,
+              "short_digest": 19
             },
             "children": {}
           }
         }
       },
-      "appendix": {
+      "appendix_&_reference": {
         "origPath": "60-appendix",
-        "displayName": "Appendix",
+        "displayName": "Appendix & Reference",
         "relevant": true,
         "usage": {
-          "input": 4873,
-          "output": 2474,
+          "input": 6814,
+          "output": 3435,
           "details": null
         },
         "token_counts": {
-          "fulltext": 1589,
-          "digest": 1803,
-          "short_digest": 551
+          "fulltext": 5490,
+          "digest": 2854,
+          "short_digest": 462
         },
         "children": {
-          "frequently_asked_questions": {
+          "faq": {
             "origPath": "60-appendix/10-faq.md",
-            "displayName": "Frequently Asked Questions",
+            "displayName": "FAQ",
             "relevant": true,
             "usage": {
-              "input": 3849,
-              "output": 880,
+              "input": 4022,
+              "output": 1552,
               "details": null
             },
             "token_counts": {
               "fulltext": 2770,
-              "digest": 567,
-              "short_digest": 199
+              "digest": 1140,
+              "short_digest": 242
             },
             "children": {}
           },
@@ -823,14 +823,14 @@
             "displayName": "Integrations",
             "relevant": true,
             "usage": {
-              "input": 1920,
-              "output": 603,
+              "input": 2093,
+              "output": 690,
               "details": null
             },
             "token_counts": {
               "fulltext": 841,
-              "digest": 309,
-              "short_digest": 187
+              "digest": 360,
+              "short_digest": 209
             },
             "children": {}
           },
@@ -839,30 +839,30 @@
             "displayName": "Breakpoint Debugging",
             "relevant": true,
             "usage": {
-              "input": 1830,
-              "output": 593,
+              "input": 2003,
+              "output": 612,
               "details": null
             },
             "token_counts": {
               "fulltext": 752,
-              "digest": 339,
-              "short_digest": 139
+              "digest": 359,
+              "short_digest": 127
             },
             "children": {}
           },
-          "migrating_to_sveltekit_v2": {
+          "migrating-to-sveltekit-2": {
             "origPath": "60-appendix/30-migrating-to-sveltekit-2.md",
-            "displayName": "Migrating to SvelteKit v2",
+            "displayName": "migrating-to-sveltekit-2",
             "relevant": true,
             "usage": {
-              "input": 4796,
-              "output": 1235,
+              "input": 4969,
+              "output": 1728,
               "details": null
             },
             "token_counts": {
               "fulltext": 3708,
-              "digest": 855,
-              "short_digest": 245
+              "digest": 1177,
+              "short_digest": 344
             },
             "children": {}
           },
@@ -871,30 +871,30 @@
             "displayName": "Migrating from Sapper",
             "relevant": true,
             "usage": {
-              "input": 3679,
-              "output": 1361,
+              "input": 3852,
+              "output": 1982,
               "details": null
             },
             "token_counts": {
               "fulltext": 2600,
-              "digest": 902,
-              "short_digest": 326
+              "digest": 1410,
+              "short_digest": 398
             },
             "children": {}
           },
-          "additional_resources": {
+          "additional-resources": {
             "origPath": "60-appendix/50-additional-resources.md",
-            "displayName": "Additional resources",
+            "displayName": "additional-resources",
             "relevant": false,
             "usage": {
-              "input": 1549,
-              "output": 357,
+              "input": 1722,
+              "output": 445,
               "details": null
             },
             "token_counts": {
               "fulltext": 469,
-              "digest": 163,
-              "short_digest": 88
+              "digest": 199,
+              "short_digest": 115
             },
             "children": {}
           },
@@ -903,14 +903,14 @@
             "displayName": "Glossary",
             "relevant": true,
             "usage": {
-              "input": 2721,
-              "output": 938,
+              "input": 2894,
+              "output": 902,
               "details": null
             },
             "token_counts": {
               "fulltext": 1642,
-              "digest": 530,
-              "short_digest": 267
+              "digest": 623,
+              "short_digest": 136
             },
             "children": {}
           },
@@ -919,14 +919,14 @@
             "displayName": "Appendix",
             "relevant": false,
             "usage": {
-              "input": 1121,
+              "input": 1294,
               "output": 189,
               "details": null
             },
             "token_counts": {
               "fulltext": 45,
               "digest": 67,
-              "short_digest": 22
+              "short_digest": 18
             },
             "children": {}
           }
@@ -937,14 +937,14 @@
         "displayName": "API Reference",
         "relevant": true,
         "usage": {
-          "input": 9081,
-          "output": 3475,
+          "input": 15722,
+          "output": 4523,
           "details": null
         },
         "token_counts": {
-          "fulltext": 3384,
-          "digest": 2512,
-          "short_digest": 851
+          "fulltext": 14159,
+          "digest": 3745,
+          "short_digest": 640
         },
         "children": {
           "@sveltejs_kit_api_reference": {
@@ -952,14 +952,14 @@
             "displayName": "@sveltejs/kit API Reference",
             "relevant": true,
             "usage": {
-              "input": 29833,
-              "output": 1717,
+              "input": 30006,
+              "output": 4197,
               "details": null
             },
             "token_counts": {
               "fulltext": 28752,
-              "digest": 1137,
-              "short_digest": 448
+              "digest": 3198,
+              "short_digest": 745
             },
             "children": {}
           },
@@ -968,62 +968,62 @@
             "displayName": "hooks",
             "relevant": true,
             "usage": {
-              "input": 1706,
-              "output": 461,
+              "input": 1879,
+              "output": 652,
               "details": null
             },
             "token_counts": {
               "fulltext": 623,
-              "digest": 268,
-              "short_digest": 90
+              "digest": 451,
+              "short_digest": 84
             },
             "children": {}
           },
-          "node_polyfills": {
+          "node-polyfills": {
             "origPath": "98-reference/15-@sveltejs-kit-node-polyfills.md",
-            "displayName": "Node Polyfills",
+            "displayName": "node-polyfills",
             "relevant": true,
             "usage": {
-              "input": 1226,
-              "output": 300,
+              "input": 1399,
+              "output": 311,
               "details": null
             },
             "token_counts": {
               "fulltext": 139,
-              "digest": 127,
+              "digest": 135,
               "short_digest": 66
             },
             "children": {}
           },
-          "node_adapter_api_reference": {
+          "node": {
             "origPath": "98-reference/15-@sveltejs-kit-node.md",
-            "displayName": "Node Adapter API Reference",
+            "displayName": "node",
             "relevant": true,
             "usage": {
-              "input": 1381,
-              "output": 439,
+              "input": 1554,
+              "output": 400,
               "details": null
             },
             "token_counts": {
               "fulltext": 298,
-              "digest": 263,
+              "digest": 221,
               "short_digest": 64
             },
             "children": {}
           },
-          "@sveltejs_kit_vite": {
+          "vite-plugin": {
             "origPath": "98-reference/15-@sveltejs-kit-vite.md",
-            "displayName": "@sveltejs/kit/vite",
+            "displayName": "vite-plugin",
             "relevant": true,
             "usage": {
-              "input": 1219,
-              "output": 307,
+              "input": 1392,
+              "output": 281,
               "details": null
             },
             "token_counts": {
               "fulltext": 135,
-              "digest": 110,
-              "short_digest": 79
+              "digest": 126,
+              "short_digest": 47
             },
             "children": {}
           },
@@ -1032,30 +1032,30 @@
             "displayName": "$app/environment",
             "relevant": true,
             "usage": {
-              "input": 1351,
-              "output": 372,
+              "input": 1524,
+              "output": 323,
               "details": null
             },
             "token_counts": {
               "fulltext": 272,
-              "digest": 201,
-              "short_digest": 70
+              "digest": 165,
+              "short_digest": 47
             },
             "children": {}
           },
-          "$app_forms": {
+          "forms": {
             "origPath": "98-reference/20-$app-forms.md",
-            "displayName": "$app/forms",
+            "displayName": "forms",
             "relevant": true,
             "usage": {
-              "input": 1862,
-              "output": 639,
+              "input": 2035,
+              "output": 580,
               "details": null
             },
             "token_counts": {
               "fulltext": 783,
-              "digest": 400,
-              "short_digest": 126
+              "digest": 407,
+              "short_digest": 58
             },
             "children": {}
           },
@@ -1064,14 +1064,14 @@
             "displayName": "$app/navigation",
             "relevant": true,
             "usage": {
-              "input": 3173,
-              "output": 783,
+              "input": 3346,
+              "output": 1043,
               "details": null
             },
             "token_counts": {
               "fulltext": 2094,
-              "digest": 480,
-              "short_digest": 193
+              "digest": 788,
+              "short_digest": 93
             },
             "children": {}
           },
@@ -1080,14 +1080,14 @@
             "displayName": "$app/paths",
             "relevant": true,
             "usage": {
-              "input": 1918,
-              "output": 491,
+              "input": 2091,
+              "output": 562,
               "details": null
             },
             "token_counts": {
               "fulltext": 839,
-              "digest": 243,
-              "short_digest": 137
+              "digest": 367,
+              "short_digest": 75
             },
             "children": {}
           },
@@ -1096,14 +1096,14 @@
             "displayName": "$app/server",
             "relevant": true,
             "usage": {
-              "input": 3142,
-              "output": 517,
+              "input": 3315,
+              "output": 1174,
               "details": null
             },
             "token_counts": {
               "fulltext": 2063,
-              "digest": 274,
-              "short_digest": 112
+              "digest": 806,
+              "short_digest": 230
             },
             "children": {}
           },
@@ -1112,14 +1112,14 @@
             "displayName": "$app/state",
             "relevant": true,
             "usage": {
-              "input": 1950,
-              "output": 550,
+              "input": 2123,
+              "output": 723,
               "details": null
             },
             "token_counts": {
               "fulltext": 871,
-              "digest": 327,
-              "short_digest": 113
+              "digest": 501,
+              "short_digest": 89
             },
             "children": {}
           },
@@ -1128,14 +1128,14 @@
             "displayName": "$app/stores",
             "relevant": true,
             "usage": {
-              "input": 1882,
-              "output": 480,
+              "input": 2055,
+              "output": 441,
               "details": null
             },
             "token_counts": {
               "fulltext": 803,
-              "digest": 240,
-              "short_digest": 118
+              "digest": 255,
+              "short_digest": 65
             },
             "children": {}
           },
@@ -1144,14 +1144,14 @@
             "displayName": "$app/types",
             "relevant": true,
             "usage": {
-              "input": 1707,
-              "output": 589,
+              "input": 1880,
+              "output": 593,
               "details": null
             },
             "token_counts": {
               "fulltext": 628,
-              "digest": 344,
-              "short_digest": 129
+              "digest": 412,
+              "short_digest": 61
             },
             "children": {}
           },
@@ -1160,14 +1160,14 @@
             "displayName": "$env/dynamic/private",
             "relevant": true,
             "usage": {
-              "input": 1349,
-              "output": 306,
+              "input": 1522,
+              "output": 362,
               "details": null
             },
             "token_counts": {
               "fulltext": 268,
-              "digest": 145,
-              "short_digest": 59
+              "digest": 178,
+              "short_digest": 68
             },
             "children": {}
           },
@@ -1176,14 +1176,14 @@
             "displayName": "$env/dynamic/public",
             "relevant": true,
             "usage": {
-              "input": 1271,
-              "output": 304,
+              "input": 1444,
+              "output": 336,
               "details": null
             },
             "token_counts": {
               "fulltext": 190,
-              "digest": 112,
-              "short_digest": 83
+              "digest": 136,
+              "short_digest": 82
             },
             "children": {}
           },
@@ -1192,14 +1192,14 @@
             "displayName": "$env/static/private",
             "relevant": true,
             "usage": {
-              "input": 1414,
-              "output": 383,
+              "input": 1587,
+              "output": 400,
               "details": null
             },
             "token_counts": {
               "fulltext": 333,
-              "digest": 181,
-              "short_digest": 92
+              "digest": 208,
+              "short_digest": 71
             },
             "children": {}
           },
@@ -1208,14 +1208,14 @@
             "displayName": "$env/static/public",
             "relevant": true,
             "usage": {
-              "input": 1233,
-              "output": 276,
+              "input": 1406,
+              "output": 266,
               "details": null
             },
             "token_counts": {
               "fulltext": 152,
-              "digest": 101,
-              "short_digest": 60
+              "digest": 100,
+              "short_digest": 53
             },
             "children": {}
           },
@@ -1224,14 +1224,14 @@
             "displayName": "$lib alias",
             "relevant": true,
             "usage": {
-              "input": 1238,
-              "output": 262,
+              "input": 1411,
+              "output": 294,
               "details": null
             },
             "token_counts": {
               "fulltext": 161,
-              "digest": 105,
-              "short_digest": 48
+              "digest": 122,
+              "short_digest": 57
             },
             "children": {}
           },
@@ -1240,46 +1240,46 @@
             "displayName": "$service-worker",
             "relevant": true,
             "usage": {
-              "input": 1580,
-              "output": 553,
+              "input": 1753,
+              "output": 432,
               "details": null
             },
             "token_counts": {
               "fulltext": 501,
-              "digest": 316,
-              "short_digest": 122
+              "digest": 260,
+              "short_digest": 57
             },
             "children": {}
           },
           "configuration": {
             "origPath": "98-reference/50-configuration.md",
-            "displayName": "Configuration",
+            "displayName": "configuration",
             "relevant": true,
             "usage": {
-              "input": 11878,
-              "output": 1490,
+              "input": 12051,
+              "output": 3940,
               "details": null
             },
             "token_counts": {
               "fulltext": 10802,
-              "digest": 1016,
-              "short_digest": 354
+              "digest": 3197,
+              "short_digest": 583
             },
             "children": {}
           },
-          "command_line_interface": {
+          "cli": {
             "origPath": "98-reference/52-cli.md",
-            "displayName": "Command Line Interface",
+            "displayName": "CLI",
             "relevant": true,
             "usage": {
-              "input": 1302,
-              "output": 305,
+              "input": 1475,
+              "output": 316,
               "details": null
             },
             "token_counts": {
               "fulltext": 226,
-              "digest": 125,
-              "short_digest": 68
+              "digest": 130,
+              "short_digest": 63
             },
             "children": {}
           },
@@ -1288,14 +1288,14 @@
             "displayName": "Types",
             "relevant": true,
             "usage": {
-              "input": 3535,
-              "output": 961,
+              "input": 3708,
+              "output": 1370,
               "details": null
             },
             "token_counts": {
               "fulltext": 2459,
-              "digest": 662,
-              "short_digest": 185
+              "digest": 1103,
+              "short_digest": 142
             },
             "children": {}
           },
@@ -1304,48 +1304,55 @@
             "displayName": "Reference",
             "relevant": false,
             "usage": {
-              "input": 1117,
-              "output": 160,
+              "input": 1290,
+              "output": 175,
               "details": null
             },
             "token_counts": {
               "fulltext": 43,
-              "digest": 47,
+              "digest": 60,
               "short_digest": 18
             },
             "children": {}
           }
         }
       },
-      "introduction": {
+      "index": {
         "origPath": "index.md",
-        "displayName": "Introduction",
+        "displayName": "index",
         "relevant": false,
         "usage": {
-          "input": 1114,
-          "output": 188,
+          "input": 1287,
+          "output": 191,
           "details": null
         },
         "token_counts": {
           "fulltext": 46,
-          "digest": 66,
-          "short_digest": 27
+          "digest": 74,
+          "short_digest": 19
         },
         "children": {}
       }
     }
   },
   "name": "sveltejs/sveltekit",
+  "ecosystems": [
+    "svelte"
+  ],
   "source_type": "git",
   "source": {
     "name": "sveltejs/sveltekit",
     "comment": null,
+    "ecosystems": [
+      "svelte"
+    ],
+    "include": null,
+    "exclude": null,
     "doc_dir": "apps/svelte.dev/content/docs/kit",
     "repo": "https://github.com/sveltejs/svelte.dev",
     "commit": "050bad718c9747d9602c389e245aa8d4f6a8d08c"
   },
-  "date": "2025-11-13T10:46:40.768617+00:00",
+  "date": "2025-12-07T02:31:07.428573+00:00",
   "model": "claude-haiku-4.5",
-  "commit": "0528ad5fe5486be5b3691edc99daacfaf782e426-dirty",
-  "ecosystems": ["svelte"]
+  "commit": "89d7a82f10a43f14d4fd63c518b2eaed000cc5c9-dirty"
 }

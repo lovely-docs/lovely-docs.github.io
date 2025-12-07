@@ -1,1 +1,1 @@
-Module for accessing public dynamic environment variables that are safe to expose to client-side code.
+Dynamic public environment variables (prefixed with PUBLIC_ by default) sent to client; prefer static variant for smaller payloads.

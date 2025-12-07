@@ -1,0 +1,1 @@
+Legacy Svelte slots: default and named slots with fallback content, bidirectional data passing via props and let: directive.

@@ -1,0 +1,1 @@
+Fix onFinish not executing on stream abort by adding consumeSseStream: consumeStream to toUIMessageStreamResponse config; use isAborted parameter to handle abort-specific cleanup.

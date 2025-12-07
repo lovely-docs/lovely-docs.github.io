@@ -1,1 +1,0 @@
-Reactive scroll position/direction tracker with edge detection, progress reporting, and programmatic scrolling for elements/window/document with RTL and flex layout support.

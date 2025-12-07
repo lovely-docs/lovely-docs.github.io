@@ -1,0 +1,1 @@
+useChat requires DefaultChatTransport for custom headers/body/credentials; use request-level options for dynamic values, hook-level for static; request options override hook options.

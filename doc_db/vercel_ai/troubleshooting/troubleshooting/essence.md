@@ -1,1 +1,1 @@
-Troubleshooting hub for resolving common SDK issues.
+Landing page for troubleshooting documentation with links to solutions for common AI SDK problems.

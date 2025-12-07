@@ -1,0 +1,1 @@
+Central registry for managing multiple AI providers and models with `providerId:modelId` access pattern; supports custom separators and provides methods for language, embedding, and image models.

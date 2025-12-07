@@ -1,29 +1,18 @@
-## Overview
-`drizzle-zod` generates Zod schemas from Drizzle ORM schemas for validating database queries and API requests/responses.
+Generate Zod validation schemas from Drizzle ORM table definitions.
 
-## Core Functions
-- **`createSelectSchema(table)`** - Validates data queried from database
-- **`createInsertSchema(table)`** - Validates data before insertion (required fields only)
-- **`createUpdateSchema(table)`** - Validates partial updates (all fields optional)
-- **`createSchemaFactory(options)`** - Advanced use cases with extended Zod instances or type coercion
+**Three main functions:**
+- `createSelectSchema(table)` - validates query results
+- `createInsertSchema(table)` - validates insert data
+- `createUpdateSchema(table)` - validates update data (all fields optional, generated columns excluded)
 
-## Refinements
-Extend or overwrite field schemas:
+**Refinements:** Pass optional second parameter to extend/modify/overwrite field schemas:
 ```ts
 createSelectSchema(users, {
-  name: (schema) => schema.max(20), // Extends
-  preferences: z.object({ theme: z.string() }) // Overwrites
-});
+  name: (schema) => schema.max(20),
+  preferences: z.object({ theme: z.string() })
+})
 ```
 
-## Factory Examples
-```ts
-// Extended Zod instance
-const { createInsertSchema } = createSchemaFactory({ zodInstance: z });
+**Factory:** `createSchemaFactory({ zodInstance: z, coerce: { date: true } })` for extended Zod instances or type coercion.
 
-// Type coercion
-const { createInsertSchema } = createSchemaFactory({ coerce: { date: true } });
-```
-
-## Data Type Mappings
-Boolean → `z.boolean()`, Date → `z.date()`, String → `z.string()`, UUID → `z.string().uuid()`, Integer → `z.number().min(min).max(max).int()`, BigInt → `z.bigint()`, JSON → `z.union([...])`, Arrays → `z.array(baseType).length(size)`, and more with appropriate bit-limit constraints
+**Type mapping:** Comprehensive reference for all Drizzle column types (boolean, date, string, UUID, char, varchar, text variants, enum, bit, integers, floats, bigint, year, geometry, vectors, lines, JSON, buffer, arrays) to corresponding Zod schemas with proper constraints.

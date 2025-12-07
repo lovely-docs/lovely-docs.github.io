@@ -1,0 +1,1 @@
+**Removed in AI SDK 4.0** - Legacy utility that converts Inkeep API responses to ReadableStream. Takes response object and optional callbacks (onStart, onToken, onCompletion, onFinal). Works in Node.js, Edge Runtime, and browsers.

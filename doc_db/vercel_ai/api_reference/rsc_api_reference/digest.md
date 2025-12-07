@@ -1,35 +1,92 @@
-## RSC API Reference
+## Server-Side Functions
 
-**Core Streaming Functions:**
-- `streamUI`: Streams LLM-generated React UI with tool support. Accepts model, system prompt, messages, generation parameters, tools, and callbacks. Returns ReactNode value and AsyncIterable stream of text-delta, tool-call, error, and finish events.
-- `createStreamableUI`: Server-to-client UI streaming with `update()`, `append()`, and `done()` methods. Initial UI optional.
-- `createStreamableValue`: Wraps serializable values for server-to-client streaming with `update()` method.
+**streamUI(model, system?, prompt?, messages?, tools?, ...)** - Creates streamable React UI from LLM output. Returns `{ value: ReactNode, stream: AsyncIterable<StreamPart>, response?, warnings? }`. Stream emits `{ type: 'text-delta', textDelta }`, `{ type: 'tool-call', toolCallId, toolName, args }`, `{ type: 'error', error }`, or `{ type: 'finish', finishReason, usage }`. Supports messages array (CoreSystemMessage, CoreUserMessage with TextPart/ImagePart/FilePart, CoreAssistantMessage, CoreToolMessage, UIMessage), tools with optional `generate` callback yielding React nodes, generation options (maxOutputTokens, temperature, topP, topK, presencePenalty, frequencyPenalty, stopSequences, seed), toolChoice ("auto"/"none"/"required"/`{ type, toolName }`), callbacks (text, onFinish), and standard options (maxRetries, abortSignal, headers, providerOptions).
 
-**State Management:**
-- `createAI`: Context provider factory accepting server actions, initial AI/UI states, SSR callback (`onGetUIState`), and persistence callback (`onSetAIState`).
-- `getAIState()`: Retrieves current AI state, optionally extracting a specific key.
-- `getMutableAIState()`: Returns mutable AI state with `update()` and `done()` methods for server-side updates.
-- `useAIState()`: Hook reading/updating globally-shared AI state under `<AI/>` provider. Returns `[state]`.
-- `useUIState()`: Hook for client-side UI state management. Returns `[state, setState]` tuple.
+**createAI(actions, initialAIState, initialUIState, onGetUIState?, onSetAIState?)** - Context provider factory for client-server state management. `actions` is Record<string, Action> of server-side callables. `onSetAIState` callback receives `{ state, done }` when mutable AI state updates occur, enabling database persistence. Returns `<AI/>` provider component.
 
-**Client-Side Consumption:**
-- `readStreamableValue()`: Async iterator for consuming server-streamed values. Usage: `for await (const value of readStreamableValue(stream)) { ... }`
-- `useStreamableValue()`: Hook consuming streamable values. Returns `[data, error, pending]` tuple.
+**createStreamableUI(initialValue?)** - Creates server-to-client stream for React components. Returns object with `value: ReactNode` (returnable from Server Action), `update(ReactNode)`, `append(ReactNode)`, `done(ReactNode | null)` (required to close stream), `error(Error)`.
 
-**Server Action Access:**
-- `useActions()`: Hook accessing patched Server Actions from clients. Returns `Record<string, Action>` dictionary.
+**createStreamableValue(value)** - Creates server-to-client stream for serializable data. Returns streamable object with initial data and update method, returnable from Server Actions.
 
-**Message Types:**
-- CoreSystemMessage: `{ role: 'system', content: string }`
-- CoreUserMessage: `{ role: 'user', content: string | Array<TextPart | ImagePart | FilePart> }`
-- CoreAssistantMessage: `{ role: 'assistant', content: string | Array<TextPart | ToolCallPart> }`
-- CoreToolMessage: `{ role: 'tool', content: Array<ToolResultPart> }`
+**getAIState(key?)** - Reads current AI state (read-only). Optional `key` parameter accesses object property.
 
-**Tool Definition:**
-```ts
-{ description?: string, parameters: zod schema, generate?: (async (parameters) => ReactNode) | AsyncGenerator<ReactNode, ReactNode, void> }
+**getMutableAIState(key?)** - Returns mutable AI state with `update(newState)` and `done(newState)` methods for server-side updates.
+
+## Client-Side Hooks
+
+**useAIState()** - Returns `[state]` array of globally-shared AI state under `<AI/>` provider. Shared across all hooks in the tree.
+
+**useUIState()** - Returns `[state, setState]` array for client-side UI state (can contain functions, React nodes, data). Visual representation of AI state.
+
+**useActions()** - Returns `Record<string, Action>` of patched Server Actions. Required because direct access causes "Cannot find Client Component" errors.
+
+**useStreamableValue(streamableValue)** - Returns `[data, error, pending]` tuple. Consumes streamable values created with `createStreamableValue`.
+
+**readStreamableValue(stream)** - Async iterator for consuming server-streamed values. Use with `for await...of` loop.
+
+## Example: Full Flow
+
+```typescript
+// Server (app/actions.ts)
+'use server';
+import { streamUI, createStreamableUI, getMutableAIState } from '@ai-sdk/rsc';
+
+export async function generate(input: string) {
+  const mutableState = getMutableAIState();
+  const { value, stream } = await streamUI({
+    model: openai('gpt-4'),
+    prompt: input,
+    tools: {
+      renderComponent: {
+        description: 'Render a React component',
+        parameters: z.object({ content: z.string() }),
+        generate: async ({ content }) => {
+          const ui = createStreamableUI(<div>{content}</div>);
+          mutableState.update([...mutableState.get(), { role: 'assistant', content }]);
+          ui.done();
+          return ui.value;
+        }
+      }
+    }
+  });
+  mutableState.done(value);
+  return { value, stream };
+}
+
+// Client (app/page.tsx)
+import { useActions, useAIState, useUIState } from '@ai-sdk/rsc';
+
+export default function Page() {
+  const [aiState] = useAIState();
+  const [uiState, setUIState] = useUIState();
+  const { generate } = useActions();
+  
+  return (
+    <button onClick={async () => {
+      const result = await generate('prompt');
+      setUIState([...uiState, result.value]);
+    }}>
+      Generate
+    </button>
+  );
+}
+
+// Root (app/layout.tsx)
+import { createAI } from '@ai-sdk/rsc';
+import { generate } from './actions';
+
+const AI = createAI({
+  actions: { generate },
+  initialAIState: [],
+  initialUIState: [],
+  onSetAIState: ({ state, done }) => {
+    if (done) saveToDatabase(state);
+  }
+});
+
+export default function RootLayout({ children }) {
+  return <AI>{children}</AI>;
+}
 ```
 
-**Generation Parameters:** maxOutputTokens, temperature, topP, topK, presencePenalty, frequencyPenalty, stopSequences, seed
-
-**Note:** AI SDK RSC is experimental. AI SDK UI recommended for production.
+**Status**: Experimental. Production use should migrate to AI SDK UI.

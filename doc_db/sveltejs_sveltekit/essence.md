@@ -1,1 +1,1 @@
-Complete reference for building full-stack web applications with SvelteKit, covering routing, data loading, forms, deployment adapters, hooks, and best practices for performance, SEO, and accessibility.
+Complete SvelteKit framework documentation covering setup, routing, load functions, form actions, adapters, hooks, advanced features, best practices, and full API reference.

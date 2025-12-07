@@ -1,7 +1,9 @@
-Hook for reading and updating AI state in RSC applications. The AI state is shared globally across all `useAIState` hooks under the same `<AI/>` provider. Intended to contain context and information shared with the AI model, including system messages, function responses, and other relevant data.
+Hook for reading and updating AI state in RSC applications. The AI state is shared globally across all `useAIState` hooks under the same `<AI/>` provider.
 
-Import: `import { useAIState } from "@ai-sdk/rsc"`
+**Purpose**: Enables access to shared context and information passed to the AI model, including system messages, function responses, and other relevant data.
 
-Returns: A single element array where the first element is the current AI state.
+**Import**: `import { useAIState } from "@ai-sdk/rsc"`
 
-Note: AI SDK RSC is experimental; AI SDK UI is recommended for production use.
+**Returns**: A single-element array where the first element is the current AI state.
+
+**Note**: AI SDK RSC is experimental; AI SDK UI is recommended for production use.

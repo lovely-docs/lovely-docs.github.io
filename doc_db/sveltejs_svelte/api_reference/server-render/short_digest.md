@@ -1,0 +1,1 @@
+Server-side function that renders a Svelte component and returns `{ body, head }` for HTML population. Accepts component, props, context Map, and idPrefix option.

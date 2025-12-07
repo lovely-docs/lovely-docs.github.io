@@ -1,0 +1,1 @@
+Stop condition function that halts when a specified tool is called. Used with `stopWhen` in `generateText()` and `streamText()`. Can be combined with other stop conditions like `stepCountIs()` in an array.

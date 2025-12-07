@@ -1,3 +1,3 @@
-**Out of box**: SSR enabled by default (better indexing), minimal performance overhead, automatic URL normalization.
+**Out of the box:** SvelteKit uses SSR by default (better for SEO), has minimal performance overhead, and normalizes URLs automatically.
 
-**Manual setup**: Add unique `<title>` and `<meta name="description">` to each page. Create sitemaps via endpoint. For AMP support, set `inlineStyleThreshold: Infinity`, disable CSR, add `amp` to HTML, and transform with `@sveltejs/amp` in hooks.
+**Manual setup:** Add unique `<title>` and `<meta name="description">` in `<svelte:head>` (often from page `load` data). Create sitemaps via `src/routes/sitemap.xml/+server.js`. For AMP support: set `inlineStyleThreshold: Infinity`, disable CSR, add `amp` to `<html>`, and transform HTML with `@sveltejs/amp` in hooks. Optionally use `dropcss` to remove unused CSS.

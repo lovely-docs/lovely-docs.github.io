@@ -1,0 +1,1 @@
+Text vs Data stream protocols: text streams plain text via toTextStreamResponse(); data streams use SSE with message/text/reasoning/source/file/tool/step parts via toUIMessageStreamResponse().

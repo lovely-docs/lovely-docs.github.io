@@ -1,1 +1,1 @@
-Transitions animate elements entering/leaving the DOM with built-in or custom functions, supporting parameters, local/global scope, and lifecycle events.
+Bidirectional DOM transitions via transition: directive; supports local/global scope, parameters, custom functions with css/tick callbacks, and lifecycle events.

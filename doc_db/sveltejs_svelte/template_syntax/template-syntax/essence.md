@@ -1,0 +1,1 @@
+Svelte template syntax documentation index covering interpolation, directives, binding, conditionals, loops, and component composition.

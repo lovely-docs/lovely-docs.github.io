@@ -1,0 +1,1 @@
+Integrate Gel's auth extension with Drizzle: define User type with ext::auth::Identity in ESDL, apply migrations, configure drizzle.config.ts with gel dialect and auth schema filter, then pull schema with drizzle-kit.

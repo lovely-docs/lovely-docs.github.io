@@ -1,1 +1,1 @@
-WITH clauses for INSERT/UPDATE/DELETE, custom migrations table/schema configuration, SQLite proxy batch and relational query support
+v0.29.5: WITH clauses for INSERT/UPDATE/DELETE, custom migrations table/schema, SQLite proxy batch and relational query support.

@@ -1,6 +1,6 @@
 ## init
 
-Initialize a new project with dependencies, the `cn` utility, and CSS variables.
+Initialize a new project with dependencies, the `cn` util, and CSS variables.
 
 ```bash
 npx shadcn-svelte@latest init
@@ -11,7 +11,7 @@ Prompts for configuration:
 - Global CSS file path
 - Import aliases for lib, components, utils, hooks, ui
 
-Options: `-c/--cwd` (working directory), `-o/--overwrite` (overwrite files), `--no-deps` (skip dependency installation), `--base-color`, `--css`, `--components-alias`, `--lib-alias`, `--utils-alias`, `--hooks-alias`, `--ui-alias`, `--proxy`
+Options: `-c/--cwd <path>`, `-o/--overwrite`, `--no-deps`, `--base-color <name>`, `--css <path>`, `--components-alias <path>`, `--lib-alias <path>`, `--utils-alias <path>`, `--hooks-alias <path>`, `--ui-alias <path>`, `--proxy <proxy>`
 
 ## add
 
@@ -26,7 +26,7 @@ npx shadcn-svelte@latest add <component> -y -o
 
 Presents interactive list of available components (accordion, alert, alert-dialog, aspect-ratio, avatar, badge, button, card, checkbox, collapsible, etc.)
 
-Options: `-c/--cwd` (working directory), `--no-deps` (skip package dependencies), `-a/--all` (install all components), `-y/--yes` (skip confirmation), `-o/--overwrite` (overwrite files), `--proxy`
+Options: `-c/--cwd <path>`, `--no-deps`, `-a/--all` (install all components), `-y/--yes`, `-o/--overwrite`, `--proxy <proxy>`
 
 ## registry build
 
@@ -38,7 +38,7 @@ npx shadcn-svelte@latest registry build [registry.json]
 
 Outputs to `static/r` directory by default.
 
-Options: `-c/--cwd` (working directory), `-o/--output` (destination directory)
+Options: `-c/--cwd <path>`, `-o/--output <path>` (destination directory), `-h/--help`
 
 ## Proxy
 

@@ -1,0 +1,1 @@
+Stop condition that triggers when a named tool is called; used with generateText/streamText stopWhen parameter for controlling agent loops.

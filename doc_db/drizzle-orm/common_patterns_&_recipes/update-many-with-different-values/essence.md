@@ -1,0 +1,1 @@
+Bulk update multiple rows with different values per row using dynamic SQL case statement with sql operator and inArray filter

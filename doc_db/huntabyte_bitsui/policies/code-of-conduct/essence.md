@@ -1,0 +1,1 @@
+Community code of conduct: be respectful and constructive; feature requests start as discussions; report violations to maintainers; applies to GitHub, Discord, and official channels.

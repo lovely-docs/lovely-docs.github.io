@@ -1,1 +1,1 @@
-AI SDK 6 beta introduces Agent abstraction with ToolLoopAgent, tool execution approval for human-in-the-loop, stable structured output with tool calling, native reranking support, and upcoming image editing—minimal breaking changes from v5.
+AI SDK 6 Beta introduces Agent interface with ToolLoopAgent default, tool execution approval with dynamic rules, stable structured output alongside tool calling, reranking support (Cohere/Bedrock/Together.ai), and call options for runtime agent configuration; minimal breaking changes from v5; stable release end of 2025.

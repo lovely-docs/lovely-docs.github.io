@@ -1,0 +1,1 @@
+Error thrown when AI fails to repair an invalid tool call. Check with `ToolCallRepairError.isInstance(error)`. Properties: `originalError` (the error being repaired), `message`, `cause`.

@@ -1,1 +1,0 @@
-Use `consumeSseStream: consumeStream` in `toUIMessageStreamResponse` to ensure `onFinish` callback executes when stream is aborted.

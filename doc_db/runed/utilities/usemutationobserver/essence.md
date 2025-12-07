@@ -1,1 +1,0 @@
-useMutationObserver hook wraps MutationObserver API; takes element getter, mutation callback, and observer options; returns object with stop() method.

@@ -8,7 +8,7 @@ Augments native scroll functionality for custom, cross-browser styling.
 npx shadcn-svelte@latest add scroll-area -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+Use `-y` to skip confirmation prompt and `-o` to overwrite existing files.
 
 ### Basic Usage
 
@@ -18,34 +18,30 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </script>
 
 <ScrollArea class="h-[200px] w-[350px] rounded-md border p-4">
-  Content that exceeds the container dimensions will be scrollable.
+  Content that overflows the container will be scrollable.
 </ScrollArea>
 ```
 
-### Horizontal Scrolling
+### Orientation Prop
 
-Set `orientation="horizontal"` to enable horizontal scrolling:
+Control scrolling direction with the `orientation` prop:
 
+- `"vertical"` (default): Vertical scrolling only
+- `"horizontal"`: Horizontal scrolling only
+- `"both"`: Both horizontal and vertical scrolling
+
+**Horizontal example:**
 ```svelte
-<script lang="ts">
-  import { ScrollArea } from "$lib/components/ui/scroll-area/index.js";
-</script>
-
-<ScrollArea class="w-96 whitespace-nowrap rounded-md border" orientation="horizontal">
+<ScrollArea class="w-96 rounded-md border" orientation="horizontal">
   <div class="flex w-max space-x-4 p-4">
     {#each items as item}
-      <div class="shrink-0">
-        {item}
-      </div>
+      <div class="shrink-0">{item}</div>
     {/each}
   </div>
 </ScrollArea>
 ```
 
-### Horizontal and Vertical Scrolling
-
-Set `orientation="both"` to enable scrolling in both directions:
-
+**Both directions example:**
 ```svelte
 <ScrollArea class="h-[200px] w-[350px] rounded-md border p-4" orientation="both">
   <div class="w-[400px]">
@@ -54,9 +50,6 @@ Set `orientation="both"` to enable scrolling in both directions:
 </ScrollArea>
 ```
 
-### Props
+### Styling
 
-- `orientation`: Controls scroll direction - `"vertical"` (default), `"horizontal"`, or `"both"`
-- `class`: Tailwind classes for styling (dimensions, borders, padding, etc.)
-
-The component wraps native scroll functionality with custom styling capabilities that work consistently across browsers.
+Apply Tailwind classes directly to the ScrollArea component for sizing and appearance (e.g., `h-72`, `w-48`, `rounded-md`, `border`).

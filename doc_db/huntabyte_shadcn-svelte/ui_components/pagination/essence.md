@@ -1,1 +1,1 @@
-Pagination component with page navigation, prev/next buttons, and ellipsis; configure via count, perPage, siblingCount props; render pages with Pagination.Link and highlight active page.
+Pagination component with configurable page count, items per page, and sibling count; renders page links, prev/next buttons, and ellipsis for skipped pages.

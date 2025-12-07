@@ -1,1 +1,1 @@
-Install bits-ui, import components, style using class props or data attributes, and leverage TypeScript support.
+Install with npm, import components, style via class props or data attributes, full TypeScript support.

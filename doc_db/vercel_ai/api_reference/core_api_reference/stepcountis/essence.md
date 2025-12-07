@@ -1,1 +1,0 @@
-stepCountIs(count) creates a stop condition for tool-calling loops in generateText/streamText; returns true when step count reaches specified number; can be combined with other conditions in array.

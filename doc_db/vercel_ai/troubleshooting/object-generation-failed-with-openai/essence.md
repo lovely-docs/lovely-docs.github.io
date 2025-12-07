@@ -1,0 +1,1 @@
+OpenAI structured outputs reject Zod schemas with `.nullish()` or `.optional()`; use `.nullable()` instead.

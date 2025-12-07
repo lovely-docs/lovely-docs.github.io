@@ -1,0 +1,1 @@
+Install `drizzle-orm@beta`, `@sqlitecloud/drivers`, `dotenv`, and dev dependencies `drizzle-kit@beta`, `tsx`. Set `SQLITE_CLOUD_CONNECTION_STRING` env variable and configure drizzle with `dialect: 'sqlite'`. Introspect database to generate schema. Connect with `drizzle()` and perform CRUD operations: insert, select, update, delete using standard Drizzle syntax.

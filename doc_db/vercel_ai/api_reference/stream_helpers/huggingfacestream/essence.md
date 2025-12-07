@@ -1,0 +1,1 @@
+Deprecated helper converting Hugging Face text generation streams to ReadableStream with token/completion callbacks and automatic end-token removal.

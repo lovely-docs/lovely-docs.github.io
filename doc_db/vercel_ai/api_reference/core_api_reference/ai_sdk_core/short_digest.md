@@ -1,3 +1,0 @@
-**Main Functions:** `generateText()`, `streamText()`, `generateObject()`, `streamObject()`, `embed()`, `embedMany()`, `experimental_generateImage()`, `experimental_transcribe()`, `experimental_generateSpeech()`
-
-**Helper Functions:** `tool()`, `experimental_createMCPClient()`, `jsonSchema()`, `zodSchema()`, `createProviderRegistry()`, `cosineSimilarity()`, `simulateReadableStream()`, `wrapLanguageModel()`, `extractReasoningMiddleware()`, `simulateStreamingMiddleware()`, `defaultSettingsMiddleware()`, `smoothStream()`, `generateId()`, `createIdGenerator()`

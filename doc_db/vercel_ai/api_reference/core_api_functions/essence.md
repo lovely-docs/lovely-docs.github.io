@@ -1,0 +1,1 @@
+Complete API reference for text generation, structured outputs, embeddings, agents, tools, and utilities with streaming, tool calling, multi-step workflows, and middleware support.

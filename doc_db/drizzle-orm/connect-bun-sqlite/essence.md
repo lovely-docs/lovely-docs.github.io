@@ -1,1 +1,1 @@
-Connect Drizzle ORM to Bun's native SQLite driver with async or sync APIs; initialize with `drizzle()` or `drizzle({ client: new Database('sqlite.db') })`.
+Native bun:sqlite support with both async and sync APIs; initialize with drizzle() and optionally pass Database client; sync methods mirror SQLite: all, get, values, run.

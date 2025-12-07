@@ -1,1 +1,0 @@
-Hook for streaming text completions with input/output state management, form handlers, and configurable API endpoint, stream protocol, and request options.

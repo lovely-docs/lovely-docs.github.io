@@ -1,1 +1,0 @@
-Hooks and utilities for building AI chat/completion/assistant apps across React, Svelte, Vue.js with message streaming and conversion.

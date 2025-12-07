@@ -1,1 +1,1 @@
-Initialize Gel project with schema, install drizzle-orm and drizzle-kit, configure dialect, pull schema types, connect with createClient(), perform CRUD operations.
+Step-by-step setup for Drizzle ORM with Gel database: initialize project, define schema, apply migrations, install packages, configure drizzle-kit, pull types, and execute CRUD operations via drizzle client.

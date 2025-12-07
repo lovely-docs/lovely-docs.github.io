@@ -1,84 +1,50 @@
-## Prompt Types
+## Prompts
 
-**Text Prompts** - Simple strings via `prompt` property, supports template literals:
-```ts
-const result = await generateText({
-  model: 'anthropic/claude-sonnet-4.5',
-  prompt: `Trip to ${destination} for ${lengthOfStay} days. Suggest activities.`,
-});
-```
+Three prompt types: **text** (simple strings), **system** (initial instructions), **messages** (array of user/assistant/tool messages for chat/multi-modal).
 
-**System Prompts** - Initial instructions via `system` property, guides model behavior:
 ```ts
-const result = await generateText({
-  model: 'anthropic/claude-sonnet-4.5',
+// Text prompt
+await generateText({ model, prompt: 'Invent a new holiday...' });
+
+// System + text
+await generateText({ 
+  model, 
   system: 'You help planning travel itineraries.',
-  prompt: `Trip to ${destination}...`,
+  prompt: 'I am planning a trip to ${destination}...'
 });
-```
 
-**Message Prompts** - Arrays of user/assistant/tool messages via `messages` property:
-```ts
-const result = await generateText({
-  model: 'anthropic/claude-sonnet-4.5',
+// Messages
+await generateText({
+  model,
   messages: [
     { role: 'user', content: 'Hi!' },
     { role: 'assistant', content: 'Hello, how can I help?' },
-    { role: 'user', content: 'Where can I buy Currywurst in Berlin?' },
+    { role: 'user', content: 'Where can I buy the best Currywurst in Berlin?' },
   ],
 });
 ```
 
-## Provider Options
+**Message content types**: text, images (base64/binary/URL), files (PDF, audio), tool calls, tool results.
 
-Pass provider-specific metadata at function, message, or message part level:
+**Provider options** at function, message, or message-part level:
 ```ts
 // Function level
-const { text } = await generateText({
-  model: azure('deployment'),
+await generateText({
+  model,
   providerOptions: { openai: { reasoningEffort: 'low' } },
 });
 
 // Message level
-const messages: ModelMessage[] = [
-  {
-    role: 'system',
-    content: 'Cached system message',
-    providerOptions: { anthropic: { cacheControl: { type: 'ephemeral' } } },
-  },
-];
+{ role: 'system', content: '...', providerOptions: { anthropic: { cacheControl: { type: 'ephemeral' } } } }
 
 // Message part level
-const messages: ModelMessage[] = [
-  {
-    role: 'user',
-    content: [
-      { type: 'text', text: 'Describe image.', providerOptions: { openai: { imageDetail: 'low' } } },
-      { type: 'image', image: 'https://example.com/image.png', providerOptions: { openai: { imageDetail: 'low' } } },
-    ],
-  },
-];
+{ type: 'text', text: '...', providerOptions: { openai: { imageDetail: 'low' } } }
 ```
 
-## Message Content Types
+**User messages**: text, images (base64/binary/URL), files (with MIME type), custom download function.
 
-**User Messages:**
-- Text parts: strings or array of text objects
-- Image parts: base64, binary (Buffer/Uint8Array/ArrayBuffer), or URL formats
-- File parts: PDF, audio (mp3/wav), supported by Google Generative AI, Vertex AI, OpenAI, Anthropic
+**Assistant messages**: text, tool calls, model-generated files.
 
-**Assistant Messages:**
-- Text content (string or array)
-- Tool call parts with toolCallId, toolName, input
-- File content (model-generated, limited support)
+**Tool messages**: tool results (JSON or multi-modal content with text+images).
 
-**Tool Messages:**
-- Tool result parts with toolCallId, toolName, output (json or content type)
-- Multi-modal tool results (experimental, Anthropic only)
-
-**System Messages:**
-- Sent before user messages to guide behavior, set via `messages` array or `system` property
-
-## Custom Download Function
-
-Implement via `experimental_download` property for throttling, retries, authentication, caching. Default downloads files in parallel when not model-supported.
+**System messages**: guide behavior, alternative to `system` property.

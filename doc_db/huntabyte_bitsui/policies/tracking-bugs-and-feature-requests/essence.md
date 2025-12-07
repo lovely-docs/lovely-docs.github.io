@@ -1,0 +1,1 @@
+Use Issues for confirmed bugs and accepted feature requests; use Discussions for proposing features, design discussions, and questions; feature requests must start as discussions and only become issues after acceptance and refinement.

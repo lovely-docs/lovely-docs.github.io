@@ -1,1 +1,1 @@
-HTTP access to PlanetScale serverless MySQL via drizzle-orm/planetscale-serverless package; install @planetscale/database, initialize with credentials or existing client.
+HTTP access to PlanetScale serverless MySQL via drizzle-orm/planetscale-serverless; initialize with credentials or existing Client instance.

@@ -1,1 +1,1 @@
-ESLint plugin with enforce-delete-with-where and enforce-update-with-where rules; supports drizzleObjectName config to target specific objects.
+ESLint plugin with enforce-delete-with-where and enforce-update-with-where rules; both support drizzleObjectName config to filter by object name.

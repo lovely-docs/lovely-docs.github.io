@@ -1,0 +1,1 @@
+**Removed in AI SDK 4.0**. The `render` function created streamable UI from LLM providers. Deprecated in favor of `streamUI`. Accepted model, provider, messages (system/user/assistant/tool), optional tools with render functions, text callback, and temperature. Returned ReactNode.

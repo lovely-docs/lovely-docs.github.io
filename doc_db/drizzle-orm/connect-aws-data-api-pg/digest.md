@@ -1,21 +1,19 @@
-## AWS Data API PostgreSQL Connection
+## AWS Data API Postgres Connection
 
-Connect Drizzle ORM to AWS RDS Aurora PostgreSQL using the AWS Data API.
+Connect Drizzle ORM to AWS RDS Aurora PostgreSQL using AWS Data API.
 
-### Prerequisites
+**Prerequisites:**
 - Database connection basics with Drizzle
-- AWS Data API (see AWS RDS Aurora documentation)
-- AWS SDK for JavaScript v3
+- AWS Data API (Aurora RDS)
+- AWS SDK v3
 
-### Installation
+**Installation:**
 ```
 npm install drizzle-orm @aws-sdk/client-rds-data
 npm install -D drizzle-kit
 ```
 
-### Basic Setup
-Initialize the driver with required connection properties:
-
+**Setup - Option 1 (Auto-create client):**
 ```typescript
 import { drizzle } from 'drizzle-orm/aws-data-api/pg';
 
@@ -30,9 +28,7 @@ const db = drizzle({
 await db.select().from(...);
 ```
 
-### Using Existing RDSDataClient
-If you have an existing RDSDataClient instance, pass it to drizzle:
-
+**Setup - Option 2 (Provide existing RDSDataClient):**
 ```typescript
 import { drizzle } from 'drizzle-orm/aws-data-api/pg';
 import { RDSDataClient } from '@aws-sdk/client-rds-data';
@@ -48,4 +44,4 @@ const db = drizzle(rdsClient, {
 await db.select().from(...);
 ```
 
-The connection object accepts any additional properties from the RDSDataClient type.
+Three required connection properties: `database`, `secretArn`, `resourceArn`. Additional RDSDataClient properties can be specified in the connection object.

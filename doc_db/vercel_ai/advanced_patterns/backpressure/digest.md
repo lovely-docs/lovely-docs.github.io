@@ -1,12 +1,18 @@
 ## Back-pressure and Cancellation with Streams
 
-Back-pressure is the signal from a consumer to a producer that more values aren't needed yet. Cancellation is the ability to stop producing values when the consumer stops consuming them.
+Back-pressure is the signal from a consumer to a producer that more values aren't needed yet. When wrapping a generator into a `ReadableStream` using an eager `for await (...)` loop in the `start` handler, the stream doesn't respect back-pressure. The generator continuously pushes values as fast as possible, causing the stream's internal buffer to grow unbounded.
 
-### The Problem: Eager Approach
-
-When wrapping a generator into a `ReadableStream` using an eager `for await (...)` loop in the `start` handler, the stream doesn't respect back-pressure:
-
+**Eager approach (problematic):**
 ```jsx
+async function* integers() {
+  let i = 1;
+  while (true) {
+    console.log(`yielding ${i}`);
+    yield i++;
+    await sleep(100);
+  }
+}
+
 function createStream(iterator) {
   return new ReadableStream({
     async start(controller) {
@@ -17,20 +23,26 @@ function createStream(iterator) {
     },
   });
 }
+
+async function run() {
+  const stream = createStream(integers());
+  const reader = stream.getReader();
+  for (let i = 0; i < 10_000; i++) {
+    const { value } = await reader.read();
+    console.log(`read ${value}`);
+    await sleep(1_000);
+  }
+}
 ```
 
-This spawns a perpetual loop that pushes data as fast as possible, regardless of whether the consumer needs it. The stream's internal buffer grows unbounded, and there's no way to signal the producer to stop. If a consumer stops reading (e.g., user navigates away), the producer continues indefinitely, consuming memory until the program crashes.
+With this approach, the generator yields ~10 values for every 1 value read, because the generator (100ms per yield) runs 10x faster than the reader (1000ms per read). The stream buffer grows unbounded.
 
-### The Solution: Lazy Approach
-
-Use the `pull` handler instead, which is called only when the consumer attempts to read more data:
-
+**Lazy approach (correct):**
 ```jsx
 function createStream(iterator) {
   return new ReadableStream({
     async pull(controller) {
       const { value, done } = await iterator.next();
-
       if (done) {
         controller.close();
       } else {
@@ -41,15 +53,14 @@ function createStream(iterator) {
 }
 ```
 
-This approach:
-- Manually calls `iterator.next()` to get the next value
-- Only produces data when requested by the consumer
-- Ties the producer's lifetime to the consumer's lifetime
-- Keeps the internal buffer minimal (typically 1 item)
-- Automatically stops producing when the consumer stops consuming
+Using the `pull` handler instead of `start`, values are produced only when the consumer requests them. The `pull` handler is called each time the consumer reads from the stream. This ties the producer's lifetime to the consumer's lifetime.
 
-### Real-world Example: AI Streaming
+## Cancellation
 
-When streaming infinite AI responses (e.g., "count from 1 to infinity"), the eager approach causes the server to continue requesting data from the AI service even after the user navigates away. The fetch connection doesn't abort, and memory grows unbounded.
+When a consumer stops reading from a stream (e.g., user navigates away), the eager approach continues yielding values indefinitely, buffering them in memory until the program runs out of memory. The eager `for await (...)` loop has no signal to stop.
 
-With the lazy approach, when the user navigates away and the fetch connection aborts, the `ReadableStream` stops requesting new data from the AI service. The connection is freed and can be garbage collected. This is how the AI SDK handles streaming responses.
+With the lazy approach, when the consumer stops reading, `pull` is no longer called, so the generator stops yielding. This naturally frees resources and allows garbage collection.
+
+## Application to AI Responses
+
+When streaming AI responses (e.g., from an API endpoint), if the client disconnects (user navigates away, page reloads), an eager approach would continue fetching data from the AI service and buffering it server-side until memory is exhausted. A lazy approach ensures that when the fetch connection aborts, the stream stops requesting data, the `ReadableStream` can be garbage collected, and the connection to the AI service is freed.

@@ -1,0 +1,1 @@
+Button component that switches between `<button>` and `<a>` based on `href` prop. Props: `href` (string), `disabled` (boolean), `ref` (bindable), `children` (Snippet).

@@ -1,0 +1,1 @@
+JSONParseError: thrown on JSON parse failure; check with isInstance(); has text and message properties

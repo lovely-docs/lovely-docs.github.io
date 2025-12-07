@@ -1,1 +1,1 @@
-Use Expo SQLite for React Native; react-native-sqlite-storage lacks Hermes runtime support.
+Use Expo SQLite for React Native; react-native-sqlite-storage lacks Hermes support.

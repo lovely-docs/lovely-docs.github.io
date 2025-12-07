@@ -1,0 +1,1 @@
+Async function validating UI messages against optional Zod schemas for metadata, data parts, and tools. Accepts `messages`, `metadataSchema`, `dataSchemas`, and `tools` parameters.

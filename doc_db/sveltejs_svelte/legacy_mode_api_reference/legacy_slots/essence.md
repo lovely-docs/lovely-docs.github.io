@@ -1,1 +1,0 @@
-Legacy mode slots allow passing content to components via slotted content rendered with `<slot>`, supporting named slots, fallback content, and bidirectional data passing.

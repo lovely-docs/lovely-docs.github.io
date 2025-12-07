@@ -1,1 +1,1 @@
-Snippets are reusable markup blocks that can be passed as component props and rendered with {@render}, replacing Svelte 4 slots.
+Snippets: reusable markup blocks with parameters, passed as props, support recursion, lexical scoping, optional rendering, TypeScript typing via Snippet<[Types]>, implicit children snippet, module exports.

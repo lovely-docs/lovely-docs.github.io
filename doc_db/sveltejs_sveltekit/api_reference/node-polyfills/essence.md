@@ -1,0 +1,1 @@
+installPolyfills() function that adds crypto and File web APIs as globals in Node.js

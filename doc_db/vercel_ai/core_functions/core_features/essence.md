@@ -1,0 +1,1 @@
+Comprehensive LLM and AI capabilities: text/structured generation, tool calling, embeddings, image/audio processing, multi-provider support, middleware, error handling, testing, telemetry.

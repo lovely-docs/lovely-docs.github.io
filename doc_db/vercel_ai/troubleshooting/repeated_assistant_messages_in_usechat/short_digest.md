@@ -1,14 +1,1 @@
-## Problem
-Assistant messages duplicate in UI when using `useChat` with `streamText` because `toUIMessageStreamResponse` generates new message IDs.
-
-## Solution
-Pass `originalMessages` option to `toUIMessageStreamResponse()` to reuse existing message IDs:
-```tsx
-return result.toUIMessageStreamResponse({
-  originalMessages: messages,
-  generateMessageId: generateId,
-  onFinish: ({ messages }) => {
-    saveChat({ id, messages });
-  },
-});
-```
+When using `useChat` with `streamText`, assistant messages may duplicate because `toUIMessageStreamResponse` generates new IDs. Pass `originalMessages` option to reuse existing message IDs and prevent duplicates.

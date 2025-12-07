@@ -1,0 +1,1 @@
+APICallError: error class for failed API calls with properties for request/response details and retry status; check with isInstance() method

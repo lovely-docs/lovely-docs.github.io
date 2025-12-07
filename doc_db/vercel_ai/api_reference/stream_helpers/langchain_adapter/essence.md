@@ -1,0 +1,1 @@
+toDataStream, toDataStreamResponse, mergeIntoDataStream helpers convert LangChain output streams (StringOutputParser, AIMessageChunk, StreamEvents v2) to AI SDK data streams/responses

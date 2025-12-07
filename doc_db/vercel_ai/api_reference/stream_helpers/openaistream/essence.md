@@ -1,0 +1,1 @@
+Deprecated OpenAIStream helper (removed in v4.0) that converts OpenAI API responses to ReadableStream with optional lifecycle callbacks (onStart, onToken, onCompletion, onFinal).

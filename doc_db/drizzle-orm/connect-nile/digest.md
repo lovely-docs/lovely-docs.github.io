@@ -1,6 +1,6 @@
-## Drizzle with Nile Database
+## Nile Integration
 
-Nile is PostgreSQL re-engineered for multi-tenant applications. Use any Drizzle PostgreSQL driver with Nile; examples use `node-postgres`.
+Nile is PostgreSQL re-engineered for multi-tenant apps. Use any Drizzle PostgreSQL driver (e.g., node-postgres).
 
 ### Installation
 ```
@@ -8,14 +8,14 @@ npm install drizzle-orm postgres
 npm install -D drizzle-kit
 ```
 
-### Basic Connection
+### Basic Setup
 ```typescript
 import { drizzle } from 'drizzle-orm/node-postgres'
 const db = drizzle(process.env.NILEDB_URL);
 const response = await db.select().from(...);
 ```
 
-Or with explicit Pool:
+Or with existing driver:
 ```typescript
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
@@ -25,13 +25,10 @@ const db = drizzle({ client: pool });
 
 ### Virtual Tenant Databases
 
-Nile provides virtual tenant databases. When you set tenant context, queries automatically apply only to that tenant's data (e.g., `select * from table` returns only that tenant's records).
-
-Set tenant context by wrapping queries in a transaction that sets `nile.tenant_id`:
+Nile provides virtual tenant databases. Set tenant context via transaction to isolate queries to that tenant:
 
 ```typescript
 import { drizzle } from 'drizzle-orm/node-postgres';
-import { todosTable } from "./db/schema";
 import { sql } from 'drizzle-orm';
 
 const db = drizzle(process.env.NILEDB_URL);
@@ -53,14 +50,11 @@ const response = await tenantDB(tenantId, async (tx) => {
 
 ### AsyncLocalStorage Pattern
 
-For web frameworks supporting it, use AsyncLocalStorage to store tenant ID in middleware:
+For web frameworks supporting AsyncLocalStorage, populate tenant ID via middleware:
 
 ```typescript
-import { drizzle } from 'drizzle-orm/node-postgres';
-import { sql } from "drizzle-orm";
 import { AsyncLocalStorage } from "async_hooks";
 
-export const db = drizzle(process.env.NILEDB_URL);
 export const tenantContext = new AsyncLocalStorage<string | undefined>();
 
 export function tenantDB<T>(cb: (tx: any) => T | Promise<T>): Promise<T> {
@@ -83,7 +77,7 @@ app.use("/api/tenants/:tenantId/*", async (c, next) => {
 
 app.get("/api/tenants/:tenantId/todos", async (c) => {
     const todos = await tenantDB(async (tx) => {
-      return await tx.select().from(todoSchema);
+      return await tx.select({...}).from(todoSchema);
     });
     return c.json(todos);
 });

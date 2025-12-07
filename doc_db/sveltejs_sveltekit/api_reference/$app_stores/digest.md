@@ -1,15 +1,13 @@
-## Deprecated Store-Based API
+Deprecated store-based API for accessing SvelteKit runtime data. Use `$app/state` instead for SvelteKit 2.12+.
 
-This module provides store equivalents of `$app/state` exports. **Deprecated in SvelteKit 2.12+** — use `$app/state` instead (requires Svelte 5).
+**getStores()** - Function that returns an object containing `page`, `navigating`, and `updated` stores.
 
-### getStores()
-Returns an object containing `page`, `navigating`, and `updated` stores.
+**navigating** - Readable store containing a `Navigation` object (with `from`, `to`, `type`, and optional `delta` properties) while navigation is in progress, otherwise `null`. Server-side subscription only during component initialization; browser-side subscription anytime.
 
-### navigating
-Readable store that contains a `Navigation` object (with `from`, `to`, `type`, and optional `delta` properties) while navigation is in progress, then reverts to `null`. Server-side subscription only during component initialization; browser allows subscription anytime.
+**page** - Readable store containing page data. Server-side subscription only during component initialization; browser-side subscription anytime.
 
-### page
-Readable store containing page data. Server-side subscription only during component initialization; browser allows subscription anytime.
+**updated** - Readable store with initial value `false`. When `version.pollInterval` is non-zero, SvelteKit polls for new app versions and updates the store to `true` when detected. Includes `check()` method to force immediate version check. Server-side subscription only during component initialization; browser-side subscription anytime.
 
-### updated
-Readable store (initially `false`) that updates to `true` when a new app version is detected via polling (if `version.pollInterval` is non-zero). Includes `check()` method to force immediate version check. Server-side subscription only during component initialization; browser allows subscription anytime.
+```js
+import { getStores, navigating, page, updated } from '$app/stores';
+```

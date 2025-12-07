@@ -1,1 +1,0 @@
-Error thrown when JSON parsing fails. Properties: `text` (unparseable text), `message` (error details). Check with `JSONParseError.isInstance(error)`.

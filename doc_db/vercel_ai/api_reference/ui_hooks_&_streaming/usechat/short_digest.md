@@ -1,0 +1,1 @@
+Hook for building chat UIs with streaming support. Manages messages, status, and provides methods to send/regenerate messages, handle tool calls, and control streaming. Configurable transport, callbacks (onFinish, onError, onData, onToolCall), and automatic resubmission logic.

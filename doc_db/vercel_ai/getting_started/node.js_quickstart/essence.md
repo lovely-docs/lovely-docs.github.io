@@ -1,1 +1,1 @@
-Build streaming Node.js chat agents with AI SDK using Vercel AI Gateway; define tools with Zod schemas; enable multi-step tool execution with stopWhen and onStepFinish.
+Node.js quickstart: set up with ai@beta/zod/dotenv, create streaming chat agent with streamText(), configure providers (default Vercel AI Gateway), add tools with Zod schemas and execute functions, enable multi-step tool calling with stopWhen/stepCountIs.

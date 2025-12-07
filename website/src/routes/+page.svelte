@@ -133,7 +133,7 @@
 		// Introduction Directory
 		items.push({ name: 'introduction/', type: 'folder', level: 1, link: 'sveltejs_svelte/introduction#digest' });
 
-		const introFiles = ['getting_started', 'svelte_files'];
+		const introFiles = ['getting-started', 'svelte-files'];
 		for (const name of introFiles) {
 			if (installMode === 'digest' || installMode === 'both') {
 				items.push({
@@ -180,7 +180,7 @@
 		items.push({ name: 'runes/', type: 'folder', level: 1, link: 'sveltejs_svelte/runes#digest' });
 
 		// Leaf file - Inside subdirectory
-		const runeFiles = ['$derived', '$effect', '$state', 'what_are_runes'];
+		const runeFiles = ['$derived', '$effect', '$state', 'what-are-runes'];
 		for (const name of runeFiles) {
 			if (installMode === 'digest' || installMode === 'both') {
 				items.push({ name: `${name}.md`, type: 'file', desc: 'Page digest', level: 2, link: `sveltejs_svelte/runes/${name}#digest` });
@@ -288,6 +288,15 @@
 						href="https://x.com/xl0xl0xl0"
 						title="X">
 						<svg role="img" viewBox="0 0 24 24" class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"><path d={siX.path} /></svg>
+					</a>
+					.
+				</p>
+				<p>
+					Tokens ain't cheap, <a
+						class="text-primary hover:text-foreground inline-flex items-baseline gap-1 transition-colors"
+						href="https://ko-fi.com/xl0xl0xl0"
+						title="KoFi">
+						buy me a coffee
 					</a>
 					.
 				</p>

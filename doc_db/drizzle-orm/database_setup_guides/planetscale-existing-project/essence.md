@@ -1,0 +1,1 @@
+Integrate Drizzle with PlanetScale MySQL via HTTP driver: install @planetscale/database, configure with host/username/password, introspect existing schema, perform CRUD with drizzle-orm/planetscale-serverless.

@@ -1,1 +1,0 @@
-Four core functions for LLM integration: generateText (non-interactive), streamText (interactive), generateObject (structured output), streamObject (streamed structured output).

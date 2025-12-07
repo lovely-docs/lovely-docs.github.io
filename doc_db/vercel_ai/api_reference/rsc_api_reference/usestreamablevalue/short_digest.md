@@ -1,1 +1,5 @@
-React hook that consumes streamable values and returns `[data, error, pending]` tuple. Import from `@ai-sdk/rsc`. Handles loading, error, and data states for streamed values passed as props.
+React hook that consumes streamable values and returns `[data, error, pending]` tuple. Useful for handling streamed data in components.
+
+```tsx
+const [data, error, pending] = useStreamableValue(streamableValue);
+```

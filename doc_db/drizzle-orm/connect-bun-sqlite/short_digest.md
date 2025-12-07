@@ -1,3 +1,3 @@
-## Bun SQLite Integration
+## Bun SQLite Setup
 
-Install `drizzle-orm` and `drizzle-kit`. Initialize with `drizzle()` for default SQLite or pass a `bun:sqlite` Database instance. Supports both async queries (`await db.select().from(...)`) and sync methods (`.all()`, `.get()`, `.values()`, `.run()`).
+Install `drizzle-orm` and `drizzle-kit`. Initialize with `drizzle()` from `'drizzle-orm/bun-sqlite'`, optionally passing a `Database` client. Use async queries with `await db.select().from(...)` or sync methods: `.all()`, `.get()`, `.values()`, `.run()`.

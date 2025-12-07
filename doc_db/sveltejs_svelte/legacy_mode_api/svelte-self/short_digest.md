@@ -1,0 +1,1 @@
+`<svelte:self>` enables recursive component inclusion within conditional blocks. **Obsolete** — use direct self-imports instead.

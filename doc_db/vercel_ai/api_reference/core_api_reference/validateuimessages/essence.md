@@ -1,1 +1,0 @@
-Async validator for UI messages with optional custom schemas for metadata, data parts, and tools; ensures type safety and data integrity.

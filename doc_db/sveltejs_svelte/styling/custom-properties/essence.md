@@ -1,0 +1,1 @@
+Pass CSS custom properties to components with `--name` syntax; they desugar to wrapper elements and are read via `var(--name, fallback)` inside components; inherit from parents and can be defined globally.

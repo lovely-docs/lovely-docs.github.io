@@ -1,1 +1,0 @@
-Complete setup guide for Turso (SQLite-compatible database) with Drizzle: authentication, database creation, environment configuration, schema definition, migration setup, and CRUD query examples.

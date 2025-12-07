@@ -1,0 +1,1 @@
+Error for invalid arguments with `parameter`, `value`, and `message` properties. Check with `InvalidArgumentError.isInstance(error)`.

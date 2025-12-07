@@ -1,17 +1,19 @@
-## Filtering & Querying
-Conditional filters with ternary/`and()`/`or()`, dynamic SQL arrays, custom operators. Count rows with `count()` or `sql`count(*)`` (cast for PostgreSQL/MySQL). Select/exclude columns with `getTableColumns()` or relational query options.
+**Querying**: Conditional filters with `and()`/`or()`, dynamic filter arrays, custom operators via `sql`. Count rows with `count()` (cast to integer on PostgreSQL/MySQL). Select columns with `.select()`, `getTableColumns()`, or relational `columns`/`extras` options. Find parent rows with children via `innerJoin()` or `exists()` subquery.
 
-## Pagination
-Limit/offset (simple, degrades with large offsets, use deferred joins). Cursor-based (efficient, use `gt`/`lt` with `orderBy`, multi-column cursors for non-unique columns).
+**Pagination**: Limit/offset with `orderBy().limit().offset()` (simple, degrades with large offsets; use deferred join optimization). Cursor-based with `gt()`/`lt()` comparisons (consistent, supports multi-column cursors for non-unique columns, requires indexing).
 
-## Data Modification
-Increment/decrement with `sql`${column} ± value``. Toggle booleans with `not()`. Bulk update different values per row using SQL CASE statements. Upsert with `.onConflictDoUpdate()` (PG/SQLite, use `excluded`) or `.onDuplicateKeyUpdate()` (MySQL, use `values()`).
+**Updates**: Increment/decrement with `sql`${column} + value``. Toggle booleans with `not()`. Bulk update different values per row using `case` statement with `sql.join()`. Upsert: PostgreSQL/SQLite `.onConflictDoUpdate(target, set, setWhere)` with `excluded` keyword; MySQL `.onDuplicateKeyUpdate(set)` with `values()`.
 
-## Advanced Queries
-Full-text search: PostgreSQL `to_tsvector()`/`to_tsquery()` with GIN indexes, `setweight()` for multi-column, `ts_rank()` for ranking. Geospatial: `point` datatype with `<->` distance/`<@` boundary operators; PostGIS adds `geometry`, `ST_Distance()`, `ST_Within()`. Vector search: pgvector with OpenAI embeddings, `cosineDistance()` queries. Parent-child: `innerJoin()` returns both (parent repeats), `exists()` returns parent only.
+**Search**: PostgreSQL full-text with `to_tsvector()`/`to_tsquery()` and `@@` operator; variants: `plainto_tsquery()` (AND), `phraseto_tsquery()` (phrase), `websearch_to_tsquery()` (web). Generated columns with `tsvector` type for indexing. Multi-column with `setweight()`, rank with `ts_rank`/`ts_rank_cd`, GIN indexes.
 
-## Schema & Defaults
-Empty arrays: PostgreSQL `sql`'{}'::type[]``, MySQL `json` with `[]`, SQLite `text` mode `json`. Timestamps: `defaultNow()` or `sql`now()``, SQLite `sql`(unixepoch())`` for unix. Case-insensitive email: unique index on `lower(email)`.
+**Vector Search**: PostgreSQL pgvector extension with embeddings, HNSW indexing, `cosineDistance` queries.
 
-## Setup & Seeding
-PostgreSQL/MySQL Docker setup. Cloudflare D1 with `d1-http` driver. Gel auth with schema extension. Seed one-to-many with `with` option; handle missing foreign key tables by removing not-null, exposing table, or using `valuesFromArray()`.
+**Geospatial**: PostgreSQL `point` datatype with `<->` distance operator, `<@` rectangular boundary. PostGIS geometry with `ST_Distance()`, `ST_Within()`, `ST_MakeEnvelope()`.
+
+**Defaults**: Timestamps: PostgreSQL `defaultNow()`/`sql`now()``/`extract(epoch from now())``; MySQL `defaultNow()`/`sql`now()``/`unix_timestamp()``; SQLite `sql`current_timestamp``/`unixepoch()``; use `mode: 'string'` for string representation. Empty arrays: PostgreSQL `sql`'{}'::text[]``; MySQL `json` with `default([])` or `sql`(JSON_ARRAY())``; SQLite `text` with `mode: 'json'` and `sql`(json_array())``; use `.$type<T>()` for type inference.
+
+**Case-Insensitive Email**: Unique index on `lower()` function; query with `eq(lower(column), lowercased_value)`.
+
+**Seeding**: Use `with` option for one-to-many relationships (requires foreign key or explicit relations). Handle partially exposed schemas by exposing referenced table, removing not-null constraint, or refining column generator.
+
+**Setup**: PostgreSQL/MySQL Docker containers with password and port mapping. Cloudflare D1 HTTP API via `drizzle.config.ts` with `dialect: 'sqlite'`, `driver: 'd1-http'`, credentials. Gel auth extension with ESDL User type and `schemaFilter`.

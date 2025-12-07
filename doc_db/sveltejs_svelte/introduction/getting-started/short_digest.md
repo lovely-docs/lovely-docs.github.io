@@ -1,0 +1,1 @@
+**Setup:** `npx sv create myapp` with SvelteKit (recommended, Vite-powered), or `npm create vite@latest` selecting svelte option. VS Code extension available. Get help on Discord or Stack Overflow.

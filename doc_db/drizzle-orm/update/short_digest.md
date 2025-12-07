@@ -1,13 +1,13 @@
 ## SQL Update
 
-Basic syntax: `.update(table).set({...}).where(...)`. Pass `null` to set columns to null; `undefined` is ignored. SQL expressions can be used as values.
+Basic: `.update(table).set({...}).where(...)` with `undefined` ignored and `null` explicit.
 
-**Limit** (MySQL, SQLite, SingleStore): `.limit(n)` restricts updated rows.
+**Limit** (MySQL, SQLite, SingleStore): `.limit(n)`
 
-**Order By**: `.orderBy(field)` or `.orderBy(asc(field), desc(field2))` for sorting.
+**Order By**: `.orderBy(field)` or `.orderBy(asc(field), desc(field2))`
 
-**Returning** (PostgreSQL, SQLite): `.returning({...})` retrieves updated rows.
+**Returning** (PostgreSQL, SQLite): `.returning({...})`
 
-**WITH clause**: Use CTEs to simplify complex queries with `.with(cte).update(...)`
+**WITH clause**: Define CTE with `db.$with('name').as(...)` then `.with(cte).update(...)`
 
-**Update ... FROM** (PostgreSQL, SQLite): Join tables in update with `.from(table).where(...)` and optionally `.returning(...)` in PostgreSQL.
+**FROM clause** (PostgreSQL, SQLite): `.from(otherTable).where(...)` to join tables; PostgreSQL can `.returning()` from joined tables

@@ -1,0 +1,1 @@
+Try/catch for regular and simple stream errors; switch on part.type for full streams (error/abort/tool-error); onAbort callback for cleanup on abort with steps array.

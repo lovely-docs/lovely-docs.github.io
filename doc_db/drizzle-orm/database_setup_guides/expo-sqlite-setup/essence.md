@@ -1,0 +1,1 @@
+Setup Drizzle ORM with Expo SQLite: install packages, define schema, configure metro/babel, initialize db connection, apply migrations, perform CRUD operations.

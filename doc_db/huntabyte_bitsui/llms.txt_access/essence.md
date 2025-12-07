@@ -1,0 +1,1 @@
+Access LLM-friendly documentation by appending /llms.txt to page URLs; root index and full consolidated docs available at bits-ui.com/llms.txt and bits-ui.com/docs/llms.txt respectively.

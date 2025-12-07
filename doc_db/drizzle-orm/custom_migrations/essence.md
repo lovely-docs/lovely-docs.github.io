@@ -1,1 +1,0 @@
-Generate custom SQL migrations with `drizzle-kit generate --custom --name=<name>` for unsupported DDL and seeding; run with `drizzle-kit migrate`.

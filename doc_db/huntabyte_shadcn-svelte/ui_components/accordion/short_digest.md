@@ -15,14 +15,12 @@ npx shadcn-svelte@latest add accordion -y -o
   import * as Accordion from "$lib/components/ui/accordion/index.js";
 </script>
 
-<Accordion.Root type="single">
+<Accordion.Root type="single" value="item-1">
   <Accordion.Item value="item-1">
-    <Accordion.Trigger>Is it accessible?</Accordion.Trigger>
-    <Accordion.Content>
-      Yes. It adheres to the WAI-ARIA design pattern.
-    </Accordion.Content>
+    <Accordion.Trigger>Heading</Accordion.Trigger>
+    <Accordion.Content>Content here</Accordion.Content>
   </Accordion.Item>
 </Accordion.Root>
 ```
 
-**Components**: `Accordion.Root` (type: "single"/"multiple"), `Accordion.Item` (value), `Accordion.Trigger`, `Accordion.Content`
+**Props:** `type` ("single" or "multiple"), `value` (initial open item), `class` (styling). WAI-ARIA accessible.

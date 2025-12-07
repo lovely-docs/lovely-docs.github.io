@@ -1,0 +1,1 @@
+Searchable command menu with keyboard navigation, custom filtering, grouping, grid layout, modal support, and imperative API for programmatic control.

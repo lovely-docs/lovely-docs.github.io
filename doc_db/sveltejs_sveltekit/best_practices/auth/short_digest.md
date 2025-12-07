@@ -1,5 +1,1 @@
-**Sessions vs Tokens**: Session IDs require DB queries but can be revoked immediately; JWTs offer better latency but cannot be revoked.
-
-**SvelteKit Integration**: Check auth cookies in server hooks, store user info in `locals`.
-
-**Recommended**: Use Lucia for session-based auth with `npx sv add lucia`.
+**Sessions vs Tokens**: Session IDs (database-stored, immediately revocable, higher latency) vs JWT (not revocable, better latency). **Integration**: Check auth cookies in server hooks, store user info in `locals`. **Implementation**: Use Lucia with `npx sv add lucia` for session-based auth.

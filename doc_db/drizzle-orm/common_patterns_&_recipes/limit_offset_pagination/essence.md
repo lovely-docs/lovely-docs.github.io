@@ -1,1 +1,0 @@
-Implement limit/offset pagination with unique column ordering; use deferred joins for large tables; consider cursor-based pagination for real-time data changes.

@@ -1,1 +1,0 @@
-Multi-step autonomous AI agent with tool calling loop, generate/stream methods, structured output parsing, and type-safe UI message inference.

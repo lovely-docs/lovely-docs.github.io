@@ -1,1 +1,1 @@
-Standardized interface for 50+ LLM providers (official, OpenAI-compatible, community) with capability matrix for 40+ models across image input, object generation, tool usage, and streaming.
+Unified interface for 50+ LLM providers (OpenAI, Anthropic, Google, Mistral, xAI, Groq, etc.) with capability matrix showing image input, object generation, tool usage, and streaming support across models.

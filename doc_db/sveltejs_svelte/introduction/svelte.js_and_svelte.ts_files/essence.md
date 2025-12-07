@@ -1,0 +1,1 @@
+.svelte.js/.svelte.ts modules support runes for reactive logic and state sharing, but cannot export reassigned state.

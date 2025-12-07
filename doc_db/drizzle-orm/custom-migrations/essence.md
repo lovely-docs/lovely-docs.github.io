@@ -1,0 +1,1 @@
+Generate empty SQL migration files with `--custom` flag for unsupported DDL operations and data seeding; execute via `drizzle-kit migrate`; JS/TS support coming soon.

@@ -1,0 +1,1 @@
+Set empty array defaults in PostgreSQL (sql`'{}'::text[]`), MySQL (json type with default([]) or JSON_ARRAY()), SQLite (text with mode: 'json' and json_array()); use .$type<T>() for type inference.

@@ -1,1 +1,0 @@
-Common questions about SvelteKit development covering package integration, library packaging, APIs, databases, and tooling compatibility.

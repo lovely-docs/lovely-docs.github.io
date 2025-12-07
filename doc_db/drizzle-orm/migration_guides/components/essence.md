@@ -1,0 +1,1 @@
+MDX component reference for documentation structure: Npm, AnchorCards, Callout, CodeTabs, IsSupportedChipGroup, Section, Tabs, SimpleLinkCards, Steps, YoutubeCards, collapsable blocks.

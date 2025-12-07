@@ -1,0 +1,1 @@
+Setup Drizzle ORM with Gel database: install packages, configure dialect, pull schema, initialize client with createClient(), perform CRUD operations.

@@ -1,1 +1,1 @@
-Tools are LLM-callable objects with description, inputSchema (Zod/JSON), and optional execute function; use with generateText/streamText; distribute via npm; extensive ecosystem of ready-made packages (web search, Stripe, Composio 250+ tools, AWS Bedrock with Browser/Code Interpreter, MCP servers).
+Tools are LLM-callable objects with description, inputSchema (Zod/JSON), and optional execute function; pass to generateText/streamText; extensive ecosystem of ready-made packages and MCP servers available.

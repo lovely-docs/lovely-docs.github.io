@@ -1,1 +1,1 @@
-v0.29.3 makes expo peer dependencies optional, fixing compatibility issues for Expo SQLite projects.
+**v0.29.3:** Made Expo peer dependencies optional to avoid dependency issues for non-Expo users.

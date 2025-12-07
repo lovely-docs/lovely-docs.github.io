@@ -1,0 +1,1 @@
+Migration guide from experimental AI SDK RSC to production-ready UI: separate generation (streamText in route handler) from rendering (useChat hook), use tool invocations for generative UI, sync child components via useChat id, save with onFinish callback, restore via initialMessages.

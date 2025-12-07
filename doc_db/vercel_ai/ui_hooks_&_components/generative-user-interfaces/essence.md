@@ -1,0 +1,1 @@
+Build dynamic UIs by connecting LLM tool calls to React components; define tools with schemas, create matching components, render by checking message.parts for tool-${toolName} parts and their states.

@@ -1,0 +1,1 @@
+Svelte 3/4 imperative API: constructor with target/props/context/hydrate/intro, $set/$on/$destroy methods, optional accessors, server-side render() method; superseded by mount/unmount in Svelte 5.

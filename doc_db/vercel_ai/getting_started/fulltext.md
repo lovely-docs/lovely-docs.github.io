@@ -2,54 +2,71 @@
 
 ## Pages
 
-### navigating_the_library
-Three SDK components with different purposes: Core (unified LLM API, any JS env), UI (streaming chat/generative UI hooks for React/Vue/Svelte), RSC (experimental server-to-client streaming for Next.js App Router); environment compatibility and feature support varies by framework.
+### navigating-the-library
+Three SDK components: Core (unified LLM API for any JS env), UI (streaming chat/generative UI hooks for React/Vue/Svelte), RSC (server-to-client streaming for Next.js App Router, experimental). Compatibility varies by framework and environment.
 
-The AI SDK consists of three main components:
+## Overview
 
-**AI SDK Core**: Unified, provider-agnostic API for generating text, structured objects, and tool calls with LLMs. Works in any JavaScript environment (Node.js, Deno, Browser). Provides functions like `generateText` and `generateObject`.
+The AI SDK consists of three main parts:
 
-**AI SDK UI**: Framework-agnostic hooks for building streaming chat and generative UIs. Supports React, Svelte, and Vue.js. Provides production-ready utilities for common AI interaction patterns (chat, completion, assistant). Supported functions:
-- `useChat` (all frameworks, tool calling in React/Svelte only)
-- `useCompletion` (all frameworks)
-- `useObject` (React only)
+1. **AI SDK Core**: Unified, provider-agnostic API for generating text, structured objects, and tool calls with LLMs. Works in any JS environment (Node.js, Deno, Browser).
 
-**AI SDK RSC**: Streams generative UIs from server to client using React Server Components. Currently experimental; recommended for Next.js App Router only. Provides `streamUI`, `createStreamableUI`, and `createStreamableValue`. Has limitations: no stream cancellation via Server Actions, potential quadratic data transfer with `createStreamableUI`, component re-mounting causes flickering during streaming.
+2. **AI SDK UI**: Framework-agnostic hooks for building chat and generative UIs. Supports React & Next.js, Vue & Nuxt, Svelte & SvelteKit. Provides production-ready utilities like `useChat`, `useCompletion`, `useObject` for handling common AI interaction patterns.
 
-**Environment Compatibility**:
-- Node.js/Deno: Core only
-- Vue/Nuxt: Core + UI
-- Svelte/SvelteKit: Core + UI
-- Next.js Pages Router: Core + UI
-- Next.js App Router: Core + UI + RSC
+3. **AI SDK RSC**: Stream generative UIs from server to client using React Server Components. Currently experimental; recommended to use AI SDK UI for production instead.
 
-**When to use each**:
-- Core: Any backend or universal JavaScript environment
-- UI: Building production-ready streaming chat/generative interfaces across React, Vue, Svelte frameworks
-- RSC: Experimental server-to-client streaming in Next.js App Router (not recommended for production; use UI instead)
+## Environment Compatibility
+
+| Environment | Core | UI | RSC |
+|---|---|---|---|
+| Node.js/Deno | ✓ | ✗ | ✗ |
+| Vue/Nuxt | ✓ | ✓ | ✗ |
+| Svelte/SvelteKit | ✓ | ✓ | ✗ |
+| Next.js Pages Router | ✓ | ✓ | ✗ |
+| Next.js App Router | ✓ | ✓ | ✓ |
+
+## AI SDK UI Framework Support
+
+| Function | React | Svelte | Vue.js |
+|---|---|---|---|
+| `useChat` | ✓ | ✓ | ✓ |
+| `useChat` tool calling | ✓ | ✓ | ✗ |
+| `useCompletion` | ✓ | ✓ | ✓ |
+| `useObject` | ✓ | ✗ | ✗ |
+
+## When to Use Each
+
+**AI SDK Core**: Any JavaScript environment where you need to call LLMs with a unified API.
+
+**AI SDK UI**: Building production-ready AI-native applications with streaming chat and generative UI. Offers full streaming support, common interaction patterns, and cross-framework compatibility.
+
+**AI SDK RSC**: Streaming generative UIs from server to client in Next.js App Router. Has limitations: no stream cancellation via Server Actions, potential quadratic data transfer with `createStreamableUI`, component re-mounting/flickering during streaming. Use AI SDK UI for production instead.
+
 
 ### next.js_app_router_quickstart
-Build a streaming chat app with Next.js App Router using `streamText` for the backend, `useChat` hook for the frontend, and define tools with Zod schemas for multi-step LLM interactions.
+Build streaming chat app with Next.js App Router: setup with Vercel AI Gateway, create POST route with streamText(), wire useChat() hook to UI, add tools with Zod schemas and multi-step execution via stopWhen.
 
 ## Setup
 
-Create a Next.js app with App Router and Tailwind CSS:
-```
+Prerequisites: Node.js 18+, pnpm, Vercel AI Gateway API key.
+
+Create Next.js app with App Router and Tailwind CSS:
+```bash
 pnpm create next-app@latest my-ai-app
 cd my-ai-app
 ```
 
 Install dependencies:
-```
+```bash
 pnpm add ai@beta @ai-sdk/react@beta zod
 ```
 
-Create `.env.local` with your Vercel AI Gateway API key:
+Configure API key in `.env.local`:
 ```env
-AI_GATEWAY_API_KEY=your_key_here
+AI_GATEWAY_API_KEY=xxxxxxxxx
 ```
 
-## Route Handler
+## Basic Chat Route Handler
 
 Create `app/api/chat/route.ts`:
 ```tsx
@@ -67,22 +84,29 @@ export async function POST(req: Request) {
 }
 ```
 
-`streamText` accepts a model and messages array. `UIMessage` includes metadata like timestamps; convert to `ModelMessage[]` using `convertToModelMessages()` which strips UI-specific data. The function returns a `StreamTextResult` with `toUIMessageStreamResponse()` method to stream the response to the client.
+Key concepts:
+- `streamText()` accepts model provider and messages array
+- `UIMessage[]` contains conversation history with metadata (timestamps, sender info)
+- `convertToModelMessages()` strips UI metadata to convert `UIMessage[]` to `ModelMessage[]` format
+- `toUIMessageStreamResponse()` converts result to streamed response
 
 ## Provider Configuration
 
-By default, the Vercel AI Gateway provider is used. Reference models as strings:
+Default uses Vercel AI Gateway (included in `ai` package). Access models with string:
 ```ts
 model: 'anthropic/claude-sonnet-4.5'
 ```
 
-Or explicitly import:
+Or explicitly:
 ```ts
 import { gateway } from 'ai';
 model: gateway('anthropic/claude-sonnet-4.5');
 ```
 
-To use other providers, install their package and create an instance:
+To use other providers, install and import:
+```bash
+pnpm add @ai-sdk/openai@beta
+```
 ```ts
 import { openai } from '@ai-sdk/openai';
 model: openai('gpt-5.1');
@@ -90,7 +114,7 @@ model: openai('gpt-5.1');
 
 ## Chat UI
 
-Create `app/page.tsx` with the `useChat` hook:
+Create `app/page.tsx`:
 ```tsx
 'use client';
 
@@ -132,46 +156,21 @@ export default function Chat() {
 }
 ```
 
-`useChat` hook provides `messages` (array with `id`, `role`, `parts` properties) and `sendMessage` function. Messages are accessed via `message.parts` array where each part can be text or other types. Run with `pnpm run dev` and visit `http://localhost:3000`.
+`useChat()` hook provides:
+- `messages` - array of chat messages with `id`, `role`, `parts` properties
+- `sendMessage()` - function to send message to `/api/chat` endpoint
+- Message `parts` array contains ordered components of model output (text, reasoning tokens, etc.)
+
+Run with `pnpm run dev` and visit http://localhost:3000.
 
 ## Tools
 
-Add tools to the `streamText` configuration:
-```tsx
-import { streamText, UIMessage, convertToModelMessages, tool } from 'ai';
-import { z } from 'zod';
+Tools allow LLMs to invoke actions and receive results for next response. Example: weather tool.
 
-export async function POST(req: Request) {
-  const { messages }: { messages: UIMessage[] } = await req.json();
-
-  const result = streamText({
-    model: 'anthropic/claude-sonnet-4.5',
-    messages: convertToModelMessages(messages),
-    tools: {
-      weather: tool({
-        description: 'Get the weather in a location (fahrenheit)',
-        inputSchema: z.object({
-          location: z.string().describe('The location to get the weather for'),
-        }),
-        execute: async ({ location }) => {
-          const temperature = Math.round(Math.random() * (90 - 32) + 32);
-          return { location, temperature };
-        },
-      }),
-    },
-  });
-
-  return result.toUIMessageStreamResponse();
-}
-```
-
-Tools have a description, `inputSchema` (Zod schema for inputs), and `execute` async function. Tool parts are named `tool-{toolName}` and appear in `message.parts` array.
-
-## Multi-Step Tool Calls
-
-Enable multi-step tool calling with `stopWhen`:
+Update `app/api/chat/route.ts`:
 ```tsx
 import { streamText, UIMessage, convertToModelMessages, tool, stepCountIs } from 'ai';
+import { z } from 'zod';
 
 export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
@@ -208,7 +207,16 @@ export async function POST(req: Request) {
 }
 ```
 
-By default `stopWhen` is `stepCountIs(1)`. Setting it to `stepCountIs(5)` allows the model to use up to 5 steps, enabling it to call tools, receive results, and generate follow-up responses. Update the UI to handle new tool parts:
+Tool definition includes:
+- `description` - helps model understand when to use it
+- `inputSchema` - Zod schema defining required inputs; model extracts from context or asks user
+- `execute` - async function running on server; can fetch from external APIs
+
+`stopWhen: stepCountIs(5)` allows model to use up to 5 steps, enabling multi-step tool calls where model uses tool results to answer original query.
+
+Tool parts in message are named `tool-{toolName}`, e.g., `tool-weather`.
+
+Update `app/page.tsx` to display tool results:
 ```tsx
 case 'tool-weather':
 case 'tool-convertFahrenheitToCelsius':
@@ -219,24 +227,26 @@ case 'tool-convertFahrenheitToCelsius':
   );
 ```
 
+Example flow: "What's the weather in New York in celsius?" → model calls weather tool → displays result → calls temperature conversion tool → provides natural language response.
+
 ### next.js_pages_router_quickstart
-Build a streaming chat app with Next.js Pages Router: set up route handler with `streamText()`, use `useChat()` hook for UI, add tools with `tool()` and Zod schemas, enable multi-step tool calls with `stopWhen: stepCountIs(n)`.
+Build a streaming chat app with Next.js Pages Router using AI SDK: create route handler with streamText, wire useChat hook to UI, add tools with Zod schemas and execute functions, enable multi-step tool calls with stopWhen.
 
 ## Setup
 
 Create a Next.js app with Pages Router (not App Router):
-```
+```bash
 pnpm create next-app@latest my-ai-app
 cd my-ai-app
 ```
 
 Install dependencies:
-```
+```bash
 pnpm add ai@beta @ai-sdk/react@beta zod@beta
 ```
 
-Create `.env.local` with your Vercel AI Gateway API key:
-```
+Configure API key in `.env.local`:
+```env
 AI_GATEWAY_API_KEY=your_key_here
 ```
 
@@ -258,22 +268,20 @@ export async function POST(req: Request) {
 }
 ```
 
-The `streamText` function accepts a model and messages array. `UIMessage` contains full message history with metadata; convert to `ModelMessage[]` using `convertToModelMessages()` which strips UI-specific data. The result's `toUIMessageStreamResponse()` method converts to a streamed response.
+The handler extracts messages from request, calls `streamText` with a model and converted messages (UIMessage → ModelMessage strips metadata), and returns the streamed response via `toUIMessageStreamResponse()`.
 
-## Provider Configuration
+## Provider Selection
 
-By default, uses Vercel AI Gateway as global provider. Access models with string syntax:
-```ts
-model: 'anthropic/claude-sonnet-4.5'
-```
-
-Or explicitly:
+Default uses Vercel AI Gateway (string model references like `'anthropic/claude-sonnet-4.5'`). Can also use:
 ```ts
 import { gateway } from 'ai';
 model: gateway('anthropic/claude-sonnet-4.5');
 ```
 
-To use other providers, install their package and create instance:
+To use other providers, install their package:
+```bash
+pnpm add @ai-sdk/openai@beta
+```
 ```ts
 import { openai } from '@ai-sdk/openai';
 model: openai('gpt-5.1');
@@ -289,6 +297,7 @@ import { useState } from 'react';
 export default function Chat() {
   const [input, setInput] = useState('');
   const { messages, sendMessage } = useChat();
+  
   return (
     <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
       {messages.map(message => (
@@ -303,13 +312,11 @@ export default function Chat() {
         </div>
       ))}
 
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          sendMessage({ text: input });
-          setInput('');
-        }}
-      >
+      <form onSubmit={e => {
+        e.preventDefault();
+        sendMessage({ text: input });
+        setInput('');
+      }}>
         <input
           className="fixed dark:bg-zinc-900 bottom-0 w-full max-w-md p-2 mb-8 border border-zinc-300 dark:border-zinc-800 rounded shadow-xl"
           value={input}
@@ -322,11 +329,11 @@ export default function Chat() {
 }
 ```
 
-The `useChat` hook provides `messages` (array with `id`, `role`, `parts` properties) and `sendMessage()` function. Messages are accessed via `parts` array which preserves sequence of model outputs (text, reasoning tokens, etc.). Run with `pnpm run dev` and visit `http://localhost:3000`.
+`useChat` hook provides `messages` (array with id, role, parts) and `sendMessage(text)`. Messages contain `parts` array where each part has a type (text, tool calls, etc.). Run with `pnpm run dev` and visit http://localhost:3000.
 
 ## Tools
 
-Add tools to the `streamText` config:
+Add tools to route handler to let the model invoke actions:
 ```tsx
 import { streamText, UIMessage, convertToModelMessages, tool } from 'ai';
 import { z } from 'zod';
@@ -355,53 +362,9 @@ export async function POST(req: Request) {
 }
 ```
 
-Tools have a description, `inputSchema` (Zod schema for model to extract inputs), and async `execute` function. Tool parts appear in `message.parts` array as `tool-{toolName}` (e.g., `tool-weather`).
-
-## Multi-Step Tool Calls
-
-Enable multi-step tool use with `stopWhen`:
-```tsx
-import { streamText, UIMessage, convertToModelMessages, tool, stepCountIs } from 'ai';
-
-export async function POST(req: Request) {
-  const { messages }: { messages: UIMessage[] } = await req.json();
-
-  const result = streamText({
-    model: 'anthropic/claude-sonnet-4.5',
-    messages: convertToModelMessages(messages),
-    stopWhen: stepCountIs(5),
-    tools: {
-      weather: tool({
-        description: 'Get the weather in a location (fahrenheit)',
-        inputSchema: z.object({
-          location: z.string().describe('The location to get the weather for'),
-        }),
-        execute: async ({ location }) => {
-          const temperature = Math.round(Math.random() * (90 - 32) + 32);
-          return { location, temperature };
-        },
-      }),
-      convertFahrenheitToCelsius: tool({
-        description: 'Convert a temperature in fahrenheit to celsius',
-        inputSchema: z.object({
-          temperature: z.number().describe('The temperature in fahrenheit to convert'),
-        }),
-        execute: async ({ temperature }) => {
-          const celsius = Math.round((temperature - 32) * (5 / 9));
-          return { celsius };
-        },
-      }),
-    },
-  });
-
-  return result.toUIMessageStreamResponse();
-}
-```
-
-By default `stopWhen` is `stepCountIs(1)`, stopping after first step. Set to higher value to allow model to use tool results to generate follow-up responses. Update UI to handle new tool parts:
+Tool parts appear in message.parts as `tool-{toolName}`. Update UI to display them:
 ```tsx
 case 'tool-weather':
-case 'tool-convertFahrenheitToCelsius':
   return (
     <pre key={`${message.id}-${i}`}>
       {JSON.stringify(part, null, 2)}
@@ -409,104 +372,14 @@ case 'tool-convertFahrenheitToCelsius':
   );
 ```
 
-### svelte
-Build streaming chat with Svelte: create gateway provider, POST endpoint with streamText/convertToModelMessages, Chat class UI component with message.parts rendering, add tools with tool() and z.object() schemas, enable multi-step with stopWhen: stepCountIs(N).
+## Multi-Step Tool Calls
 
-## Svelte Quickstart
-
-Build a streaming chat interface with Svelte using the AI SDK and Vercel AI Gateway.
-
-### Prerequisites
-- Node.js 18+ and pnpm
-- Vercel AI Gateway API key
-
-### Setup
-1. Create SvelteKit app: `npx sv create my-ai-app`
-2. Install dependencies: `pnpm add -D ai@beta @ai-sdk/svelte@beta zod`
-3. Create `.env.local` with `AI_GATEWAY_API_KEY=your_key`
-
-### API Route (`src/routes/api/chat/+server.ts`)
+By default, generation stops after first step when there are tool results. Enable multi-step with `stopWhen`:
 ```tsx
-import { streamText, convertToModelMessages, createGateway } from 'ai';
-import { AI_GATEWAY_API_KEY } from '$env/static/private';
-
-const gateway = createGateway({ apiKey: AI_GATEWAY_API_KEY });
-
-export async function POST({ request }) {
-  const { messages } = await request.json();
-  const result = streamText({
-    model: gateway('anthropic/claude-sonnet-4.5'),
-    messages: convertToModelMessages(messages),
-  });
-  return result.toUIMessageStreamResponse();
-}
-```
-
-Key concepts:
-- `createGateway()` creates provider instance
-- `streamText()` streams model responses
-- `convertToModelMessages()` converts UIMessage[] to ModelMessage[] (strips UI metadata)
-- `toUIMessageStreamResponse()` converts result to streamed response
-
-### UI Component (`src/routes/+page.svelte`)
-```svelte
-<script lang="ts">
-  import { Chat } from '@ai-sdk/svelte';
-  let input = '';
-  const chat = new Chat({});
-  
-  function handleSubmit(event: SubmitEvent) {
-    event.preventDefault();
-    chat.sendMessage({ text: input });
-    input = '';
-  }
-</script>
-
-<main>
-  <ul>
-    {#each chat.messages as message, messageIndex (messageIndex)}
-      <li>
-        <div>{message.role}</div>
-        <div>
-          {#each message.parts as part, partIndex (partIndex)}
-            {#if part.type === 'text'}
-              <div>{part.text}</div>
-            {/if}
-          {/each}
-        </div>
-      </li>
-    {/each}
-  </ul>
-  <form onsubmit={handleSubmit}>
-    <input bind:value={input} />
-    <button type="submit">Send</button>
-  </form>
-</main>
-```
-
-Chat class provides:
-- `messages` - array of message objects with `id`, `role`, `parts` properties
-- `sendMessage()` - send message to API
-- Message parts preserve sequence of model outputs (text, reasoning tokens, etc.)
-
-### Provider Configuration
-Default uses Vercel AI Gateway with string model references: `model: 'anthropic/claude-sonnet-4.5'`
-
-Alternative providers require installation and import:
-```ts
-import { openai } from '@ai-sdk/openai';
-model: openai('gpt-5.1');
-```
-
-### Tools
-Add tool calling to enable discrete tasks and external API integration:
-
-```tsx
-import { tool, stepCountIs } from 'ai';
-import { z } from 'zod';
+import { streamText, UIMessage, convertToModelMessages, tool, stepCountIs } from 'ai';
 
 const result = streamText({
-  model: gateway('anthropic/claude-sonnet-4.5'),
+  model: 'anthropic/claude-sonnet-4.5',
   messages: convertToModelMessages(messages),
   stopWhen: stepCountIs(5),
   tools: {
@@ -534,58 +407,203 @@ const result = streamText({
 });
 ```
 
-Tool parts are named `tool-{toolName}` and appear in `message.parts` array. Display them in UI:
+Update UI to handle new tool part:
+```tsx
+case 'tool-weather':
+case 'tool-convertFahrenheitToCelsius':
+  return (
+    <pre key={`${message.id}-${i}`}>
+      {JSON.stringify(part, null, 2)}
+    </pre>
+  );
+```
+
+With `stopWhen: stepCountIs(5)`, the model can use up to 5 steps, allowing it to call multiple tools in sequence and use their results to answer questions.
+
+### svelte-quickstart
+Build streaming chat UI in Svelte with AI SDK: setup gateway provider, create POST endpoint with streamText(), use Chat class in component, add tools with multi-step execution via stopWhen, handle tool parts in UI; Svelte classes require reference-based reactivity and context for synchronization.
+
+## Svelte Quickstart for AI SDK
+
+Build a streaming chat interface with Svelte using the AI SDK and Vercel AI Gateway.
+
+### Prerequisites
+- Node.js 18+, pnpm
+- Vercel AI Gateway API key
+
+### Setup
+```bash
+npx sv create my-ai-app
+cd my-ai-app
+pnpm add -D ai@beta @ai-sdk/svelte@beta zod
+```
+
+Create `.env.local`:
+```env
+AI_GATEWAY_API_KEY=your_key
+```
+
+### API Route (`src/routes/api/chat/+server.ts`)
+```ts
+import { streamText, convertToModelMessages, createGateway } from 'ai';
+import { AI_GATEWAY_API_KEY } from '$env/static/private';
+
+const gateway = createGateway({ apiKey: AI_GATEWAY_API_KEY });
+
+export async function POST({ request }) {
+  const { messages } = await request.json();
+  const result = streamText({
+    model: gateway('anthropic/claude-sonnet-4.5'),
+    messages: convertToModelMessages(messages),
+  });
+  return result.toUIMessageStreamResponse();
+}
+```
+
+Key concepts:
+- `createGateway()` creates provider instance
+- `streamText()` streams model responses
+- `convertToModelMessages()` converts UIMessage[] to ModelMessage[] (strips metadata)
+- `toUIMessageStreamResponse()` converts result to streamed response
+
+### UI Component (`src/routes/+page.svelte`)
 ```svelte
+<script lang="ts">
+  import { Chat } from '@ai-sdk/svelte';
+  let input = '';
+  const chat = new Chat({});
+  
+  function handleSubmit(event) {
+    event.preventDefault();
+    chat.sendMessage({ text: input });
+    input = '';
+  }
+</script>
+
+<main>
+  <ul>
+    {#each chat.messages as message}
+      <li>
+        <div>{message.role}</div>
+        {#each message.parts as part}
+          {#if part.type === 'text'}
+            <div>{part.text}</div>
+          {/if}
+        {/each}
+      </li>
+    {/each}
+  </ul>
+  <form onsubmit={handleSubmit}>
+    <input bind:value={input} />
+    <button type="submit">Send</button>
+  </form>
+</main>
+```
+
+Chat class provides:
+- `messages` - array of message objects with `id`, `role`, `parts`
+- `sendMessage()` - send message to API
+- Message parts preserve sequence of model outputs (text, reasoning, etc.)
+
+### Tools
+
+Define tools in API route:
+```ts
+const result = streamText({
+  model: gateway('anthropic/claude-sonnet-4.5'),
+  messages: convertToModelMessages(messages),
+  tools: {
+    weather: tool({
+      description: 'Get weather in location (fahrenheit)',
+      inputSchema: z.object({
+        location: z.string().describe('Location'),
+      }),
+      execute: async ({ location }) => {
+        const temperature = Math.round(Math.random() * (90 - 32) + 32);
+        return { location, temperature };
+      },
+    }),
+    convertFahrenheitToCelsius: tool({
+      description: 'Convert fahrenheit to celsius',
+      inputSchema: z.object({
+        temperature: z.number().describe('Temperature in fahrenheit'),
+      }),
+      execute: async ({ temperature }) => {
+        const celsius = Math.round((temperature - 32) * (5 / 9));
+        return { celsius };
+      },
+    }),
+  },
+});
+```
+
+Tool parts are named `tool-{toolName}` and appear in `message.parts`.
+
+### Multi-Step Tool Calls
+
+Enable model to use tool results to generate follow-up responses:
+```ts
+const result = streamText({
+  model: gateway('anthropic/claude-sonnet-4.5'),
+  messages: convertToModelMessages(messages),
+  stopWhen: stepCountIs(5),  // Allow up to 5 steps
+  tools: { /* ... */ },
+});
+```
+
+Update UI to display tool parts:
+```svelte
+{#if part.type === 'text'}
+  <div>{part.text}</div>
 {:else if part.type === 'tool-weather' || part.type === 'tool-convertFahrenheitToCelsius'}
   <pre>{JSON.stringify(part, null, 2)}</pre>
 {/if}
 ```
 
-`stopWhen: stepCountIs(5)` enables multi-step tool calls - model can use tool results to trigger additional generations up to 5 steps.
-
 ### Svelte vs React Differences
 
-1. **State management**: Svelte uses classes (Chat) instead of hooks (useChat)
-
-2. **Reactive arguments**: Pass references, not values:
+1. **State management**: Svelte uses classes (Chat) vs React hooks (useChat)
+2. **Reactivity**: Arguments to classes aren't reactive by default - pass references:
 ```svelte
-// Won't work - id copied by value
-let chat = new Chat({ id });
-
-// Works - id passed by reference
 let chat = new Chat({
-  get id() {
-    return id;
+  get id() { return id; }  // reactive
+});
+```
+3. **Destructuring**: Destructuring class properties copies by value, disconnecting from instance
+4. **Synchronization**: Use `createAIContext()` in root layout for instance synchronization across components
+
+### Running
+```bash
+pnpm run dev
+# Open http://localhost:5173
+```
+
+### nuxt_quickstart
+Nuxt quickstart: set up API route with streamText/convertToModelMessages/createGateway, create Chat UI component with useChat hook, add tools with tool()/zod schemas, enable multi-step tool calls with stopWhen.
+
+## Setup
+
+Create a Nuxt app with `pnpm create nuxt my-ai-app`, then install dependencies:
+```
+pnpm add ai@beta @ai-sdk/vue@beta zod
+```
+
+Configure API key in `.env`:
+```env
+NUXT_AI_GATEWAY_API_KEY=your_key
+```
+
+And in `nuxt.config.ts`:
+```ts
+export default defineNuxtConfig({
+  runtimeConfig: {
+    aiGatewayApiKey: '',
   },
 });
 ```
 
-3. **No destructuring class properties**: Destructuring copies by value and disconnects from instance:
-```svelte
-const chat = new Chat({});
-let { messages } = chat; // messages won't update when chat.messages changes
-```
-
-4. **Instance synchronization**: Use `createAIContext()` in root layout to synchronize instances with same `id`:
-```svelte
-<script>
-  import { createAIContext } from '@ai-sdk/svelte';
-  let { children } = $props();
-  createAIContext();
-</script>
-{@render children()}
-```
-
-### Run Application
-`pnpm run dev` then visit http://localhost:5173
-
-### nuxt_quickstart
-Build streaming chat UI in Nuxt with API route using streamText, Chat class for message management, tools with Zod schemas, and multi-step tool calling via stopWhen.
-
-## Setup
-Create a Nuxt app with `pnpm create nuxt my-ai-app`. Install dependencies: `pnpm add ai@beta @ai-sdk/vue@beta zod`. Configure API key in `.env` as `NUXT_AI_GATEWAY_API_KEY=xxxxxxxxx` and add to `nuxt.config.ts` runtime config.
-
 ## API Route
+
 Create `server/api/chat.ts`:
 ```typescript
 import { streamText, UIMessage, convertToModelMessages, createGateway } from 'ai';
@@ -605,9 +623,16 @@ export default defineLazyEventHandler(async () => {
   });
 });
 ```
-The route receives `UIMessage[]` (includes metadata like timestamps), converts to `ModelMessage[]` (stripped of metadata) for the model, and returns a streamed response.
+
+Key points:
+- `createGateway()` creates a provider instance
+- Extract `messages` from request body (UIMessage[] type with metadata)
+- `streamText()` accepts model and messages, returns StreamTextResult
+- `convertToModelMessages()` strips UI metadata to convert UIMessage[] to ModelMessage[]
+- `toUIMessageStreamResponse()` converts result to streamed response
 
 ## UI Component
+
 Create `pages/index.vue`:
 ```typescript
 <script setup lang="ts">
@@ -638,9 +663,16 @@ const handleSubmit = (e: Event) => {
     </div>
 </template>
 ```
-The `Chat` class manages messages and provides `sendMessage()`. Messages have `id`, `role`, and `parts` array. Each part has a `type` (e.g., 'text') and corresponding data.
+
+Chat hook provides:
+- `messages` - array of objects with `id`, `role`, `parts` properties
+- `sendMessage()` - function to send message to API
+- Message `parts` array contains ordered components (text, reasoning, etc.) in generation order
+
+Run with `pnpm run dev` and visit http://localhost:3000.
 
 ## Tools
+
 Add tools to `streamText()` config:
 ```typescript
 tools: {
@@ -666,7 +698,8 @@ tools: {
   }),
 }
 ```
-Tool parts appear in `message.parts` as `tool-{toolName}` (e.g., `tool-weather`). Display them in the UI:
+
+Tool parts appear in message.parts as `tool-{toolName}`. Update UI to display them:
 ```typescript
 <pre v-if="part.type === 'tool-weather' || part.type === 'tool-convertFahrenheitToCelsius'">
   {{ JSON.stringify(part, null, 2) }}
@@ -674,42 +707,49 @@ Tool parts appear in `message.parts` as `tool-{toolName}` (e.g., `tool-weather`)
 ```
 
 ## Multi-Step Tool Calls
+
 Enable with `stopWhen: stepCountIs(5)` in `streamText()` config. This allows the model to use tool results to generate follow-up responses across multiple steps (up to 5 in this example), enabling complex interactions where the model gathers information and uses it to answer the original query.
 
 ## Provider Options
-Default is Vercel AI Gateway: `model: gateway('anthropic/claude-sonnet-4.5')`. To use OpenAI: `pnpm add @ai-sdk/openai@beta` then `import { openai } from '@ai-sdk/openai'` and `model: openai('gpt-5.1')`. The AI SDK supports dozens of providers through first-party, OpenAI-compatible, and community packages.
 
-### node.js_quickstart
-Build streaming Node.js chat agents with AI SDK using Vercel AI Gateway; define tools with Zod schemas; enable multi-step tool execution with stopWhen and onStepFinish.
+Default uses Vercel AI Gateway via string: `model: 'anthropic/claude-sonnet-4.5'`
 
-## Node.js Quickstart for AI SDK
-
-Build a simple AI agent with streaming chat interface using Node.js and the AI SDK.
-
-### Prerequisites
-- Node.js 18+ and pnpm
-- Vercel AI Gateway API key (sign up at vercel.com/ai-gateway)
-
-### Setup
-Create project directory and initialize:
-```bash
-mkdir my-ai-app
-cd my-ai-app
-pnpm init
+Or explicitly:
+```ts
+import { gateway } from 'ai';
+model: gateway('anthropic/claude-sonnet-4.5');
 ```
 
-Install dependencies:
+For other providers like OpenAI:
+```
+pnpm add @ai-sdk/openai@beta
+```
+```ts
+import { openai } from '@ai-sdk/openai';
+model: openai('gpt-5.1');
+```
+
+### node.js_quickstart
+Node.js quickstart: set up with ai@beta/zod/dotenv, create streaming chat agent with streamText(), configure providers (default Vercel AI Gateway), add tools with Zod schemas and execute functions, enable multi-step tool calling with stopWhen/stepCountIs.
+
+## Setup
+
+Prerequisites: Node.js 18+, pnpm, Vercel AI Gateway API key.
+
+Create project:
 ```bash
+mkdir my-ai-app && cd my-ai-app && pnpm init
 pnpm add ai@beta zod dotenv
 pnpm add -D @types/node tsx typescript
 ```
 
-Create `.env` file with API key:
+Create `.env`:
 ```env
-AI_GATEWAY_API_KEY=your_key_here
+AI_GATEWAY_API_KEY=your_key
 ```
 
-### Basic Chat Agent
+## Basic Chat Agent
+
 Create `index.ts`:
 ```ts
 import { ModelMessage, streamText } from 'ai';
@@ -748,21 +788,23 @@ async function main() {
 main().catch(console.error);
 ```
 
-Run with: `pnpm tsx index.ts`
+Run with `pnpm tsx index.ts`. The code uses `streamText()` to stream responses, maintains message history for context, and iterates over `result.textStream` to print tokens in real-time.
 
-### Provider Configuration
-The AI SDK uses Vercel AI Gateway as default global provider. Access models with string notation:
-```ts
-model: 'anthropic/claude-sonnet-4.5'
-```
+## Provider Configuration
 
-Or explicitly import:
+Default provider is Vercel AI Gateway. Access models with string: `model: 'anthropic/claude-sonnet-4.5'`
+
+Equivalent explicit imports:
 ```ts
 import { gateway } from 'ai';
 model: gateway('anthropic/claude-sonnet-4.5');
+
+// or
+import { gateway } from '@ai-sdk/gateway';
+model: gateway('anthropic/claude-sonnet-4.5');
 ```
 
-To use other providers like OpenAI:
+To use other providers (e.g., OpenAI):
 ```bash
 pnpm add @ai-sdk/openai@beta
 ```
@@ -771,11 +813,12 @@ import { openai } from '@ai-sdk/openai';
 model: openai('gpt-5.1');
 ```
 
-### Tools
-Tools enable agents to perform discrete tasks and interact with external systems. Define tools with `tool()` function using Zod schemas:
+## Tools
+
+Tools allow LLMs to invoke actions and receive results. Add tools to `streamText()`:
 
 ```ts
-import { streamText, tool } from 'ai';
+import { tool } from 'ai';
 import { z } from 'zod';
 
 const result = streamText({
@@ -796,8 +839,17 @@ const result = streamText({
 });
 ```
 
-### Multi-Step Tool Calls
-Enable agents to use tool results to answer questions by configuring `stopWhen` and `onStepFinish`:
+Tool definition requires: description (when to use), inputSchema (Zod schema for parameters), execute (async function that runs on server).
+
+Access tool calls and results:
+```ts
+console.log(await result.toolCalls);
+console.log(await result.toolResults);
+```
+
+## Multi-Step Tool Calls
+
+Enable agent to use tool results to answer questions with `stopWhen` and `onStepFinish`:
 
 ```ts
 import { stepCountIs } from 'ai';
@@ -805,7 +857,7 @@ import { stepCountIs } from 'ai';
 const result = streamText({
   model: 'anthropic/claude-sonnet-4.5',
   messages,
-  tools: { /* tools defined */ },
+  tools: { /* ... */ },
   stopWhen: stepCountIs(5),
   onStepFinish: async ({ toolResults }) => {
     if (toolResults.length) {
@@ -815,9 +867,8 @@ const result = streamText({
 });
 ```
 
-`stopWhen: stepCountIs(5)` allows up to 5 steps for generation, enabling complex multi-tool interactions. The agent will automatically send tool results back for additional generation until the stopping condition is met.
+`stopWhen: stepCountIs(5)` allows up to 5 steps. Agent can call multiple tools sequentially. Example with two tools:
 
-### Multiple Tools Example
 ```ts
 tools: {
   weather: tool({
@@ -843,32 +894,27 @@ tools: {
 }
 ```
 
-When asking "What's the weather in New York in celsius?", the agent will call weather tool, then conversion tool, then provide natural language response.
+Query "What's the weather in New York in celsius?" triggers: weather tool call → temperature conversion tool call → natural language response.
 
 ### expo_quickstart
-Build streaming chat interface with Expo using useChat hook, streamText API route, and optional tools with multi-step execution.
+Build streaming chat UI with Expo: setup project, create API route with streamText(), use useChat hook with expo/fetch transport, display message parts, add tools with Zod schemas and execute functions, enable multi-step calls with stopWhen, add polyfills for structuredClone and text encoding.
 
 ## Expo Quickstart
 
-Build a streaming chat interface with Expo and the AI SDK.
+Build a streaming chat UI with Expo and the AI SDK.
 
 ### Prerequisites
-- Node.js 18+ and pnpm
+- Node.js 18+, pnpm
 - Vercel AI Gateway API key
 
 ### Setup
-Create a new Expo app:
 ```bash
 pnpm create expo-app@latest my-ai-app
 cd my-ai-app
-```
-
-Install dependencies (requires Expo 52+):
-```bash
 pnpm add ai@beta @ai-sdk/react@beta zod
 ```
 
-Configure API key in `.env.local`:
+Create `.env.local`:
 ```env
 AI_GATEWAY_API_KEY=xxxxxxxxx
 ```
@@ -880,12 +926,10 @@ import { streamText, UIMessage, convertToModelMessages } from 'ai';
 
 export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
-
   const result = streamText({
     model: 'anthropic/claude-sonnet-4.5',
     messages: convertToModelMessages(messages),
   });
-
   return result.toUIMessageStreamResponse({
     headers: {
       'Content-Type': 'application/octet-stream',
@@ -895,26 +939,10 @@ export async function POST(req: Request) {
 }
 ```
 
-The `streamText` function accepts model and messages, returns a `StreamTextResult` with `toUIMessageStreamResponse()` method to stream the response to the client.
+The `streamText` function accepts model and messages, returns `StreamTextResult` with `toUIMessageStreamResponse()` method to stream to client.
 
-### Provider Configuration
-By default, uses Vercel AI Gateway (included in `ai` package). Reference models as strings: `'anthropic/claude-sonnet-4.5'`. Can also explicitly import:
-```ts
-import { gateway } from 'ai';
-model: gateway('anthropic/claude-sonnet-4.5');
-```
-
-To use other providers, install their package:
-```bash
-pnpm add @ai-sdk/openai@beta
-```
-```ts
-import { openai } from '@ai-sdk/openai';
-model: openai('gpt-5.1');
-```
-
-### UI Setup
-Update `app/(tabs)/index.tsx` with `useChat` hook:
+### UI with useChat Hook
+Update `app/(tabs)/index.tsx`:
 ```tsx
 import { generateAPIUrl } from '@/utils';
 import { useChat } from '@ai-sdk/react';
@@ -941,15 +969,13 @@ export default function App() {
         <ScrollView style={{ flex: 1 }}>
           {messages.map(m => (
             <View key={m.id} style={{ marginVertical: 8 }}>
-              <View>
-                <Text style={{ fontWeight: 700 }}>{m.role}</Text>
-                {m.parts.map((part, i) => {
-                  switch (part.type) {
-                    case 'text':
-                      return <Text key={`${m.id}-${i}`}>{part.text}</Text>;
-                  }
-                })}
-              </View>
+              <Text style={{ fontWeight: 700 }}>{m.role}</Text>
+              {m.parts.map((part, i) => {
+                switch (part.type) {
+                  case 'text':
+                    return <Text key={`${m.id}-${i}`}>{part.text}</Text>;
+                }
+              })}
             </View>
           ))}
         </ScrollView>
@@ -973,7 +999,7 @@ export default function App() {
 }
 ```
 
-`useChat` provides `messages` (array with `id`, `role`, `parts` properties) and `sendMessage` function. Use `expo/fetch` instead of native fetch for streaming support. Message `parts` array contains ordered components of model output (text, reasoning tokens, etc.).
+`useChat` hook provides `messages` (array with id, role, parts), `sendMessage` function, and `error`. Messages have `parts` array containing text, reasoning tokens, and tool results in generation order. Use `expo/fetch` instead of native fetch for streaming (requires Expo 52+).
 
 ### API URL Generator
 Create `utils.ts`:
@@ -983,72 +1009,35 @@ import Constants from 'expo-constants';
 export const generateAPIUrl = (relativePath: string) => {
   const origin = Constants.experienceUrl.replace('exp://', 'http://');
   const path = relativePath.startsWith('/') ? relativePath : `/${relativePath}`;
-
+  
   if (process.env.NODE_ENV === 'development') {
     return origin.concat(path);
   }
-
+  
   if (!process.env.EXPO_PUBLIC_API_BASE_URL) {
     throw new Error('EXPO_PUBLIC_API_BASE_URL environment variable is not defined');
   }
-
+  
   return process.env.EXPO_PUBLIC_API_BASE_URL.concat(path);
 };
 ```
 
-Handles URL generation for development and production. Must set `EXPO_PUBLIC_API_BASE_URL` before production deployment.
+Handles URL generation for dev and production. Set `EXPO_PUBLIC_API_BASE_URL` before deploying.
 
-### Running
+### Run
 ```bash
 pnpm expo
 ```
 Open http://localhost:8081
 
 ### Tools
-Add tool capabilities to the model. Update `app/api/chat+api.ts`:
+Add tools to enable LLM to invoke actions. Update `app/api/chat+api.ts`:
 ```tsx
-import { streamText, UIMessage, convertToModelMessages, tool } from 'ai';
+import { streamText, UIMessage, convertToModelMessages, tool, stepCountIs } from 'ai';
 import { z } from 'zod';
 
 export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
-
-  const result = streamText({
-    model: 'anthropic/claude-sonnet-4.5',
-    messages: convertToModelMessages(messages),
-    tools: {
-      weather: tool({
-        description: 'Get the weather in a location (fahrenheit)',
-        inputSchema: z.object({
-          location: z.string().describe('The location to get the weather for'),
-        }),
-        execute: async ({ location }) => {
-          const temperature = Math.round(Math.random() * (90 - 32) + 32);
-          return { location, temperature };
-        },
-      }),
-    },
-  });
-
-  return result.toUIMessageStreamResponse({
-    headers: {
-      'Content-Type': 'application/octet-stream',
-      'Content-Encoding': 'none',
-    },
-  });
-}
-```
-
-Define tools with description, `inputSchema` (Zod schema), and async `execute` function. Tool parts appear in `message.parts` array as `tool-{toolName}` type.
-
-### Multi-Step Tool Calls
-Enable model to use tool results to generate follow-up responses. Update `app/api/chat+api.ts`:
-```tsx
-import { streamText, UIMessage, convertToModelMessages, tool, stepCountIs } from 'ai';
-
-export async function POST(req: Request) {
-  const { messages }: { messages: UIMessage[] } = await req.json();
-
   const result = streamText({
     model: 'anthropic/claude-sonnet-4.5',
     messages: convertToModelMessages(messages),
@@ -1076,7 +1065,6 @@ export async function POST(req: Request) {
       }),
     },
   });
-
   return result.toUIMessageStreamResponse({
     headers: {
       'Content-Type': 'application/octet-stream',
@@ -1086,7 +1074,9 @@ export async function POST(req: Request) {
 }
 ```
 
-`stopWhen: stepCountIs(5)` allows model to use up to 5 steps. Update UI to handle new tool parts:
+Tool definition includes description, `inputSchema` (Zod schema for inputs), and async `execute` function. Tool parts are named `tool-{toolName}`. `stopWhen: stepCountIs(5)` allows model to use up to 5 steps, enabling multi-step tool calls where model can use tool results to trigger additional generations.
+
+Update UI to display tool results:
 ```tsx
 {m.parts.map((part, i) => {
   switch (part.type) {
@@ -1094,11 +1084,7 @@ export async function POST(req: Request) {
       return <Text key={`${m.id}-${i}`}>{part.text}</Text>;
     case 'tool-weather':
     case 'tool-convertFahrenheitToCelsius':
-      return (
-        <Text key={`${m.id}-${i}`}>
-          {JSON.stringify(part, null, 2)}
-        </Text>
-      );
+      return <Text key={`${m.id}-${i}`}>{JSON.stringify(part, null, 2)}</Text>;
   }
 })}
 ```
@@ -1118,18 +1104,15 @@ if (Platform.OS !== 'web') {
   const setupPolyfills = async () => {
     const { polyfillGlobal } = await import('react-native/Libraries/Utilities/PolyfillFunctions');
     const { TextEncoderStream, TextDecoderStream } = await import('@stardazed/streams-text-encoding');
-
+    
     if (!('structuredClone' in global)) {
       polyfillGlobal('structuredClone', () => structuredClone);
     }
-
     polyfillGlobal('TextEncoderStream', () => TextEncoderStream);
     polyfillGlobal('TextDecoderStream', () => TextDecoderStream);
   };
-
   setupPolyfills();
 }
-
 export {};
 ```
 

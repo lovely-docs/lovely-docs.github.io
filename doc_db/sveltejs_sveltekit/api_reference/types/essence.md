@@ -1,1 +1,1 @@
-SvelteKit automatically generates typed `$types` modules for routes and pages, with ambient types defined in app.d.ts.
+Auto-generated route type definitions ($types module), app.d.ts ambient types (Error, Locals, PageData, PageState, Platform), $lib aliases, tsconfig configuration.

@@ -1,1 +1,1 @@
-Use the child snippet to customize rendered elements in Bits UI components while preserving accessibility and functionality.
+Child snippet enables custom element rendering in Bits UI components with full prop merging, Svelte feature support, and special two-level structure for floating components.

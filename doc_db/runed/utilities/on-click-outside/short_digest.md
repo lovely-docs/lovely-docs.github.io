@@ -1,0 +1,1 @@
+Detects clicks outside an element and runs a callback. Returns `start()`, `stop()`, and `enabled` property for control. Options: `immediate` (default true), `detectIframe` (default false), `document`, `window`.

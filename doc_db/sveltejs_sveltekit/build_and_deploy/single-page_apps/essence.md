@@ -1,1 +1,0 @@
-Configure SvelteKit apps as client-rendered single-page apps using adapter-static with a fallback page, with options to prerender specific pages.

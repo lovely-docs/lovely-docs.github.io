@@ -1,0 +1,1 @@
+Complete reference of Svelte compiler warnings covering accessibility (a11y_*), attributes, structure, reactivity, and deprecated patterns; disable with `<!-- svelte-ignore code -->` comments.

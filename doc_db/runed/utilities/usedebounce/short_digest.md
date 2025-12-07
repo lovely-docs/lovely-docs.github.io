@@ -1,12 +1,8 @@
-## useDebounce
-Creates a debounced callback that delays execution until after inactivity. Takes a callback and duration function, returns object with `pending` state, `runScheduledNow()`, and `cancel()` methods.
+Creates a debounced version of a callback with configurable delay. Returns a function with `runScheduledNow()`, `cancel()`, and `pending` property.
 
 ```svelte
-const logCount = useDebounce(
-	() => { /* callback */ },
-	() => 1000 // duration in ms
-);
-logCount(); // schedule execution
-logCount.runScheduledNow(); // execute immediately
-logCount.cancel(); // cancel pending
+const debounced = useDebounce(callback, () => delayMs);
+debounced(); // schedule execution
+debounced.runScheduledNow(); // execute immediately
+debounced.cancel(); // cancel pending
 ```

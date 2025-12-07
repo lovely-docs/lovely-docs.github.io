@@ -1,0 +1,1 @@
+Setup Drizzle with Turso (SQLite-compatible database): install dependencies, create Turso DB and auth token, configure connection URL/token in .env, create db connection with libSQL driver, define SQLite schema, configure drizzle.config.ts with turso dialect, generate and run migrations, use standard insert/select/update/delete queries.

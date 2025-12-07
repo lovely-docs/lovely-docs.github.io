@@ -1,0 +1,1 @@
+Complete reference of 200+ Svelte compiler error codes with descriptions, organized by feature (animations, attributes, bindings, blocks, components, CSS, declarations, each blocks, elements, event handlers, exports, props, runes, scripts, slots, snippets, state, stores, svelte meta tags, transitions, legacy/async).

@@ -1,1 +1,3 @@
-This page documents query utility functions in Drizzle ORM. It includes the `$count` utility, which is a query helper function. The page serves as an index for query-related utilities available in the library, with `$count` being the primary utility documented here. The `$count` utility is imported from a separate documentation file and provides functionality for counting query results.
+Query utility functions for Drizzle ORM.
+
+The page documents `$count` - a query utility for counting rows. This is a foundational utility for aggregating query results.

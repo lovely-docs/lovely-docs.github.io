@@ -1,0 +1,1 @@
+Zod compatibility issue with AI SDK 5 causes TypeScript performance degradation; fix with Zod 4.1.8+ or `moduleResolution: "nodenext"` in tsconfig.json

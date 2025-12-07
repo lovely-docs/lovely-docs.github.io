@@ -1,0 +1,1 @@
+When using `onToolCall` with mixed static/dynamic tools, TypeScript can't narrow `toolCall.toolName` from `string` to specific literal types. Solution: check `if (toolCall.dynamic) return;` first to enable type narrowing for static tools before passing to `addToolOutput`.

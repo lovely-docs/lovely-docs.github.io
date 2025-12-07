@@ -1,1 +1,1 @@
-Empty state component with Root, Header (Media/Title/Description), and Content sections; supports icon/avatar variants and Tailwind styling for borders and gradients.
+Empty state component with Root, Header (Media/Title/Description), and Content sections; supports icon/avatar variants, borders, gradients, and input groups.

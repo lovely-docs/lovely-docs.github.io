@@ -1,1 +1,0 @@
-How to implement service workers in SvelteKit for offline support and performance optimization.

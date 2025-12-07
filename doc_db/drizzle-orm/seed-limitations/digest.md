@@ -1,1 +1,3 @@
-The page documents type limitations for the third parameter in seeding operations. This is a technical constraint that developers need to be aware of when implementing database seeding functionality. The specific limitations affect how the third parameter can be typed and used in seed functions, which may impact the design of seed scripts and data initialization routines.
+Type limitations for the third parameter in seed operations.
+
+The page documents constraints and type-related issues that developers may encounter when working with the third parameter of seeding functions in drizzle-orm. This covers type inference limitations, type safety concerns, and potential workarounds when the type system cannot properly infer or validate the third parameter.

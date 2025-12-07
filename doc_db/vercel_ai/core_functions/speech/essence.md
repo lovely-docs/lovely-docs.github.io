@@ -1,0 +1,1 @@
+Text-to-speech generation via `generateSpeech()` with configurable voice, language, provider options, timeouts, headers; supports OpenAI, ElevenLabs, LMNT, Hume models; throws `AI_NoSpeechGeneratedError` on failure.

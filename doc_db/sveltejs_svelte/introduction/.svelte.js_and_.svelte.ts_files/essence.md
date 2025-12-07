@@ -1,1 +1,0 @@
-Svelte modules (.svelte.js/.svelte.ts) enable runes for reactive logic and state sharing.

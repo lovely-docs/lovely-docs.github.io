@@ -1,0 +1,1 @@
+flip animation function using FLIP technique to animate element position changes between DOMRect start/end states with configurable delay, duration, and easing

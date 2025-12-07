@@ -1,0 +1,1 @@
+Mock providers (MockLanguageModelV3, MockEmbeddingModelV3) and test helpers (mockId, mockValues, simulateReadableStream) from ai/test enable deterministic unit testing of AI SDK code without calling real providers.

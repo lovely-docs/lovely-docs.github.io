@@ -1,1 +1,1 @@
-Fix "Failed to parse stream string" error by setting `streamProtocol: 'text'` in useChat/useCompletion when using incompatible stream sources (old SDK versions, custom providers, LangChain).
+useChat/useCompletion "Failed to parse stream" error in SDK 3.0.20+: use streamProtocol: 'text' parameter for raw text streams

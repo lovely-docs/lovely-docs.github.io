@@ -1,0 +1,1 @@
+Save AI state with `onSetAIState` callback, restore with `initialAIState` prop. UI state uses AI state as proxy: save details in AI state, restore via `onGetUIState` callback by comparing database and app history.

@@ -1,0 +1,1 @@
+Install `drizzle-orm` and `mysql2`. Initialize with `drizzle({ connection: { uri: DATABASE_URL } })` or pass existing mysql2 client/pool. Use single client for migrations, either for queries. Notable limitations: no foreign keys, no nested transactions, no relational API, no `ORDER BY`+`LIMIT` chaining.

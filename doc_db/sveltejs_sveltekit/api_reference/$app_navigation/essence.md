@@ -1,1 +1,1 @@
-API reference for navigation, lifecycle hooks, data invalidation, and history state management in SvelteKit.
+$app/navigation exports 12 functions: lifecycle hooks (afterNavigate, beforeNavigate, onNavigate), navigation (goto), preloading (preloadCode, preloadData), invalidation (invalidate, invalidateAll, refreshAll), scroll (disableScrollHandling), and shallow routing (pushState, replaceState).

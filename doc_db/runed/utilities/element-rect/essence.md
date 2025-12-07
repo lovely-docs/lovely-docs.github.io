@@ -1,0 +1,1 @@
+ElementRect: reactive DOMRect tracking with individual dimension/position properties and complete rect object

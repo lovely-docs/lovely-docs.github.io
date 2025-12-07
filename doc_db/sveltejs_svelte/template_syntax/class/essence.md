@@ -1,1 +1,1 @@
-How to set classes on elements using the class attribute (with objects/arrays) or the class: directive.
+Two ways to set element classes: `class` attribute (supports strings, objects with truthy keys, arrays with truthy values, flattened nesting) and `class:` directive (conditional shorthand); prefer attribute form.

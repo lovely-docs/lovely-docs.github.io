@@ -3,13 +3,16 @@
 Drizzle ORM is a thin TypeScript layer on top of SQL with minimal overhead. To achieve near-zero overhead, use prepared statements.
 
 ### How Query Execution Works
-When running a query, three steps occur:
+When running a query:
 1. Query builder configurations are concatenated into an SQL string
-2. The string and parameters are sent to the database driver
-3. The driver compiles the SQL to binary executable format and sends it to the database
+2. String and parameters are sent to the database driver
+3. Driver compiles SQL to binary executable format and sends to database
 
-### Prepared Statements
-Prepared statements perform SQL concatenation once on the Drizzle side, allowing the database driver to reuse precompiled binary SQL instead of parsing the query repeatedly. This provides extreme performance benefits, especially for large SQL queries. Different database drivers support prepared statements differently.
+With prepared statements, SQL concatenation happens once on the Drizzle side, allowing the database driver to reuse the precompiled binary SQL instead of parsing the query repeatedly. This provides extreme performance benefits, especially for large SQL queries.
+
+Different database drivers support prepared statements differently. Drizzle ORM can sometimes outperform even the better-sqlite3 driver.
+
+### Prepared Statement Usage
 
 **PostgreSQL:**
 ```typescript
@@ -41,12 +44,13 @@ const res2 = await prepared.execute();
 ```
 
 ### Placeholders for Dynamic Values
-Use `sql.placeholder(...)` to embed dynamic runtime values in prepared statements.
 
-**PostgreSQL/MySQL/SingleStore:**
+Use `sql.placeholder(...)` to embed dynamic runtime values:
+
 ```typescript
 import { sql } from "drizzle-orm";
 
+// Simple placeholder
 const p1 = db
   .select()
   .from(customers)
@@ -56,31 +60,18 @@ const p1 = db
 await p1.execute({ id: 10 }); // SELECT * FROM customers WHERE id = 10
 await p1.execute({ id: 12 }); // SELECT * FROM customers WHERE id = 12
 
+// Complex placeholder with SQL functions
 const p2 = db
   .select()
   .from(customers)
   .where(sql`lower(${customers.name}) like ${sql.placeholder('name')}`)
   .prepare("p2");
 
-await p2.execute({ name: '%an%' }); // SELECT * FROM customers WHERE name ilike '%an%'
+await p2.execute({ name: '%an%' }); // SELECT * FROM customers WHERE lower(name) like '%an%'
 ```
 
-**SQLite:**
+For SQLite, use `.get()` and `.all()` instead of `.execute()`:
 ```typescript
-const p1 = db
-  .select()
-  .from(customers)
-  .where(eq(customers.id, sql.placeholder('id')))
-  .prepare();
-
-p1.get({ id: 10 }); // SELECT * FROM customers WHERE id = 10
-p1.get({ id: 12 }); // SELECT * FROM customers WHERE id = 12
-
-const p2 = db
-  .select()
-  .from(customers)
-  .where(sql`lower(${customers.name}) like ${sql.placeholder('name')}`)
-  .prepare();
-
-p2.all({ name: '%an%' }); // SELECT * FROM customers WHERE name ilike '%an%'
+p1.get({ id: 10 });
+p2.all({ name: '%an%' });
 ```

@@ -1,1 +1,1 @@
-Define TypeScript database schemas with dialect-specific table functions, organize in single or multiple files, use column aliases or casing option for name mapping, reuse common columns, and leverage PostgreSQL schemas.
+Define TypeScript schemas using dialect-specific table functions (pgTable/mysqlTable/sqliteTable) with columns; organize in single or multiple files; use casing option for camelCase-to-snake_case mapping; PostgreSQL supports pgSchema namespaces; MySQL schemas are databases; SQLite has no schemas.

@@ -1,18 +1,1 @@
-## Core Concepts
-- **Runes** ($state, $derived, $effect, $props, $bindable, $inspect, $host) manage reactivity in Svelte 5
-- **Template syntax** includes conditionals, iteration, async handling, snippets, directives (bind, use, transition, animate, style, class)
-- **Styling** is scoped by default; use `:global()` for global styles and CSS custom properties for component theming
-- **Special elements** (svelte:boundary, svelte:window, svelte:document, svelte:head, svelte:element, svelte:options) provide framework features
-
-## State & APIs
-- **Stores** (writable, readable, derived) enable reactive state management; access with `$` prefix
-- **Context** (setContext, getContext) passes values parent-to-child without prop-drilling
-- **Lifecycle** (onMount, onDestroy, tick) manages component initialization and cleanup
-- **Imperative API** (mount, unmount, hydrate) controls component instantiation
-
-## Advanced
-- **Animations/Transitions**: Built-in functions (blur, fade, fly, scale, slide, draw, crossfade) and FLIP animation
-- **TypeScript**: Full support with `lang="ts"`; type props and actions
-- **Custom Elements**: Compile to web components with `customElement` option
-- **Testing**: Vitest for units, @testing-library/svelte for components, Playwright for E2E
-- **Svelte 5 Migration**: Replace `let` with `$state()`, `$:` with `$derived()`/`$effect()`, `export let` with `$props()`, slots with snippets
+**Runes** ($state, $derived, $effect, $props, $bindable, $inspect, $host): Svelte 5 reactivity keywords. **Template**: Markup, events, conditionals, loops, async, snippets, bindings, actions, transitions, animations, styling, special directives. **Styling**: Scoped CSS, :global(), CSS custom properties. **Special Elements**: svelte:boundary, svelte:window/document/body, svelte:head, svelte:element, svelte:options. **Runtime**: Stores (writable, readable, derived), context API, lifecycle (onMount, onDestroy, tick), imperative (mount, unmount, render, hydrate). **Advanced**: Testing (Vitest, Playwright), TypeScript, custom elements, Svelte 4→5 migration. **API Reference**: Complete function/type documentation. **Legacy Mode**: Svelte 3/4 API (reactive variables, $:, export let, on:, slots, imperative constructor).

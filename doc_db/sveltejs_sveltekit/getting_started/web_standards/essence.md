@@ -1,1 +1,0 @@
-SvelteKit builds on standard Web APIs (Fetch, Request, Response, Headers, FormData, Streams, URL, Web Crypto) with a special server-side fetch for direct endpoint invocation.

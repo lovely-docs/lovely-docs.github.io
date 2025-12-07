@@ -1,1 +1,1 @@
-Component styling with automatic scoping, global style options, CSS custom properties, and nested style behavior.
+Component styling with automatic scoping, global style escape hatches, CSS custom properties, and nested style behavior.

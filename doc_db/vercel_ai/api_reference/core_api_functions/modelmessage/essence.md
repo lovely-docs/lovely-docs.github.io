@@ -1,0 +1,1 @@
+Message structure types (system, user, assistant, tool) and content parts (text, image, file, tool-call, tool-result) for AI SDK Core with support for multimodal content and tool interactions.

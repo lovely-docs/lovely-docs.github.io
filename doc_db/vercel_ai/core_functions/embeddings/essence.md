@@ -1,0 +1,1 @@
+Embed text to vectors with `embed()` or `embedMany()`, calculate similarity with `cosineSimilarity()`, supports OpenAI/Google/Mistral/Cohere/Bedrock with configurable parallelism, retries, timeouts, headers, and provider options.

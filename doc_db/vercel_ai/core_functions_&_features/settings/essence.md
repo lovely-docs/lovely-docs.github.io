@@ -1,1 +1,0 @@
-Common settings for all AI SDK functions: output control (maxOutputTokens, stopSequences), sampling (temperature/topP/topK/seed), penalties (presencePenalty/frequencyPenalty), request control (maxRetries, abortSignal), and HTTP headers.

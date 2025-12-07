@@ -1,1 +1,1 @@
-Navigation index for SvelteKit core concepts documentation.
+Documentation index page for SvelteKit core concepts.

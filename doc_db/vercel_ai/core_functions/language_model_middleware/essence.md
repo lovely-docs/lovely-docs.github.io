@@ -1,0 +1,1 @@
+Middleware pattern for intercepting/modifying language model calls; built-in options for reasoning extraction, streaming simulation, defaults; custom implementations via transformParams/wrapGenerate/wrapStream; examples: logging, caching, RAG, guardrails; per-request metadata via providerOptions.

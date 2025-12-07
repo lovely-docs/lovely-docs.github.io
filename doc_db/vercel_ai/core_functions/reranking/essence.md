@@ -1,0 +1,1 @@
+Rerank documents by query relevance using `rerank()` with trained models; returns ranking array with originalIndex, score (0-1), and document; supports string/JSON documents, topN limiting, retries, abort signals, custom headers, and provider-specific options; available from Cohere, Bedrock, Together.ai.

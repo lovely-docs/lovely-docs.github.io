@@ -1,0 +1,1 @@
+Error for failed message conversion. Check with `MessageConversionError.isInstance(error)`. Properties: `originalMessage`, `message`.

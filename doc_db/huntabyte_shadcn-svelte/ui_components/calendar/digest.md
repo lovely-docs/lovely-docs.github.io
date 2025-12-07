@@ -4,133 +4,96 @@ A date selection component built on Bits UI Calendar using @internationalized/da
 
 ### Basic Usage
 ```svelte
-<script lang="ts">
-  import { getLocalTimeZone, today } from "@internationalized/date";
-  import { Calendar } from "$lib/components/ui/calendar/index.js";
-  let value = today(getLocalTimeZone());
-</script>
-<Calendar type="single" bind:value class="rounded-md border shadow-sm" captionLayout="dropdown" />
+import { getLocalTimeZone, today } from "@internationalized/date";
+import { Calendar } from "$lib/components/ui/calendar/index.js";
+
+let value = today(getLocalTimeZone());
+```
+```svelte
+<Calendar
+  type="single"
+  bind:value
+  class="rounded-md border shadow-sm"
+  captionLayout="dropdown"
+/>
 ```
 
 ### Installation
 ```bash
 npx shadcn-svelte@latest add calendar -y -o
 ```
-Flags: `-y` skips confirmation, `-o` overwrites existing files.
-
-### Key Features
-- Single date selection with `type="single"`
-- Multiple month display with `numberOfMonths` prop
-- Caption layout options: `"dropdown"` (month/year), `"dropdown-months"` (month only), `"dropdown-years"` (year only)
-- Date constraints with `maxValue` and `minValue` props
-- Event handling with `onValueChange` callback
-- Timezone support via @internationalized/date
+(-y: skip confirmation, -o: overwrite existing files)
 
 ### Examples
 
-**Multiple Months:**
+**Multiple Months Display**
 ```svelte
+let value = new CalendarDate(2025, 6, 12);
 <Calendar type="single" bind:value numberOfMonths={2} />
 ```
 
-**Month/Year Selector with Dropdown:**
+**Month/Year Selector with Dropdown Options**
 ```svelte
-<script lang="ts">
-  import Calendar from "$lib/components/ui/calendar/calendar.svelte";
-  import * as Select from "$lib/components/ui/select/index.js";
-  let value = $state(new CalendarDate(2025, 6, 12));
-  let dropdown = $state("dropdown");
-</script>
+let dropdown = "dropdown"; // or "dropdown-months", "dropdown-years"
 <Calendar type="single" bind:value captionLayout={dropdown} />
-<Select.Root type="single" bind:value={dropdown}>
-  <Select.Trigger>
-    {selectedDropdown}
-  </Select.Trigger>
-  <Select.Content>
-    <Select.Item value="dropdown">Month and Year</Select.Item>
-    <Select.Item value="dropdown-months">Month Only</Select.Item>
-    <Select.Item value="dropdown-years">Year Only</Select.Item>
-  </Select.Content>
-</Select.Root>
 ```
+Pair with Select component to switch between "Month and Year", "Month Only", "Year Only" layouts.
 
-**Date of Birth Picker (with Popover):**
+**Date of Birth Picker (in Popover)**
 ```svelte
-<script lang="ts">
-  import Calendar from "$lib/components/ui/calendar/calendar.svelte";
-  import * as Popover from "$lib/components/ui/popover/index.js";
-  import { Button } from "$lib/components/ui/button/index.js";
-  import { today } from "@internationalized/date";
-  let open = $state(false);
-  let value = $state();
-</script>
+let open = false;
+let value;
 <Popover.Root bind:open>
   <Popover.Trigger>
-    {#snippet child({ props })}
-      <Button {...props} variant="outline">
-        {value ? value.toDate(getLocalTimeZone()).toLocaleDateString() : "Select date"}
-      </Button>
-    {/snippet}
+    <Button variant="outline">
+      {value ? value.toDate(getLocalTimeZone()).toLocaleDateString() : "Select date"}
+    </Button>
   </Popover.Trigger>
   <Popover.Content class="w-auto p-0">
-    <Calendar type="single" bind:value maxValue={today(getLocalTimeZone())} 
-      onValueChange={() => { open = false; }} />
+    <Calendar
+      type="single"
+      bind:value
+      captionLayout="dropdown"
+      onValueChange={() => { open = false; }}
+      maxValue={today(getLocalTimeZone())}
+    />
   </Popover.Content>
 </Popover.Root>
 ```
 
-**Date and Time Picker:**
+**Date and Time Picker**
+Combine Calendar in Popover with time Input:
 ```svelte
-<div class="flex gap-4">
-  <Popover.Root bind:open>
-    <Popover.Trigger>
-      {#snippet child({ props })}
-        <Button {...props} variant="outline">
-          {value ? value.toDate(getLocalTimeZone()).toLocaleDateString() : "Select date"}
-        </Button>
-      {/snippet}
-    </Popover.Trigger>
-    <Popover.Content class="w-auto p-0">
-      <Calendar type="single" bind:value onValueChange={() => { open = false; }} />
-    </Popover.Content>
-  </Popover.Root>
-  <Input type="time" value="10:30:00" />
-</div>
+<Calendar type="single" bind:value captionLayout="dropdown" />
+<Input type="time" step="1" value="10:30:00" />
 ```
 
-**Natural Language Date Picker (using chrono-node):**
+**Natural Language Date Input**
+Uses chrono-node to parse text like "In 2 days", "Tomorrow", "next week":
 ```svelte
-<script lang="ts">
-  import { Calendar } from "$lib/components/ui/calendar/index.js";
-  import { Input } from "$lib/components/ui/input/index.js";
-  import { parseDate } from "chrono-node";
-  import { CalendarDate, getLocalTimeZone } from "@internationalized/date";
-  
-  let open = $state(false);
-  let inputValue = $state("In 2 days");
-  let value = $state(parseDate(inputValue) ? new CalendarDate(...) : undefined);
-</script>
-<Input bind:value={inputValue} placeholder="Tomorrow or next week" 
-  onkeydown={(e) => { if (e.key === "ArrowDown") open = true; }} />
-<Popover.Root bind:open>
-  <Popover.Trigger>Calendar Icon</Popover.Trigger>
-  <Popover.Content class="w-auto p-0">
-    <Calendar type="single" bind:value 
-      onValueChange={(v) => { inputValue = formatDate(v); open = false; }} />
-  </Popover.Content>
-</Popover.Root>
+import { parseDate } from "chrono-node";
+import { CalendarDate } from "@internationalized/date";
+
+let inputValue = "In 2 days";
+let value = parseDate(inputValue) 
+  ? new CalendarDate(date.getFullYear(), date.getMonth() + 1, date.getDate())
+  : undefined;
+
+<Input
+  bind:value={inputValue}
+  placeholder="Tomorrow or next week"
+  onkeydown={(e) => { if (e.key === "ArrowDown") open = true; }}
+/>
+<Calendar type="single" bind:value onValueChange={(v) => { inputValue = formatDate(v); }} />
 ```
 
 ### Related Components
 - Range Calendar: for date range selection
-- Date Picker: higher-level date selection component
+- Date Picker: wrapper component using Calendar
 - 30+ calendar blocks available in Blocks Library
 
 ### Upgrade
 ```bash
 npx shadcn-svelte@latest add calendar -y -o
 ```
-If you've customized the component, manually merge changes. After upgrading, add new blocks:
-```bash
-npx shadcn-svelte@latest add calendar-02 -y -o
-```
+Then add new blocks: `npx shadcn-svelte@latest add calendar-02 -y -o`

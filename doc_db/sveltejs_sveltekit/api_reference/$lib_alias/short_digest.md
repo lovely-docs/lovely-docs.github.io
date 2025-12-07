@@ -1,5 +1,3 @@
-The `$lib` alias automatically points to `src/lib` and can be configured in the config file.
+`$lib` is an auto-configured alias pointing to `src/lib` for importing components and utilities. Customizable via config's `files` option.
 
-```svelte
-import Component from '$lib/Component.svelte';
-```
+Example: `import Component from '$lib/Component.svelte'`

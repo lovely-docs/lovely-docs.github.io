@@ -1,8 +1,1 @@
-## useId
-
-Generates unique IDs. Import from "bits-ui" and call to get an ID:
-
-```svelte
-import { useId } from "bits-ui";
-const id = useId();
-```
+Generates unique IDs for associating form elements. Import from `bits-ui`, call `useId()` to get a unique ID string, apply to elements via `for` and `id` attributes.

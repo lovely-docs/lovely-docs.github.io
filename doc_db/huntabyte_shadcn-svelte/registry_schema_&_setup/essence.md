@@ -1,0 +1,1 @@
+JSON schema specification and setup guide for creating custom component registries with reusable items, styles, and themes.

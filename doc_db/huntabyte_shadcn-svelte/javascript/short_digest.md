@@ -1,0 +1,1 @@
+Set `"typescript": false` in `components.json` to use JavaScript versions of components. Configure aliases in `jsconfig.json` with compiler paths.

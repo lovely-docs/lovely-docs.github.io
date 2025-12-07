@@ -1,1 +1,0 @@
-.svelte.js and .svelte.ts files are modules supporting Svelte runes for reusable reactive logic and shared reactive state (cannot export reassigned state).

@@ -1,1 +1,0 @@
-Step-by-step migration from Sequelize to Drizzle ORM with installation, config, introspection, connection setup, and query translation examples (insert, select with joins/filtering/aggregations, update, delete with transactions).

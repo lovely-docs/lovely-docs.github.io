@@ -1,0 +1,1 @@
+Hook for streaming text completions with configurable API endpoint, shared state via id, callbacks, request customization, and UI state/handlers.

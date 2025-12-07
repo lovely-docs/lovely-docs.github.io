@@ -1,1 +1,1 @@
-Reference guide for Svelte runtime warnings with explanations and fixes for common issues with state, reactivity, hydration, and component lifecycle.
+Reference of 20 runtime warnings in Svelte: assignment operators, async reactivity, hydration mismatches, binding/mutation rules, proxy identity issues, and transition/element constraints.

@@ -1,0 +1,1 @@
+Step-by-step integration of Drizzle ORM with Supabase Edge Functions: schema definition, migrations, local development, and deployment with environment-based connection pooling.

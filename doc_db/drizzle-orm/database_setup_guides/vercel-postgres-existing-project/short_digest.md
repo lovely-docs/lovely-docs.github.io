@@ -1,0 +1,1 @@
+Install `@vercel/postgres`, set `POSTGRES_URL` env var, configure drizzle.config.ts with PostgreSQL dialect, introspect existing database, connect with `drizzle()`, then use insert/select/update/delete operations. Run with tsx.

@@ -1,0 +1,1 @@
+Legacy mode: `$$props` contains all passed props, `$$restProps` contains all except declared exports; use for prop forwarding with filtering.

@@ -7,13 +7,12 @@ import { pgSchema } from 'drizzle-orm/pg-core';
 const mySchema = pgSchema('mySchema');
 const colors = mySchema.enum('colors', ['red', 'green', 'blue']);
 ```
-Enums can now be created within custom schemas in Postgres.
 
 ## Fixes
 
-**D1 migrate() function:** Changed to use batch API for better performance with Cloudflare D1.
+**D1 migrate() function:** Changed to use batch API for better performance.
 
-**Postgres .onConflictDoUpdate() method:** Split `where` clause into `setWhere` and `targetWhere` to properly support both where cases in ON CONFLICT clauses:
+**Postgres `.onConflictDoUpdate` method:** Split `where` clause into `setWhere` and `targetWhere` to support both where cases in on conflict clause.
 ```ts
 await db.insert(employees)
   .values({ employeeId: 123, name: 'John Doe' })
@@ -22,7 +21,7 @@ await db.insert(employees)
     targetWhere: sql`name <> 'John Doe'`,
     set: { name: sql`excluded.name` }
   });
-
+  
 await db.insert(employees)
   .values({ employeeId: 123, name: 'John Doe' })
   .onConflictDoUpdate({
@@ -32,6 +31,6 @@ await db.insert(employees)
   });
 ```
 
-**Postgres .onConflictDoNothing() method:** Fixed query generation for `where` clause which was being placed in wrong location.
+**Postgres `.onConflictDoNothing` method:** Fixed query generation for `where` clause placement.
 
 **AWS Data API driver:** Fixed multiple issues including inserting and updating array values.

@@ -1,0 +1,1 @@
+Detects user idle state by monitoring activity events with configurable timeout. Provides `current` (boolean) and `lastActive` (timestamp) properties. Configurable events, timeout duration, visibility detection, and initial state.

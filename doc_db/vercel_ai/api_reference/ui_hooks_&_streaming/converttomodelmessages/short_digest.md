@@ -1,0 +1,1 @@
+Converts `useChat` hook messages to `ModelMessage` objects for AI functions. Supports multi-modal tool responses via `toModelOutput` and custom data part conversion (URLs, code files) through `convertDataPart` callback with type-safe generics.

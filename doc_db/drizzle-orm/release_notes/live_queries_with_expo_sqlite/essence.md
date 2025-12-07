@@ -1,1 +1,0 @@
-useLiveQuery React Hook for Expo SQLite auto-rerunning queries on database changes, returning {data, error, updatedAt}

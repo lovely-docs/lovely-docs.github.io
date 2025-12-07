@@ -1,0 +1,1 @@
+**Setup:** Install drizzle-orm@beta, @sqlitecloud/drivers, dotenv, drizzle-kit@beta, tsx. Set SQLITE_CLOUD_CONNECTION_STRING env var. Connect with `drizzle()` from 'drizzle-orm/sqlite-cloud'. Create schema, config file, then insert/select/update/delete with standard Drizzle API.

@@ -1,0 +1,1 @@
+Tooltip component for hover-triggered supplementary info; requires Provider wrapper; supports state binding, custom positioning via Floating UI or static, transitions with forceMount, custom anchors; not mobile-compatible; non-essential content only.

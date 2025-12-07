@@ -1,1 +1,0 @@
-Sequential generations chain multiple generateText() calls with outputs feeding into subsequent prompts for multi-step workflows.

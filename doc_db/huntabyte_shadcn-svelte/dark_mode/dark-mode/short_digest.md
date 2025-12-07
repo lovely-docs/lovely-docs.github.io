@@ -1,1 +1,1 @@
-Install `mode-watcher` and add `ModeWatcher` component to root layout. Create mode toggles using `toggleMode()`, `setMode()`, or `resetMode()` functions with Button or DropdownMenu components.
+Install `mode-watcher`, add `<ModeWatcher />` to root layout, then create a toggle using `toggleMode()`, `setMode()`, or `resetMode()` functions with sun/moon icons.

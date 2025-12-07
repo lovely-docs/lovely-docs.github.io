@@ -1,7 +1,1 @@
-**createStreamableUI** streams React UI from server to client via Server Actions.
-
-**Import:** `import { createStreamableUI } from "@ai-sdk/rsc"`
-
-**Methods:** `update()` replaces UI, `append()` adds UI (prevents further updates), `done()` finalizes stream (required), `error()` signals errors to error boundary.
-
-**Note:** Experimental; use AI SDK UI for production.
+Server function to stream React UI from server to client. Methods: `update()` (replace UI), `append()` (add UI), `done()` (finalize stream—required), `error()` (signal error). Must call `done()` to prevent loading state.

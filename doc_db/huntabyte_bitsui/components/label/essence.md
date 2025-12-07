@@ -1,0 +1,1 @@
+Label component for associating text with form inputs; supports bindable ref, snippet children, render delegation, and data-label-root attribute.

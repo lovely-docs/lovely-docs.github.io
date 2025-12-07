@@ -1,0 +1,1 @@
+Svelte 5 lifecycle: onMount (after DOM mount, optional cleanup), onDestroy (before unmount, runs on server), tick (promise for DOM updates); deprecated beforeUpdate/afterUpdate replaced by $effect.pre/$effect for granular state-change reactions.

@@ -1,0 +1,1 @@
+InvalidDataContentError: thrown for invalid data content in multi-modal message parts; detect with isInstance() method; provides content and message properties.

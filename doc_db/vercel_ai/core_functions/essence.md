@@ -1,0 +1,1 @@
+Complete reference for AI SDK's core text/object generation, tool calling, embeddings, reranking, image/speech/transcription, middleware, provider management, and testing utilities.

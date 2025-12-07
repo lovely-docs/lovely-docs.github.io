@@ -1,57 +1,44 @@
 ## Button Component
 
-Displays a button or component that looks like a button.
+Reusable button with multiple variants (default, secondary, destructive, outline, ghost, link).
 
 ### Installation
-
 ```bash
 npx shadcn-svelte@latest add button -y -o
 ```
 
 ### Usage
-
 ```svelte
 <script lang="ts">
   import { Button } from "$lib/components/ui/button/index.js";
 </script>
-<Button variant="outline">Button</Button>
-```
 
-### Variants
+<Button>Default</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="destructive">Destructive</Button>
+<Button variant="outline">Outline</Button>
+<Button variant="ghost">Ghost</Button>
+<Button variant="link">Link</Button>
 
-`outline`, `secondary`, `destructive`, `ghost`, `link`
-
-### Link Conversion
-
-```svelte
+<!-- As link -->
 <Button href="/dashboard">Dashboard</Button>
-```
 
-Or use `buttonVariants` helper:
-
-```svelte
-<a href="/dashboard" class={buttonVariants({ variant: "outline" })}>
-  Dashboard
-</a>
-```
-
-### Icons and Sizes
-
-```svelte
+<!-- With icon -->
 <Button variant="outline" size="sm">
   <GitBranchIcon />
   Login with Email
 </Button>
+
+<!-- Icon only -->
 <Button variant="secondary" size="icon" class="size-8">
   <ChevronRightIcon />
 </Button>
-```
 
-### Disabled State
-
-```svelte
+<!-- Loading state -->
 <Button disabled>
   <Loader2Icon class="animate-spin" />
   Please wait
 </Button>
 ```
+
+Use `buttonVariants` helper to style links as buttons. Supports `size` prop and standard HTML attributes.

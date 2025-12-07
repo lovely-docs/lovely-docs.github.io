@@ -1,6 +1,6 @@
-## Command Component
+## Command
 
-Fast, composable, unstyled command menu for Svelte. Built on Bits UI.
+Fast, composable, unstyled command menu component for Svelte.
 
 ### Installation
 
@@ -8,11 +8,9 @@ Fast, composable, unstyled command menu for Svelte. Built on Bits UI.
 npx shadcn-svelte@latest add command -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Basic Usage
-
-Import and use the Command component with its subcomponents:
 
 ```svelte
 <script lang="ts">
@@ -26,32 +24,42 @@ Import and use the Command component with its subcomponents:
     <Command.Group heading="Suggestions">
       <Command.Item>Calendar</Command.Item>
       <Command.Item>Search Emoji</Command.Item>
-      <Command.Item>Calculator</Command.Item>
+      <Command.Item disabled>Calculator</Command.Item>
     </Command.Group>
     <Command.Separator />
     <Command.Group heading="Settings">
-      <Command.Item>Profile</Command.Item>
-      <Command.Item>Billing</Command.Item>
-      <Command.Item>Settings</Command.Item>
+      <Command.Item>
+        <span>Profile</span>
+        <Command.Shortcut>P</Command.Shortcut>
+      </Command.Item>
+      <Command.Item>
+        <span>Billing</span>
+        <Command.Shortcut>B</Command.Shortcut>
+      </Command.Item>
+      <Command.Item>
+        <span>Settings</span>
+        <Command.Shortcut>S</Command.Shortcut>
+      </Command.Item>
     </Command.Group>
   </Command.List>
 </Command.Root>
 ```
 
-### Component Structure
+### Components
 
-- `<Command.Root>` - Container component, accepts styling classes
-- `<Command.Input>` - Search/filter input field
-- `<Command.List>` - Scrollable list container
+- `<Command.Root>` - Container for the command menu
+- `<Command.Input>` - Search/input field
+- `<Command.List>` - Container for command items
 - `<Command.Empty>` - Message shown when no results match
 - `<Command.Group>` - Groups items with an optional heading
-- `<Command.Item>` - Individual command item (can be disabled)
-- `<Command.Separator>` - Visual divider between groups
-- `<Command.Shortcut>` - Display keyboard shortcut hint within an item
+- `<Command.Item>` - Individual command item (supports `disabled` prop)
+- `<Command.Separator>` - Visual separator between groups
+- `<Command.Shortcut>` - Displays keyboard shortcut hint
+- `<Command.Dialog>` - Dialog variant that wraps Command.Root with Dialog.Root
 
 ### Dialog Example
 
-Use `<Command.Dialog>` to display the command menu in a modal dialog:
+Use `<Command.Dialog>` to display the command menu in a modal dialog. It accepts props for both Dialog and Command components.
 
 ```svelte
 <script lang="ts">
@@ -78,16 +86,17 @@ Use `<Command.Dialog>` to display the command menu in a modal dialog:
       <Command.Item>Search Emoji</Command.Item>
       <Command.Item>Calculator</Command.Item>
     </Command.Group>
+    <Command.Group heading="Settings">
+      <Command.Item>Profile</Command.Item>
+      <Command.Item>Billing</Command.Item>
+      <Command.Item>Settings</Command.Item>
+    </Command.Group>
   </Command.List>
 </Command.Dialog>
 ```
 
-`<Command.Dialog>` accepts props for both Dialog.Root and Command.Root components. Bind the `open` state to control visibility.
+### Styling
 
-### Icon Styling
-
-As of 2024-10-30, `<Command.Item>` automatically applies icon styling: `gap-2 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0`. Icons placed inside items are automatically sized and spaced correctly.
-
-### API Reference
-
-Full API documentation available in Bits UI docs for the Command component.
+- Icons inside `<Command.Item>` are automatically styled with `gap-2 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0` classes
+- Component is unstyled by default; apply custom classes to `<Command.Root>` (e.g., `rounded-lg border shadow-md`)
+- Use Lucide Svelte icons for consistent iconography

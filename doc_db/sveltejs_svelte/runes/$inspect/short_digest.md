@@ -1,9 +1,1 @@
-## $inspect
-
-Development-only debugging rune that logs reactive state changes with stack traces. Re-runs whenever arguments change, tracking nested updates.
-
-```svelte
-$inspect(count, message); // logs on change
-$inspect(count).with((type, value) => { /* custom handler */ });
-$inspect.trace(); // traces which state caused effect to re-run
-```
+Development-only rune for reactive logging. `$inspect(value)` logs when value changes. Use `.with(callback)` for custom handlers or `$inspect.trace()` to trace effect/derived re-runs.

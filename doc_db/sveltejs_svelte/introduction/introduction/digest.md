@@ -1,1 +1,1 @@
-This page serves as the introduction section to the Svelte documentation. However, the actual content is not provided in the page excerpt - only the frontmatter metadata is shown. The page appears to be auto-generated as part of the documentation build process.
+This page serves as the introduction section to the Svelte documentation. It is a structural/organizational page that marks the beginning of the documentation hierarchy. The page itself contains no substantive content - it is a placeholder or entry point for the introduction section of the docs.

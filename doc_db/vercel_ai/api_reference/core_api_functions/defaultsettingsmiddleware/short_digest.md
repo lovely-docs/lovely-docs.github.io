@@ -1,0 +1,1 @@
+Middleware that applies default settings to language model calls. Accepts a `settings` object with default parameters (temperature, maxOutputTokens, providerOptions, etc.). Merges defaults with call parameters, with explicit parameters taking precedence. Use with `wrapLanguageModel()` to apply defaults across multiple model invocations.

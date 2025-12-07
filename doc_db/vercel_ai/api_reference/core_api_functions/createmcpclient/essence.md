@@ -1,0 +1,1 @@
+Lightweight MCP client factory with tools/resources/prompts/elicitation support; configurable transport (stdio/SSE/HTTP with OAuth); error handling via MCPClientError and onUncaughtError callback.

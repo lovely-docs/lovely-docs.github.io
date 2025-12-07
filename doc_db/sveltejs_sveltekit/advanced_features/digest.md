@@ -1,84 +1,36 @@
 ## Advanced Routing
-- **Rest parameters**: `[...file]` matches variable segments; `[...rest]` matches zero or more
-- **Optional parameters**: `[[lang]]/home` matches both `home` and `en/home`; cannot follow rest parameters
-- **Matchers**: Create `src/params/fruit.js` with `match(param)` function to validate route parameters
-- **Route sorting**: Specificity > matchers > optional/rest > alphabetical
-- **Character encoding**: Use `[x+3a]` for `:`, `[x+2f]` for `/`, or Unicode `[u+nnnn]`
-- **Layout groups**: `(group)` directories organize routes without affecting URLs
-- **Breaking layouts**: `+page@segment` resets hierarchy; `+page@.svelte` inherits only root layout
+Rest parameters `[...file]` match variable segments: `/[org]/[repo]/tree/[branch]/[...file]` captures path segments. Optional parameters `[[lang]]` match with or without the segment. Matchers validate parameters via `src/params/fruit.js` exporting `match(param)` function. Route sorting prioritizes: specificity (no params > one param > more params), matchers, then alphabetical. Special characters in routes use hex escapes `[x+nn]` (e.g., `:` → `[x+3a]`) or Unicode `[u+nnnn]`. Layout groups `(app)` don't affect URLs but allow different layouts per group. Break out of layout hierarchy with `+page@segment` or `+layout@segment` to inherit from specific ancestor instead of parent.
 
 ## Hooks
-Server hooks in `src/hooks.server.js`:
-- `handle(event, resolve)` - Runs on every request; can modify response or bypass SvelteKit
-- `handleFetch(request, fetch)` - Modifies `event.fetch` calls (e.g., redirect API to localhost during SSR)
-- `handleValidationError` - Called when remote functions receive invalid arguments
-- `handleError` - Processes unexpected errors; allows logging and custom error objects
+Three hook files: `src/hooks.server.js`, `src/hooks.client.js`, `src/hooks.js`. **handle** runs on every request, receives `event` and `resolve`, can modify response or bypass SvelteKit. **resolve** accepts options: `transformPageChunk` for HTML transforms, `filterSerializedResponseHeaders` to control which headers serialize from load functions, `preload` to control asset preloading. **handleFetch** modifies `event.fetch` calls (useful for API proxying). **handleValidationError** handles Standard Schema validation failures. **handleError** catches unexpected errors during loading/rendering, receives `error`, `event`, `status`, `message`; customize error shape via `App.Error` interface. **init** runs once at startup for async initialization. **reroute** (universal) translates URLs to routes before `handle`, can be async, must be pure/idempotent. **transport** defines custom type serialization across server/client boundary with `encode`/`decode` functions.
 
-Universal hooks in `src/hooks.js`:
-- `reroute({ url })` - Changes URL-to-route mapping before `handle`
-- `transport` - Defines custom type encoders/decoders for server/client boundary
+## Error Handling
+Expected errors via `error(status, message)` from `@sveltejs/kit` render nearest `+error.svelte` with `page.error` containing error object. Unexpected errors show generic message, logged to console, passed to `handleError` hook. Customize fallback error page with `src/error.html` using `%sveltekit.status%` and `%sveltekit.error.message%` placeholders. Define `App.Error` interface for type-safe custom properties (always includes `message: string`).
 
-## Errors
-- **Expected errors**: Use `error(404, { message: 'Not found' })` to set status and render `+error.svelte`
-- **Customize error shape**: Declare `App.Error` interface in TypeScript
-- **Unexpected errors**: Logged but not exposed to users; process via `handleError` hook
-- **Fallback error page**: Create `src/error.html` with `%sveltekit.status%` and `%sveltekit.error.message%` placeholders
-
-## Link Options
-Control navigation with `data-sveltekit-*` attributes:
-- `data-sveltekit-preload-data="hover|tap"` - When to preload page data
-- `data-sveltekit-preload-code="eager|viewport|hover|tap"` - When to preload page code
-- `data-sveltekit-reload` - Force full-page navigation
-- `data-sveltekit-replacestate` - Replace history entry instead of push
-- `data-sveltekit-keepfocus` - Retain focus after navigation
-- `data-sveltekit-noscroll` - Prevent scroll to top
-- Disable with `"false"` value in nested elements
+## Link Navigation Options
+`data-sveltekit-*` attributes customize `<a>` and `<form method="GET">` behavior:
+- **preload-data**: `"hover"` (default), `"tap"`, `"eager"`, `"viewport"` - when to preload page data
+- **preload-code**: `"eager"`, `"viewport"`, `"hover"`, `"tap"` - when to preload page code
+- **reload**: Force full-page navigation instead of client-side
+- **replacestate**: Replace history entry instead of pushing new one
+- **keepfocus**: Retain focus on current element after navigation
+- **noscroll**: Prevent scroll to top after navigation
+Disable inherited attributes with `"false"` value. Respects `navigator.connection.saveData`.
 
 ## Service Workers
-SvelteKit auto-bundles `src/service-worker.js` if present. Access `$service-worker` module for `build`, `files`, `version`, and `prerendered` paths. Example: cache assets on install, clean old caches on activate, serve from cache with network fallback on fetch.
+Place `src/service-worker.js` for automatic bundling and registration. Access build/static paths via `$service-worker` module exporting `build`, `files`, `version`, `base`. Implement `install` event to cache assets, `activate` to clean old caches, `fetch` to intercept requests. Example: cache app files on install, network-first with cache fallback on fetch. During dev, service workers aren't bundled; use `type: dev ? 'module' : 'classic'` for manual registration. `build` and `prerendered` arrays empty during development.
 
-## Server-only Modules
-Prevent accidental exposure of sensitive data:
-- Mark modules with `.server` suffix: `secrets.server.js`
-- Or place in `$lib/server/`: `$lib/server/secrets.js`
-- `$env/static/private` and `$env/dynamic/private` only importable in server contexts
-- SvelteKit throws error if public code imports server-only modules, even indirectly
+## Server-Only Modules
+Prevent accidental exposure of secrets to browser. Mark modules as server-only via `.server` suffix (`secrets.server.js`) or `$lib/server/` directory. SvelteKit analyzes import chains and errors if browser code imports server-only modules, even indirectly or unused exports. `$env/static/private`, `$env/dynamic/private`, `$app/server` are built-in server-only modules. Illegal import detection disabled during tests when `process.env.TEST === 'true'`.
 
 ## Snapshots
-Preserve ephemeral DOM state across navigation. Export `snapshot` object from `+page.svelte` or `+layout.svelte`:
-```js
-export const snapshot = {
-  capture: () => comment,
-  restore: (value) => comment = value
-};
-```
-Data must be JSON-serializable to persist to `sessionStorage`.
+Preserve ephemeral DOM state (scroll, form values) across navigation. Export `snapshot` object from `+page.svelte` or `+layout.svelte` with `capture()` and `restore(value)` methods. `capture()` called before page updates, value stored in history stack. `restore()` called with stored value after page updates. Data must be JSON-serializable for `sessionStorage` persistence across page reloads.
 
 ## Shallow Routing
-Create history entries without navigation for modals/overlays:
-- `pushState(url, state)` - New history entry with state
-- `replaceState(url, state)` - Set state without new entry
-- `preloadData(href)` - Load route data before navigating
-- Access state via `page.state` from `$app/state`
-- Declare `App.PageState` interface for type safety
-- State is empty during SSR and on page reload
+Create history entries without navigation via `pushState(url, state)` and `replaceState(url, state)`. Access state via `page.state`. Useful for modals/overlays dismissible via back button. Use `preloadData(href)` to fetch route data for rendering another `+page.svelte` inside current page. Type-safe state via `App.PageState` interface. Requires JavaScript; `page.state` empty during SSR and on first page load.
 
 ## Observability
-Enable OpenTelemetry tracing in `svelte.config.js`:
-```js
-kit: {
-  experimental: {
-    tracing: { server: true },
-    instrumentation: { server: true }
-  }
-}
-```
-Access spans via `event.tracing.root` and `event.tracing.current` to add custom attributes. Instrumentation code goes in `src/instrumentation.server.ts`.
+Emit OpenTelemetry spans for server-side observability (experimental, opt-in via `kit.experimental.tracing.server` and `kit.experimental.instrumentation.server`). Traces `handle` hook, server/universal `load` functions, form actions, remote functions. Create `src/instrumentation.server.ts` for setup. Access `event.tracing.root` and `event.tracing.current` to add custom attributes. Example Jaeger setup with `@opentelemetry/sdk-node`, `@opentelemetry/auto-instrumentations-node`, `@opentelemetry/exporter-trace-otlp-proto`.
 
-## Packaging
-Build component libraries with `@sveltejs/package`:
-- `src/lib` is public-facing; `svelte-package` generates `dist` with preprocessed components and auto-generated type definitions
-- Configure `package.json` exports with `types` and `svelte` conditions
-- Set `sideEffects` for tree-shaking (mark CSS files as side effects)
-- Use `typesVersions` to map types for non-root exports if consumers can't use `"moduleResolution": "bundler"`
-- Avoid SvelteKit-specific modules; use fully specified relative imports with `.js` extensions
+## Component Library Packaging
+Use `@sveltejs/package` to build libraries. Structure: `src/lib` is public API, `src/routes` for docs/demo. `svelte-package` generates `dist` with preprocessed components and auto-generated type definitions. Configure `package.json`: **exports** with `types`, `svelte`, `default` conditions for entry points; **svelte** field for legacy compatibility; **sideEffects** to mark files with side effects (CSS always has). For non-root exports, use `typesVersions` to map types if consumers don't use `moduleResolution: bundler|node16|nodenext`. Avoid SvelteKit-specific modules; use `esm-env` instead. All relative imports must be fully specified with extensions (`.js` not `.ts`). Options: `-w/--watch`, `-i/--input`, `-o/--output`, `-p/--preserve-output`, `-t/--types`, `--tsconfig`.

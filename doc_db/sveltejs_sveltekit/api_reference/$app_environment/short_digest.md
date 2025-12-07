@@ -1,5 +1,1 @@
-Export four constants from `$app/environment`:
-- `browser: boolean` — running in browser
-- `building: boolean` — during build/prerender
-- `dev: boolean` — dev server running
-- `version: string` — from `config.kit.version.name`
+Environment constants: `browser`, `building`, `dev`, `version` — imported from `$app/environment` to detect runtime context (browser vs server, dev vs prod, build phase).

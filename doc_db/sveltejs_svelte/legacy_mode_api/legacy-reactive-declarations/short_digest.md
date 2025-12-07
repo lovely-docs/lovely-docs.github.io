@@ -1,0 +1,1 @@
+Top-level variables in legacy mode are automatically reactive. Reactivity is assignment-based, so mutations like `.push()` require a subsequent reassignment (`numbers = numbers`) to trigger updates.

@@ -1,0 +1,1 @@
+Count rows using count() function with database-specific type casting (PostgreSQL/MySQL need integer cast, SQLite returns integer); supports filtering, joins, and grouping.

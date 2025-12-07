@@ -1,4 +1,4 @@
-## Release v0.28.4 (2023-08-24)
+## v0.28.4 Release (2023-08-24)
 
 ### Fixes
 - Fixed imports in ESM-based projects (issue #1088)

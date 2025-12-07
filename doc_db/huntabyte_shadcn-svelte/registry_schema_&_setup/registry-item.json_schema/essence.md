@@ -1,0 +1,1 @@
+JSON schema specification for registry items with properties for name, type, files, dependencies, CSS variables, and metadata.

@@ -1,0 +1,1 @@
+Legacy mode requires `<svelte:component this={ref} />` for dynamic component rendering with proper instance lifecycle; runes mode handles this automatically.

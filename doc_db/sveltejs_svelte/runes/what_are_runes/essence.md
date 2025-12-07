@@ -1,1 +1,0 @@
-Runes are $ -prefixed keywords in Svelte that control the compiler and are part of the language syntax.

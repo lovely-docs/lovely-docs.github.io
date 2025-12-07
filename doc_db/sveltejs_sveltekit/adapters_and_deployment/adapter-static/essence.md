@@ -1,0 +1,1 @@
+Static site generator adapter with options for output directories, SPA fallback, compression, and strict mode; GitHub Pages support with base path configuration and 404 fallback.

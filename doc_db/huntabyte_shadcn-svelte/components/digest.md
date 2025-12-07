@@ -1,25 +1,11 @@
-## Available Components
+Complete list of 70+ UI components available in the shadcn-svelte library, including:
 
-The library provides 70+ pre-built UI components covering common interface patterns:
+**Form & Input Components:** Button, Button Group, Checkbox, Combobox, Date Picker, Dropdown Menu, Field, Input, Input Group, Input OTP, Label, Native Select, Radio Group, Select, Switch, Textarea, Toggle, Toggle Group
 
-**Form & Input Components**: Input, Textarea, Checkbox, Radio Group, Select, Native Select, Combobox, Toggle, Toggle Group, Switch, Label, Input Group, Input OTP, Field
+**Layout & Structure:** Accordion, Aspect Ratio, Breadcrumb, Card, Carousel, Collapsible, Drawer, Grid, Resizable, Scroll Area, Separator, Sheet, Sidebar
 
-**Display Components**: Badge, Avatar, Alert, Card, Skeleton, Progress, Spinner, Kbd, Typography, Separator, Scroll Area
+**Display & Feedback:** Alert, Alert Dialog, Avatar, Badge, Calendar, Chart, Dialog, Empty, Hover Card, Item, Kbd, Menubar, Navigation Menu, Pagination, Popover, Progress, Range Calendar, Skeleton, Slider, Spinner, Table, Tabs, Tooltip, Typography
 
-**Navigation Components**: Button, Button Group, Breadcrumb, Pagination, Menubar, Navigation Menu, Tabs
+**Utility:** Command, Context Menu, Data Table, Formsnap, Sonner (toast notifications)
 
-**Dialog & Overlay Components**: Dialog, Alert Dialog, Drawer, Sheet, Popover, Hover Card, Tooltip, Context Menu, Dropdown Menu
-
-**Data Components**: Data Table, Calendar, Range Calendar, Date Picker, Carousel, Chart
-
-**Layout Components**: Aspect Ratio, Resizable, Sidebar, Item
-
-**Interaction Components**: Accordion, Collapsible, Command
-
-**Specialized Components**: Empty, Sonner (toast notifications)
-
-All components are available for installation via the CLI. Install individual components with:
-```
-npx shadcn-svelte@latest add <component> -y -o
-```
-Where `-y` skips the confirmation prompt and `-o` overwrites existing files if needed.
+All components are documented with individual pages and can be installed via CLI.

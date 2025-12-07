@@ -1,1 +1,1 @@
-Static private environment variables that are injected at build time for server-side use only.
+Static private environment variables injected at build time; import from `$env/static/private`, declare in `.env`, override via CLI.

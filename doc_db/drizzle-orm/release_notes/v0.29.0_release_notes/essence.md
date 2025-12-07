@@ -1,0 +1,1 @@
+v0.29.0 adds MySQL unsigned bigint, dynamic query building with .$dynamic(), custom constraint names, read replicas with withReplicas(), set operators (UNION/INTERSECT/EXCEPT), MySQL/PostgreSQL proxy drivers, D1 Batch API, and requires Kit 0.20.0

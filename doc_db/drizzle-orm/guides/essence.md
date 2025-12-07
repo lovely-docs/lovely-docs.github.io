@@ -1,1 +1,1 @@
-Navigation/index page for guides section; renders Guides component
+Documentation index page that renders a list of available guides.

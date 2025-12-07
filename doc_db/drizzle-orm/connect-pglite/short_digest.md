@@ -1,11 +1,27 @@
 ## PGlite Integration
 
-WASM-based Postgres for browser/Node.js/Bun, 2.6mb gzipped, supports in-memory or persistent storage.
+WASM Postgres for browser/Node.js/Bun, 2.6mb gzipped, supports in-memory or persistent storage.
 
-**Installation:** `npm install drizzle-orm @electric-sql/pglite`
+**Installation:**
+```
+npm install drizzle-orm @electric-sql/pglite -D drizzle-kit
+```
 
 **Usage:**
-- In-memory: `drizzle()`
-- With persistence: `drizzle('path-to-dir')`
-- Advanced config: `drizzle({ connection: { dataDir: 'path-to-dir' }})`
-- Existing client: `drizzle({ client: new PGlite() })`
+```typescript
+import { drizzle } from 'drizzle-orm/pglite';
+
+// In-memory
+const db = drizzle();
+
+// With persistence
+const db = drizzle('path-to-dir');
+
+// Advanced config
+const db = drizzle({ connection: { dataDir: 'path-to-dir' }});
+
+// With existing client
+import { PGlite } from '@electric-sql/pglite';
+const client = new PGlite();
+const db = drizzle({ client });
+```

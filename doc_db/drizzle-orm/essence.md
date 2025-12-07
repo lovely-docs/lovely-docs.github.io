@@ -1,1 +1,1 @@
-Headless TypeScript ORM with SQL-like and relational query APIs, automatic migrations, full type safety, and zero dependencies for PostgreSQL, MySQL, and SQLite.
+Complete Drizzle ORM reference documentation covering all features, APIs, database integrations, CLI tools, and ecosystem.

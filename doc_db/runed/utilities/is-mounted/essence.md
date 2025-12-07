@@ -1,0 +1,1 @@
+IsMounted class provides a mounted state object with a `current` property; shorthand for onMount/effect-based mount tracking.

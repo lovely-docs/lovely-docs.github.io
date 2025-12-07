@@ -1,1 +1,1 @@
-Reference documentation for server-side rendering errors in Svelte with solutions for async handling, deprecated properties, and lifecycle restrictions.
+Server-side rendering errors: await in sync render, deprecated html property, unavailable lifecycle methods.

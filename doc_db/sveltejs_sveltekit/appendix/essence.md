@@ -1,1 +1,0 @@
-Reference documentation covering FAQs, integrations, debugging, migration guides from Sapper and v1, and terminology for SvelteKit development.

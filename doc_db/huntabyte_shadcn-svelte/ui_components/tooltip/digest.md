@@ -1,4 +1,4 @@
-## Tooltip Component
+## Tooltip
 
 A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.
 
@@ -15,11 +15,14 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 ```svelte
 <script lang="ts">
   import * as Tooltip from "$lib/components/ui/tooltip/index.js";
+  import { buttonVariants } from "../ui/button/index.js";
 </script>
 
 <Tooltip.Provider>
   <Tooltip.Root>
-    <Tooltip.Trigger>Hover</Tooltip.Trigger>
+    <Tooltip.Trigger class={buttonVariants({ variant: "outline" })}>
+      Hover
+    </Tooltip.Trigger>
     <Tooltip.Content>
       <p>Add to library</p>
     </Tooltip.Content>
@@ -27,10 +30,4 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 </Tooltip.Provider>
 ```
 
-The component structure consists of:
-- `Tooltip.Provider`: Wraps the tooltip context
-- `Tooltip.Root`: The root container for the tooltip
-- `Tooltip.Trigger`: The element that triggers the tooltip on hover or focus
-- `Tooltip.Content`: The popup content displayed when triggered
-
-The trigger element can accept styling through class bindings, such as button variants.
+Wrap content in `Tooltip.Provider`, then use `Tooltip.Root` with `Tooltip.Trigger` (the element that activates the tooltip) and `Tooltip.Content` (the popup content). The trigger can accept any styling classes.

@@ -1,0 +1,1 @@
+TiDB Cloud Serverless driver now supported. Import from `drizzle-orm/tidb-serverless`, initialize with `connect({ url: '...' })`, and use standard Drizzle queries.

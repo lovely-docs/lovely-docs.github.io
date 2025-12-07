@@ -1,1 +1,1 @@
-Embla Carousel component with sizing, spacing, vertical/horizontal orientation, options, reactive API for state/events, and plugin support.
+Embla-based carousel with sizing (basis classes), spacing (pl-/ml- utilities), vertical/horizontal orientation, configurable options, API access via setApi callback, and plugin support (Autoplay).

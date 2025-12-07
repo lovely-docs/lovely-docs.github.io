@@ -1,0 +1,1 @@
+Registry items define styles, themes, blocks, and CSS customizations. Key types: `registry:style` (extends or standalone), `registry:theme` (color schemes), `registry:block` (component groups). Support dependencies, CSS variables (theme/light/dark), custom CSS layers (base/components), utilities (simple/complex/functional), and animations (keyframes + theme vars).

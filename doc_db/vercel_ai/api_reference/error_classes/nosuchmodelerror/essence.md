@@ -1,0 +1,1 @@
+NoSuchModelError thrown when model ID not found; detect with isInstance() method; exposes modelId, modelType, message properties.

@@ -1,0 +1,1 @@
+Standardized LLM integration with four core functions: generateText, streamText, generateObject, streamObject for text and structured data generation in interactive and non-interactive contexts.

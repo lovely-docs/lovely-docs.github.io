@@ -1,1 +1,0 @@
-Reactive setInterval wrapper with pause/resume, tick counter, and optional callback; delay can be reactive.

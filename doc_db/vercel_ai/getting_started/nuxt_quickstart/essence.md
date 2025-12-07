@@ -1,1 +1,1 @@
-Build streaming chat UI in Nuxt with API route using streamText, Chat class for message management, tools with Zod schemas, and multi-step tool calling via stopWhen.
+Nuxt quickstart: set up API route with streamText/convertToModelMessages/createGateway, create Chat UI component with useChat hook, add tools with tool()/zod schemas, enable multi-step tool calls with stopWhen.

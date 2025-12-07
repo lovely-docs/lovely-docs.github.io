@@ -1,1 +1,0 @@
-Type helper extracting input/output types from tools for type-safe UIMessage handling

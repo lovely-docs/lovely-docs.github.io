@@ -1,33 +1,41 @@
-## Using Transitions with Bits UI Components
+## Using Transitions with Components
 
-Bits UI components don't support Svelte transition directives (`in:`, `out:`, `transition:`) directly. Instead, use the `forceMount` prop combined with the `child` snippet to apply transitions.
+Svelte transitions (in:, out:, transition:) don't work directly on components. Bits UI v5 removed the old workaround of exposing transition* props and instead provides `forceMount` prop and `child` snippet for flexible animation support.
 
 ### Default Behavior
-By default, components handle mounting/unmounting and wait for transitions to complete before removing from DOM. CSS transitions and animations work out of the box.
+Components handle mounting/unmounting automatically with transition support. CSS transitions and animations work out of the box (examples use tailwindcss-animate).
 
 ### Force Mounting Pattern
-Set `forceMount={true}` on conditionally rendered components, then use the `child` snippet to conditionally render and apply transitions:
+Use `forceMount` prop to keep component mounted in DOM, then use the `child` snippet to conditionally render and apply transitions:
 
 ```svelte
-<Dialog.Content forceMount>
-  {#snippet child({ props, open })}
-    {#if open}
-      <div {...props} transition:fly>
-        <!-- content -->
-      </div>
-    {/if}
-  {/snippet}
-</Dialog.Content>
+<Dialog.Root>
+  <Dialog.Content forceMount>
+    {#snippet child({ props, open })}
+      {#if open}
+        <div {...props} transition:fly>
+          <!-- content -->
+        </div>
+      {/if}
+    {/snippet}
+  </Dialog.Content>
+</Dialog.Root>
 ```
 
-### Reusable Wrapper Component
-For repeated use, create a wrapper component that encapsulates this pattern:
+For reusability, wrap this pattern in a custom component:
 
 ```svelte
 <script lang="ts">
-  import { Dialog, type WithoutChildrenOrChild } from "bits-ui";
+  import type { Snippet } from "svelte";
   import { fly } from "svelte/transition";
-  let { ref = $bindable(null), children, ...restProps }: WithoutChildrenOrChild<Dialog.ContentProps> & { children?: Snippet } = $props();
+  import { Dialog, type WithoutChildrenOrChild } from "bits-ui";
+  let {
+    ref = $bindable(null),
+    children,
+    ...restProps
+  }: WithoutChildrenOrChild<Dialog.ContentProps> & {
+    children?: Snippet;
+  } = $props();
 </script>
 <Dialog.Content bind:ref {...restProps} forceMount={true}>
   {#snippet child({ props, open })}
@@ -40,8 +48,10 @@ For repeated use, create a wrapper component that encapsulates this pattern:
 </Dialog.Content>
 ```
 
-### Floating UI Components
-For components using Floating UI (like `Popover.Content`), add a wrapper element and spread `wrapperProps`:
+Then use it with other Dialog components normally.
+
+### Floating Content Components
+For components using Floating UI (like Popover.Content), add a wrapper element and spread `wrapperProps`:
 
 ```svelte
 <Popover.Content forceMount>

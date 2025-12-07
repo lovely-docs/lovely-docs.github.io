@@ -1,29 +1,9 @@
 ## Kbd Component
 
-Displays keyboard input visually.
+Displays keyboard input text. Install with `npx shadcn-svelte@latest add kbd -y -o`.
 
-### Installation
+**Basic usage**: `<Kbd.Root>B</Kbd.Root>`
 
-```bash
-npx shadcn-svelte@latest add kbd -y -o
-```
+**Group keys**: `<Kbd.Group><Kbd.Root>Ctrl</Kbd.Root><Kbd.Root>B</Kbd.Root></Kbd.Group>`
 
-### Usage
-
-```svelte
-<script lang="ts">
-  import * as Kbd from "$lib/components/ui/kbd/index.js";
-</script>
-<Kbd.Root>B</Kbd.Root>
-<Kbd.Group>
-  <Kbd.Root>Ctrl</Kbd.Root>
-  <span>+</span>
-  <Kbd.Root>B</Kbd.Root>
-</Kbd.Group>
-```
-
-### Examples
-
-- **Button**: `<Button><Kbd.Root>Esc</Kbd.Root></Button>`
-- **Tooltip**: Wrap `Kbd.Root` in `Tooltip.Content`
-- **InputGroup**: Place `Kbd.Root` in `InputGroup.Addon`
+**In buttons, tooltips, and input groups**: Nest `Kbd.Root` inside Button, Tooltip.Content, or InputGroup.Addon components.

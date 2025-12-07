@@ -1,1 +1,0 @@
-Displays latest version releases and recent updates via the LatestReleases component.

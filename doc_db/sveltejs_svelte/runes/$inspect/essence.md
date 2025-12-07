@@ -1,1 +1,1 @@
-A development-only rune for logging and debugging reactive state changes with automatic re-execution and optional custom handlers.
+$inspect: reactive console.log for development; .with() for custom callbacks; .trace() to debug effect/derived re-runs.

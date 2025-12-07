@@ -1,0 +1,1 @@
+Middleware extracting XML-tagged reasoning from generated text; params: tagName (required), separator (default "\n"), startWithReasoning (default false); returns middleware processing streaming/non-streaming, exposing reasoning separately.

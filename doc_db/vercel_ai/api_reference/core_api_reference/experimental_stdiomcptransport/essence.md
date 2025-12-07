@@ -1,1 +1,0 @@
-Experimental stdio-based MCP transport for Node.js; configure with command, optional args, env vars, stderr stream, and working directory.

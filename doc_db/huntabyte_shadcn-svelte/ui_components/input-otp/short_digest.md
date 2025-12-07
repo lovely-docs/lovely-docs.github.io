@@ -2,29 +2,18 @@
 
 Accessible one-time password component with copy-paste functionality.
 
-### Installation
-
 ```bash
 npx shadcn-svelte@latest add input-otp -y -o
 ```
 
-### Basic Usage
-
+**Basic structure:**
 ```svelte
-<script lang="ts">
-  import * as InputOTP from "$lib/components/ui/input-otp/index.js";
-</script>
+import * as InputOTP from "$lib/components/ui/input-otp/index.js";
 
 <InputOTP.Root maxlength={6}>
   {#snippet children({ cells })}
     <InputOTP.Group>
-      {#each cells.slice(0, 3) as cell (cell)}
-        <InputOTP.Slot {cell} />
-      {/each}
-    </InputOTP.Group>
-    <InputOTP.Separator />
-    <InputOTP.Group>
-      {#each cells.slice(3, 6) as cell (cell)}
+      {#each cells as cell (cell)}
         <InputOTP.Slot {cell} />
       {/each}
     </InputOTP.Group>
@@ -32,9 +21,9 @@ npx shadcn-svelte@latest add input-otp -y -o
 </InputOTP.Root>
 ```
 
-### Key Features
-
-- **Pattern validation**: Use `pattern` prop with `REGEXP_ONLY_DIGITS_AND_CHARS` from bits-ui
-- **Invalid state**: Apply `aria-invalid` attribute to slots
-- **Form integration**: Works with sveltekit-superforms for validation and error handling
-- **Customizable layout**: Use `InputOTP.Separator` to divide cells into groups
+**Key features:**
+- `maxlength` prop for OTP length
+- `pattern` prop for validation (e.g., `REGEXP_ONLY_DIGITS_AND_CHARS` from bits-ui)
+- `InputOTP.Separator` for visual grouping
+- `aria-invalid` for error states
+- Integrates with sveltekit-superforms for form validation

@@ -1,0 +1,1 @@
+Build streaming chat UI in Svelte with AI SDK: setup gateway provider, create POST endpoint with streamText(), use Chat class in component, add tools with multi-step execution via stopWhen, handle tool parts in UI; Svelte classes require reference-based reactivity and context for synchronization.

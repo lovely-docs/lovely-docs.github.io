@@ -1,14 +1,10 @@
 ## PlanetScale Integration
 
-PlanetScale is a serverless MySQL platform. Access via HTTP using `drizzle-orm/planetscale-serverless` package.
+Serverless MySQL platform access via HTTP using `drizzle-orm/planetscale-serverless` package.
 
-### Installation
-```
-npm install drizzle-orm @planetscale/database
-npm install -D drizzle-kit
-```
+**Install:** `drizzle-orm @planetscale/database` and `drizzle-kit`
 
-### Setup
+**Usage:**
 ```typescript
 import { drizzle } from "drizzle-orm/planetscale-serverless";
 
@@ -17,6 +13,9 @@ const db = drizzle({ connection: {
   username: process.env["DATABASE_USERNAME"],
   password: process.env["DATABASE_PASSWORD"],
 }});
-```
 
-Or pass an existing `@planetscale/database` Client instance to `drizzle({ client })`.
+// Or with existing client:
+import { Client } from "@planetscale/database";
+const client = new Client({ host, username, password });
+const db = drizzle({ client });
+```

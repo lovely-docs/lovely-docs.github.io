@@ -1,1 +1,1 @@
-Use `:global(selector)` to apply styles globally to a single selector, or `:global { ... }` block for multiple selectors. Prepend keyframe names with `-global-` to make them globally accessible.
+Use `:global(selector)` to style individual selectors globally, or `:global { ... }` block for multiple selectors. Prepend `-global-` to @keyframes names for global animations.

@@ -1,0 +1,1 @@
+Searchable dropdown with single/multiple selection, keyboard navigation, Floating UI positioning, scroll buttons, item grouping, and Svelte transitions support.

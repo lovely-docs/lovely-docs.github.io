@@ -1,0 +1,1 @@
+Deprecated helper that pipes ReadableStream to Node.js ServerResponse with configurable status/headers; replaced by pipeDataStreamToResponse in streamText.

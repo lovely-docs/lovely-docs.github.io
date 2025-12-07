@@ -1,0 +1,1 @@
+MessageConversionError thrown on message conversion failure; detect via isInstance() method; exposes originalMessage and message properties.

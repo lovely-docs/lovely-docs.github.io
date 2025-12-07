@@ -1,1 +1,0 @@
-API for generating structured objects/arrays/enums/JSON from LLM prompts with schema validation, supporting multiple output modes, sampling controls, token limits, and provider-specific options.

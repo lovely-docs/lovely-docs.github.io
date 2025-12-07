@@ -1,0 +1,1 @@
+Toolbar with toggle groups (single/multiple), buttons, and links; state via bind:value or function binding; data attributes for styling state.

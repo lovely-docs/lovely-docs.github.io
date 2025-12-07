@@ -1,0 +1,1 @@
+Collapsible component with Root/Trigger/Content sub-components; supports controlled/uncontrolled state, Svelte transitions via forceMount+child snippet, and hiddenUntilFound for browser search integration.

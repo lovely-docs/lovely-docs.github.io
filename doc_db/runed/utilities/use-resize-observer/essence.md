@@ -1,0 +1,1 @@
+useResizeObserver hook: observe element dimensions via callback with ResizeObserverEntry array, stop() to unobserve

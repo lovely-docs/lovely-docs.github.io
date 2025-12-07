@@ -1,0 +1,1 @@
+Page options (prerender, ssr, csr, trailingSlash, config, entries) exported from layout/page files control per-route rendering: static generation, server-side, client-side, trailing slashes, adapter config, and dynamic route prerender parameters.

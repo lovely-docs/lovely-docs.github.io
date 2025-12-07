@@ -1,1 +1,0 @@
-Entry point page with links to setup guides for different databases and environments.

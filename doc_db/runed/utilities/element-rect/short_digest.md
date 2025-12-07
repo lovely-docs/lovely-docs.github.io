@@ -1,0 +1,1 @@
+Reactive element dimensions and position tracking. Constructor takes element getter, exposes `width`, `height`, `top`, `left`, `right`, `bottom`, `x`, `y` properties and `current` DOMRect object.

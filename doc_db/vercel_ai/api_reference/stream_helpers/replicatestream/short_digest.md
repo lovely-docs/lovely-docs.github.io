@@ -1,0 +1,1 @@
+**Removed in AI SDK 4.0**. Legacy utility that converts Replicate API Prediction objects to ReadableStreams via async fetch. Accepts optional callbacks (onStart, onToken, onCompletion, onFinal) and headers.

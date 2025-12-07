@@ -1,63 +1,86 @@
-## Image Optimization Approaches
+## Image Optimization Techniques
 
-**Vite's built-in handling**: Automatically processes imported assets, adds hashes for caching, and inlines small assets.
+Three approaches for optimizing images in SvelteKit projects:
+
+### Vite's Built-in Handling
+Automatically processes imported assets with hashing for caching and inlining of small assets:
 ```svelte
-import logo from '$lib/assets/logo.png';
+<script>
+	import logo from '$lib/assets/logo.png';
+</script>
 <img alt="The project logo" src={logo} />
 ```
 
-**@sveltejs/enhanced-img**: Build-time plugin that generates optimal formats (avif, webp), creates multiple sizes, sets intrinsic dimensions to prevent layout shift, and strips EXIF data. Only works with local files at build time.
+### @sveltejs/enhanced-img Plugin
+Provides automatic image optimization with multiple formats (avif, webp), responsive sizing, intrinsic dimensions, and EXIF stripping. Only works with build-time accessible images.
 
-Setup: Install `@sveltejs/enhanced-img`, add `enhancedImages()` plugin before `sveltekit()` in vite.config.js.
+**Setup:**
+```sh
+npm i -D @sveltejs/enhanced-img
+```
+```js
+import { enhancedImages } from '@sveltejs/enhanced-img';
+export default defineConfig({
+	plugins: [enhancedImages(), sveltekit()]
+});
+```
 
-Basic usage with static paths:
+**Basic usage:**
 ```svelte
 <enhanced:img src="./path/to/your/image.jpg" alt="An alt text" />
 ```
 
-Dynamic image selection with manual imports:
+**Dynamic imports:**
 ```svelte
-import MyImage from './path/to/your/image.jpg?enhanced';
+<script>
+	import MyImage from './path/to/your/image.jpg?enhanced';
+</script>
 <enhanced:img src={MyImage} alt="some alt text" />
 ```
 
-Or with glob imports:
+**With glob:**
 ```svelte
-const imageModules = import.meta.glob('/path/to/assets/*.{avif,gif,heif,jpeg,jpg,png,tiff,webp,svg}', {
-  eager: true,
-  query: { enhanced: true }
-})
+<script>
+	const imageModules = import.meta.glob(
+		'/path/to/assets/*.{avif,gif,heif,jpeg,jpg,png,tiff,webp,svg}',
+		{ eager: true, query: { enhanced: true } }
+	)
+</script>
 {#each Object.entries(imageModules) as [_path, module]}
-  <enhanced:img src={module.default} alt="some alt text" />
+	<enhanced:img src={module.default} alt="some alt text" />
 {/each}
 ```
 
-Width and height are automatically inferred and added to prevent layout shift. Use CSS to override dimensions if needed.
-
-For large images, specify `sizes` to request smaller versions on smaller devices:
+**Responsive sizing with srcset:**
 ```svelte
 <enhanced:img src="./image.png" sizes="min(1280px, 100vw)"/>
 ```
 
-Custom widths with `w` query parameter:
+**Custom widths:**
 ```svelte
-<enhanced:img src="./image.png?w=1280;640;400" sizes="(min-width:1920px) 1280px, (min-width:1080px) 640px, (min-width:768px) 400px" />
+<enhanced:img
+  src="./image.png?w=1280;640;400"
+  sizes="(min-width:1920px) 1280px, (min-width:1080px) 640px, (min-width:768px) 400px"
+/>
 ```
 
-Per-image transforms via query string:
+**Per-image transforms:**
 ```svelte
 <enhanced:img src="./path/to/your/image.jpg?blur=15" alt="An alt text" />
 ```
 
-**CDN-based optimization**: For images not accessible at build time (CMS, database, backend). CDNs serve appropriate formats based on User-Agent header. Libraries like `@unpic/svelte` provide CDN-agnostic support, or use provider-specific libraries (Cloudinary, Contentful, Storyblok, Contentstack).
+Width and height are automatically inferred and added to prevent layout shift. Use CSS to override dimensions if needed.
+
+### CDN-based Dynamic Loading
+For images not accessible at build time (CMS, database, backend). Provides dynamic optimization and flexibility but may have setup overhead and costs. Libraries like `@unpic/svelte` provide CDN-agnostic support; specific CDNs (Cloudinary) and CMS platforms (Contentful, Storyblok, Contentstack) offer Svelte integrations.
 
 ## Best Practices
 
-- Mix approaches in one project (Vite for meta tags, enhanced-img for homepage, CDN for user content)
+- Mix and match all three solutions in one project as appropriate
 - Serve all images via CDN to reduce latency
-- Provide images at 2x resolution for HiDPI displays; processing can downscale but not upscale
-- Use `sizes` for images much larger than mobile width (~400px) like hero images
-- Set `fetchpriority="high"` and avoid `loading="lazy"` for LCP images
-- Constrain images with container/styling and use width/height to prevent layout shift
+- Provide original images at 2x display width for HiDPI devices; processing can downscale but not upscale
+- For large images (hero images, >400px width), specify `sizes` to serve smaller versions on smaller devices
+- For important images (LCP), set `fetchpriority="high"` and avoid `loading="lazy"`
+- Constrain images with container/styling and use `width`/`height` to prevent layout shift
 - Always provide good `alt` text
-- Don't use `em` or `rem` in `sizes` declarations as they're relative to user's default font-size, not CSS-modified values
+- Don't use `em` or `rem` in `sizes` declarations; they're relative to user's default font-size, not CSS-modified values

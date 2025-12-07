@@ -1,1 +1,1 @@
-Introductory page directing to quickstart guides and backend framework examples (Node.js HTTP, Express, Hono, Fastify, Nest.js) for integrating AI SDK Core and AI SDK UI.
+Quickstart guides and backend framework examples (Node.js HTTP, Express, Hono, Fastify, Nest.js) for integrating AI SDK Core and AI SDK UI.

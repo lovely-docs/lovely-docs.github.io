@@ -1,0 +1,1 @@
+Placeholder for Drizzle Kit data seeding documentation, pending `drizzle-seed` package release.

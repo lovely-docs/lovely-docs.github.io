@@ -1,1 +1,0 @@
-Integrate Drizzle with Nile multi-tenant PostgreSQL: install pg, set NILEDB_URL, introspect with `drizzle-kit pull`, connect and query; supports Nile built-in tables and schema updates.

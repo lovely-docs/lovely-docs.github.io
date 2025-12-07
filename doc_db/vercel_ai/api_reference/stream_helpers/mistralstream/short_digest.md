@@ -1,0 +1,1 @@
+**Deprecated in SDK 4.0**. Converts Mistral API responses to ReadableStream with optional callbacks (onStart, onToken, onCompletion, onFinal). Use Mistral Provider instead.

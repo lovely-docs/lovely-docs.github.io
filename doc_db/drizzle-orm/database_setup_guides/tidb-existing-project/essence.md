@@ -1,0 +1,1 @@
+Integrate Drizzle ORM with TiDB in existing project: install @tidbcloud/serverless, set DATABASE_URL, configure mysql dialect, introspect database, connect with tidb-serverless dialect, query and optionally update schema.

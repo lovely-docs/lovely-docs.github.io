@@ -1,0 +1,1 @@
+Automatically resizes textarea height based on content. Uses an off-screen clone to measure scroll height. Options: `element` and `input` (required), `styleProp` ("height" or "minHeight"), `maxHeight`, `onResize` callback.

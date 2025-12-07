@@ -1,0 +1,1 @@
+`$$slots` is a legacy-mode object whose keys are the names of slots passed to a component. Use it to conditionally render content: `{#if $$slots.slotName}` renders only if that slot was provided by the parent.

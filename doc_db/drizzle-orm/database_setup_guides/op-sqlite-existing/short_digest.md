@@ -1,1 +1,1 @@
-Stub page redirecting to the main OP-SQLite getting started guide for existing project integration.
+Stub page redirecting to the main OP-SQLite getting started guide for existing projects.

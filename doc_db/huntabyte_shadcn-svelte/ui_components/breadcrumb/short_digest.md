@@ -1,6 +1,6 @@
-## Breadcrumb Component
+## Breadcrumb
 
-Displays hierarchical navigation path using links and separators.
+Displays navigation path using hierarchy of links.
 
 ### Installation
 
@@ -8,8 +8,17 @@ Displays hierarchical navigation path using links and separators.
 npx shadcn-svelte@latest add breadcrumb -y -o
 ```
 
-### Basic Usage
+### Components
 
+- `<Breadcrumb.Root>`, `<Breadcrumb.List>`, `<Breadcrumb.Item>` - Structure
+- `<Breadcrumb.Link href="...">` - Clickable link
+- `<Breadcrumb.Page>` - Current page (non-clickable)
+- `<Breadcrumb.Separator>` - Separator (customizable via slot)
+- `<Breadcrumb.Ellipsis>` - Collapsed state indicator
+
+### Examples
+
+**Basic:**
 ```svelte
 <Breadcrumb.Root>
   <Breadcrumb.List>
@@ -24,33 +33,10 @@ npx shadcn-svelte@latest add breadcrumb -y -o
 </Breadcrumb.Root>
 ```
 
-### Key Components
+**Custom separator:** Pass component to `<Breadcrumb.Separator>` slot.
 
-- `<Breadcrumb.Link>` - Clickable link with `href`
-- `<Breadcrumb.Page>` - Current page (non-clickable)
-- `<Breadcrumb.Separator>` - Divider (accepts custom slot content)
-- `<Breadcrumb.Ellipsis>` - Collapsed state indicator
+**Dropdown:** Compose `<Breadcrumb.Item>` with `<DropdownMenu>`.
 
-### Examples
+**Collapsed:** Use `<Breadcrumb.Ellipsis />` for long breadcrumbs.
 
-**Custom separator:**
-```svelte
-<Breadcrumb.Separator>
-  <SlashIcon />
-</Breadcrumb.Separator>
-```
-
-**Dropdown integration:**
-```svelte
-<Breadcrumb.Item>
-  <DropdownMenu.Root>
-    <DropdownMenu.Trigger>Components <ChevronDownIcon /></DropdownMenu.Trigger>
-    <DropdownMenu.Content align="start">
-      <DropdownMenu.Item>Documentation</DropdownMenu.Item>
-    </DropdownMenu.Content>
-  </DropdownMenu.Root>
-</Breadcrumb.Item>
-```
-
-**Responsive (desktop dropdown, mobile drawer):**
-Use `MediaQuery("(min-width: 768px)")` to conditionally render `<DropdownMenu />` or `<Drawer />` with `<Breadcrumb.Ellipsis />` for collapsed items.
+**Responsive:** Use `MediaQuery` to show `<DropdownMenu>` on desktop and `<Drawer>` on mobile.

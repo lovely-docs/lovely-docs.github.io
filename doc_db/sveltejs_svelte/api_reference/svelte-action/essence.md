@@ -1,0 +1,1 @@
+Action and ActionReturn TypeScript interfaces for typing element lifecycle functions with optional update/destroy callbacks and custom attributes/events.

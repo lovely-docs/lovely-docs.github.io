@@ -1,0 +1,1 @@
+Index page for Svelte template syntax documentation. Covers variable interpolation, directives (if/each/on/bind), event handling, two-way binding, conditional/list rendering, and component composition. Specific content is auto-generated.

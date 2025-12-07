@@ -1,0 +1,1 @@
+$$slots object in legacy mode contains keys for each slot passed to a component; check presence with {#if $$slots.name} to conditionally render slot content.

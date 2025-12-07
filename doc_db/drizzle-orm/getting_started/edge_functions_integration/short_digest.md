@@ -1,0 +1,5 @@
+**Netlify Edge Functions:** Setup with Neon (neon driver) or Supabase (postgres-js), define schema, configure import_map.json and netlify.toml, connect via `neon()`/`postgres()` and `drizzle()`, deploy with netlify CLI.
+
+**Supabase Edge Functions:** Schema definition, `supabase init`, generate migrations, create function with deno.json imports, connect via `postgres()` with `{ prepare: false }` for pooling, local test with `supabase functions serve`, deploy with `supabase link`, `db push`, `secrets set`, and `functions deploy`.
+
+**Vercel Edge Functions:** Choose edge-compatible driver (Neon/@neondatabase/serverless, Vercel/@vercel/postgres, PlanetScale/@planetscale/database, Turso/@libsql/client), define schema, configure drizzle.config.ts, generate/migrate, connect in db/index.ts, create API route with `runtime: 'edge'` and `dynamic: 'force-dynamic'`, deploy with vercel CLI and env vars.

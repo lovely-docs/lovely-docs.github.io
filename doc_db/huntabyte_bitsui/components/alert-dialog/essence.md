@@ -1,0 +1,1 @@
+Modal dialog component with compound sub-components; supports state binding, focus management, scroll locking, escape/outside interaction customization, and nested dialogs with depth tracking.

@@ -1,0 +1,1 @@
+Headless TypeScript ORM with SQL-like and relational query APIs, zero dependencies, serverless-ready, doesn't force project structure.

@@ -1,1 +1,1 @@
-Effects run side effects when state updates, automatically tracking synchronous dependencies and re-running on changes, with variants for pre-DOM execution, tracking context detection, and manual control.
+$effect runs side-effect functions when tracked state changes; variants: $effect.pre (before DOM), $effect.tracking (check if tracked), $effect.pending (promise count), $effect.root (manual cleanup); avoid for state sync ($derived instead) or circular updates (use function bindings).

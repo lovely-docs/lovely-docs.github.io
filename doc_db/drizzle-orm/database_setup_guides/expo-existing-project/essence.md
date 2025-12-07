@@ -1,0 +1,1 @@
+No dedicated guide for Expo in existing projects; use the new project guide instead.

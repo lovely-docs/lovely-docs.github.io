@@ -1,1 +1,1 @@
-How to handle expected and unexpected errors in SvelteKit, customize error objects, and control error page rendering.
+Expected errors via error(status, message) render +error.svelte; unexpected errors show generic message and go through handleError hook; customize fallback with src/error.html; define App.Error interface for type-safe custom properties.

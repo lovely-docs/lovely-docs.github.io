@@ -1,0 +1,1 @@
+11-step guide to integrate Drizzle ORM into existing Supabase PostgreSQL project: install postgres driver, configure DATABASE_URL and drizzle.config.ts, introspect existing schema, connect and query database, optionally update schema and apply migrations.

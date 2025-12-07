@@ -1,1 +1,0 @@
-CLI tool for SQL migrations with commands for generating, applying, pushing, pulling, and introspecting schemas; configured via drizzle.config.ts with dialect and schema path.

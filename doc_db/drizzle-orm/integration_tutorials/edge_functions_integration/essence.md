@@ -1,1 +1,0 @@
-Integration guides for deploying Drizzle ORM with edge function platforms (Netlify, Supabase, Vercel) using edge-compatible database drivers.

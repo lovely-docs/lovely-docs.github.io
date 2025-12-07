@@ -1,50 +1,36 @@
-## Setup Drizzle ORM with SQLite in an Existing Project
+## Setup Drizzle ORM with SQLite in an existing project
 
-This guide walks through integrating Drizzle ORM into an existing SQLite database project using LibSQL client.
+This guide covers integrating Drizzle ORM into an existing SQLite database project using LibSQL (a SQLite fork optimized for low latency).
 
 ### Prerequisites
 - **dotenv** - for managing environment variables
 - **tsx** - for running TypeScript files
-- **libsql** - SQLite fork optimized for low query latency
+- **libsql** - SQLite fork optimized for global applications
 
-### Installation & Configuration
+### Step-by-step setup
 
-**Step 1: Install packages**
-Install `@libsql/client` package.
+1. **Install packages**: Install `@libsql/client`
 
-**Step 2: Setup connection variables**
-Create environment variable `DB_FILE_NAME` with LibSQL format. For local SQLite files, prefix with `file:`:
-```
-DB_FILE_NAME=file:local.db
-```
+2. **Setup environment variables**: Create a `.env` file with database connection details
+   ```
+   DB_FILE_NAME=file:local.db
+   ```
+   Note: LibSQL requires the `file:` prefix for local SQLite databases
 
-**Step 3: Setup Drizzle config file**
-Configure Drizzle with SQLite dialect and reference the `DB_FILE_NAME` environment variable.
+3. **Setup Drizzle config**: Create `drizzle.config.ts` with SQLite dialect and environment variable reference
 
-### Database Integration
+4. **Introspect existing database**: Run introspection to generate schema from existing SQLite database
 
-**Step 4: Introspect your database**
-Run introspection to analyze existing SQLite database schema.
+5. **Transfer introspected schema**: Move generated schema code to your actual schema file
 
-**Step 5: Transfer code to schema file**
-Move introspected schema code to your actual schema file.
+6. **Connect to database**: Setup LibSQL client connection in your application code
 
-**Step 6: Connect Drizzle ORM to database**
-Establish connection using LibSQL client with the configured database file.
+7. **Query the database**: Write and execute queries using the connected Drizzle ORM instance
 
-**Step 7: Query the database**
-Execute queries against the database using Drizzle ORM with LibSQL dialect.
+8. **Run your code**: Execute the TypeScript file using tsx
 
-**Step 8: Run index.ts file**
-Execute the TypeScript file to verify setup.
+9. **Update schema (optional)**: Modify table definitions as needed
 
-### Optional: Schema Updates
+10. **Apply changes (optional)**: Run migrations to update the database with schema changes
 
-**Step 9: Update table schema**
-Modify table definitions as needed.
-
-**Step 9 (alt): Apply changes to database**
-Apply schema changes to the database.
-
-**Step 10: Query with new fields**
-Execute queries using updated schema with new fields.
+11. **Query with new fields (optional)**: Test queries against updated schema

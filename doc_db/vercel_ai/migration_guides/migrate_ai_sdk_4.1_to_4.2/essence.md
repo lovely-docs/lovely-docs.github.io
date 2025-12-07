@@ -1,1 +1,0 @@
-AI SDK 4.2: stabilize APIs (remove experimental_ prefix), require zod ^3.23.8, redesign useChat to combine assistant messages into single message with ordered parts array (text, reasoning, tool-invocation, source, file) instead of separate properties.

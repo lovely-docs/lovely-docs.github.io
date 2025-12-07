@@ -1,0 +1,1 @@
+**DEPRECATED in AI SDK 4.0** - Legacy utility that converts Anthropic SDK responses to ReadableStream with optional callbacks (onStart, onToken, onCompletion, onFinal). Use Anthropic Provider instead.

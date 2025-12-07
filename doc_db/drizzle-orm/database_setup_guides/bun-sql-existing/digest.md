@@ -1,49 +1,59 @@
-## Setup Drizzle ORM with Bun SQL in an existing PostgreSQL project
+## Setup Drizzle ORM with Bun SQL in an existing project
 
-### Prerequisites
-- **dotenv** - for managing environment variables
-- **bun** - JavaScript all-in-one toolkit
-- **Bun SQL** - native bindings for PostgreSQL databases
+**Prerequisites:**
+- dotenv for environment variables
+- Bun JavaScript toolkit
+- Bun SQL native bindings for PostgreSQL
 
-### Important Note
-Bun version 1.2.0 has issues with concurrent statement execution that may cause errors when running multiple queries simultaneously. This is tracked in a GitHub issue and should be resolved in future versions.
+**Known Issue:** Bun v1.2.0 has concurrent statement execution issues that may cause errors when running multiple queries simultaneously.
 
-### Installation Steps
-
-**Step 1: Install packages**
+**Installation:**
 ```bash
 npm install drizzle-orm dotenv
 npm install -D drizzle-kit @types/bun
 ```
 
-**Step 2: Setup environment variables**
-Create a `.env` file with `DATABASE_URL` pointing to your PostgreSQL database.
+**Setup Steps:**
 
-**Step 3: Setup Drizzle config**
-Create a `drizzle.config.ts` file with dialect set to `postgresql` and reference the `DATABASE_URL` environment variable.
+1. Create `.env` file with `DATABASE_URL` variable pointing to your PostgreSQL database
 
-**Step 4: Introspect your database**
-Run introspection to generate schema from existing PostgreSQL database.
+2. Create `drizzle.config.ts`:
+```typescript
+import { defineConfig } from 'drizzle-kit';
 
-**Step 5: Transfer introspected code**
-Move the generated schema code to your actual schema file.
+export default defineConfig({
+  dialect: 'postgresql',
+  dbCredentials: {
+    url: process.env.DATABASE_URL!,
+  },
+});
+```
 
-**Step 6: Connect Drizzle ORM to the database**
-Setup the database connection using Bun SQL bindings.
+3. Introspect existing database to generate schema:
+```bash
+drizzle-kit introspect:pg
+```
 
-**Step 7: Query the database**
-Write queries using the Drizzle ORM API with Bun SQL dialect and `DATABASE_URL` environment variable.
+4. Transfer generated schema to your actual schema file
 
-**Step 8: Run the script**
+5. Connect to database in `src/index.ts`:
+```typescript
+import { drizzle } from 'drizzle-orm/bun';
+import { sql } from 'bun:sql';
+
+const db = drizzle(sql);
+```
+
+6. Query the database:
+```typescript
+const result = await db.query.users.findMany();
+```
+
+7. Run with Bun:
 ```bash
 bun src/index.ts
 ```
 
-**Step 9 (Optional): Update table schema**
-Modify your schema definitions as needed.
+8. (Optional) Update table schema and apply migrations with `drizzle-kit push:pg`
 
-**Step 10 (Optional): Apply changes to database**
-Run migrations to apply schema changes to the database.
-
-**Step 11 (Optional): Query with new fields**
-Test queries against the updated schema with new fields.
+9. (Optional) Query with new fields after schema updates

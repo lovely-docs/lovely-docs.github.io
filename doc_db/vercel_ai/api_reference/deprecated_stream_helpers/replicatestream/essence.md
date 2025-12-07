@@ -1,1 +1,0 @@
-Deprecated ReplicateStream utility (removed in SDK 4.0) converts Replicate Prediction objects to Promise<ReadableStream> with optional callbacks and headers.

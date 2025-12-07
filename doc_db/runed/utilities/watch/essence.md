@@ -1,1 +1,1 @@
-watch: manually track specific reactive dependencies with callback receiving current/previous values; variants: watch.pre, watchOnce, watchOnce.pre; options: lazy
+watch(getter, callback, options?) - manually track specific reactive dependencies; supports single/array sources, deep watching, lazy execution, and one-time variants

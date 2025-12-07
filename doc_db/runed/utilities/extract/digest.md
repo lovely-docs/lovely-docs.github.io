@@ -1,31 +1,36 @@
 ## Purpose
-`extract` resolves either a getter function or a static value to a plain value, simplifying utility functions that accept both reactive and static inputs.
+The `extract` utility resolves either a getter function or a static value to a plain value, simplifying code that needs to handle both reactive and static inputs.
 
-## Problem It Solves
-APIs often accept `MaybeGetter<T>` - either a reactive getter or a static value. Without `extract`, handling both requires verbose conditional logic:
+## Problem
+APIs that accept `MaybeGetter<T>` (either a function returning T or a static value) require verbose conditional logic:
 ```ts
 typeof wait === "function" ? (wait() ?? 250) : (wait ?? 250)
 ```
 
-## Usage
+## Solution
 ```ts
 import { extract } from "runed";
 
 function throwConfetti(intervalProp?: MaybeGetter<number | undefined>) {
 	const interval = $derived(extract(intervalProp, 100));
 }
+
+// Also works with Debounced:
+const d1 = new Debounced(() => search, () => debounceTime);
+const d2 = new Debounced(() => search, 500);
+const d3 = new Debounced(() => search);
 ```
 
 ## Behavior
-`extract(input, fallback)` handles four cases:
+`extract(input, fallback)` resolves:
 - Static value → returns the value
-- `undefined` → returns the fallback
-- Function returning a value → returns the function result
-- Function returning `undefined` → returns the fallback
+- `undefined` → returns fallback
+- Function returning value → returns the result
+- Function returning `undefined` → returns fallback
 
-The fallback is optional; omitting it returns `T | undefined`.
+Fallback is optional; omitting it returns `T | undefined`.
 
-## Type Signatures
+## Types
 ```ts
 function extract<T>(input: MaybeGetter<T | undefined>, fallback: T): T;
 function extract<T>(input: MaybeGetter<T | undefined>): T | undefined;

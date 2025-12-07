@@ -1,101 +1,105 @@
 ## Generated Columns
 
-Generated columns are database columns whose values are automatically computed based on expressions involving other columns in the same table. They help ensure data consistency, simplify database design, and improve query performance.
+Generated columns are database columns whose values are automatically computed based on expressions involving other columns. Two types exist:
 
-### Types
+1. **Virtual (non-persistent)**: Computed dynamically on query, no storage overhead
+2. **Stored (persistent)**: Computed on insert/update and stored, can be indexed
 
-**Virtual (non-persistent)**: Computed dynamically on each query, no storage space used.
-
-**Stored (persistent)**: Computed during insert/update and stored in the database, can be indexed.
-
-### Use Cases
-
-- Deriving new data from existing columns
-- Automating calculations to avoid manual updates
-- Enforcing data integrity and consistency
-- Simplifying application logic by keeping complex calculations in the database schema
+Benefits: derive new data, automate calculations, enforce data integrity, simplify application logic.
 
 ### PostgreSQL
 
 **Types**: STORED only
 
-**Capabilities**:
-- Precomputes complex expressions
-- Supports indexing on generated columns
+**Drizzle API**: `.generatedAlwaysAs()` on any column type
 
-**Limitations**:
-- Cannot specify default values
-- Expressions cannot reference other generated columns or include subqueries
-- Schema changes required to modify expressions
-- Cannot use in primary keys, foreign keys, or unique constraints
+Three ways to specify expressions:
 
-**Drizzle API**: Use `.generatedAlwaysAs()` on any column type. Accepts expressions in three ways:
+**String literal**:
+```ts
+export const test = pgTable("test", {
+    generatedName: text("gen_name").generatedAlwaysAs(`hello world!`),
+});
+// CREATE TABLE "test" ("gen_name" text GENERATED ALWAYS AS (hello world!) STORED);
+```
 
-1. **String**: `text("gen_name").generatedAlwaysAs(\`hello world!\`)`
-2. **SQL tag**: `text("gen_name").generatedAlwaysAs(sql\`hello "world"!\`)` - for escaping values
-3. **Callback**: `text("gen_name").generatedAlwaysAs((): SQL => sql\`hi, ${test.name}!\`)` - for column references
+**SQL tag** (for escaping):
+```ts
+generatedName: text("gen_name").generatedAlwaysAs(sql`hello "world"!`),
+// CREATE TABLE "test" ("gen_name" text GENERATED ALWAYS AS (hello "world"!) STORED);
+```
 
-**Example with full-text search**:
-```typescript
+**Callback** (to reference columns):
+```ts
+export const test = pgTable("test", {
+    name: text("first_name"),
+    generatedName: text("gen_name").generatedAlwaysAs(
+      (): SQL => sql`hi, ${test.name}!`
+    ),
+});
+// CREATE TABLE "test" ("first_name" text, "gen_name" text GENERATED ALWAYS AS (hi, "test"."first_name"!) STORED);
+```
+
+**Full-text search example**:
+```ts
 const tsVector = customType<{ data: string }>({
-  dataType() { return "tsvector"; }
+  dataType() { return "tsvector"; },
 });
 
 export const test = pgTable("test", {
-  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
-  content: text("content"),
-  contentSearch: tsVector("content_search", { dimensions: 3 })
-    .generatedAlwaysAs((): SQL => sql`to_tsvector('english', ${test.content})`),
-}, (t) => [index("idx_content_search").using("gin", t.contentSearch)]);
+    id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+    content: text("content"),
+    contentSearch: tsVector("content_search", { dimensions: 3 }).generatedAlwaysAs(
+      (): SQL => sql`to_tsvector('english', ${test.content})`
+    ),
+  },
+  (t) => [index("idx_content_search").using("gin", t.contentSearch)]
+);
 ```
+
+**Limitations**: Cannot specify defaults, reference other generated columns, use subqueries, modify expressions without schema changes, or use in primary/foreign/unique keys.
 
 ### MySQL
 
 **Types**: STORED, VIRTUAL
 
-**Capabilities**:
-- Used in SELECT, INSERT, UPDATE, DELETE statements
-- Both virtual and stored columns can be indexed
-- Can specify NOT NULL and other constraints
+**Drizzle API**: `.generatedAlwaysAs()` with optional `{ mode: "stored" | "virtual" }` parameter (defaults to VIRTUAL)
 
-**Limitations**:
-- Cannot directly insert or update values in generated columns
+Same three expression formats as PostgreSQL:
 
-**Drizzle API**: Same three expression formats as PostgreSQL. For MySQL, specify mode:
-
-```typescript
+```ts
 export const users = mysqlTable("users", {
-  name: text("first_name"),
-  storedGenerated: text("stored_gen").generatedAlwaysAs(
-    (): SQL => sql`${users.name} || 'hello'`,
-    { mode: "stored" }
-  ),
-  virtualGenerated: text("virtual_gen").generatedAlwaysAs(
-    (): SQL => sql`${users.name} || 'hello'`,
-    { mode: "virtual" }
-  ),
+    id: int("id"),
+    name: text("name"),
+    storedGenerated: text("stored_gen").generatedAlwaysAs(
+      (): SQL => sql`${users.name} || 'hello'`,
+      { mode: "stored" }
+    ),
+    virtualGenerated: text("virtual_gen").generatedAlwaysAs(
+      (): SQL => sql`${users.name} || 'hello'`,
+      { mode: "virtual" }
+    ),
 });
+// CREATE TABLE `users` (
+//   `id` int, `name` text,
+//   `stored_gen` text GENERATED ALWAYS AS (`users`.`name` || 'hello') STORED,
+//   `virtual_gen` text GENERATED ALWAYS AS (`users`.`name` || 'hello') VIRTUAL
+// );
 ```
 
 **Drizzle Kit limitations for `push` command**:
-- Cannot change generated constraint expression and type - must drop column, push, then add with new expression
-- `generate` command has no limitations
+1. Cannot change generated expression or type - must drop column, push, then add with new expression (data is restored since it's generated)
+2. `generate` command has no limitations
 
 ### SQLite
 
 **Types**: STORED, VIRTUAL
 
-**Capabilities**:
-- Used in SELECT, INSERT, UPDATE, DELETE statements
-- Both virtual and stored columns can be indexed
-- Can specify NOT NULL and other constraints
+**Drizzle API**: `.generatedAlwaysAs()` with optional `{ mode: "stored" | "virtual" }` parameter (defaults to VIRTUAL)
 
-**Limitations**:
-- Cannot directly insert or update values in generated columns
+Same three expression formats:
 
-**Drizzle API**: Same three expression formats. Specify mode like MySQL:
-
-```typescript
+```ts
 export const users = sqliteTable("users", {
   id: int("id"),
   name: text("name"),
@@ -108,14 +112,17 @@ export const users = sqliteTable("users", {
     { mode: "virtual" }
   ),
 });
+// CREATE TABLE `users` (
+//   `id` integer, `name` text,
+//   `stored_gen` text GENERATED ALWAYS AS ("name" || 'hello') STORED,
+//   `virtual_gen` text GENERATED ALWAYS AS ("name" || 'hello') VIRTUAL
+// );
 ```
 
-**Drizzle Kit limitations for `push` and `generate` commands**:
-- Cannot change stored generated expression in existing table - must delete and recreate table
-- Cannot add stored generated expression to existing column - can only add virtual
-- Cannot change stored generated expression - can only change virtual
-- Cannot change from virtual to stored - can only change from stored to virtual
+**Drizzle Kit limitations for `push` and `generate`**:
+1. Cannot change stored generated expression - requires table recreation (data migration needed in future)
+2. Cannot add stored expression to existing column, but can add virtual
+3. Cannot change stored expression, but can change virtual
+4. Cannot change from virtual to stored, but can change from stored to virtual
 
-### Requirements
-
-Requires `drizzle-orm@0.32.0` or higher and `drizzle-kit@0.23.0` or higher
+**Requirements**: drizzle-orm@0.32.0+, drizzle-kit@0.23.0+

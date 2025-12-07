@@ -1,1 +1,0 @@
-PostGIS geometry point support: manual extension setup, point column definition with GIST indexing, insertion methods (object/tuple/SQL), distance queries with `<->` and `ST_Distance()`, rectangular filtering with `ST_Within()` and `ST_MakeEnvelope()`.

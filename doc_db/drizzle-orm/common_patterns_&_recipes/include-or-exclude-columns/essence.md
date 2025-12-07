@@ -1,0 +1,1 @@
+Multiple methods to include/exclude columns: .select() with field objects, getTableColumns() utility with spread/destructuring, relational queries with columns/extras/with options, conditional selection with spread operators.

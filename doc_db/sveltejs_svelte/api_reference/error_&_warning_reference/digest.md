@@ -1,227 +1,141 @@
-## Error & Warning Reference
+## Complete Error and Warning Reference for Svelte
 
-Comprehensive reference for all Svelte compiler and runtime errors and warnings.
+Comprehensive documentation of all runtime errors, compiler errors, compiler warnings, and server-side errors in Svelte 5.
 
-### Client-Side Errors
-**Reactivity & State**
-- `async_derived_orphan`: Async deriveds require effect context
-- `derived_references_self`: Derived values cannot reference themselves
-- `state_unsafe_mutation`: Cannot update state in `$derived`, `$inspect`, or template expressions; use `$effect`
-- `state_descriptors_fixed`: Property descriptors on `$state` objects must have `value` and be `enumerable`, `configurable`, `writable`
-- `effect_update_depth_exceeded`: Effect reads and writes same state causing infinite loop; use `untrack()` if necessary
+### Client-side Runtime Errors
 
-**Effects**
-- `effect_orphan`: Runes like `$effect` only work inside component initialization or other effects
-- `effect_in_teardown`: Cannot use runes inside effect cleanup functions
-- `effect_pending_outside_reaction`: `$effect.pending()` only works inside effects or deriveds
-- `flush_sync_in_effect`: Cannot call `flushSync()` inside an effect
+**Reactivity Errors**: `async_derived_orphan` (async deriveds need effects), `derived_references_self`, `effect_in_unowned_derived`, `effect_orphan`, `effect_in_teardown`, `effect_pending_outside_reaction`, `effect_update_depth_exceeded` (infinite loops from reading/writing same state - use `untrack()` or regular variables), `state_unsafe_mutation` (cannot mutate state in derived/inspect/templates - make everything derived or use effects).
 
-**Binding**
-- `bind_invalid_checkbox_value`: Use `bind:checked` instead of `bind:value` for checkboxes
-- `bind_not_bindable`: Mark properties as bindable: `let { key = $bindable() } = $props()`
-- `props_rest_readonly`: Rest element properties from `$props()` are readonly
+**Binding Errors**: `bind_invalid_checkbox_value` (use `bind:checked`), `bind_invalid_export` (use `bind:this`), `bind_not_bindable` (mark with `$bindable()`), `props_invalid_value` (cannot bind undefined when fallback exists), `props_rest_readonly`.
 
-**Components & Lifecycle**
-- `component_api_invalid_new`: Cannot instantiate components with `new` in Svelte 5; set `compatibility.componentApi: 4` for legacy support
-- `set_context_after_init`: `setContext` must be called during component initialization, not in effects or after `await`
-- `lifecycle_legacy_only`: Legacy lifecycle functions cannot be used in runes mode
+**Component Errors**: `component_api_changed` (methods no longer valid in Svelte 5), `component_api_invalid_new` (cannot use `new` on components).
 
-**Other**
-- `each_key_duplicate`: Keyed each blocks have duplicate keys
-- `invalid_snippet`: Cannot render null/undefined snippet; use optional chaining `{@render snippet?.()}`
-- `svelte_boundary_reset_onerror`: `<svelte:boundary>` reset function cannot be called synchronously in onerror; use `await tick()` first
-- `hydration_failed`: Application hydration failed
+**Loop Errors**: `each_key_duplicate`.
 
-### Client-Side Warnings
-- `assignment_value_stale`: Nullish coalescing assignment (`??=`) evaluates to right-hand side, not assigned property; separate into two statements
-- `await_reactivity_loss`: State read in async functions after `await` may not be tracked; pass values as parameters
-- `await_waterfall`: Multiple async deriveds create unnecessary waterfalls; create promises first, then await them
-- `console_log_state`: Logging `$state` proxies shows proxy object; use `$inspect()` or `$state.snapshot()` instead
-- `hydration_mismatch`: Server-rendered HTML structure doesn't match client-rendered structure
-- `state_proxy_equality_mismatch`: `$state()` creates proxies with different identity; compare values created the same way or use `$state.raw()`
-- `transition_slide_display`: `slide` transition doesn't work with `display: inline`, `table`, or `contents`
+**Context & Lifecycle**: `set_context_after_init` (must call during initialization), `lifecycle_legacy_only`.
 
-### Compiler Errors
+**State Errors**: `state_descriptors_fixed`, `state_prototype_fixed`.
 
-**Animation**
-- `animation_duplicate`: Element can only have one `animate:` directive
-- `animation_invalid_placement`: Element using `animate:` must be only child of keyed `{#each}` block
-- `animation_missing_key`: Element using `animate:` must be in keyed `{#each}` block
+**Async/Fork Errors**: `experimental_async_fork`, `fork_discarded`, `fork_timing`, `flush_sync_in_effect`.
 
-**Attributes**
-- `attribute_contenteditable_dynamic`: `contenteditable` cannot be dynamic with two-way binding
-- `attribute_duplicate`: Attributes must be unique
-- `attribute_invalid_event_handler`: Event attributes must be JavaScript expressions, not strings
-- `attribute_invalid_type`: `type` attribute must be static if input uses two-way binding
-- `attribute_invalid_multiple`: `multiple` attribute must be static if select uses two-way binding
+**Other**: `get_abort_signal_outside_reaction`, `hydration_failed`, `invalid_snippet` (use optional chaining), `rune_outside_svelte`, `svelte_boundary_reset_onerror` (wait with `await tick()` before calling reset).
 
-**Binding**
-- `bind_invalid_expression`: Can only bind to Identifier, MemberExpression, or `{get, set}` pair
-- `bind_invalid_target`: `bind:%name%` can only be used with specific elements
-- `bind_invalid_value`: Can only bind to state or props
-- `bind_group_invalid_expression`: `bind:group` can only bind to Identifier or MemberExpression
+### Client-side Warnings
 
-**Blocks**
-- `block_duplicate_clause`: Block clause cannot appear more than once
-- `block_unclosed`: Block was left open
-- `block_invalid_placement`: `{#%name%}` block cannot be at this location
+**State & Reactivity**: `assignment_value_stale` (separate statements), `await_reactivity_loss` (pass values as parameters), `await_waterfall` (create promises first), `console_log_state` (use `$inspect()` or `$state.snapshot()`), `legacy_recursive_reactive_block`, `non_reactive_update` (use `$state()` for updates), `state_proxy_equality_mismatch` (compare values consistently), `state_referenced_locally` (wrap in function for lazy evaluation).
 
-**Const Tag**
-- `const_tag_cycle`: Cyclical dependency detected
-- `const_tag_invalid_placement`: `{@const}` must be immediate child of specific blocks/components
-- `const_tag_invalid_reference`: Const declaration not available in this snippet
+**Binding & Props**: `binding_property_non_reactive`, `ownership_invalid_binding` (use `bind:` in parent), `ownership_invalid_mutation` (use `bind:` or `$bindable()`), `state_proxy_unmount` (use `$state.raw()`).
 
-**Declarations**
-- `declaration_duplicate`: Variable already declared
-- `constant_assignment`: Cannot assign to constant
-- `constant_binding`: Cannot bind to constant
+**Hydration**: `hydration_attribute_changed` (ensure server/client match or force update in effect), `hydration_html_changed` (same pattern as attribute_changed), `hydration_mismatch` (server HTML structure differs).
 
-**CSS**
-- `css_empty_declaration`: Declaration cannot be empty
-- `css_global_block_invalid_combinator`: `:global` selector cannot follow combinator
-- `css_global_block_invalid_declaration`: Top-level `:global {}` can only contain rules, not declarations
-- `css_global_invalid_selector`: `:global(...)` must contain exactly one selector
-- `css_nesting_selector_invalid_placement`: Nesting selectors only in rules or first in lone `:global(...)`
+**Events & Lifecycle**: `event_handler_invalid`, `lifecycle_double_unmount`.
 
-**Derived/Export**
-- `derived_invalid_export`: Cannot export derived state from module; export function returning value instead
-- `state_invalid_export`: Cannot export state from module if reassigned; export function or only mutate properties
+**Snippets & Rendering**: `invalid_raw_snippet_render` (must return single element), `svelte_boundary_reset_noop` (only works first time).
 
-**Each Block**
-- `each_item_invalid_assignment`: Cannot reassign/bind to each block argument in runes mode; use array/index instead
-- `each_key_without_as`: `{#each}` block without `as` clause cannot have key
+**Other**: `select_multiple_invalid_value` (must be array/null/undefined), `transition_slide_display` (doesn't work with inline/table/contents).
 
-**Effect**
-- `effect_invalid_placement`: `$effect()` can only be used as expression statement
+### Compiler Errors (200+)
 
-**Event Handler**
-- `event_handler_invalid_modifier`: Invalid event modifier
-- `event_handler_invalid_modifier_combination`: Modifiers cannot be used together
+**Animations**: `animation_duplicate`, `animation_invalid_placement` (only child of keyed each), `animation_missing_key`.
 
-**Props**
-- `props_duplicate`: Cannot use `%rune%()` more than once
-- `props_invalid_identifier`: `$props()` only with object destructuring pattern
-- `props_invalid_pattern`: `$props()` assignment must not contain nested properties or computed keys
-- `props_invalid_placement`: `$props()` only at top level as variable declaration initializer
+**Attributes**: `attribute_contenteditable_dynamic`, `attribute_contenteditable_missing`, `attribute_duplicate`, `attribute_empty_shorthand`, `attribute_invalid_event_handler`, `attribute_invalid_multiple`, `attribute_invalid_type`, `attribute_invalid_sequence_expression` (wrap in parens in runes mode), `attribute_unquoted_sequence`.
 
-**Rune**
-- `rune_invalid_arguments`: Rune cannot be called with arguments
-- `rune_invalid_name`: Not a valid rune
-- `rune_missing_parentheses`: Cannot use rune without parentheses
-- `rune_removed`: Rune has been removed
-- `rune_renamed`: Rune renamed to different name
+**Bindings**: `bind_group_invalid_expression`, `bind_group_invalid_snippet_parameter`, `bind_invalid_expression`, `bind_invalid_name`, `bind_invalid_parens`, `bind_invalid_target`, `bind_invalid_value`.
 
-**Snippet**
-- `snippet_conflict`: Cannot use `<slot>` and `{@render}` tags in same component
-- `snippet_invalid_export`: Exported snippet can only reference things in `<script module>` or other exportable snippets
-- `snippet_invalid_rest_parameter`: Snippets don't support rest parameters; use array instead
-- `snippet_parameter_assignment`: Cannot reassign/bind to snippet parameter
-- `snippet_shadowing_prop`: Snippet shadows prop with same name
+**Blocks**: `block_duplicate_clause`, `block_invalid_continuation_placement`, `block_invalid_elseif` (use `else if`), `block_invalid_placement`, `block_unclosed`, `block_unexpected_character`, `block_unexpected_close`.
 
-**State**
-- `state_field_duplicate`: State field already declared on class
-- `state_invalid_placement`: `%rune%()` only as variable declaration initializer, class field declaration, or first assignment in constructor
+**Const Tags**: `const_tag_cycle`, `const_tag_invalid_expression`, `const_tag_invalid_placement` (must be immediate child of snippet/if/else/each/then/catch/fragment/boundary/component), `const_tag_invalid_reference` (scoping issue - const in boundary not available in nested snippet).
 
-**Svelte Meta Elements**
-- `svelte_boundary_invalid_attribute`: Valid attributes on `<svelte:boundary>` are `onerror` and `failed`
-- `svelte_component_missing_this`: `<svelte:component>` must have `this` attribute
-- `svelte_element_missing_this`: `<svelte:element>` must have `this` attribute with value
-- `svelte_fragment_invalid_placement`: `<svelte:fragment>` must be direct child of component
-- `svelte_meta_invalid_placement`: `<%name%>` tags cannot be inside elements or blocks
+**CSS**: `css_empty_declaration`, `css_expected_identifier`, `css_global_block_invalid_combinator`, `css_global_block_invalid_declaration`, `css_global_block_invalid_list` (cannot mix `:global` with non-global in selector list), `css_global_block_invalid_modifier`, `css_global_block_invalid_modifier_start`, `css_global_block_invalid_placement`, `css_global_invalid_placement`, `css_global_invalid_selector`, `css_global_invalid_selector_list`, `css_nesting_selector_invalid_placement`, `css_selector_invalid`, `css_type_selector_invalid_placement`.
 
-**Svelte Options**
-- `svelte_options_invalid_customelement`: "customElement" must be string literal or object with tag/shadow/props
-- `svelte_options_invalid_customelement_shadow`: "shadow" must be "open" or "none"
-- `svelte_options_invalid_tagname`: Tag name must be lowercase and hyphenated
-- `svelte_options_reserved_tagname`: Tag name is reserved
+**Declarations**: `declaration_duplicate`, `declaration_duplicate_module_import`, `constant_assignment`, `constant_binding`.
 
-**Textarea**
-- `textarea_invalid_content`: `<textarea>` can have value attribute OR child content, not both
+**Each Blocks**: `each_item_invalid_assignment` (cannot reassign each argument in runes mode - use index instead: `{#each array as entry, i}` then `array[i] = value`), `each_key_without_as`.
 
-**Transition**
-- `transition_conflict`: Cannot use `%type%:` with existing `%existing%:` directive
-- `transition_duplicate`: Cannot use multiple `%type%:` directives on single element
+**Elements**: `element_invalid_closing_tag`, `element_invalid_closing_tag_autoclosed`, `element_unclosed`.
 
-**Parsing**
-- `js_parse_error`: JavaScript parsing error
-- `unexpected_eof`: Unexpected end of input
-- `unterminated_string_constant`: Unterminated string
+**Event Handlers**: `event_handler_invalid_component_modifier` (only `once` on components), `event_handler_invalid_modifier`, `event_handler_invalid_modifier_combination`.
 
-### Compiler Warnings
+**Exports**: `export_undefined`, `export_let_unused`, `derived_invalid_export` (export function instead).
 
-**Accessibility (a11y_*)**
-- `a11y_accesskey`: Avoid `accesskey` attributes
-- `a11y_aria_activedescendant_has_tabindex`: Elements with `aria-activedescendant` must have `tabindex`
-- `a11y_autofocus`: Avoid `autofocus`
-- `a11y_click_events_have_key_events`: Non-interactive elements with `onclick` need keyboard handlers and `tabindex`
-- `a11y_consider_explicit_label`: Buttons/links need text or `aria-label`/`aria-labelledby`/`title`
-- `a11y_distracting_elements`: Avoid `<marquee>` and `<blink>`
-- `a11y_hidden`: Don't hide elements useful for screen reader navigation
-- `a11y_img_redundant_alt`: Alt text shouldn't contain "image", "picture", or "photo"
-- `a11y_interactive_supports_focus`: Interactive roles need `tabindex`
-- `a11y_invalid_attribute`: Attributes like `href` must have valid values
-- `a11y_label_has_associated_control`: Labels must wrap a control or use `for` attribute
-- `a11y_media_has_caption`: `<video>` needs `<track kind="captions">` unless `muted`
-- `a11y_missing_attribute`: Required attributes for `<a>`, `<area>`, `<html>`, `<iframe>`, `<img>`, `<object>`, `<input type="image">`
-- `a11y_missing_content`: Headings and anchors must have text content
-- `a11y_mouse_events_have_key_events`: `onmouseover` needs `onfocus`, `onmouseout` needs `onblur`
-- `a11y_no_abstract_role`: Abstract ARIA roles forbidden
-- `a11y_no_interactive_element_to_noninteractive_role`: Can't use non-interactive roles on interactive elements
-- `a11y_no_noninteractive_element_interactions`: Non-interactive elements shouldn't have event listeners
-- `a11y_no_noninteractive_element_to_interactive_role`: Can't use interactive roles on non-interactive elements
-- `a11y_no_noninteractive_tabindex`: Non-interactive elements shouldn't have non-negative `tabindex`
-- `a11y_no_redundant_roles`: Don't repeat default ARIA roles
-- `a11y_no_static_element_interactions`: `<div>` with event handlers needs ARIA role
-- `a11y_positive_tabindex`: Avoid `tabindex > 0`
-- `a11y_role_has_required_aria_props`: ARIA roles need required attributes
-- `a11y_role_supports_aria_props`: Only use ARIA attributes supported by the element's role
-- `a11y_unknown_aria_attribute`: Only valid ARIA attributes allowed
-- `a11y_unknown_role`: Only valid, non-abstract ARIA roles allowed
+**Experimental**: `experimental_async` (need `experimental.async` compiler option for await in deriveds/templates/top-level).
 
-**Code Quality**
-- `bind_invalid_each_rest`: Rest operator in `{#each}` creates new object, breaking bindings
-- `block_empty`: Empty blocks detected
-- `component_name_lowercase`: Components must start with capital letter
-- `css_unused_selector`: Unused CSS selectors; use `:global` to preserve selectors targeting `{@html}` or child components
-- `element_implicitly_closed`: Some HTML elements auto-close others; add explicit closing tags
-- `element_invalid_self_closing_tag`: HTML has no self-closing tags; use `<div>...</div>` not `<div />`
-- `export_let_unused`: Unused export properties; use `export const` for external-only references
-- `legacy_code`: Outdated syntax; use suggested replacement
-- `legacy_component_creation`: Svelte 5 components aren't classes; use `mount()` or `hydrate()` from 'svelte'
-- `non_reactive_update`: Variables reassigned but not declared with `$state()` won't trigger updates
-- `perf_avoid_inline_class`: Declare classes at top level, not inline
-- `perf_avoid_nested_class`: Don't declare classes in nested scopes
-- `state_referenced_locally`: Reassigned state loses reactivity when passed to functions; wrap in function for lazy evaluation
-- `store_rune_conflict`: Local binding conflicts with `$` store prefix; rename to avoid ambiguity
-- `svelte_component_deprecated`: `<svelte:component>` deprecated; components are dynamic by default in Svelte 5
-- `svelte_self_deprecated`: Use self-imports instead of `<svelte:self>`
+**Global**: `global_reference_invalid` (use `globalThis.%name%`).
 
-**Deprecated Options**
-- `options_deprecated_accessors`: `accessors` option deprecated in runes mode
-- `options_deprecated_immutable`: `immutable` option deprecated in runes mode
-- `options_removed_*`: Removed options: `enableSourcemap`, `hydratable`, `loopGuardTimeout`
-- `options_renamed_ssr_dom`: `generate: "dom"` → `"client"`, `generate: "ssr"` → `"server"`
+**Host**: `host_invalid_placement` (`$host()` only in custom element instances).
 
-**Other**
-- `attribute_avoid_is`: Don't use `is` attribute
-- `attribute_quoted`: Quoted attributes on components will stringify in future versions
-- `event_directive_deprecated`: Use `on%name%` attribute instead of `on:%name%` directive
-- `slot_element_deprecated`: Use `{@render}` instead of `<slot>`
+**Imports**: `import_svelte_internal_forbidden`.
 
-### Server-Side Errors
-- `await_invalid`: Encountered asynchronous work while rendering synchronously; await the result of `render(...)` or wrap in `<svelte:boundary>`
-- `html_deprecated`: The `html` property of server render results is deprecated; use `body` instead
-- `lifecycle_function_unavailable`: Lifecycle methods like `mount` cannot be invoked in server context
+**Inspect**: `inspect_trace_generator`, `inspect_trace_invalid_placement` (must be first statement).
+
+**Invalid/Parse**: `invalid_arguments_usage`, `js_parse_error`.
+
+**Legacy**: `legacy_await_invalid`, `legacy_export_invalid` (use `$props()`), `legacy_props_invalid` (use `$props()`), `legacy_reactive_statement_invalid` (use `$derived`/`$effect`), `legacy_rest_props_invalid`.
+
+**Misc**: `mixed_event_handler_syntaxes`, `module_illegal_default_export`, `node_invalid_placement` (HTML repair breaks Svelte - examples: `<p><div></div></p>` becomes `<p></p><div></div><p></p>`, `<option><div></div></option>` becomes `<option></option>`, `<table><tr><td></td></tr></table>` becomes `<table><tbody><tr><td></td></tr></tbody></table>`).
+
+**Options**: `options_invalid_value`, `options_removed`, `options_unrecognised`.
+
+**Props**: `props_duplicate` (cannot use `$props()` twice), `props_id_invalid_placement` (only at top level), `props_illegal_name` (cannot start with `$$`), `props_invalid_identifier` (only object destructuring), `props_invalid_pattern` (no nested properties/computed keys), `props_invalid_placement`.
+
+**Runes**: `rune_invalid_arguments`, `rune_invalid_arguments_length`, `rune_invalid_computed_property`, `rune_invalid_name`, `rune_invalid_spread`, `rune_invalid_usage`, `rune_missing_parentheses`, `rune_removed`, `rune_renamed`.
+
+**Scripts**: `script_duplicate`, `script_invalid_attribute_value`, `script_invalid_context`, `script_reserved_attribute`, `bindable_invalid_location` (`$bindable()` only in `$props()`).
+
+**Slots**: `slot_attribute_duplicate`, `slot_attribute_invalid`, `slot_attribute_invalid_placement`, `slot_default_duplicate`, `slot_element_invalid_attribute`, `slot_element_invalid_name`, `slot_element_invalid_name_default`, `slot_snippet_conflict`.
+
+**Snippets**: `snippet_conflict` (cannot use `<slot>` and `{@render}` together), `snippet_invalid_export` (only references module-level script or other exportable snippets), `snippet_invalid_rest_parameter` (use array), `snippet_parameter_assignment`, `snippet_shadowing_prop`.
+
+**State**: `state_field_duplicate`, `state_field_invalid_assignment`, `state_invalid_export` (export function or only mutate properties), `state_invalid_placement` (only as variable/class field/constructor assignment).
+
+**Stores**: `store_invalid_scoped_subscription`, `store_invalid_subscription`, `store_invalid_subscription_module`.
+
+**Styles**: `style_directive_invalid_modifier` (only `important`), `style_duplicate`.
+
+**Svelte Elements**: `svelte_body_illegal_attribute`, `svelte_boundary_invalid_attribute`, `svelte_boundary_invalid_attribute_value`, `svelte_component_invalid_this`, `svelte_component_missing_this`, `svelte_element_missing_this`, `svelte_fragment_invalid_attribute`, `svelte_fragment_invalid_placement`, `svelte_head_illegal_attribute`, `svelte_meta_duplicate`, `svelte_meta_invalid_content`, `svelte_meta_invalid_placement`, `svelte_meta_invalid_tag`, `svelte_options_deprecated_tag`, `svelte_options_invalid_attribute`, `svelte_options_invalid_attribute_value`, `svelte_options_invalid_customelement`, `svelte_options_invalid_customelement_props`, `svelte_options_invalid_customelement_shadow`, `svelte_options_invalid_tagname`, `svelte_options_reserved_tagname`, `svelte_options_unknown_attribute`, `svelte_self_invalid_placement` (only in if/each/snippet blocks or slots).
+
+**Tags**: `tag_invalid_name`, `tag_invalid_placement`, `textarea_invalid_content`, `title_illegal_attribute`, `title_invalid_content`.
+
+**Transitions**: `transition_conflict`, `transition_duplicate`.
+
+**TypeScript**: `typescript_invalid_feature` (use preprocessor).
+
+**Misc**: `unexpected_eof`, `unexpected_reserved_word`, `unterminated_string_constant`, `void_element_invalid_content`.
+
+### Compiler Warnings (100+)
+
+**Accessibility (a11y_*)**: `accesskey`, `aria_activedescendant_has_tabindex`, `aria_attributes` (reserved elements), `autofocus`, `click_events_have_key_events` (need keyboard handlers), `consider_explicit_label`, `distracting_elements`, `figcaption_index`, `figcaption_parent`, `hidden` (certain elements), `img_redundant_alt`, `incorrect_aria_attribute_type` (aria-hidden: boolean, aria-activedescendant: ID, aria-labelledby: ID list, aria-level: integer, aria-sort: token, aria-pressed: tristate), `interactive_supports_focus`, `invalid_attribute` (href), `label_has_associated_control`, `media_has_caption`, `misplaced_role`, `misplaced_scope`, `missing_attribute` (a: href, area: alt/aria-label/aria-labelledby, html: lang, iframe: title, img: alt, object: title/aria-label/aria-labelledby, input[type=image]: alt/aria-label/aria-labelledby), `missing_content`, `mouse_events_have_key_events`, `no_abstract_role`, `no_interactive_element_to_noninteractive_role`, `no_noninteractive_element_interactions`, `no_noninteractive_element_to_interactive_role`, `no_noninteractive_tabindex`, `no_redundant_roles`, `no_static_element_interactions`, `positive_tabindex`, `role_has_required_aria_props`, `role_supports_aria_props`, `unknown_aria_attribute`, `unknown_role`.
+
+**Attributes**: `attribute_avoid_is`, `attribute_global_event_reference`, `attribute_illegal_colon`, `attribute_invalid_property_name`, `attribute_quoted`.
+
+**Code Quality**: `bidirectional_control_characters`, `bind_invalid_each_rest`, `block_empty`, `component_name_lowercase`, `css_unused_selector` (use `:global()` for selectors targeting `{@html}` or child components), `custom_element_props_identifier`, `element_implicitly_closed`, `element_invalid_self_closing_tag`, `event_directive_deprecated` (use `on%name%`), `export_let_unused`, `legacy_code`, `legacy_component_creation`, `node_invalid_placement_ssr`, `options_deprecated_accessors`, `options_deprecated_immutable`, `options_missing_custom_element`, `options_removed_enable_sourcemap`, `options_removed_hydratable`, `options_removed_loop_guard_timeout`, `options_renamed_ssr_dom`, `perf_avoid_inline_class`, `perf_avoid_nested_class`, `reactive_declaration_invalid_placement`, `reactive_declaration_module_script_dependency`, `script_context_deprecated` (use `module` attribute), `script_unknown_attribute`, `slot_element_deprecated` (use `{@render}`), `store_rune_conflict`, `svelte_component_deprecated` (use dynamic components), `svelte_element_invalid_this`, `svelte_self_deprecated`, `unknown_code`.
+
+### Server-side Errors
+
+**await_invalid**: Async work in sync render - await result or wrap in `<svelte:boundary>`.
+
+**html_deprecated**: Use `body` instead of `html` property.
+
+**lifecycle_function_unavailable**: Methods like `mount` unavailable on server.
 
 ### Shared Errors
-- `invalid_default_snippet`: Cannot use `{@render children(...)}` if parent uses `let:` directives; use named snippets instead
-- `invalid_snippet_arguments`: Snippets must be instantiated via `{@render ...}`, not called directly
-- `lifecycle_outside_component`: Lifecycle methods like `onMount()` can only be called at top level of component instance scripts
-- `missing_context`: The `get` function from `createContext()` throws if `set` was never called in a parent component
-- `snippet_without_render_tag`: Snippets must be rendered with `{@render snippet()}`, not `{snippet}`
-- `store_invalid_shape`: A store must have a `subscribe` method
-- `svelte_element_invalid_this_value`: The `this` prop on `<svelte:element>` must be a string if defined
+
+**invalid_default_snippet**: Cannot use `{@render children(...)}` with `let:` directives - use named snippets.
+
+**invalid_snippet_arguments**: Snippets only instantiated via `{@render}`.
+
+**lifecycle_outside_component**: Lifecycle methods only at top level of instance script.
+
+**missing_context**: Context not set in parent - `get` throws if `set` not called.
+
+**snippet_without_render_tag**: Snippet stringified instead of rendered - use `{@render}`.
+
+**store_invalid_shape**: Not a store with `subscribe` method.
+
+**svelte_element_invalid_this_value**: `this` prop must be string.
 
 ### Shared Warnings
-- `dynamic_void_element_content`: Void elements like `<input>` cannot have content; children passed to `<svelte:element this="%tag%">` with void element will be ignored
-- `state_snapshot_uncloneable`: `$state.snapshot()` cannot clone certain objects like DOM elements; original value is returned instead
+
+**dynamic_void_element_content**: Void elements ignore children.
+
+**state_snapshot_uncloneable**: `$state.snapshot()` returns original for uncloneable values (DOM elements, etc.).

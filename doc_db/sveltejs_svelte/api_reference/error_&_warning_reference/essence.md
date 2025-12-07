@@ -1,1 +1,1 @@
-Complete reference of all Svelte compiler and runtime error and warning codes with explanations and solutions.
+Complete reference of all Svelte runtime errors, compiler errors, compiler warnings, and server-side errors with causes and solutions.

@@ -1,1 +1,0 @@
-Deprecated AnthropicStream utility (removed in v4.0) converts Anthropic SDK responses to ReadableStream with optional callbacks for start/token/completion/final events; use AI SDK Anthropic Provider instead.

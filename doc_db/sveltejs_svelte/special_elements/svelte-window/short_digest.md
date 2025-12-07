@@ -1,10 +1,14 @@
 ## `<svelte:window>`
 
-Attach event listeners to `window` with automatic cleanup and SSR safety.
+Attach window event listeners and bind to window properties with automatic cleanup.
 
+**Event listeners:** `<svelte:window onevent={handler} />`
+
+**Bindable properties:** `innerWidth`, `innerHeight`, `outerWidth`, `outerHeight`, `scrollX`, `scrollY`, `online`, `devicePixelRatio` (only `scrollX`/`scrollY` are writable)
+
+**Example:**
 ```svelte
-<svelte:window onkeydown={handleKeydown} />
-<svelte:window bind:scrollY={y} />
+<svelte:window onkeydown={handleKeydown} bind:scrollY={y} />
 ```
 
-Bindable properties: `innerWidth`, `innerHeight`, `outerWidth`, `outerHeight`, `scrollX`, `scrollY`, `online`, `devicePixelRatio`. Only `scrollX`/`scrollY` are writable. Must be at component top level.
+Must be at component top level. Initial scroll values don't trigger scrolling; use `scrollTo()` in `$effect` if needed.

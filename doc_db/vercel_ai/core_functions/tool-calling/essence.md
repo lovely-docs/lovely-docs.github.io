@@ -1,0 +1,1 @@
+Tool calling: define tools with description, inputSchema, execute; multi-step calls with stopWhen; callbacks (onStepFinish, prepareStep); dynamic tools; tool choice control; error handling; experimental repair; active tools filtering; multi-modal results; type helpers; MCP support.

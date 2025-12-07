@@ -1,0 +1,1 @@
+TransformStream for smoothing text streaming with configurable delays and chunking strategies (word/line/regex/callback), with special handling for non-space-delimited languages.

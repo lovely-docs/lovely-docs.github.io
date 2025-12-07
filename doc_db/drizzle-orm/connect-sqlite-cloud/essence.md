@@ -1,1 +1,1 @@
-Connect Drizzle to SQLite Cloud via connection string or driver instance; install drizzle-orm@beta and @sqlitecloud/drivers.
+Connect to SQLite Cloud: install packages, initialize drizzle with connection string or Database client, execute queries.

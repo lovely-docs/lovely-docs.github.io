@@ -1,1 +1,1 @@
-Inject raw HTML into components using {@html ...} with proper sanitization and :global styling for injected content.
+Inject raw HTML with `{@html ...}`; sanitize input to prevent XSS; injected HTML bypasses scoped styles, use `:global` to style it.

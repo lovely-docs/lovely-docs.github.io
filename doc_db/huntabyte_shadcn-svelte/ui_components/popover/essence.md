@@ -1,1 +1,1 @@
-Portal component displaying rich content triggered by button; compose with Root, Trigger, and Content subcomponents.
+Popover component with Root, Trigger, and Content subcomponents; displays portal content on button click.

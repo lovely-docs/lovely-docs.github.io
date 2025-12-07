@@ -1,1 +1,1 @@
-Type limitations exist for the third parameter in seeding operations that developers should account for when writing seed functions.
+Type limitations for seed function's third parameter - covers type inference constraints and workarounds.

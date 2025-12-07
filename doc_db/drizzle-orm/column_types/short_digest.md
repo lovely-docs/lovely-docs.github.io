@@ -1,0 +1,3 @@
+**MySQL**: int, bigint, decimal, float, varchar, text, boolean, datetime, timestamp, json, mysqlEnum | **PostgreSQL**: integer, serial, bigserial, numeric, real, doublePrecision, text, varchar, char, json, jsonb, time, timestamp, date, interval, point, line, pgEnum, identity columns | **SingleStore**: int, bigint, decimal, float, varchar, text, boolean, datetime, timestamp, json, singlestoreEnum | **SQLite**: integer (modes: number/boolean/timestamp_ms/timestamp), real, text, blob (modes: buffer/bigint/json), numeric
+
+**Modifiers**: `.notNull()`, `.primaryKey()`, `.autoincrement()`, `.default(value)`, `.defaultNow()`, `.$defaultFn(fn)`, `.$onUpdate(fn)`, `.$type<T>()`

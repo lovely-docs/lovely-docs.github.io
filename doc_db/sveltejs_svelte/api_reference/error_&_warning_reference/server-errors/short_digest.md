@@ -1,4 +1,1 @@
-## Server Rendering Errors
-- **await_invalid**: Async work in sync render - await `render()` or wrap in `<svelte:boundary>`
-- **html_deprecated**: Use `body` instead of `html` property
-- **lifecycle_function_unavailable**: Methods like `mount` unavailable on server - don't call during render
+Three server-side rendering errors: `await_invalid` (async work in sync render—use `<svelte:boundary>` or await), `html_deprecated` (use `body` instead), `lifecycle_function_unavailable` (methods like `mount` unavailable server-side).

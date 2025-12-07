@@ -1,1 +1,0 @@
-Text-to-speech function supporting OpenAI and ElevenLabs with configurable voice, format, speed, language, and provider options; returns audio in multiple formats (base64, Uint8Array) with metadata.

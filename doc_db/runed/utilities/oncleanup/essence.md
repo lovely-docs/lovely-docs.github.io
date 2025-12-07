@@ -1,1 +1,0 @@
-onCleanup registers a callback invoked on effect context disposal (component destroy or root effect end); shorthand for returning cleanup from $effect().

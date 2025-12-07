@@ -1,0 +1,1 @@
+HTTP proxy driver for Drizzle: async callback sends SQL queries to HTTP server, server executes on database and returns raw rows; supports PostgreSQL, MySQL, SQLite with batch support.

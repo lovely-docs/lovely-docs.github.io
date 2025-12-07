@@ -1,0 +1,1 @@
+OP SQLite integration: install packages, open database, create drizzle instance; for Expo/React Native requires babel plugin, config updates, and useMigrations hook for bundled SQL migrations.

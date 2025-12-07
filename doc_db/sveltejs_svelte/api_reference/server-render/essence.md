@@ -1,0 +1,1 @@
+render() function for server-side Svelte component rendering, returns body and head HTML strings with optional props, context, and idPrefix configuration.

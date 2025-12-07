@@ -1,0 +1,1 @@
+Language models can replace explicit routing logic by using function calling to reason about which operations to perform and which UIs to render based on user intent, supporting both parameter-based and sequential multi-step routing.

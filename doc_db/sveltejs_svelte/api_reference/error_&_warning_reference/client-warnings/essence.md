@@ -1,1 +1,1 @@
-Reference guide for client-side warnings in Svelte, covering reactivity issues, hydration mismatches, state proxy behavior, and common pitfalls.
+18 client-side warnings covering state mutations, reactivity tracking, hydration mismatches, component ownership, and lifecycle issues with fixes for each.

@@ -1,0 +1,1 @@
+Error messages masked by default in toDataStreamResponse; use getErrorMessage callback with toUIMessageStreamResponse or onError with createDataStreamResponse to expose details.

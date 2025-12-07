@@ -1,9 +1,9 @@
-Reactive wrappers for window properties via `svelte/reactivity/window`. Each export has a `.current` property: `innerWidth`, `innerHeight`, `outerWidth`, `outerHeight`, `scrollX`, `scrollY`, `screenLeft`, `screenTop`, `devicePixelRatio`, `online`. All are `undefined` on server.
+Reactive wrappers for window properties (innerWidth, innerHeight, scrollX, scrollY, devicePixelRatio, online, etc.) with `.current` property. All available since 5.11.0, return undefined on server.
 
 ```svelte
 <script>
-	import { innerWidth, innerHeight } from 'svelte/reactivity/window';
+	import { innerWidth, innerHeight, scrollX, online } from 'svelte/reactivity/window';
 </script>
 
-<p>{innerWidth.current}x{innerHeight.current}</p>
+<p>{innerWidth.current}x{innerHeight.current} | scroll: {scrollX.current},{scrollY.current} | online: {online.current}</p>
 ```

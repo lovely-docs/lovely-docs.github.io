@@ -9,8 +9,12 @@
 - Added support for Drizzle objects retrieved from functions
 - Improved error message context in suggestions
 
-## New Expo SQLite Driver
-Install with: `npm install drizzle-orm expo-sqlite@next`
+## New: Expo SQLite Driver
+
+Install packages:
+```bash
+npm install drizzle-orm expo-sqlite@next
+```
 
 Basic usage:
 ```ts
@@ -21,11 +25,13 @@ const expoDb = openDatabaseSync("db.db");
 const db = drizzle(expoDb);
 
 await db.select().from(...);
-// or db.select().from(...).then(...);
-// or db.select().from(...).all();
+// or
+db.select().from(...).then(...);
+// or
+db.select().from(...).all();
 ```
 
-For migrations support, install `babel-plugin-inline-import` and update configuration files:
+For migrations support, configure Babel and Metro:
 
 **babel.config.js:**
 ```ts
@@ -58,9 +64,12 @@ export default {
 } satisfies Config;
 ```
 
-Generate migrations with: `npx drizzle-kit generate`
+Generate migrations:
+```bash
+npx drizzle-kit generate
+```
 
-In **App.tsx**, use the migration hook:
+Use migrations in **App.tsx:**
 ```ts
 import { drizzle } from "drizzle-orm/expo-sqlite";
 import { openDatabaseSync } from "expo-sqlite";
@@ -72,14 +81,15 @@ const db = drizzle(expoDb);
 
 export default function App() {
   const { success, error } = useMigrations(db, migrations);
-  
+
   if (error) {
     return <View><Text>Migration error: {error.message}</Text></View>;
   }
+
   if (!success) {
     return <View><Text>Migration is in progress...</Text></View>;
   }
-  
+
   return ...your application component;
 }
 ```

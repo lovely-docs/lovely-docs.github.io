@@ -1,0 +1,1 @@
+Deprecated ReplicateStream helper (removed in v4.0): converts Replicate Prediction objects to ReadableStreams with optional callbacks and headers.

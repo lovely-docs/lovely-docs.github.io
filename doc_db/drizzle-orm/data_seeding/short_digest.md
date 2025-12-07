@@ -1,1 +1,0 @@
-Data seeding documentation is pending release of the `drizzle-seed` package. Details coming soon.

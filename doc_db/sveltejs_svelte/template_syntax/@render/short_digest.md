@@ -1,7 +1,1 @@
-Use `{@render ...}` to render snippets. Supports arbitrary expressions and optional chaining for undefined snippets:
-
-```svelte
-{@render sum(1, 2)}
-{@render (cool ? coolSnippet : lameSnippet)()}
-{@render children?.()}
-```
+The `{@render ...}` tag executes a snippet. Supports arbitrary expressions, optional chaining for undefined snippets, and conditional rendering with fallbacks.

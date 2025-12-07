@@ -1,0 +1,1 @@
+OpenTelemetry integration for AI SDK with experimental telemetry option; records spans for text/object generation and embedding with configurable input/output recording, custom tracers, and detailed attributes including model, tokens, responses, and tool calls.

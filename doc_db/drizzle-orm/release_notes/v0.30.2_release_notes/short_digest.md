@@ -1,1 +1,1 @@
-**LibSQL migrations** now use batch execution instead of transactions for better performance. **bun:sqlite** findFirst query bug fixed.
+LibSQL migrations switched to batch execution instead of transactions. Fixed findFirst query for bun:sqlite.

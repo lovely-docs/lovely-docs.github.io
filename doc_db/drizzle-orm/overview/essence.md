@@ -1,1 +1,1 @@
-Headless TypeScript ORM with zero dependencies, SQL-like and relational query APIs, automatic migrations, serverless-ready, supports PostgreSQL/MySQL/SQLite/SingleStore.
+Headless TypeScript ORM with SQL-like and relational query APIs, zero dependencies, automatic migrations, multi-database support (PostgreSQL/MySQL/SQLite/SingleStore), serverless-ready.

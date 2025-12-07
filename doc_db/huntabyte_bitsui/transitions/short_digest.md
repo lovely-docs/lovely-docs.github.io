@@ -1,1 +1,1 @@
-Use `forceMount` prop with `child` snippet to apply transitions to Bits UI components. For regular components, conditionally render with `{#if open}` and apply transitions to the inner element. For Floating UI components, wrap with `wrapperProps` and apply transitions to the content element.
+Use `forceMount` prop with `child` snippet to apply Svelte transitions or other animations to components. For Floating UI components, wrap content with `wrapperProps` element.

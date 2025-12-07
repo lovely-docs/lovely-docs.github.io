@@ -1,0 +1,1 @@
+Drizzle Kit configuration file options: dialect, schema paths, output folder, database credentials (URL or connection params), migrations table config, introspection casing, table/schema/extension filters, role management with provider support, strict mode, verbose output, and statement breakpoints.

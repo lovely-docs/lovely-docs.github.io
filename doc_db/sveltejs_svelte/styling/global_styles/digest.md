@@ -13,7 +13,7 @@ Apply styles to a single selector globally using the `:global(...)` modifier:
 	}
 
 	p:global(.big.red) {
-		/* applies to p elements in this component with class="big red" */
+		/* applies to <p> with class="big red" */
 	}
 </style>
 ```
@@ -30,7 +30,7 @@ For globally accessible @keyframes, prepend the keyframe name with `-global-`. T
 
 ## :global block
 
-Apply styles to multiple selectors globally using a `:global {...}` block:
+Apply styles to a group of selectors globally using a `:global {...}` block:
 
 ```svelte
 <style>
@@ -45,4 +45,4 @@ Apply styles to multiple selectors globally using a `:global {...}` block:
 </style>
 ```
 
-Alternatively, use `.a :global .b .c .d` syntax where everything after `:global` is unscoped.
+Alternatively, use `.a :global .b .c .d` syntax where everything after `:global` is unscoped (nested form preferred).

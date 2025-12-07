@@ -1,1 +1,1 @@
-Two-way data binding directive that allows child-to-parent data flow with support for inputs, selects, media elements, and component props.
+Two-way data binding directive enabling child-to-parent flow; supports inputs (value/checked/group/files), selects, media elements (audio/video), images, details, contenteditable, dimensions, DOM/component references, and component props via $bindable() rune with optional getter/setter functions.

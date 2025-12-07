@@ -1,27 +1,18 @@
-## Drizzle ORM Overview
+## Headless TypeScript ORM with SQL-like and Relational APIs
 
-Headless TypeScript ORM with zero dependencies, designed for serverless environments. Embraces SQL as core design - if you know SQL, you know Drizzle.
+Drizzle is a lightweight, zero-dependency ORM that embraces SQL rather than abstracting it. Define schemas in TypeScript, query with familiar SQL syntax or use the Relational API for nested data fetching (always 1 SQL query). Supports PostgreSQL, MySQL, SQLite, SingleStore with automatic migrations.
 
-**Two query APIs:**
-- SQL-like: Direct SQL syntax mirroring
-- Relational: Nested data fetching with single SQL query output
-
-**Schema definition in TypeScript:**
+**Example**:
 ```typescript
+// Schema
 export const countries = pgTable('countries', {
   id: serial('id').primaryKey(),
   name: varchar('name', { length: 256 }),
 });
-```
 
-**SQL-like queries:**
-```typescript
-await db.select().from(countries).leftJoin(cities, eq(cities.countryId, countries.id))
-```
+// SQL-like query
+await db.select().from(countries).where(eq(countries.id, 10))
 
-**Relational queries:**
-```typescript
+// Relational query
 await db.query.users.findMany({ with: { posts: true } })
 ```
-
-Supports PostgreSQL, MySQL, SQLite, SingleStore with automatic migration generation. Non-intrusive design lets you build projects your way without framework constraints.

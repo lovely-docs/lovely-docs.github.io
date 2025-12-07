@@ -1,0 +1,1 @@
+Dropdown select component with single/multiple selection, typeahead search, keyboard navigation, Floating UI positioning, scroll buttons, grouping, and full customization via sub-components.

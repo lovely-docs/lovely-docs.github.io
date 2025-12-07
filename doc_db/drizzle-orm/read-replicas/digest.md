@@ -1,15 +1,23 @@
 ## Read Replicas
 
-The `withReplicas()` function enables automatic routing of database operations between a primary instance and read replica instances. SELECT queries are distributed across replicas while CREATE, UPDATE, and DELETE operations are routed to the primary instance.
+The `withReplicas()` function enables automatic routing of SELECT queries to read replica instances while directing CREATE, UPDATE, and DELETE operations to the primary database instance.
 
 ### Setup
 
-Create separate database connections for the primary and each read replica, then pass them to `withReplicas()`:
+Create separate database connections for primary and replicas, then combine them:
 
-**PostgreSQL:**
 ```ts
+// PostgreSQL
 import { drizzle } from 'drizzle-orm/node-postgres';
-import { withReplicas } from 'drizzle-orm/pg-core';
+import { pgTable, serial, text, boolean, timestamp, jsonb, withReplicas } from 'drizzle-orm/pg-core';
+
+const usersTable = pgTable('users', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull(),
+  verified: boolean('verified').notNull().default(false),
+  jsonb: jsonb('jsonb').$type<string[]>(),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
 
 const primaryDb = drizzle("postgres://user:password@host:port/primary_db");
 const read1 = drizzle("postgres://user:password@host:port/read_replica_1");
@@ -18,93 +26,41 @@ const read2 = drizzle("postgres://user:password@host:port/read_replica_2");
 const db = withReplicas(primaryDb, [read1, read2]);
 ```
 
-**MySQL:**
-```ts
-import { drizzle } from "drizzle-orm/mysql2";
-import mysql from "mysql2/promise";
-import { withReplicas } from 'drizzle-orm/mysql-core';
-
-const primaryClient = await mysql.createConnection({ host: "host", user: "user", database: "primary_db" });
-const primaryDb = drizzle({ client: primaryClient });
-
-const read1Client = await mysql.createConnection({ host: "host", user: "user", database: "read_1" });
-const read1 = drizzle({ client: read1Client });
-
-const read2Client = await mysql.createConnection({ host: "host", user: "user", database: "read_2" });
-const read2 = drizzle({ client: read2Client });
-
-const db = withReplicas(primaryDb, [read1, read2]);
-```
-
-**SQLite:**
-```ts
-import { drizzle } from 'drizzle-orm/libsql';
-import { withReplicas } from 'drizzle-orm/sqlite-core';
-import { createClient } from '@libsql/client';
-
-const primaryDb = drizzle({ client: createClient({ url: 'DATABASE_URL', authToken: 'DATABASE_AUTH_TOKEN' }) });
-const read1 = drizzle({ client: createClient({ url: 'DATABASE_URL', authToken: 'DATABASE_AUTH_TOKEN' }) });
-const read2 = drizzle({ client: createClient({ url: 'DATABASE_URL', authToken: 'DATABASE_AUTH_TOKEN' }) });
-
-const db = withReplicas(primaryDb, [read1, read2]);
-```
-
-**SingleStore:**
-```ts
-import { drizzle } from "drizzle-orm/singlestore";
-import mysql from "mysql2/promise";
-import { withReplicas } from 'drizzle-orm/singlestore-core';
-
-const primaryClient = await mysql.createConnection({ host: "host", user: "user", database: "primary_db" });
-const primaryDb = drizzle({ client: primaryClient });
-
-const read1Client = await mysql.createConnection({ host: "host", user: "user", database: "read_1" });
-const read1 = drizzle({ client: read1Client });
-
-const read2Client = await mysql.createConnection({ host: "host", user: "user", database: "read_2" });
-const read2 = drizzle({ client: read2Client });
-
-const db = withReplicas(primaryDb, [read1, read2]);
-```
+MySQL/SingleStore setup is similar, using `mysql2/promise` connections and `mysqlTable` or `singlestoreTable`. SQLite uses `libsql` client with `sqliteTable`.
 
 ### Usage
 
-Use the `db` instance normally. Drizzle automatically routes SELECT queries to replicas and write operations (INSERT, UPDATE, DELETE) to the primary:
+Drizzle automatically routes queries:
 
 ```ts
-// Routed to a read replica
+// SELECT queries automatically use a replica
 await db.select().from(usersTable);
 
-// Routed to primary
+// Write operations use primary
 await db.delete(usersTable).where(eq(usersTable.id, 1));
-```
 
-### Force Primary for Reads
-
-Use the `$primary` property to force read operations against the primary instance:
-
-```ts
+// Force primary for reads
 await db.$primary.select().from(usersTable);
 ```
 
-### Custom Replica Selection Logic
+### Custom Replica Selection
 
-Pass a third argument to `withReplicas()` to implement custom replica selection. The function receives the replicas array and must return a selected replica:
+Pass a function as the third argument to implement custom selection logic (e.g., weighted random selection):
 
 ```ts
 const db = withReplicas(primaryDb, [read1, read2], (replicas) => {
-    const weight = [0.7, 0.3];
-    let cumulativeProbability = 0;
-    const rand = Math.random();
+  const weight = [0.7, 0.3];
+  let cumulativeProbability = 0;
+  const rand = Math.random();
 
-    for (const [i, replica] of replicas.entries()) {
-      cumulativeProbability += weight[i]!;
-      if (rand < cumulativeProbability) return replica;
-    }
-    return replicas[0]!
+  for (const [i, replica] of replicas.entries()) {
+    cumulativeProbability += weight[i]!;
+    if (rand < cumulativeProbability) return replica;
+  }
+  return replicas[0]!;
 });
 
 await db.select().from(usersTable);
 ```
 
-This example implements weighted random selection where the first replica has 70% probability and the second has 30%. Any custom selection method can be implemented.
+Any random selection method can be implemented in the custom function.

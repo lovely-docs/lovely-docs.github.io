@@ -1,0 +1,1 @@
+Utility that triggers callback on clicks outside a specified element; supports programmatic control via start/stop methods and immediate/detectIframe options.

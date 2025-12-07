@@ -1,19 +1,16 @@
 ## createStreamableValue
 
-Creates a stream that sends serializable values from the server to the client in RSC (React Server Components) applications.
+Creates a server-to-client stream for sending serializable data values.
 
-### Import
+**Import:**
 ```
 import { createStreamableValue } from "@ai-sdk/rsc"
 ```
 
-### Parameters
-- `value` (any): Any serializable data supported by RSC, such as JSON objects.
+**Parameters:**
+- `value` (any): Any serializable data supported by RSC (e.g., JSON)
 
-### Returns
-- `streamable`: A special value object that can be returned from Server Actions to the client. It holds the initial data and can be updated via the update method.
+**Returns:**
+- A streamable object that can be returned from Server Actions to the client. It holds the initial data and can be updated via an update method.
 
-### Purpose
-Enables bidirectional streaming of data between server and client in RSC contexts, allowing you to send initial data and update it over time without requiring a full page reload.
-
-**Note**: AI SDK RSC is experimental. For production use, the AI SDK UI is recommended. Migration guidance is available in the migration guide.
+**Note:** AI SDK RSC is experimental. Use AI SDK UI for production; see migration guide for RSC to UI migration.

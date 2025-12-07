@@ -1,0 +1,1 @@
+Install `drizzle-orm gel` and dev dependencies `drizzle-kit tsx`. Configure `drizzle.config.ts` with `dialect: 'gel'`. Pull schema with `drizzle-kit pull`. Initialize client: `const db = drizzle({ client: createClient() })`. Use standard Drizzle operations (insert, select, update, delete) with the Gel client.

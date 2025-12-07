@@ -1,1 +1,1 @@
-Reactive wrappers for built-in JavaScript objects (Map, Set, Date, URL, URLSearchParams) and utilities for integrating external event systems with Svelte's reactivity.
+Reactive versions of Map, Set, Date, URL, URLSearchParams, MediaQuery; createSubscriber bridges external events to Svelte reactivity.

@@ -1,0 +1,1 @@
+Two query approaches: SQL-like syntax (select/insert/update/delete mirroring SQL) and Relational Queries API (nested data fetching); both support advanced composition with independent filters and subqueries.

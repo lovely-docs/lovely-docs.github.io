@@ -1,0 +1,1 @@
+Database provider integration patterns: connection setup, schema definition, migrations, and query examples for Neon, Supabase, Turso, Vercel Postgres, Xata, and Nile.

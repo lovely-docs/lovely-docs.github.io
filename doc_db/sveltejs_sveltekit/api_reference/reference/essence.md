@@ -1,1 +1,1 @@
-Index page for SvelteKit reference documentation.
+Empty reference documentation index page; actual content in child pages.

@@ -1,0 +1,1 @@
+Progress component shows task completion status. Distinguish from Meter (static measurements). Use `Progress.Root` with `value`, `min`, `max` props. Set `value` to `null` for indeterminate state. Use `aria-labelledby` or `aria-label` for accessibility. Data attributes: `data-value`, `data-state`, `data-min`, `data-max`, `data-indeterminate`, `data-progress-root`.

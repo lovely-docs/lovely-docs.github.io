@@ -1,1 +1,1 @@
-v0.30.2: LibSQL migrations switched to batch execution; bun:sqlite findFirst fixed
+v0.30.2: LibSQL migrations use batch execution; bun:sqlite findFirst fix

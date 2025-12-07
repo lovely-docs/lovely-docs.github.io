@@ -1,12 +1,12 @@
 ## Serverless Performance Benefits
 
-Serverless functions like AWS Lambda and Vercel Server Functions (AWS Lambda-based) can live up to 15 minutes and reuse both database connections and prepared statements, providing significant performance benefits.
+Serverless functions (AWS Lambda, Vercel Server Functions) can live up to 15 minutes and reuse database connections and prepared statements across invocations, providing significant performance benefits.
 
-Edge functions, by contrast, clean up immediately after invocation, offering little to no performance benefits.
+Edge functions, by contrast, clean up immediately after invocation and offer little to no performance benefits.
 
-## Connection and Statement Reuse
+### Reusing Connections and Prepared Statements
 
-To reuse database connections and prepared statements, declare them outside the handler scope:
+Declare database connections and prepared statements outside the handler scope to reuse them across multiple invocations:
 
 ```ts
 const databaseConnection = ...;
@@ -18,4 +18,4 @@ export const handler = async (event: APIGatewayProxyEvent) => {
 }
 ```
 
-This pattern allows the connection and prepared statement to persist across multiple function invocations within the 15-minute lifetime, eliminating the overhead of creating new connections and re-preparing statements for each request.
+This pattern allows the same connection and prepared statement to be reused for every Lambda invocation within the 15-minute lifetime.

@@ -1,0 +1,1 @@
+v0.30.7 adds Vercel Postgres mappings and fixes Neon interval mapping

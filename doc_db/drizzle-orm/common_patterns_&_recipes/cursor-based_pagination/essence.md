@@ -1,1 +1,0 @@
-Cursor-based pagination: use row pointer with comparison operators (gt/lt) and orderBy to efficiently fetch next pages; support multi-column cursors for non-unique columns and non-sequential PKs; index cursor columns.

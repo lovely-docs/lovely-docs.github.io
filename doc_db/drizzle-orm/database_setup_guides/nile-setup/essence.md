@@ -1,0 +1,1 @@
+Step-by-step setup for Drizzle with Nile (multi-tenant PostgreSQL): install pg, configure NILEDB_URL, define tenant-aware schema with tenants and tenant_id-keyed tables, configure drizzle.config.ts, run migrations, seed/query data.

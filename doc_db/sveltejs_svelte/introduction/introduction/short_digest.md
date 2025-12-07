@@ -1,1 +1,1 @@
-Introduction page (content not visible in excerpt)
+Documentation introduction page with no substantive content.

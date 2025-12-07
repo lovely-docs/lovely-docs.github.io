@@ -1,0 +1,1 @@
+Hook to observe DOM element mutations. Pass element getter, mutation callback, and options (e.g., `{ attributes: true }`). Returns object with `stop()` method to halt observation.

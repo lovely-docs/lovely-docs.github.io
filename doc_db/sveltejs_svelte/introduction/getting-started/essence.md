@@ -1,0 +1,1 @@
+Project setup with SvelteKit (npx sv create) or Vite (npm create vite); editor support via VS Code extension; community help via Discord/Stack Overflow.

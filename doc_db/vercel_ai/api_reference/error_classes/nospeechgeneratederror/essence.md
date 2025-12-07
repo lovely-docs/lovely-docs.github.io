@@ -1,0 +1,1 @@
+NoSpeechGeneratedError: thrown when audio generation fails; detect via isInstance() method; includes responses array and message property.

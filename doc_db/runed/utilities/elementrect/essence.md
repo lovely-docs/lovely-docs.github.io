@@ -1,1 +1,0 @@
-ElementRect: reactive DOMRect tracking with individual property accessors and optional initial dimensions

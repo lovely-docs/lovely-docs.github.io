@@ -1,0 +1,1 @@
+Step-by-step setup for Drizzle ORM with Turso Database: install packages, configure environment, connect database, define schema, apply migrations, perform insert/select/update/delete operations.

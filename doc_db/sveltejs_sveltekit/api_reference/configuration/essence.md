@@ -1,1 +1,1 @@
-SvelteKit configuration options in svelte.config.js for adapters, routing, CSP, prerendering, environment variables, and deployment versioning.
+SvelteKit configuration options in svelte.config.js: adapter, alias, appDir, csp, csrf, embedded, env, experimental features, file locations, inlineStyleThreshold, moduleExtensions, outDir, output bundling/preloading, paths, prerender, router type/resolution, typescript, version management.

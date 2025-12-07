@@ -1,0 +1,1 @@
+Drizzle ORM v0.30.4 adds native xata-http driver support for Xata Postgres platform; also supports pg/postgres.js drivers

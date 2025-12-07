@@ -1,1 +1,1 @@
-v0.28.1 patch fixes Postgres array regressions from 0.28.0
+v0.28.1 patch fixes Postgres array bugs from v0.28.0

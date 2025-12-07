@@ -1,1 +1,0 @@
-Chain multiple `generateText()` calls where each output feeds into the next prompt. Example: generate ideas → pick best → create outline, with each step using the previous result as input.

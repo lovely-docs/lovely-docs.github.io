@@ -1,1 +1,1 @@
-Runtime environment detection constants for SvelteKit apps.
+$app/environment exports boolean flags (browser, building, dev) and version string to detect runtime context.

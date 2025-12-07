@@ -1,11 +1,14 @@
-## Await Expressions (Experimental)
+## Await in Components (Svelte 5.36+)
+Enable with `experimental.async: true` in config. Use `await` in `<script>`, `$derived()`, and markup.
 
-Enable with `experimental.async: true` in `svelte.config.js`. Use `await` in `<script>`, `$derived()`, and markup.
+**Synchronized updates**: UI waits for async completion to prevent inconsistent states.
 
-**Synchronized updates**: UI waits for async work to complete, preventing inconsistent states.
+**Concurrency**: Multiple independent `await` in markup run in parallel; sequential ones in `<script>` behave normally.
 
-**Concurrency**: Independent `await` in markup run in parallel; sequential `await` in `<script>` behave like normal JavaScript.
+**Loading states**: Use `<svelte:boundary pending={...}>` for placeholders, `$effect.pending()` for subsequent updates, `settled()` to wait for completion.
 
-**Loading states**: Use `<svelte:boundary pending>` for initial load UI, `$effect.pending()` for subsequent updates, `settled()` to wait for completion.
+**SSR**: `await render(App)` supports async rendering; pending snippets render during SSR.
 
-**Forking**: `fork()` API runs expected `await` expressions in advance for preloading.
+**Forking**: `fork(() => {...})` preloads expected async work with `commit()` or `discard()`.
+
+Requires opt-in; removed in Svelte 6.

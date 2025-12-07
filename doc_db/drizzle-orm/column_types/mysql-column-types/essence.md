@@ -1,0 +1,1 @@
+MySQL column type definitions with precision/scale options, constraints (.notNull, .primaryKey, .autoincrement), and runtime defaults ($defaultFn, $onUpdate, $type for type inference).

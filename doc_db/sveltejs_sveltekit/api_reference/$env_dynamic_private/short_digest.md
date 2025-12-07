@@ -1,1 +1,6 @@
-Access runtime private environment variables via `import { env } from '$env/dynamic/private'`. Server-side only. Filters based on `config.kit.env.publicPrefix` and `config.kit.env.privatePrefix` configuration.
+Server-side module for accessing private runtime environment variables. Cannot be used in client code. Automatically filters variables based on prefix configuration.
+
+```ts
+import { env } from '$env/dynamic/private';
+console.log(env.DEPLOYMENT_SPECIFIC_VARIABLE);
+```

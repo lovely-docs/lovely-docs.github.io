@@ -1,1 +1,0 @@
-The flip animation function from svelte/animate calculates and animates element position changes between two DOMRect states.

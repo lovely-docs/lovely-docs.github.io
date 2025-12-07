@@ -1,0 +1,1 @@
+Step-by-step guide to set up Drizzle ORM with TiDB serverless using HTTP driver: install @tidbcloud/serverless, configure DATABASE_URL, connect Drizzle, define schema, setup config with mysql dialect, apply migrations, seed/query, and run.

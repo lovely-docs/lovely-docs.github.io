@@ -1,1 +1,0 @@
-Await blocks branch on Promise states (pending, fulfilled, rejected). Omit `catch` or pending block as needed. Use with dynamic imports for lazy component loading.

@@ -1,1 +1,0 @@
-Export page options from layout and page files to control per-route rendering behavior: prerendering, SSR, CSR, trailing slashes, and adapter config.

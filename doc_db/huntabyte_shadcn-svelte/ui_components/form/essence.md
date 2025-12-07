@@ -1,1 +1,1 @@
-Composable form components with Formsnap/Superforms/Zod integration for type-safe, accessible forms with client/server validation.
+Form components wrapping Formsnap & Superforms with Zod validation, ARIA attributes, and composable field structure (Field/Control/Label/Description/FieldErrors); install with `npx shadcn-svelte@latest add form -y -o`; define schema, load via superValidate, create component with superForm hook, handle via server action.

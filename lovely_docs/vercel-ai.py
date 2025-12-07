@@ -32,7 +32,7 @@ commit, clone_dir = clone_repo(source)
 source.commit = commit # Replace the literal commit (master) with the hash
 
 # %% ../nbs/14_vercel-ai.ipynb 8
-tree = build_markdown_doc_tree(clone_dir/source.doc_dir, extensions=['.mdx'])
+tree = build_markdown_doc_tree(clone_dir/source.doc_dir, extensions=['.mdx'], exclude=["08-migration-guides"])
 tree
 
 # %% ../nbs/14_vercel-ai.ipynb 11

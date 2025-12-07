@@ -1,0 +1,1 @@
+Deprecated Svelte 4 compatibility layer: component constructors (asClassComponent, createClassComponent, createBubbler), event modifier replacements (once, preventDefault, stopPropagation, stopImmediatePropagation, self, trusted, passive, nonpassive), and utilities (handlers, run).

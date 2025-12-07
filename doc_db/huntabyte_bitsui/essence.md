@@ -1,1 +1,1 @@
-Complete reference for building accessible, unstyled Svelte components with flexible state management, styling, and composition patterns.
+Complete reference for Bits UI: 50+ headless Svelte components with flexible state management, accessibility, styling via data attributes/CSS variables, child snippet rendering, date/time handling, and utilities.

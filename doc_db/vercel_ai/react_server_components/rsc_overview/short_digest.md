@@ -1,0 +1,1 @@
+Experimental RSC package for streaming AI-generated UI from server to client. Core functions: `streamUI` (model responds with RSC), `useUIState`/`useAIState` (state management), `useActions` (server access), `createAI` (context provider), `createStreamableValue`/`createStreamableUI` (streaming data/UI), `readStreamableValue`/`useStreamableValue` (consuming streams).

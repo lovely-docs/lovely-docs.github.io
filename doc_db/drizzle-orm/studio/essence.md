@@ -1,1 +1,1 @@
-Local database browser server with configurable host/port, verbose logging, Safari/Brave support via mkcert, embeddable component for B2B, chrome extension for serverless databases, not open source.
+Local database browser server with configurable host/port, verbose logging, Safari/Brave support via mkcert, embeddable B2B component, and Chrome extension for serverless databases; local-only, not open source.

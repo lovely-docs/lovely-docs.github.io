@@ -1,1 +1,1 @@
-Complete reference for Svelte 5 framework covering runes-based reactivity, template syntax, styling, component lifecycle, state management, animations, and migration from legacy mode.
+Complete Svelte 5 framework documentation: runes-based reactivity, template syntax, styling, special elements, runtime APIs, testing, TypeScript, custom elements, migration guides, and legacy mode reference.

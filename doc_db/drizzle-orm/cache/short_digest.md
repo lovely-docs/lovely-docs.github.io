@@ -1,50 +1,21 @@
-## Caching Strategy
-
-Drizzle has opt-in caching (default `global: false`) or global caching (`global: true`). Use `.$withCache()` to enable per-query caching.
-
-## Upstash Integration
-
+## Setup
 ```ts
+import { upstashCache } from "drizzle-orm/cache/upstash";
 const db = drizzle(process.env.DB_URL!, {
-  cache: upstashCache({
-    url: '<UPSTASH_URL>',
-    token: '<UPSTASH_TOKEN>',
-    global: true,
-    config: { ex: 60 }
-  })
+  cache: upstashCache({ url: "", token: "", global: true, config: { ex: 60 } })
 });
 ```
 
 ## Usage
-
-**Opt-in caching (`global: false`):**
-```ts
-const res = await db.select().from(users).$withCache();
-.$withCache({ config: { ex: 60 } })  // override TTL
-.$withCache({ tag: 'custom_key' })  // custom key
-.$withCache({ autoInvalidate: false })  // disable auto-invalidation
-```
-
-**Global caching (`global: true`):**
-```ts
-const res = await db.select().from(users);  // cached automatically
-const res = await db.select().from(users).$withCache(false);  // disable for this query
-```
-
-## Invalidation
-
-```ts
-await db.$cache.invalidate({ tables: users });
-await db.$cache.invalidate({ tables: [users, posts] });
-await db.$cache.invalidate({ tags: "custom_key" });
-```
-
-Mutations automatically invalidate affected table caches.
+- **`global: false` (default):** Use `.$withCache()` to opt-in per query
+  - `.$withCache({ config: { ex: 60 } })` - custom TTL
+  - `.$withCache({ tag: 'key' })` - custom cache key
+  - `.$withCache({ autoInvalidate: false })` - eventual consistency
+- **`global: true`:** All queries cached by default, use `.$withCache(false)` to disable
+- **Manual invalidation:** `db.$cache.invalidate({ tables: users })` or `{ tags: "key" }`
 
 ## Custom Cache
-
-Extend `Cache` class and implement `strategy()`, `get()`, `put()`, and `onMutate()` methods.
+Extend `Cache` class with `strategy()`, `get(key)`, `put(key, response, tables, config)`, and `onMutate(params)` methods.
 
 ## Limitations
-
-Not supported: raw queries, batch operations, transactions, relational queries, better-sqlite3, Durable Objects, expo sqlite, AWS Data API, views.
+No support for: raw queries, batch operations, transactions, relational queries, better-sqlite3/Durable Objects/expo sqlite, AWS Data API, views

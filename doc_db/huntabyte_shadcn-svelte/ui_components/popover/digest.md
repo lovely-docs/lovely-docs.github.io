@@ -2,6 +2,14 @@
 
 A component that displays rich content in a portal, triggered by a button.
 
+### Installation
+
+```bash
+npx shadcn-svelte@latest add popover -y -o
+```
+
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
+
 ### Basic Usage
 
 ```svelte
@@ -15,15 +23,7 @@ A component that displays rich content in a portal, triggered by a button.
 </Popover.Root>
 ```
 
-### Installation
-
-```bash
-npx shadcn-svelte@latest add popover -y -o
-```
-
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
-
-### Complete Example
+### Example with Form Controls
 
 ```svelte
 <script lang="ts">
@@ -68,6 +68,6 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </Popover.Root>
 ```
 
-### API Reference
+### API
 
-See the Bits UI documentation for the complete API reference.
+Refer to the Bits UI Popover documentation for complete API reference and additional configuration options.

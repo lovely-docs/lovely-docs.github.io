@@ -1,0 +1,1 @@
+Legacy mode component props declared with `export let` keyword, supporting defaults and renaming; exported functions/classes become public API.

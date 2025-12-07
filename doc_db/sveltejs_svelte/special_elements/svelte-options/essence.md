@@ -1,0 +1,1 @@
+Element for per-component compiler options: runes mode, namespace, custom element config, CSS injection; deprecated immutable/accessors.

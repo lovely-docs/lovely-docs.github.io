@@ -1,0 +1,1 @@
+Creates an MCP transport using stdio for Node.js. Configure with `command`, optional `args`, `env`, `stderr` stream, and `cwd`. Experimental API.

@@ -16,25 +16,35 @@ npx shadcn-svelte@latest add checkbox -y -o
   import { Label } from "$lib/components/ui/label/index.js";
 </script>
 
-<Checkbox id="terms" />
-<Label for="terms">Accept terms</Label>
-```
-
-### States & Styling
-
-```svelte
+<Checkbox />
 <Checkbox checked />
 <Checkbox disabled />
-<Checkbox class="data-[state=checked]:bg-blue-600" />
+
+<div class="flex items-center gap-3">
+  <Checkbox id="terms" />
+  <Label for="terms">Accept terms</Label>
+</div>
 ```
+
+### Styling
+
+Use `class` prop with `data-[state=checked]` selector:
+
+```svelte
+<Checkbox class="data-[state=checked]:bg-blue-600 data-[state=checked]:text-white" />
+```
+
+Parent Label can use `has-[[aria-checked=true]]` for conditional styling.
 
 ### Form Integration
 
 ```svelte
 <Form.Fieldset {form} name="items">
   {#each items as item}
+    {@const checked = $formData.items.includes(item.id)}
     <Checkbox
-      checked={$formData.items.includes(item.id)}
+      {checked}
+      value={item.id}
       onCheckedChange={(v) => {
         if (v) $formData.items = [...$formData.items, item.id];
         else $formData.items = $formData.items.filter((i) => i !== item.id);
@@ -44,4 +54,4 @@ npx shadcn-svelte@latest add checkbox -y -o
 </Form.Fieldset>
 ```
 
-Use `data-[state=checked]` for styling checked state and `onCheckedChange` for state updates.
+Emits `onCheckedChange` event on toggle.

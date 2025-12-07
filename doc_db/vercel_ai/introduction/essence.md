@@ -1,0 +1,1 @@
+TypeScript toolkit standardizing LLM integration across providers; Core library for text/objects/tools/agents, UI library for chat/generative interfaces; templates and community support included.

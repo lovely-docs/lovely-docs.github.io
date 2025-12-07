@@ -1,1 +1,0 @@
-LanguageModelV3Middleware: experimental interface with transformParams, wrapGenerate, wrapStream methods for intercepting/modifying language model calls to add guardrails, RAG, caching, logging.

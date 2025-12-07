@@ -1,1 +1,1 @@
-Svelte is a compiler framework for building UIs with components that combine HTML, CSS, and JavaScript, with setup via SvelteKit or Vite.
+Getting started with Svelte: project setup, file structure, and basic concepts

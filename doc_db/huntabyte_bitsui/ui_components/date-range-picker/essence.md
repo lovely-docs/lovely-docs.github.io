@@ -1,1 +1,0 @@
-Complete API reference for DateRangePicker component with state management patterns, props, callbacks, and data attributes.

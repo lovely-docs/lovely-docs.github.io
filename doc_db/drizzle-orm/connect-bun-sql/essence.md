@@ -1,1 +1,1 @@
-Setup Drizzle with Bun SQL for PostgreSQL: install packages, import from 'drizzle-orm/bun-sql', initialize with DATABASE_URL or existing SQL client instance.
+Drizzle ORM integration with Bun SQL for PostgreSQL: install drizzle-orm, initialize with DATABASE_URL or existing SQL client, use standard Drizzle query API.

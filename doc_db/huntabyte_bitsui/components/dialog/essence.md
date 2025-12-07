@@ -1,0 +1,1 @@
+Modal dialog component with compound structure, focus management, customizable escape/outside-click behavior, nested dialog support with CSS variables, Svelte transition support via forceMount, and form integration patterns.

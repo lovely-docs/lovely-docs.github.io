@@ -1,10 +1,10 @@
 ## Streaming vs Blocking
 
-Blocking UIs wait for complete LLM responses (5-40+ seconds), while streaming UIs display response parts immediately as they're generated, significantly improving user experience in conversational applications.
+Blocking UIs wait for full LLM response (5-40s latency) before displaying. Streaming UIs display response parts incrementally, improving UX.
 
-## Quick Implementation
+## Implementation
 
-Use the `streamText` function to stream text generation:
+Use `streamText` to stream text generation:
 
 ```ts
 import { streamText } from 'ai';
@@ -19,4 +19,4 @@ for await (const textPart of textStream) {
 }
 ```
 
-Streaming is most valuable for long outputs; consider non-streaming approaches if a faster model suffices.
+Streaming isn't always necessary—smaller, faster models may not benefit.

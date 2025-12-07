@@ -1,0 +1,1 @@
+Await blocks handle Promise states (pending, fulfilled, rejected). Syntax: `{#await expr}...{:then val}...{:catch err}...{/await}`. Blocks can be omitted selectively. During SSR, only pending branch renders. Use with dynamic imports for lazy component loading.

@@ -1,1 +1,1 @@
-PostgreSQL sequences: thread-safe unique identifier generation with nextval/currval/setval/lastval functions, configurable start/increment/min/max/cycle/cache, creates gaps on transaction abort, no rollback semantics.
+PostgreSQL sequences for auto-incrementing IDs: create with pgSequence("name", {startWith, maxValue, minValue, cycle, cache, increment}); use nextval/currval/setval/lastval; supports OWNED BY, cycling, caching; has gaps, out-of-order values, no rollback; PostgreSQL only.

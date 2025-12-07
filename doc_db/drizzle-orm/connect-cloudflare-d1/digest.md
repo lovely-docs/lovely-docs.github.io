@@ -1,12 +1,15 @@
-## Cloudflare D1 Setup
+## Cloudflare D1 Integration
 
-D1 is Cloudflare's queryable relational database. Drizzle ORM fully supports D1 and Cloudflare Workers environment, supporting SQLite-like query methods (`all`, `get`, `values`, `run`).
+D1 is Cloudflare's queryable relational database. Drizzle ORM fully supports D1 and Cloudflare Workers environment with SQLite-like query methods (`all`, `get`, `values`, `run`).
 
 ### Installation
-Install `drizzle-orm` and `drizzle-kit` as dev dependency.
+```
+npm install drizzle-orm
+npm install -D drizzle-kit
+```
 
 ### Configuration
-Create a `wrangler.json` or `wrangler.toml` file with D1 database binding configuration:
+Create `wrangler.json` or `wrangler.toml` with D1 database binding:
 
 **wrangler.json:**
 ```json
@@ -15,14 +18,12 @@ Create a `wrangler.json` or `wrangler.toml` file with D1 database binding config
     "main": "src/index.ts",
     "compatibility_date": "2024-09-26",
     "compatibility_flags": ["nodejs_compat"],
-    "d1_databases": [
-        {
-            "binding": "BINDING_NAME",
-            "database_name": "YOUR_DB_NAME",
-            "database_id": "YOUR_DB_ID",
-            "migrations_dir": "drizzle/migrations"
-        }
-    ]
+    "d1_databases": [{
+        "binding": "BINDING_NAME",
+        "database_name": "YOUR_DB_NAME",
+        "database_id": "YOUR_DB_ID",
+        "migrations_dir": "drizzle/migrations"
+    }]
 }
 ```
 
@@ -40,7 +41,7 @@ database_id = "YOUR_DB_ID"
 migrations_dir = "drizzle/migrations"
 ```
 
-### Basic Query
+### Usage
 ```typescript
 import { drizzle } from 'drizzle-orm/d1';
 
@@ -51,10 +52,10 @@ export interface Env {
 export default {
   async fetch(request: Request, env: Env) {
     const db = drizzle(env.<BINDING_NAME>);
-    const result = await db.select().from(users).all()
+    const result = await db.select().from(users).all();
     return Response.json(result);
   },
 };
 ```
 
-Initialize the driver by importing from `drizzle-orm/d1`, pass the D1 database binding from the Cloudflare Workers environment, and execute queries using standard Drizzle syntax.
+Initialize driver with `drizzle(env.<BINDING_NAME>)` and use standard Drizzle query syntax.

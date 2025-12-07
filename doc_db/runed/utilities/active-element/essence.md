@@ -1,0 +1,1 @@
+Reactive wrapper for document.activeElement with Shadow DOM support and optional custom document scoping.

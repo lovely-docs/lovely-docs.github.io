@@ -1,0 +1,1 @@
+Declare SQL schemas with pgSchema/mysqlSchema/singlestoreSchema; SQLite unsupported; prepends schema names to queries.

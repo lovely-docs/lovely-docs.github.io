@@ -1,0 +1,1 @@
+embed() generates a single embedding vector from a value using a specified embedding model, with configurable retries, abort signals, headers, and optional telemetry.

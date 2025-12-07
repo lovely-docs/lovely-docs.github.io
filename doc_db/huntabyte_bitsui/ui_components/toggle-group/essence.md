@@ -1,1 +1,0 @@
-ToggleGroup component for grouping toggle controls with single or multiple selection modes.

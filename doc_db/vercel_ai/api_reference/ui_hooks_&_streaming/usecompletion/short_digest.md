@@ -1,0 +1,3 @@
+## useCompletion Hook
+
+Streaming text completion hook with state management. Imports vary by framework (React/Svelte/Vue). Configure via `api` endpoint, `id` for shared state, callbacks (`onFinish`, `onError`), request options (`headers`, `body`, `credentials`, `fetch`, `streamProtocol`), and React throttling. Returns state (`completion`, `input`, `error`, `isLoading`), setters (`setCompletion`, `setInput`), execution (`complete`, `stop`), and handlers (`handleInputChange`, `handleSubmit`).

@@ -1,0 +1,1 @@
+Filter parent rows to only those with at least one related child using innerJoin (with child data) or exists subquery (parent only).

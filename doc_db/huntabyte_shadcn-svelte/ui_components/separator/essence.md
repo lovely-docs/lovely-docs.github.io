@@ -1,1 +1,1 @@
-Separator component for horizontal/vertical content division; supports orientation prop and custom styling via class.
+Separator component with horizontal/vertical orientation support; install via shadcn-svelte CLI.

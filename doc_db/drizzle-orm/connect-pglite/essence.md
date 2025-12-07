@@ -1,1 +1,1 @@
-WASM Postgres for browser/Node.js/Bun with drizzle-orm; supports in-memory or persistent storage via filesystem/indexedDB.
+PGlite: WASM Postgres for browser/Node.js/Bun (2.6mb), supports in-memory or persistent storage; initialize with drizzle() for in-memory, drizzle('path') for file persistence, or drizzle({ connection: { dataDir } }) for advanced config.

@@ -1,0 +1,1 @@
+Setup Drizzle with SingleStore using mysql2 driver; supports URI, config, or existing client/pool connections; has limitations including no foreign keys, nested transactions, relational API, or ORDER BY+LIMIT chaining.

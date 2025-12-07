@@ -3,169 +3,158 @@
 ## Pages
 
 ### streamui
-RSC helper to stream LLM-generated React UI with tools, messages, generation parameters, and event callbacks; returns ReactNode UI and AsyncIterable stream of text/tool/error/finish events.
+streamUI creates streamable React UI from LLM output with tool support, returning ReactNode + AsyncIterable stream of text/tool/error/finish events; supports messages, tools with generate callbacks, and standard generation parameters.
 
 ## streamUI
 
-A helper function from AI SDK RSC that creates a streamable UI from LLM providers, supporting the same model interfaces as AI SDK Core APIs.
-
-**Note:** AI SDK RSC is experimental. Use AI SDK UI for production; see migration guide for transitioning from RSC to UI.
+Helper function to create streamable UI from LLM providers. Similar to AI SDK Core APIs with same model interfaces.
 
 ### Import
-```
+```javascript
 import { streamUI } from "@ai-sdk/rsc"
 ```
 
 ### Parameters
 
-**Core Configuration:**
-- `model` (LanguageModel): The language model to use, e.g., `openai("gpt-4.1")`
+**Core inputs:**
+- `model` (LanguageModel): Language model to use, e.g. `openai("gpt-4.1")`
 - `system` (string | SystemModelMessage): System prompt specifying model behavior
 - `prompt` (string): Input prompt to generate text from
+- `messages` (Array): Conversation messages - CoreSystemMessage, CoreUserMessage, CoreAssistantMessage, CoreToolMessage, or UIMessage from useChat hook
+  - CoreUserMessage content can include TextPart, ImagePart (base64/data URL/http(s) URL), or FilePart
+  - CoreAssistantMessage content can include TextPart or ToolCallPart
+  - CoreToolMessage content contains ToolResultPart with tool execution results
 - `initial` (ReactNode, optional): Initial UI to render
 
-**Messages:**
-- `messages` (Array): Conversation history supporting CoreSystemMessage, CoreUserMessage, CoreAssistantMessage, CoreToolMessage, or UIMessage from useChat hook
-  - CoreSystemMessage: `{ role: 'system', content: string }`
-  - CoreUserMessage: `{ role: 'user', content: string | Array<TextPart | ImagePart | FilePart> }`
-    - TextPart: `{ type: 'text', text: string }`
-    - ImagePart: `{ type: 'image', image: string | Uint8Array | Buffer | ArrayBuffer | URL, mediaType?: string }`
-    - FilePart: `{ type: 'file', data: string | Uint8Array | Buffer | ArrayBuffer | URL, mediaType: string }`
-  - CoreAssistantMessage: `{ role: 'assistant', content: string | Array<TextPart | ToolCallPart> }`
-    - ToolCallPart: `{ type: 'tool-call', toolCallId: string, toolName: string, args: object }`
-  - CoreToolMessage: `{ role: 'tool', content: Array<ToolResultPart> }`
-    - ToolResultPart: `{ type: 'tool-result', toolCallId: string, toolName: string, result: unknown, isError?: boolean }`
-
-**Generation Parameters:**
+**Generation options:**
 - `maxOutputTokens` (number, optional): Maximum tokens to generate
-- `temperature` (number, optional): Temperature setting (set either temperature or topP, not both)
-- `topP` (number, optional): Nucleus sampling (set either temperature or topP, not both)
-- `topK` (number, optional): Sample from top K options per token (advanced use only)
-- `presencePenalty` (number, optional): Affects likelihood of repeating information in prompt
+- `temperature` (number, optional): Temperature setting (recommend setting either temperature or topP, not both)
+- `topP` (number, optional): Nucleus sampling
+- `topK` (number, optional): Sample from top K options per token
+- `presencePenalty` (number, optional): Affects likelihood of repeating prompt information
 - `frequencyPenalty` (number, optional): Affects likelihood of repeating same words/phrases
 - `stopSequences` (string[], optional): Sequences that stop generation
 - `seed` (number, optional): Integer seed for deterministic results if supported
 
-**Request Control:**
-- `maxRetries` (number, optional): Maximum retries, default 2; set to 0 to disable
-- `abortSignal` (AbortSignal, optional): Cancel the call
-- `headers` (Record<string, string>, optional): Additional HTTP headers for HTTP-based providers
-
-**Tools:**
-- `tools` (ToolSet): Tools accessible to the model
-  - Tool: `{ description?: string, parameters: zod schema, generate?: (async (parameters) => ReactNode) | AsyncGenerator<ReactNode, ReactNode, void> }`
-- `toolChoice` (optional): `"auto" | "none" | "required" | { "type": "tool", "toolName": string }` - specifies how tools are selected (default: "auto")
+**Tool configuration:**
+- `tools` (ToolSet, optional): Tools accessible to model with:
+  - `description` (string, optional): Purpose and usage details
+  - `parameters` (zod schema): Typed schema for tool parameters
+  - `generate` (async function or AsyncGenerator, optional): Called with tool arguments, yields React nodes as UI
+- `toolChoice` (optional): How tools are selected - "auto" (default), "none", "required", or `{ "type": "tool", "toolName": string }`
 
 **Callbacks:**
-- `text` ((Text) => ReactNode, optional): Callback for generated tokens with `{ content: string, delta: string, done: boolean }`
-- `onFinish` ((OnFinishResult) => void, optional): Called when LLM response and tool executions finish
-  - OnFinishResult: `{ usage: TokenUsage, value: ReactNode, warnings?: Warning[], response?: Response }`
-  - TokenUsage: `{ promptTokens: number, completionTokens: number, totalTokens: number }`
-  - Response: `{ headers?: Record<string, string> }`
+- `text` (function, optional): Callback handling generated tokens with `{ content, delta, done }`
+- `onFinish` (function, optional): Called when LLM response and tool executions complete, receives `{ usage: { promptTokens, completionTokens, totalTokens }, value: ReactNode, warnings?, response? }`
 
-**Provider:**
+**Other:**
+- `maxRetries` (number, optional): Max retries, default 2, set to 0 to disable
+- `abortSignal` (AbortSignal, optional): Cancel the call
+- `headers` (Record<string, string>, optional): Additional HTTP headers for HTTP-based providers
 - `providerOptions` (Record<string, JSONObject>, optional): Provider-specific options
 
 ### Returns
 
-- `value` (ReactNode): The user interface based on stream output
+- `value` (ReactNode): User interface based on stream output
 - `response` (Response, optional): Response data with optional headers
-- `warnings` (Warning[], optional): Warnings from model provider
-- `stream` (AsyncIterable<StreamPart> & ReadableStream<StreamPart>): Stream of all events
-  - StreamPart types:
-    - Text delta: `{ type: 'text-delta', textDelta: string }`
-    - Tool call: `{ type: 'tool-call', toolCallId: string, toolName: string, args: object }`
-    - Error: `{ type: 'error', error: Error }`
-    - Finish: `{ type: 'finish', finishReason: 'stop' | 'length' | 'content-filter' | 'tool-calls' | 'error' | 'other' | 'unknown', usage: TokenUsage }`
+- `warnings` (Warning[], optional): Provider warnings
+- `stream` (AsyncIterable<StreamPart> & ReadableStream<StreamPart>): Stream with all events:
+  - `{ type: 'text-delta', textDelta: string }`: Text delta
+  - `{ type: 'tool-call', toolCallId, toolName, args }`: Tool call
+  - `{ type: 'error', error: Error }`: Error during execution
+  - `{ type: 'finish', finishReason, usage }`: Completion with reason ('stop' | 'length' | 'content-filter' | 'tool-calls' | 'error' | 'other' | 'unknown')
 
 ### Examples
 
-- Render React components as function calls using language model in Next.js
-- Persist and restore UI/AI states in Next.js
-- Route React components using language model in Next.js
-- Stream component updates to client in Next.js
+1. **Render React component as function call** - Use streamUI with a model to generate and render React components based on LLM output
+2. **Persist and restore UI/AI states** - Save and restore both UI state and AI state in Next.js applications
+3. **Route React components** - Use language model to dynamically route between different React components
+4. **Stream component updates** - Stream component updates to client in real-time
+
+**Note:** AI SDK RSC is experimental. Use AI SDK UI for production; migration guide available.
 
 ### createai
-Context provider factory for managing AI/UI states in RSC; accepts server actions, initial states, SSR callback, and persistence callback triggered on state updates
+Context provider factory for client-server AI/UI state management with server actions, SSR support, and persistence callbacks.
 
 ## createAI
 
 Creates a client-server context provider for managing UI and AI states in your application tree.
 
-**Status**: Experimental. AI SDK RSC is experimental; use AI SDK UI for production instead.
+**Status**: Experimental. AI SDK RSC is experimental; use AI SDK UI for production. Migration guide available.
 
-**Import**: `import { createAI } from "@ai-sdk/rsc"`
+**Import**:
+```
+import { createAI } from "@ai-sdk/rsc"
+```
 
 **Parameters**:
 - `actions` (Record<string, Action>): Server-side actions callable from the client
 - `initialAIState` (any): Initial AI state for the client
 - `initialUIState` (any): Initial UI state for the client
 - `onGetUIState` (() => UIState): Called during SSR to compare and update UI state
-- `onSetAIState` ((Event) => void): Triggered when update() or done() is called by mutable AI state in your action, allowing you to persist AI state to database. Event contains:
-  - `state` (AIState): The resulting AI state after the update
-  - `done` (boolean): Whether AI state updates have been finalized
+- `onSetAIState` ((Event) => void): Triggered when update() or done() is called by mutable AI state in actions, allowing safe database persistence
+  - Event parameters:
+    - `state` (AIState): Resulting AI state after update
+    - `done` (boolean): Whether AI state updates are finalized
 
 **Returns**: An `<AI/>` context provider component
 
-**Use cases**: Manage AI and UI states in Next.js applications; persist and restore UI/AI states
+**Examples**:
+- Managing AI and UI states in Next.js
+- Persisting and restoring UI/AI states in Next.js
 
 ### createstreamableui
-Server-to-client React UI streaming via `update()`, `append()`, `done()` (required), and `error()` methods; experimental RSC feature.
+createStreamableUI: stream React components from server to client with update/append/done/error methods; done() call required to close stream.
 
-## Overview
-`createStreamableUI` creates a stream that sends UI from the server to the client. The returned value can be rendered as a normal React node on the client side.
+## createStreamableUI
 
-## Import
+Server-side function that creates a stream for sending React UI components from server to client. The client receives and renders the streamed UI as normal React nodes.
+
+**Import:**
 ```
 import { createStreamableUI } from "@ai-sdk/rsc"
 ```
 
-## API
-
 **Parameters:**
-- `initialValue` (ReactNode, optional): The initial value of the streamable UI.
+- `initialValue` (ReactNode, optional): Initial UI value
 
 **Returns:**
-- `value` (ReactNode): The streamable UI value that can be returned from a Server Action and received by the client.
+- `value` (ReactNode): The streamable UI that can be returned from a Server Action and received by the client
 
 **Methods:**
-- `update(ReactNode)`: Replaces the current UI node with a new one. Previous node cannot be updated after appending.
-- `append(ReactNode)`: Appends a new UI node to the end. Once appended, the previous UI node cannot be updated anymore.
-- `done(ReactNode | null)`: Marks the UI as finalized and closes the stream. Required to be called, otherwise the response stays in loading state. After calling, UI cannot be updated or appended.
-- `error(Error)`: Signals an error in the UI stream. Thrown on client side and caught by nearest error boundary.
+- `update(ReactNode)`: Replace current UI node with a new one
+- `append(ReactNode)`: Append a new UI node; previous node becomes immutable after append
+- `done(ReactNode | null)`: Finalize and close the stream; required to call, otherwise response stays in loading state
+- `error(Error)`: Signal an error in the stream; thrown on client and caught by nearest error boundary
 
-## Note
-AI SDK RSC is experimental. Use AI SDK UI for production instead.
+**Example:** Render a React component during a tool call (see examples/next-app/tools/render-interface-during-tool-call)
 
 ### createstreamablevalue
-Server-to-client streaming function for RSC that wraps serializable values in updatable streamable objects; experimental feature.
+Server-to-client streaming function for serializable data in RSC; returns updateable streamable object for Server Actions.
 
 ## createStreamableValue
 
-Creates a stream that sends serializable values from the server to the client in RSC (React Server Components) applications.
+Creates a server-to-client stream for sending serializable data values.
 
-### Import
+**Import:**
 ```
 import { createStreamableValue } from "@ai-sdk/rsc"
 ```
 
-### Parameters
-- `value` (any): Any serializable data supported by RSC, such as JSON objects.
+**Parameters:**
+- `value` (any): Any serializable data supported by RSC (e.g., JSON)
 
-### Returns
-- `streamable`: A special value object that can be returned from Server Actions to the client. It holds the initial data and can be updated via the update method.
+**Returns:**
+- A streamable object that can be returned from Server Actions to the client. It holds the initial data and can be updated via an update method.
 
-### Purpose
-Enables bidirectional streaming of data between server and client in RSC contexts, allowing you to send initial data and update it over time without requiring a full page reload.
-
-**Note**: AI SDK RSC is experimental. For production use, the AI SDK UI is recommended. Migration guidance is available in the migration guide.
+**Note:** AI SDK RSC is experimental. Use AI SDK UI for production; see migration guide for RSC to UI migration.
 
 ### readstreamablevalue
-Client-side async iterator for consuming server-streamed values created with createStreamableValue; takes StreamableValue parameter and yields emitted values.
+readStreamableValue: async iterator for consuming server-streamed values created with createStreamableValue in RSC; takes StreamableValue parameter, yields values via for-await-of loop.
 
 ## readStreamableValue
 
-Function that reads streamable values created on the server using `createStreamableValue` from the client side.
+Reads streamable values created on the server using `createStreamableValue` from the client side.
 
 **Purpose**: Enables client-side consumption of server-streamed values in RSC (React Server Components) applications.
 
@@ -174,10 +163,11 @@ Function that reads streamable values created on the server using `createStreama
 import { readStreamableValue } from "@ai-sdk/rsc"
 ```
 
-**Usage**: Call `readStreamableValue()` with a streamable value returned from a server action, then iterate over it with `for await...of` to receive each emitted value:
+**Usage**: Returns an async iterator that yields values emitted by the streamable. Iterate with `for await...of` to process each streamed value.
 
+**Example**:
 ```ts
-// Server action
+// Server (app/actions.ts)
 async function generate() {
   'use server';
   const streamable = createStreamableValue();
@@ -187,21 +177,32 @@ async function generate() {
   return streamable.value;
 }
 
-// Client component
-const stream = await generate();
-for await (const delta of readStreamableValue(stream)) {
-  setGeneration(generation => generation + delta);
+// Client (app/page.tsx)
+import { readStreamableValue } from '@ai-sdk/rsc';
+
+export default function Page() {
+  const [generation, setGeneration] = useState('');
+  return (
+    <button onClick={async () => {
+      const stream = await generate();
+      for await (const delta of readStreamableValue(stream)) {
+        setGeneration(gen => gen + delta);
+      }
+    }}>
+      Generate
+    </button>
+  );
 }
 ```
 
 **API**:
-- **Parameter**: `stream` (StreamableValue) - the streamable value to read from
-- **Returns**: An async iterator containing values emitted by the streamable value
+- **Parameter**: `stream` (StreamableValue) - the streamable value to read
+- **Returns**: AsyncIterator yielding values from the streamable
 
-**Note**: AI SDK RSC is experimental; production use should prefer AI SDK UI.
+**Note**: AI SDK RSC is experimental; use AI SDK UI for production.
 
 ### getaistate
-getAIState() retrieves current AI state in RSC, optionally extracting a specific key from the state object; experimental feature with production recommendation to use AI SDK UI instead.
+getAIState() retrieves current AI state in RSC; accepts optional key parameter for object property access.
 
 ## getAIState
 
@@ -213,18 +214,16 @@ import { getAIState } from "@ai-sdk/rsc"
 ```
 
 **Parameters:**
-- `key` (string, optional): Returns the value of the specified key in the AI state if the state is an object.
+- `key` (string, optional): Returns the value of the specified key in the AI state if it's an object.
 
-**Returns:**
-The AI state value.
+**Returns:** The AI state.
 
-**Usage:**
-Call `getAIState()` to access the current AI state. Optionally pass a key to extract a specific property from the state object.
+**Note:** AI SDK RSC is experimental. For production use, AI SDK UI is recommended. Migration guide available.
 
-**Note:** AI SDK RSC is experimental. The recommended approach for production is AI SDK UI, with a migration guide available.
+**Example:** Render a React component during a tool call made by a language model in Next.js (see examples/next-app/tools/render-interface-during-tool-call).
 
 ### getmutableaistate
-getMutableAIState: server-side function to get/update AI state with update() and done() methods; RSC experimental, use UI SDK for production.
+getMutableAIState() returns mutable AI state with update() and done() methods for server-side state management in RSC (experimental).
 
 ## getMutableAIState
 
@@ -238,63 +237,75 @@ import { getMutableAIState } from "@ai-sdk/rsc"
 **Parameters:**
 - `key` (optional, string): Returns the value of the specified key in the AI state if it's an object.
 
-**Returns:** The mutable AI state object with the following methods:
-- `update(newState: any)`: Updates the AI state with new state without finalizing.
-- `done(newState: any)`: Updates the AI state with new state, marks it as finalized, and closes the stream.
+**Returns:** Mutable AI state object with methods:
+- `update(newState: any)`: Updates the AI state with new state
+- `done(newState: any)`: Updates the AI state, marks it as finalized, and closes the stream
 
-**Use case:** Persist and restore AI and UI states in Next.js applications by updating the mutable state on the server side.
+**Example:** Persist and restore AI and UI states in Next.js (see state-management/save-and-restore-states example)
 
-**Note:** AI SDK RSC is experimental. Use AI SDK UI for production applications.
+**Note:** AI SDK RSC is experimental. Use AI SDK UI for production; migration guide available.
 
 ### useaistate
-Hook that reads/updates globally-shared AI state (system messages, function responses) under `<AI/>` provider; returns [state].
+useAIState hook reads/updates globally-shared AI state (system messages, function responses) under <AI/> provider; returns [state]; from @ai-sdk/rsc (experimental)
 
-Hook for reading and updating AI state in RSC applications. The AI state is shared globally across all `useAIState` hooks under the same `<AI/>` provider. Intended to contain context and information shared with the AI model, including system messages, function responses, and other relevant data.
+Hook for reading and updating AI state in RSC applications. The AI state is shared globally across all `useAIState` hooks under the same `<AI/>` provider.
 
-Import: `import { useAIState } from "@ai-sdk/rsc"`
+**Purpose**: Enables access to shared context and information passed to the AI model, including system messages, function responses, and other relevant data.
 
-Returns: A single element array where the first element is the current AI state.
+**Import**: `import { useAIState } from "@ai-sdk/rsc"`
 
-Note: AI SDK RSC is experimental; AI SDK UI is recommended for production use.
+**Returns**: A single-element array where the first element is the current AI state.
+
+**Note**: AI SDK RSC is experimental; AI SDK UI is recommended for production use.
 
 ### useactions
-useActions hook accesses patched Server Actions from clients, returning action dictionary; prevents direct-access errors.
+useActions hook accesses patched Server Actions from client; returns Record<string, Action>; required to avoid "Cannot find Client Component" errors.
 
-Hook for accessing Server Actions from client components in RSC (React Server Components). Returns a dictionary of server actions that have been patched through context.
+## useActions Hook
 
-**Purpose**: Enables client-side access to server actions while avoiding "Cannot find Client Component" errors that occur when accessing server actions directly.
+A client-side hook for accessing Server Actions from the AI SDK RSC. Required for proper integration because Server Actions are patched when passed through context; accessing them directly causes "Cannot find Client Component" errors.
 
-**Import**: `import { useActions } from "@ai-sdk/rsc"`
+**Import:**
+```javascript
+import { useActions } from "@ai-sdk/rsc"
+```
 
-**Returns**: `Record<string, Action>` - a dictionary mapping action names to their corresponding server action functions.
+**Returns:** `Record<string, Action>` - a dictionary of server actions.
 
-**Key Detail**: Server actions must be accessed through this hook because they are patched when passed through context. Direct access bypasses this patching and causes errors.
+**Use Cases:**
+- Building interfaces requiring user interactions with the server
+- Managing AI and UI states in Next.js applications
+- Routing React components using a language model
 
-**Use Cases**: Building interfaces that require user interactions with the server, managing AI and UI states in Next.js, routing React components using a language model.
-
-**Status**: Currently experimental. Production use should prefer AI SDK UI instead, with migration guide available.
+**Note:** AI SDK RSC is experimental; AI SDK UI is recommended for production. Migration guide available.
 
 ### useuistate
-Client-side hook for managing UI state as visual representation of AI state; returns [state, setState] tuple supporting functions and React nodes.
+useUIState hook: read/update client-side UI state (functions, React nodes, data) as visual representation of AI state; returns [state, setState] array; RSC experimental, use AI SDK UI for production.
 
-Hook for reading and updating UI state on the client side. The UI state is the visual representation of AI state and can contain functions, React nodes, and other data.
+Hook for reading and updating UI state in RSC applications. Returns an array similar to useState with current UI state as first element and update function as second element. UI state is client-side only and can contain functions, React nodes, and other data, serving as the visual representation of AI state.
 
-Returns an array similar to useState with two elements: the current UI state and a function to update it.
+**Note:** AI SDK RSC is experimental; AI SDK UI is recommended for production. Migration guide available.
 
-Import: `import { useUIState } from "@ai-sdk/rsc"`
+**Import:**
+```
+import { useUIState } from "@ai-sdk/rsc"
+```
 
-Note: AI SDK RSC is experimental; AI SDK UI is recommended for production. Migration guide available for transitioning from RSC to UI.
-
-Example use case: Managing AI and UI states in Next.js applications.
+**Example:** Managing AI and UI states in Next.js applications (see state-management/ai-ui-states example).
 
 ### usestreamablevalue
-React hook consuming streamable values, returns [data, error, pending] tuple for handling streamed data with loading/error states.
+React hook consuming streamable values, returns [data, error, pending] tuple for handling streamed component data.
 
-React hook that consumes streamable values created with `createStreamableValue`. Returns a tuple of `[data, error, pending]` where data is the current streamed value, error is any exception thrown during streaming, and pending is a boolean indicating if the stream is still in progress.
+React hook for consuming streamable values created with `createStreamableValue`.
 
-Import: `import { useStreamableValue } from "@ai-sdk/rsc"`
+**Purpose**: Unwraps a streamable value and provides access to its current data, error state, and pending status.
 
-Usage example:
+**Import**:
+```tsx
+import { useStreamableValue } from "@ai-sdk/rsc"
+```
+
+**Usage**:
 ```tsx
 function MyComponent({ streamableValue }) {
   const [data, error, pending] = useStreamableValue(streamableValue);
@@ -306,27 +317,37 @@ function MyComponent({ streamableValue }) {
 }
 ```
 
-Typical use case is consuming streamable values passed as component props from server-side streaming operations. Note: AI SDK RSC is experimental; AI SDK UI is recommended for production.
+**Returns**: Array tuple with three elements:
+1. `data` - The current value from the stream
+2. `error` - Error object if thrown during streaming, otherwise undefined
+3. `pending` - Boolean indicating if the value is still being streamed
 
-### render_(removed)
-Removed RSC function that streamed LLM-generated UI with tool support; replaced by streamUI.
+**Note**: AI SDK RSC is experimental; AI SDK UI is recommended for production.
 
-The `render` function has been removed in AI SDK 4.0. It was a helper function from the RSC module that created streamable UI from LLM providers, supporting the same model interfaces as AI SDK Core APIs.
+### rsc_reference
+Experimental RSC API reference: server-side streamUI/createAI/createStreamableUI/createStreamableValue/getAIState/getMutableAIState; client-side useAIState/useUIState/useActions hooks.
 
-**Status**: Deprecated and removed. Users should migrate to `streamUI` instead.
+## Overview
 
-**What it did**: Created a streamable UI from language model responses with support for tools and streaming text callbacks.
+AI SDK RSC (React Server Components) is an experimental feature for building AI applications. The documentation warns that it's not production-ready and recommends using AI SDK UI instead, with a migration guide available.
 
-**Parameters**:
-- `model` (string): Model identifier, must be OpenAI SDK compatible
-- `provider`: Provider client (OpenAI was the only available provider)
-- `initial` (optional, ReactNode): Initial UI to render
-- `messages` (array): Conversation messages with roles (system, user, assistant, tool) and content. Assistant messages could include tool_calls with id, type, and function details. Tool messages included toolCallId to reference the call.
-- `functions` or `tools` (optional, ToolSet): Tools accessible to the model, each with description, parameters (zod schema), and optional async render function
-- `text` (optional, callback): Handled generated tokens with content, delta, and done flag
-- `temperature` (optional, number): Model temperature setting
+## Core Functions
 
-**Return**: Any valid ReactNode
+**streamUI** - Helper function that streams React Server Components during tool execution, enabling dynamic UI updates from server-side AI operations.
 
-**Migration**: The function was replaced by `streamUI` with updated message specification. AI SDK RSC is experimental; AI SDK UI is recommended for production.
+**createAI** - Context provider that wraps your application and manages shared state between client and server, connecting the language model with your UI.
+
+**createStreamableUI** - Creates a UI component that can be rendered on the server and streamed to the client, allowing progressive rendering of complex components.
+
+**createStreamableValue** - Creates a streamable value (non-UI data) that can be rendered on the server and streamed to the client, useful for streaming data alongside UI.
+
+**getAIState** - Server-side function to read the current AI state (read-only access).
+
+**getMutableAIState** - Server-side function to read and update the AI state, allowing modifications to the AI context during execution.
+
+**useAIState** - Client-side hook to access the AI state from the context provider created by createAI.
+
+**useUIState** - Client-side hook to access the UI state from the context provider, managing client-side UI updates.
+
+**useActions** - Client-side hook to call server actions from the client, enabling client-to-server communication for AI operations.
 

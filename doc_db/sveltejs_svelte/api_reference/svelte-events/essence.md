@@ -1,0 +1,1 @@
+on() function attaches event listeners to DOM targets (window, document, HTMLElement, MediaQueryList, EventTarget) with proper ordering relative to declarative handlers, returns unsubscribe function.

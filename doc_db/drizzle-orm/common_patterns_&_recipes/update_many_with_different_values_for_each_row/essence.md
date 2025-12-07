@@ -1,1 +1,0 @@
-Bulk update different values per row using SQL CASE statements with sql operator and inArray filter

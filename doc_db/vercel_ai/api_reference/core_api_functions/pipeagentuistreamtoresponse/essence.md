@@ -1,0 +1,1 @@
+Pipes Agent UI message stream to Node.js ServerResponse for low-latency real-time streaming in chat/tool-use endpoints; supports AbortSignal cancellation; Node.js-only (not Edge/serverless).

@@ -1,0 +1,1 @@
+Manage multiple providers and models via custom providers (pre-configured settings/aliases/limits) and provider registries (string ID access with customizable separators); set global default provider via globalThis.AI_SDK_DEFAULT_PROVIDER.

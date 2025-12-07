@@ -1,9 +1,11 @@
 ## Multiple Streamable UIs
 
-The RSC APIs allow composing and returning multiple streamable UIs along with other data in a single request. This decouples UI into smaller components that stream independently.
+Return multiple streamable UI components in a single server action response. Each streamable can update independently based on async operations.
 
-Example: Create multiple streamable UIs, update them with loading states, then resolve them with actual data:
 ```tsx
+'use server';
+import { createStreamableUI } from '@ai-sdk/rsc';
+
 export async function getWeather() {
   const weatherUI = createStreamableUI();
   const forecastUI = createStreamableUI();
@@ -27,17 +29,15 @@ export async function getWeather() {
 }
 ```
 
-The client receives a data structure with multiple streamable UI fields that update independently based on when their data resolves.
+The returned object contains both streamable UIs and other data fields. Components update independently based on when their data resolves.
 
 ## Nested Streamable UIs
 
-Stream UI components within other UI components to build complex UIs from reusable parts. Pass a streamable as a prop to a parent component, which renders it and automatically updates as the server responds.
+Stream UI components within other UI components by passing streamables as props. Child components automatically update as the server sends new data.
 
-Example: Pass a `historyChart` streamable to a `StockCard` component:
 ```tsx
-async function getStockHistoryChart({ symbol: string }) {
-  'use server';
-
+'use server';
+async function getStockHistoryChart({ symbol }: { symbol: string }) {
   const ui = createStreamableUI(<Spinner />);
 
   (async () => {
@@ -53,4 +53,4 @@ async function getStockHistoryChart({ symbol: string }) {
 }
 ```
 
-The parent component renders immediately with a spinner, then the nested streamable updates independently once data arrives.
+Wrap async operations in an IIFE to avoid blocking. Parent components render child streamables which update independently.

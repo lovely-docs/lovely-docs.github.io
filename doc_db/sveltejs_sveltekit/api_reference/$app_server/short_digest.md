@@ -1,9 +1,19 @@
-## Server-side utilities for SvelteKit
+Server-side utilities: `command`, `form`, `query`, `prerender` for remote function execution; `getRequestEvent` to access current request context; `read` to load imported assets. All remote functions support optional schema validation and unchecked inputs.
 
-- **command**: Remote function that executes on server via fetch
-- **form**: Form handler with optional validation
-- **getRequestEvent**: Access current RequestEvent in server context
-- **prerender**: Remote prerender function with optional inputs generator
-- **query**: Remote query function with optional validation
-- **query.batch**: Batch multiple queries into single request (since 2.35)
-- **read**: Read imported asset contents from filesystem
+```js
+import { command, form, query, prerender, getRequestEvent, read } from '$app/server';
+
+// Remote functions execute on server when called from browser
+const cmd = command(() => 'result');
+const frm = form('unchecked', (data, invalid) => handleForm(data));
+const qry = query(schema, (arg) => fetchData(arg));
+const pre = prerender(() => generatePage(), { dynamic: true });
+const batch = query.batch(schema, (args) => (arg, idx) => process(arg));
+
+// Access request context
+const event = getRequestEvent();
+
+// Read imported assets
+const asset = read(importedFile);
+const text = await asset.text();
+```

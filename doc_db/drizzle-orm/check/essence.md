@@ -1,1 +1,0 @@
-Command to validate SQL migrations history consistency; requires dialect and database credentials via config file or CLI flags (--dialect, --out, --config).

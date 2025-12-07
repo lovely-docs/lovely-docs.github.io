@@ -1,0 +1,1 @@
+Three form utilities: **applyAction** updates page form data and status; **deserialize** converts response text to ActionResult; **enhance** intercepts form submission with optional custom handling and default behaviors for updates, resets, and redirects.

@@ -1,0 +1,1 @@
+Push schema changes directly to database without SQL files; code-first migrations with config via drizzle.config.ts or CLI (dialect, schema path, db connection required); supports filtering tables/schemas/extensions, multiple configs, and CLI options (verbose, strict, force).

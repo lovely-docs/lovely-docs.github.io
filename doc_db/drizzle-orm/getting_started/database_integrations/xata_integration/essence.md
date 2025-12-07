@@ -1,0 +1,1 @@
+Connect Drizzle ORM to Xata PostgreSQL database with postgres-js driver, define schema, generate/run migrations, and perform CRUD operations with examples.

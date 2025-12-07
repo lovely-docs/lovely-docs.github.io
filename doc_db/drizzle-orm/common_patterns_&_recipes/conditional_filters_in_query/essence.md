@@ -1,1 +1,0 @@
-Conditional filtering with ternary operators, combining filters with and()/or(), dynamic filter arrays, and custom SQL-based filter operators.

@@ -1,0 +1,1 @@
+Creates a ReadableStream emitting values sequentially with optional delays. Parameters: `chunks` (T[]), `initialDelayInMs` (number | null), `chunkDelayInMs` (number | null). Returns ReadableStream<T> that auto-closes after emitting all chunks.

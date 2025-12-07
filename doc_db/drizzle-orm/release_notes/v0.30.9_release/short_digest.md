@@ -1,0 +1,1 @@
+**SQLite `.onConflictDoUpdate()`**: Split `where` into `targetWhere` (filter conflicts) and `setWhere` (conditional updates). **Schema access**: Added `db._.fullSchema`. **AWS Data API migrator** fixed.

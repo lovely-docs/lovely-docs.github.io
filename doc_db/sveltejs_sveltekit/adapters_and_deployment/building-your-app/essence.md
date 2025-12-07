@@ -1,0 +1,1 @@
+Two-stage build: Vite optimizes, adapter tunes for environment; skip build-time execution with `building` flag check; preview with `vite preview` (Node-based, not production-identical).

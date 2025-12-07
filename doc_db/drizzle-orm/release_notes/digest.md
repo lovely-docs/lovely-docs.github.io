@@ -1,54 +1,25 @@
-## Major Features & Improvements
+## Release History: v0.11.0 through v0.32.2
 
-**Query Building & Performance**
-- v0.28.0: Relational queries rewritten with lateral joins (430% IntelliSense speedup), removed nested relation filtering in where clauses
-- v0.29.0: Query builder methods now enforce single invocation by default; use `.$dynamic()` for dynamic building. Added set operators (UNION, INTERSECT, EXCEPT)
-- v0.29.1: Aggregate helpers (count, avg, sum, max, min with distinct variants)
-- v0.30.10: `.if()` conditional method for WHERE expressions
+### Early Releases (v0.11.0 - v0.16.2)
+Initial TypeScript ORM with PostgreSQL support. v0.11.0 introduced core features: typed schema definition via classes, filtering/selection, joins, many-to-many relationships, and automatic migration generation. v0.16.2 added PostgreSQL schemas, MySQL database/schema support, database introspection, postgres.js driver support, and custom types.
 
-**Database Drivers & Connectivity**
-- v0.16.2: postgres.js driver support, PostgreSQL/MySQL schemas, database introspection
-- v0.29.0: Read replicas with `withReplicas()`, MySQL/PostgreSQL proxy drivers
-- v0.29.2: Expo SQLite driver with migration support via babel/metro config
-- v0.30.1: OP-SQLite driver support
-- v0.30.4: Xata HTTP driver for Xata Postgres platform
-- v0.30.5: PGlite (WASM Postgres) driver support
-- v0.30.7: Vercel Postgres mappings
-- v0.31.2: TiDB Cloud Serverless driver support
-- v0.31.1: Live queries for Expo SQLite via `useLiveQuery` hook
+### Schema & Constraints (v0.27.2 - v0.28.6)
+v0.27.2 added UNIQUE constraints across PostgreSQL, MySQL, SQLite with column-level `.unique()` or table-level `unique().on()` methods. v0.28.0 removed nested relation filtering, added mysql2 mode config, achieved 430% IntelliSense speedup via lateral joins rewrite, added insert with all defaults. v0.28.1-v0.28.6 fixed array bugs, timestamp milliseconds, SQLite typing, added Typebox support, column runtime defaults via `.$defaultFn()`, table type inference via `.$inferSelect/$inferInsert`, LibSQL batch API, SQLite JSON text mode, relational query `.toSQL()`, PostgreSQL array operators (`arrayContains`, `arrayContained`, `arrayOverlaps`).
 
-**Schema & Type Features**
-- v0.28.3: `.$defaultFn()` for runtime defaults, `$inferSelect`/`$inferInsert` table type inference
-- v0.29.0: Custom constraint names for primary/foreign keys
-- v0.31.0: PostgreSQL indexes API redesigned (per-column ordering, `.using()` for index type), pg_vector support with distance helpers, point/line/geometry types, PostGIS support
-- v0.32.0: PostgreSQL sequences/identity columns, generated columns (PostgreSQL/MySQL/SQLite)
-- v0.32.0: MySQL `$returningId()` for retrieving inserted IDs
+### Query Building & Drivers (v0.29.0 - v0.29.5)
+v0.29.0 added MySQL unsigned bigint, dynamic query building with `.$dynamic()`, custom constraint names, read replicas via `withReplicas()`, set operators (UNION/INTERSECT/EXCEPT), MySQL/PostgreSQL proxy drivers, D1 batch API. v0.29.1 added aggregate helpers (`count`, `sum`, `avg`, `max`, `min` with Distinct variants), ESLint plugin with `enforce-delete-with-where` and `enforce-update-with-where` rules. v0.29.2 added Expo SQLite driver with migration support via babel/metro config and `useMigrations` hook. v0.29.3 made Expo peer dependencies optional. v0.29.4 added Neon HTTP batch queries, deprecated PlanetScale `connect()` in favor of Client instances. v0.29.5 added WITH clauses for INSERT/UPDATE/DELETE, custom migrations table/schema, SQLite proxy batch and relational query support.
 
-**Data Operations**
-- v0.28.0: Insert rows with default values via empty objects
-- v0.28.6: LibSQL batch API, SQLite JSON text mode, PostgreSQL array operators (arrayContains/arrayContained/arrayOverlaps)
-- v0.29.4: Neon HTTP batch queries
-- v0.29.5: WITH clauses for INSERT/UPDATE/DELETE, custom migrations table/schema configuration
-- v0.30.5: `$onUpdate()` for dynamic column values on updates
+### Timestamp Handling & New Drivers (v0.30.0 - v0.30.10)
+v0.30.0 changed postgres.js to return date strings with Drizzle mode-based mapping, fixed 8 timestamp/date bugs. v0.30.1 added OP-SQLite driver. v0.30.2 made LibSQL migrations use batch execution. v0.30.3 added raw query batch support for Neon HTTP. v0.30.4 added native xata-http driver for Xata Postgres. v0.30.5 added `$onUpdate()` for runtime column value computation on update. v0.30.6 added PGlite driver (WASM Postgres, 2.6mb, browser/Node.js/Bun). v0.30.7 added Vercel Postgres mappings, fixed Neon interval mapping. v0.30.8 added PostgreSQL enum schema support, D1 batch migrations, split `onConflict` where clause into `setWhere`/`targetWhere`. v0.30.9 added SQLite `onConflictDoUpdate` split where, `db._.fullSchema` for schema introspection. v0.30.10 added `.if()` for conditional WHERE clauses.
 
-**Unique Constraints & Conflict Resolution**
-- Unique constraints across PostgreSQL (with NULLS NOT DISTINCT), MySQL, SQLite
-- v0.30.8: Split `onConflictDoUpdate()` where into `setWhere` and `targetWhere`
-- v0.30.9: Same split for SQLite `.onConflictDoUpdate()`
+### Advanced Features (v0.31.0 - v0.32.2)
+v0.31.0 breaking change: PostgreSQL indexes API - ordering modifiers move to per-column level, `.using()` specifies index type. Added pg_vector support with distance functions (`l2Distance`, `l1Distance`, `innerProduct`, `cosineDistance`, `hammingDistance`, `jaccardDistance`), PostgreSQL point/line types, PostGIS geometry type. v0.31.1 added `useLiveQuery` React Hook for Expo SQLite with auto-rerun on data changes. v0.31.2 added TiDB Cloud Serverless driver. v0.31.3 fixed RQB schema handling, added Prisma extension for native Drizzle query integration via `$extends(drizzle())`. v0.31.4 marked prisma clients package as optional. v0.32.0 added MySQL `$returningId()` for inserted IDs, PostgreSQL sequences/identity columns/generated columns, MySQL/SQLite generated columns with stored/virtual modes, Drizzle Kit migrations support and `--force` flag, customizable migration file prefixes. v0.32.1 fixed index typings for 3+ columns, added limit 0 support, empty array handling for `inArray`/`notInArray`. v0.32.2 fixed AWS Data API type hints, MySQL transactions, `useLiveQuery` dependency forwarding.
 
-**Tooling & Integration**
-- v0.29.1: ESLint plugin with enforce-delete-with-where and enforce-update-with-where rules
-- v0.31.3: Prisma-Drizzle extension via `$extends(drizzle())`
-- v0.32.0: Drizzle Kit migration file prefix customization (index, supabase, unix, none)
-
-## Bug Fixes (Notable)
-- v0.23.2: PostgreSQL schemaFilter enum detection, drizzle-kit up command
-- v0.28.1: Postgres array handling regressions
-- v0.28.2: MySQL timestamp milliseconds, SQLite `.get()` type, sqlite-proxy double-execution
-- v0.28.4-v0.28.5: ESM imports, Postgres table types, OpenTelemetry import syntax
-- v0.30.0: Postgres date/timestamp handling (breaking change: postgres.js client mutation for date strings)
-- v0.30.2: LibSQL migrations batch execution, bun:sqlite findFirst
-- v0.30.3: Neon HTTP raw query batching, sqlite-proxy `.run()` result format
-- v0.31.3: RQB schema name collisions, RDS Data API type hints
-- v0.32.1: Index typings for 3+ columns, limit 0 support, empty array in inArray/notInArray
-- v0.32.2: AWS Data API types, MySQL transactions, useLiveQuery dependencies, SQLite type exports
+### Key Patterns
+- Schema definition: `pgTable('name', { columns })` with typed columns
+- Queries: `db.select().from(table).where(eq(table.id, 1))`
+- Inserts: `db.insert(table).values({...})`
+- Migrations: auto-generated via drizzle-kit
+- Type inference: `typeof table.$inferSelect`, `typeof table.$inferInsert`
+- Relational queries: `db.query.table.findMany({ with: { relation: true } })`
+- Batch operations: `db.batch([query1, query2, ...])`

@@ -1,0 +1,1 @@
+Step-by-step PostgreSQL setup with node-postgres: install pg, set DATABASE_URL env var, connect Drizzle client, define schema, configure drizzle.config.ts, apply migrations, seed/query, run with tsx.

@@ -1,0 +1,1 @@
+Prerender entire SvelteKit site as static files using `@sveltejs/adapter-static`. Configure with `pages`, `assets`, `fallback` (for SPA), `precompress`, and `strict` options. Set `trailingSlash` appropriately. For GitHub Pages, update `paths.base` to repo name and generate `404.html` fallback. Example GitHub Actions workflow provided.

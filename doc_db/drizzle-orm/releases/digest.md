@@ -1,0 +1,1 @@
+This page displays the latest releases of drizzle-orm. It uses the LatestReleases component to render a dynamic list of recent version releases, changes, and updates to the library. The component pulls release information and presents it to users who want to stay informed about the latest features, bug fixes, and improvements.

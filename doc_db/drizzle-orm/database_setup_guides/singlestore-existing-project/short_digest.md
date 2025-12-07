@@ -1,14 +1,14 @@
-## Setup Drizzle with SingleStore in Existing Project
+## Setup Drizzle with existing SingleStore database
 
 **Prerequisites:** dotenv, tsx, mysql2
 
 **Steps:**
-1. Install mysql2 package
-2. Set DATABASE_URL environment variable
-3. Create drizzle.config.ts with singlestore dialect
-4. Introspect existing database to generate schema
-5. Transfer introspected schema to schema file
-6. Connect Drizzle client with mysql2
-7. Query database with Drizzle ORM
+1. Install mysql2
+2. Set `DATABASE_URL` in .env
+3. Create drizzle.config with dialect='singlestore'
+4. Introspect database to generate schema
+5. Move introspected schema to schema file
+6. Connect to database with mysql2 driver
+7. Query database
 8. Run with tsx
-9. (Optional) Update schema and apply migrations
+9-11. (Optional) Update schema and apply changes

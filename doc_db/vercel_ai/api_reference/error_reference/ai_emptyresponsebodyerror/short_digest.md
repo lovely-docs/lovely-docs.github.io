@@ -1,1 +1,0 @@
-Error thrown when server returns empty response body. Detect using `EmptyResponseBodyError.isInstance(error)` after importing from 'ai'.

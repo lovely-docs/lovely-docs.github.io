@@ -1,20 +1,18 @@
 ## svelte:boundary
 
-A special element that creates error boundaries and handles async state in Svelte components.
+A special element that creates error boundaries and handles async state in Svelte components (added in 5.3.0).
 
-### Use Cases
+### Purpose
+- Wall off parts of your app to handle errors during rendering or effects
+- Show pending UI while `await` expressions resolve
+- Provide error UI when rendering fails
 
-**1. Handle rendering errors with fallback UI:**
-```svelte
-<svelte:boundary>
-	<FlakyComponent />
-	{#snippet failed(error, reset)}
-		<button onclick={reset}>oops! try again</button>
-	{/snippet}
-</svelte:boundary>
-```
+**Important limitation**: Only catches errors during rendering and effects. Errors in event handlers, setTimeout, or other async work outside the rendering process are NOT caught.
 
-**2. Show pending UI while awaiting async expressions:**
+### Properties
+
+**pending** - A snippet shown when the boundary is first created, visible until all `await` expressions inside resolve. Not shown for subsequent async updates (use `$effect.pending()` for those instead).
+
 ```svelte
 <svelte:boundary>
 	<p>{await delayed('hello!')}</p>
@@ -24,19 +22,29 @@ A special element that creates error boundaries and handles async state in Svelt
 </svelte:boundary>
 ```
 
-**3. Track errors with external service:**
+**failed** - A snippet rendered when an error is thrown, receives `error` and `reset` function arguments. When a boundary handles an error, its existing content is removed.
+
 ```svelte
-<svelte:boundary onerror={(error, reset) => report(error)}>
+<svelte:boundary>
 	<FlakyComponent />
+	{#snippet failed(error, reset)}
+		<button onclick={reset}>oops! try again</button>
+	{/snippet}
 </svelte:boundary>
 ```
 
-**4. Handle errors outside the boundary:**
+Can also be passed explicitly: `<svelte:boundary {failed}>...</svelte:boundary>`
+
+**onerror** - A function called with `error` and `reset` arguments. Useful for error reporting or managing error state outside the boundary.
+
 ```svelte
 <script>
 	let error = $state(null);
 	let reset = $state(() => {});
-	function onerror(e, r) { error = e; reset = r; }
+	function onerror(e, r) {
+		error = e;
+		reset = r;
+	}
 </script>
 
 <svelte:boundary {onerror}>
@@ -44,18 +52,11 @@ A special element that creates error boundaries and handles async state in Svelt
 </svelte:boundary>
 
 {#if error}
-	<button onclick={() => { error = null; reset(); }}>try again</button>
+	<button onclick={() => {
+		error = null;
+		reset();
+	}}>oops! try again</button>
 {/if}
 ```
 
-### Properties
-
-- `pending` snippet: shown when boundary is created, remains visible until all `await` expressions resolve. Not shown for subsequent async updates.
-- `failed` snippet: rendered when error is thrown, receives `error` and `reset` function. Can be passed explicitly or declared inside the boundary.
-- `onerror` handler: called with `error` and `reset` arguments. Errors thrown inside `onerror` propagate to parent boundaries.
-
-### Important Notes
-
-- Only catches errors during rendering and effects, not in event handlers or after `setTimeout`/async work
-- When boundary handles an error, existing content is removed
-- Available since Svelte 5.3.0
+Errors thrown inside `onerror` (or rethrown errors) propagate to parent boundaries if they exist.

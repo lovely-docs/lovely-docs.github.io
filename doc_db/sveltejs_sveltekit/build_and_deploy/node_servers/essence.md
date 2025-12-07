@@ -1,1 +1,0 @@
-Configure and deploy SvelteKit apps as standalone Node servers with environment-based configuration for ports, origins, proxies, and graceful shutdown.

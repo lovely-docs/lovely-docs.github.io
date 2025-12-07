@@ -1,1 +1,1 @@
-Reactive window property bindings that update automatically in reactive contexts without manual event listeners.
+Reactive window property accessors (innerWidth/Height, outerWidth/Height, scrollX/Y, screenLeft/Top, devicePixelRatio, online) via `.current` property; undefined on server; screenLeft/Top update via requestAnimationFrame.

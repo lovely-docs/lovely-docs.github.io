@@ -1,0 +1,1 @@
+useInterval: reactive setInterval wrapper with pause/resume, tick counter, optional callback, reactive delay support via function, options for immediate start/callback execution.

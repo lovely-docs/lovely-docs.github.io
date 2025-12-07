@@ -1,1 +1,1 @@
-Practical patterns for filtering, pagination, data modification, advanced queries, schema defaults, and database setup in Drizzle ORM.
+Comprehensive patterns for querying, filtering, pagination, updates, full-text search, geospatial queries, defaults, seeding, and database setup.

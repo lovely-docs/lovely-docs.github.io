@@ -1,1 +1,0 @@
-Svelte 5 replaces implicit reactivity with explicit runes ($state, $derived, $effect), converts event directives to properties, replaces slots with snippets, changes components from classes to functions, and requires modern browser features.

@@ -1,0 +1,1 @@
+**DEPRECATED in AI SDK 4.0**. GoogleGenerativeAIStream converts Google Generative AI SDK responses to ReadableStream with optional callbacks (onStart, onToken, onCompletion, onFinal). Use the Google Generative AI Provider instead.

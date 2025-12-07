@@ -1,1 +1,1 @@
-Auto-generated TypeScript types for type-safe access to routes, pathnames, and parameters in your SvelteKit app.
+Auto-generated TypeScript types for routes, pathnames, and parameters with utilities like RouteParams and LayoutParams for type-safe route handling.

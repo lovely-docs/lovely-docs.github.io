@@ -1,23 +1,18 @@
-## TiDB Serverless Setup
+## TiDB Serverless
 
-TiDB Serverless is a managed DBaaS with HTTP driver support for edge environments, MySQL-compatible.
+Fully-managed DBaaS compatible with MySQL, with HTTP driver for edge environments.
 
-**Installation:**
-```
-drizzle-orm @tidbcloud/serverless
--D drizzle-kit
-```
+**Install:** `drizzle-orm @tidbcloud/serverless` and `drizzle-kit`
 
-**Quick start:**
+**Setup:**
 ```typescript
 import { drizzle } from 'drizzle-orm/tidb-serverless';
 const db = drizzle({ connection: { url: process.env.TIDB_URL }});
 ```
 
-**With existing driver:**
+Or with custom client:
 ```typescript
 import { connect } from '@tidbcloud/serverless';
-import { drizzle } from 'drizzle-orm/tidb-serverless';
 const client = connect({ url: process.env.TIDB_URL });
 const db = drizzle({ client });
 ```

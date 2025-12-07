@@ -1,0 +1,1 @@
+`useChat` with `resume: true` conflicts with abort functionality. Choose either stream resumption or abort capability, not both. Use `resume: true` for long-running generations across reloads, or `resume: false` (default) to enable manual stream stopping.

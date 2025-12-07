@@ -1,1 +1,0 @@
-Svelte 5 lifecycle hooks: onMount (initialization), onDestroy (cleanup), tick (DOM sync), with beforeUpdate/afterUpdate deprecated in favor of $effect.pre/$effect.

@@ -1,31 +1,21 @@
-## Node.js Quickstart for AI SDK
+## Setup
 
-Build a simple AI agent with streaming chat interface using Node.js and the AI SDK.
+Prerequisites: Node.js 18+, pnpm, Vercel AI Gateway API key.
 
-### Prerequisites
-- Node.js 18+ and pnpm
-- Vercel AI Gateway API key (sign up at vercel.com/ai-gateway)
-
-### Setup
-Create project directory and initialize:
+Create project:
 ```bash
-mkdir my-ai-app
-cd my-ai-app
-pnpm init
-```
-
-Install dependencies:
-```bash
+mkdir my-ai-app && cd my-ai-app && pnpm init
 pnpm add ai@beta zod dotenv
 pnpm add -D @types/node tsx typescript
 ```
 
-Create `.env` file with API key:
+Create `.env`:
 ```env
-AI_GATEWAY_API_KEY=your_key_here
+AI_GATEWAY_API_KEY=your_key
 ```
 
-### Basic Chat Agent
+## Basic Chat Agent
+
 Create `index.ts`:
 ```ts
 import { ModelMessage, streamText } from 'ai';
@@ -64,21 +54,23 @@ async function main() {
 main().catch(console.error);
 ```
 
-Run with: `pnpm tsx index.ts`
+Run with `pnpm tsx index.ts`. The code uses `streamText()` to stream responses, maintains message history for context, and iterates over `result.textStream` to print tokens in real-time.
 
-### Provider Configuration
-The AI SDK uses Vercel AI Gateway as default global provider. Access models with string notation:
-```ts
-model: 'anthropic/claude-sonnet-4.5'
-```
+## Provider Configuration
 
-Or explicitly import:
+Default provider is Vercel AI Gateway. Access models with string: `model: 'anthropic/claude-sonnet-4.5'`
+
+Equivalent explicit imports:
 ```ts
 import { gateway } from 'ai';
 model: gateway('anthropic/claude-sonnet-4.5');
+
+// or
+import { gateway } from '@ai-sdk/gateway';
+model: gateway('anthropic/claude-sonnet-4.5');
 ```
 
-To use other providers like OpenAI:
+To use other providers (e.g., OpenAI):
 ```bash
 pnpm add @ai-sdk/openai@beta
 ```
@@ -87,11 +79,12 @@ import { openai } from '@ai-sdk/openai';
 model: openai('gpt-5.1');
 ```
 
-### Tools
-Tools enable agents to perform discrete tasks and interact with external systems. Define tools with `tool()` function using Zod schemas:
+## Tools
+
+Tools allow LLMs to invoke actions and receive results. Add tools to `streamText()`:
 
 ```ts
-import { streamText, tool } from 'ai';
+import { tool } from 'ai';
 import { z } from 'zod';
 
 const result = streamText({
@@ -112,8 +105,17 @@ const result = streamText({
 });
 ```
 
-### Multi-Step Tool Calls
-Enable agents to use tool results to answer questions by configuring `stopWhen` and `onStepFinish`:
+Tool definition requires: description (when to use), inputSchema (Zod schema for parameters), execute (async function that runs on server).
+
+Access tool calls and results:
+```ts
+console.log(await result.toolCalls);
+console.log(await result.toolResults);
+```
+
+## Multi-Step Tool Calls
+
+Enable agent to use tool results to answer questions with `stopWhen` and `onStepFinish`:
 
 ```ts
 import { stepCountIs } from 'ai';
@@ -121,7 +123,7 @@ import { stepCountIs } from 'ai';
 const result = streamText({
   model: 'anthropic/claude-sonnet-4.5',
   messages,
-  tools: { /* tools defined */ },
+  tools: { /* ... */ },
   stopWhen: stepCountIs(5),
   onStepFinish: async ({ toolResults }) => {
     if (toolResults.length) {
@@ -131,9 +133,8 @@ const result = streamText({
 });
 ```
 
-`stopWhen: stepCountIs(5)` allows up to 5 steps for generation, enabling complex multi-tool interactions. The agent will automatically send tool results back for additional generation until the stopping condition is met.
+`stopWhen: stepCountIs(5)` allows up to 5 steps. Agent can call multiple tools sequentially. Example with two tools:
 
-### Multiple Tools Example
 ```ts
 tools: {
   weather: tool({
@@ -159,4 +160,4 @@ tools: {
 }
 ```
 
-When asking "What's the weather in New York in celsius?", the agent will call weather tool, then conversion tool, then provide natural language response.
+Query "What's the weather in New York in celsius?" triggers: weather tool call → temperature conversion tool call → natural language response.

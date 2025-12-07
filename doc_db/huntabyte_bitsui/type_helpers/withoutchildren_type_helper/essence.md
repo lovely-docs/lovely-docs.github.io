@@ -1,1 +1,1 @@
-Type helper that excludes the children snippet prop from a component's type definition for custom wrappers.
+Type helper to exclude `children` snippet prop from component props when building wrappers that manage children internally.

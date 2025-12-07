@@ -1,0 +1,1 @@
+Reactive wrapper around Page Visibility API; tracks document.hidden state with automatic visibilitychange event listening.

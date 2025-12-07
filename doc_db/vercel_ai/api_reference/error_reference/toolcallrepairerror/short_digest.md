@@ -1,1 +1,0 @@
-Error thrown when AI fails to repair an invalid tool call (either `NoSuchToolError` or `InvalidToolInputError`). Contains `originalError`, `message`, and `cause` properties. Check with `ToolCallRepairError.isInstance(error)`.

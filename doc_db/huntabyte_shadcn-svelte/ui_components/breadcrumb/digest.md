@@ -1,4 +1,4 @@
-## Breadcrumb Component
+## Breadcrumb
 
 Displays the path to the current resource using a hierarchy of links.
 
@@ -34,30 +34,26 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </Breadcrumb.Root>
 ```
 
-### Component Structure
+### Components
 
 - `<Breadcrumb.Root>` - Root container
 - `<Breadcrumb.List>` - List wrapper
 - `<Breadcrumb.Item>` - Individual breadcrumb item
-- `<Breadcrumb.Link>` - Clickable link with `href` prop
+- `<Breadcrumb.Link href="...">` - Clickable link in breadcrumb
 - `<Breadcrumb.Page>` - Current page (non-clickable)
 - `<Breadcrumb.Separator>` - Separator between items (default: forward slash)
 - `<Breadcrumb.Ellipsis>` - Collapsed state indicator
 
-### Custom Separator
+### Examples
 
-Pass a custom component to the `<Breadcrumb.Separator />` slot:
-
+**Custom separator** - Pass a custom component to `<Breadcrumb.Separator>` slot:
 ```svelte
 <Breadcrumb.Separator>
   <SlashIcon />
 </Breadcrumb.Separator>
 ```
 
-### Dropdown Integration
-
-Compose `<Breadcrumb.Item />` with `<DropdownMenu />` to create interactive breadcrumbs:
-
+**Dropdown** - Compose with `<DropdownMenu>` to create collapsible breadcrumb sections:
 ```svelte
 <Breadcrumb.Item>
   <DropdownMenu.Root>
@@ -74,31 +70,19 @@ Compose `<Breadcrumb.Item />` with `<DropdownMenu />` to create interactive brea
 </Breadcrumb.Item>
 ```
 
-### Collapsed State
-
-Use `<Breadcrumb.Ellipsis />` to show a collapsed state for long breadcrumbs:
-
+**Collapsed** - Use `<Breadcrumb.Ellipsis />` to show collapsed state for long breadcrumbs:
 ```svelte
 <Breadcrumb.Item>
   <Breadcrumb.Ellipsis />
 </Breadcrumb.Item>
 ```
 
-### Custom Link Component
+**Custom link component** - Use `asChild` prop on `<Breadcrumb.Link>` to integrate with routing libraries.
 
-Use the `asChild` prop on `<Breadcrumb.Link />` to integrate with routing libraries.
-
-### Responsive Breadcrumb
-
-Compose with `<DropdownMenu />` for desktop and `<Drawer />` for mobile using `MediaQuery`:
-
+**Responsive** - Compose with `<DropdownMenu>` for desktop and `<Drawer>` for mobile using `MediaQuery`:
 ```svelte
 <script lang="ts">
   import { MediaQuery } from "svelte/reactivity";
-  import * as Breadcrumb from "$lib/components/ui/breadcrumb/index.js";
-  import * as Drawer from "$lib/components/ui/drawer/index.js";
-  import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.js";
-  
   const items = [
     { href: "#", label: "Home" },
     { href: "#", label: "Documentation" },

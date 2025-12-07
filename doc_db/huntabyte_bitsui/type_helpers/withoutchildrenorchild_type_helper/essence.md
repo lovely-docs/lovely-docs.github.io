@@ -1,1 +1,1 @@
-Type helper that removes child and children props from component types for custom wrappers.
+Type helper excluding child/children props from component types; use when wrapping components that manage their own children.

@@ -1,0 +1,1 @@
+Keyboard key press tracker with has(), all property, and onKeys() callback registration for key combinations.

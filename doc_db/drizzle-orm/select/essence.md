@@ -1,1 +1,1 @@
-Type-safe SQL SELECT with column selection, filtering, pagination, CTEs, subqueries, aggregations, and MySQL index hints.
+Type-safe SQL SELECT queries with partial selection, filtering, aggregations, CTEs, subqueries, pagination, and database-specific index hints.

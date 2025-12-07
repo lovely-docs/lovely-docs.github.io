@@ -1,6 +1,6 @@
 ## Toggle
 
-A two-state button component that toggles between on and off states.
+A two-state button component that can be toggled on or off.
 
 ### Installation
 
@@ -34,34 +34,30 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 </Toggle>
 ```
 
-**Outline variant:**
+**Variants and sizes:**
 ```svelte
+<!-- Outline variant -->
 <Toggle variant="outline" aria-label="Toggle italic">
   <ItalicIcon class="size-4" />
 </Toggle>
-```
 
-**With text and icon:**
-```svelte
+<!-- With text -->
 <Toggle aria-label="Toggle italic">
   <ItalicIcon class="mr-2 size-4" />
   Italic
 </Toggle>
-```
 
-**Size variants (small and large):**
-```svelte
+<!-- Size small -->
 <Toggle size="sm" aria-label="Toggle italic">
   <ItalicIcon class="size-4" />
 </Toggle>
 
+<!-- Size large -->
 <Toggle size="lg" aria-label="Toggle italic">
   <ItalicIcon class="size-4" />
 </Toggle>
-```
 
-**Disabled state:**
-```svelte
+<!-- Disabled -->
 <Toggle aria-label="Toggle underline" disabled>
   <UnderlineIcon class="size-4" />
 </Toggle>
@@ -69,7 +65,7 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Props
 
-- `variant`: "default" or "outline" - controls button styling
-- `size`: "sm", "md" (default), or "lg" - controls button size
-- `disabled`: boolean - disables the toggle button
-- `aria-label`: string - accessibility label for the button
+- `variant`: "default" | "outline" (default: "default")
+- `size`: "sm" | "default" | "lg" (default: "default")
+- `disabled`: boolean (default: false)
+- `aria-label`: string (recommended for accessibility)

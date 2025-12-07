@@ -1,0 +1,1 @@
+Error thrown when image generation fails. Check with `NoImageGeneratedError.isInstance(error)`. Properties: `message`, `responses` (metadata), `cause` (root cause).

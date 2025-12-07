@@ -1,11 +1,10 @@
 ## Changes
-MySQL `datetime` with `mode: 'date'` now stores and retrieves dates in UTC strings to align with MySQL behavior. Use `mode: 'string'` or custom types for different behavior.
+MySQL `datetime` with `mode: 'date'` now stores and retrieves dates in UTC strings. Use `mode: 'string'` or custom types for different behavior.
 
 ## New Features
 
-**LibSQL batch API support**: Execute multiple queries in a single batch call using `db.batch()`. Supports all query builders: `db.all()`, `db.get()`, `db.values()`, `db.run()`, `db.query.<table>.findMany()`, `db.query.<table>.findFirst()`, `db.select()`, `db.update()`, `db.delete()`, `db.insert()`.
-
-Example:
+**LibSQL batch API support**
+Execute multiple queries in a single batch call:
 ```ts
 const batchResponse = await db.batch([
   db.insert(usersTable).values({ id: 1, name: 'John' }).returning({ id: usersTable.id }),
@@ -13,39 +12,38 @@ const batchResponse = await db.batch([
   db.query.usersTable.findMany({}),
   db.select().from(usersTable).where(eq(usersTable.id, 1)),
 ]);
+// Returns: [{ id: number }[], ResultSet, User[], User[]]
 ```
+Supported builders: `db.all()`, `db.get()`, `db.values()`, `db.run()`, `db.query.<table>.findMany()`, `db.query.<table>.findFirst()`, `db.select()...`, `db.update()...`, `db.delete()...`, `db.insert()...`
 
-**JSON mode for SQLite text columns**: Store and retrieve JSON data using text columns with `mode: 'json'`:
+**JSON mode for SQLite text columns**
 ```ts
 const test = sqliteTable('test', {
   dataTyped: text('data_typed', { mode: 'json' }).$type<{ a: 1 }>().notNull(),
 });
 ```
 
-**`.toSQL()` for Relational Query API**: Convert relational queries to SQL:
+**`.toSQL()` on Relational Query API**
 ```ts
 const query = db.query.usersTable.findFirst().toSQL();
 ```
 
-**PostgreSQL array operators**: New operators for array operations:
-- `arrayContains(posts.tags, ['Typescript', 'ORM'])` - check if array contains values
-- `arrayContained(posts.tags, ['Typescript', 'ORM'])` - check if array is contained in values
-- `arrayOverlaps(posts.tags, ['Typescript', 'ORM'])` - check if arrays overlap
-
-Supports subqueries:
+**PostgreSQL array operators**
 ```ts
-db.select({ id: posts.id }).from(posts).where(
-  arrayContains(posts.tags, db.select({ tags: posts.tags }).from(posts).where(eq(posts.id, 1)))
-);
+const contains = await db.select({ id: posts.id }).from(posts)
+  .where(arrayContains(posts.tags, ['Typescript', 'ORM']));
+const contained = await db.select({ id: posts.id }).from(posts)
+  .where(arrayContained(posts.tags, ['Typescript', 'ORM']));
+const overlaps = await db.select({ id: posts.id }).from(posts)
+  .where(arrayOverlaps(posts.tags, ['Typescript', 'ORM']));
+const withSubQuery = await db.select({ id: posts.id }).from(posts)
+  .where(arrayContains(posts.tags, db.select({ tags: posts.tags }).from(posts).where(eq(posts.id, 1))));
 ```
 
-**More SQL operators in Relational Query where filters**: Operators like `inArray` are now available as parameters in the where callback:
+**More SQL operators in Relational Query where filters**
 ```ts
-// Before
-await db.users.findFirst({ where: (table, _) => inArray(table.id, [...]) })
-
-// After
-await db.users.findFirst({ where: (table, { inArray }) => inArray(table.id, [...]) })
+// Before: import { inArray } from "drizzle-orm/pg-core"; await db.users.findFirst({ where: (table, _) => inArray(table.id, [...]) })
+// After: await db.users.findFirst({ where: (table, { inArray }) => inArray(table.id, [...]) })
 ```
 
 ## Fixes

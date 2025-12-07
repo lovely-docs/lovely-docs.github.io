@@ -1,4 +1,4 @@
-`WithoutChild` excludes the `child` snippet prop from a component type. Use when building wrappers that populate `children` without exposing custom `child` snippets.
+Type helper that removes the `child` snippet prop from component types. Used when wrapping components that manage their own children.
 
 ```svelte
 let { children, ...restProps }: WithoutChild<Accordion.ItemProps> = $props();

@@ -1,0 +1,1 @@
+Special element for inserting content into document.head; top-level only; supports title and meta tags for SEO.

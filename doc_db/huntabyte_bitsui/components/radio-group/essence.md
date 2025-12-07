@@ -1,0 +1,1 @@
+Radio group component for selecting one value from multiple options; supports form submission, two-way binding, disabled/readonly states, vertical/horizontal orientation with arrow-key navigation, and looping.

@@ -1,0 +1,1 @@
+Thrown by `generateObject()` when model fails to produce a valid schema-conforming object. Check with `NoObjectGeneratedError.isInstance(error)`. Properties include `text`, `response`, `usage`, `finishReason`, and `cause` for debugging.

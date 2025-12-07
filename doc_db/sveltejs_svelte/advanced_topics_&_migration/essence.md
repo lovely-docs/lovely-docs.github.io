@@ -1,1 +1,0 @@
-Advanced patterns, testing strategies, TypeScript integration, custom elements, and migration guides for Svelte 4 and 5.

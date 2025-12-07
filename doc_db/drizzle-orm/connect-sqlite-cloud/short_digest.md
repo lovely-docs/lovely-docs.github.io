@@ -1,15 +1,7 @@
-## SQLite Cloud Connection
+## SQLite Cloud Setup
 
-Install `drizzle-orm@beta` and `@sqlitecloud/drivers`. Connect via connection string or existing driver instance:
+Install `drizzle-orm@beta` and `@sqlitecloud/drivers`.
 
-```typescript
-import { drizzle } from 'drizzle-orm/sqlite-cloud';
-const db = drizzle(process.env.SQLITE_CLOUD_CONNECTION_STRING);
-```
+Initialize with connection string: `drizzle(process.env.SQLITE_CLOUD_CONNECTION_STRING)` or with client instance: `drizzle({ client: new Database(...) })`.
 
-Or with existing driver:
-```typescript
-import { Database } from '@sqlitecloud/drivers';
-const client = new Database(process.env.SQLITE_CLOUD_CONNECTION_STRING!);
-const db = drizzle({ client });
-```
+Execute queries: `db.execute('select 1')`

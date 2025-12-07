@@ -1,1 +1,1 @@
-Checkbox component with checked/disabled states, data-[state=checked] styling, and sveltekit-superforms integration via onCheckedChange callback.
+Toggle control with checked/disabled states, data-[state=checked] styling, onCheckedChange event, sveltekit-superforms integration.

@@ -1,15 +1,15 @@
-## Conditional Rendering with {#if}
+## Conditional Rendering with If Blocks
 
-Wrap content in an if block to conditionally render it based on an expression.
+Wrap content in `{#if expression}...{/if}` blocks to conditionally render it based on expressions.
 
-**Basic if:**
 ```svelte
 {#if answer === 42}
 	<p>what was the question?</p>
 {/if}
 ```
 
-**if with else if and else:**
+Add additional conditions with `{:else if expression}`:
+
 ```svelte
 {#if porridge.temperature > 100}
 	<p>too hot!</p>
@@ -20,4 +20,4 @@ Wrap content in an if block to conditionally render it based on an expression.
 {/if}
 ```
 
-Blocks can wrap elements or text within elements.
+Blocks can wrap elements or text within elements. Use `{:else}` for a final fallback clause.

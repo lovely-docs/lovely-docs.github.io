@@ -1,1 +1,0 @@
-Fix "only plain objects" Server Action error with streamText/streamObject by using createStreamableValue to wrap serializable data.

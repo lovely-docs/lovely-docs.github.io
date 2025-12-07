@@ -1,1 +1,0 @@
-Set `"typescript": false` in `components.json` to use JavaScript versions of components via CLI. Configure aliases in `jsconfig.json` with path mappings.

@@ -1,1 +1,0 @@
-Index page for legacy APIs in Svelte documentation.

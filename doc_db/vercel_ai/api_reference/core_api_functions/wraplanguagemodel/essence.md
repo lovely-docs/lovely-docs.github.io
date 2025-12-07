@@ -1,0 +1,1 @@
+wrapLanguageModel() applies middleware to LanguageModelV3 instances; accepts model, middleware (single/array), optional modelId/providerId overrides.

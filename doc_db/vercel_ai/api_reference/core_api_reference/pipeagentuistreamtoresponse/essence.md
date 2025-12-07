@@ -1,1 +1,0 @@
-Streams Agent UI messages directly to Node.js ServerResponse for low-latency real-time endpoints; supports abort signals for cancellation; Node.js-only (not Edge/serverless).

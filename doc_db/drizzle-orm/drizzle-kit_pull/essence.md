@@ -1,1 +1,0 @@
-Introspect existing database schema and generate TypeScript Drizzle schema file; supports multiple config files, special drivers (aws-data-api, pglite, d1-http), and filtering by tables/schemas/extensions.

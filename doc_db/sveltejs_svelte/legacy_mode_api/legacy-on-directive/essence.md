@@ -1,0 +1,1 @@
+Legacy mode event handlers via `on:` directive with modifiers (preventDefault, stopPropagation, capture, once, self, trusted, etc.); component events via createEventDispatcher; callback props recommended for Svelte 5 migration.

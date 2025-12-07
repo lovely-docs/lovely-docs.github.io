@@ -1,0 +1,1 @@
+Configure Drizzle Kit for Cloudflare D1 HTTP API by setting `dialect: 'sqlite'` and `driver: 'd1-http'` in `drizzle.config.ts`, with credentials (accountId, databaseId, token) from Cloudflare dashboard. Supports migrate, push, introspect, and studio commands.

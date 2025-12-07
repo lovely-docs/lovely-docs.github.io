@@ -1,0 +1,1 @@
+ToolCallRepairError: thrown when AI fails to repair NoSuchToolError or InvalidToolInputError; check with isInstance(); has originalError, message, cause properties.

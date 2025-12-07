@@ -1,1 +1,1 @@
-Svelte is a compiler-based framework for building web UIs by transforming declarative components into optimized JavaScript.
+Compiler-based web UI framework converting declarative components to optimized JS; supports standalone components to full-stack apps via SvelteKit.

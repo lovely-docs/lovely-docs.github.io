@@ -1,0 +1,1 @@
+Setup Drizzle ORM with PGLite in existing project: install packages, configure with PostgreSQL dialect, introspect existing database, connect via PGLite client, query with Drizzle API.

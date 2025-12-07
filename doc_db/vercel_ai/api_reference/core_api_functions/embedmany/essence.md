@@ -1,0 +1,1 @@
+embedMany() embeds multiple values with automatic request chunking; accepts model, values array, optional retries/abort/headers/telemetry; returns embeddings array, usage tokens, and provider metadata.

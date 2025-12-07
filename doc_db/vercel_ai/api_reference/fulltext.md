@@ -1,197 +1,336 @@
 
 ## Directories
 
-### core_api_reference
-Complete API reference for text generation, structured outputs, embeddings, agents, tools, MCP integration, schema validation, and provider management.
+### core_api_functions
+Complete API reference for text generation, structured outputs, embeddings, agents, tools, and utilities with streaming, tool calling, multi-step workflows, and middleware support.
 
 ## Text Generation
-- **generateText()**: Non-interactive text generation with tool calling, multi-step workflows, structured outputs. Returns text, tool calls, reasoning, token usage, and step history.
-- **streamText()**: Streams text with tools and structured outputs. Returns promises (text, finishReason, usage) and streams (textStream, fullStream with all events).
+- `generateText()`: Non-streaming text generation with tool calling, structured outputs, multi-step generation via callbacks. Supports messages/prompt, tools with Zod/JSON schemas, generation parameters (temperature, topP, topK, penalties, seed), output modes (text/object/array/choice/json), and callbacks (onStepFinish, onFinish).
+- `streamText()`: Streaming variant returning textStream, fullStream (with tool calls/results/errors), partialOutputStream for structured outputs. Same parameters as generateText plus experimental_transform for stream processing.
 
-## Structured Output
-- **generateObject()**: Generates typed objects/arrays/enums from schemas (Zod or JSON). Supports object, array, enum, and no-schema modes.
-- **streamObject()**: Streams structured objects with partial object stream and element stream for arrays.
+## Structured Data
+- `generateObject()`: Forces models to return validated structured data. Supports output modes: object (default), array, enum, no-schema. Parameters include schema (Zod/JSON), schemaName/Description, mode (auto/json/tool), system/messages, generation controls, and returns typed object with usage/metadata.
+- `streamObject()`: Streaming structured output with partialObjectStream (partial objects as they stream), elementStream (for array mode), textStream, fullStream. Same modes and parameters as generateObject.
 
-## Embeddings & Retrieval
-- **embed()**: Single value embedding generation.
-- **embedMany()**: Multiple value embeddings with automatic request chunking.
-- **rerank()**: Reranks documents by semantic relevance to query, returns ranking with scores (0-1).
+## Embeddings
+- `embed()`: Single value embedding returning embedding vector and usage tokens.
+- `embedMany()`: Multiple values with automatic request chunking for models with embedding limits. Returns embeddings array in same order as inputs.
 
-## Multimodal
-- **generateImage()**: Generates images from text prompts (experimental).
-- **transcribe()**: Converts audio to text with segments and timing (experimental).
-- **generateSpeech()**: Text-to-speech with voice and format options (experimental).
+## Reranking
+- `rerank()`: Rerank documents by semantic relevance to query. Returns ranking array with originalIndex/score/document, rerankedDocuments sorted by relevance, and response metadata.
 
-## Agents & Tools
-- **Agent interface**: Contract with generate() and stream() methods for custom agents.
-- **ToolLoopAgent**: Multi-step autonomous agent with tool calling loop, structured output parsing, type-safe UI message inference.
-- **tool()**: TypeScript helper connecting inputSchema to execute for proper type inference.
-- **dynamicTool()**: Tools with runtime-determined unknown input/output types for MCP or external tools.
-- **createAgentUIStream()**: Streams agent output as async iterable UI messages.
-- **createAgentUIStreamResponse()**: Returns HTTP Response with streamed UI messages.
-- **pipeAgentUIStreamToResponse()**: Pipes agent UI stream to Node.js ServerResponse.
+## Experimental Features
+- `generateImage()`: Image generation from text prompts. Parameters: model, prompt, n (count), size (WxH), aspectRatio, seed. Returns image/images (GeneratedFile with base64/uint8Array/mediaType), warnings, providerMetadata.
+- `transcribe()`: Audio-to-text transcription. Returns text, segments (with timing), language code, durationInSeconds, warnings, response metadata.
+- `generateSpeech()`: Text-to-speech with voice/outputFormat/speed/language/instructions parameters. Returns audio (GeneratedAudioFile with base64/uint8Array/mimeType/format), warnings, responses.
 
-## MCP Integration
-- **experimental_createMCPClient()**: Creates MCP client with tool/resource/prompt access. Configure transport (stdio/SSE/HTTP), call tools(), listResources(), readResource(), listPrompts(), getPrompt().
-- **Experimental_StdioMCPTransport**: Stdio-based MCP transport for Node.js.
+## Agents
+- `Agent` interface: Contract with version/id/tools properties, generate() and stream() methods accepting prompt/messages with optional call options and abortSignal.
+- `ToolLoopAgent`: Multi-step agent class with configurable stop conditions (stepCountIs, hasToolCall), structured output parsing, tool calling loop. Constructor accepts model, instructions, tools, toolChoice, stopWhen, activeTools, output, prepareStep, callbacks, generation parameters.
+- `createAgentUIStream()`: Runs agent and returns async iterable of UI message chunks. Validates/converts messages, invokes agent.stream(), supports AbortSignal.
+- `createAgentUIStreamResponse()`: Executes agent and streams output as HTTP Response with UI messages. Server-side only.
+- `pipeAgentUIStreamToResponse()`: Pipes agent UI message stream to Node.js ServerResponse for low-latency streaming. Node.js-only.
 
-## Schema & Validation
-- **jsonSchema()**: Creates typed JSON schema objects for structured generation.
-- **zodSchema()**: Converts Zod schemas to JSON schemas with recursive schema support via useReferences.
-- **valibotSchema()**: Converts Valibot schemas to JSON schemas (experimental).
-- **ModelMessage**: Four message types (system, user, assistant, tool) with multimodal parts (text, image, file, tool-call, tool-result).
-- **UIMessage**: Type-safe message interface with metadata, data parts, and tool interactions for UI rendering.
-- **validateUIMessages()**: Validates UI messages with custom schemas for metadata, data parts, tools.
-- **safeValidateUIMessages()**: Non-throwing message validator returning {success, data|error}.
+## Tools
+- `tool()`: Helper enabling TypeScript type inference for tool definitions. Connects inputSchema to execute method. Parameters: description, inputSchema (Zod/JSON), execute (async function receiving input and ToolCallOptions), outputSchema, toModelOutput, onInputStart/Delta/Available, providerOptions, type (function/provider-defined), id, name, args.
+- `dynamicTool()`: Creates tools with unknown types determined at runtime. Returns Tool<unknown, unknown> with type: 'dynamic'. Useful for MCP tools, user-defined functions, external sources.
 
-## Providers & Models
-- **createProviderRegistry()**: Centralized registry for multiple providers accessed via `providerId:modelId` identifiers.
-- **customProvider()**: Maps model IDs to LanguageModel/EmbeddingModel/ImageModel instances with optional fallback.
+## MCP (Model Context Protocol)
+- `createMCPClient()`: Lightweight MCP client factory. Methods: tools(), listResources(), readResource(), listResourceTemplates(), listPrompts(), getPrompt(), onElicitationRequest(), close(). Configuration: transport (MCPTransport/MCPTransportConfig), name, onUncaughtError, capabilities.
+- `Experimental_StdioMCPTransport`: Stdio-based MCP transport for Node.js. Configuration: command (required), args, env, stderr, cwd.
+
+## Schemas
+- `jsonSchema()`: Creates JSON schema objects with optional validation function. Alternative to Zod for dynamic schemas or OpenAPI definitions.
+- `zodSchema()`: Converts Zod schemas to JSON schema. Supports useReferences option for recursive schemas via z.lazy(). Critical: metadata methods (.meta(), .describe()) must be last in chain.
+- `valibotSchema()`: Experimental helper converting Valibot schemas to AI SDK-compatible JSON schemas.
+
+## Messages
+- `ModelMessage`: Fundamental message structure with types: SystemModelMessage (role: system, content: string), UserModelMessage (role: user, content: string | TextPart/ImagePart/FilePart array), AssistantModelMessage (role: assistant, content: string | TextPart/ToolCallPart array), ToolModelMessage (role: tool, content: ToolResultPart array). Content parts: TextPart, ImagePart (base64/Uint8Array/Buffer/URL with optional mediaType), FilePart (data + mediaType), ToolCallPart (toolCallId/toolName/args), ToolResultPart (toolCallId/toolName/output with type: text/json/execution-denied/error-text/error-json/content).
+- `UIMessage`: Type-safe message container for UI state with id, role, optional metadata, polymorphic parts (text, reasoning, tool invocations, files, sources, custom data, step markers). Generic parameters: METADATA, DATA_PARTS, TOOLS. Parts: TextUIPart, ReasoningUIPart, ToolUIPart (type: tool-{name}, states: input-streaming/input-available/output-available/output-error), SourceUrlUIPart, SourceDocumentUIPart, FileUIPart, DataUIPart (type: data-{name}), StepStartUIPart.
+- `validateUIMessages()`: Async validator for UI message arrays with optional Zod schemas for metadata, data parts, tools. Throws on validation failure.
+- `safeValidateUIMessages()`: Safe wrapper returning {success: boolean, data?: ValidatedMessages, error?: Error}.
+
+## Providers
+- `createProviderRegistry()`: Centralized registry for multiple providers. Access via providerId:modelId format (customizable separator). Methods: languageModel(id), embeddingModel(id), imageModel(id).
+- `customProvider()`: Maps model IDs to custom LanguageModel/EmbeddingModel/ImageModel instances with optional fallback provider.
 
 ## Utilities
-- **cosineSimilarity()**: Calculates cosine similarity between vectors (-1 to 1).
-- **wrapLanguageModel()**: Wraps language model with middleware for enhanced behavior.
-- **LanguageModelV3Middleware**: Experimental interface with transformParams, wrapGenerate, wrapStream for intercepting model calls.
-- **extractReasoningMiddleware()**: Extracts XML-tagged reasoning from responses.
-- **simulateStreamingMiddleware()**: Converts non-streaming responses to simulated streams.
-- **defaultSettingsMiddleware()**: Applies default LanguageModelV3CallOptions to model calls.
-- **stepCountIs()**: Stop condition for tool loops when step count reaches specified number.
-- **hasToolCall()**: Stop condition for tool loops when specific tool is invoked.
-- **simulateReadableStream()**: Creates ReadableStream emitting values sequentially with configurable delays.
-- **smoothStream()**: TransformStream for smoothing text streaming with word/line/regex/custom chunking.
-- **generateId()**: Generates unique ID strings.
-- **createIdGenerator()**: Creates customizable ID generator with prefix, separator, alphabet, size options.
+- `cosineSimilarity(vector1, vector2)`: Returns number [-1, 1] comparing embedding similarity.
+- `wrapLanguageModel()`: Applies middleware to LanguageModelV3 instances. Parameters: model, middleware (single/array), optional modelId/providerId overrides.
+- `LanguageModelV3Middleware`: Experimental middleware with transformParams, wrapGenerate, wrapStream hooks for intercepting model calls.
+- `extractReasoningMiddleware()`: Extracts XML-tagged reasoning from generated text. Parameters: tagName (required), separator (default "\n"), startWithReasoning (default false).
+- `simulateStreamingMiddleware()`: Converts non-streaming responses into simulated streams.
+- `defaultSettingsMiddleware()`: Applies default language model settings (temperature, tokens, provider options) overridable per-call.
+- `stepCountIs(count)`: Stop condition for tool loops, halts after specified step count.
+- `hasToolCall(toolName)`: Stop condition triggering when named tool is invoked.
+- `simulateReadableStream()`: Creates ReadableStream emitting array values with configurable initial and inter-chunk delays.
+- `smoothStream()`: TransformStream for smoothing text streaming with configurable delays and chunking strategies (word/line/regex/callback). Handles non-space-delimited languages via custom regex.
+- `generateId()`: Generates unique 16-char ID string (size parameter deprecated).
+- `createIdGenerator()`: Customizable ID generator with configurable prefix, separator, alphabet, size. Uses non-secure randomization.
 
-### ui_hooks_&_utilities
-React/Svelte/Vue hooks and utilities for streaming conversational and completion UIs with message transformation, pruning, and type-safe tool handling.
+### ui_hooks_&_streaming
+Hooks and utilities for building chat/completion UIs with streaming, message management, tool calling, and type-safe message conversion.
 
-## UI Hooks & Utilities
+## Core Hooks
 
-### Hooks for Streaming UI
+**useChat** - Conversational UI hook with streaming, message state management, tool calling, and transport customization. Creates chat interface with automatic state management.
 
-**useChat** - Conversational UI hook with streaming support, automatic state management, and tool calling. Accepts optional ChatTransport for custom endpoints, initial messages, and callbacks for tool calls, finish events, and errors. Returns current messages, status, and methods to send/regenerate/stop messages and handle tool outputs. Supports automatic resubmission via `sendAutomaticallyWhen`.
+Parameters: `chat` (existing instance), `transport` (ChatTransport with api endpoint, credentials, headers, body, request customization via `prepareSendMessagesRequest`/`prepareReconnectToStreamRequest`), `id` (unique identifier), `messages` (initial UIMessage[]), `onToolCall` (callback requiring `addToolOutput`), `sendAutomaticallyWhen` (resubmit condition), `onFinish` (receives message, messages, isAbort, isDisconnect, isError, finishReason), `onError`, `onData`, `experimental_throttle`, `resume`.
 
-**useCompletion** - Text completion hook with streaming. Manages input and completion state, provides form handlers (`handleInputChange`, `handleSubmit`), and supports custom fetch, headers, and stream protocols. Returns completion text, input value, loading state, and control methods.
+Returns: `id`, `messages` (UIMessage[] with id, role, parts, metadata), `status` ('submitted'|'streaming'|'ready'|'error'), `error`, `sendMessage(message|string, options?)`, `regenerate(options?)`, `stop()`, `clearError()`, `resumeStream()`, `addToolOutput(tool, toolCallId, output|errorText)`, `setMessages(messages|function)`.
 
-**useObject** (experimental) - Streams and parses JSON objects matching a Zod or JSON schema. Accepts schema and API endpoint, returns partial object updates as they stream, with error and loading states.
+**useCompletion** - Text completion hook with streaming, state management, and UI updates.
 
-### Message Conversion & Transformation
+Parameters: `api` (default '/api/completion'), `id` (shared state), `initialInput`, `initialCompletion`, `onFinish((prompt, completion))`, `onError`, `headers`, `body`, `credentials`, `fetch`, `streamProtocol` ('text'|'data'), `experimental_throttle`.
 
-**convertToModelMessages** - Transforms useChat UI messages to ModelMessage objects for backend functions like `streamText`. Supports multi-modal tool responses via `toModelOutput` and custom data part conversion with type-safe generics for attachments (URLs, code files).
+Returns: `completion`, `input`, `error`, `isLoading`, `setCompletion`, `setInput`, `complete(prompt, options?)`, `stop()`, `handleInputChange`, `handleSubmit`.
 
-**pruneMessages** - Filters ModelMessage arrays to reduce token count. Configurable strategies: remove all/some reasoning, remove tool calls except in recent messages, remove empty messages.
+**useObject** (experimental) - Streams and parses JSON objects into typed objects using schemas.
 
-### Stream Creation & Response
+Parameters: `api`, `schema` (Zod or JSON Schema), `id`, `initialValue`, `fetch`, `headers`, `credentials`, `onError`, `onFinish({object, error})`.
 
-**createUIMessageStream** - Creates a ReadableStream<UIMessageChunk> with writer API for emitting chunks. Supports merging streams, error handling, and onFinish callbacks. Messages use consistent IDs across text-start/delta/end lifecycle.
+Returns: `submit(input)`, `object` (DeepPartial<RESULT>), `error`, `isLoading`, `stop()`, `clear()`.
 
-**createUIMessageStreamResponse** - Wraps UIMessageStream in an HTTP Response object with custom status, headers, and optional SSE consumption callback.
+## Message Conversion & Utilities
 
-**pipeUIMessageStreamToResponse** - Pipes UIMessageStream to Node.js ServerResponse with HTTP metadata.
+**convertToModelMessages** - Transforms useChat messages to ModelMessage objects for AI core functions. Supports multi-modal tool responses via `toModelOutput` method and custom data part conversion with `convertDataPart` callback for URLs, code files, JSON configs.
 
-**readUIMessageStream** - Converts UIMessageChunk streams to AsyncIterableStream<UIMessage> for terminal UIs, custom clients, and React Server Components.
+**pruneMessages** - Filters ModelMessage arrays to reduce context size. Parameters: `messages`, `reasoning` ('all'|'before-last-message'|'none'), `toolCalls` ('all'|'before-last-message'|'before-last-${number}-messages'|'none'|PruneToolCallsOption[]), `emptyMessages` ('keep'|'remove'). Removes intermediate reasoning, tool calls, and empty messages.
 
-### Type Helpers
+**createUIMessageStream** - Creates readable stream for UI messages with message merging and error handling.
 
-**InferUITools** - TypeScript type helper extracting input/output types from a ToolSet for type-safe tool handling in UIMessages.
+Parameters: `execute({writer})` with `writer.write(UIMessageChunk)` and `writer.merge(stream)`, `onError`, `originalMessages`, `onFinish({messages, isContinuation, responseMessage})`, `generateId`.
 
-**InferUITool** - Extracts input/output types from a single tool.
+Returns: ReadableStream<UIMessageChunk>.
+
+**createUIMessageStreamResponse** - Creates HTTP Response streaming UI message chunks (data, text, sources, LLM output).
+
+Parameters: `stream` (ReadableStream<UIMessageChunk>), `status`, `statusText`, `headers`, `consumeSseStream`.
+
+Returns: Response object.
+
+**pipeUIMessageStreamToResponse** - Pipes ReadableStream<UIMessageChunk> to Node.js ServerResponse.
+
+Parameters: `response`, `stream`, `status`, `statusText`, `headers`, `consumeSseStream`.
+
+**readUIMessageStream** - Transforms UIMessageChunk stream to AsyncIterableStream<UIMessage> for terminal UIs, custom clients, or RSCs.
+
+Parameters: `message` (optional starting message), `stream`, `onError`, `terminateOnError`.
+
+Returns: AsyncIterableStream<UIMessage>.
+
+## Type Helpers
+
+**InferUITools** - Maps ToolSet to inferred input/output types for each tool: `{ [NAME]: { input: InferToolInput; output: InferToolOutput } }`.
+
+**InferUITool** - Infers input/output types from single tool definition: `{ input: InferToolInput; output: InferToolOutput }`.
+
+## Framework Support
+
+React: Full support (useChat, useCompletion, useObject). Svelte: Full support (Chat, Completion, StructuredObject). Vue.js: useChat and useCompletion only.
 
 ### rsc_api_reference
-Complete API reference for React Server Components integration with streaming UI, state management, and LLM tool execution.
+React Server Components API for streaming LLM-generated UI and data with bidirectional state management between server and client.
 
-## RSC API Reference
+## Server-Side Functions
 
-**Core Streaming Functions:**
-- `streamUI`: Streams LLM-generated React UI with tool support. Accepts model, system prompt, messages, generation parameters, tools, and callbacks. Returns ReactNode value and AsyncIterable stream of text-delta, tool-call, error, and finish events.
-- `createStreamableUI`: Server-to-client UI streaming with `update()`, `append()`, and `done()` methods. Initial UI optional.
-- `createStreamableValue`: Wraps serializable values for server-to-client streaming with `update()` method.
+**streamUI(model, system?, prompt?, messages?, tools?, ...)** - Creates streamable React UI from LLM output. Returns `{ value: ReactNode, stream: AsyncIterable<StreamPart>, response?, warnings? }`. Stream emits `{ type: 'text-delta', textDelta }`, `{ type: 'tool-call', toolCallId, toolName, args }`, `{ type: 'error', error }`, or `{ type: 'finish', finishReason, usage }`. Supports messages array (CoreSystemMessage, CoreUserMessage with TextPart/ImagePart/FilePart, CoreAssistantMessage, CoreToolMessage, UIMessage), tools with optional `generate` callback yielding React nodes, generation options (maxOutputTokens, temperature, topP, topK, presencePenalty, frequencyPenalty, stopSequences, seed), toolChoice ("auto"/"none"/"required"/`{ type, toolName }`), callbacks (text, onFinish), and standard options (maxRetries, abortSignal, headers, providerOptions).
 
-**State Management:**
-- `createAI`: Context provider factory accepting server actions, initial AI/UI states, SSR callback (`onGetUIState`), and persistence callback (`onSetAIState`).
-- `getAIState()`: Retrieves current AI state, optionally extracting a specific key.
-- `getMutableAIState()`: Returns mutable AI state with `update()` and `done()` methods for server-side updates.
-- `useAIState()`: Hook reading/updating globally-shared AI state under `<AI/>` provider. Returns `[state]`.
-- `useUIState()`: Hook for client-side UI state management. Returns `[state, setState]` tuple.
+**createAI(actions, initialAIState, initialUIState, onGetUIState?, onSetAIState?)** - Context provider factory for client-server state management. `actions` is Record<string, Action> of server-side callables. `onSetAIState` callback receives `{ state, done }` when mutable AI state updates occur, enabling database persistence. Returns `<AI/>` provider component.
 
-**Client-Side Consumption:**
-- `readStreamableValue()`: Async iterator for consuming server-streamed values. Usage: `for await (const value of readStreamableValue(stream)) { ... }`
-- `useStreamableValue()`: Hook consuming streamable values. Returns `[data, error, pending]` tuple.
+**createStreamableUI(initialValue?)** - Creates server-to-client stream for React components. Returns object with `value: ReactNode` (returnable from Server Action), `update(ReactNode)`, `append(ReactNode)`, `done(ReactNode | null)` (required to close stream), `error(Error)`.
 
-**Server Action Access:**
-- `useActions()`: Hook accessing patched Server Actions from clients. Returns `Record<string, Action>` dictionary.
+**createStreamableValue(value)** - Creates server-to-client stream for serializable data. Returns streamable object with initial data and update method, returnable from Server Actions.
 
-**Message Types:**
-- CoreSystemMessage: `{ role: 'system', content: string }`
-- CoreUserMessage: `{ role: 'user', content: string | Array<TextPart | ImagePart | FilePart> }`
-- CoreAssistantMessage: `{ role: 'assistant', content: string | Array<TextPart | ToolCallPart> }`
-- CoreToolMessage: `{ role: 'tool', content: Array<ToolResultPart> }`
+**getAIState(key?)** - Reads current AI state (read-only). Optional `key` parameter accesses object property.
 
-**Tool Definition:**
-```ts
-{ description?: string, parameters: zod schema, generate?: (async (parameters) => ReactNode) | AsyncGenerator<ReactNode, ReactNode, void> }
+**getMutableAIState(key?)** - Returns mutable AI state with `update(newState)` and `done(newState)` methods for server-side updates.
+
+## Client-Side Hooks
+
+**useAIState()** - Returns `[state]` array of globally-shared AI state under `<AI/>` provider. Shared across all hooks in the tree.
+
+**useUIState()** - Returns `[state, setState]` array for client-side UI state (can contain functions, React nodes, data). Visual representation of AI state.
+
+**useActions()** - Returns `Record<string, Action>` of patched Server Actions. Required because direct access causes "Cannot find Client Component" errors.
+
+**useStreamableValue(streamableValue)** - Returns `[data, error, pending]` tuple. Consumes streamable values created with `createStreamableValue`.
+
+**readStreamableValue(stream)** - Async iterator for consuming server-streamed values. Use with `for await...of` loop.
+
+## Example: Full Flow
+
+```typescript
+// Server (app/actions.ts)
+'use server';
+import { streamUI, createStreamableUI, getMutableAIState } from '@ai-sdk/rsc';
+
+export async function generate(input: string) {
+  const mutableState = getMutableAIState();
+  const { value, stream } = await streamUI({
+    model: openai('gpt-4'),
+    prompt: input,
+    tools: {
+      renderComponent: {
+        description: 'Render a React component',
+        parameters: z.object({ content: z.string() }),
+        generate: async ({ content }) => {
+          const ui = createStreamableUI(<div>{content}</div>);
+          mutableState.update([...mutableState.get(), { role: 'assistant', content }]);
+          ui.done();
+          return ui.value;
+        }
+      }
+    }
+  });
+  mutableState.done(value);
+  return { value, stream };
+}
+
+// Client (app/page.tsx)
+import { useActions, useAIState, useUIState } from '@ai-sdk/rsc';
+
+export default function Page() {
+  const [aiState] = useAIState();
+  const [uiState, setUIState] = useUIState();
+  const { generate } = useActions();
+  
+  return (
+    <button onClick={async () => {
+      const result = await generate('prompt');
+      setUIState([...uiState, result.value]);
+    }}>
+      Generate
+    </button>
+  );
+}
+
+// Root (app/layout.tsx)
+import { createAI } from '@ai-sdk/rsc';
+import { generate } from './actions';
+
+const AI = createAI({
+  actions: { generate },
+  initialAIState: [],
+  initialUIState: [],
+  onSetAIState: ({ state, done }) => {
+    if (done) saveToDatabase(state);
+  }
+});
+
+export default function RootLayout({ children }) {
+  return <AI>{children}</AI>;
+}
 ```
 
-**Generation Parameters:** maxOutputTokens, temperature, topP, topK, presencePenalty, frequencyPenalty, stopSequences, seed
+**Status**: Experimental. Production use should migrate to AI SDK UI.
 
-**Note:** AI SDK RSC is experimental. AI SDK UI recommended for production.
+### stream_helpers
+Framework adapters for converting external AI service streams to AI SDK format
 
-### error_reference
-Comprehensive reference of all SDK error types with properties and isInstance() detection pattern.
+Collection of utilities for converting and streaming responses from various AI frameworks and APIs into AI SDK-compatible data streams.
 
-## Error Types
+**StreamingTextResponse** (DEPRECATED in SDK 4.0, use `streamText.toDataStreamResponse()` instead)
+- Wraps native Response class to return ReadableStream of text
+- Auto-sets status 200 and Content-Type: 'text/plain; charset=utf-8'
+- Accepts optional ResponseInit for customization and StreamData for additional response data
 
-All errors implement `isInstance()` static method for type checking.
+**AWSBedrockLlama2Stream** (DEPRECATED in SDK 4.0)
+- Transforms AWS Bedrock API responses into ReadableStream using AIStream
+- Supports callbacks: onStart(), onToken(token), onCompletion(completion), onFinal(completion)
+
+**LangChain Adapter** (@ai-sdk/langchain)
+- `toDataStream`: Converts LangChain StringOutputParser or AIMessageChunk streams to AIStream
+- `toDataStreamResponse`: Converts to Response object with optional ResponseInit, StreamData, callbacks
+- `mergeIntoDataStream`: Merges LangChain streams into existing DataStreamWriter
+- Supports LangChain Expression Language, StringOutputParser, and StreamEvents v2
+
+Example:
+```tsx
+import { toDataStream } from '@ai-sdk/langchain';
+import { ChatOpenAI } from '@langchain/openai';
+
+const model = new ChatOpenAI({ model: 'gpt-3.5-turbo-0125' });
+const stream = await model.stream(prompt);
+const aiStream = toDataStream(stream);
+```
+
+**LlamaIndex Adapter** (@ai-sdk/llamaindex)
+- `toDataStream`: Converts LlamaIndex ChatEngine/QueryEngine streams to data stream
+- `toDataStreamResponse`: Converts to Response with optional init, data, callbacks
+- `mergeIntoDataStream`: Merges into existing DataStreamWriter
+
+Example:
+```tsx
+import { SimpleChatEngine } from 'llamaindex';
+import { toDataStreamResponse } from '@ai-sdk/llamaindex';
+
+const chatEngine = new SimpleChatEngine({ llm });
+const stream = await chatEngine.chat({ message: prompt, stream: true });
+return toDataStreamResponse(stream);
+```
+
+### error_classes
+Complete error class reference with type-safe detection and detailed properties for all SDK failure scenarios.
+
+## Error Classes Reference
+
+Comprehensive set of error classes thrown by the AI SDK. All errors support type checking via `ErrorClass.isInstance(error)` method.
 
 ### API & Network Errors
-- **APICallError**: Failed API calls with `url`, `statusCode`, `responseHeaders`, `responseBody`, `isRetryable`, `requestBodyValues`
-- **DownloadError**: Failed downloads with `url`, `statusCode`, `statusText`
-- **LoadAPIKeyError**: API key loading failure
-- **LoadSettingError**: Setting loading failure
-
-### Response Errors
+- **APICallError**: Failed API calls with `url`, `requestBodyValues`, `statusCode`, `responseHeaders`, `responseBody`, `isRetryable`, `data` properties
+- **DownloadError**: Download failures with `url`, `statusCode`, `statusText`, `message`
 - **EmptyResponseBodyError**: Server returned empty response body
-- **InvalidResponseDataError**: Server returned invalid response data with `data` property
-- **JSONParseError**: JSON parsing failure with `text` property
+- **LoadAPIKeyError**: API key loading failed
+- **LoadSettingError**: Setting loading failed
 
-### Input Validation Errors
-- **InvalidArgumentError**: Invalid function argument with `parameter`, `value`
-- **InvalidPromptError**: Invalid prompt (common: passing `UIMessage[]` instead of `ModelMessage[]`). Use `convertToModelMessages()` to fix
-- **InvalidMessageRoleError**: Invalid message role with `role` property
-- **InvalidDataContentError**: Invalid multi-modal message content with `content` property
-- **InvalidToolInputError**: Invalid tool arguments with `toolName`, `toolInput`, `cause`
-- **TypeValidationError**: Type validation failure with `value` property
+### Data Validation Errors
+- **InvalidArgumentError**: Invalid function argument with `parameter`, `value`, `message`
+- **InvalidDataContentError**: Invalid multi-modal message content with `content`, `message`
+- **InvalidDataContent**: Invalid data content with `content`, `message`, `cause`
+- **InvalidMessageRoleError**: Invalid message role with `role`, `message`
+- **InvalidPromptError**: Invalid prompt (common cause: passing `UIMessage[]` instead of `ModelMessage[]`). Solution: use `convertToModelMessages()` to convert. Properties: `prompt`, `message`, `cause`
+- **InvalidResponseDataError**: Server response with invalid data with `data`, `message`
+- **InvalidToolInputError**: Tool received invalid input with `toolName`, `toolInput`, `message`, `cause`
+- **TypeValidationError**: Type validation failed with `value`, `message`
 
 ### Generation Errors
 - **NoContentGeneratedError**: AI provider failed to generate content
-- **NoObjectGeneratedError**: Failed object generation with `text`, `response`, `usage`, `finishReason`, `cause`
-- **NoImageGeneratedError**: Failed image generation with `responses`, `cause`
-- **NoSpeechGeneratedError**: Failed audio generation with `responses`
-- **NoTranscriptGeneratedError**: Failed transcript generation with `responses`
+- **NoImageGeneratedError**: Image generation failed with `message`, `responses` (metadata), `cause`
+- **NoObjectGeneratedError**: `generateObject()` failed to produce schema-conforming object. Properties: `message`, `text` (raw generated), `response` (metadata), `usage`, `finishReason`, `cause`. Causes: model failed, response unparseable, or failed schema validation
+- **NoSpeechGeneratedError**: Audio generation failed with `responses`, `message`
+- **NoTranscriptGeneratedError**: Transcript generation failed with `responses`, `message`
 
-### Model & Tool Errors
-- **NoSuchModelError**: Model ID not found with `modelId`, `modelType`
-- **NoSuchProviderError**: Provider ID not found with `providerId`, `availableProviders`, `modelId`, `modelType`
-- **NoSuchToolError**: Model called unavailable tool with `toolName`, `availableTools`
-- **ToolCallRepairError**: Failed to auto-repair invalid tool call with `originalError`, `cause`
+### Model & Provider Errors
+- **NoSuchModelError**: Model ID not found with `modelId`, `modelType`, `message`
+- **NoSuchProviderError**: Provider ID not found with `providerId`, `availableProviders`, `modelId`, `modelType`, `message`
+- **NoSuchToolError**: Model called non-existent tool with `toolName`, `availableTools`, `message`
+- **TooManyEmbeddingValuesForCallError**: Embedding call exceeded provider's `maxEmbeddingsPerCall` limit with `provider`, `modelId`, `maxEmbeddingsPerCall`, `values`
+
+### Parsing & Conversion Errors
+- **JSONParseError**: JSON parsing failed with `text`, `message`
+- **MessageConversionError**: Message conversion failed with `originalMessage`, `message`
+
+### Retry & Repair Errors
+- **RetryError**: Retry operation failed after multiple attempts with `reason`, `lastError`, `errors` (array of all errors), `message`
+- **ToolCallRepairError**: AI failed to repair `NoSuchToolError` or `InvalidToolInputError` with `originalError`, `message`, `cause`
 
 ### Other Errors
-- **MessageConversionError**: Message conversion failure with `originalMessage`
-- **RetryError**: Retry operation failed with `reason`, `lastError`, `errors` array
-- **TooManyEmbeddingValuesForCallError**: Embedding call exceeded limit with `provider`, `modelId`, `maxEmbeddingsPerCall`, `values`
-- **UnsupportedFunctionalityError**: Unsupported feature with `functionality`
+- **UnsupportedFunctionalityError**: Feature not supported with `functionality`, `message`
 
-### Error Detection Pattern
+### Usage Pattern
 ```typescript
-import { APICallError, InvalidPromptError } from 'ai';
+import { APICallError, InvalidPromptError, NoObjectGeneratedError } from 'ai';
 
 try {
-  // operation
+  await generateObject({ model, schema, messages: convertToModelMessages(uiMessages) });
 } catch (error) {
   if (APICallError.isInstance(error)) {
-    console.log(error.statusCode, error.url);
+    console.log('API failed:', error.statusCode, error.isRetryable);
   } else if (InvalidPromptError.isInstance(error)) {
-    console.log(error.cause);
+    console.log('Invalid prompt:', error.cause);
+  } else if (NoObjectGeneratedError.isInstance(error)) {
+    console.log('Generation failed:', error.cause, error.finishReason);
   }
 }
 ```

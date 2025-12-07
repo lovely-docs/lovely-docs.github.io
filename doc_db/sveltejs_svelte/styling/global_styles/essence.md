@@ -1,1 +1,1 @@
-How to apply styles globally in Svelte components using :global() modifier and blocks.
+:global(...) and :global {...} modifiers for applying styles globally; -global- prefix for global @keyframes

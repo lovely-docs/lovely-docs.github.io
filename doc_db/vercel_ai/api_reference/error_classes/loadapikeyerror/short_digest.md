@@ -1,0 +1,1 @@
+Error when API key fails to load. Check with `LoadAPIKeyError.isInstance(error)`.

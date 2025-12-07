@@ -1,0 +1,1 @@
+DateRangeField: dual date field component with start/end inputs, bindable value/placeholder, granularity/validation/min-max/locale/hourCycle/readonly options, segment-based rendering.

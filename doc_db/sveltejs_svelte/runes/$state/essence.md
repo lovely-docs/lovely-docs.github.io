@@ -1,1 +1,1 @@
-The $state rune creates reactive state in Svelte; arrays and objects become deeply reactive proxies, with variants for raw non-reactive state, snapshots, and eager updates.
+$state rune creates reactive state; plain values stay plain, arrays/objects become deep proxies; $state.raw for non-reactive, $state.snapshot for static snapshots, $state.eager for immediate updates; pass-by-value semantics require functions for reactive references; cross-module export requires property updates or getter functions.

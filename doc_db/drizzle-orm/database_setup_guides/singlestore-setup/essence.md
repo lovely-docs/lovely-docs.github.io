@@ -1,0 +1,1 @@
+Step-by-step setup for Drizzle ORM with SingleStore: install mysql2, configure DATABASE_URL, connect via drizzle-orm/singlestore driver, define schema, setup drizzle.config.ts with singlestore dialect, apply migrations, seed/query data.

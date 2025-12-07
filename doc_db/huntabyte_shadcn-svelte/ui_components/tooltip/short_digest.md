@@ -1,26 +1,14 @@
-## Tooltip Component
+## Tooltip
 
-Displays information on hover or keyboard focus.
-
-### Installation
-
-```bash
-npx shadcn-svelte@latest add tooltip -y -o
-```
-
-### Usage
+Popup displaying information on hover or focus.
 
 ```svelte
-<script lang="ts">
-  import * as Tooltip from "$lib/components/ui/tooltip/index.js";
-</script>
-
 <Tooltip.Provider>
   <Tooltip.Root>
     <Tooltip.Trigger>Hover</Tooltip.Trigger>
-    <Tooltip.Content>
-      <p>Add to library</p>
-    </Tooltip.Content>
+    <Tooltip.Content>Add to library</Tooltip.Content>
   </Tooltip.Root>
 </Tooltip.Provider>
 ```
+
+Install: `npx shadcn-svelte@latest add tooltip -y -o`

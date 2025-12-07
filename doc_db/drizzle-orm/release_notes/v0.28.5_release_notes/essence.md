@@ -1,0 +1,1 @@
+v0.28.5 fixes OpenTelemetry type import syntax error causing runtime failures; OpenTelemetry feature is disabled.

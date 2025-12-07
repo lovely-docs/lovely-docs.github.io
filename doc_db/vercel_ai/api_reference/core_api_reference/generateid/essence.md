@@ -1,1 +1,0 @@
-generateId() produces unique ID strings; optional size parameter (default 16) is deprecated.

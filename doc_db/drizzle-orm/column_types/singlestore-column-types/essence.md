@@ -1,0 +1,1 @@
+SingleStore column types: numeric (int, bigint, decimal, float, real, double), binary (binary, varbinary), string (char, varchar, text with optional enum), boolean, temporal (date, datetime, time, year, timestamp), json with .$type<T>(), enum; modifiers: .notNull(), .default(), .$defaultFn(), .$onUpdate(), .primaryKey(), .autoincrement(), .$type<T>() for branded types.

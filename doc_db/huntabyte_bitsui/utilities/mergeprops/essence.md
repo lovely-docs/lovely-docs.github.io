@@ -1,1 +1,1 @@
-Utility to merge props objects with special handling for event handlers (with preventDefault support), functions, classes, and styles.
+Merges props objects with event handler chaining (preventDefault stops chain), function chaining, clsx class merging, and style object/string merging with override semantics.

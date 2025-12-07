@@ -1,0 +1,1 @@
+Step-by-step setup for Drizzle ORM with Xata PostgreSQL: install postgres driver, configure DATABASE_URL, initialize Drizzle connection, define schema, create drizzle.config.ts with postgresql dialect, apply migrations, seed/query with TypeScript, run via tsx.

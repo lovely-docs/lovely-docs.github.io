@@ -1,0 +1,1 @@
+PostgreSQL point datatype: define with point() column, insert as {x,y} or [x,y], compute distance with <-> operator, filter by rectangular boundary with <@ operator.

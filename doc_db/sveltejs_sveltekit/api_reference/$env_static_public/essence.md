@@ -1,1 +1,1 @@
-Module for importing public environment variables that are statically replaced at build time and safe to expose to client-side code.
+Static public environment variables (PUBLIC_* prefix) replaced at build time, safe for client-side exposure.

@@ -1,6 +1,6 @@
 # Child Snippet Documentation
 
-Learn how to use the `child` snippet to render your own elements.
+Learn how to use the \`child\` snippet to render your own elements.
 
 This is a documentation section that potentially contains examples, demos, and other useful information related to a specific part of Bits UI. When helping users with this documentation, you can ignore the classnames applied to the demos unless they are relevant to the user's issue.
 

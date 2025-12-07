@@ -1,0 +1,1 @@
+Date range input combining two date fields with start/end segments. Supports two-way and fully controlled binding for value and placeholder. Configurable granularity (day/hour/minute/second), validation, min/max constraints, locale, hour cycle, and readonly segments.

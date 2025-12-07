@@ -1,0 +1,1 @@
+TimeRangeField combines two Time Fields for start/end time input with bindable value/placeholder (TimeRange/TimeValue), validation, min/max constraints, granularity/hourCycle/locale config, and segment-level control.

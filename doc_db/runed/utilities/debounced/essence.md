@@ -1,1 +1,1 @@
-Debounced state wrapper with delay; access via `.current`, control with `.cancel()`, `.setImmediately()`, `.updateImmediately()`
+Debounced state wrapper with cancel, immediate set, and immediate update methods; access value via .current property

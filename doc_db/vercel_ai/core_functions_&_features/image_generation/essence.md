@@ -1,1 +1,0 @@
-Generate images from text prompts using `generateImage()` with configurable size/aspect ratio, batch generation, seeds, provider-specific options, abort signals, custom headers, and error handling; supports multiple providers (OpenAI, Google, Fal, DeepInfra, etc.); some language models return images via `files` property.

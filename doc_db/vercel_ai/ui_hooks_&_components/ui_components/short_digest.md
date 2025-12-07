@@ -1,0 +1,1 @@
+AI SDK UI documentation index covering chatbot interfaces, message persistence, tool usage, text completion, object generation, streaming data, message stream consumption, error handling, and the underlying stream protocol.

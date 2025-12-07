@@ -1,13 +1,17 @@
-Hook for accessing Server Actions from client components in RSC (React Server Components). Returns a dictionary of server actions that have been patched through context.
+## useActions Hook
 
-**Purpose**: Enables client-side access to server actions while avoiding "Cannot find Client Component" errors that occur when accessing server actions directly.
+A client-side hook for accessing Server Actions from the AI SDK RSC. Required for proper integration because Server Actions are patched when passed through context; accessing them directly causes "Cannot find Client Component" errors.
 
-**Import**: `import { useActions } from "@ai-sdk/rsc"`
+**Import:**
+```javascript
+import { useActions } from "@ai-sdk/rsc"
+```
 
-**Returns**: `Record<string, Action>` - a dictionary mapping action names to their corresponding server action functions.
+**Returns:** `Record<string, Action>` - a dictionary of server actions.
 
-**Key Detail**: Server actions must be accessed through this hook because they are patched when passed through context. Direct access bypasses this patching and causes errors.
+**Use Cases:**
+- Building interfaces requiring user interactions with the server
+- Managing AI and UI states in Next.js applications
+- Routing React components using a language model
 
-**Use Cases**: Building interfaces that require user interactions with the server, managing AI and UI states in Next.js, routing React components using a language model.
-
-**Status**: Currently experimental. Production use should prefer AI SDK UI instead, with migration guide available.
+**Note:** AI SDK RSC is experimental; AI SDK UI is recommended for production. Migration guide available.

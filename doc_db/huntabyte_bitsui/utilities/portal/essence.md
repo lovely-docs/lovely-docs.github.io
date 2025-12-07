@@ -1,1 +1,1 @@
-Utility component that renders children in a portal to prevent layout issues, with customizable target and disable options.
+Portal component renders children to specified DOM location (body by default) via `to` prop; disable with `disabled` prop; configure default target via BitsConfig's `defaultPortalTo`.

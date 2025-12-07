@@ -1,1 +1,1 @@
-Combine tool calling with structured outputs using generateText/streamText + output option; adjust stopWhen to account for extra structured output generation step.
+Tool calling with structured outputs requires generateText/streamText + output option; adjust stopWhen step count to include structured output generation step.

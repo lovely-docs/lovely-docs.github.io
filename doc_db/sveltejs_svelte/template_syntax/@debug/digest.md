@@ -1,18 +1,22 @@
-The `{@debug ...}` tag logs variable values whenever they change and pauses execution if devtools are open, serving as an alternative to `console.log()`.
+The `{@debug ...}` tag logs variable values whenever they change and pauses execution when devtools are open, serving as an alternative to `console.log()`.
 
 **Usage:**
-- Accepts comma-separated variable names only (not expressions):
 ```svelte
+<script>
+	let user = {
+		firstname: 'Ada',
+		lastname: 'Lovelace'
+	};
+</script>
+
 {@debug user}
 {@debug user1, user2, user3}
 ```
 
-- Does NOT work with property access, array indexing, or expressions:
-```svelte
-{@debug user.firstname}        // Won't compile
-{@debug myArray[0]}            // Won't compile
-{@debug !isReady}              // Won't compile
-{@debug typeof user === 'object'}  // Won't compile
-```
+**Syntax rules:**
+- Accepts comma-separated variable names only (not expressions)
+- Valid: `{@debug user}`, `{@debug user1, user2, user3}`
+- Invalid: `{@debug user.firstname}`, `{@debug myArray[0]}`, `{@debug !isReady}`, `{@debug typeof user === 'object'}`
 
-- `{@debug}` without arguments inserts a `debugger` statement triggered on any state change.
+**Parameterless form:**
+`{@debug}` without arguments inserts a `debugger` statement triggered on any state change, rather than specific variables.

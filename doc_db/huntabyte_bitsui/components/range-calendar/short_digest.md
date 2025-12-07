@@ -1,0 +1,1 @@
+Calendar component for selecting date ranges. Key props: `minDays`, `maxDays`, `excludeDisabled`, `isDateDisabled`, `numberOfMonths`, `fixedWeeks`. Bindable `value` returns `{ start, end }`. Includes header with prev/next buttons, grid with cells and days. Data attributes for styling selected/highlighted/disabled states.

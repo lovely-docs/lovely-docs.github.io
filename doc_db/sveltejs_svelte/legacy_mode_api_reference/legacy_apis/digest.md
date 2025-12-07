@@ -1,1 +1,0 @@
-This page serves as an index for legacy APIs in Svelte. It appears to be a documentation structure page that organizes deprecated or older API references. The page itself contains minimal content and primarily functions as a navigation hub for accessing legacy API documentation.

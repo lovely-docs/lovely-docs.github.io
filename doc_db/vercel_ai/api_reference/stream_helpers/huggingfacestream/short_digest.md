@@ -1,0 +1,1 @@
+**DEPRECATED in SDK 4.0**. Converts Hugging Face language model output to ReadableStream. Takes async generator from `hf.textGenerationStream()` and optional callbacks (`onStart`, `onToken`, `onCompletion`, `onFinal`). Removes end-of-response tokens (`</s>`, `<|endoftext|>`) for clean text output.

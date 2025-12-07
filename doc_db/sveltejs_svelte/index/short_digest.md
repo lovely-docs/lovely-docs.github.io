@@ -1,1 +1,1 @@
-Auto-generated documentation index page with no substantive content.
+Main documentation index page for Svelte. Auto-generated from sync-docs script.

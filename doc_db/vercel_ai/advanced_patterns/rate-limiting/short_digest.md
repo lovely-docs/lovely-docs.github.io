@@ -1,0 +1,1 @@
+Protect API endpoints from abuse using Vercel KV and Upstash Ratelimit. Create a Ratelimit instance with `Ratelimit.fixedWindow(5, '30s')`, extract client IP, call `ratelimit.limit(ip)`, and return 429 status if rate limit exceeded.

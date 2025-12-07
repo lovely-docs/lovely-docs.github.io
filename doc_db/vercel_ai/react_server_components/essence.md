@@ -1,1 +1,1 @@
-Experimental React Server Components package for streaming LLM-generated UI with split AI/UI state management and Server Actions integration.
+Experimental RSC integration for streaming React Server Components and generative UI with state split between serializable AI State and client-only UI State.

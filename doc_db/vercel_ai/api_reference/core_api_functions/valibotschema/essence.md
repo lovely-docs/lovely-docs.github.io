@@ -1,0 +1,1 @@
+Experimental helper converting Valibot schemas to AI SDK-compatible JSON schemas for structured data generation and tool calling.

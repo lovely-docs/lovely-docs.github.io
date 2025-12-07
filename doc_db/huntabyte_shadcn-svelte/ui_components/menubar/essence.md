@@ -1,1 +1,1 @@
-Desktop menubar with File/Edit/View menus, submenus, checkboxes, radio groups, shortcuts, and separators.
+Desktop menubar with Root/Menu/Trigger/Content/Item/Shortcut/Separator/Sub/CheckboxItem/RadioGroup components; supports nested submenus, keyboard shortcuts, checkboxes, and radio selections.

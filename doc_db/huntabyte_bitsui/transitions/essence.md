@@ -1,1 +1,1 @@
-How to apply Svelte transitions and animations to Bits UI components using forceMount and child snippets.
+Apply transitions to Bits UI components via forceMount + child snippet pattern; Floating UI components require wrapperProps wrapper element.

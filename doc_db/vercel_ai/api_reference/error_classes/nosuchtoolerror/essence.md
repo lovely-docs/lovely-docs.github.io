@@ -1,0 +1,1 @@
+NoSuchToolError: thrown when model calls non-existent tool; detect via isInstance() method; includes toolName, availableTools, message properties.

@@ -1,12 +1,14 @@
 ## Building Forms with Formsnap, Superforms & Zod
 
-The Form components in shadcn-svelte wrap Formsnap and Superforms to provide composable form building with:
-- Semantic HTML structure with proper ARIA attributes
-- Client and server-side validation using Zod
-- Integration with shadcn-svelte components (Select, RadioGroup, Switch, Checkbox, etc.)
-- Type-safe form handling
+Well-designed forms must be semantically correct, keyboard-navigable, accessible with ARIA attributes, support client/server validation, and styled consistently.
 
-### Component Anatomy
+The Form components wrap Formsnap & Superforms to provide:
+- Composable form field components for scoping state
+- Zod validation (or other Superforms-supported validators)
+- Automatic ARIA attributes based on field states
+- Integration with Select, RadioGroup, Switch, Checkbox, and other UI components
+
+### Anatomy
 ```
 <form>
   <Form.Field>
@@ -19,9 +21,15 @@ The Form components in shadcn-svelte wrap Formsnap and Superforms to provide com
 </form>
 ```
 
-### Setup Steps
+### Installation
+```bash
+npx shadcn-svelte@latest add form -y -o
+```
+(-y: skip confirmation, -o: overwrite existing files)
 
-1. **Define schema** (src/routes/settings/schema.ts):
+### Usage
+
+**1. Create a form schema** (src/routes/settings/schema.ts):
 ```ts
 import { z } from "zod";
 export const formSchema = z.object({
@@ -30,7 +38,7 @@ export const formSchema = z.object({
 export type FormSchema = typeof formSchema;
 ```
 
-2. **Setup load function** (src/routes/settings/+page.server.ts):
+**2. Setup the load function** (src/routes/settings/+page.server.ts):
 ```ts
 import type { PageServerLoad } from "./$types.js";
 import { superValidate } from "sveltekit-superforms";
@@ -44,7 +52,7 @@ export const load: PageServerLoad = async () => {
 };
 ```
 
-3. **Create form component** (src/routes/settings/settings-form.svelte):
+**3. Create form component** (src/routes/settings/settings-form.svelte):
 ```svelte
 <script lang="ts">
   import * as Form from "$lib/components/ui/form/index.js";
@@ -75,18 +83,19 @@ export const load: PageServerLoad = async () => {
 </form>
 ```
 
-4. **Use component** (src/routes/settings/+page.svelte):
+The `name`, `id`, and accessibility attributes are applied via spreading `props` from Form.Control. Form.Label automatically associates with input via `for` attribute.
+
+**4. Use the component** (src/routes/settings/+page.svelte):
 ```svelte
 <script lang="ts">
   import type { PageData } from "./$types.js";
   import SettingsForm from "./settings-form.svelte";
   let { data }: { data: PageData } = $props();
 </script>
-
 <SettingsForm {data} />
 ```
 
-5. **Create server action** (src/routes/settings/+page.server.ts):
+**5. Create an Action** (src/routes/settings/+page.server.ts):
 ```ts
 import type { PageServerLoad, Actions } from "./$types.js";
 import { fail } from "@sveltejs/kit";
@@ -111,7 +120,7 @@ export const actions: Actions = {
 };
 ```
 
-### SPA Example with Client-Side Validation
+**SPA Example** (client-side only):
 ```svelte
 <script lang="ts" module>
   import { z } from "zod";
@@ -119,7 +128,6 @@ export const actions: Actions = {
     username: z.string().min(2).max(50)
   });
 </script>
-
 <script lang="ts">
   import { defaults, superForm } from "sveltekit-superforms";
   import { zod4 } from "sveltekit-superforms/adapters";
@@ -156,11 +164,5 @@ export const actions: Actions = {
 </form>
 ```
 
-### Installation
-```bash
-npx shadcn-svelte@latest add form -y -o
-```
-(-y: skip confirmation, -o: overwrite existing files)
-
-### Integration Examples
-Form components work with: Checkbox, Date Picker, Input, Radio Group, Select, Switch, Textarea. See component-specific documentation for examples.
+### Related Components
+Form examples also available for: Checkbox, Date Picker, Input, Radio Group, Select, Switch, Textarea

@@ -1,0 +1,1 @@
+32 easing functions (linear, quad/cubic/quart/quint/sine/expo/circ/back/bounce/elastic with In/Out/InOut variants) for controlling animation timing curves.

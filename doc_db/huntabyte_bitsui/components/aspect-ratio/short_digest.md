@@ -1,0 +1,1 @@
+Maintains aspect ratio for content. Set ratio with `ratio` prop (default 1). Root component with bindable ref, children/child snippet support. Data attribute: `data-aspect-ratio-root`.

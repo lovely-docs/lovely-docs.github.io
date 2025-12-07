@@ -1,0 +1,1 @@
+DateField: customizable date input component with segment-based editing (day/month/year/hour/minute/second/timezone), validation (min/max/custom), granularity control, localization, bindable state, and readonly segment support.

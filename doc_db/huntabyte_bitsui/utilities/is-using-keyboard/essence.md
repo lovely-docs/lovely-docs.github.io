@@ -1,0 +1,1 @@
+IsUsingKeyboard utility tracks keyboard activity via global shared state; instantiate and read `.current` property for boolean keyboard usage status.

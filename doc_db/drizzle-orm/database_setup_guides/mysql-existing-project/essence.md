@@ -1,0 +1,1 @@
+11-step guide to integrate Drizzle ORM with existing MySQL database: install mysql2, configure DATABASE_URL and drizzle.config.ts, introspect schema, connect, query, and optionally update schema with migrations.

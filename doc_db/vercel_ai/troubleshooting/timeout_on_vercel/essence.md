@@ -1,0 +1,1 @@
+Fix streaming timeouts on Vercel by increasing maxDuration via route export (Next.js) or vercel.json config; Hobby plan capped at 300s, Pro/Enterprise at 800s.

@@ -1,1 +1,1 @@
-Svelte's context API enables parent-to-child value passing without prop-drilling, with support for reactive state and type safety.
+Context API for passing values down component tree without props; supports reactive state, type-safe variant via createContext, and request isolation for SSR.

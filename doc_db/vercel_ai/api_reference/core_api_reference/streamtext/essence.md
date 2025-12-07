@@ -1,1 +1,0 @@
-Stream text from LLMs with tools, structured outputs, callbacks, and multi-step generation; returns promises and streams for text/reasoning/sources/tool-calls/results with token usage tracking.

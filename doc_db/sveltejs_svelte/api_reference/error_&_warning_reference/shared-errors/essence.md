@@ -1,1 +1,1 @@
-Reference documentation for common Svelte error messages with explanations and fixes.
+Common Svelte runtime errors: snippet/render misuse, lifecycle method placement, context setup, store shape, and element binding constraints.

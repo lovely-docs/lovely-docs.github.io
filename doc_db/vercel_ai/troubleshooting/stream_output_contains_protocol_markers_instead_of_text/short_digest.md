@@ -1,1 +1,0 @@
-Stream output shows protocol markers like `0: "text"` instead of plain text in SDK 3.0.20+. Use `streamText().toTextStreamResponse()` or downgrade to 3.0.19.

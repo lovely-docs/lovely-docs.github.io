@@ -1,14 +1,11 @@
-## Authentication
-Use Lucia for session-based auth. Sessions are revocable but require DB queries; JWTs have lower latency but cannot be revoked. Validate auth cookies in server hooks, store user info in `locals`.
+**Auth**: Sessions vs JWT tradeoffs; use Lucia for session-based auth.
 
-## Performance
-SvelteKit auto-optimizes: code-splitting, preloading, hashing, coalescing, parallel loading, inlining, invalidation, prerendering. Use `@sveltejs/enhanced-img` for images with auto format conversion and responsive sizing. Compress videos with Handbrake, subset fonts. Upgrade Svelte version, use dynamic `import()` for conditional code. Use server `load` functions and DB joins to prevent waterfalls. Colocate frontend/backend, deploy to edge, use CDN for images.
+**Performance**: Built-in features (code-splitting, preloading, caching, request coalescing, data inlining). Diagnostics with PageSpeed Insights, WebPageTest, browser devtools. Image optimization: `@sveltejs/enhanced-img` with `<enhanced:img src="./image.jpg" alt="text" />`, responsive sizing via `sizes` attribute, custom widths `?w=1280;640;400`. Video: compress to `.webm`/`.mp4`, lazy-load with `preload="none"`. Fonts: manually preload in `handle` hook. Code: use latest Svelte, identify large packages with `rollup-plugin-visualizer`, minimize third-party scripts, use dynamic `import()` for lazy-loading. Navigation: prevent waterfalls via server load functions with DB joins, return promises for slow data. Hosting: co-locate frontend/backend, edge deployment, CDN, HTTP/2+.
 
-## Icons & Images
-Use Iconify for CSS icons. Avoid Svelte icon libraries with one file per icon. For images: use Vite's built-in handling, `@sveltejs/enhanced-img` for build-time optimization, or CDN for runtime images. Provide 2x resolution for HiDPI, use `sizes` for large images, set `fetchpriority="high"` for LCP images.
+**Icons**: Iconify CSS-based (icon-sets.iconify.design); avoid per-icon `.svelte` files.
 
-## Accessibility
-SvelteKit announces route changes via page titles in live region. Customize focus management with `afterNavigate` hook. Set `lang` attribute on `<html>` element.
+**Images**: Vite built-in, `@sveltejs/enhanced-img` (auto format/size/EXIF), or CDN dynamic loading. Best practices: 2x originals for HiDPI, `sizes` for large images, `fetchpriority="high"` for LCP, prevent layout shift with `width`/`height`.
 
-## SEO
-Keep SSR enabled. Set unique `<title>` and `<meta name="description">` per page. Create dynamic sitemaps via `src/routes/sitemap.xml/+server.js`. Optional AMP support via `@sveltejs/amp`.
+**Accessibility**: Page titles announce to screen readers; auto-focus `<body>` (customize with `afterNavigate`); set `lang` attribute on `<html>` (dynamic via server hook).
+
+**SEO**: SSR by default, performance matters, normalize URLs. Manual: unique `<title>`/`<meta name="description">` per page from `load` functions. Sitemaps via `src/routes/sitemap.xml/+server.js`. AMP: inline styles, disable CSR, transform HTML with `@sveltejs/amp`.

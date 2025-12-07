@@ -1,0 +1,1 @@
+**DEPRECATED in AI SDK 4.0**. Legacy utility that transforms AWS Bedrock API responses into ReadableStream with optional lifecycle callbacks (onStart, onToken, onCompletion, onFinal).

@@ -1,18 +1,5 @@
-## Xata Integration
+## Xata Setup
 
-PostgreSQL platform with branches, zero-downtime migrations, and performance monitoring.
+Install `drizzle-orm postgres` and `-D drizzle-kit`.
 
-**Install:** `npm install drizzle-orm postgres` and `npm install -D drizzle-kit`
-
-**Setup:**
-```typescript
-import { drizzle } from 'drizzle-orm/postgres-js'
-const db = drizzle(process.env.DATABASE_URL);
-```
-
-Or with existing driver:
-```typescript
-import postgres from 'postgres'
-const client = postgres(process.env.DATABASE_URL)
-const db = drizzle({ client });
-```
+Initialize with `drizzle(process.env.DATABASE_URL)` using `drizzle-orm/postgres-js`, or pass an existing postgres client to `drizzle({ client })`.

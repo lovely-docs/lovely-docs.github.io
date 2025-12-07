@@ -1,37 +1,22 @@
-## Overview
-Drizzle relations enable querying relational data with a simple API. They are application-level abstractions that define relationships between tables without affecting the database schema or creating foreign keys implicitly.
+## Purpose
+Drizzle relations enable querying relational data with a simple API, abstracting away manual joins. They define relationships between tables at the application level without creating database constraints.
 
-Relational queries example:
+## Relational Queries vs Manual Joins
+Relational queries automatically fetch related data:
 ```ts
 const db = drizzle(client, { schema });
-const result = db.query.users.findMany({
-  with: {
-    posts: true,
-  },
+const result = await db.query.users.findMany({
+  with: { posts: true }
 });
 // Returns: [{ id: 10, name: "Dan", posts: [...] }]
 ```
 
+Manual joins require explicit join syntax and result mapping.
+
 ## One-to-One Relations
-Define with `one()` operator. When the foreign key is in the referenced table, the relation is nullable.
+Define with `one()` operator. Two patterns:
 
-Self-referencing example (user invites another user):
-```ts
-export const users = pgTable('users', {
-  id: serial('id').primaryKey(),
-  name: text('name'),
-  invitedBy: integer('invited_by'),
-});
-
-export const usersRelations = relations(users, ({ one }) => ({
-  invitee: one(users, {
-    fields: [users.invitedBy],
-    references: [users.id],
-  }),
-}));
-```
-
-Foreign key in separate table (user has profile info):
+**Foreign key in related table (nullable relation):**
 ```ts
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
@@ -49,15 +34,32 @@ export const profileInfo = pgTable('profile_info', {
 });
 
 export const profileInfoRelations = relations(profileInfo, ({ one }) => ({
-  user: one(users, { fields: [profileInfo.userId], references: [users.id] }),
+  user: one(users, { 
+    fields: [profileInfo.userId], 
+    references: [users.id] 
+  }),
 }));
-// user.profileInfo is nullable
+// user.profileInfo is { ... } | null
+```
+
+**Self-referencing (foreign key in same table):**
+```ts
+export const users = pgTable('users', {
+  id: serial('id').primaryKey(),
+  name: text('name'),
+  invitedBy: integer('invited_by'),
+});
+
+export const usersRelations = relations(users, ({ one }) => ({
+  invitee: one(users, {
+    fields: [users.invitedBy],
+    references: [users.id],
+  }),
+}));
 ```
 
 ## One-to-Many Relations
-Define with `many()` operator on the parent side and `one()` on the child side.
-
-Users with posts and posts with comments:
+Define with `many()` operator on parent, `one()` on child:
 ```ts
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
@@ -98,9 +100,7 @@ export const commentsRelations = relations(comments, ({ one }) => ({
 ```
 
 ## Many-to-Many Relations
-Require explicit junction/join tables that store associations between related tables.
-
-Users and groups with junction table:
+Requires explicit junction/join table:
 ```ts
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
@@ -142,18 +142,19 @@ export const usersToGroupsRelations = relations(usersToGroups, ({ one }) => ({
 ```
 
 ## Relations vs Foreign Keys
-Relations are application-level abstractions; foreign keys are database-level constraints. Relations don't affect the database schema or create foreign keys implicitly. They can be used independently or together, allowing relations to work with databases that don't support foreign keys.
+- **Relations**: Application-level abstraction, don't affect database schema, don't create constraints
+- **Foreign Keys**: Database-level constraints, enforced on insert/update/delete, throw errors on violation
+- Can be used independently or together; relations work with databases that don't support foreign keys
 
 ## Foreign Key Actions
-Specify actions when referenced data in parent table is modified using the `references()` second argument:
-
+Specify behavior when referenced data is modified using `references()` second argument:
 ```ts
-export type UpdateDeleteAction = 'cascade' | 'restrict' | 'no action' | 'set null' | 'set default';
+type UpdateDeleteAction = 'cascade' | 'restrict' | 'no action' | 'set null' | 'set default';
 
 // In column definition:
-author: integer('author').references(() => users.id, { onDelete: 'cascade' }).notNull(),
+author: integer('author').references(() => users.id, { onDelete: 'cascade' }).notNull()
 
-// In foreignKey operator:
+// In foreignKey constraint:
 foreignKey({
   name: "author_fk",
   columns: [table.author],
@@ -163,35 +164,20 @@ foreignKey({
   .onUpdate('cascade')
 ```
 
-Actions:
-- `CASCADE`: Delete/update parent row also deletes/updates all child rows
-- `NO ACTION`: Prevents deletion of parent row if dependent child rows exist (default)
-- `RESTRICT`: Same as NO ACTION, included for compatibility
-- `SET DEFAULT`: Sets foreign key column to default value when parent row deleted
-- `SET NULL`: Sets foreign key column to NULL when parent row deleted (requires nullable column)
-
-ON UPDATE works the same way as ON DELETE, with CASCADE copying updated values to referencing rows.
+**Actions:**
+- `CASCADE`: Delete/update child rows when parent is deleted/updated
+- `NO ACTION`: Prevent parent deletion if child rows exist (default)
+- `RESTRICT`: Same as NO ACTION
+- `SET NULL`: Set foreign key column to NULL when parent is deleted
+- `SET DEFAULT`: Set foreign key column to default value when parent is deleted
 
 ## Disambiguating Relations
-Use `relationName` option to distinguish multiple relations between the same two tables:
-
+Use `relationName` option when defining multiple relations between same tables:
 ```ts
-export const users = pgTable('users', {
-  id: serial('id').primaryKey(),
-  name: text('name'),
-});
-
 export const usersRelations = relations(users, ({ many }) => ({
   author: many(posts, { relationName: 'author' }),
   reviewer: many(posts, { relationName: 'reviewer' }),
 }));
-
-export const posts = pgTable('posts', {
-  id: serial('id').primaryKey(),
-  content: text('content'),
-  authorId: integer('author_id'),
-  reviewerId: integer('reviewer_id'),
-});
 
 export const postsRelations = relations(posts, ({ one }) => ({
   author: one(users, {

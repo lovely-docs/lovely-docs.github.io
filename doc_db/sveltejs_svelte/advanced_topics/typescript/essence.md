@@ -1,0 +1,1 @@
+TypeScript support via `lang="ts"` with type-only features by default; preprocessor setup for full TS; typing $props/$state, generics, wrapper components, Component type, and DOM type augmentation.

@@ -1,0 +1,1 @@
+Reactive state container with automatic localStorage/sessionStorage persistence, cross-tab sync, connection control, and custom serialization support; plain objects/arrays deeply reactive, class instances require full replacement.

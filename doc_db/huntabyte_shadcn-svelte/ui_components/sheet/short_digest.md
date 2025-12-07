@@ -1,20 +1,9 @@
-## Sheet Component
+Dialog-based component for complementary content sliding from screen edges.
 
-Dialog-based component for displaying complementary content from screen edges.
+**Install:** `npx shadcn-svelte@latest add sheet -y -o`
 
-### Installation
-
-```bash
-npx shadcn-svelte@latest add sheet -y -o
-```
-
-### Basic Usage
-
+**Basic structure:**
 ```svelte
-<script lang="ts">
-  import * as Sheet from "$lib/components/ui/sheet/index.js";
-</script>
-
 <Sheet.Root>
   <Sheet.Trigger>Open</Sheet.Trigger>
   <Sheet.Content side="right">
@@ -29,10 +18,4 @@ npx shadcn-svelte@latest add sheet -y -o
 </Sheet.Root>
 ```
 
-### Key Features
-
-- **Side property**: Control slide direction with `side="top|right|bottom|left"`
-- **Sizing**: Use CSS classes on `Sheet.Content` to adjust dimensions (e.g., `class="w-[400px] sm:w-[540px]"`)
-- **Components**: Root, Trigger, Content, Header, Title, Description, Footer, Close
-
-Extends bits-ui Dialog component.
+**Options:** `side` prop accepts `top|right|bottom|left`; customize size with CSS classes on `Sheet.Content`.

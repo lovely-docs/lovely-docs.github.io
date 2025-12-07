@@ -1,1 +1,1 @@
-Modal dialog component with Root, Trigger, Content, Header, Title, Description, Footer, Cancel, and Action sub-components; install with `npx shadcn-svelte@latest add alert-dialog -y -o`.
+Modal dialog component with Root, Trigger, Content, Header, Title, Description, Footer, Cancel, and Action subcomponents.

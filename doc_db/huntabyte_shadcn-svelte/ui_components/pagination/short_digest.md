@@ -1,15 +1,11 @@
-## Pagination Component
+Pagination component for navigating paginated content.
 
-Navigation component for paginated content with page numbers, previous/next buttons, and ellipsis.
-
-### Installation
-
+**Installation:**
 ```bash
 npx shadcn-svelte@latest add pagination -y -o
 ```
 
-### Basic Usage
-
+**Basic usage:**
 ```svelte
 <script lang="ts">
   import * as Pagination from "$lib/components/ui/pagination/index.js";
@@ -23,9 +19,7 @@ npx shadcn-svelte@latest add pagination -y -o
       </Pagination.Item>
       {#each pages as page (page.key)}
         {#if page.type === "ellipsis"}
-          <Pagination.Item>
-            <Pagination.Ellipsis />
-          </Pagination.Item>
+          <Pagination.Item><Pagination.Ellipsis /></Pagination.Item>
         {:else}
           <Pagination.Item>
             <Pagination.Link {page} isActive={currentPage === page.value}>
@@ -42,7 +36,4 @@ npx shadcn-svelte@latest add pagination -y -o
 </Pagination.Root>
 ```
 
-### Key Props
-
-- **Pagination.Root**: `count` (total items), `perPage` (items per page), `siblingCount` (optional, page numbers around current)
-- **Pagination.Link**: `page` object, `isActive` boolean for highlighting current page
+**Props:** `count` (total items), `perPage` (items per page), `siblingCount` (page links around current page). Snippet receives `pages` array and `currentPage` number.

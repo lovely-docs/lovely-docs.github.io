@@ -1,1 +1,1 @@
-Mutually exclusive radio button component; install with `npx shadcn-svelte@latest add radio-group -y -o`; use `RadioGroup.Root` with `RadioGroup.Item` elements; bind to form data with `bind:value`; integrates with sveltekit-superforms for validation.
+Radio button group component for single-selection from multiple options; install with -y -o flags; use RadioGroup.Root/Item with Label; integrates with sveltekit-superforms for form validation.

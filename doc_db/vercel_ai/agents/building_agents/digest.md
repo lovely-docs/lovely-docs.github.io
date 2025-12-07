@@ -1,8 +1,14 @@
 ## ToolLoopAgent Class
 
-The ToolLoopAgent class encapsulates LLM configuration, tools, and behavior into reusable components. It handles the agent loop automatically, allowing the LLM to call tools multiple times in sequence to accomplish complex tasks.
+The ToolLoopAgent class encapsulates LLM configuration, tools, and behavior into reusable components. It handles the agent loop automatically, allowing the LLM to call tools multiple times in sequence.
 
-### Creating an Agent
+Benefits:
+- Reuse configurations across your application
+- Maintain consistent behavior and capabilities
+- Reduce boilerplate in API routes
+- Full TypeScript support
+
+## Creating an Agent
 
 ```ts
 import { ToolLoopAgent } from 'ai';
@@ -10,13 +16,11 @@ import { ToolLoopAgent } from 'ai';
 const myAgent = new ToolLoopAgent({
   model: 'anthropic/claude-sonnet-4.5',
   instructions: 'You are a helpful assistant.',
-  tools: {
-    // Your tools here
-  },
+  tools: { /* your tools */ },
 });
 ```
 
-### Configuration Options
+## Configuration Options
 
 **Model and System Instructions:**
 ```ts
@@ -28,71 +32,51 @@ const agent = new ToolLoopAgent({
 
 **Tools:**
 ```ts
-import { ToolLoopAgent, tool } from 'ai';
+import { tool } from 'ai';
 import { z } from 'zod';
 
-const codeAgent = new ToolLoopAgent({
+const agent = new ToolLoopAgent({
   model: 'anthropic/claude-sonnet-4.5',
   tools: {
     runCode: tool({
       description: 'Execute Python code',
-      inputSchema: z.object({
-        code: z.string(),
-      }),
-      execute: async ({ code }) => {
-        return { output: 'Code executed successfully' };
-      },
+      inputSchema: z.object({ code: z.string() }),
+      execute: async ({ code }) => ({ output: 'Code executed successfully' }),
     }),
   },
 });
 ```
 
 **Loop Control:**
-By default, agents run for 20 steps. Each step represents one generation (either text or a tool call). The loop continues until a finish reason other than tool-calls is returned, a tool without an execute function is invoked, a tool call needs approval, or a stop condition is met.
+By default, agents run for 20 steps. Each step is one generation (text or tool call). The loop continues until a finish reason other than tool-calls is returned, a tool without execute function is called, a tool needs approval, or a stop condition is met.
 
 ```ts
-import { ToolLoopAgent, stepCountIs } from 'ai';
+import { stepCountIs } from 'ai';
 
 const agent = new ToolLoopAgent({
   model: 'anthropic/claude-sonnet-4.5',
   stopWhen: stepCountIs(20), // Allow up to 20 steps
-});
-```
-
-Combine multiple conditions:
-```ts
-const agent = new ToolLoopAgent({
-  model: 'anthropic/claude-sonnet-4.5',
-  stopWhen: [
-    stepCountIs(20),
-    yourCustomCondition(),
-  ],
+  // or combine conditions:
+  stopWhen: [stepCountIs(20), yourCustomCondition()],
 });
 ```
 
 **Tool Choice:**
-Control how the agent uses tools with `toolChoice: 'required'` (force tool use), `'none'` (disable tools), or `'auto'` (default, let model decide). Force a specific tool:
-
 ```ts
 const agent = new ToolLoopAgent({
   model: 'anthropic/claude-sonnet-4.5',
-  tools: {
-    weather: weatherTool,
-    cityAttractions: attractionsTool,
-  },
-  toolChoice: {
-    type: 'tool',
-    toolName: 'weather',
-  },
+  tools: { weather: weatherTool, cityAttractions: attractionsTool },
+  toolChoice: 'required', // 'auto' (default), 'none', or specific tool
+  // or force specific tool:
+  toolChoice: { type: 'tool', toolName: 'weather' },
 });
 ```
 
 **Structured Output:**
 ```ts
-import { ToolLoopAgent, Output, stepCountIs } from 'ai';
-import { z } from 'zod';
+import { Output } from 'ai';
 
-const analysisAgent = new ToolLoopAgent({
+const agent = new ToolLoopAgent({
   model: 'anthropic/claude-sonnet-4.5',
   output: Output.object({
     schema: z.object({
@@ -104,16 +88,16 @@ const analysisAgent = new ToolLoopAgent({
   stopWhen: stepCountIs(10),
 });
 
-const { output } = await analysisAgent.generate({
+const { output } = await agent.generate({
   prompt: 'Analyze customer feedback from the last quarter',
 });
 ```
 
-### System Instructions
+## System Instructions
 
 System instructions define agent behavior, personality, and constraints. Examples:
 
-**Basic role definition:**
+**Basic role:**
 ```ts
 const agent = new ToolLoopAgent({
   model: 'anthropic/claude-sonnet-4.5',
@@ -123,10 +107,9 @@ const agent = new ToolLoopAgent({
 
 **Detailed behavioral guidelines:**
 ```ts
-const codeReviewAgent = new ToolLoopAgent({
+const agent = new ToolLoopAgent({
   model: 'anthropic/claude-sonnet-4.5',
   instructions: `You are a senior software engineer conducting code reviews.
-
   Your approach:
   - Focus on security vulnerabilities first
   - Identify performance bottlenecks
@@ -136,120 +119,94 @@ const codeReviewAgent = new ToolLoopAgent({
 });
 ```
 
-**Constrain behavior:**
+**Constrained behavior:**
 ```ts
-const customerSupportAgent = new ToolLoopAgent({
+const agent = new ToolLoopAgent({
   model: 'anthropic/claude-sonnet-4.5',
   instructions: `You are a customer support specialist for an e-commerce platform.
-
   Rules:
   - Never make promises about refunds without checking the policy
   - Always be empathetic and professional
   - If you don't know something, say so and offer to escalate
   - Keep responses concise and actionable
   - Never share internal company information`,
-  tools: {
-    checkOrderStatus,
-    lookupPolicy,
-    createTicket,
-  },
+  tools: { checkOrderStatus, lookupPolicy, createTicket },
 });
 ```
 
 **Tool usage guidance:**
 ```ts
-const researchAgent = new ToolLoopAgent({
+const agent = new ToolLoopAgent({
   model: 'anthropic/claude-sonnet-4.5',
   instructions: `You are a research assistant with access to search and document tools.
-
   When researching:
   1. Always start with a broad search to understand the topic
   2. Use document analysis for detailed information
   3. Cross-reference multiple sources before drawing conclusions
   4. Cite your sources when presenting information
   5. If information conflicts, present both viewpoints`,
-  tools: {
-    webSearch,
-    analyzeDocument,
-    extractQuotes,
-  },
+  tools: { webSearch, analyzeDocument, extractQuotes },
 });
 ```
 
 **Format and style:**
 ```ts
-const technicalWriterAgent = new ToolLoopAgent({
+const agent = new ToolLoopAgent({
   model: 'anthropic/claude-sonnet-4.5',
   instructions: `You are a technical documentation writer.
-
   Writing style:
   - Use clear, simple language
   - Avoid jargon unless necessary
   - Structure information with headers and bullet points
   - Include code examples where relevant
   - Write in second person ("you" instead of "the user")
-
   Always format responses in Markdown.`,
 });
 ```
 
-### Using an Agent
+## Using an Agent
 
 **Generate text (one-time):**
 ```ts
-const result = await myAgent.generate({
-  prompt: 'What is the weather like?',
-});
+const result = await myAgent.generate({ prompt: 'What is the weather like?' });
 console.log(result.text);
 ```
 
 **Stream text:**
 ```ts
-const stream = myAgent.stream({
-  prompt: 'Tell me a story',
-});
-
+const stream = myAgent.stream({ prompt: 'Tell me a story' });
 for await (const chunk of stream.textStream) {
   console.log(chunk);
 }
 ```
 
-**Create API response for client applications:**
+**API response for UI:**
 ```ts
 import { createAgentUIStreamResponse } from 'ai';
 
 export async function POST(request: Request) {
   const { messages } = await request.json();
-
-  return createAgentUIStreamResponse({
-    agent: myAgent,
-    messages,
-  });
+  return createAgentUIStreamResponse({ agent: myAgent, messages });
 }
 ```
 
-### Type Safety
+## Type Safety
 
 Infer types for agent UIMessages:
 ```ts
-import { ToolLoopAgent, InferAgentUIMessage } from 'ai';
+import { InferAgentUIMessage } from 'ai';
 
-const myAgent = new ToolLoopAgent({
-  // ... configuration
-});
-
+const myAgent = new ToolLoopAgent({ /* ... */ });
 export type MyAgentUIMessage = InferAgentUIMessage<typeof myAgent>;
 ```
 
 Use in client components:
 ```tsx
-'use client';
-
 import { useChat } from '@ai-sdk/react';
 import type { MyAgentUIMessage } from '@/agent/my-agent';
 
 export function Chat() {
   const { messages } = useChat<MyAgentUIMessage>();
-  // Full type safety for your messages and tools
+  // Full type safety for messages and tools
 }
 ```

@@ -1,1 +1,1 @@
-Resizable panel groups with horizontal/vertical directions, defaultSize prop, withHandle indicator, and nested layout support.
+Resizable panel component with horizontal/vertical direction, defaultSize percentages, nested pane support, and optional handle indicators.

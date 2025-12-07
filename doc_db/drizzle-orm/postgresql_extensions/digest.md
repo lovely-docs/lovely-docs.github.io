@@ -1,12 +1,15 @@
 ## pg_vector
 
-Open-source vector similarity search for PostgreSQL. Requires pg_vector extension to be pre-installed in the database.
+Vector similarity search extension for PostgreSQL. Store vectors alongside relational data with support for exact and approximate nearest neighbor search, multiple vector types (single-precision, half-precision, binary, sparse), and distance metrics (L2, inner product, cosine, L1, Hamming, Jaccard).
 
 **Column Types:**
-- `vector({ dimensions: 3 })` - stores vectors alongside other data
+```ts
+const table = pgTable('table', {
+    embedding: vector({ dimensions: 3 })
+})
+```
 
 **Indexes:**
-Create HNSW indexes with distance operators:
 ```ts
 const table = pgTable('items', {
     embedding: vector({ dimensions: 3 })
@@ -24,33 +27,20 @@ const table = pgTable('items', {
 ```ts
 import { l2Distance, l1Distance, innerProduct, cosineDistance, hammingDistance, jaccardDistance } from 'drizzle-orm'
 
-l2Distance(table.column, [3, 1, 2])        // <->
-l1Distance(table.column, [3, 1, 2])        // <+>
-innerProduct(table.column, [3, 1, 2])      // <#>
-cosineDistance(table.column, [3, 1, 2])    // <=>
-hammingDistance(table.column, '101')       // <~>
-jaccardDistance(table.column, '101')       // <%>
-```
-
-**Query Examples:**
-```ts
-// Nearest neighbor search
-db.select().from(items).orderBy(l2Distance(items.embedding, [3,1,2])).limit(5)
-
-// Distance calculation
-db.select({ distance: l2Distance(items.embedding, [3,1,2]) }).from(items)
-
-// Subquery distance
-const subquery = db.select({ embedding: items.embedding }).from(items).where(eq(items.id, 1))
-db.select().from(items).orderBy(l2Distance(items.embedding, subquery)).limit(5)
-
-// Custom operations
-db.select({ innerProduct: sql`(${innerProduct(items.embedding, [3,1,2])}) * -1` }).from(items)
+l2Distance(table.column, [3, 1, 2]) // <->
+l1Distance(table.column, [3, 1, 2]) // <+>
+innerProduct(table.column, [3, 1, 2]) // <#>
+cosineDistance(table.column, [3, 1, 2]) // <=>
+hammingDistance(table.column, '101') // <~>
+jaccardDistance(table.column, '101') // <%>
 ```
 
 Custom distance functions can be created by replicating the pattern:
 ```ts
-export function l2Distance(column: SQLWrapper | AnyColumn, value: number[] | string[] | TypedQueryBuilder<any> | string): SQL {
+export function l2Distance(
+  column: SQLWrapper | AnyColumn,
+  value: number[] | string[] | TypedQueryBuilder<any> | string,
+): SQL {
   if (is(value, TypedQueryBuilder<any>) || typeof value === 'string') {
     return sql`${column} <-> ${value}`;
   }
@@ -58,25 +48,38 @@ export function l2Distance(column: SQLWrapper | AnyColumn, value: number[] | str
 }
 ```
 
+**Query Examples:**
+```ts
+// Nearest neighbors
+db.select().from(items).orderBy(l2Distance(items.embedding, [3,1,2])).limit(5)
+
+// Distance calculation
+db.select({ distance: l2Distance(items.embedding, [3,1,2]) }).from(items)
+
+// Subquery distance
+const subquery = db.select({ embedding: items.embedding }).from(items).where(eq(items.id, 1));
+db.select().from(items).orderBy(l2Distance(items.embedding, subquery)).limit(5)
+
+// Computed distance
+db.select({ innerProduct: sql`(${innerProduct(items.embedding, [3,1,2])}) * -1` }).from(items)
+```
+
 ## PostGIS
 
-Extends PostgreSQL with geospatial data support. Requires postgis extension to be pre-installed. Use `extensionsFilters` in drizzle config to exclude PostGIS tables from introspect/push commands.
+Geospatial extension for PostgreSQL. Adds support for storing, indexing, and querying geographic data.
 
 **Column Types:**
-- `geometry('geo', { type: 'point' })` - stores geometry data
-
-**Modes:**
-- `tuple` (default) - maps to array `[1, 2]`
-- `xy` - maps to object `{ x: 1, y: 2 }`
-
-**Examples:**
 ```ts
 const items = pgTable('items', {
   geo: geometry('geo', { type: 'point' }),
   geoObj: geometry('geo_obj', { type: 'point', mode: 'xy' }),
   geoSrid: geometry('geo_options', { type: 'point', mode: 'xy', srid: 4000 }),
-})
+});
 ```
+
+**Mode:** `tuple` (default, maps to [x,y]) or `xy` (maps to {x, y} object)
+
+**Type:** Predefined `point` type available; any string can be used for other PostGIS types
 
 **Indexes:**
 ```ts
@@ -87,4 +90,4 @@ const table = pgTable('table', {
 ])
 ```
 
-Type can be any string to support other PostGIS geometry types beyond `point`.
+Note: Use `extensionsFilters` in drizzle config to exclude PostGIS tables from introspect/push commands.

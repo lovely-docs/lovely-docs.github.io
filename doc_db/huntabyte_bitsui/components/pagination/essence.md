@@ -1,0 +1,1 @@
+Pagination component with Root, Page, PrevButton, NextButton; supports bindable page state, configurable items-per-page and sibling count, ellipsis rendering, keyboard navigation with optional looping, and data attributes for styling.

@@ -1,1 +1,0 @@
-Toggle switch component with state management, form integration, and accessibility features.

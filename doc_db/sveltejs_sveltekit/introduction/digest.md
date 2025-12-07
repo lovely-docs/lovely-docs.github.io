@@ -1,1 +1,0 @@
-This is the main index page for SvelteKit documentation. It serves as the entry point to the documentation structure and is auto-generated from the documentation sync script. The page itself contains minimal content - primarily frontmatter metadata indicating it is a generated file that should not be manually edited.

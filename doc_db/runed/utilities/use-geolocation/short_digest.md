@@ -1,0 +1,1 @@
+Reactive Geolocation API wrapper. Create with `useGeolocation()`, access `position.coords`, `position.timestamp`, `error`, and `isSupported`. Control with `pause()`/`resume()`. Options: `immediate` (default true) and standard PositionOptions.

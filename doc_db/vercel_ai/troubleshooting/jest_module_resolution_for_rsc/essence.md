@@ -1,0 +1,1 @@
+Fix Jest "Cannot find module '@ai-sdk/rsc'" error by mapping the module path in jest.config.js moduleNameMapper to node_modules/@ai-sdk/rsc/dist

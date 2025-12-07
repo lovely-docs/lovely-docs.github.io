@@ -1,0 +1,1 @@
+Reactive access to the currently focused DOM element. Returns `Element | null`. Supports custom document/shadow root via `new ActiveElement({ document })`. Updates synchronously, SSR-safe, searches through Shadow DOM.

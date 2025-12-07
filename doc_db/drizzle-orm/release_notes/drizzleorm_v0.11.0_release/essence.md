@@ -1,1 +1,0 @@
-TypeScript ORM for PostgreSQL with fully typed schemas, compile-time safe queries, joins, CRUD operations, and automatic migration generation.

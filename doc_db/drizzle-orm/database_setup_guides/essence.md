@@ -1,1 +1,1 @@
-Step-by-step integration guides for connecting Drizzle ORM to 25+ database platforms including PostgreSQL, MySQL, SQLite variants, and specialized databases like Cloudflare D1 and Nile.
+Database integration setup for 30+ platforms with standardized workflow and examples

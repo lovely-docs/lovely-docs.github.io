@@ -1,0 +1,1 @@
+API for generating text with language models, supporting tool calling, structured outputs, multi-step generation with callbacks, and fine-grained control over generation parameters.

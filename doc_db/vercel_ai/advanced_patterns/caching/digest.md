@@ -6,17 +6,15 @@ Two approaches to cache AI provider responses:
 
 Use `LanguageModelV3Middleware` with `wrapGenerate` and `wrapStream` methods to intercept model calls.
 
-For `wrapGenerate` (used by `generateText` and `generateObject`):
-- Create a cache key from params
+For `wrapGenerate` (used by `generateText`, `generateObject`):
+- Create cache key from params: `const cacheKey = JSON.stringify(params)`
 - Check cache before calling `doGenerate()`
 - Store result in cache after generation
-- Restore timestamp fields from cached Date objects
 
-For `wrapStream` (used by `streamText` and `streamObject`):
-- Create a cache key from params
-- If cached, use `simulateReadableStream()` to return cached `LanguageModelV3StreamPart[]` array chunk-by-chunk
-- Control replay timing with `initialDelayInMs` and `chunkDelayInMs` parameters
-- If not cached, pipe the stream through a `TransformStream` that collects all chunks and stores them in cache on flush
+For `wrapStream` (used by `streamText`, `streamObject`):
+- Check cache before calling `doStream()`
+- If cached, use `simulateReadableStream()` to return cached chunks with configurable delays (`initialDelayInMs`, `chunkDelayInMs`)
+- If not cached, pipe stream through `TransformStream` to collect chunks and store in cache on flush
 
 Example using Upstash Redis:
 ```ts
@@ -30,7 +28,7 @@ export const cacheMiddleware: LanguageModelV3Middleware = {
     const cacheKey = JSON.stringify(params);
     const cached = await redis.get(cacheKey);
     if (cached !== null) {
-      return { ...cached, response: { ...cached.response, timestamp: new Date(cached.response.timestamp) } };
+      return { ...cached, response: { ...cached.response, timestamp: cached?.response?.timestamp ? new Date(cached?.response?.timestamp) : undefined } };
     }
     const result = await doGenerate();
     redis.set(cacheKey, result);
@@ -47,14 +45,9 @@ export const cacheMiddleware: LanguageModelV3Middleware = {
     }
     const { stream, ...rest } = await doStream();
     const fullResponse: LanguageModelV3StreamPart[] = [];
-    const transformStream = new TransformStream({
-      transform(chunk, controller) {
-        fullResponse.push(chunk);
-        controller.enqueue(chunk);
-      },
-      flush() {
-        redis.set(cacheKey, fullResponse);
-      },
+    const transformStream = new TransformStream({ 
+      transform(chunk, controller) { fullResponse.push(chunk); controller.enqueue(chunk); },
+      flush() { redis.set(cacheKey, fullResponse); }
     });
     return { stream: stream.pipeThrough(transformStream), ...rest };
   },
@@ -63,12 +56,12 @@ export const cacheMiddleware: LanguageModelV3Middleware = {
 
 ### Lifecycle Callbacks
 
-Use the `onFinish` callback in `streamText`, `generateText`, etc. to cache responses after generation completes.
+Use `onFinish` callback in `streamText` to cache response after generation completes.
 
-Example with Upstash Redis in Next.js:
-```tsx
+Example with Upstash Redis and 1-hour expiration:
+```ts
 import { openai } from '@ai-sdk/openai';
-import { streamText } from 'ai';
+import { formatDataStreamPart, streamText } from 'ai';
 import { Redis } from '@upstash/redis';
 
 const redis = new Redis({ url: process.env.KV_URL, token: process.env.KV_TOKEN });
@@ -79,10 +72,7 @@ export async function POST(req: Request) {
   
   const cached = await redis.get(key);
   if (cached != null) {
-    return new Response(formatDataStreamPart('text', cached), {
-      status: 200,
-      headers: { 'Content-Type': 'text/plain' },
-    });
+    return new Response(formatDataStreamPart('text', cached), { status: 200, headers: { 'Content-Type': 'text/plain' } });
   }
 
   const result = streamText({
@@ -90,7 +80,7 @@ export async function POST(req: Request) {
     messages,
     async onFinish({ text }) {
       await redis.set(key, text);
-      await redis.expire(key, 60 * 60); // 1 hour TTL
+      await redis.expire(key, 60 * 60);
     },
   });
 
@@ -98,4 +88,4 @@ export async function POST(req: Request) {
 }
 ```
 
-Any KV storage provider can be used instead of Upstash Redis. The middleware approach is recommended as it's more transparent and works with all SDK functions.
+Works with any KV storage provider, not just Upstash Redis.

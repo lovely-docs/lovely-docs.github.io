@@ -1,1 +1,1 @@
-Toggle control for checked/unchecked states; install with `npx shadcn-svelte@latest add switch -y -o`; bind to form data with `bind:checked`; supports disabled and aria-readonly.
+Toggle switch component; install via CLI; bind to checked property; supports disabled/aria-readonly states; integrates with form libraries.

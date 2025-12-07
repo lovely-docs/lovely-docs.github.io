@@ -1,1 +1,1 @@
-Define local constants within block scopes using {@const ...}
+Declare block-scoped constants with `{@const}` inside blocks, components, or boundaries.

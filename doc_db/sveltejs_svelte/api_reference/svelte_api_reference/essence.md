@@ -1,0 +1,1 @@
+Svelte 5 public API: Component type, mount/hydrate/unmount functions, lifecycle hooks (onMount/onDestroy), context API (createContext/getContext/setContext), event dispatcher, state sync (tick/settled/flushSync), fork for speculative updates, untrack/getAbortSignal utilities, and TypeScript types.

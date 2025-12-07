@@ -1,1 +1,1 @@
-Documentation index page for Svelte reference materials.
+Empty documentation index page; structural only.

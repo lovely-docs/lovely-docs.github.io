@@ -1,6 +1,6 @@
-## Generated Type Utilities
+## Generated Type Utilities for Routes
 
-The `$app/types` module provides auto-generated TypeScript types for your app's routes and assets.
+The `$app/types` module provides auto-generated TypeScript types for your app's routes and assets (available since v2.26).
 
 ### Asset
 Union of all static directory filenames plus a string wildcard for dynamically imported assets:
@@ -21,16 +21,20 @@ type Pathname = '/' | '/my-route' | `/my-other-route/${string}` & {};
 ```
 
 ### ResolvedPathname
-Like `Pathname` but includes base path prefix, used with `page.url.pathname`:
+Like `Pathname` but includes optional base path prefix, used with `page.url.pathname`:
 ```ts
 type ResolvedPathname = `${'' | `/${string}`}/` | `${'' | `/${string}`}/my-route` | `${'' | `/${string}`}/my-other-route/${string}` | {};
 ```
 
 ### RouteParams
-Utility to get parameters for a given route:
+Utility to extract parameters from a route ID:
 ```ts
+type RouteParams<T extends RouteId> = { /* generated */ } | Record<string, never>;
 type BlogParams = RouteParams<'/blog/[slug]'>; // { slug: string }
 ```
 
 ### LayoutParams
-Like `RouteParams` but includes optional parameters from child routes.
+Like `RouteParams` but for layouts, includes optional parameters from child routes:
+```ts
+type RouteParams<T extends RouteId> = { /* generated */ } | Record<string, never>;
+```

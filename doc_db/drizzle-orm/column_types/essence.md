@@ -1,0 +1,1 @@
+Column type definitions and modifiers for MySQL, PostgreSQL, SingleStore, and SQLite databases with examples.

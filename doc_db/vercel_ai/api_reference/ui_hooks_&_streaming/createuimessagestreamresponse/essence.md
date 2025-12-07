@@ -1,0 +1,1 @@
+Creates HTTP Response streaming UI message chunks (data, text, sources, LLM output) with configurable status, headers, and SSE consumption callback.

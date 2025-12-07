@@ -1,1 +1,1 @@
-Fix useChat no response by converting messages to ModelMessage format with convertToModelMessages before streamText
+useChat tool calls logged but no model response: convert messages with convertToModelMessages() before streamText()

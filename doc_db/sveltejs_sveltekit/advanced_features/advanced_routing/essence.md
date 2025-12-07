@@ -1,1 +1,0 @@
-Advanced routing techniques including rest parameters, optional parameters, matchers, route sorting, character encoding, layout groups, and layout hierarchy control.

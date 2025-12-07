@@ -1,3 +1,1 @@
-Hook for reading and updating client-side UI state (visual representation of AI state). Returns `[uiState, setUIState]` similar to useState. Can contain functions, React nodes, and other data.
-
-Import: `import { useUIState } from "@ai-sdk/rsc"`
+Hook for reading/updating client-side UI state in RSC. Returns `[uiState, setUIState]` array. Can contain functions, React nodes, and other data as visual representation of AI state. Note: RSC is experimental; use AI SDK UI for production.

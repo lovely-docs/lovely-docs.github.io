@@ -1,0 +1,1 @@
+Three hooks (useChat, useCompletion, useObject) for building AI-driven UIs across React, Svelte, Vue.js, Angular with different feature support per framework.

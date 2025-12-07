@@ -1,1 +1,0 @@
-Setup and CRUD patterns for integrating Drizzle ORM with six different database platforms (Neon, Nile, Supabase, Turso, Vercel Postgres, Xata).

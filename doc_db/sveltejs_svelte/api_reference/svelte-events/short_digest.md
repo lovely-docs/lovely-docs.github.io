@@ -1,0 +1,1 @@
+**on(target, type, handler, options?)** - Attaches event handler to window/document/element/EventTarget and returns removal function. Preserves correct handler order vs declarative handlers through event delegation.

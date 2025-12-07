@@ -1,0 +1,1 @@
+Attach custom metadata to messages using Zod schemas. Define metadata type, send via `messageMetadata` callback in `toUIMessageStreamResponse` at streaming start/finish stages, access via `message.metadata` on client. Useful for timestamps, model info, token usage, user context, and performance metrics.

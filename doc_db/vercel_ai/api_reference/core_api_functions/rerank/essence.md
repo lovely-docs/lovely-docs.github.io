@@ -1,0 +1,1 @@
+Rerank documents by semantic relevance to a query; returns ranking array with scores and indices, reranked documents, and response metadata.

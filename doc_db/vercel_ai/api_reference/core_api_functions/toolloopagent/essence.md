@@ -1,0 +1,1 @@
+Multi-step agent class with generate()/stream() methods, tool calling, configurable stop conditions, structured output parsing, and type-safe UI message inference.

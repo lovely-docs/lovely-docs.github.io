@@ -1,1 +1,1 @@
-Integrate Drizzle ORM into existing SQLite project: install @libsql/client, set DB_FILE_NAME env var with file: prefix, configure Drizzle dialect, introspect database, transfer schema, connect via LibSQL, query with ORM.
+Step-by-step guide to integrate Drizzle ORM with an existing SQLite database using LibSQL client, from installation through introspection, schema setup, and querying.

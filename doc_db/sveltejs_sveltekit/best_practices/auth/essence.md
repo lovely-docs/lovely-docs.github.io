@@ -1,1 +1,1 @@
-Guide to implementing authentication and authorization in SvelteKit using sessions or tokens, with recommendations for session-based approaches using Lucia.
+Authentication/authorization: session IDs vs JWT tradeoffs; check cookies in server hooks and store user data in locals; use Lucia for session-based auth.

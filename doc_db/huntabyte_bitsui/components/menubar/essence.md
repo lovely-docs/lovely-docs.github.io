@@ -1,0 +1,1 @@
+Menubar component with nested menus, radio/checkbox items, keyboard navigation, floating UI positioning, and state management via two-way or function bindings.

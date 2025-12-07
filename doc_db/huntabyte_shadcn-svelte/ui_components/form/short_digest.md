@@ -1,14 +1,20 @@
 ## Form Component Guide
 
-Composable form components wrapping Formsnap and Superforms with Zod validation.
+Composable form components wrapping Formsnap & Superforms with Zod validation, automatic ARIA attributes, and UI component integration.
 
-**Setup:**
+**Install:**
+```bash
+npx shadcn-svelte@latest add form -y -o
+```
+
+**Basic setup:**
 1. Define Zod schema
-2. Create load function with `superValidate(zod4(formSchema))`
-3. Build form component using `Form.Field`, `Form.Control`, `Form.Label`, `Form.Description`, `Form.FieldErrors`
-4. Create server action to validate and handle form submission
+2. Load form via `superValidate(zod4(formSchema))`
+3. Create form component using `Form.Field`, `Form.Control`, `Form.Label`, `Form.Description`, `Form.FieldErrors`
+4. Use `superForm()` hook with validators
+5. Handle submission via server action
 
-**Basic Example:**
+**Example:**
 ```svelte
 <script lang="ts">
   import * as Form from "$lib/components/ui/form/index.js";
@@ -36,9 +42,4 @@ Composable form components wrapping Formsnap and Superforms with Zod validation.
 </form>
 ```
 
-**Installation:**
-```bash
-npx shadcn-svelte@latest add form -y -o
-```
-
-Works with Checkbox, Date Picker, Input, Radio Group, Select, Switch, Textarea.
+Supports client/server validation, keyboard navigation, and accessibility attributes.

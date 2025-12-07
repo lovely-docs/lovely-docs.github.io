@@ -1,0 +1,1 @@
+Common patterns, integrations, debugging, breaking changes from v1→v2, Sapper migration guide, and rendering/architecture glossary.

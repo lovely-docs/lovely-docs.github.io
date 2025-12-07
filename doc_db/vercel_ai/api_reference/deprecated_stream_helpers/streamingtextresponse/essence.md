@@ -1,1 +1,0 @@
-Deprecated utility for streaming text responses; use streamText.toDataStreamResponse() instead. Wraps ReadableStream with auto status 200 and text/plain Content-Type.

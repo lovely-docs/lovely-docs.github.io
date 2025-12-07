@@ -1,0 +1,1 @@
+Legacy Svelte reactive statements: prefix top-level statements with `$:` to auto-rerun when compile-time-detected dependencies change, with topological ordering; dependencies must be directly referenced (not via closures), and SSR-unsafe code needs browser guards.

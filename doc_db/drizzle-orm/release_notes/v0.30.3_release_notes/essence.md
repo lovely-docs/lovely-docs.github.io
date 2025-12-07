@@ -1,1 +1,1 @@
-v0.30.3: raw query batching for Neon HTTP, fixed serverless types and sqlite-proxy .run() result
+v0.30.3: raw query batch support for Neon HTTP, fixed @neondatabase/serverless types, fixed sqlite-proxy .run() result

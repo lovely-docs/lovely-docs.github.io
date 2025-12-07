@@ -1,18 +1,42 @@
-## $state Rune
+## Core
+`$state` creates reactive state that updates the UI. Plain values stay plain; arrays/objects become deeply reactive proxies.
 
-Create reactive state with `$state(value)`. Arrays and plain objects become deeply reactive proxies:
-
-```js
+```svelte
 let count = $state(0);
-let todos = $state([{ done: false, text: 'add more todos' }]);
-todos[0].done = true; // triggers updates
+<button onclick={() => count++}>clicks: {count}</button>
 ```
 
-**Variants:**
-- `$state.raw` — non-reactive, reassign-only
-- `$state.snapshot` — get plain object from proxy
-- `$state.eager` — force immediate updates in await expressions
+## Proxies & Destructuring
+Nested properties trigger granular updates. Destructuring breaks reactivity:
+```js
+let todos = $state([{ done: false }]);
+todos[0].done = true; // reactive
+let { done } = todos[0]; // done is not reactive
+```
 
-**Classes:** Use `$state` on class fields, not the class itself.
+## Classes
+Use `$state` on fields; compiler creates get/set methods. Watch `this` context in event handlers:
+```js
+class Todo { done = $state(false); }
+<button onclick={() => todo.reset()}>reset</button> // correct
+```
 
-**Exporting:** Can't directly export reassigned state. Export an object and mutate properties, or use accessor functions instead.
+## Variants
+- `$state.raw`: Non-reactive, reassign-only, better performance
+- `$state.snapshot`: Static snapshot of proxy for external libraries
+- `$state.eager`: Immediate UI updates in `await` expressions
+
+## Passing State
+Pass-by-value: functions receive current value, not reactive reference. Use functions/getters for reactive access:
+```js
+let a = $state(1);
+add(a, b); // passes value 1
+add(() => a, () => b); // passes getters for current values
+```
+
+## Cross-Module Export
+Can't export directly reassigned state (compiler limitation). Either update properties or use getter functions:
+```js
+export const counter = $state({ count: 0 }); // OK
+export function getCount() { return count; } // OK
+```

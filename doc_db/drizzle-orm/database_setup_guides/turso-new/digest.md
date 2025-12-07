@@ -1,27 +1,27 @@
-## Getting Started with Drizzle ORM and Turso Cloud
+## Getting Started with Turso Cloud
 
-This guide walks through setting up Drizzle ORM with Turso (SQLite for Production) and LibSQL, a fork of SQLite optimized for low query latency.
+This guide walks through setting up Drizzle ORM with Turso Cloud (SQLite for production) and libsql driver.
 
 ### Prerequisites
-- **dotenv** - for managing environment variables
-- **tsx** - for running TypeScript files
-- **turso** - SQLite for Production
-- **libsql** - fork of SQLite optimized for low query latency
+- dotenv - environment variable management
+- tsx - TypeScript file runner
+- turso - SQLite for production
+- libsql - SQLite fork optimized for low query latency
 
-### Installation and Setup
+### Setup Steps
 
 **Step 1: Install packages**
-```
+```bash
 npm install @libsql/client
 ```
 
 **Step 2: Environment variables**
-Create `.env` file with:
-```
+Create `.env` file:
+```plaintext
 TURSO_DATABASE_URL=
 TURSO_AUTH_TOKEN=
 ```
-Get these values from the LibSQL Driver SDK tutorial at docs.turso.tech/sdk/ts/quickstart
+Get these values from Turso dashboard or LibSQL Driver SDK tutorial.
 
 **Step 3: Connect to database**
 Create `src/index.ts`:
@@ -39,8 +39,6 @@ const db = drizzle({
 
 Or with existing driver:
 ```typescript
-import 'dotenv/config';
-import { drizzle } from 'drizzle-orm/libsql';
 import { createClient } from '@libsql/client';
 
 const client = createClient({ 
@@ -50,7 +48,8 @@ const client = createClient({
 const db = drizzle({ client });
 ```
 
-**Step 4: Create a table** - covered in separate section
+**Step 4: Create a table**
+Define schema in `src/db/schema.ts` (details in referenced component).
 
 **Step 5: Setup Drizzle config**
 Create `drizzle.config.ts`:
@@ -69,8 +68,11 @@ export default defineConfig({
 });
 ```
 
-**Step 6: Apply changes to database** - covered in separate section
+**Step 6: Apply migrations**
+Run Drizzle Kit migrations (details in referenced component).
 
-**Step 7: Seed and query database** - covered in separate section
+**Step 7: Seed and query database**
+Execute queries using initialized db instance (details in referenced component).
 
-**Step 8: Run the file** - covered in separate section
+**Step 8: Run the file**
+Execute with tsx runner (details in referenced component).

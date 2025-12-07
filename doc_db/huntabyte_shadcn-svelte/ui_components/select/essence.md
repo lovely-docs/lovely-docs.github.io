@@ -1,1 +1,1 @@
-Dropdown select component with single selection, dynamic options, grouping, and form integration via sveltekit-superforms.
+Dropdown select component with single selection, grouping, state binding, and form integration support.

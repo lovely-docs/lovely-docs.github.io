@@ -1,1 +1,0 @@
-Connect Drizzle to OP SQLite in Expo/React Native with babel plugin for SQL migration bundling; use useMigrations hook to run migrations on app startup.

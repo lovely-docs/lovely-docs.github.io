@@ -1,1 +1,1 @@
-Complete TypeScript API reference for SvelteKit exports, hooks, navigation, forms, configuration, and type generation.
+Complete API reference for SvelteKit exports: server class, error/response helpers, form actions, adapters, navigation types, load functions, request handling, cookies, hooks, remote functions, validation, configuration options, environment modules, and type definitions.

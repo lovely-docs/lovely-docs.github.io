@@ -1,0 +1,1 @@
+Reactive `setInterval` wrapper with pause/resume, tick counter, and optional callback. Accepts static delay or reactive function. Options: `immediate`, `immediateCallback`, `callback`. API: `counter`, `isActive`, `pause()`, `resume()`, `reset()`.

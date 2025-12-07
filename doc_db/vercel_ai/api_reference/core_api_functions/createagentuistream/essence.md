@@ -1,0 +1,1 @@
+Streams agent execution as async iterable of UI message chunks; validates/converts messages, invokes agent.stream(), supports AbortSignal cancellation.

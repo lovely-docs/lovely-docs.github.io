@@ -1,1 +1,1 @@
-Badge component with default/secondary/destructive/outline variants; supports custom styling and link styling via badgeVariants helper.
+Badge component with variants (default, secondary, destructive, outline); supports icons, custom styling, and badgeVariants helper for link badges.

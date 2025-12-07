@@ -1,9 +1,4 @@
-## sequence
-
-Chains multiple `handle` middleware with specific ordering:
-- `transformPageChunk`: reverse order, merged
-- `preload`: forward order, first wins
-- `filterSerializedResponseHeaders`: forward order, first wins
+**sequence** - Chains multiple `handle` middleware functions. `transformPageChunk` applies in reverse order, `preload` and `filterSerializedResponseHeaders` apply in forward order with first option winning.
 
 ```js
 import { sequence } from '@sveltejs/kit/hooks';

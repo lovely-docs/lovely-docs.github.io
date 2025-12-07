@@ -1,1 +1,1 @@
-Debounce utility that delays callback execution until after specified inactivity duration; supports dynamic duration via function, immediate execution, and cancellation.
+useDebounce: delays callback execution until after inactivity period; accepts callback and duration getter; provides runScheduledNow(), cancel(), and pending property

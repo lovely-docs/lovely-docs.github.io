@@ -1,0 +1,1 @@
+useChat status changes to "streaming" on connection before text arrives; conditionally show loader by checking if last assistant message has content parts

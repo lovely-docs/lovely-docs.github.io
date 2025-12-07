@@ -1,0 +1,1 @@
+pruneMessages() filters ModelMessage arrays to reduce token usage by removing reasoning, tool calls, and empty messages with configurable strategies per option type.

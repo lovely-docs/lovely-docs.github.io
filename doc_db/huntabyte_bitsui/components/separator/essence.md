@@ -1,0 +1,1 @@
+Headless separator component with horizontal/vertical orientation, decorative flag for a11y, and data attributes for styling.

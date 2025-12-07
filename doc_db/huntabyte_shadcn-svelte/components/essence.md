@@ -1,1 +1,1 @@
-Complete catalog of 70+ shadcn-svelte UI components spanning forms, navigation, dialogs, data display, and layout.
+Complete component library index with 70+ UI components for forms, layout, display, and utilities.

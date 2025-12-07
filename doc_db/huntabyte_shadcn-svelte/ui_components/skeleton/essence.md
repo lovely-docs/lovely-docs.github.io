@@ -1,1 +1,1 @@
-Placeholder component for loading states; import from $lib/components/ui/skeleton and style with Tailwind classes.
+Skeleton loader component; customize dimensions and shape via Tailwind classes

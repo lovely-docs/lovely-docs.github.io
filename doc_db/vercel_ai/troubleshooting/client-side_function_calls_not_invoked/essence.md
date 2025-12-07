@@ -1,1 +1,1 @@
-Fix missing client-side function calls in OpenAIStream v3.0.20+ by adding experimental_onFunctionCall stub
+Fix for v3.0.20+: add empty `experimental_onFunctionCall` callback to `OpenAIStream` options to restore client-side function call forwarding.

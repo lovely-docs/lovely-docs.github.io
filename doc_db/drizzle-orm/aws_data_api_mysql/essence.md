@@ -1,1 +1,0 @@
-AWS Data API MySQL support is not implemented

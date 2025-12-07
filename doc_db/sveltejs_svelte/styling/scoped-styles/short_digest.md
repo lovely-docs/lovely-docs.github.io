@@ -1,0 +1,1 @@
+Svelte automatically scopes component `<style>` blocks by adding a hash-based class (e.g., `svelte-123xyz`) to elements. Scoped selectors get +0-1-0 specificity, taking precedence over global styles. `@keyframes` are also scoped and animation rules are auto-adjusted.

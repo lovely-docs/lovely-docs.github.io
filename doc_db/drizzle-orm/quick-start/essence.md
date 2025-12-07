@@ -1,1 +1,1 @@
-PostgreSQL setup: install drizzle-orm + drizzle-kit, define schema with pgTable, configure drizzle.config.ts, run generate then migrate commands
+Install drizzle-orm and drizzle-kit, define PostgreSQL schema with pgTable, configure drizzle.config.ts with dialect/schema/out paths, add generate/migrate npm scripts, run generate to create SQL migrations then migrate to apply them.

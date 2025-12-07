@@ -1,0 +1,1 @@
+Type helper that adds a `ref` prop to custom components. Intersects your props type with `{ ref?: HTMLElement | null }`. Use with `$bindable()` and `bind:this` to expose the underlying element.

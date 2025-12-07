@@ -1,1 +1,1 @@
-Documentation index page for Svelte styling topics.
+Documentation index for Svelte styling features and techniques.

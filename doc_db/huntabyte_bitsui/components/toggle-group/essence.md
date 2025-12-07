@@ -1,0 +1,1 @@
+Toggle group component supporting single or multiple selection modes with roving focus navigation, state binding, and orientation control.

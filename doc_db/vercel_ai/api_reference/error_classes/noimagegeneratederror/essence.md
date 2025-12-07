@@ -1,0 +1,1 @@
+NoImageGeneratedError: thrown on image generation failure; check with isInstance(); provides message, responses metadata, and cause

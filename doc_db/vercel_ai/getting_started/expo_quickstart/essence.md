@@ -1,1 +1,1 @@
-Build streaming chat interface with Expo using useChat hook, streamText API route, and optional tools with multi-step execution.
+Build streaming chat UI with Expo: setup project, create API route with streamText(), use useChat hook with expo/fetch transport, display message parts, add tools with Zod schemas and execute functions, enable multi-step calls with stopWhen, add polyfills for structuredClone and text encoding.

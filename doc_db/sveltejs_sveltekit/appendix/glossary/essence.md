@@ -1,1 +1,0 @@
-Definitions of rendering modes (CSR, SSR, SPA, MPA, hybrid), static generation approaches (SSG, prerendering, ISR), and related concepts (hydration, routing, PWA) used in SvelteKit.

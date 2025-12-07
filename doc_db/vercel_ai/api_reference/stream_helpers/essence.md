@@ -1,0 +1,1 @@
+Framework adapters for converting external AI service streams to AI SDK format

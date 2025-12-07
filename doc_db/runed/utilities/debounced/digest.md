@@ -1,39 +1,34 @@
-## Debounced
+A wrapper over `useDebounce` that returns a debounced state object.
 
-A wrapper over `useDebounce` that returns a debounced state. Useful for delaying state updates, commonly used for search inputs or other user interactions that shouldn't trigger immediately.
-
-### Basic Usage
-
-Create a debounced state by passing a getter function and delay in milliseconds:
-
+**Usage:**
 ```ts
+import { Debounced } from "runed";
+
 let search = $state("");
 const debounced = new Debounced(() => search, 500);
 ```
 
-The debounced value is accessed via `debounced.current`. In the example above, when `search` changes, `debounced.current` will update after 500ms of inactivity.
+Access the debounced value via `debounced.current`.
 
-### Methods
+**Methods:**
+- `cancel()` - Cancel the pending debounced update
+- `setImmediately(value)` - Set a new value immediately and cancel pending updates
+- `updateImmediately()` - Run the pending update immediately
 
-- `cancel()` - Cancels any pending debounced update, keeping the current debounced value unchanged
-- `setImmediately(value)` - Sets a new value immediately and cancels any pending updates
-- `updateImmediately()` - Runs the pending update immediately without waiting for the delay
-
-### Example with all methods
-
+**Example:**
 ```ts
 let count = $state(0);
 const debounced = new Debounced(() => count, 500);
 
 count = 1;
-debounced.cancel(); // Cancels the pending update
-// debounced.current remains 0
+debounced.cancel();
+console.log(debounced.current); // 0 (update was cancelled)
 
 count = 2;
-debounced.setImmediately(count); // Sets to 2 immediately
-// debounced.current is now 2
+debounced.setImmediately(count);
+console.log(debounced.current); // 2 (set immediately)
 
 count = 3;
-await debounced.updateImmediately(); // Runs pending update immediately
-// debounced.current is now 3
+await debounced.updateImmediately();
+console.log(debounced.current); // 3 (updated immediately)
 ```

@@ -1,1 +1,0 @@
-Global context provider for setting default props (portal target, locale) across Bits UI components with inheritance and override support.

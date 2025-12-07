@@ -1,31 +1,11 @@
-## drizzle-arktype Plugin
+Plugin generating Arktype schemas from Drizzle ORM schemas for validation.
 
-Generates Arktype schemas from Drizzle ORM schemas. Requires Drizzle ORM v0.36.0+, Arktype v2.0.0+.
+**Select Schema** (query validation): `createSelectSchema(table)` validates all queried fields present.
 
-**Select Schema** - Validates queried data:
-```ts
-const userSelectSchema = createSelectSchema(users);
-const parsed = userSelectSchema(rows[0]); // { id: number; name: string; age: number }
-```
+**Insert Schema** (request validation): `createInsertSchema(table)` validates required fields for insertion.
 
-**Insert Schema** - Validates data to insert (excludes auto-generated columns):
-```ts
-const userInsertSchema = createInsertSchema(users);
-const parsed = userInsertSchema({ name: 'Jane', age: 30 });
-```
+**Update Schema** (request validation): `createUpdateSchema(table)` makes all fields optional, rejects generated columns.
 
-**Update Schema** - Validates data to update (all fields optional, excludes generated columns):
-```ts
-const userUpdateSchema = createUpdateSchema(users);
-const parsed = userUpdateSchema({ age: 35 }); // { name?: string, age?: number }
-```
+**Refinements**: Pass object with field names mapping to functions `(schema) => pipe(schema, ...)` to extend/modify, or Arktype schemas to overwrite.
 
-**Refinements** - Extend/modify or overwrite field schemas:
-```ts
-const userSelectSchema = createSelectSchema(users, {
-  name: (schema) => pipe(schema, maxLength(20)), // Extends
-  preferences: object({ theme: string() }) // Overwrites
-});
-```
-
-**Data Type Mappings**: Boolean, Date/Timestamp, String, Bit, UUID, Char, Varchar, MySQL text variants, Enum, Integer types (tinyint, smallint, int, bigint), Float/Double, Year, Point, Vector, Line, JSON, Buffer, Array - each with specific Arktype schema equivalents and range constraints.
+**Type Mappings**: Boolean → `type.boolean`, Date → `type.Date`, String → `type.string`, UUID → regex, Char/Varchar → `type.string.exactlyLength/atMostLength(n)`, Enum → `type.enumerated(...)`, Integer types → `type.keywords.number.integer.atLeast(min).atMost(max)`, BigInt → `type.bigint.narrow(...)`, JSON → union of primitives/arrays/objects, Point → tuple or object, Vector → number array, Buffer → `type.instanceOf(Buffer)`, Arrays → `baseSchema.array().exactlyLength(size)`.

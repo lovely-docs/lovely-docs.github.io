@@ -1,1 +1,0 @@
-CohereStream (deprecated, removed in v4.0): transforms Cohere API responses to ReadableStream with optional callbacks (onStart, onToken, onCompletion, onFinal); works in Node.js/Edge/browser.

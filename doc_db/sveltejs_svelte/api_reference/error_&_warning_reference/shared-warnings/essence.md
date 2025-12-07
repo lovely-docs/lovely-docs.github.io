@@ -1,1 +1,1 @@
-Documentation of two shared warnings: void elements cannot have content, and $state.snapshot() cannot clone certain objects like DOM elements.
+Two shared warnings: void elements ignore children; $state.snapshot() returns originals for uncloneable values like DOM elements.

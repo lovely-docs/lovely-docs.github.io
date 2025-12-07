@@ -1,1 +1,0 @@
-Slider component for selecting single or multiple values from a range with support for discrete steps, custom labels, and vertical orientation.

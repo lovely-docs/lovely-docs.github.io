@@ -1,1 +1,1 @@
-Multiple approaches to style unstyled Bits UI components using classes, data attributes, CSS variables, and inline styles, with support for state-based and animated styling.
+Five styling approaches (CSS frameworks, data attributes, global classes, scoped styles, style prop); state styling via data attributes and CSS variables; animation techniques combining state selectors with keyframes.

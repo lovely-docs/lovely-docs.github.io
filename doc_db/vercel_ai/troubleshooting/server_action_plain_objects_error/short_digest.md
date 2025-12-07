@@ -1,1 +1,0 @@
-When `streamText` or `streamObject` return non-serializable objects in Server Actions, use `createStreamableValue` to wrap only the serializable data (e.g., text) before passing to Client Components.

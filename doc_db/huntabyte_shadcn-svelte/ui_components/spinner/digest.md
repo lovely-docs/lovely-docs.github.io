@@ -8,9 +8,9 @@ A loading state indicator component.
 npx shadcn-svelte@latest add spinner -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
-### Basic Usage
+### Usage
 
 ```svelte
 <script lang="ts">
@@ -21,7 +21,7 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 
 ### Customization
 
-Replace the default spinner icon by editing the component. The default uses a `LoaderIcon` with `animate-spin` class:
+Replace the default spinner icon by editing the component. Example with a custom loader icon:
 
 ```svelte
 <script lang="ts">
@@ -41,7 +41,7 @@ Replace the default spinner icon by editing the component. The default uses a `L
 
 ### Examples
 
-**Size**: Use `size-*` utility classes to adjust spinner size:
+**Size**: Use `size-*` utility classes to adjust spinner size.
 ```svelte
 <Spinner class="size-3" />
 <Spinner class="size-4" />
@@ -49,30 +49,38 @@ Replace the default spinner icon by editing the component. The default uses a `L
 <Spinner class="size-8" />
 ```
 
-**Color**: Use `text-*` utility classes to change color:
+**Color**: Use `text-*` utility classes to change color.
 ```svelte
 <Spinner class="size-6 text-red-500" />
 <Spinner class="size-6 text-green-500" />
 <Spinner class="size-6 text-blue-500" />
 ```
 
-**Button**: Add spinner to buttons to indicate loading state. Button component handles spacing:
+**Button**: Add spinner to buttons to indicate loading state. The Button component handles spacing.
 ```svelte
 <Button disabled size="sm">
   <Spinner />
   Loading...
 </Button>
+<Button variant="outline" disabled size="sm">
+  <Spinner />
+  Please wait
+</Button>
 ```
 
-**Badge**: Use inside Badge component:
+**Badge**: Use spinner inside badges.
 ```svelte
 <Badge>
   <Spinner />
   Syncing
 </Badge>
+<Badge variant="secondary">
+  <Spinner />
+  Updating
+</Badge>
 ```
 
-**Input Group**: Place spinners in `<InputGroup.Addon>`:
+**Input Group**: Place spinners in `<InputGroup.Addon>`.
 ```svelte
 <InputGroup.Root>
   <InputGroup.Input placeholder="Send a message..." disabled />
@@ -80,21 +88,36 @@ Replace the default spinner icon by editing the component. The default uses a `L
     <Spinner />
   </InputGroup.Addon>
 </InputGroup.Root>
+<InputGroup.Root>
+  <InputGroup.Textarea placeholder="Send a message..." disabled />
+  <InputGroup.Addon align="block-end">
+    <Spinner /> Validating...
+    <InputGroup.Button class="ml-auto" variant="default">
+      <ArrowUpIcon />
+    </InputGroup.Button>
+  </InputGroup.Addon>
+</InputGroup.Root>
 ```
 
-**Empty State**: Use in Empty component's Media slot:
+**Empty State**: Use in empty state components.
 ```svelte
-<Empty.Root>
+<Empty.Root class="w-full">
   <Empty.Header>
     <Empty.Media variant="icon">
       <Spinner />
     </Empty.Media>
     <Empty.Title>Processing your request</Empty.Title>
+    <Empty.Description>
+      Please wait while we process your request. Do not refresh the page.
+    </Empty.Description>
   </Empty.Header>
+  <Empty.Content>
+    <Button variant="outline" size="sm">Cancel</Button>
+  </Empty.Content>
 </Empty.Root>
 ```
 
-**Item**: Use in Item.Media to show loading state with progress:
+**Item**: Use in `<Item.Media>` to show loading state.
 ```svelte
 <Item.Root variant="outline">
   <Item.Media variant="icon">
@@ -104,8 +127,26 @@ Replace the default spinner icon by editing the component. The default uses a `L
     <Item.Title>Downloading...</Item.Title>
     <Item.Description>129 MB / 1000 MB</Item.Description>
   </Item.Content>
+  <Item.Actions class="hidden sm:flex">
+    <Button variant="outline" size="sm">Cancel</Button>
+  </Item.Actions>
   <Item.Footer>
     <Progress value={75} />
   </Item.Footer>
+</Item.Root>
+```
+
+**Item with Payment**: Example combining Item, Spinner, and text.
+```svelte
+<Item.Root variant="muted">
+  <Item.Media>
+    <Spinner />
+  </Item.Media>
+  <Item.Content>
+    <Item.Title class="line-clamp-1">Processing payment...</Item.Title>
+  </Item.Content>
+  <Item.Content class="flex-none justify-end">
+    <span class="text-sm tabular-nums">$100.00</span>
+  </Item.Content>
 </Item.Root>
 ```

@@ -1,1 +1,1 @@
-Hook that reads/updates globally-shared AI state (system messages, function responses) under `<AI/>` provider; returns [state].
+useAIState hook reads/updates globally-shared AI state (system messages, function responses) under <AI/> provider; returns [state]; from @ai-sdk/rsc (experimental)

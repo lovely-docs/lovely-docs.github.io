@@ -1,0 +1,1 @@
+Wraps a language model with middleware. Parameters: `model` (LanguageModelV3), `middleware` (single or array), optional `modelId` and `providerId`. Returns wrapped LanguageModelV3.

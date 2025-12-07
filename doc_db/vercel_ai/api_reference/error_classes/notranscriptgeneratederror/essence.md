@@ -1,0 +1,1 @@
+NoTranscriptGeneratedError thrown when transcript generation fails; check with isInstance() method; includes responses array and message properties.

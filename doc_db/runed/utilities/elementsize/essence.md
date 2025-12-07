@@ -1,1 +1,0 @@
-Reactive width/height tracker for DOM elements; constructor takes element getter function, exposes readonly width/height number properties

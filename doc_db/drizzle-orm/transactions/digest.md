@@ -4,18 +4,16 @@ SQL transactions group one or more SQL statements into a single logical unit tha
 
 ### Basic Usage
 
-Run statements in a transaction using `db.transaction()`:
-
 ```ts
+const db = drizzle(...)
+
 await db.transaction(async (tx) => {
   await tx.update(accounts).set({ balance: sql`${accounts.balance} - 100.00` }).where(eq(users.name, 'Dan'));
   await tx.update(accounts).set({ balance: sql`${accounts.balance} + 100.00` }).where(eq(users.name, 'Andrew'));
 });
 ```
 
-### Nested Transactions with Savepoints
-
-Drizzle supports savepoints via nested transactions:
+### Nested Transactions (Savepoints)
 
 ```ts
 await db.transaction(async (tx) => {
@@ -28,21 +26,17 @@ await db.transaction(async (tx) => {
 
 ### Rollback on Condition
 
-Call `tx.rollback()` to rollback the transaction based on business logic:
-
 ```ts
 await db.transaction(async (tx) => {
   const [account] = await tx.select({ balance: accounts.balance }).from(accounts).where(eq(users.name, 'Dan'));
   if (account.balance < 100) {
-    tx.rollback();
+    tx.rollback()
   }
   await tx.update(accounts).set({ balance: sql`${accounts.balance} - 100.00` }).where(eq(users.name, 'Dan'));
 });
 ```
 
 ### Return Values
-
-Transactions can return values:
 
 ```ts
 const newBalance: number = await db.transaction(async (tx) => {
@@ -54,48 +48,36 @@ const newBalance: number = await db.transaction(async (tx) => {
 
 ### Relational Queries in Transactions
 
-Transactions work with relational query builder:
-
 ```ts
+const db = drizzle({ schema })
 await db.transaction(async (tx) => {
-  await tx.query.users.findMany({
-    with: { accounts: true }
-  });
+  await tx.query.users.findMany({ with: { accounts: true } });
 });
 ```
 
 ### Dialect-Specific Configuration
 
-**PostgreSQL** supports `isolationLevel` ("read uncommitted" | "read committed" | "repeatable read" | "serializable"), `accessMode` ("read only" | "read write"), and `deferrable`:
-
+**PostgreSQL:**
 ```ts
-await db.transaction(async (tx) => {
-  // statements
-}, {
-  isolationLevel: "read committed",
-  accessMode: "read write",
-  deferrable: true,
+await db.transaction(async (tx) => { /* ... */ }, {
+  isolationLevel: "read committed" | "read uncommitted" | "repeatable read" | "serializable",
+  accessMode: "read only" | "read write",
+  deferrable: boolean,
 });
 ```
 
-**MySQL** and **SingleStore** support `isolationLevel`, `accessMode`, and `withConsistentSnapshot`:
-
+**MySQL/SingleStore:**
 ```ts
-await db.transaction(async (tx) => {
-  // statements
-}, {
-  isolationLevel: "read committed",
-  accessMode: "read write",
-  withConsistentSnapshot: true,
+await db.transaction(async (tx) => { /* ... */ }, {
+  isolationLevel: "read committed" | "read uncommitted" | "repeatable read" | "serializable",
+  accessMode: "read only" | "read write",
+  withConsistentSnapshot: boolean,
 });
 ```
 
-**SQLite** supports `behavior` ("deferred" | "immediate" | "exclusive"):
-
+**SQLite:**
 ```ts
-await db.transaction(async (tx) => {
-  // statements
-}, {
-  behavior: "deferred",
+await db.transaction(async (tx) => { /* ... */ }, {
+  behavior: "deferred" | "immediate" | "exclusive",
 });
 ```

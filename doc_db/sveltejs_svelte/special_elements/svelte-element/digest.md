@@ -2,29 +2,31 @@
 
 Renders a DOM element whose tag name is determined at runtime via the `this` prop.
 
-**Basic Usage:**
+**Purpose**: Useful when the element type is unknown at author time, such as when it comes from a CMS or dynamic source.
+
+**Basic usage**:
+```svelte
+<svelte:element this={expression} />
+```
+
+**Key behaviors**:
+- If `this` is nullish, the element and its children are not rendered
+- Only `bind:this` binding is supported; other Svelte bindings don't work with generic elements
+- All properties and event listeners are applied to the rendered element
+- `this` must be a valid DOM element tag name (e.g., `div`, `span`, `hr`); invalid values like `#text` or `svelte:head` will not work
+
+**Void element handling**: If `this` is a void element (e.g., `br`, `hr`) and the component has child elements, a runtime error is thrown in development mode:
 ```svelte
 <script>
 	let tag = $state('hr');
 </script>
 
 <svelte:element this={tag}>
-	Content here
+	This text cannot appear inside an hr element
 </svelte:element>
 ```
 
-**Key Behaviors:**
-- If `this` is nullish, the element and children are not rendered
-- Only `bind:this` binding is supported; other Svelte bindings don't work with generic elements
-- All properties and event listeners are applied to the element
-- Throws a runtime error in development if `this` is a void element (like `br`, `hr`) but has child content
-
-**Namespace Handling:**
-Svelte infers the namespace from context, but you can make it explicit:
+**Namespace handling**: Svelte attempts to infer the correct namespace from context, but you can make it explicit with the `xmlns` attribute:
 ```svelte
 <svelte:element this={tag} xmlns="http://www.w3.org/2000/svg" />
 ```
-
-**Constraints:**
-- `this` must be a valid DOM element tag name
-- Invalid values like `#text` or `svelte:head` will not work

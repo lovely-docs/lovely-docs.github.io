@@ -1,1 +1,0 @@
-Three utilities for Node.js integration: `createReadableStream()` converts files to streams, `getRequest()` converts Node's `IncomingMessage` to Web `Request`, and `setResponse()` writes Web `Response` to Node's `ServerResponse`.

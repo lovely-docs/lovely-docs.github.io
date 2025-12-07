@@ -1,1 +1,0 @@
-Stream helper functions for converting responses from 13+ AI providers (OpenAI, Anthropic, AWS Bedrock, Cohere, Google, HuggingFace, LangChain, Mistral, Replicate, Inkeeps) into readable streams; core utilities: AIStream, StreamingTextResponse, streamToResponse.

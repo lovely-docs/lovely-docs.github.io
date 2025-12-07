@@ -1,1 +1,1 @@
-Stream React components from server to client using `streamUI` with tools; generator functions enable yielding loading states before final components; requires Server Action + client page in Next.js.
+Stream React components server-to-client with `streamUI`; tools return components via generator functions that yield loading states before final UI.

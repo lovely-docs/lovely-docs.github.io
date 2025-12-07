@@ -1,0 +1,1 @@
+Type incompatibility error when SDK updates add new model specification features; resolve by updating provider packages and SDK.

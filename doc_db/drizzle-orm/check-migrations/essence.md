@@ -1,0 +1,1 @@
+Command to validate SQL migrations history consistency; requires dialect and connection config via drizzle.config.ts or CLI flags (--dialect, --out, --config).

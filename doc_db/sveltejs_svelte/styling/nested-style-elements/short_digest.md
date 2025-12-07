@@ -1,0 +1,1 @@
+Nested `<style>` tags (inside elements/logic blocks) are inserted as-is without scoping, affecting the entire DOM rather than just the component.

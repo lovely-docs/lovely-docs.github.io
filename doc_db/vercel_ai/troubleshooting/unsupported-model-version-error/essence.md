@@ -1,0 +1,1 @@
+AI SDK 5 requires v2 specification; error occurs when provider packages aren't updated to 2.0.0+; update ai@5.0.0+, @ai-sdk/*@2.0.0+, @ai-sdk/provider@2.0.0+, zod@4.1.8+.

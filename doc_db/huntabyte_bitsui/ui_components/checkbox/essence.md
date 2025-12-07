@@ -1,1 +1,0 @@
-Checkbox component with tri-state support, form integration, and checkbox groups.

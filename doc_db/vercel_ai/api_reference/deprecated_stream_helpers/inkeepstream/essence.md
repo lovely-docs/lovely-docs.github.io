@@ -1,1 +1,0 @@
-Deprecated utility (removed in SDK 4.0) that converts Inkeep API responses to ReadableStream with optional callbacks for stream lifecycle events.

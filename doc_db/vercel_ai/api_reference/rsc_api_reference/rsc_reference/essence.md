@@ -1,0 +1,1 @@
+Experimental RSC API reference: server-side streamUI/createAI/createStreamableUI/createStreamableValue/getAIState/getMutableAIState; client-side useAIState/useUIState/useActions hooks.

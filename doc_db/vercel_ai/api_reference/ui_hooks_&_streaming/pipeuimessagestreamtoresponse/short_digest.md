@@ -1,0 +1,1 @@
+Pipes UI message streams to Node.js ServerResponse with status, headers, and optional SSE stream consumption callback.

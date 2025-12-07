@@ -1,29 +1,8 @@
-## Deploying AI Applications to Vercel
+## Deployment Steps
 
-Deploy Next.js AI applications to Vercel using git-centered workflow with automatic deployments on main branch pushes.
+1. **Commit Changes**: Ensure `.gitignore` excludes `.env` and `node_modules`, then commit with `git add .` and `git commit -m "init"`
 
-### Prerequisites
-- Vercel account
-- Git provider account (GitHub, GitLab, or Bitbucket)
-- OpenAI API key
-
-### Setup Steps
-
-**1. Prepare Local Repository**
-Ensure `.gitignore` excludes `.env` and `node_modules`:
-```bash
-git add .
-git commit -m "init"
-```
-
-**2. Create Git Repository**
-Create repository on GitHub, then push existing repository:
-```bash
-git remote add origin <repository-url>
-git branch -M main
-git push -u origin main
-```
-If "remote origin already exists" error occurs:
+2. **Create Git Repository**: Create a new repository on GitHub, then push your local code using the commands GitHub provides. If you get "remote origin already exists" error, run:
 ```bash
 rm -rf .git
 git init
@@ -31,30 +10,27 @@ git add .
 git commit -m "init"
 ```
 
-**3. Import to Vercel**
-- Go to vercel.com/new
-- Select Git provider and authenticate
-- Click Import on your repository
-- Expand "Environment Variables" section and paste `.env.local` contents (Vercel auto-parses key:value format)
-- Click Deploy button
+3. **Import to Vercel**: Go to vercel.com/new, select your Git provider, sign in, and click Import next to your repository
 
-### Infrastructure Considerations
+4. **Add Environment Variables**: Expand "Environment Variables" section and paste your `.env.local` file contents. Vercel automatically parses variables into key:value format
 
-**Function Duration**
-Vercel serverless functions default to 10 second maximum on Hobby Tier. LLM responses may exceed this. Set custom duration in route handler or server action:
+5. **Deploy**: Click Deploy button. View your deployment by selecting the Project and clicking Domain
+
+## Infrastructure Considerations
+
+**Function Duration**: Vercel serverless functions default to 10 second max on Hobby Tier. LLM calls may exceed this. Increase with route segment config:
 ```ts
 export const maxDuration = 30;
 ```
-Maximum 60 seconds on Hobby Tier; check documentation for other tier limits.
+Max 60 seconds on Hobby Tier; check documentation for other tiers.
 
-### Security Measures
+## Security
 
-**Rate Limiting**
-Implement rate limiting to regulate requests per client within time frame. Reference Vercel's rate limiting guide.
+**Rate Limiting**: Implement to prevent abuse from high LLM costs. Follow Vercel's rate limiting guide.
 
-**Firewall**
-Use Vercel Firewall for DDoS protection and unauthorized access prevention. Enterprise teams get custom IP blocking rules and dedicated support.
+**Firewall**: Use Vercel Firewall for DDoS protection and unauthorized access prevention. Enterprise teams get custom IP blocking rules.
 
-### Troubleshooting
+## Troubleshooting
+
 - Streaming not working when proxied
 - Timeouts on Vercel

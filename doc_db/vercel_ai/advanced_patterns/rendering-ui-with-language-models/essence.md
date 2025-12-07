@@ -1,0 +1,1 @@
+Return JSON from tools to render React components; use @ai-sdk/rsc's createStreamableUI() to render components server-side and stream them to client instead of managing multiple conditional renders client-side.

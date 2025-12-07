@@ -1,6 +1,6 @@
-## Badge Component
+## Badge
 
-A UI component for displaying badges with multiple style variants.
+Displays a badge or badge-like component.
 
 ### Installation
 
@@ -8,48 +8,40 @@ A UI component for displaying badges with multiple style variants.
 npx shadcn-svelte@latest add badge -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
-### Basic Usage
+### Usage
 
-Import and use the Badge component:
+Basic badge with variants:
 
 ```svelte
 <script lang="ts">
   import { Badge } from "$lib/components/ui/badge/index.js";
+  import BadgeCheckIcon from "@lucide/svelte/icons/badge-check";
 </script>
 
 <Badge>Badge</Badge>
 <Badge variant="secondary">Secondary</Badge>
 <Badge variant="destructive">Destructive</Badge>
 <Badge variant="outline">Outline</Badge>
-```
 
-### Variants
-
-The component supports four built-in variants: default, secondary, destructive, and outline.
-
-### Customization
-
-Badges can be customized with additional classes for styling:
-
-```svelte
+<!-- With icon -->
 <Badge variant="secondary" class="bg-blue-500 text-white dark:bg-blue-600">
   <BadgeCheckIcon />
   Verified
 </Badge>
-```
 
-Circular badge variants can be created using custom classes:
-
-```svelte
+<!-- Circular badges with numbers -->
 <Badge class="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums">8</Badge>
 <Badge class="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums" variant="destructive">99</Badge>
+<Badge class="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums" variant="outline">20+</Badge>
 ```
+
+Available variants: `default`, `secondary`, `destructive`, `outline`.
 
 ### Link Badge
 
-Use the `badgeVariants` helper to style links as badges:
+Use `badgeVariants` helper to style a link as a badge:
 
 ```svelte
 <script lang="ts">

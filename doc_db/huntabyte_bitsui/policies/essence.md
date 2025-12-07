@@ -1,0 +1,1 @@
+Contribution guidelines for changelog entries and issue/discussion management

@@ -1,7 +1,0 @@
-The AI SDK standardizes integration with AI models across multiple providers, allowing developers to focus on building applications rather than handling provider-specific details.
-
-**Generative Artificial Intelligence**: Models that predict and generate outputs (text, images, audio) based on statistical patterns learned from training data. Examples: generating image captions from photos, transcriptions from audio, or images from text descriptions.
-
-**Large Language Models (LLMs)**: A subset of generative models focused on text. Takes a sequence of words as input and predicts the most likely sequence to follow by assigning probabilities to potential next sequences. Continues generating until a stopping criterion is met. LLMs train on massive text collections, making them better suited for some use cases than others (e.g., a model trained on GitHub data understands source code patterns well). Important limitation: LLMs can "hallucinate" or fabricate information when asked about less-known or absent information, so consider how well-represented your needed information is in the model's training data.
-
-**Embedding Models**: Convert complex data (words, images) into dense vector representations (lists of numbers). Unlike generative models, they don't generate new text or data but provide representations of semantic and syntactic relationships between entities for use as input to other models or NLP tasks.

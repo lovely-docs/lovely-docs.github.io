@@ -1,1 +1,0 @@
-Version format is `MAJOR.MINOR.PATCH`. Stable APIs (no prefix) are production-ready with backward compatibility. Experimental APIs (prefixed `experimental_` or `Experimental_`) can change anytime—pin exact versions and test in development only. Deprecated APIs are removed in major releases with migration guides and codemods provided.

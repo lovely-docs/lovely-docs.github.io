@@ -1,0 +1,1 @@
+Save AI state via onSetAIState callback and initialAIState prop; restore UI state via onGetUIState by using AI state as proxy and syncing with database.

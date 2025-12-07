@@ -1,0 +1,1 @@
+React/Svelte/Vue hook for conversational UI with streaming, message state management, tool calling, and transport-based request customization.

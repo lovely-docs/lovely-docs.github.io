@@ -1,0 +1,1 @@
+Limit/offset pagination: skip (page-1)*size rows, return size rows; requires unique column ordering; simple but degrades with large offsets and inconsistent with concurrent data changes; deferred join optimizes large tables.

@@ -1,0 +1,1 @@
+InkeepStream (removed in v4.0): converts Inkeep API responses to ReadableStream with optional onStart/onToken/onCompletion/onFinal callbacks.

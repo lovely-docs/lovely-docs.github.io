@@ -1,1 +1,0 @@
-Comprehensive reference of all SDK error types with properties and isInstance() detection pattern.

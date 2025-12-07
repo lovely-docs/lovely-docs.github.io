@@ -1,1 +1,1 @@
-Tabbed interface component with Tabs.Root, Tabs.List, Tabs.Trigger, and Tabs.Content; install with `npx shadcn-svelte@latest add tabs -y -o`; set active tab via Root's value prop matching Trigger/Content values.
+Tabbed interface component with Root, List, Trigger, and Content sub-components; install with `npx shadcn-svelte@latest add tabs -y -o`.

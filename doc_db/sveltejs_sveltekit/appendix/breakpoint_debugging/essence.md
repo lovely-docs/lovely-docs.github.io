@@ -1,1 +1,0 @@
-How to set up breakpoint debugging in SvelteKit projects using VSCode, browser DevTools, and other editors.

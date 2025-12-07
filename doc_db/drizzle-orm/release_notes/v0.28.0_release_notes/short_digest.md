@@ -1,10 +1,10 @@
 ## Breaking Changes
-- **Removed nested relation filtering**: `table` object in `where` callback no longer includes `with`/`extras` fields for more efficient queries
-- **Added `mode` config for mysql2**: Use `mode: "default"` for MySQL, `mode: "planetscale"` for PlanetScale (which doesn't support lateral joins)
+- Removed filtering by nested relations in `where` callbacks (use manual filtering or core API instead)
+- Added `mode` config for `mysql2` driver: `'default'` for MySQL, `'planetscale'` for PlanetScale
 
-## Performance Improvements
-- **IntelliSense**: 430% faster for large schemas
-- **Relational Queries**: Rewritten to use lateral joins, selective data retrieval, reduced aggregations, and simplified grouping
+## Performance
+- **430% IntelliSense speedup** for large schemas via optimized internal types
+- Relational queries rewritten with lateral joins, selective data retrieval, reduced aggregations, and simplified grouping
 
-## New Features
-- **Insert with defaults**: `db.insert(table).values({})` or `db.insert(table).values([{}, {}])`
+## Features
+- Insert rows with all defaults: `db.insert(table).values({})` or `db.insert(table).values([{}, {}])`

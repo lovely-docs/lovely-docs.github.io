@@ -1,0 +1,1 @@
+Svelte 5 deprecated Svelte 3/4 API in favor of runes/snippets; legacy mode and runes mode are mutually exclusive per component.

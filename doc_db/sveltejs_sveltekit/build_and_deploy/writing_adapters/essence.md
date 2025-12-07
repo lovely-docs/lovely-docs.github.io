@@ -1,1 +1,0 @@
-Guide to implementing custom SvelteKit adapters by defining the required API structure and adapt method responsibilities.

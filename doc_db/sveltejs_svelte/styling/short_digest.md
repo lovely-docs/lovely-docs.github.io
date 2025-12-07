@@ -1,15 +1,7 @@
-## Scoped Styles
-Svelte automatically scopes component styles with hash-based classes (e.g., `svelte-123xyz`), preventing leakage. Scoped selectors override global styles with 0-1-0 specificity increase. Keyframes are also scoped.
+**Scoped Styles**: Hash-based classes (+0-1-0 specificity) auto-scope component CSS and `@keyframes`; use `:where()` for multiple scoping classes.
 
-## Global Styles
-Use `:global(selector)` or `:global {...}` blocks to apply styles globally. Prefix keyframe names with `-global-` for global keyframes.
+**Global Styles**: `:global(selector)` or `:global {...}` blocks apply styles globally; prepend `-global-` to `@keyframes` names.
 
-## CSS Custom Properties
-Pass custom properties with `--property-name` syntax and read with `var()`:
-```svelte
-<Slider --track-color="black" />
-<style>.track { background: var(--track-color, #aaa); }</style>
-```
+**CSS Custom Properties**: Pass via `--name` syntax, desugars to wrapper element (`display: contents` or `<g>`), read with `var(--name, fallback)`, inherit from parents.
 
-## Nested Styles
-Nested `<style>` tags bypass scoping and apply globally.
+**Nested Styles**: Nested `<style>` tags bypass scoping and apply globally.

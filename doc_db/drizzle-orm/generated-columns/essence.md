@@ -1,1 +1,1 @@
-Generated columns: auto-computed DB columns from expressions. PostgreSQL (STORED only), MySQL/SQLite (STORED/VIRTUAL). API: `.generatedAlwaysAs(string|sql|callback)` with optional `{ mode }`. Limitations vary by DB for schema changes.
+Generated columns: auto-computed database columns using `.generatedAlwaysAs(string|sql|callback)` with Virtual/Stored modes; PostgreSQL STORED-only, MySQL/SQLite both; limitations on expression changes via push.

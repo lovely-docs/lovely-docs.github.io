@@ -1,0 +1,1 @@
+Pass CSS custom properties to components using `--property-name` syntax. They desugar to a wrapper element with `display: contents` (or `<g>` for SVG). Read them inside components with `var(--property-name, fallback)`. Properties inherit from parent elements and can be defined globally on `:root`.

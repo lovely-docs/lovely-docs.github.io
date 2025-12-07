@@ -1,1 +1,0 @@
-Creates MCP client with tool/resource/prompt access; configure transport (stdio/SSE/HTTP), call tools()/listResources()/readResource()/listPrompts()/getPrompt()/onElicitationRequest(), close() when done; throws MCPClientError on init/protocol/capability/connection failures.

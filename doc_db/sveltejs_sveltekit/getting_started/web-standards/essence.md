@@ -1,0 +1,1 @@
+Standard Web APIs available in SvelteKit: fetch (with SSR-optimized version), Request/Response/Headers, FormData, Streams, URL/URLSearchParams, Web Crypto.

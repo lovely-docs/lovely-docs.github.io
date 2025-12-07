@@ -1,1 +1,1 @@
-The $props rune receives component inputs with destructuring, defaults, renaming, and type safety support.
+$props rune for receiving component inputs with destructuring, defaults, renaming, rest properties, reactivity, and type safety; $props.id() generates unique instance IDs.

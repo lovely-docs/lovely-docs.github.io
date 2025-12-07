@@ -1,1 +1,0 @@
-3.1→3.2: StreamingReactResponse removed, nanoid deprecated (use generateId), Svelte/Vue/Solid UI moved to @ai-sdk/* packages

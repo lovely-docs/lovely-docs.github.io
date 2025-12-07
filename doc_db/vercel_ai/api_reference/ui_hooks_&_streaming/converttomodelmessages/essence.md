@@ -1,0 +1,1 @@
+Transform useChat messages to ModelMessage objects; supports multi-modal tool responses and custom data part conversion with type safety.

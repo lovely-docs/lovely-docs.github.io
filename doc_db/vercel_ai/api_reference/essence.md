@@ -1,1 +1,1 @@
-Complete API reference for text generation, structured outputs, embeddings, agents, tools, MCP, React hooks, RSC integration, and error types.
+Complete API reference for text generation, structured outputs, embeddings, agents, tools, MCP, UI hooks, RSC, stream adapters, and error classes with type-safe detection.

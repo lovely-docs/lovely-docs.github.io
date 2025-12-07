@@ -1,0 +1,1 @@
+Handle RSC streaming errors via streamableUI.error() for UI or try-catch returning error objects for other values; optionally use React Error Boundary on client.

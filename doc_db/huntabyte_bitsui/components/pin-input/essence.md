@@ -1,0 +1,1 @@
+PIN input component for OTP/2FA/MFA with invisible input, customizable cells, state binding, paste transformation, input patterns, form integration, and accessibility.

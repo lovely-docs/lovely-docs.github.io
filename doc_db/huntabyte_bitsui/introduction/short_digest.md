@@ -1,3 +1,1 @@
-## Bits UI
-
-Headless Svelte component library with unstyled components, full TypeScript support, WAI-ARIA compliance, keyboard navigation, and composable design using render delegation and chainable events.
+Headless Svelte component library with unstyled components, full TypeScript support, WAI-ARIA accessibility, and composable primitives. Style via `class` props or `data-*` attributes. Built on Melt UI, Radix UI, and React Spectrum patterns.

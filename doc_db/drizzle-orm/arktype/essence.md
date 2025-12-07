@@ -1,1 +1,1 @@
-Plugin generating Arktype validation schemas from Drizzle ORM table/view/enum definitions; supports select/insert/update schemas with field refinements and comprehensive data type mappings across PostgreSQL, MySQL, SQLite.
+Generate Arktype validation schemas from Drizzle ORM tables/views/enums with createSelectSchema, createInsertSchema, createUpdateSchema; supports refinements to extend/overwrite field schemas; comprehensive type mappings for all database types with range constraints.

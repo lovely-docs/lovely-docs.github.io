@@ -1,0 +1,1 @@
+v0→v1 breaking changes: el→ref, asChild→child snippet, let:→snippet props, transition props removed; multiple→required type prop; selected→value; indicator components→children snippet; auto-portalling→explicit Portal wrapper; Checkbox.Input removed; AlertDialog.Action no-close; Pin Input overhauled; Slider type prop+onValueCommit; Tooltip.Provider required.

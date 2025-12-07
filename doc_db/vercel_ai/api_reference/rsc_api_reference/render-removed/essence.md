@@ -1,0 +1,1 @@
+Removed `render` function (use `streamUI` instead) that created streamable UI from LLM with model, messages, optional tools/functions with render callbacks, text streaming callback, and temperature parameter.

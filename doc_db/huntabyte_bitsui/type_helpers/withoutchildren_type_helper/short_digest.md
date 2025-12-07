@@ -1,5 +1,1 @@
-`WithoutChildren<T>` removes the `children` snippet prop from a component's type. Use it when wrapping components that manage their own children:
-
-```svelte
-let { ...restProps }: WithoutChildren<Accordion.RootProps> = $props();
-```
+Type helper that removes the `children` snippet prop from component props. Use `WithoutChildren<ComponentProps>` when wrapping components that manage their own children internally.

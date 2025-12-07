@@ -1,1 +1,1 @@
-Deploy Next.js AI apps to Vercel: commit changes, create GitHub repo, import to Vercel, add environment variables. Set `export const maxDuration = 30;` for LLM calls exceeding 10s default. Implement rate limiting and Vercel Firewall for security.
+Deploy Next.js AI app to Vercel: commit code, create GitHub repo, import to Vercel, add `.env.local` variables, deploy. Set `export const maxDuration = 30;` to handle LLM calls exceeding 10s default timeout. Implement rate limiting and firewall for security.

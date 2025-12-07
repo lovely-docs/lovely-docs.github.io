@@ -1,1 +1,1 @@
-Prepared statements API for query performance optimization: concatenate SQL once, reuse precompiled binary; use `.prepare()` with optional statement name (PostgreSQL), execute with `.execute()` (PostgreSQL/MySQL/SingleStore) or `.all()/.get()` (SQLite), embed dynamic values with `sql.placeholder(name)`.
+Prepared statements in Drizzle ORM: concatenate SQL once, reuse precompiled binary for repeated executions; use `.prepare()` then `.execute()` (or `.get()`/`.all()` for SQLite); use `sql.placeholder('name')` for dynamic values.

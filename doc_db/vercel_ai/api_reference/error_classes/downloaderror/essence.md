@@ -1,0 +1,1 @@
+DownloadError exception with url, statusCode, statusText, message properties; check via DownloadError.isInstance()

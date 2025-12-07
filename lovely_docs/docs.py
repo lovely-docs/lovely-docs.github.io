@@ -66,14 +66,17 @@ def build_markdown_doc_tree(
     root: Path,
     path: Path = Path(),
     include: list | None = None,  # Relative prefixes, don't start with '/'
-    exclude: list | None = None,
+    exclude: list | None = None,  # Glob patterns
     extensions: list[str] = [".md"],
-) -> DocItem:
+) -> DocItem | None:
     """Recursively build a documentation tree from markdown files.
 
     Args:
         root: Root directory containing the documentation
         path: Relative path from root to process (default: root itself)
+        include: List of paths to include (prefixes). If None, all are included.
+        exclude: List of glob patterns to exclude.
+        extensions: List of file extensions to consider.
 
     Returns:
         DocItem containing pages and subdirectories in children, if any
@@ -83,17 +86,16 @@ def build_markdown_doc_tree(
     assert (root / path).exists() and (root / path).is_dir()
 
     include_paths: set[str] = set(include or [])
-    exclude_paths: set[str] = set(exclude or [])
+    exclude_patterns: set[str] = set(exclude or [])
 
     def _is_included(rel: Path) -> bool:
         rel_str = rel.as_posix()
         if not include_paths:
             return True
-        return any(rel_str.startswith(inc) or inc.startswith(rel_str)  for inc in include_paths)
+        return any(rel_str.startswith(inc) or inc.startswith(rel_str) for inc in include_paths)
 
     def _is_excluded(rel: Path) -> bool:
-        rel_str = rel.as_posix()
-        return any(rel_str.startswith(exc) or exc.startswith(rel_str) for exc in exclude_paths)
+        return any(rel.match(exc) for exc in exclude_patterns)
 
     children: list[DocItem] = []
 
@@ -112,7 +114,9 @@ def build_markdown_doc_tree(
                     DocItem(origPath=rel_path, name=name, displayName=name, fulltext=fulltext)
                 )
         if item.is_dir():
-            subtree = build_markdown_doc_tree(root, item.relative_to(root), include, exclude, extensions)
+            subtree = build_markdown_doc_tree(
+                root, item.relative_to(root), include, exclude, extensions
+            )
             if subtree:
                 children.append(subtree)
 
@@ -386,10 +390,11 @@ async def process_tree_depth_first(
         )
         pages = sorted(pages, key=lambda s: s.origPath)
 
-
         # The whole tree is just 1 page.
         if not pages:
-            result = await llm_process_page(page=tree, extra_prompt=extra_page, libname=libname, settings=settings)
+            result = await llm_process_page(
+                page=tree, extra_prompt=extra_page, libname=libname, settings=settings
+            )
         else:
             # .name is llm-generated and might be not unique. Make it unique.
             names: set[str] = set()

@@ -1,0 +1,1 @@
+Error thrown when a model ID is not found. Check with `NoSuchModelError.isInstance(error)`. Properties: `modelId`, `modelType`, `message`.

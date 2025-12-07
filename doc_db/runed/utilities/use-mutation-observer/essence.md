@@ -1,0 +1,1 @@
+useMutationObserver hook observes DOM element changes via MutationObserver API; accepts element getter, callback receiving mutations array, and config options; returns stop() method.

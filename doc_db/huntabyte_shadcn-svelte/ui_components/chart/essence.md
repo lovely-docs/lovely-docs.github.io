@@ -1,1 +1,1 @@
-Beautiful, composable charts built on LayerChart with customizable config, theming via CSS variables or direct colors, and flexible tooltips with custom keys.
+Composable chart components built on LayerChart; define data, config (labels/colors), build with LayerChart components; supports CSS variable theming and customizable tooltips.

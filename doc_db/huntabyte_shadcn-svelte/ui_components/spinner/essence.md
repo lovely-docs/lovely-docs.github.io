@@ -1,1 +1,1 @@
-Spinner component for loading states; customize size/color with utility classes; works in Button, Badge, InputGroup, Empty, and Item components.
+Loading indicator component; install with `add spinner -y -o`; customize size/color with utility classes; works in buttons, badges, input groups, items, empty states; replace icon by editing component.

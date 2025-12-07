@@ -1,4 +1,4 @@
-When `useChat` shows tool calls/results in logs but no model response, convert messages using `convertToModelMessages` before passing to `streamText`:
+When `useChat` doesn't get a model response despite tool calls appearing in logs, wrap incoming messages with `convertToModelMessages()` before passing to `streamText()`:
 
 ```tsx
 const result = streamText({

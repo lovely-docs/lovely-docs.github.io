@@ -1,0 +1,1 @@
+Changelog entry format: `- <type>(<scope>): <description>` with types (fix/feat/improve/chore/docs), component or general scope, concise lowercase verb-first descriptions with backticks for code, 10-15 words max.

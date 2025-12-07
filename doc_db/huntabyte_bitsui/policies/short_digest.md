@@ -1,0 +1,3 @@
+**Changelog format:** `- <type>(<scope>): <description>` with types (fix/feat/improve/chore/docs), component scope, verb-first lowercase descriptions with backticks for code, 10-15 words max.
+
+**Issues vs Discussions:** Issues for confirmed bugs and accepted features; Discussions for feature proposals, design discussions, and questions. Feature requests start as Discussions, move to Issues only after acceptance and refinement.

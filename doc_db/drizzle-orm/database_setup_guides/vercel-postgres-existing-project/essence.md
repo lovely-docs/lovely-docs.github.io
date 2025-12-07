@@ -1,0 +1,1 @@
+Setup Drizzle ORM with Vercel Postgres in existing project: install @vercel/postgres, configure POSTGRES_URL and drizzle.config.ts, introspect schema, connect with drizzle(), perform CRUD operations.

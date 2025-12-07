@@ -2,22 +2,21 @@
 
 ## Pages
 
-### activeelement
-Reactive wrapper around document.activeElement with Shadow DOM support and optional custom document/shadow root scoping.
+### active-element
+Reactive wrapper for document.activeElement with Shadow DOM support and optional custom document scoping.
 
 ## activeElement
 
-Provides reactive access to the currently focused DOM element, similar to `document.activeElement` but with automatic reactive updates whenever focus changes.
+Provides reactive access to the currently focused DOM element, similar to `document.activeElement` but with reactive updates.
 
-### Key Features
-- Synchronous updates with DOM focus changes
+**Features:**
+- Updates synchronously with DOM focus changes
 - Returns `null` when no element is focused
-- SSR-safe
-- Searches through Shadow DOM boundaries to find the true active element
+- Safe to use with SSR
 - Lightweight alternative to manual focus tracking
+- Searches through Shadow DOM boundaries for the true active element
 
-### Basic Usage
-
+**Basic usage:**
 ```svelte
 <script lang="ts">
 	import { activeElement } from "runed";
@@ -29,10 +28,7 @@ Provides reactive access to the currently focused DOM element, similar to `docum
 </p>
 ```
 
-### Custom Document/Shadow Root
-
-To scope focus tracking within a custom document or shadow root, pass a `DocumentOrShadowRoot` to the `ActiveElement` constructor:
-
+**Custom document/shadow root:**
 ```svelte
 <script lang="ts">
 	import { ActiveElement } from "runed";
@@ -43,109 +39,105 @@ To scope focus tracking within a custom document or shadow root, pass a `Documen
 </script>
 ```
 
-### Type Definition
-
+**Type:**
 ```ts
 interface ActiveElement {
 	readonly current: Element | null;
 }
 ```
 
-The `current` property holds the currently focused element or `null` if no element has focus.
-
-### animationframes
-Declarative requestAnimationFrame wrapper with FPS limiting, frame metrics (fps, delta), and automatic cleanup.
+### animation-frames
+requestAnimationFrame wrapper with FPS limiting, frame metrics (fps, delta), and automatic cleanup
 
 ## AnimationFrames
 
-A declarative wrapper around the browser's `requestAnimationFrame` API that provides FPS limiting and frame metrics with automatic cleanup.
+A declarative wrapper around the browser's `requestAnimationFrame` API that adds FPS limiting and frame metrics while handling cleanup automatically.
 
-### Purpose
-Simplifies animation loops by handling frame timing, FPS control, and performance metrics without manual cleanup.
-
-### Key Features
-- **FPS Limiting**: Control animation frame rate via `fpsLimit` option (0 = unlimited)
-- **Frame Metrics**: Access `fps` property for current frames per second and `delta` for milliseconds since last frame
-- **Automatic Cleanup**: Handles cleanup automatically
-- **Declarative API**: Callback-based approach integrated with reactive state
+### Core Features
+- Wraps `requestAnimationFrame` with a declarative API
+- FPS limiting capabilities via `fpsLimit` option
+- Frame metrics including `fps` property and `delta` (time since last frame in ms)
+- Automatic cleanup
 
 ### Usage
-Create an instance with a callback function and options:
 
-```svelte
-const animation = new AnimationFrames(
-	(args) => {
-		frames++;
-		delta = args.delta;
-	},
-	{ fpsLimit: () => fpsLimit }
-);
-```
-
-The callback receives an object with `delta` (time since last frame in milliseconds). The `fpsLimit` option accepts a function that returns the desired FPS limit (0 for no limit).
-
-### Properties
-- `animation.fps`: Current frames per second (number)
-- `animation.running`: Whether the animation is currently running (boolean)
-
-### Control
-Start/stop the animation by toggling `animation.running` or calling appropriate methods.
-
-### boolattr
-boolAttr(value: unknown): "" | undefined - converts values to empty string (truthy) or undefined (falsy) for proper HTML boolean attribute rendering
-
-## boolAttr
-
-Transforms any value into `""` (empty string) or `undefined` for use with HTML boolean attributes where presence indicates truth.
-
-### Problem
-Boolean values rendered directly in Svelte attributes become string values, causing both truthy and falsy states to render the attribute as present:
-```svelte
-<div data-active={true}>Content</div>  <!-- renders as: <div data-active="true"> -->
-<div data-active={false}>Content</div> <!-- renders as: <div data-active="false"> -->
-```
-
-### Solution
-`boolAttr` ensures proper boolean attribute behavior by returning an empty string for truthy values (attribute present) or undefined for falsy values (attribute absent):
 ```svelte
 <script lang="ts">
-	import { boolAttr } from "runed";
-	let isActive = $state(true);
-	let isLoading = $state(false);
+	import { AnimationFrames } from "runed";
+
+	let frames = $state(0);
+	let fpsLimit = $state(10);
+	let delta = $state(0);
+	
+	const animation = new AnimationFrames(
+		(args) => {
+			frames++;
+			delta = args.delta;
+		},
+		{ fpsLimit: () => fpsLimit }
+	);
 </script>
 
-<div data-active={boolAttr(isActive)}>Active content</div>    <!-- renders as: <div data-active> -->
-<div data-loading={boolAttr(isLoading)}>Loading content</div>  <!-- renders as: <div> -->
+<button onclick={() => animation.running ? animation.stop() : animation.start()}>
+	{animation.running ? "Stop" : "Start"}
+</button>
+<p>FPS: {animation.fps.toFixed(0)}, Delta: {delta.toFixed(0)}ms</p>
 ```
 
-### Type Definition
+### API
+- Constructor takes a callback function and options object
+- Callback receives `args` object with `delta` property (milliseconds since last frame)
+- Options: `fpsLimit` can be a number or function returning a number (0 = unlimited)
+- Properties: `fps` (current frames per second), `running` (boolean state)
+- Methods: implied `start()` and `stop()` for controlling animation
+
+### boolattr
+boolAttr(value): "" | undefined — converts truthy/falsy values to empty string or undefined for proper HTML boolean attribute behavior
+
+## Purpose
+Transforms any value into `""` (empty string) or `undefined` for HTML boolean attributes, where presence indicates truth rather than value.
+
+## Problem
+Boolean values render as strings in HTML attributes, making both true and false cases present:
+```svelte
+<div data-active={true}>Content</div>  <!-- renders: data-active="true" -->
+<div data-active={false}>Content</div> <!-- renders: data-active="false" -->
+```
+
+## Solution
+```ts
+import { boolAttr } from "runed";
+
+let isActive = $state(true);
+let isLoading = $state(false);
+
+<div data-active={boolAttr(isActive)}>Active</div>    <!-- renders: data-active="" -->
+<div data-loading={boolAttr(isLoading)}>Loading</div> <!-- renders: (no attribute) -->
+```
+
+## API
 ```ts
 function boolAttr(value: unknown): "" | undefined;
 ```
-
-**Parameters:**
-- `value` (`unknown`) - Any value to be converted to a boolean attribute
-
-**Returns:**
-- `""` (empty string) - When `value` is truthy
-- `undefined` - When `value` is falsy
+- Returns `""` when value is truthy
+- Returns `undefined` when value is falsy
 
 ### context
-Type-safe Svelte Context API wrapper with get/set/exists methods; define with type parameter, set during component initialization, retrieve in children with fallback support.
+Type-safe Context API wrapper: define with `new Context<T>(name)`, set with `.set(value)` in parent init, read with `.get()` or `.getOr(fallback)` in child init.
 
 ## Purpose
-Type-safe wrapper around Svelte's Context API for sharing data between components without prop drilling. Useful for themes, authentication state, localization preferences, and other shared data.
+Type-safe wrapper around Svelte's Context API for sharing data between components without prop drilling.
 
 ## Creating Context
-Define a Context instance with a type parameter:
+Define a context instance with a type:
 ```ts
 import { Context } from "runed";
 export const myTheme = new Context<"light" | "dark">("theme");
 ```
-The constructor parameter is just an identifier for debugging. Creating a Context only defines the container—it doesn't set a value yet.
+The constructor parameter is just an identifier for debugging. The context is empty until explicitly set.
 
-## Setting Context Values
-Set the context value in a parent component during initialization (like lifecycle functions):
+## Setting Context
+Set the value in a parent component during initialization:
 ```svelte
 <script lang="ts">
 	import { myTheme } from "./context";
@@ -154,73 +146,68 @@ Set the context value in a parent component during initialization (like lifecycl
 </script>
 {@render children?.()}
 ```
-Context must be set during component initialization, not in event handlers or callbacks.
+Must be called during component initialization, not in event handlers or callbacks.
 
-## Reading Context Values
-Child components access context using `get()` or `getOr()`:
+## Reading Context
+Child components retrieve the value:
 ```svelte
 <script lang="ts">
 	import { myTheme } from "./context";
-	const theme = myTheme.get(); // throws if not set
-	const theme = myTheme.getOr("light"); // fallback value
+	const theme = myTheme.get();
+	const theme = myTheme.getOr("light"); // with fallback
 </script>
 ```
 
 ## API
-- `constructor(name: string)` - Creates context with identifier for debugging
-- `key: symbol` - Internal key (use methods instead of accessing directly)
-- `exists(): boolean` - Check if context is set in parent
+- `constructor(name: string)` - Creates context with identifier
+- `key: symbol` - Internal key (avoid direct use)
+- `exists(): boolean` - Check if context is set
 - `get(): TContext` - Retrieve context, throws if not set
 - `getOr<TFallback>(fallback: TFallback): TContext | TFallback` - Retrieve with fallback
-- `set(context: TContext): TContext` - Set context value and return it
+- `set(context: TContext): TContext` - Set and return context value
 
 All methods must be called during component initialization.
 
 ### debounced
-Debounced state wrapper with delay; access via `.current`, control with `.cancel()`, `.setImmediately()`, `.updateImmediately()`
+Debounced state wrapper with cancel, immediate set, and immediate update methods; access value via .current property
 
-## Debounced
+A wrapper over `useDebounce` that returns a debounced state object.
 
-A wrapper over `useDebounce` that returns a debounced state. Useful for delaying state updates, commonly used for search inputs or other user interactions that shouldn't trigger immediately.
-
-### Basic Usage
-
-Create a debounced state by passing a getter function and delay in milliseconds:
-
+**Usage:**
 ```ts
+import { Debounced } from "runed";
+
 let search = $state("");
 const debounced = new Debounced(() => search, 500);
 ```
 
-The debounced value is accessed via `debounced.current`. In the example above, when `search` changes, `debounced.current` will update after 500ms of inactivity.
+Access the debounced value via `debounced.current`.
 
-### Methods
+**Methods:**
+- `cancel()` - Cancel the pending debounced update
+- `setImmediately(value)` - Set a new value immediately and cancel pending updates
+- `updateImmediately()` - Run the pending update immediately
 
-- `cancel()` - Cancels any pending debounced update, keeping the current debounced value unchanged
-- `setImmediately(value)` - Sets a new value immediately and cancels any pending updates
-- `updateImmediately()` - Runs the pending update immediately without waiting for the delay
-
-### Example with all methods
-
+**Example:**
 ```ts
 let count = $state(0);
 const debounced = new Debounced(() => count, 500);
 
 count = 1;
-debounced.cancel(); // Cancels the pending update
-// debounced.current remains 0
+debounced.cancel();
+console.log(debounced.current); // 0 (update was cancelled)
 
 count = 2;
-debounced.setImmediately(count); // Sets to 2 immediately
-// debounced.current is now 2
+debounced.setImmediately(count);
+console.log(debounced.current); // 2 (set immediately)
 
 count = 3;
-await debounced.updateImmediately(); // Runs pending update immediately
-// debounced.current is now 3
+await debounced.updateImmediately();
+console.log(debounced.current); // 3 (updated immediately)
 ```
 
-### elementrect
-ElementRect: reactive DOMRect tracking with individual property accessors and optional initial dimensions
+### element-rect
+ElementRect: reactive DOMRect tracking with individual dimension/position properties and complete rect object
 
 ## ElementRect
 
@@ -242,9 +229,7 @@ Provides reactive access to an element's dimensions and position information, au
 <pre>{JSON.stringify(rect.current, null, 2)}</pre>
 ```
 
-Pass a getter function that returns an HTMLElement (or undefined/null). Access dimensions via individual properties (`width`, `height`, `top`, `left`, `right`, `bottom`, `x`, `y`) or the complete `current` object containing all DOMRect properties except `toJSON`.
-
-### Type Definition
+### API
 
 ```ts
 type Rect = Omit<DOMRect, "toJSON">;
@@ -267,14 +252,14 @@ class ElementRect {
 }
 ```
 
-Constructor accepts an optional `initialRect` option to set initial dimensions before the element is measured.
+Pass an element getter to the constructor. Access dimensions via individual properties (`width`, `height`, `top`, `left`, `right`, `bottom`, `x`, `y`) or the complete `current` object.
 
-### elementsize
-Reactive width/height tracker for DOM elements; constructor takes element getter function, exposes readonly width/height number properties
+### element-size
+ElementSize: reactive width/height tracker for DOM elements, updates automatically on dimension changes
 
 ## ElementSize
 
-Provides reactive access to an element's width and height, automatically updating when the element's dimensions change. Similar to ElementRect but focused only on size measurements.
+Provides reactive access to an element's width and height, automatically updating when dimensions change. Similar to `ElementRect` but focused only on size measurements.
 
 ### Usage
 
@@ -291,8 +276,6 @@ Provides reactive access to an element's width and height, automatically updatin
 <p>Width: {size.width} Height: {size.height}</p>
 ```
 
-Pass a function that returns the target element to the constructor. Access the reactive `width` and `height` properties to get current dimensions.
-
 ### Type Definition
 
 ```ts
@@ -302,54 +285,57 @@ interface ElementSize {
 }
 ```
 
-The interface exposes two readonly properties: `width` and `height`, both numbers representing the element's current dimensions in pixels.
+The utility accepts a function that returns an HTMLElement and exposes `width` and `height` properties that update reactively.
 
 ### extract
-Utility that resolves MaybeGetter<T> (getter or static value) to plain value with optional fallback, supporting undefined coalescing.
+Utility that unwraps MaybeGetter<T> (function or static value) to T, with optional fallback for undefined.
 
 ## Purpose
-`extract` resolves either a getter function or a static value to a plain value, simplifying utility functions that accept both reactive and static inputs.
+The `extract` utility resolves either a getter function or a static value to a plain value, simplifying code that needs to handle both reactive and static inputs.
 
-## Problem It Solves
-APIs often accept `MaybeGetter<T>` - either a reactive getter or a static value. Without `extract`, handling both requires verbose conditional logic:
+## Problem
+APIs that accept `MaybeGetter<T>` (either a function returning T or a static value) require verbose conditional logic:
 ```ts
 typeof wait === "function" ? (wait() ?? 250) : (wait ?? 250)
 ```
 
-## Usage
+## Solution
 ```ts
 import { extract } from "runed";
 
 function throwConfetti(intervalProp?: MaybeGetter<number | undefined>) {
 	const interval = $derived(extract(intervalProp, 100));
 }
+
+// Also works with Debounced:
+const d1 = new Debounced(() => search, () => debounceTime);
+const d2 = new Debounced(() => search, 500);
+const d3 = new Debounced(() => search);
 ```
 
 ## Behavior
-`extract(input, fallback)` handles four cases:
+`extract(input, fallback)` resolves:
 - Static value → returns the value
-- `undefined` → returns the fallback
-- Function returning a value → returns the function result
-- Function returning `undefined` → returns the fallback
+- `undefined` → returns fallback
+- Function returning value → returns the result
+- Function returning `undefined` → returns fallback
 
-The fallback is optional; omitting it returns `T | undefined`.
+Fallback is optional; omitting it returns `T | undefined`.
 
-## Type Signatures
+## Types
 ```ts
 function extract<T>(input: MaybeGetter<T | undefined>, fallback: T): T;
 function extract<T>(input: MaybeGetter<T | undefined>): T | undefined;
 ```
 
-### finitestatemachine
-Strongly-typed FSM with state/event configuration, conditional actions, lifecycle hooks (_enter/_exit), wildcard fallback (*), and debounced transitions.
+### finite-state-machine
+Strongly-typed finite state machine with state→event→state transitions, action functions, lifecycle hooks (_enter/_exit), wildcard handlers, and debounce scheduling.
 
-## FiniteStateMachine
+## Finite State Machine
 
-A strongly-typed finite state machine for tracking and manipulating systems with multiple discrete states and events that trigger transitions between them.
+A strongly-typed FSM for tracking states and events. Define states and which events transition between them.
 
 ### Basic Usage
-
-Create an FSM by specifying the initial state and a configuration object mapping each state to its valid events and target states:
 
 ```ts
 import { FiniteStateMachine } from "runed";
@@ -364,31 +350,28 @@ const f = new FiniteStateMachine<MyStates, MyEvents>("off", {
 f.send("toggle"); // transition to next state
 ```
 
+First argument is initial state. Second argument maps each state to its valid events and target states.
+
 ### Actions
 
-Instead of string state names, use functions that return states to implement conditional logic and dynamic transitions:
+Instead of string targets, use functions that return a state. Can receive parameters and conditionally transition or prevent transitions by returning nothing:
 
 ```ts
 const f = new FiniteStateMachine<MyStates, MyEvents>("off", {
 	off: {
-		toggle: () => {
-			if (isTuesday) return "on";
-			// returning nothing prevents transition
-		}
+		toggle: () => isTuesday ? "on" : undefined
 	},
 	on: {
-		toggle: (heldMillis: number) => {
-			if (heldMillis > 3000) return "off";
-		}
+		toggle: (heldMillis: number) => heldMillis > 3000 ? "off" : undefined
 	}
 });
 
-f.send("toggle", 5000); // pass arguments to action
+f.send("toggle", arg1, arg2); // pass args to action
 ```
 
 ### Lifecycle Methods
 
-Define `_enter` and `_exit` handlers that run when entering or leaving a state:
+`_enter` and `_exit` handlers invoked on state transitions:
 
 ```ts
 const f = new FiniteStateMachine<MyStates, MyEvents>("off", {
@@ -405,23 +388,25 @@ const f = new FiniteStateMachine<MyStates, MyEvents>("off", {
 });
 ```
 
-The metadata object contains: `from` (exited state), `to` (entered state), `event` (triggering event name), and `args` (optional additional parameters passed to `f.send()`). For the initial state's `_enter`, both `from` and `event` are `null`.
+Metadata object contains: `from` (exited state), `to` (entered state), `event` (triggering event), `args` (optional additional params). For initial state, `from` and `event` are `null`.
 
 ### Wildcard Handlers
 
-Use the special `*` state as a fallback for events not handled by the current state:
+Use `"*"` state as fallback for unhandled events:
 
 ```ts
 const f = new FiniteStateMachine<MyStates, MyEvents>("off", {
 	off: { toggle: "on" },
 	on: { toggle: "off" },
-	"*": { emergency: "off" } // handles emergency from any state
+	"*": { emergency: "off" }
 });
+
+f.send("emergency"); // handled by wildcard, works from any state
 ```
 
 ### Debouncing
 
-Schedule state transitions after a delay using `debounce()`. Calling it again with the same event cancels the previous timer:
+Schedule state transitions after a delay. Re-invoking with same event cancels and restarts the timer:
 
 ```ts
 f.debounce(5000, "toggle"); // transition in 5 seconds
@@ -441,55 +426,61 @@ const f = new FiniteStateMachine<MyStates, MyEvents>("off", {
 
 ### Notes
 
-Minimalistic implementation inspired by kenkunz/svelte-fsm. For more advanced features, consider statelyai/xstate.
+Minimalistic implementation. Based on kenkunz/svelte-fsm. For more features, see statelyai/xstate.
 
-### isdocumentvisible
-Reactive document visibility tracker using Page Visibility API; exposes boolean `current` property that updates on visibility changes.
+### is-document-visible
+Reactive wrapper around Page Visibility API; tracks document.hidden state with automatic visibilitychange event listening.
 
-## IsDocumentVisible
+Reactive boolean that tracks document visibility state using the Page Visibility API.
 
-Reactive boolean that tracks whether the current document is visible using the Page Visibility API.
+**Usage:**
+```ts
+import { IsDocumentVisible } from "runed";
 
-### Purpose
-Monitors document visibility state by listening to the `visibilitychange` event and automatically updates when visibility changes (e.g., when user switches tabs or minimizes the window).
-
-### Usage
-```svelte
-<script lang="ts">
-	import { IsDocumentVisible } from "runed";
-
-	const visible = new IsDocumentVisible();
-</script>
-
-<p>Document visible: {visible.current ? "Yes" : "No"}</p>
+const visible = new IsDocumentVisible();
+console.log(visible.current); // true when document is visible, false when hidden
 ```
 
-### API
-- Constructor accepts optional `IsDocumentVisibleOptions` with `window` and `document` properties for custom contexts
-- `current` property: boolean that is `true` when document is visible, `false` when hidden
+**Type Definition:**
+```ts
+type IsDocumentVisibleOptions = {
+	window?: Window;
+	document?: Document;
+};
 
-### Implementation Details
-- Built on Page Visibility API using `document.hidden` and `visibilitychange` event
-- In non-browser environments, `current` defaults to `false`
+class IsDocumentVisible {
+	constructor(options?: IsDocumentVisibleOptions);
+	readonly current: boolean;
+}
+```
 
-### isfocuswithin
-IsFocusWithin class tracks whether any descendant has focus in a container; constructor takes element getter, exposes readonly current boolean property.
+**Details:**
+- Listens to the `visibilitychange` event and updates automatically
+- Uses `document.hidden` and `visibilitychange` from the Page Visibility API
+- In non-browser contexts, `current` defaults to `false`
+- Accepts optional `window` and `document` parameters for custom contexts
+
+### is-focus-within
+IsFocusWithin utility class reactively tracks whether any descendant has focus in a container element; constructor takes getter returning HTMLElement, exposes readonly boolean current property.
+
+## IsFocusWithin
 
 A utility class that reactively tracks whether any descendant element has focus within a specified container element. Updates automatically when focus changes.
 
-**Constructor**: Takes a getter function that returns an HTMLElement, undefined, or null.
+### Usage
 
-**Property**: `current` - a readonly boolean indicating whether focus is currently within the container.
+```ts
+import { IsFocusWithin } from "runed";
 
-**Usage example**:
+let formElement = $state<HTMLFormElement>();
+const focusWithinForm = new IsFocusWithin(() => formElement);
+
+// Access current focus state
+console.log(focusWithinForm.current); // boolean
+```
+
+Use in template:
 ```svelte
-<script lang="ts">
-	import { IsFocusWithin } from "runed";
-
-	let formElement = $state<HTMLFormElement>();
-	const focusWithinForm = new IsFocusWithin(() => formElement);
-</script>
-
 <p>Focus within form: {focusWithinForm.current}</p>
 <form bind:this={formElement}>
 	<input type="text" />
@@ -497,152 +488,125 @@ A utility class that reactively tracks whether any descendant element has focus 
 </form>
 ```
 
-The utility accepts a MaybeGetter (either a direct value or a getter function) for the target element, making it flexible for reactive element references.
-
-### isidle
-IsIdle sensor tracks user activity with configurable timeout and events, exposing idle state and last activity timestamp.
-
-## IsIdle
-
-Tracks user activity and determines if they're idle based on a configurable timeout. Monitors mouse movement, keyboard input, and touch events to detect user interaction.
-
-### Constructor Options
+### Type Definition
 
 ```ts
-interface IsIdleOptions {
-  events?: MaybeGetter<(keyof WindowEventMap)[]>;
-  // Default: ['mousemove', 'mousedown', 'resize', 'keydown', 'touchstart', 'wheel']
-  
-  timeout?: MaybeGetter<number>;
-  // Timeout in milliseconds before idle state is set to true. Default: 60000 (60 seconds)
-  
-  detectVisibilityChanges?: MaybeGetter<boolean>;
-  // Detect document visibility changes. Default: false
-  
-  initialState?: boolean;
-  // Initial state of the idle property. Default: false
+class IsFocusWithin {
+	constructor(node: MaybeGetter<HTMLElement | undefined | null>);
+	readonly current: boolean;
 }
 ```
 
-### API
+Constructor accepts a getter function that returns the container element to track. The `current` property is a readonly boolean indicating whether focus is currently within the container.
 
+### is-idle
+User idle detection utility tracking activity via events (mousemove, keydown, touch, etc.) with configurable timeout; exposes current idle state and lastActive timestamp.
+
+Tracks user activity and determines idle state based on configurable timeout. Monitors mouse movement, keyboard input, and touch events.
+
+**Usage:**
 ```ts
-class IsIdle {
-  constructor(options?: IsIdleOptions);
-  readonly current: boolean;        // Current idle state
-  readonly lastActive: number;      // Timestamp of last user activity
-}
+import { IsIdle } from "runed";
+const idle = new IsIdle({ timeout: 1000 });
+// idle.current - boolean idle state
+// idle.lastActive - timestamp of last activity
 ```
 
-### Usage Example
+**Options:**
+- `events` - array of window events to monitor (default: mousemove, mousedown, resize, keydown, touchstart, wheel)
+- `timeout` - milliseconds before idle state triggers (default: 60000)
+- `detectVisibilityChanges` - detect document visibility changes (default: false)
+- `initialState` - initial idle state (default: false)
 
-```svelte
-<script lang="ts">
-  import { IsIdle } from "runed";
-  
-  const idle = new IsIdle({ timeout: 1000 });
-</script>
+**API:**
+- `current` - readonly boolean indicating if user is idle
+- `lastActive` - readonly number timestamp of last user activity
 
-<p>Idle: {idle.current}</p>
-<p>Last active: {new Date(idle.lastActive).toLocaleTimeString()}</p>
-```
-
-Customizable events trigger activity detection. By default monitors mousemove, mousedown, resize, keydown, touchstart, and wheel events. The `lastActive` property stores the timestamp of the most recent user interaction.
-
-### isinviewport
-Class that reactively tracks viewport visibility of DOM elements via Intersection Observer; exposes boolean `current` property.
+### is-in-viewport
+Class utility that tracks viewport visibility of DOM elements via Intersection Observer; constructor takes element/getter and optional config, exposes `current` boolean property.
 
 ## IsInViewport
 
 Tracks whether an element is visible within the current viewport using the Intersection Observer API.
 
 ### Purpose
-Provides a reactive way to detect if a DOM element is currently visible in the viewport, useful for lazy loading, analytics, or triggering animations when elements come into view.
+Provides a class-based utility to monitor if a DOM element is currently in view, useful for lazy loading, analytics, or triggering animations when elements become visible.
 
-### How It Works
-- Built on top of the `useIntersectionObserver` utility
+### How it works
+- Built on top of `useIntersectionObserver` utility
 - Accepts an element or a getter function that returns an element
 - Supports optional configuration options that align with `useIntersectionObserver` options
 
 ### Usage
+
+```ts
+import { IsInViewport } from "runed";
+
+let targetNode = $state<HTMLElement>()!;
+const inViewport = new IsInViewport(() => targetNode);
+```
+
 ```svelte
-<script lang="ts">
-	import { IsInViewport } from "runed";
-
-	let targetNode = $state<HTMLElement>()!;
-	const inViewport = new IsInViewport(() => targetNode);
-</script>
-
 <p bind:this={targetNode}>Target node</p>
-
 <p>Target node in viewport: {inViewport.current}</p>
 ```
 
 ### API
-- **Constructor**: `new IsInViewport(node, options?)`
-  - `node`: HTMLElement or getter function returning HTMLElement | null | undefined
-  - `options`: Optional IsInViewportOptions (same as UseIntersectionObserverOptions)
-- **Property**: `current` - boolean getter that returns true if element is in viewport
 
-### ismounted
-IsMounted class provides mounted state tracking via .current property; shorthand for onMount or $effect patterns
+**Constructor:**
+- `new IsInViewport(node: MaybeGetter<HTMLElement | null | undefined>, options?: IsInViewportOptions)`
+
+**Properties:**
+- `current: boolean` - getter that returns whether the element is currently in the viewport
+
+**Options:**
+- Accepts `IsInViewportOptions` which extends `UseIntersectionObserverOptions`
+
+### is-mounted
+IsMounted class provides a mounted state object with a `current` property; shorthand for onMount/effect-based mount tracking.
 
 ## IsMounted
 
-A utility class that tracks whether a component has been mounted. Returns an object with a `current` property that is `false` initially and becomes `true` after the component mounts.
+A utility class that tracks whether a component has mounted.
 
 ### Usage
 
 ```svelte
 <script lang="ts">
 	import { IsMounted } from "runed";
-
 	const isMounted = new IsMounted();
 </script>
 ```
 
-The `isMounted.current` property can then be used in templates or reactive code to conditionally render or execute logic only after mount.
+The `isMounted` object has a `current` property that is `false` initially and becomes `true` after the component mounts.
 
 ### Equivalent implementations
 
 Using `onMount`:
 ```svelte
-<script lang="ts">
-	import { onMount } from "svelte";
-
-	const isMounted = $state({ current: false });
-
-	onMount(() => {
-		isMounted.current = true;
-	});
-</script>
+import { onMount } from "svelte";
+const isMounted = $state({ current: false });
+onMount(() => {
+	isMounted.current = true;
+});
 ```
 
 Using `$effect` with `untrack`:
 ```svelte
-<script lang="ts">
-	import { untrack } from "svelte";
-
-	const isMounted = $state({ current: false });
-
-	$effect(() => {
-		untrack(() => (isMounted.current = true));
-	});
-</script>
+import { untrack } from "svelte";
+const isMounted = $state({ current: false });
+$effect(() => {
+	untrack(() => (isMounted.current = true));
+});
 ```
 
-The class provides a convenient shorthand for these common patterns.
+### on-cleanup
+onCleanup(cb): registers cleanup function for effect context disposal; replaces onDestroy; works in components and $effect.root
 
-### oncleanup
-onCleanup registers a callback invoked on effect context disposal (component destroy or root effect end); shorthand for returning cleanup from $effect().
+Register a cleanup function that executes when the current effect context is disposed (component destruction or root effect disposal).
 
-## onCleanup
+Shorthand for returning a cleanup function from `$effect()`:
 
-Registers a cleanup function that executes when the current effect context is disposed (component destruction or root effect disposal).
-
-**Purpose**: Provides a shorthand for cleanup logic that would otherwise require returning a function from `$effect()`.
-
-**Equivalent to**:
 ```ts
 $effect(() => {
 	return () => {
@@ -651,42 +615,39 @@ $effect(() => {
 });
 ```
 
-**Usage Examples**:
+**Usage:**
 
-As a replacement for `onDestroy`:
 ```svelte
 <script lang="ts">
 	import { onCleanup } from "runed";
 
+	// Replace onDestroy
 	onCleanup(() => {
 		console.log("Component is being cleaned up!");
+	});
+
+	// Within root effect
+	$effect.root(() => {
+		onCleanup(() => {
+			console.log("Root effect is being cleaned up!");
+		});
 	});
 </script>
 ```
 
-Within a root effect:
-```ts
-$effect.root(() => {
-	onCleanup(() => {
-		console.log("Root effect is being cleaned up!");
-	});
-});
-```
-
-**Type Signature**:
+**Type:**
 ```ts
 function onCleanup(cb: () => void): void;
 ```
 
-The callback receives no arguments and returns void.
+### on-click-outside
+Utility that triggers callback on clicks outside a specified element; supports programmatic control via start/stop methods and immediate/detectIframe options.
 
-### onclickoutside
-Detects clicks outside an element; returns start/stop/enabled for control; supports immediate/detectIframe/custom document/window options.
+## onClickOutside
 
-## Purpose
-`onClickOutside` detects clicks outside a specified element's boundaries and executes a callback. Common use cases include dismissible dropdowns, modals, and other interactive components.
+Detects clicks outside a specified element and executes a callback. Useful for dismissible dropdowns, modals, and interactive components.
 
-## Basic Usage
+### Basic Usage
 ```svelte
 import { onClickOutside } from "runed";
 
@@ -698,8 +659,8 @@ onClickOutside(
 );
 ```
 
-## Controlled Listener
-The function returns control methods: `start()` and `stop()` to programmatically manage the listener, plus a reactive read-only `enabled` property to check current status.
+### Controlled Listener
+Returns control methods `start()` and `stop()` plus a reactive `enabled` property to manage the listener programmatically.
 
 ```svelte
 const clickOutside = onClickOutside(
@@ -722,15 +683,15 @@ function closeDialog() {
 }
 ```
 
-## Options
-- `immediate` (boolean, default: true): Whether the handler is enabled by default. If false, call `start()` to activate.
-- `detectIframe` (boolean, default: false): Whether focus events from iframes trigger the callback. Enable if you need to detect interactions with iframe content.
-- `document` (Document, default: global document): The document object to use.
-- `window` (Window, default: global window): The window object to use.
+### Options
+- `immediate` (boolean, default: true) - Whether handler is enabled by default
+- `detectIframe` (boolean, default: false) - Detect focus events from iframes
+- `document` (Document, default: global document) - Document object to use
+- `window` (Window, default: global window) - Window object to use
 
-## Type Signature
+### Type Definition
 ```ts
-function onClickOutside<T extends Element = HTMLElement>(
+export declare function onClickOutside<T extends Element = HTMLElement>(
 	container: MaybeElementGetter<T>,
 	callback: (event: PointerEvent | FocusEvent) => void,
 	opts?: OnClickOutsideOptions
@@ -738,17 +699,15 @@ function onClickOutside<T extends Element = HTMLElement>(
 	stop: () => boolean;
 	start: () => boolean;
 	readonly enabled: boolean;
-}
+};
 ```
 
-The container parameter accepts either an element or a getter function returning an element. The callback receives either a PointerEvent or FocusEvent.
-
-### persistedstate
-Reactive state container with automatic browser storage persistence, cross-tab synchronization, connection control, and custom serialization support.
+### persisted-state
+Reactive state container with automatic localStorage/sessionStorage persistence, cross-tab sync, connection control, and custom serialization support; plain objects/arrays deeply reactive, class instances require full replacement.
 
 ## PersistedState
 
-A reactive state manager that automatically persists data to browser storage (localStorage or sessionStorage) and optionally synchronizes changes across browser tabs in real-time.
+A reactive state manager that persists data to browser storage (localStorage or sessionStorage) and optionally synchronizes changes across browser tabs in real-time.
 
 ### Basic Usage
 
@@ -756,83 +715,69 @@ A reactive state manager that automatically persists data to browser storage (lo
 import { PersistedState } from "runed";
 
 const count = new PersistedState("count", 0);
-count.current++; // Automatically persists
+count.current++; // Persists automatically
 ```
 
 ### Complex Objects
 
-Only plain structures are deeply reactive: arrays, plain objects, and primitive values. Class instances require reassignment to persist:
+Only plain structures (arrays, plain objects, primitives) are deeply reactive and persist on mutation:
 
 ```ts
-const persistedArray = new PersistedState("foo", ["a", "b"]);
-persistedArray.current.push("c"); // Persists
+const arr = new PersistedState("foo", ["a", "b"]);
+arr.current.push("c"); // Persists
 
-const persistedObject = new PersistedState("bar", { name: "Bob" });
-persistedObject.current.name = "JG"; // Persists
+const obj = new PersistedState("bar", { name: "Bob" });
+obj.current.name = "JG"; // Persists
 
-class Person {
-	name: string;
-	constructor(name: string) { this.name = name; }
-}
-const persistedComplexObject = new PersistedState("baz", new Person("Bob"));
-persistedComplexObject.current.name = "JG"; // Does NOT persist
-persistedComplexObject.current = new Person("JG"); // Persists
+class Person { name: string; }
+const complex = new PersistedState("baz", new Person("Bob"));
+complex.current.name = "JG"; // Does NOT persist
+complex.current = new Person("JG"); // Persists
 ```
 
 ### Configuration Options
 
 ```ts
 const state = new PersistedState("key", initialValue, {
-	storage: "session",      // 'local' (default) or 'session'
-	syncTabs: false,         // Cross-tab sync (default: true)
-	connected: false,        // Start disconnected (default: true)
-	serializer: {            // Custom serialization
-		serialize: superjson.stringify,
-		deserialize: superjson.parse
-	}
+  storage: "session", // 'local' (default) or 'session'
+  syncTabs: false,    // Cross-tab sync (default: true)
+  connected: false,   // Start disconnected (default: true)
+  serializer: {
+    serialize: superjson.stringify,
+    deserialize: superjson.parse
+  }
 });
 ```
 
 ### Connection Control
 
-Control when state connects to storage:
-
 ```ts
-const state = new PersistedState("temp-data", initialValue, { connected: false });
-state.current = "new value"; // Kept in memory only
-state.connect();             // Persists to storage
-console.log(state.connected); // true
-state.disconnect();          // Removes from storage, keeps in memory
+const state = new PersistedState("temp", value, { connected: false });
+state.current = "new"; // In-memory only
+state.connect();       // Persists to storage
+state.disconnect();    // Removes from storage, keeps in memory
+console.log(state.connected); // Check status
 ```
 
-When disconnected: state changes are in-memory only, storage changes don't reflect in state, and cross-tab sync is disabled. `disconnect()` removes from storage but preserves the value in memory. `connect()` immediately persists the current in-memory value to storage.
-
-### Storage Options
-
-- `'local'`: Data persists until explicitly cleared
-- `'session'`: Data persists until browser session ends
-
-### Cross-Tab Synchronization
-
-When `syncTabs` is enabled (default), changes automatically synchronize across all browser tabs using storage events.
+When disconnected: state changes stay in memory, storage changes don't affect state, cross-tab sync is disabled. `disconnect()` removes from storage but preserves value in memory. `connect()` immediately persists current in-memory value.
 
 ### Custom Serialization
 
-Handle complex data types like Dates:
+For complex types like Date objects:
 
 ```ts
 import superjson from "superjson";
 
 const lastAccessed = new PersistedState("last-accessed", new Date(), {
-	serializer: {
-		serialize: superjson.stringify,
-		deserialize: superjson.parse
-	}
+  serializer: {
+    serialize: superjson.stringify,
+    deserialize: superjson.parse
+  }
 });
 ```
 
-### pressedkeys
-Keyboard key press tracker with methods to check individual/combined keys, list all pressed keys, and register key combination callbacks.
+### pressed-keys
+Keyboard key press tracker with has(), all property, and onKeys() callback registration for key combinations.
 
 ## PressedKeys
 
@@ -857,7 +802,7 @@ console.log(keys.all);
 ```
 
 ### Registering key combination callbacks
-Use the `onKeys` method to execute a callback when a specific key combination is pressed:
+Use `onKeys` to execute a callback when a specific key combination is pressed:
 ```ts
 keys.onKeys(["meta", "k"], () => {
 	console.log("open command palette");
@@ -865,102 +810,81 @@ keys.onKeys(["meta", "k"], () => {
 ```
 
 ### previous
-Reactive utility tracking previous getter values for state comparisons and transitions; access via `current` property.
+Previous: reactive wrapper maintaining prior getter value via `.current` property for state change tracking.
 
-The `Previous` utility creates a reactive wrapper that maintains the previous value of a getter function, enabling state change comparisons and transition effects.
+## Previous
 
-**Type Definition:**
+A reactive utility that maintains and provides access to the previous value of a getter function.
+
+### Purpose
+Useful for comparing state changes or implementing transition effects by tracking the prior value of reactive state.
+
+### Usage
+
+```ts
+import { Previous } from "runed";
+
+let count = $state(0);
+const previous = new Previous(() => count);
+
+// Access previous value
+console.log(previous.current); // undefined initially, then previous count value
+```
+
+In a component:
+```svelte
+<button onclick={() => count++}>Count: {count}</button>
+<pre>Previous: {previous.current}</pre>
+```
+
+### API
+
 ```ts
 class Previous<T> {
 	constructor(getter: () => T);
-	readonly current: T | undefined; // Previous value
+	readonly current: T | undefined; // Previous value, undefined until getter is called once
 }
 ```
 
-**Usage:**
-```svelte
-<script lang="ts">
-	import { Previous } from "runed";
-
-	let count = $state(0);
-	const previous = new Previous(() => count);
-</script>
-
-<div>
-	<button onclick={() => count++}>Count: {count}</button>
-	<pre>Previous: {`${previous.current}`}</pre>
-</div>
-```
-
-The constructor accepts a getter function that returns the value to track. The `current` property provides access to the previous value, which is `undefined` until the tracked value changes at least once.
+The `current` property reactively tracks the previous value of the getter function. On first access, it's undefined since there is no prior value yet.
 
 ### resource
-Reactive async data fetcher with automatic cancellation, loading/error states, debounce/throttle, cleanup hooks, and pre-render support.
+Reactive async data fetching utility with automatic request cancellation, loading/error states, debounce/throttle, cleanup hooks, multiple dependencies, and pre-render support.
 
 ## Purpose
-`resource` is a utility that combines reactive state management with async data fetching. It runs after rendering by default, with a pre-render option via `resource.pre()`. Built on top of `watch`, it's designed for component-level reactive data fetching when you need more flexibility than SvelteKit's load functions.
+Reactive async data fetching utility that combines state management with automatic request handling. Built on `watch`, runs after rendering by default with optional pre-render support via `resource.pre()`.
 
-## Core API
+## Basic Usage
 ```svelte
-const searchResource = resource(
-  () => id,  // source: reactive dependency
-  async (id, prevId, { data, refetching, onCleanup, signal }) => {
-    // fetcher function
-    const response = await fetch(`api/posts?id=${id}`, { signal });
-    return response.json();
-  },
-  { debounce: 300 }  // options
-);
+import { resource } from "runed";
 
-// Properties
-searchResource.current;    // current value
-searchResource.loading;    // boolean
-searchResource.error;      // Error | undefined
-searchResource.mutate(value);  // direct update (optimistic updates)
-searchResource.refetch();  // re-run fetcher
-```
-
-## Fetcher Parameters
-- `value`: current source value
-- `previousValue`: previous source value
-- `data`: previous fetcher return value
-- `refetching`: boolean or custom value passed to `refetch(info)`
-- `onCleanup(fn)`: register cleanup before refetch
-- `signal`: AbortSignal for cancelling requests
-
-## Configuration Options
-- `lazy`: skip initial fetch, only fetch on dependency changes or `refetch()`
-- `once`: fetch only once, ignore subsequent dependency changes
-- `initialValue`: provide initial value before first fetch completes
-- `debounce`: milliseconds to debounce rapid changes (cancels pending requests, executes last one after delay)
-- `throttle`: milliseconds to throttle rapid changes (spaces requests by delay, returns pending promise if called too soon)
-- Note: use either debounce or throttle, not both; debounce takes precedence
-
-## Features
-- Automatic request cancellation when dependencies change
-- Built-in loading and error states
-- Debouncing and throttling for rate limiting
-- Full TypeScript support with inferred types
-- Multiple dependencies support: `resource([() => query, () => page], async ([query, page]) => ...)`
-- Custom cleanup functions via `onCleanup()`
-- Pre-render execution via `resource.pre()`
-
-## Examples
-
-**Basic usage with single dependency:**
-```svelte
 let id = $state(1);
+
 const searchResource = resource(
   () => id,
-  async (id, prevId, { signal }) => {
+  async (id, prevId, { data, refetching, onCleanup, signal }) => {
     const response = await fetch(`api/posts?id=${id}`, { signal });
     return response.json();
   },
   { debounce: 300 }
 );
+
+// Access: searchResource.current, searchResource.loading, searchResource.error
+// Methods: searchResource.mutate(), searchResource.refetch()
 ```
 
-**Multiple dependencies:**
+## Features
+- **Automatic Request Cancellation**: In-flight requests canceled when dependencies change
+- **Loading & Error States**: Built-in `loading` and `error` properties
+- **Debouncing & Throttling**: Optional rate limiting (debounce takes precedence if both specified)
+- **Type Safety**: Full TypeScript support with inferred types
+- **Multiple Dependencies**: Track multiple reactive dependencies as array
+- **Custom Cleanup**: `onCleanup()` callback runs before refetching
+- **Pre-render Support**: `resource.pre()` for pre-render execution
+
+## Advanced Examples
+
+**Multiple Dependencies:**
 ```svelte
 const results = resource(
   [() => query, () => page],
@@ -971,7 +895,7 @@ const results = resource(
 );
 ```
 
-**Custom cleanup (e.g., EventSource):**
+**Custom Cleanup:**
 ```svelte
 const stream = resource(
   () => streamId,
@@ -984,7 +908,7 @@ const stream = resource(
 );
 ```
 
-**Pre-render execution:**
+**Pre-render:**
 ```svelte
 const data = resource.pre(
   () => query,
@@ -995,37 +919,45 @@ const data = resource.pre(
 );
 ```
 
-### scrollstate
-Reactive scroll position/direction tracker with edge detection, progress reporting, and programmatic scrolling for elements/window/document with RTL and flex layout support.
+## Configuration Options
+- `lazy`: Skip initial fetch, only fetch on dependency changes or `refetch()`
+- `once`: Fetch only once, ignore subsequent dependency changes
+- `initialValue`: Provide initial value before first fetch completes
+- `debounce`: Milliseconds to debounce rapid changes (cancels pending requests)
+- `throttle`: Milliseconds to throttle rapid changes (spaces requests by delay)
+
+## API
+- `current`: Current resource value
+- `loading`: Boolean loading state
+- `error`: Error object if fetch failed
+- `mutate(value)`: Update resource value directly (optimistic updates)
+- `refetch(info?)`: Re-run fetcher with current watching values
+
+## Fetcher Parameters
+- `value`: Current source value(s)
+- `previousValue`: Previous source value(s)
+- `data`: Previous fetcher return value
+- `refetching`: Boolean or value passed to `refetch()`
+- `onCleanup`: Register cleanup function
+- `signal`: AbortSignal for canceling fetch requests
+
+### scroll-state
+Reactive scroll position/direction/edge tracking with programmatic scrolling, RTL support, and debounced stop callbacks.
 
 ## ScrollState
 
-A reactive utility for tracking and controlling scroll behavior on DOM elements, window, or document.
+Reactive utility for tracking scroll position, direction, and edge states with programmatic scrolling support.
 
-### Core Capabilities
+### Core Features
 
-- **Position Tracking**: Access current scroll positions via `scroll.x` and `scroll.y` (reactive, get/set)
-- **Direction Detection**: `scroll.directions` identifies active scroll directions (left, right, top, bottom)
-- **Edge Detection**: `scroll.arrived` object indicates whether scroll has reached each edge
-- **Progress Tracking**: `scroll.progress` provides percentage scrolled on x/y axes
-- **Programmatic Scrolling**: `scroll.scrollTo(x, y)`, `scroll.scrollToTop()`, `scroll.scrollToBottom()`
-- **Event Handling**: Listen to scroll and scroll-end events via callbacks
-- **Layout Support**: Respects flex, RTL, and reverse layout modes
+- Track scroll positions (`x`, `y`) — reactive, get/set
+- Detect scroll direction (`left`, `right`, `top`, `bottom`)
+- Determine edge arrival state (`arrived`) — whether scrolled to each edge
+- Programmatic scrolling: `scrollTo(x, y)`, `scrollToTop()`, `scrollToBottom()`
+- Listen to scroll and scroll-end events
+- Respects flex, RTL, and reverse layout modes
 
-### Configuration Options
-
-| Option | Type | Default | Purpose |
-|--------|------|---------|---------|
-| `element` | `MaybeGetter<HTMLElement \| Window \| Document \| null>` | Required | The scroll container |
-| `idle` | `MaybeGetter<number \| undefined>` | 200ms | Debounce time after scroll ends |
-| `offset` | `{ top?, bottom?, left?, right? }` | 0 | Pixel thresholds for edge detection |
-| `onScroll` | `(e: Event) => void` | — | Scroll event callback |
-| `onStop` | `(e: Event) => void` | — | Callback after scrolling stops |
-| `eventListenerOptions` | `AddEventListenerOptions` | `{ passive: true, capture: false }` | Scroll listener configuration |
-| `behavior` | `ScrollBehavior` | "auto" | Scroll animation: "auto", "smooth", etc. |
-| `onError` | `(error: unknown) => void` | `console.error` | Error handler |
-
-### Usage Example
+### Usage
 
 ```svelte
 <script lang="ts">
@@ -1034,35 +966,47 @@ A reactive utility for tracking and controlling scroll behavior on DOM elements,
 	let el = $state<HTMLElement>();
 
 	const scroll = new ScrollState({
-		element: () => el,
-		idle: 300,
-		offset: { top: 50, bottom: 50 }
+		element: () => el
 	});
 </script>
 
 <div bind:this={el} style="overflow: auto; height: 200px;">
-	{#if scroll.arrived.top}
-		<p>At top</p>
-	{/if}
-	{#if scroll.directions.down}
-		<p>Scrolling down</p>
-	{/if}
-	<button onclick={() => scroll.scrollToBottom()}>Go to bottom</button>
+	<!-- scrollable content here -->
 </div>
 ```
 
-### Key Behaviors
+Access properties:
+- `scroll.x`, `scroll.y` — current scroll positions
+- `scroll.directions` — active scroll directions
+- `scroll.arrived` — edge arrival state
+- `scroll.progress` — scroll percentage on x/y axis
 
-- Both position (`x`, `y`) and edge arrival state (`arrived`) are reactive and can be set programmatically to trigger scrolling
-- `onStop` is debounced and fires after scrolling ends and idle time elapses
-- Layout direction and reverse flex settings are automatically considered in edge state calculations
+### Options
 
-### statehistory
-StateHistory utility for tracking state changes with undo/redo via getter/setter functions; provides log array with snapshots/timestamps, undo/redo/clear methods, and canUndo/canRedo booleans.
+| Option | Type | Description |
+|--------|------|-------------|
+| `element` | `MaybeGetter<HTMLElement \| Window \| Document \| null>` | Scroll container (required) |
+| `idle` | `MaybeGetter<number \| undefined>` | Debounce time after scroll ends (default: 200ms) |
+| `offset` | `{ top?, bottom?, left?, right? }` | Pixel thresholds for "arrived" detection (default: 0) |
+| `onScroll` | `(e: Event) => void` | Scroll event callback |
+| `onStop` | `(e: Event) => void` | Callback after scrolling stops |
+| `eventListenerOptions` | `AddEventListenerOptions` | Listener options (default: `{ passive: true, capture: false }`) |
+| `behavior` | `ScrollBehavior` | Scroll behavior: "auto", "smooth", etc. (default: "auto") |
+| `onError` | `(error: unknown) => void` | Error handler (default: console.error) |
+
+### Notes
+
+- Both position and edge arrival state are reactive
+- Programmatically setting `scroll.x` and `scroll.y` triggers element scroll
+- Layout direction and reverse flex settings are respected
+- `onStop` is debounced and invoked after idle period
+
+### state-history
+StateHistory utility for tracking state changes with undo/redo; constructor takes getter/setter, provides undo/redo/clear methods and canUndo/canRedo/log properties.
 
 ## StateHistory
 
-Tracks state changes with undo/redo capabilities. Requires a getter function to read the current state and a setter function to apply state changes.
+Tracks state changes with undo/redo capabilities. Takes a getter and setter, logs each state change with timestamp.
 
 ### Basic Usage
 
@@ -1076,8 +1020,7 @@ history.log[0]; // { snapshot: 0, timestamp: ... }
 
 ### Methods
 
-**`undo()`** - Reverts state to the previous value in history log, moving current state to redo stack.
-
+**`undo()`** - Reverts state to previous value in history log, moves current state to redo stack.
 ```ts
 let count = $state(0);
 const history = new StateHistory(() => count, (c) => (count = c));
@@ -1087,15 +1030,13 @@ history.undo(); // count is now 1
 history.undo(); // count is now 0
 ```
 
-**`redo()`** - Restores a previously undone state from the redo stack.
-
+**`redo()`** - Restores previously undone state from redo stack.
 ```ts
 history.undo(); // count is now 1
 history.redo();  // count is now 2
 ```
 
-**`clear()`** - Clears entire history log and redo stack.
-
+**`clear()`** - Clears history log and redo stack.
 ```ts
 history.clear();
 console.log(history.log); // []
@@ -1105,13 +1046,11 @@ console.log(history.canRedo); // false
 
 ### Properties
 
-**`log`** - Array of `LogEvent<T>` objects, each containing a `snapshot` of the state and a `timestamp`.
+- **`log`** - Array of `LogEvent<T>` objects with `snapshot` and `timestamp`
+- **`canUndo`** - Derived boolean, true when log has more than one item
+- **`canRedo`** - Derived boolean, true when redo stack is not empty
 
-**`canUndo`** - Derived boolean indicating whether undo is possible (true when log has more than one item).
-
-**`canRedo`** - Derived boolean indicating whether redo is possible (true when redo stack is not empty).
-
-### Example in Svelte Component
+### UI Example
 
 ```svelte
 <script lang="ts">
@@ -1128,8 +1067,8 @@ console.log(history.canRedo); // false
 <button onclick={history.clear}>Clear History</button>
 ```
 
-### textareaautosize
-Textarea utility that auto-resizes vertically by measuring an off-screen clone; supports grow-only mode via minHeight and optional max-height limit.
+### textarea-autosize
+Textarea utility that auto-adjusts height to content via off-screen clone measurement; supports grow-only mode via minHeight and max height limits.
 
 ## TextareaAutosize
 
@@ -1160,13 +1099,11 @@ Utility that automatically adjusts textarea height based on content without layo
 ```
 
 ### Options
-| Option | Type | Description |
-|--------|------|-------------|
-| `element` | `Getter<HTMLElement \| undefined>` | The target textarea (required) |
-| `input` | `Getter<string>` | Reactive input value (required) |
-| `onResize` | `() => void` | Called whenever the height is updated |
-| `styleProp` | `"height"` \| `"minHeight"` | CSS property to control size. `"height"` resizes both ways, `"minHeight"` grows only. Default: `"height"` |
-| `maxHeight` | `number` | Maximum height in pixels before scroll appears. Default: unlimited |
+- `element` (required): `Getter<HTMLElement | undefined>` - The target textarea
+- `input` (required): `Getter<string>` - Reactive input value
+- `onResize`: `() => void` - Called whenever height is updated
+- `styleProp`: `"height" | "minHeight"` - CSS property to control size. "height" resizes both ways, "minHeight" grows only. Default: "height"
+- `maxHeight`: `number` - Maximum height in pixels before scroll appears. Default: unlimited
 
 ### Grow-only behavior
 ```ts
@@ -1176,110 +1113,98 @@ new TextareaAutosize({
 	styleProp: "minHeight"
 });
 ```
-Using `styleProp: "minHeight"` lets the textarea expand as needed but won't shrink smaller than its current size.
+Textarea expands as needed but won't shrink smaller than current size.
 
 ### throttled
-Throttled state wrapper: delays reactive value updates by specified interval; supports cancel() and setImmediately() for manual control.
+Throttled state wrapper with configurable delay; provides cancel() and setImmediately() methods.
 
 ## Throttled
 
-A wrapper over `useThrottle` that returns a throttled state. Throttles updates to a reactive value, delaying state changes by a specified interval.
+A wrapper over `useThrottle` that returns a throttled state. Delays state updates by a specified interval.
 
 ### Basic Usage
 
-Create a throttled state by passing a getter function and throttle interval in milliseconds:
-
 ```ts
+import { Throttled } from "runed";
+
 let search = $state("");
 const throttled = new Throttled(() => search, 500);
 ```
 
-The throttled value is accessed via `throttled.current`. Updates to the source value are delayed by the throttle interval before reflecting in the throttled state.
+The throttled object's `current` property reflects the throttled value. In the example above, `throttled.current` updates at most every 500ms as `search` changes.
 
-### Controlling Updates
-
-Two methods control pending updates:
-
-- `cancel()` - Cancels any pending throttled update, keeping the current throttled value unchanged
-- `setImmediately(value)` - Sets a new value immediately and cancels any pending updates
-
-### Example with Control Methods
+### Canceling and Immediate Updates
 
 ```ts
 let count = $state(0);
 const throttled = new Throttled(() => count, 500);
 
 count = 1;
-throttled.cancel();
+throttled.cancel(); // Cancels pending update
 console.log(throttled.current); // Still 0
 
 count = 2;
 console.log(throttled.current); // Still 0
-throttled.setImmediately(count);
+throttled.setImmediately(count); // Sets value immediately, cancels pending updates
 console.log(throttled.current); // 2
 ```
 
+Methods:
+- `cancel()` - Cancels any pending throttled update
+- `setImmediately(value)` - Sets the throttled value immediately and cancels pending updates
+
 ### usedebounce
-Debounce utility that delays callback execution until after specified inactivity duration; supports dynamic duration via function, immediate execution, and cancellation.
+useDebounce: delays callback execution until after inactivity period; accepts callback and duration getter; provides runScheduledNow(), cancel(), and pending property
 
-## Purpose
-`useDebounce` creates a debounced version of a callback function, preventing frequent execution by delaying it until after a specified duration of inactivity.
+## useDebounce
 
-## API
-- **Function signature**: `useDebounce(callback, durationFn)` - takes a callback and a function that returns the debounce duration in milliseconds
-- **Returns object with**:
-  - `pending` - boolean indicating if a debounced call is scheduled
-  - `runScheduledNow()` - method to execute the scheduled callback immediately
-  - `cancel()` - method to cancel the pending scheduled execution
+A utility function that creates a debounced version of a callback function. Debouncing delays function execution until after a specified duration of inactivity, preventing excessive calls.
 
-## Example
+### Usage
+
 ```svelte
-<script lang="ts">
-	import { useDebounce } from "runed";
+import { useDebounce } from "runed";
 
-	let count = $state(0);
-	let logged = $state("");
-	let debounceDuration = $state(1000);
+let count = $state(0);
+let logged = $state("");
+let debounceDuration = $state(1000);
 
-	const logCount = useDebounce(
-		() => {
-			logged = `You pressed the button ${count} times!`;
-			count = 0;
-		},
-		() => debounceDuration
-	);
+const logCount = useDebounce(
+	() => {
+		logged = `You pressed the button ${count} times!`;
+		count = 0;
+	},
+	() => debounceDuration
+);
 
-	function ding() {
-		count++;
-		logCount();
-	}
-</script>
-
-<input type="number" bind:value={debounceDuration} />
-<button onclick={ding}>DING DING DING</button>
-<button onclick={logCount.runScheduledNow} disabled={!logCount.pending}>Run now</button>
-<button onclick={logCount.cancel} disabled={!logCount.pending}>Cancel</button>
-<p>{logged}</p>
+function ding() {
+	count++;
+	logCount();
+}
 ```
 
-The duration function allows dynamic debounce timing. Calling the debounced function multiple times within the duration resets the timer. Use `runScheduledNow()` to force immediate execution or `cancel()` to discard the pending call.
+The debounced function accepts:
+- A callback function to debounce
+- A function that returns the debounce duration in milliseconds
 
-### useeventlistener
-Automatically disposed event listener function accepting target element getter, event name, and callback with automatic cleanup on component destruction or element reference changes.
+The returned debounced function has methods:
+- `runScheduledNow()` - Execute the pending debounced call immediately
+- `cancel()` - Cancel the pending debounced call
+- `pending` - Boolean property indicating if a call is scheduled
+
+### use-event-listener
+useEventListener: attach auto-disposed event listeners to elements via function-based target, with automatic cleanup on component destroy or element change
 
 ## useEventListener
 
-A function that attaches an automatically disposed event listener to DOM elements.
+Attaches an automatically disposed event listener to DOM elements, useful for listening to events on elements you don't directly control (document, window, or elements from parent components).
 
-### Purpose
-Useful for attaching event listeners to elements you don't directly control, such as the document body, window, or element references received from parent components. Eliminates the need for manual cleanup.
+**Key Features:**
+- Automatic cleanup when component is destroyed or element reference changes
+- Lazy initialization via function-based target element definition
+- Ideal for global listeners where direct DOM attachment is impractical
 
-### Key Features
-- **Automatic Cleanup:** Event listener is removed automatically when the component is destroyed or when the element reference changes.
-- **Lazy Initialization:** Target element can be defined using a function, enabling flexible and dynamic behavior.
-- **Convenient for Global Listeners:** Ideal for scenarios where attaching event listeners directly to DOM elements is cumbersome or impractical.
-
-### Example: Tracking Clicks
+**Example:**
 
 ```ts
 import { useEventListener } from "runed";
@@ -1301,61 +1226,44 @@ export class ClickLogger {
 }
 ```
 
-Usage in a Svelte component:
+Usage in Svelte component:
 ```svelte
 <script lang="ts">
 	import { ClickLogger } from "./ClickLogger.ts";
 	const logger = new ClickLogger();
 </script>
 
-<p>
-	You've clicked the document {logger.clicks}
-	{logger.clicks === 1 ? "time" : "times"}
-</p>
+<p>You've clicked the document {logger.clicks} {logger.clicks === 1 ? "time" : "times"}</p>
 ```
 
-The function accepts a target element getter function, event name, and callback handler. The listener automatically cleans up when the component unmounts or the element reference changes.
+The listener is automatically removed when the component is destroyed or the element reference changes.
 
-### usegeolocation
-Reactive Geolocation API wrapper providing position tracking with pause/resume control, error handling, and browser support detection.
+### use-geolocation
+Reactive Geolocation API wrapper with position tracking, pause/resume control, and error handling.
 
 Reactive wrapper around the browser's Geolocation API for accessing device location.
 
-**Core Functionality:**
-- Tracks device position reactively with automatic updates
-- Provides access to coordinates, timestamp, and errors
-- Supports pause/resume control for tracking
-- Detects API support across browsers
-
 **Usage:**
 ```svelte
-<script lang="ts">
-	import { useGeolocation } from "runed";
-	const location = useGeolocation();
-</script>
-
-<pre>Coords: {JSON.stringify(location.position.coords, null, 2)}</pre>
-<pre>Located at: {location.position.timestamp}</pre>
-<pre>Error: {JSON.stringify(location.error, null, 2)}</pre>
-<pre>Is Supported: {location.isSupported}</pre>
-<button onclick={location.pause} disabled={location.isPaused}>Pause</button>
-<button onclick={location.resume} disabled={!location.isPaused}>Resume</button>
+import { useGeolocation } from "runed";
+const location = useGeolocation();
 ```
 
-**API:**
-- `isSupported`: boolean indicating Geolocation API availability
-- `position`: GeolocationPosition object containing coords and timestamp
-- `error`: GeolocationPositionError or null
-- `isPaused`: boolean tracking pause state
-- `pause()`: stops position tracking
-- `resume()`: resumes position tracking
+Access location data via `location.position.coords` and `location.position.timestamp`. Check `location.error` for errors and `location.isSupported` for API support. Control tracking with `location.pause()` and `location.resume()`, checking `location.isPaused` for state.
 
 **Options:**
-- `immediate`: boolean (default: true) - whether to start tracking immediately or wait for `resume()` call
-- Accepts all standard PositionOptions (timeout, enableHighAccuracy, maximumAge)
+- `immediate` (boolean, default: true): Start tracking immediately or wait for `resume()` call
+- Accepts standard PositionOptions (timeout, enableHighAccuracy, maximumAge)
 
-### useintersectionobserver
-useIntersectionObserver: observe element visibility changes with pause/resume/stop control and isActive getter
+**Return type includes:**
+- `isSupported`: boolean indicating Geolocation API availability
+- `position`: GeolocationPosition with coords and timestamp
+- `error`: GeolocationPositionError or null
+- `isPaused`: boolean tracking state
+- `pause()` and `resume()`: control methods
+
+### use-intersection-observer
+useIntersectionObserver hook: observe element intersection with callback, control via pause/resume/stop, check isActive getter
 
 ## useIntersectionObserver
 
@@ -1363,99 +1271,131 @@ Watch for intersection changes of a target element using the Intersection Observ
 
 ### Basic Usage
 
-Pass a function returning the target element, a callback to handle intersection entries, and optional configuration:
+```svelte
+<script lang="ts">
+	import { useIntersectionObserver } from "runed";
 
-```ts
-import { useIntersectionObserver } from "runed";
+	let target = $state<HTMLElement | null>(null);
+	let root = $state<HTMLElement | null>(null);
+	let isIntersecting = $state(false);
 
-let target = $state<HTMLElement | null>(null);
-let isIntersecting = $state(false);
+	useIntersectionObserver(
+		() => target,
+		(entries) => {
+			const entry = entries[0];
+			if (!entry) return;
+			isIntersecting = entry.isIntersecting;
+		},
+		{ root: () => root }
+	);
+</script>
 
-useIntersectionObserver(
-	() => target,
-	(entries) => {
-		const entry = entries[0];
-		if (!entry) return;
-		isIntersecting = entry.isIntersecting;
-	},
-	{ root: () => root }
-);
+<div bind:this={root}>
+	<div bind:this={target}>
+		{#if isIntersecting}
+			<div>Target is intersecting</div>
+		{:else}
+			<div>Target is not intersecting</div>
+		{/if}
+	</div>
+</div>
 ```
 
-The callback receives an array of IntersectionObserverEntry objects. You can access properties like `isIntersecting` to determine if the target element is currently visible in the viewport or within a specified root element.
+The utility accepts a getter function for the target element, a callback that receives intersection entries, and optional configuration including a root element.
 
 ### Control Methods
 
-The observer returns an object with control methods:
-
-- `pause()` - Temporarily pause observation without stopping it
-- `resume()` - Resume a paused observer
-- `stop()` - Completely stop the observer
-
 ```ts
 const observer = useIntersectionObserver(/* ... */);
-observer.pause();
-observer.resume();
-observer.stop();
+
+observer.pause();    // Pause observation
+observer.resume();   // Resume observation
+observer.stop();     // Stop observation completely
 ```
 
 ### isActive Property
 
-Check if the observer is currently active via the `isActive` getter property. This cannot be destructured and must be accessed directly:
+Check if the observer is currently active. This is a getter and cannot be destructured:
 
 ```ts
 const observer = useIntersectionObserver(/* ... */);
+
 if (observer.isActive) {
-	// observer is running
+	// do something
 }
 ```
 
-### useinterval
-Reactive setInterval wrapper with pause/resume, tick counter, and optional callback; delay can be reactive.
+### use-interval
+useInterval: reactive setInterval wrapper with pause/resume, tick counter, optional callback, reactive delay support via function, options for immediate start/callback execution.
 
-## Purpose
-`useInterval` is a reactive wrapper around `setInterval` that provides pause/resume controls and automatic tick counting.
+## useInterval
 
-## Basic Usage
+A reactive wrapper around `setInterval` with pause/resume controls and automatic tick counting.
+
+### Basic Usage
+
 ```svelte
 import { useInterval } from "runed";
 
-const interval = useInterval(1000, {
+let delay = $state(1000);
+const interval = useInterval(() => delay, {
   callback: (count) => console.log(`Tick ${count}`)
 });
+
+<p>Counter: {interval.counter}</p>
+<p>Status: {interval.isActive ? "Running" : "Paused"}</p>
+<input type="number" bind:value={delay} />
+<button onclick={interval.pause} disabled={!interval.isActive}>Pause</button>
+<button onclick={interval.resume} disabled={interval.isActive}>Resume</button>
+<button onclick={interval.reset}>Reset Counter</button>
 ```
 
-## Core Properties
-- `counter` - Tracks the number of ticks that have occurred
-- `isActive` - Boolean indicating if the interval is currently running
+### Counter
 
-## Core Methods
-- `pause()` - Pauses the interval
-- `resume()` - Resumes the interval
-- `reset()` - Resets the counter to 0
+Built-in `counter` property tracks ticks. Call `interval.reset()` to reset it.
 
-## Reactive Delay
-The delay can be a reactive value (state or derived), and the interval automatically restarts when it changes:
-```svelte
-let delay = $state(1000);
-const interval = useInterval(() => delay);
-```
+### Callback
 
-## Options
-- `immediate` (default: `true`) - Start the interval immediately
-- `immediateCallback` (default: `false`) - Execute callback immediately when resuming
-- `callback` - Optional function called on each tick with the current counter value
-
-## Callback Behavior
-The callback receives the current counter value on each tick:
+Optional callback receives current counter value on each tick:
 ```svelte
 const interval = useInterval(1000, {
   callback: (count) => console.log(`Tick number ${count}`)
 });
 ```
 
-### usemutationobserver
-useMutationObserver hook wraps MutationObserver API; takes element getter, mutation callback, and observer options; returns object with stop() method.
+### Options
+
+- `immediate` (default: `true`) - Start interval immediately
+- `immediateCallback` (default: `false`) - Execute callback immediately when resuming
+- `callback` - Optional callback function receiving counter value
+
+```svelte
+const interval = useInterval(1000, {
+  immediate: false,
+  immediateCallback: true,
+  callback: (count) => console.log(count)
+});
+```
+
+### Reactive Interval
+
+Pass a function returning the delay to make it reactive. Timer automatically restarts when delay changes:
+```svelte
+let delay = $state(1000);
+const interval = useInterval(() => delay);
+<input type="range" bind:value={delay} min="100" max="2000" />
+```
+
+### API
+
+- `counter` - Current tick count
+- `isActive` - Whether interval is running
+- `pause()` - Pause the interval
+- `resume()` - Resume the interval
+- `reset()` - Reset counter to 0
+
+### use-mutation-observer
+useMutationObserver hook observes DOM element changes via MutationObserver API; accepts element getter, callback receiving mutations array, and config options; returns stop() method.
 
 ## useMutationObserver
 
@@ -1463,13 +1403,14 @@ Hook to observe changes in a DOM element using the MutationObserver API.
 
 ### Basic Usage
 
-Pass an element reference, a callback function to handle mutations, and configuration options:
+Pass an element reference, a callback function to handle mutations, and options object:
 
 ```ts
 import { useMutationObserver } from "runed";
 
 let el = $state<HTMLElement | null>(null);
 const messages = $state<string[]>([]);
+let className = $state("");
 
 useMutationObserver(
 	() => el,
@@ -1480,9 +1421,13 @@ useMutationObserver(
 	},
 	{ attributes: true }
 );
+
+setTimeout(() => {
+	className = "text-brand";
+}, 1000);
 ```
 
-The callback receives an array of mutations. In this example, the `attributes: true` option enables observation of attribute changes. When the element's class or style attributes change, the mutation's `attributeName` is captured.
+The callback receives an array of mutations. In this example, attribute changes are tracked by pushing the `attributeName` to a messages array.
 
 ### Stopping the Observer
 
@@ -1493,14 +1438,14 @@ const { stop } = useMutationObserver(/* ... */);
 stop();
 ```
 
-### useresizeobserver
-Resize observer utility that tracks element dimension changes via callback, with manual stop control.
+### use-resize-observer
+useResizeObserver hook: observe element dimensions via callback with ResizeObserverEntry array, stop() to unobserve
 
 ## useResizeObserver
 
 Detects changes in the size of an element using the Resize Observer API.
 
-### Basic Usage
+### Usage
 
 Pass a function that returns an element reference and a callback that receives resize entries:
 
@@ -1515,18 +1460,17 @@ useResizeObserver(
 	(entries) => {
 		const entry = entries[0];
 		if (!entry) return;
-
 		const { width, height } = entry.contentRect;
 		text = `width: ${width};\nheight: ${height};`;
 	}
 );
 ```
 
-The callback receives an array of ResizeObserverEntry objects. Access the element's dimensions via `entry.contentRect.width` and `entry.contentRect.height`.
+The callback receives an array of `ResizeObserverEntry` objects. Access the new dimensions via `entry.contentRect.width` and `entry.contentRect.height`.
 
 ### Stopping the Observer
 
-Call the `stop` method returned from `useResizeObserver` to stop observing:
+Call the `stop()` method returned from `useResizeObserver()` to stop observing:
 
 ```ts
 const { stop } = useResizeObserver(/* ... */);
@@ -1534,286 +1478,437 @@ stop();
 ```
 
 ### usesearchparams
-Reactive, schema-validated URL search params with type safety, compression, debouncing, date formatting, custom codecs, and server-side validation; top-level reactivity only.
+Reactive, type-safe URL search params with schema validation (Zod/Valibot/Arktype/built-in), defaults, compression, debouncing, history control, date formatting, and Zod codec support; top-level reactivity only.
 
 ## useSearchParams
 
-Reactive, type-safe, schema-driven management of URL search parameters in Svelte/SvelteKit. Automatically syncs parameters across tabs and sessions, validates against a schema, and provides direct property access with automatic URL updates.
+Reactive, type-safe, schema-driven management of URL search parameters in Svelte/SvelteKit. Supports validation, defaults, compression, debouncing, and history control.
 
-### Core Features
-
-- **Schema Validation**: Define types, defaults, and structure using Standard Schema (Zod, Valibot, Arktype, or built-in createSearchParamsSchema)
-- **Type Safety**: All values parsed and validated to schema types
-- **Default Values**: Missing params auto-filled with defaults
-- **Compression**: Store all params in single compressed `_data` param for cleaner URLs
-- **Debounce**: Optionally debounce updates to avoid cluttering browser history
-- **History Control**: Choose between push (new history entry) or replace state
-- **In-memory Mode**: Keep params in memory without updating URL
-- **Invalid Param Handling**: Invalid values replaced with defaults and removed from URL
-- **Date Formatting**: Control how Date parameters serialize (YYYY-MM-DD or ISO8601)
-- **Custom Serialization**: Use Zod codecs for complete control over type conversions
+### Requirements
+- `@sveltejs/kit` installed
+- Standard Schema compatible validator (Zod, Valibot, Arktype, or built-in `createSearchParamsSchema`)
 
 ### Basic Usage
 
+Define schema with Zod:
 ```ts
-// Define schema with Zod
-const productSearchSchema = z.object({
-  page: z.coerce.number().default(1),
-  filter: z.string().default(""),
-  sort: z.enum(["newest", "oldest", "price"]).default("newest")
+import { z } from "zod";
+export const productSearchSchema = z.object({
+	page: z.coerce.number().default(1),
+	filter: z.string().default(""),
+	sort: z.enum(["newest", "oldest", "price"]).default("newest")
 });
+```
 
-// In component
+Use in component:
+```svelte
+<script lang="ts">
+import { useSearchParams } from "runed/kit";
+import { productSearchSchema } from './schemas';
+
 const params = useSearchParams(productSearchSchema);
 const page = $derived(params.page); // number (defaults to 1)
+const sort = $derived(params.sort); // 'newest' | 'oldest' | 'price'
+
+// Update parameters
 params.page = 2; // Updates URL to ?page=2
-params.update({ page: 3, sort: 'oldest' }); // Update multiple at once
+params.update({ page: 3, sort: 'oldest' }); // Multiple updates
 params.reset(); // Reset to defaults
 params.toURLSearchParams(); // Get URLSearchParams object
+</script>
+
+<input type="text" bind:value={params.filter} />
+```
+
+Use in load function:
+```ts
+import { validateSearchParams } from "runed/kit";
+import { productSearchSchema } from "./schemas";
+
+export const load = ({ url, fetch }) => {
+	const { searchParams } = validateSearchParams(url, productSearchSchema);
+	const response = await fetch(`/api/products?${searchParams.toString()}`);
+	return { products: await response.json() };
+};
 ```
 
 ### Options
 
 - `showDefaults` (boolean): Show parameters with default values in URL (default: false)
-- `debounce` (number): Milliseconds to delay URL updates (default: 0)
+- `debounce` (number): Delay URL updates in milliseconds (default: 0)
 - `pushHistory` (boolean): Create new history entries on update (default: true)
-- `compress` (boolean): Compress all params into single `_data` param (default: false)
-- `compressedParamName` (string): Custom name for compressed param (default: '_data')
-- `updateURL` (boolean): Update URL when params change (default: true)
+- `compress` (boolean): Compress all params into single `_data` parameter using lz-string (default: false)
+- `compressedParamName` (string): Custom name for compressed parameter (default: '_data')
+- `updateURL` (boolean): Update URL when parameters change (default: true)
 - `noScroll` (boolean): Preserve scroll position on URL update (default: false)
 - `dateFormats` (object): Map field names to 'date' (YYYY-MM-DD) or 'datetime' (ISO8601) format
 
+Example with options:
 ```ts
 const params = useSearchParams(schema, {
   showDefaults: true,
   debounce: 300,
   pushHistory: false,
   compress: true,
-  compressedParamName: '_compressed',
-  dateFormats: { birthDate: 'date', createdAt: 'datetime' }
+  compressedParamName: '_compressed'
 });
+```
+
+### Alternative Schema Validators
+
+Valibot:
+```ts
+import * as v from "valibot";
+const schema = v.object({
+	page: v.optional(v.fallback(v.number(), 1), 1),
+	filter: v.optional(v.fallback(v.string(), ""), ""),
+	sort: v.optional(v.fallback(v.picklist(["newest", "oldest", "price"]), "newest"), "newest")
+});
+const params = useSearchParams(schema);
+```
+
+Arktype:
+```ts
+import { type } from "arktype";
+const schema = type({
+	page: "number = 1",
+	filter: 'string = ""',
+	sort: '"newest" | "oldest" | "price" = "newest"'
+});
+const params = useSearchParams(schema);
 ```
 
 ### createSearchParamsSchema
 
-Lightweight schema creator without external dependencies. Supports basic types with defaults, arrays, objects, and dates.
-
+Lightweight built-in schema creator without external dependencies:
 ```ts
 const schema = createSearchParamsSchema({
-  page: { type: "number", default: 1 },
-  filter: { type: "string", default: "" },
-  tags: { type: "array", default: ["new"], arrayType: "" },
-  config: { type: "object", default: { theme: "light" }, objectType: { theme: "" } },
-  birthDate: { type: "date", default: new Date("1990-01-15"), dateFormat: "date" },
-  createdAt: { type: "date", default: new Date(), dateFormat: "datetime" }
+	page: { type: "number", default: 1 },
+	filter: { type: "string", default: "" },
+	sort: { type: "string", default: "newest" },
+	tags: { type: "array", default: ["new"], arrayType: "" },
+	config: { type: "object", default: { theme: "light" }, objectType: { theme: "" } }
 });
 ```
 
-Limitations: No nested validation, no custom rules, no granular reactivity for nested properties (must reassign entire value).
-
-### validateSearchParams
-
-Server-side utility to extract and validate URL search parameters without modifying the URL. Works in SvelteKit load functions.
-
-```ts
-export const load = ({ url, fetch }) => {
-  const { searchParams, data } = validateSearchParams(url, productSearchSchema, {
-    compressedParamName: "_compressed",
-    dateFormats: { birthDate: "date", createdAt: "datetime" }
-  });
-  const response = await fetch(`/api/products?${searchParams.toString()}`);
-  return { products: await response.json() };
-};
-```
-
-### Date Formatting
-
-Two approaches to control Date serialization:
-
-**Option 1: Schema property**
-```ts
-const schema = createSearchParamsSchema({
-  birthDate: { type: "date", default: new Date("1990-01-15"), dateFormat: "date" },
-  createdAt: { type: "date", default: new Date(), dateFormat: "datetime" }
-});
-```
-
-**Option 2: useSearchParams option**
-```ts
-const params = useSearchParams(zodSchema, {
-  dateFormats: { birthDate: "date", createdAt: "datetime" }
-});
-```
-
-- `'date'` format: YYYY-MM-DD (e.g., 2025-10-21), parsed as midnight UTC
-- `'datetime'` format (default): Full ISO8601 (e.g., 2025-10-21T18:18:14.196Z)
-
-### Zod Codecs (Advanced)
-
-For complete control over serialization, use Zod codecs (v4.1.0+) to define custom bidirectional transformations:
-
-```ts
-// Unix timestamp codec
-const unixTimestampCodec = z.codec(
-  z.coerce.number(),
-  z.date(),
-  {
-    decode: (timestamp) => new Date(timestamp * 1000),
-    encode: (date) => Math.floor(date.getTime() / 1000)
-  }
-);
-
-// Date-only codec
-const dateOnlyCodec = z.codec(
-  z.string(),
-  z.date(),
-  {
-    decode: (str) => new Date(str + "T00:00:00.000Z"),
-    encode: (date) => date.toISOString().split("T")[0]
-  }
-);
-
-// Compact ID codec (base36)
-const compactIdCodec = z.codec(
-  z.string(),
-  z.number(),
-  {
-    decode: (str) => parseInt(str, 36),
-    encode: (num) => num.toString(36)
-  }
-);
-
-const schema = z.object({
-  query: z.string().default(""),
-  createdAfter: unixTimestampCodec.default(new Date("2024-01-01")),
-  birthDate: dateOnlyCodec.default(new Date("1990-01-15")),
-  productId: compactIdCodec.optional()
-});
-
-const params = useSearchParams(schema);
-```
-
-Codecs work automatically with `validateSearchParams` on the server.
-
-### Reactivity Limitations
-
-**Top-level reactivity only** - direct property assignment works, nested mutations don't:
-
-✅ Works:
-```ts
-params.page = 2;
-params.config = { theme: "dark", size: "large" };
-params.items = [...params.items, newItem];
-```
-
-❌ Doesn't work:
-```ts
-params.config.theme = "dark"; // Nested property mutation
-params.items.push(newItem); // Array method
-params.items[0].name = "updated"; // Array item property
-delete params.config.oldProp; // Property deletion
-```
-
-This design prioritizes simplicity, type safety, and performance over deep reactivity.
-
-### Schema Examples
-
-**Zod:**
-```ts
-const schema = z.object({
-  page: z.number().default(1),
-  filter: z.string().default(""),
-  sort: z.enum(["newest", "oldest", "price"]).default("newest")
-});
-```
-
-**Valibot:**
-```ts
-const schema = v.object({
-  page: v.optional(v.fallback(v.number(), 1), 1),
-  filter: v.optional(v.fallback(v.string(), ""), ""),
-  sort: v.optional(v.fallback(v.picklist(["newest", "oldest", "price"]), "newest"), "newest")
-});
-```
-
-**Arktype:**
-```ts
-const schema = type({
-  page: "number = 1",
-  filter: 'string = ""',
-  sort: '"newest" | "oldest" | "price" = "newest"'
-});
-```
-
-### URL Storage Format
-
+URL storage format:
 - Arrays: JSON strings `?tags=["sale","featured"]`
-- Objects: JSON strings `?config={"theme":"dark","fontSize":14}`
+- Objects: JSON strings `?config={"theme":"dark"}`
 - Dates: ISO8601 `?createdAt=2023-12-01T10:30:00.000Z` or date-only `?birthDate=2023-12-01`
 - Primitives: Direct `?page=2&filter=red`
 
-### Type Definitions
+Limitations:
+- Basic array/object validation only (no nested validation)
+- No custom validation rules
+- No granular reactivity for nested properties (must reassign entire value: `params.config = {...params.config, theme: 'dark'}`)
 
-`SearchParamsOptions` interface defines all configuration options. `ReturnUseSearchParams<Schema>` provides typed reactive params plus `update()`, `reset()`, and `toURLSearchParams()` methods. `SchemaTypeConfig` defines schema field types for `createSearchParamsSchema`.
+### Date Format Support
 
-### usethrottle
-Higher-order function that throttles callback execution to at most once per specified duration interval.
-
-## Purpose
-A higher-order function that throttles function execution, ensuring a function is called at most once within a specified time interval.
-
-## API
-`useThrottle(callback, durationFn)` - Takes a callback function and a duration function that returns milliseconds. Returns a throttled function that can be called repeatedly but will only execute the callback at most once per duration interval.
-
-## Example
-```svelte
-<script lang="ts">
-	import { useThrottle } from "runed";
-
-	let search = $state("");
-	let throttledSearch = $state("");
-	let durationMs = $state(1000);
-
-	const throttledUpdate = useThrottle(
-		() => {
-			throttledSearch = search;
-		},
-		() => durationMs
-	);
-</script>
-
-<div>
-	<input
-		bind:value={
-			() => search,
-			(v) => {
-				search = v;
-				throttledUpdate();
-			}
-		} />
-	<p>You searched for: <b>{throttledSearch}</b></p>
-</div>
+Option 1: Using `dateFormat` in schema:
+```ts
+const schema = createSearchParamsSchema({
+	birthDate: { type: "date", default: new Date("1990-01-15"), dateFormat: "date" },
+	createdAt: { type: "date", default: new Date(), dateFormat: "datetime" }
+});
+const params = useSearchParams(schema);
+// URL: ?birthDate=1990-01-15&createdAt=2023-01-01T10:30:00.000Z
 ```
 
-In this example, the search input is throttled to update at most once per second (1000ms), preventing excessive updates while the user types.
+Option 2: Using `dateFormats` option (works with any validator):
+```ts
+const params = useSearchParams(zodSchema, {
+	dateFormats: {
+		birthDate: "date",
+		createdAt: "datetime"
+	}
+});
+```
+
+Date format details:
+- `'date'`: YYYY-MM-DD format (e.g., 2025-10-21), parsed as midnight UTC
+- `'datetime'`: Full ISO8601 (e.g., 2025-10-21T18:18:14.196Z), preserves exact time
+
+Practical example:
+```svelte
+<script lang="ts">
+	import { useSearchParams, createSearchParamsSchema } from "runed/kit";
+
+	const schema = createSearchParamsSchema({
+		eventDate: { type: "date", default: new Date("2025-01-01"), dateFormat: "date" },
+		createdAt: { type: "date", default: new Date(), dateFormat: "datetime" }
+	});
+
+	const params = useSearchParams(schema);
+</script>
+
+<label>
+	Event Date:
+	<input
+		type="date"
+		value={params.eventDate.toISOString().split("T")[0]}
+		oninput={(e) => (params.eventDate = new Date(e.target.value))} />
+</label>
+
+<label>
+	Created At:
+	<input
+		type="datetime-local"
+		value={params.createdAt.toISOString().slice(0, 16)}
+		oninput={(e) => (params.createdAt = new Date(e.target.value))} />
+</label>
+```
+
+### validateSearchParams
+
+Server-side utility to extract, validate, and convert URL search parameters to URLSearchParams. Handles both standard and compressed parameters.
+
+```ts
+import { validateSearchParams } from "runed/kit";
+import { productSchema } from "./schemas";
+
+export const load = ({ url, fetch }) => {
+	const { searchParams, data } = validateSearchParams(url, productSchema, {
+		compressedParamName: "_compressed",
+		dateFormats: {
+			birthDate: "date",
+			createdAt: "datetime"
+		}
+	});
+
+	const response = await fetch(`/api/products?${searchParams.toString()}`);
+	return { products: await response.json() };
+};
+```
+
+### Advanced: Zod Codecs (Zod v4.1.0+)
+
+Custom bidirectional transformations for URL serialization. Use when you need custom date formats, complex type conversions, or compact representations.
+
+Define reusable codecs:
+```ts
+import { z } from "zod";
+
+// Unix timestamp codec (stores Date as number)
+const unixTimestampCodec = z.codec(
+	z.coerce.number(),
+	z.date(),
+	{
+		decode: (timestamp) => new Date(timestamp * 1000),
+		encode: (date) => Math.floor(date.getTime() / 1000)
+	}
+);
+
+// Date-only codec (stores Date as YYYY-MM-DD)
+const dateOnlyCodec = z.codec(
+	z.string(),
+	z.date(),
+	{
+		decode: (str) => new Date(str + "T00:00:00.000Z"),
+		encode: (date) => date.toISOString().split("T")[0]
+	}
+);
+
+// Compact ID codec (stores number as base36 string)
+const compactIdCodec = z.codec(
+	z.string(),
+	z.number(),
+	{
+		decode: (str) => parseInt(str, 36),
+		encode: (num) => num.toString(36)
+	}
+);
+```
+
+Use in schema:
+```ts
+const searchSchema = z.object({
+	query: z.string().default(""),
+	page: z.coerce.number().default(1),
+	createdAfter: unixTimestampCodec.optional(),
+	birthDate: dateOnlyCodec.default(new Date("1990-01-15")),
+	productId: compactIdCodec.optional()
+});
+
+const params = useSearchParams(searchSchema);
+```
+
+Real-world event search example:
+```svelte
+<script lang="ts">
+	import { z } from "zod";
+	import { useSearchParams } from "runed/kit";
+
+	const unixTimestamp = z.codec(z.coerce.number(), z.date(), {
+		decode: (ts) => new Date(ts * 1000),
+		encode: (date) => Math.floor(date.getTime() / 1000)
+	});
+
+	const dateOnly = z.codec(z.string(), z.date(), {
+		decode: (str) => new Date(str + "T00:00:00.000Z"),
+		encode: (date) => date.toISOString().split("T")[0]
+	});
+
+	const eventSearchSchema = z.object({
+		query: z.string().default(""),
+		eventDate: dateOnly.default(new Date()),
+		createdAfter: unixTimestamp.optional(),
+		updatedSince: unixTimestamp.optional()
+	});
+
+	const params = useSearchParams(eventSearchSchema);
+</script>
+
+<label>
+	Event Date:
+	<input
+		type="date"
+		value={params.eventDate.toISOString().split("T")[0]}
+		oninput={(e) => (params.eventDate = new Date(e.target.value))} />
+</label>
+
+<label>
+	Created After:
+	<input
+		type="date"
+		value={params.createdAfter?.toISOString().split("T")[0] ?? ""}
+		oninput={(e) =>
+			(params.createdAfter = e.target.value ? new Date(e.target.value) : undefined)} />
+</label>
+
+<!-- Clean URLs:
+     Without codecs: ?eventDate=2025-01-15T00:00:00.000Z&createdAfter=2024-01-01T00:00:00.000Z
+     With codecs:    ?eventDate=2025-01-15&createdAfter=1704067200
+-->
+```
+
+Codec benefits:
+- Custom date formats (Unix timestamps, relative dates, custom strings)
+- Any type conversions (numbers, objects, arrays)
+- Optimized URL size
+- Full Zod validation + transformation
+- Reusable codec definitions
+- Automatic with `validateSearchParams` on server
+
+Codecs work automatically with `validateSearchParams`:
+```ts
+export const load = ({ url }) => {
+	const { searchParams, data } = validateSearchParams(url, eventSearchSchema);
+	// data.eventDate is a Date object (decoded from URL string)
+	return { events: await fetchEvents(searchParams) };
+};
+```
+
+### Reactivity Limitations
+
+Top-level reactivity only:
+
+✅ Works (direct property assignment):
+```svelte
+<script>
+	const params = useSearchParams(schema);
+	params.page = 2;
+	params.filter = "active";
+	params.config = { theme: "dark", size: "large" };
+	params.items = [...params.items, newItem];
+</script>
+```
+
+❌ Doesn't work (nested property mutations):
+```svelte
+<script>
+	const params = useSearchParams(schema);
+	params.config.theme = "dark"; // Nested object property
+	params.items.push(newItem); // Array method
+	params.items[0].name = "updated"; // Array item property
+	delete params.config.oldProp; // Property deletion
+</script>
+```
+
+Design rationale: Prioritizes simplicity, type safety, and ease of use. Benefits include simple predictable API, full TypeScript support, clean URLs, performance, and reliability.
+
+### Type Definitions
+
+```ts
+interface SearchParamsOptions {
+	showDefaults?: boolean; // default: false
+	debounce?: number; // default: 0
+	pushHistory?: boolean; // default: true
+	compress?: boolean; // default: false
+	compressedParamName?: string; // default: '_data'
+	updateURL?: boolean; // default: true
+	noScroll?: boolean; // default: false
+	dateFormats?: Record<string, "date" | "datetime">;
+}
+
+type ReturnUseSearchParams<Schema extends StandardSchemaV1> = {
+	[key: string]: any; // Typed, reactive params
+	update(values: Partial<StandardSchemaV1.InferOutput<Schema>>): void;
+	reset(showDefaults?: boolean): void;
+	toURLSearchParams(): URLSearchParams;
+};
+
+type SchemaTypeConfig<ArrayType = unknown, ObjectType = unknown> =
+	| { type: "string"; default?: string }
+	| { type: "number"; default?: number }
+	| { type: "boolean"; default?: boolean }
+	| { type: "array"; default?: ArrayType[]; arrayType?: ArrayType }
+	| { type: "object"; default?: ObjectType; objectType?: ObjectType }
+	| { type: "date"; default?: Date; dateFormat?: "date" | "datetime" };
+```
+
+### use-throttle
+useThrottle(callback, durationFn) - throttles callback execution to max once per duration returned by durationFn
+
+## useThrottle
+
+A higher-order function that throttles function execution, limiting how frequently a function can be called.
+
+### Usage
+
+```svelte
+import { useThrottle } from "runed";
+
+let search = $state("");
+let throttledSearch = $state("");
+let durationMs = $state(1000);
+
+const throttledUpdate = useThrottle(
+	() => {
+		throttledSearch = search;
+	},
+	() => durationMs
+);
+
+// Call throttledUpdate() - it will execute at most once per durationMs
+```
+
+The function takes two arguments:
+1. A callback function to throttle
+2. A function that returns the throttle duration in milliseconds
+
+The returned throttled function can be called repeatedly, but the callback will only execute at most once per specified duration interval.
 
 ### watch
-watch: manually track specific reactive dependencies with callback receiving current/previous values; variants: watch.pre, watchOnce, watchOnce.pre; options: lazy
+watch(getter, callback, options?) - manually track specific reactive dependencies; supports single/array sources, deep watching, lazy execution, and one-time variants
 
 ## watch
 
 Manually specify which reactive values should trigger a callback, unlike `$effect` which automatically tracks all dependencies.
 
-**Basic usage:**
+**watch(source, callback, options?)**
+
+Runs callback when source changes. Source is a getter function returning the dependency value(s).
+
 ```ts
 import { watch } from "runed";
+
 let count = $state(0);
-watch(() => count, () => {
-	console.log(count);
+watch(() => count, (curr, prev) => {
+	console.log(`count is ${curr}, was ${prev}`);
 });
 ```
 
-**Deep watching objects:**
+Watch entire objects with `$state.snapshot()`:
 ```ts
 let user = $state({ name: 'bob', age: 20 });
 watch(() => $state.snapshot(user), () => {
@@ -1821,35 +1916,26 @@ watch(() => $state.snapshot(user), () => {
 });
 ```
 
-**Watching specific nested values:**
+Watch specific nested values:
 ```ts
-let user = $state({ name: 'bob', age: 20 });
 watch(() => user.age, () => {
 	console.log(`User is now ${user.age} years old`);
 });
 ```
 
-**Multiple sources as array:**
+Watch multiple sources as array:
 ```ts
 let age = $state(20);
 let name = $state("bob");
 watch([() => age, () => name], ([age, name], [prevAge, prevName]) => {
-	// callback receives current and previous values
-});
-```
-
-**Callback receives current and previous values:**
-```ts
-let count = $state(0);
-watch(() => count, (curr, prev) => {
-	console.log(`count is ${curr}, was ${prev}`);
+	// callback receives current and previous values as arrays
 });
 ```
 
 **Options:**
 - `lazy: true` - First run only happens after sources change (default: false)
 
-**Variants:**
-- `watch.pre` - Uses `$effect.pre` under the hood for pre-effect timing
-- `watchOnce` / `watchOnce.pre` - Runs callback only once, no options object accepted
+**watch.pre** - Uses `$effect.pre` instead of `$effect` under the hood.
+
+**watchOnce / watchOnce.pre** - Runs callback only once, then stops. Same behavior as `watch`/`watch.pre` but no options parameter.
 

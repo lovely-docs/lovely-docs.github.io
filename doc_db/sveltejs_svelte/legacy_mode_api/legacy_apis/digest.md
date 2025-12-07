@@ -1,0 +1,1 @@
+This page serves as an index for legacy APIs in Svelte. It is auto-generated from documentation sync scripts and contains no substantive content beyond the title indicating it documents deprecated or older API interfaces that are maintained for backward compatibility.

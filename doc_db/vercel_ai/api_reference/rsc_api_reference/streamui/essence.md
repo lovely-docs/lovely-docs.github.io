@@ -1,1 +1,1 @@
-RSC helper to stream LLM-generated React UI with tools, messages, generation parameters, and event callbacks; returns ReactNode UI and AsyncIterable stream of text/tool/error/finish events.
+streamUI creates streamable React UI from LLM output with tool support, returning ReactNode + AsyncIterable stream of text/tool/error/finish events; supports messages, tools with generate callbacks, and standard generation parameters.

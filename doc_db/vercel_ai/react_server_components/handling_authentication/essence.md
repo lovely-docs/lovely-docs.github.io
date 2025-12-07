@@ -1,1 +1,0 @@
-Validate user authorization in Server Actions by checking cookies before executing protected logic; return error object if token is missing or invalid.

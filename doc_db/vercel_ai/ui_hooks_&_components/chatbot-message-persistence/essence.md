@@ -1,0 +1,1 @@
+Implement persistent chat storage: create/load chats with unique IDs, validate messages with tools/metadata using `validateUIMessages()`, store in `useChat` format via `onFinish` callback, use server-side ID generation for consistency, optimize with `prepareSendMessagesRequest()` to send only last message, handle disconnects with `consumeStream()`.

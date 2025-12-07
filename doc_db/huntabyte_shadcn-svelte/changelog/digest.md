@@ -1,70 +1,45 @@
 ## June 2025
-
-**Calendar Components Overhaul**
-- `Calendar` and `RangeCalendar` components now support month/year dropdown selectors
-- 30+ Calendar blocks added for building custom calendar components
+Calendar and RangeCalendar components overhauled with month/year dropdown selectors and 30+ Calendar blocks added.
 
 ## May 2025
+**Tailwind v4 Support**: Official support landed with refreshed styles. Full migration guide available. Projects using Svelte v5 with Tailwind v3 continue to work until upgrade.
 
-**Tailwind v4 Support**
-- Official Tailwind v4 support released with refreshed styles (demo at v4.shadcn-svelte.com)
-- Full migration guide available; projects using Svelte v5 with Tailwind v3 continue to work until upgrade
-- CLI supports adding components for Svelte v5 + Tailwind v4 projects
+**Charts**: Added as preview component. Available via CLI for Svelte v5 + Tailwind v4 projects.
 
-**Charts Component**
-- Charts added as preview component (available via CLI for Svelte v5 + Tailwind v4)
-
-**Custom Registry Support**
-- Developers can now publish custom/remote components and share via shadcn-svelte CLI
+**Custom Registry Support**: Publish custom/remote components via shadcn-svelte CLI to share with community.
 
 ## March 2024
+**Blocks**: Ready-made, fully responsive, accessible, composable components built using same principles as core components.
 
-**Blocks Introduction**
-- Ready-made, fully responsive, accessible, composable components built using shadcn-svelte principles
-- Note: v0 only supports React currently
-
-**New Components: Breadcrumb, Scroll Area**
-- `Breadcrumb`: Navigation component
-- `Scroll Area`: Built on Bits UI, supports vertical and horizontal scrolling with consistent cross-browser experience
+**New Components**: Breadcrumb, Scroll Area (built on Bits UI, supports vertical/horizontal scrolling).
 
 ## February 2024
+**New Component: Resizable**: Built on PaneForge.
 
-**New Component: Resizable**
-- Built on PaneForge library (early stage)
+**Icon Imports Updated**: Moved from unmaintained `radix-icons-svelte` to `svelte-radix`. Changed from:
+```ts
+import { Check } from "@lucide/svelte";
+```
+to deep imports:
+```ts
+import Check from "@lucide/svelte/icons/check";
+```
+Deep imports prevent Vite from optimizing entire icon collections, only optimizing used icons. Significant dev server performance improvement.
 
-**Icon Import Changes**
-- Moved from unmaintained `radix-icons-svelte` to `svelte-radix` for new-york style
-- Changed from: `import { Check } from "@lucide/svelte"`
-- Changed to: `import Check from "@lucide/svelte/icons/check"`
-- Deep imports prevent Vite from optimizing entire icon collections, significantly improving dev server performance
-
-**Major Forms Update**
-- Formsnap completely rewritten for flexibility and power
-- Breaking changes: all `Form` components updated to new API
-- No direct migration path; requires updating components to new API and latest formsnap/sveltekit-superforms versions
-- Live examples available on Forms Examples page
+**Major Forms Update**: Formsnap completely rewritten for flexibility and power. No direct migration path—update components to new API. All Form components updated. See Forms Examples page.
 
 ## January 2024
-
-**New Components: Carousel, Drawer, Sonner, Pagination**
-
-**Carousel Example:**
+**New Component: Carousel**:
 ```svelte
-<script lang="ts">
-  import * as Card from "$lib/components/ui/card/index.js";
-  import * as Carousel from "$lib/components/ui/carousel/index.js";
-</script>
 <Carousel.Root class="w-full max-w-xs">
   <Carousel.Content>
     {#each Array(5), i}
       <Carousel.Item>
-        <div class="p-1">
-          <Card.Root>
-            <Card.Content class="flex aspect-square items-center justify-center p-6">
-              <span class="text-4xl font-semibold">{i + 1}</span>
-            </Card.Content>
-          </Card.Root>
-        </div>
+        <Card.Root>
+          <Card.Content class="flex aspect-square items-center justify-center p-6">
+            <span class="text-4xl font-semibold">{i + 1}</span>
+          </Card.Content>
+        </Card.Root>
       </Carousel.Item>
     {/each}
   </Carousel.Content>
@@ -73,102 +48,38 @@
 </Carousel.Root>
 ```
 
-**Drawer**
-- Built on vaul-svelte (Svelte port of vaul by Emil Kowalski)
-- Example with goal adjustment:
-```svelte
-<script lang="ts">
-  import MinusIcon from "@lucide/svelte/icons/minus";
-  import PlusIcon from "@lucide/svelte/icons/plus";
-  import * as Drawer from "$lib/components/ui/drawer/index.js";
-  import { Button, buttonVariants } from "$lib/components/ui/button/index.js";
-  
-  let goal = $state(350);
-  function handleClick(adjustment: number) {
-    goal = Math.max(200, Math.min(400, goal + adjustment));
-  }
-</script>
-<Drawer.Root>
-  <Drawer.Trigger class={buttonVariants({ variant: "outline" })}>Open Drawer</Drawer.Trigger>
-  <Drawer.Content>
-    <div class="mx-auto w-full max-w-sm">
-      <Drawer.Header>
-        <Drawer.Title>Move Goal</Drawer.Title>
-        <Drawer.Description>Set your daily activity goal.</Drawer.Description>
-      </Drawer.Header>
-      <div class="p-4 pb-0">
-        <div class="flex items-center justify-center space-x-2">
-          <Button variant="outline" size="icon" class="size-8 shrink-0 rounded-full" onclick={() => handleClick(-10)} disabled={goal <= 200}>
-            <MinusIcon />
-            <span class="sr-only">Decrease</span>
-          </Button>
-          <div class="flex-1 text-center">
-            <div class="text-7xl font-bold tracking-tighter">{goal}</div>
-            <div class="text-muted-foreground text-[0.70rem] uppercase">Calories/day</div>
-          </div>
-          <Button variant="outline" size="icon" class="size-8 shrink-0 rounded-full" onclick={() => handleClick(10)} disabled={goal >= 400}>
-            <PlusIcon />
-            <span class="sr-only">Increase</span>
-          </Button>
-        </div>
-      </div>
-      <Drawer.Footer>
-        <Button>Submit</Button>
-        <Drawer.Close class={buttonVariants({ variant: "outline" })}>Cancel</Drawer.Close>
-      </Drawer.Footer>
-    </div>
-  </Drawer.Content>
-</Drawer.Root>
+**New Component: Drawer**: Built on vaul-svelte (Svelte port of vaul by Emil Kowalski). Includes header, description, content, footer with buttons.
+
+**New Component: Sonner**: Svelte port of Sonner (by Emil Kowalski). Toast notifications:
+```ts
+import { toast } from "svelte-sonner";
+toast.success("Event has been created", {
+  description: "Sunday, December 03, 2023 at 9:00 AM",
+  action: { label: "Undo", onClick: () => console.info("Undo") }
+});
 ```
 
-**Sonner**
-- Svelte port of Sonner (by Emil Kowalski)
-```svelte
-<script lang="ts">
-  import { toast } from "svelte-sonner";
-  import { Button } from "$lib/components/ui/button/index.js";
-</script>
-<Button variant="outline" onclick={() => toast.success("Event has been created", { description: "Sunday, December 03, 2023 at 9:00 AM", action: { label: "Undo", onClick: () => console.info("Undo") } })}>
-  Show Toast
-</Button>
-```
-
-**Pagination**
-- Built on Bits UI Pagination component
+**New Component: Pagination**: Built on Bits UI Pagination component.
 
 ## December 2023
-
-**New Components: Calendar, Range Calendar, Date Picker**
+New components: Calendar, Range Calendar, Date Picker.
 
 ## November 2023
-
-**New Component: Toggle Group**
+New component: Toggle Group.
 
 ## October 2023
+**New Component: Command**: Command palette built on cmdk-sv (Svelte port of cmdk).
 
-**New Components: Command, Combobox**
+**New Component: Combobox**: Combination of Command + Popover for searchable dropdown.
 
-**Command**
-- Command palette component built on cmdk-sv (Svelte port of cmdk)
-- Library in early stage
-
-**Combobox**
-- Combination of Command and Popover components
-- Creates searchable dropdown menu
-
-**Form Updates**
-
-**Form.Label Changes**
-- `ids` from `getFormField()` is now a store, must be prefixed with `$`:
+**Form.Label Changes**: `ids` from `getFormField()` now a store, prefix with `$`:
 ```svelte
-<Label for={$ids.input} class={cn($errors && "text-destructive", className)} {...$$restProps}>
+<Label for={$ids.input} class={cn($errors && "text-destructive", className)}>
   <slot />
 </Label>
 ```
 
-**Form.Control**
-- New Formsnap component for wrapping non-traditional form elements
-- Export in `src/lib/ui/form/index.ts`:
+**Form.Control**: New formsnap component wraps non-traditional form elements. Export in `src/lib/ui/form/index.ts`:
 ```ts
 const Control = FormPrimitive.Control;
 export { Control, Control as FormControl };

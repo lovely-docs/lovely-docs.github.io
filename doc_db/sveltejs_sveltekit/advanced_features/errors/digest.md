@@ -1,6 +1,10 @@
+## Error Objects
+
+SvelteKit distinguishes between expected and unexpected errors, both represented as `{ message: string }` objects by default. Additional properties like `code` or `id` can be added (requires TypeScript `Error` interface redefinition).
+
 ## Expected Errors
 
-Use the `error` helper from `@sveltejs/kit` to throw expected errors:
+Created with the `error()` helper from `@sveltejs/kit`. Throws an exception caught by SvelteKit, setting the response status code and rendering the nearest `+error.svelte` component where `page.error` contains the error object.
 
 ```js
 import { error } from '@sveltejs/kit';
@@ -9,43 +13,37 @@ export async function load({ params }) {
 	const post = await db.getPost(params.slug);
 	if (!post) {
 		error(404, { message: 'Not found' });
+		// or with custom properties:
+		error(404, { message: 'Not found', code: 'NOT_FOUND' });
+		// or shorthand:
+		error(404, 'Not found');
 	}
 	return { post };
 }
 ```
 
-This sets the response status code and renders the nearest `+error.svelte` component where `page.error` contains the error object.
-
-Customize the error shape by declaring an `App.Error` interface in TypeScript:
-
-```ts
-declare global {
-	namespace App {
-		interface Error {
-			message: string;
-			code: string;
-			id: string;
-		}
-	}
-}
+Access in `+error.svelte`:
+```svelte
+<script>
+	import { page } from '$app/state'; // or $app/stores in SvelteKit < 2.12
+</script>
+<h1>{page.error.message}</h1>
 ```
 
 ## Unexpected Errors
 
-Any other exception during request handling is an unexpected error. These are logged but not exposed to users (generic `{ message: "Internal Error" }` is sent instead for security).
+Any other exception during request handling. Not exposed to users for security; generic `{ message: "Internal Error" }` is shown instead. Printed to console/server logs and passed through the `handleError` hook for custom handling (e.g., error reporting services).
 
-Process unexpected errors in the `handleError` hook to add custom handling, send to reporting services, or return a custom error object.
+## Responses
 
-## Error Responses
+Errors in `handle` or `+server.js` respond with fallback error page or JSON based on `Accept` headers.
 
-When errors occur in `handle` or `+server.js`, SvelteKit responds with a fallback error page or JSON based on `Accept` headers.
-
-Customize the fallback error page with `src/error.html`:
-
+Customize fallback with `src/error.html`:
 ```html
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<meta charset="utf-8" />
 		<title>%sveltekit.error.message%</title>
 	</head>
 	<body>
@@ -56,6 +54,24 @@ Customize the fallback error page with `src/error.html`:
 </html>
 ```
 
-SvelteKit replaces `%sveltekit.status%` and `%sveltekit.error.message%` with actual values.
+SvelteKit replaces `%sveltekit.status%` and `%sveltekit.error.message%` with values.
 
-When errors occur in `load` functions during page rendering, the nearest `+error.svelte` component is rendered. Exception: errors in root `+layout.js` or `+layout.server.js` use the fallback error page since the root layout would contain the error component.
+Errors in `load` functions render nearest `+error.svelte`. If error in root `+layout.js/+layout.server.js`, fallback error page is used (since root layout contains `+error.svelte`).
+
+## Type Safety
+
+Customize error shape with TypeScript by declaring `App.Error` interface (typically in `src/app.d.ts`):
+
+```ts
+declare global {
+	namespace App {
+		interface Error {
+			code: string;
+			id: string;
+		}
+	}
+}
+export {};
+```
+
+Always includes `message: string` property.

@@ -1,0 +1,1 @@
+Slider component for selecting values from continuous ranges; supports single/multiple thumbs, vertical/horizontal, discrete steps, ticks, labels, RTL, and form integration.

@@ -1,1 +1,1 @@
-Progress bar component with reactive value binding, max prop, and class styling support.
+Progress bar component with value and max props; install via CLI with -y -o flags

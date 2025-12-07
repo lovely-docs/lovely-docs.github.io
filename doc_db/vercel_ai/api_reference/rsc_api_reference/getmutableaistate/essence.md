@@ -1,1 +1,1 @@
-getMutableAIState: server-side function to get/update AI state with update() and done() methods; RSC experimental, use UI SDK for production.
+getMutableAIState() returns mutable AI state with update() and done() methods for server-side state management in RSC (experimental).

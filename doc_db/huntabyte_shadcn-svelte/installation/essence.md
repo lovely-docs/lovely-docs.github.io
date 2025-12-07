@@ -1,1 +1,1 @@
-Installation guides for SvelteKit/Astro/Vite/Manual; components split into multiple files with barrel exports; VSCode and JetBrains IDE extensions available.
+Components split across multiple files with barrel exports; import from `$lib/components/ui/<component>`; tree-shaken by Rollup; VSCode and JetBrains IDE extensions available.

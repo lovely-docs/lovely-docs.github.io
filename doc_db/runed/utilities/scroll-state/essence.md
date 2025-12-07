@@ -1,0 +1,1 @@
+Reactive scroll position/direction/edge tracking with programmatic scrolling, RTL support, and debounced stop callbacks.

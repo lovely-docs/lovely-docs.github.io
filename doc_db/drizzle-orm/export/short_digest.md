@@ -1,8 +1,8 @@
-## Purpose
-Exports SQL DDL representation of Drizzle schema to console for codebase-first migrations.
+## Overview
+`drizzle-kit export` outputs SQL DDL representation of Drizzle schema to console for codebase-first migrations.
 
 ## Configuration
-Requires `dialect` and `schema` via config file or CLI:
+Requires `dialect` and `schema` (via config file or CLI):
 ```ts
 // drizzle.config.ts
 export default defineConfig({
@@ -12,15 +12,17 @@ export default defineConfig({
 ```
 ```shell
 npx drizzle-kit export
+# or with CLI options
+npx drizzle-kit export --dialect=postgresql --schema=./src/schema.ts
 ```
 
 ## Schema paths
-Use glob patterns for single or multiple schema files.
+Use glob patterns for single or multiple schema files: `"./src/schema/**/*.ts"`
 
 ## Multiple configs
-Support different config files per database stage:
 ```shell
 npx drizzle-kit export --config=drizzle-dev.config.ts
+npx drizzle-kit export --config=drizzle-prod.config.ts
 ```
 
 ## Example

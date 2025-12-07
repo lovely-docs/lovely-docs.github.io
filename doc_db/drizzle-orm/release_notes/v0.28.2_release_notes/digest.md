@@ -1,13 +1,18 @@
-## v0.28.2 Release (2023-08-10)
+## v0.28.2 Release
 
-### Internal Features and Changes
-- Added comprehensive test suite for D1 database
-- Fixed issues in internal documentation
+### Community Contributions
+This release includes contributions from the community.
+
+### Internal Changes
+- Added comprehensive test suite for d1
+- Fixed documentation issues
 
 ### Bug Fixes
-- Resolved MySQL timestamp milliseconds truncation issue
-- Corrected `.get()` method type signature for sqlite-based dialects (issue #565)
-- Fixed sqlite-proxy bug causing queries to execute twice
+- **MySQL timestamp milliseconds**: Fixed truncation issue where milliseconds were being lost in timestamp values
+- **SQLite `.get()` method**: Corrected type signature for sqlite-based dialects (issue #565)
+- **SQLite proxy**: Fixed bug causing queries to execute twice
 
-### New Packages
-- Added Typebox support via new drizzle-typebox package for schema validation integration
+### New Features
+- **Typebox support**: Added official support for Typebox package integration via new `drizzle-typebox` package
+  - Enables type-safe schema validation using Typebox
+  - See `/docs/typebox` for usage examples and documentation

@@ -1,1 +1,0 @@
-$$slots object in legacy mode allows checking which named slots were provided to a component for conditional rendering.

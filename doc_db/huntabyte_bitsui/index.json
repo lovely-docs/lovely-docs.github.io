@@ -4,29 +4,29 @@
     "displayName": "",
     "relevant": true,
     "usage": {
-      "input": 8861,
-      "output": 2050,
+      "input": 13540,
+      "output": 3008,
       "details": null
     },
     "token_counts": {
-      "fulltext": 4239,
-      "digest": 1593,
-      "short_digest": 347
+      "fulltext": 12113,
+      "digest": 2509,
+      "short_digest": 370
     },
     "children": {
-      "ui_components": {
+      "components": {
         "origPath": "components",
-        "displayName": "UI Components",
+        "displayName": "Components",
         "relevant": true,
         "usage": {
-          "input": 33029,
-          "output": 1201,
+          "input": 74903,
+          "output": 1498,
           "details": null
         },
         "token_counts": {
-          "fulltext": 13233,
-          "digest": 855,
-          "short_digest": 233
+          "fulltext": 73059,
+          "digest": 1141,
+          "short_digest": 247
         },
         "children": {
           "accordion": {
@@ -34,14 +34,14 @@
             "displayName": "accordion",
             "relevant": true,
             "usage": {
-              "input": 10914,
-              "output": 1238,
+              "input": 11087,
+              "output": 3531,
               "details": null
             },
             "token_counts": {
               "fulltext": 9841,
-              "digest": 801,
-              "short_digest": 327
+              "digest": 3152,
+              "short_digest": 267
             },
             "children": {}
           },
@@ -50,30 +50,30 @@
             "displayName": "alert-dialog",
             "relevant": true,
             "usage": {
-              "input": 10120,
-              "output": 1086,
+              "input": 10293,
+              "output": 2899,
               "details": null
             },
             "token_counts": {
               "fulltext": 9043,
-              "digest": 743,
-              "short_digest": 235
+              "digest": 2644,
+              "short_digest": 131
             },
             "children": {}
           },
-          "aspect_ratio": {
+          "aspect-ratio": {
             "origPath": "components/aspect-ratio/llms.md",
-            "displayName": "Aspect Ratio",
+            "displayName": "aspect-ratio",
             "relevant": true,
             "usage": {
-              "input": 2147,
-              "output": 645,
+              "input": 2320,
+              "output": 637,
               "details": null
             },
             "token_counts": {
               "fulltext": 1070,
-              "digest": 438,
-              "short_digest": 104
+              "digest": 461,
+              "short_digest": 51
             },
             "children": {}
           },
@@ -82,30 +82,30 @@
             "displayName": "avatar",
             "relevant": true,
             "usage": {
-              "input": 4292,
-              "output": 747,
+              "input": 4465,
+              "output": 2434,
               "details": null
             },
             "token_counts": {
               "fulltext": 3219,
-              "digest": 379,
-              "short_digest": 263
+              "digest": 1837,
+              "short_digest": 472
             },
             "children": {}
           },
           "button": {
             "origPath": "components/button/llms.md",
-            "displayName": "Button",
+            "displayName": "button",
             "relevant": true,
             "usage": {
-              "input": 1619,
-              "output": 475,
+              "input": 1794,
+              "output": 395,
               "details": null
             },
             "token_counts": {
-              "fulltext": 546,
-              "digest": 260,
-              "short_digest": 112
+              "fulltext": 548,
+              "digest": 223,
+              "short_digest": 58
             },
             "children": {}
           },
@@ -114,14 +114,14 @@
             "displayName": "calendar",
             "relevant": true,
             "usage": {
-              "input": 17762,
-              "output": 1931,
+              "input": 17950,
+              "output": 3196,
               "details": null
             },
             "token_counts": {
-              "fulltext": 16689,
-              "digest": 1204,
-              "short_digest": 621
+              "fulltext": 16704,
+              "digest": 2337,
+              "short_digest": 717
             },
             "children": {}
           },
@@ -130,14 +130,14 @@
             "displayName": "checkbox",
             "relevant": true,
             "usage": {
-              "input": 6371,
-              "output": 1308,
+              "input": 6544,
+              "output": 2758,
               "details": null
             },
             "token_counts": {
               "fulltext": 5298,
-              "digest": 829,
-              "short_digest": 375
+              "digest": 2267,
+              "short_digest": 361
             },
             "children": {}
           },
@@ -146,14 +146,14 @@
             "displayName": "collapsible",
             "relevant": true,
             "usage": {
-              "input": 5756,
-              "output": 983,
+              "input": 5929,
+              "output": 3043,
               "details": null
             },
             "token_counts": {
               "fulltext": 4679,
-              "digest": 613,
-              "short_digest": 256
+              "digest": 2451,
+              "short_digest": 454
             },
             "children": {}
           },
@@ -162,14 +162,14 @@
             "displayName": "combobox",
             "relevant": true,
             "usage": {
-              "input": 18910,
-              "output": 1120,
+              "input": 19083,
+              "output": 4431,
               "details": null
             },
             "token_counts": {
               "fulltext": 17833,
-              "digest": 680,
-              "short_digest": 333
+              "digest": 3374,
+              "short_digest": 936
             },
             "children": {}
           },
@@ -178,14 +178,14 @@
             "displayName": "command",
             "relevant": true,
             "usage": {
-              "input": 15432,
-              "output": 1548,
+              "input": 15605,
+              "output": 2425,
               "details": null
             },
             "token_counts": {
               "fulltext": 14359,
-              "digest": 984,
-              "short_digest": 456
+              "digest": 1825,
+              "short_digest": 484
             },
             "children": {}
           },
@@ -194,30 +194,30 @@
             "displayName": "context-menu",
             "relevant": true,
             "usage": {
-              "input": 23211,
-              "output": 1584,
+              "input": 23384,
+              "output": 1645,
               "details": null
             },
             "token_counts": {
               "fulltext": 22134,
-              "digest": 1034,
-              "short_digest": 434
+              "digest": 1431,
+              "short_digest": 93
             },
             "children": {}
           },
-          "datefield": {
+          "date-field": {
             "origPath": "components/date-field/llms.md",
-            "displayName": "DateField",
+            "displayName": "date-field",
             "relevant": true,
             "usage": {
-              "input": 8121,
-              "output": 1167,
+              "input": 8318,
+              "output": 2209,
               "details": null
             },
             "token_counts": {
-              "fulltext": 7044,
-              "digest": 804,
-              "short_digest": 252
+              "fulltext": 7068,
+              "digest": 1671,
+              "short_digest": 396
             },
             "children": {}
           },
@@ -226,14 +226,14 @@
             "displayName": "date-picker",
             "relevant": true,
             "usage": {
-              "input": 17695,
-              "output": 1702,
+              "input": 17868,
+              "output": 3792,
               "details": null
             },
             "token_counts": {
               "fulltext": 16618,
-              "digest": 1010,
-              "short_digest": 581
+              "digest": 3248,
+              "short_digest": 367
             },
             "children": {}
           },
@@ -242,14 +242,14 @@
             "displayName": "date-range-field",
             "relevant": true,
             "usage": {
-              "input": 5971,
-              "output": 1061,
+              "input": 6144,
+              "output": 1625,
               "details": null
             },
             "token_counts": {
               "fulltext": 4890,
-              "digest": 675,
-              "short_digest": 272
+              "digest": 1424,
+              "short_digest": 65
             },
             "children": {}
           },
@@ -258,14 +258,14 @@
             "displayName": "date-range-picker",
             "relevant": true,
             "usage": {
-              "input": 19264,
-              "output": 1991,
+              "input": 19437,
+              "output": 4480,
               "details": null
             },
             "token_counts": {
               "fulltext": 18183,
-              "digest": 1476,
-              "short_digest": 402
+              "digest": 3143,
+              "short_digest": 1134
             },
             "children": {}
           },
@@ -274,14 +274,14 @@
             "displayName": "dialog",
             "relevant": true,
             "usage": {
-              "input": 12528,
-              "output": 1976,
+              "input": 12701,
+              "output": 2090,
               "details": null
             },
             "token_counts": {
               "fulltext": 11455,
-              "digest": 1463,
-              "short_digest": 400
+              "digest": 1719,
+              "short_digest": 242
             },
             "children": {}
           },
@@ -290,30 +290,30 @@
             "displayName": "dropdown-menu",
             "relevant": true,
             "usage": {
-              "input": 26556,
-              "output": 1849,
+              "input": 26729,
+              "output": 3014,
               "details": null
             },
             "token_counts": {
               "fulltext": 25479,
-              "digest": 1213,
-              "short_digest": 520
+              "digest": 2155,
+              "short_digest": 738
             },
             "children": {}
           },
           "label": {
             "origPath": "components/label/llms.md",
-            "displayName": "Label",
+            "displayName": "label",
             "relevant": true,
             "usage": {
-              "input": 1884,
-              "output": 721,
+              "input": 2057,
+              "output": 818,
               "details": null
             },
             "token_counts": {
               "fulltext": 811,
-              "digest": 435,
-              "short_digest": 186
+              "digest": 636,
+              "short_digest": 67
             },
             "children": {}
           },
@@ -322,14 +322,14 @@
             "displayName": "link-preview",
             "relevant": true,
             "usage": {
-              "input": 9333,
-              "output": 955,
+              "input": 9506,
+              "output": 2634,
               "details": null
             },
             "token_counts": {
               "fulltext": 8256,
-              "digest": 601,
-              "short_digest": 233
+              "digest": 2014,
+              "short_digest": 497
             },
             "children": {}
           },
@@ -338,46 +338,46 @@
             "displayName": "menubar",
             "relevant": true,
             "usage": {
-              "input": 22497,
-              "output": 1161,
+              "input": 22670,
+              "output": 5358,
               "details": null
             },
             "token_counts": {
               "fulltext": 21422,
-              "digest": 748,
-              "short_digest": 301
+              "digest": 3802,
+              "short_digest": 1437
             },
             "children": {}
           },
           "meter": {
             "origPath": "components/meter/llms.md",
-            "displayName": "Meter",
+            "displayName": "meter",
             "relevant": true,
             "usage": {
-              "input": 2878,
-              "output": 951,
+              "input": 3051,
+              "output": 1037,
               "details": null
             },
             "token_counts": {
               "fulltext": 1805,
-              "digest": 649,
-              "short_digest": 198
+              "digest": 696,
+              "short_digest": 213
             },
             "children": {}
           },
-          "navigation_menu": {
+          "navigation-menu": {
             "origPath": "components/navigation-menu/llms.md",
-            "displayName": "Navigation Menu",
+            "displayName": "navigation-menu",
             "relevant": true,
             "usage": {
-              "input": 16731,
-              "output": 838,
+              "input": 16904,
+              "output": 2174,
               "details": null
             },
             "token_counts": {
               "fulltext": 15654,
-              "digest": 463,
-              "short_digest": 266
+              "digest": 1955,
+              "short_digest": 96
             },
             "children": {}
           },
@@ -386,46 +386,46 @@
             "displayName": "pagination",
             "relevant": true,
             "usage": {
-              "input": 4371,
-              "output": 1257,
+              "input": 4544,
+              "output": 1563,
               "details": null
             },
             "token_counts": {
               "fulltext": 3298,
-              "digest": 800,
-              "short_digest": 352
+              "digest": 1051,
+              "short_digest": 372
             },
             "children": {}
           },
-          "pin_input": {
+          "pin-input": {
             "origPath": "components/pin-input/llms.md",
-            "displayName": "PIN Input",
+            "displayName": "pin-input",
             "relevant": true,
             "usage": {
-              "input": 4896,
-              "output": 1220,
+              "input": 5069,
+              "output": 2164,
               "details": null
             },
             "token_counts": {
               "fulltext": 3819,
-              "digest": 772,
-              "short_digest": 334
+              "digest": 1856,
+              "short_digest": 184
             },
             "children": {}
           },
-          "popover_component": {
+          "popover": {
             "origPath": "components/popover/llms.md",
-            "displayName": "Popover Component",
+            "displayName": "popover",
             "relevant": true,
             "usage": {
-              "input": 13309,
-              "output": 1068,
+              "input": 13482,
+              "output": 2233,
               "details": null
             },
             "token_counts": {
               "fulltext": 12234,
-              "digest": 722,
-              "short_digest": 237
+              "digest": 1783,
+              "short_digest": 335
             },
             "children": {}
           },
@@ -434,30 +434,30 @@
             "displayName": "progress",
             "relevant": true,
             "usage": {
-              "input": 2748,
-              "output": 835,
+              "input": 2921,
+              "output": 1210,
               "details": null
             },
             "token_counts": {
               "fulltext": 1675,
-              "digest": 549,
-              "short_digest": 179
+              "digest": 988,
+              "short_digest": 109
             },
             "children": {}
           },
-          "radio_group": {
+          "radio-group": {
             "origPath": "components/radio-group/llms.md",
-            "displayName": "Radio Group",
+            "displayName": "radio-group",
             "relevant": true,
             "usage": {
-              "input": 5479,
-              "output": 962,
+              "input": 5652,
+              "output": 1663,
               "details": null
             },
             "token_counts": {
               "fulltext": 4402,
-              "digest": 578,
-              "short_digest": 276
+              "digest": 1318,
+              "short_digest": 217
             },
             "children": {}
           },
@@ -466,14 +466,14 @@
             "displayName": "range-calendar",
             "relevant": true,
             "usage": {
-              "input": 19115,
-              "output": 1056,
+              "input": 19288,
+              "output": 1386,
               "details": null
             },
             "token_counts": {
               "fulltext": 18038,
-              "digest": 629,
-              "short_digest": 320
+              "digest": 1181,
+              "short_digest": 90
             },
             "children": {}
           },
@@ -482,14 +482,14 @@
             "displayName": "rating-group",
             "relevant": true,
             "usage": {
-              "input": 7464,
-              "output": 1081,
+              "input": 7637,
+              "output": 3182,
               "details": null
             },
             "token_counts": {
               "fulltext": 6387,
-              "digest": 675,
-              "short_digest": 291
+              "digest": 2727,
+              "short_digest": 328
             },
             "children": {}
           },
@@ -498,14 +498,14 @@
             "displayName": "scroll-area",
             "relevant": true,
             "usage": {
-              "input": 4573,
-              "output": 805,
+              "input": 4746,
+              "output": 1350,
               "details": null
             },
             "token_counts": {
               "fulltext": 3496,
-              "digest": 486,
-              "short_digest": 209
+              "digest": 1095,
+              "short_digest": 121
             },
             "children": {}
           },
@@ -514,30 +514,30 @@
             "displayName": "select",
             "relevant": true,
             "usage": {
-              "input": 19097,
-              "output": 1719,
+              "input": 19288,
+              "output": 4298,
               "details": null
             },
             "token_counts": {
-              "fulltext": 18024,
-              "digest": 1171,
-              "short_digest": 438
+              "fulltext": 18042,
+              "digest": 3101,
+              "short_digest": 1070
             },
             "children": {}
           },
           "separator": {
             "origPath": "components/separator/llms.md",
-            "displayName": "Separator",
+            "displayName": "separator",
             "relevant": true,
             "usage": {
-              "input": 2009,
-              "output": 750,
+              "input": 2182,
+              "output": 754,
               "details": null
             },
             "token_counts": {
               "fulltext": 936,
-              "digest": 504,
-              "short_digest": 141
+              "digest": 478,
+              "short_digest": 164
             },
             "children": {}
           },
@@ -546,30 +546,30 @@
             "displayName": "slider",
             "relevant": true,
             "usage": {
-              "input": 12303,
-              "output": 1805,
+              "input": 12476,
+              "output": 2143,
               "details": null
             },
             "token_counts": {
               "fulltext": 11230,
-              "digest": 1092,
-              "short_digest": 601
+              "digest": 1592,
+              "short_digest": 428
             },
             "children": {}
           },
-          "switch_component": {
+          "switch": {
             "origPath": "components/switch/llms.md",
-            "displayName": "Switch Component",
+            "displayName": "switch",
             "relevant": true,
             "usage": {
-              "input": 3770,
-              "output": 752,
+              "input": 3943,
+              "output": 1199,
               "details": null
             },
             "token_counts": {
               "fulltext": 2697,
-              "digest": 512,
-              "short_digest": 138
+              "digest": 864,
+              "short_digest": 223
             },
             "children": {}
           },
@@ -578,46 +578,46 @@
             "displayName": "tabs",
             "relevant": true,
             "usage": {
-              "input": 4734,
-              "output": 781,
+              "input": 4907,
+              "output": 1027,
               "details": null
             },
             "token_counts": {
               "fulltext": 3661,
-              "digest": 505,
-              "short_digest": 171
+              "digest": 688,
+              "short_digest": 221
             },
             "children": {}
           },
-          "timefield_component": {
+          "time-field": {
             "origPath": "components/time-field/llms.md",
-            "displayName": "TimeField Component",
+            "displayName": "time-field",
             "relevant": true,
             "usage": {
-              "input": 7960,
-              "output": 1236,
+              "input": 8142,
+              "output": 2026,
               "details": null
             },
             "token_counts": {
-              "fulltext": 6883,
-              "digest": 783,
-              "short_digest": 344
+              "fulltext": 6892,
+              "digest": 1431,
+              "short_digest": 454
             },
             "children": {}
           },
-          "timerangefield": {
+          "time-range-field": {
             "origPath": "components/time-range-field/llms.md",
-            "displayName": "TimeRangeField",
+            "displayName": "time-range-field",
             "relevant": true,
             "usage": {
-              "input": 5692,
-              "output": 1247,
+              "input": 5865,
+              "output": 1599,
               "details": null
             },
             "token_counts": {
               "fulltext": 4611,
-              "digest": 806,
-              "short_digest": 324
+              "digest": 1303,
+              "short_digest": 154
             },
             "children": {}
           },
@@ -626,14 +626,14 @@
             "displayName": "toggle",
             "relevant": true,
             "usage": {
-              "input": 2330,
-              "output": 637,
+              "input": 2503,
+              "output": 825,
               "details": null
             },
             "token_counts": {
               "fulltext": 1257,
-              "digest": 367,
-              "short_digest": 160
+              "digest": 559,
+              "short_digest": 153
             },
             "children": {}
           },
@@ -642,14 +642,14 @@
             "displayName": "toggle-group",
             "relevant": true,
             "usage": {
-              "input": 3549,
-              "output": 824,
+              "input": 3722,
+              "output": 1269,
               "details": null
             },
             "token_counts": {
               "fulltext": 2472,
-              "digest": 493,
-              "short_digest": 225
+              "digest": 929,
+              "short_digest": 227
             },
             "children": {}
           },
@@ -658,48 +658,48 @@
             "displayName": "toolbar",
             "relevant": true,
             "usage": {
-              "input": 5052,
-              "output": 915,
+              "input": 5225,
+              "output": 1811,
               "details": null
             },
             "token_counts": {
               "fulltext": 3979,
-              "digest": 583,
-              "short_digest": 224
+              "digest": 1605,
+              "short_digest": 88
             },
             "children": {}
           },
           "tooltip": {
             "origPath": "components/tooltip/llms.md",
-            "displayName": "Tooltip",
+            "displayName": "tooltip",
             "relevant": true,
             "usage": {
-              "input": 12547,
-              "output": 1491,
+              "input": 12715,
+              "output": 2991,
               "details": null
             },
             "token_counts": {
-              "fulltext": 11474,
-              "digest": 1087,
-              "short_digest": 289
+              "fulltext": 11469,
+              "digest": 2454,
+              "short_digest": 402
             },
             "children": {}
           }
         }
       },
-      "contribution_policies": {
+      "policies": {
         "origPath": "policies",
-        "displayName": "Contribution Policies",
+        "displayName": "Policies",
         "relevant": true,
         "usage": {
-          "input": 1689,
-          "output": 481,
+          "input": 2089,
+          "output": 717,
           "details": null
         },
         "token_counts": {
-          "fulltext": 238,
-          "digest": 289,
-          "short_digest": 88
+          "fulltext": 830,
+          "digest": 513,
+          "short_digest": 106
         },
         "children": {
           "changelog-conventions": {
@@ -707,30 +707,30 @@
             "displayName": "changelog-conventions",
             "relevant": true,
             "usage": {
-              "input": 1892,
-              "output": 541,
+              "input": 2065,
+              "output": 645,
               "details": null
             },
             "token_counts": {
               "fulltext": 815,
-              "digest": 319,
-              "short_digest": 115
+              "digest": 420,
+              "short_digest": 78
             },
             "children": {}
           },
-          "code_of_conduct": {
+          "code-of-conduct": {
             "origPath": "policies/code-of-conduct/llms.md",
-            "displayName": "Code of Conduct",
+            "displayName": "code-of-conduct",
             "relevant": false,
             "usage": {
-              "input": 1534,
-              "output": 451,
+              "input": 1707,
+              "output": 522,
               "details": null
             },
             "token_counts": {
               "fulltext": 453,
-              "digest": 265,
-              "short_digest": 76
+              "digest": 316,
+              "short_digest": 82
             },
             "children": {}
           },
@@ -739,14 +739,14 @@
             "displayName": "tracking-bugs-and-feature-requests",
             "relevant": true,
             "usage": {
-              "input": 1958,
-              "output": 401,
+              "input": 2131,
+              "output": 515,
               "details": null
             },
             "token_counts": {
               "fulltext": 869,
-              "digest": 220,
-              "short_digest": 65
+              "digest": 294,
+              "short_digest": 88
             },
             "children": {}
           }
@@ -757,28 +757,28 @@
         "displayName": "Type Helpers",
         "relevant": true,
         "usage": {
-          "input": 2116,
-          "output": 525,
+          "input": 2288,
+          "output": 551,
           "details": null
         },
         "token_counts": {
-          "fulltext": 379,
-          "digest": 328,
-          "short_digest": 90
+          "fulltext": 997,
+          "digest": 388,
+          "short_digest": 59
         },
         "children": {
-          "withelementref_type_helper": {
+          "with-element-ref": {
             "origPath": "type-helpers/with-element-ref/llms.md",
-            "displayName": "WithElementRef Type Helper",
+            "displayName": "with-element-ref",
             "relevant": true,
             "usage": {
-              "input": 1431,
-              "output": 410,
+              "input": 1606,
+              "output": 436,
               "details": null
             },
             "token_counts": {
-              "fulltext": 346,
-              "digest": 247,
+              "fulltext": 348,
+              "digest": 251,
               "short_digest": 57
             },
             "children": {}
@@ -788,14 +788,14 @@
             "displayName": "WithoutChild Type Helper",
             "relevant": true,
             "usage": {
-              "input": 1396,
-              "output": 395,
+              "input": 1569,
+              "output": 370,
               "details": null
             },
             "token_counts": {
               "fulltext": 315,
-              "digest": 210,
-              "short_digest": 76
+              "digest": 196,
+              "short_digest": 62
             },
             "children": {}
           },
@@ -804,14 +804,14 @@
             "displayName": "WithoutChildren Type Helper",
             "relevant": true,
             "usage": {
-              "input": 1445,
-              "output": 411,
+              "input": 1618,
+              "output": 323,
               "details": null
             },
             "token_counts": {
               "fulltext": 364,
-              "digest": 231,
-              "short_digest": 69
+              "digest": 170,
+              "short_digest": 42
             },
             "children": {}
           },
@@ -820,14 +820,14 @@
             "displayName": "WithoutChildrenOrChild Type Helper",
             "relevant": true,
             "usage": {
-              "input": 1449,
-              "output": 385,
+              "input": 1622,
+              "output": 428,
               "details": null
             },
             "token_counts": {
               "fulltext": 360,
-              "digest": 204,
-              "short_digest": 71
+              "digest": 246,
+              "short_digest": 66
             },
             "children": {}
           }
@@ -838,45 +838,45 @@
         "displayName": "Utilities",
         "relevant": true,
         "usage": {
-          "input": 2828,
-          "output": 962,
+          "input": 4114,
+          "output": 1475,
           "details": null
         },
         "token_counts": {
-          "fulltext": 833,
-          "digest": 704,
-          "short_digest": 146
+          "fulltext": 2810,
+          "digest": 1168,
+          "short_digest": 201
         },
         "children": {
-          "bitsconfig": {
+          "bits-config": {
             "origPath": "utilities/bits-config/llms.md",
-            "displayName": "BitsConfig",
+            "displayName": "bits-config",
             "relevant": true,
             "usage": {
-              "input": 2775,
-              "output": 905,
+              "input": 2948,
+              "output": 1299,
               "details": null
             },
             "token_counts": {
               "fulltext": 1698,
-              "digest": 515,
-              "short_digest": 277
+              "digest": 1119,
+              "short_digest": 64
             },
             "children": {}
           },
-          "isusingkeyboard": {
+          "is-using-keyboard": {
             "origPath": "utilities/is-using-keyboard/llms.md",
-            "displayName": "IsUsingKeyboard",
+            "displayName": "is-using-keyboard",
             "relevant": true,
             "usage": {
-              "input": 1332,
-              "output": 324,
+              "input": 1505,
+              "output": 290,
               "details": null
             },
             "token_counts": {
               "fulltext": 251,
               "digest": 127,
-              "short_digest": 86
+              "short_digest": 46
             },
             "children": {}
           },
@@ -885,30 +885,30 @@
             "displayName": "mergeProps",
             "relevant": true,
             "usage": {
-              "input": 2086,
-              "output": 707,
+              "input": 2259,
+              "output": 1044,
               "details": null
             },
             "token_counts": {
               "fulltext": 1009,
-              "digest": 456,
-              "short_digest": 138
+              "digest": 779,
+              "short_digest": 139
             },
             "children": {}
           },
           "portal": {
             "origPath": "utilities/portal/llms.md",
-            "displayName": "Portal",
+            "displayName": "portal",
             "relevant": true,
             "usage": {
-              "input": 1929,
-              "output": 623,
+              "input": 2102,
+              "output": 773,
               "details": null
             },
             "token_counts": {
               "fulltext": 856,
-              "digest": 356,
-              "short_digest": 158
+              "digest": 500,
+              "short_digest": 143
             },
             "children": {}
           },
@@ -917,14 +917,14 @@
             "displayName": "useId",
             "relevant": true,
             "usage": {
-              "input": 1283,
-              "output": 287,
+              "input": 1456,
+              "output": 278,
               "details": null
             },
             "token_counts": {
               "fulltext": 206,
-              "digest": 128,
-              "short_digest": 56
+              "digest": 119,
+              "short_digest": 51
             },
             "children": {}
           }
@@ -935,14 +935,14 @@
         "displayName": "child-snippet",
         "relevant": true,
         "usage": {
-          "input": 2877,
-          "output": 993,
+          "input": 3052,
+          "output": 1721,
           "details": null
         },
         "token_counts": {
-          "fulltext": 1804,
-          "digest": 622,
-          "short_digest": 262
+          "fulltext": 1806,
+          "digest": 1315,
+          "short_digest": 285
         },
         "children": {}
       },
@@ -951,14 +951,14 @@
         "displayName": "dates-and-times",
         "relevant": true,
         "usage": {
-          "input": 3664,
-          "output": 1532,
+          "input": 3837,
+          "output": 1415,
           "details": null
         },
         "token_counts": {
           "fulltext": 2595,
-          "digest": 960,
-          "short_digest": 460
+          "digest": 1104,
+          "short_digest": 156
         },
         "children": {}
       },
@@ -967,14 +967,14 @@
         "displayName": "getting-started",
         "relevant": true,
         "usage": {
-          "input": 2663,
-          "output": 920,
+          "input": 2836,
+          "output": 1295,
           "details": null
         },
         "token_counts": {
           "fulltext": 1590,
-          "digest": 585,
-          "short_digest": 225
+          "digest": 938,
+          "short_digest": 249
         },
         "children": {}
       },
@@ -983,62 +983,62 @@
         "displayName": "introduction",
         "relevant": true,
         "usage": {
-          "input": 1951,
-          "output": 417,
+          "input": 2124,
+          "output": 453,
           "details": null
         },
         "token_counts": {
           "fulltext": 882,
-          "digest": 250,
-          "short_digest": 53
+          "digest": 262,
+          "short_digest": 71
         },
         "children": {}
       },
-      "llm-friendly_documentation_access": {
+      "llms.txt_access": {
         "origPath": "llms/llms.md",
-        "displayName": "LLM-Friendly Documentation Access",
+        "displayName": "llms.txt Access",
         "relevant": false,
         "usage": {
-          "input": 1909,
-          "output": 414,
+          "input": 2082,
+          "output": 502,
           "details": null
         },
         "token_counts": {
           "fulltext": 838,
-          "digest": 219,
-          "short_digest": 77
+          "digest": 286,
+          "short_digest": 75
         },
         "children": {}
       },
-      "migration_guide:_v0.x_to_v1": {
+      "migration-guide-v0-to-v1": {
         "origPath": "migration-guide/llms.md",
-        "displayName": "Migration Guide: v0.x to v1",
+        "displayName": "migration-guide-v0-to-v1",
         "relevant": true,
         "usage": {
-          "input": 3746,
-          "output": 1013,
+          "input": 3919,
+          "output": 1492,
           "details": null
         },
         "token_counts": {
           "fulltext": 2673,
-          "digest": 688,
-          "short_digest": 185
+          "digest": 1053,
+          "short_digest": 251
         },
         "children": {}
       },
-      "ref-prop-binding": {
+      "ref-prop": {
         "origPath": "ref/llms.md",
-        "displayName": "ref-prop-binding",
+        "displayName": "ref-prop",
         "relevant": true,
         "usage": {
-          "input": 2140,
-          "output": 827,
+          "input": 2313,
+          "output": 807,
           "details": null
         },
         "token_counts": {
           "fulltext": 1071,
-          "digest": 548,
-          "short_digest": 168
+          "digest": 609,
+          "short_digest": 78
         },
         "children": {}
       },
@@ -1047,14 +1047,14 @@
         "displayName": "state-management",
         "relevant": true,
         "usage": {
-          "input": 1658,
-          "output": 540,
+          "input": 1831,
+          "output": 594,
           "details": null
         },
         "token_counts": {
           "fulltext": 585,
-          "digest": 348,
-          "short_digest": 74
+          "digest": 399,
+          "short_digest": 68
         },
         "children": {}
       },
@@ -1063,46 +1063,53 @@
         "displayName": "styling",
         "relevant": true,
         "usage": {
-          "input": 4098,
-          "output": 903,
+          "input": 4271,
+          "output": 2506,
           "details": null
         },
         "token_counts": {
           "fulltext": 3029,
-          "digest": 569,
-          "short_digest": 213
+          "digest": 2177,
+          "short_digest": 204
         },
         "children": {}
       },
       "transitions": {
         "origPath": "transitions/llms.md",
-        "displayName": "Transitions",
+        "displayName": "transitions",
         "relevant": true,
         "usage": {
-          "input": 2470,
-          "output": 721,
+          "input": 2643,
+          "output": 743,
           "details": null
         },
         "token_counts": {
           "fulltext": 1401,
-          "digest": 538,
-          "short_digest": 73
+          "digest": 581,
+          "short_digest": 48
         },
         "children": {}
       }
     }
   },
   "name": "huntabyte/bitsui",
+  "ecosystems": [
+    "svelte"
+  ],
   "source_type": "git",
   "source": {
     "name": "huntabyte/bitsui",
     "comment": null,
+    "ecosystems": [
+      "svelte"
+    ],
+    "include": null,
+    "exclude": null,
     "doc_dir": "docs/static/docs",
-    "repo": "git@github.com:xl0/bits-ui.git",
-    "commit": "4b6e2b17fd1ef9894da62ff520dbeab75850d87b"
+    "repo": "https://github.com/huntabyte/bits-ui",
+    "commit": "798d69505806943dfa0d8c0d83e9f1ac0ca86e4d"
   },
-  "date": "2025-11-13T11:00:10.696631+00:00",
+  "date": "2025-12-07T02:43:36.406302+00:00",
   "model": "claude-haiku-4.5",
-  "commit": "0528ad5fe5486be5b3691edc99daacfaf782e426-dirty",
-  "ecosystems": ["svelte"]
+  "commit": "89d7a82f10a43f14d4fd63c518b2eaed000cc5c9-dirty"
 }

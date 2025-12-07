@@ -1,0 +1,1 @@
+useEventListener: attach auto-disposed event listeners to elements via function-based target, with automatic cleanup on component destroy or element change

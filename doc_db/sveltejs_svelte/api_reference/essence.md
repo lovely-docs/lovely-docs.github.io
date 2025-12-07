@@ -1,1 +1,1 @@
-Complete reference of Svelte 5 runtime APIs, compiler functions, and utility modules for component lifecycle, state management, animations, stores, and server-side rendering.
+Complete API documentation for Svelte 5: component lifecycle, context, mounting, state management, animations, transitions, stores, compiler, and utilities.

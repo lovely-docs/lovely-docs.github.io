@@ -1,0 +1,1 @@
+Experimental RSC integration enabling LLMs to generate and stream React Server Components from server to client via streamable values and state management hooks.

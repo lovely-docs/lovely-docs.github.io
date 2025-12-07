@@ -1,0 +1,1 @@
+In legacy mode, use `<svelte:component this={MyComponent} />` to dynamically render components. It destroys and recreates the instance when the component reference changes. If `this` is falsy, nothing renders.

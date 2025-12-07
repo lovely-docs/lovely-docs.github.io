@@ -1,0 +1,1 @@
+Agent interface contract: version, id, tools properties; generate() and stream() methods accepting prompt/messages with optional call options and abort signal; supports custom implementations and tool-based workflows.

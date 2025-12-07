@@ -1,1 +1,1 @@
-Quickstart guides for building streaming chat applications across JavaScript frameworks using unified LLM API, UI hooks, and tool-calling patterns.
+Quickstart guides for building streaming chat applications across different JavaScript environments and frameworks using the AI SDK.

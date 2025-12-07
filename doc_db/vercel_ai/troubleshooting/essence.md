@@ -1,1 +1,1 @@
-Solutions for common AI SDK issues including streaming problems, useChat configuration, tool calling, server actions, error handling, and version compatibility.
+Solutions for streaming, useChat, server actions, tool calling, error handling, and SDK compatibility issues

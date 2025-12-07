@@ -1,1 +1,1 @@
-Actions are functions called on element mount using `use:` directive with `$effect` for setup/teardown. They accept optional arguments and can dispatch custom events. Type with `Action<NodeType, ParamType, EventHandlers>`.
+Actions are functions called on element mount via `use:` directive. They use `$effect` for setup/teardown, optionally accept arguments (run once, not reactive), and can be typed with `Action<NodeType, ParamType, EventHandlers>` to define custom events.

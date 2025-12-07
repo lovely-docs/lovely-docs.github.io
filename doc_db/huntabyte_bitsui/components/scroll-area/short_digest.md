@@ -1,0 +1,3 @@
+## Scroll Area
+
+Customizable scroll area with four types: hover (default), scroll, auto, always. Build with `ScrollArea.Root`, `Viewport`, `Scrollbar` (vertical/horizontal), `Thumb`, and `Corner`. Key props: `type`, `scrollHideDelay` (default 600ms), `orientation` ('vertical'|'horizontal'|'both'). Create reusable component to reduce boilerplate. Data attributes available for styling based on state ('visible'|'hidden').

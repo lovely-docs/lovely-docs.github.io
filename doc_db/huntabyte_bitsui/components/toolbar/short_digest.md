@@ -1,0 +1,1 @@
+Toolbar component for displaying frequently used actions. Supports single/multiple toggle groups with two-way or fully controlled state binding. Root accepts `loop` and `orientation` props. Groups require `type` ('single'|'multiple') and support `bind:value`. Items have required `value` prop. All components support `disabled`, `ref` binding, and snippets for rendering.

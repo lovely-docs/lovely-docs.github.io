@@ -1,1 +1,0 @@
-Complete library of accessible, composable UI components for Svelte with flexible state management, keyboard navigation, and Floating UI positioning.

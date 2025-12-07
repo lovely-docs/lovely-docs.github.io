@@ -1,0 +1,1 @@
+.svelte file structure: optional `<script>` (per-instance), `<script module>` (once), markup, and `<style>` (scoped); runes for props/reactivity; module exports allowed except default.

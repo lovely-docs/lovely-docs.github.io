@@ -1,16 +1,23 @@
-The `<svelte:document>` element allows you to attach event listeners to the `document` object and use actions on it. This is useful for events that don't fire on `window`, such as `visibilitychange`.
+## `<svelte:document>` Element
 
-Usage:
+Allows you to add event listeners to `document` and use actions on it, similar to `<svelte:window>`.
+
+**Usage:**
 ```svelte
 <svelte:document onevent={handler} />
 <svelte:document bind:prop={value} />
 <svelte:document onvisibilitychange={handleVisibilityChange} use:someAction />
 ```
 
-The element must appear only at the top level of your component and cannot be inside blocks or elements.
+**Constraints:**
+- May only appear at the top level of your component
+- Must never be inside a block or element
 
-You can bind to these readonly properties:
+**Bindable Properties (readonly):**
 - `activeElement`
 - `fullscreenElement`
 - `pointerLockElement`
 - `visibilityState`
+
+**Use Cases:**
+Listen to document events like `visibilitychange` that don't fire on `window`, and bind to document properties.

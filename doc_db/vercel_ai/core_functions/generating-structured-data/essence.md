@@ -1,0 +1,1 @@
+generateObject/streamObject for schema-validated structured data generation with Zod/Valibot/JSON; supports object/array/enum/no-schema outputs, error handling, JSON repair, and integration with generateText/streamText via Output types.

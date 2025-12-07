@@ -1,6 +1,7 @@
-When streaming works locally but fails in deployed environments, the full response returns after a delay instead of streaming incrementally. This is caused by deployment environment configurations that don't properly support streaming responses.
+When streaming works locally but fails in deployed environments, the full response is returned all at once instead of being streamed. This is caused by deployment environment configuration issues.
 
-To fix this, add HTTP headers to the response:
+To fix streaming in deployed apps, add HTTP headers to the response:
+
 ```tsx
 return result.toUIMessageStreamResponse({
   headers: {
@@ -10,4 +11,4 @@ return result.toUIMessageStreamResponse({
 });
 ```
 
-The `Transfer-Encoding: chunked` header enables chunked transfer encoding for streaming, and `Connection: keep-alive` maintains the connection for multiple chunks.
+The `Transfer-Encoding: chunked` header enables chunked transfer encoding, and `Connection: keep-alive` maintains the connection for streaming.

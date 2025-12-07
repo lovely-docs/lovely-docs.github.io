@@ -1,1 +1,1 @@
-Hook to read and update AI state shared globally under `<AI/>` provider. Returns array with current AI state as first element. Used for storing context shared with AI model like system messages and function responses.
+Hook to read/update AI state shared globally under `<AI/>` provider. Returns array with current state as first element. Import from `@ai-sdk/rsc`. Experimental feature.

@@ -1,1 +1,0 @@
-Pull PostgreSQL Docker image and start container with `docker run --name drizzle-postgres -e POSTGRES_PASSWORD=mypassword -d -p 5432:5432 postgres`, then connect via `postgres://postgres:mypassword@localhost:5432/postgres`

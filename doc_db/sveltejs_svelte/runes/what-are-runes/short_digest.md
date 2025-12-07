@@ -1,0 +1,1 @@
+Runes are `$`-prefixed compiler keywords in Svelte (e.g., `$state('hello')`) that control compilation. They're not importable functions and can't be assigned or passed as arguments. Introduced in Svelte 5.

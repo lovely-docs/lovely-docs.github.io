@@ -1,0 +1,1 @@
+Experimental API to generate images from text prompts; accepts model, prompt, and optional n/size/aspectRatio/seed/providerOptions/maxRetries/abortSignal/headers; returns image, images array, warnings, and response metadata with base64/uint8Array/mediaType.

@@ -4,11 +4,11 @@ Execute multiple SQL statements in a single database call with implicit transact
 
 ### Overview
 
-Batch APIs allow executing one or more SQL statements in order within an implicit transaction. The behavior differs by database:
+Batch APIs are supported for LibSQL, Neon, and D1 drivers. A batch executes one or more SQL statements in order within an implicit transaction. If all statements succeed, the transaction commits. If any statement fails, the entire transaction rolls back.
 
-- **LibSQL**: Transaction controlled by backend. All statements succeed and commit together, or all fail and rollback.
-- **D1**: Statements execute sequentially and non-concurrently in auto-commit mode. If any statement fails, the entire sequence aborts/rolls back.
-- **Neon**: Similar transactional guarantees to LibSQL.
+**LibSQL**: Batch is an implicit transaction controlled by the backend.
+
+**D1**: Batching reduces network latency by sending multiple statements in one call. Operates in auto-commit mode. Statements execute sequentially and non-concurrently. If any statement fails, the sequence aborts and rolls back.
 
 ### Usage
 
@@ -22,15 +22,14 @@ const batchResponse: BatchResponse = await db.batch([
 ]);
 ```
 
-The response is a tuple where each element corresponds to the result of each statement in order. Result types vary by database (ResultSet for libSQL, NeonHttpQueryResult for Neon, D1Result for D1).
+The response is a tuple where each element corresponds to the result of each statement in the batch. Return types vary by driver:
+- **libSQL**: `ResultSet` for mutations
+- **Neon**: `NeonHttpQueryResult` for mutations
+- **D1**: `D1Result` for mutations
 
 ### Supported Builders
 
-All query builders can be used inside `db.batch()`:
+All query builders can be used in `db.batch()`:
 - `db.all()`, `db.get()`, `db.values()`, `db.run()`, `db.execute()`
 - `db.query.<table>.findMany()`, `db.query.<table>.findFirst()`
-- `db.select()...`, `db.update()...`, `db.delete()...`, `db.insert()...`
-
-### Performance Benefit
-
-Batching reduces network latency by combining multiple statements into a single database call, providing significant performance improvements especially for D1.
+- `db.select()`, `db.update()`, `db.delete()`, `db.insert()`

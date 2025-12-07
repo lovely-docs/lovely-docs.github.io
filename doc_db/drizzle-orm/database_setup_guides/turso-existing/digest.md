@@ -1,27 +1,25 @@
 ## Setup Drizzle ORM with Turso Cloud in an existing project
 
-### Prerequisites
-- dotenv: environment variable management
-- tsx: TypeScript file execution
-- turso: SQLite for production
-- libsql: SQLite fork optimized for low query latency
+**Prerequisites:**
+- dotenv - environment variable management
+- tsx - TypeScript file runner
+- turso - SQLite for Production
+- libsql - SQLite fork optimized for low query latency
 
-### Installation
-Install the libsql client package:
+**Step 1: Install packages**
 ```bash
 npm install @libsql/client
 ```
 
-### Environment Configuration
-Create `.env` file with Turso credentials:
+**Step 2: Setup environment variables**
+Create `.env` file:
 ```plaintext
 TURSO_DATABASE_URL=
 TURSO_AUTH_TOKEN=
 ```
-Obtain these values from the LibSQL Driver SDK tutorial at docs.turso.tech/sdk/ts/quickstart
+Get these values from the LibSQL Driver SDK tutorial at docs.turso.tech/sdk/ts/quickstart
 
-### Drizzle Configuration
-Create `drizzle.config.ts`:
+**Step 3: Create drizzle.config.ts**
 ```typescript
 import 'dotenv/config';
 import { defineConfig } from 'drizzle-kit';
@@ -37,16 +35,12 @@ export default defineConfig({
 });
 ```
 
-### Database Introspection
-Run introspection to generate schema from existing database (details in IntrospectSqlite component).
+**Step 4: Introspect your database** - generates schema from existing database
 
-### Schema Setup
-Transfer introspected code to `src/db/schema.ts`.
+**Step 5: Transfer introspected code to schema file** - move generated schema to `src/db/schema.ts`
 
-### Database Connection
-Create `src/index.ts` with connection initialization. Two approaches:
-
-**Option 1 - Direct connection:**
+**Step 6: Connect Drizzle ORM to database**
+Create `src/index.ts`:
 ```typescript
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/libsql';
@@ -59,25 +53,22 @@ const db = drizzle({
 });
 ```
 
-**Option 2 - With existing driver:**
+Or with existing driver:
 ```typescript
-import 'dotenv/config';
-import { drizzle } from 'drizzle-orm/libsql';
 import { createClient } from '@libsql/client';
-
 const client = createClient({ 
   url: process.env.TURSO_DATABASE_URL!, 
   authToken: process.env.TURSO_AUTH_TOKEN!
 });
-
 const db = drizzle({ client });
 ```
 
-### Querying
-Query the database using the initialized `db` instance (details in QueryTurso component).
+**Step 7: Query the database** - use the db instance to run queries
 
-### Running
-Execute the file with tsx (details in RunFile component).
+**Step 8: Run index.ts file** - execute with tsx
 
-### Optional: Schema Updates
-Update table schema in `src/db/schema.ts` and apply changes to database using Drizzle Kit migrations (details in UpdateSchema and ApplyChanges components).
+**Step 9 (optional): Update table schema** - modify schema.ts and run migrations
+
+**Step 10 (optional): Apply changes to database** - run Drizzle Kit migrations
+
+**Step 11 (optional): Query with new fields** - use updated schema in queries

@@ -1,1 +1,0 @@
-Guidelines for writing changelog entries and managing feature requests through Issues and Discussions.

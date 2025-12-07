@@ -1,6 +1,6 @@
 ## Native Select
 
-A styled wrapper around the native HTML select element with consistent design system integration.
+A styled wrapper around the native HTML `<select>` element with design system integration.
 
 ### Installation
 
@@ -8,7 +8,7 @@ A styled wrapper around the native HTML select element with consistent design sy
 npx shadcn-svelte@latest add native-select -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+Use `-y` to skip confirmation and `-o` to overwrite existing files.
 
 ### Basic Usage
 
@@ -22,12 +22,13 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
   <NativeSelect.Option value="todo">Todo</NativeSelect.Option>
   <NativeSelect.Option value="in-progress">In Progress</NativeSelect.Option>
   <NativeSelect.Option value="done">Done</NativeSelect.Option>
+  <NativeSelect.Option value="cancelled">Cancelled</NativeSelect.Option>
 </NativeSelect.Root>
 ```
 
-### Grouped Options
+### Option Groups
 
-Use `NativeSelect.OptGroup` to organize related options:
+Organize options with `NativeSelect.OptGroup`:
 
 ```svelte
 <NativeSelect.Root>
@@ -35,75 +36,76 @@ Use `NativeSelect.OptGroup` to organize related options:
   <NativeSelect.OptGroup label="Engineering">
     <NativeSelect.Option value="frontend">Frontend</NativeSelect.Option>
     <NativeSelect.Option value="backend">Backend</NativeSelect.Option>
+    <NativeSelect.Option value="devops">DevOps</NativeSelect.Option>
   </NativeSelect.OptGroup>
   <NativeSelect.OptGroup label="Sales">
     <NativeSelect.Option value="sales-rep">Sales Rep</NativeSelect.Option>
+    <NativeSelect.Option value="account-manager">Account Manager</NativeSelect.Option>
+    <NativeSelect.Option value="sales-director">Sales Director</NativeSelect.Option>
   </NativeSelect.OptGroup>
 </NativeSelect.Root>
 ```
 
-### Disabled State
+### States
 
-Disable individual options or the entire select:
-
+**Disabled:**
 ```svelte
 <NativeSelect.Root disabled>
   <NativeSelect.Option value="">Select priority</NativeSelect.Option>
   <NativeSelect.Option value="low">Low</NativeSelect.Option>
+  <NativeSelect.Option value="medium">Medium</NativeSelect.Option>
   <NativeSelect.Option value="high">High</NativeSelect.Option>
 </NativeSelect.Root>
 ```
 
-Or disable specific options:
-
-```svelte
-<NativeSelect.Option value="grapes" disabled>Grapes</NativeSelect.Option>
-```
-
-### Invalid State
-
-Use `aria-invalid="true"` to show validation errors:
-
+**Invalid (with aria-invalid):**
 ```svelte
 <NativeSelect.Root aria-invalid="true">
   <NativeSelect.Option value="">Select role</NativeSelect.Option>
   <NativeSelect.Option value="admin">Admin</NativeSelect.Option>
   <NativeSelect.Option value="editor">Editor</NativeSelect.Option>
+  <NativeSelect.Option value="viewer">Viewer</NativeSelect.Option>
 </NativeSelect.Root>
+```
+
+**Individual option disabled:**
+```svelte
+<NativeSelect.Option value="grapes" disabled>Grapes</NativeSelect.Option>
 ```
 
 ### API Reference
 
-**NativeSelect.Root** - Main select component wrapping native HTML select
-- `class`: string - Custom CSS classes
-- All other props pass through to the underlying `<select>` element
+**NativeSelect.Root** - Main select wrapper
+- `class`: string (optional)
+- All other props passed to native `<select>`
 
-**NativeSelect.Option** - Individual option element
-- `value`: string - Option value
-- `disabled`: boolean (default: false) - Disable this option
-- `class`: string - Custom CSS classes
-- All other props pass through to the underlying `<option>` element
+**NativeSelect.Option** - Individual option
+- `value`: string (required)
+- `disabled`: boolean (default: false)
+- `class`: string (optional)
+- All other props passed to native `<option>`
 
-**NativeSelect.OptGroup** - Groups related options
-- `label`: string - Group label
-- `disabled`: boolean (default: false) - Disable entire group
-- `class`: string - Custom CSS classes
-- All other props pass through to the underlying `<optgroup>` element
-
-### When to Use
-
-Use `NativeSelect` for native browser behavior, better performance, and mobile-optimized dropdowns. Use the `Select` component instead when you need custom styling, animations, or complex interactions.
+**NativeSelect.OptGroup** - Option grouping
+- `label`: string (required)
+- `disabled`: boolean (default: false)
+- `class`: string (optional)
+- All other props passed to native `<optgroup>`
 
 ### Accessibility
 
-- Maintains all native HTML select accessibility features
-- Screen readers navigate through options using arrow keys
-- Chevron icon marked as `aria-hidden="true"` to avoid duplication
-- Use `aria-label` or `aria-labelledby` for additional context:
+- Maintains native HTML select accessibility
+- Screen readers navigate with arrow keys
+- Chevron icon marked `aria-hidden="true"`
+- Use `aria-label` or `aria-labelledby` for context:
 
 ```svelte
 <NativeSelect.Root aria-label="Choose your preferred language">
   <NativeSelect.Option value="en">English</NativeSelect.Option>
   <NativeSelect.Option value="es">Spanish</NativeSelect.Option>
+  <NativeSelect.Option value="fr">French</NativeSelect.Option>
 </NativeSelect.Root>
 ```
+
+### NativeSelect vs Select
+
+Use `NativeSelect` for native browser behavior, better performance, or mobile-optimized dropdowns. Use `Select` for custom styling, animations, or complex interactions.

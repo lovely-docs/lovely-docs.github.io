@@ -1,0 +1,1 @@
+Deprecated CohereStream utility (removed in SDK 4.0) that wraps Cohere API responses as ReadableStream with optional lifecycle callbacks.

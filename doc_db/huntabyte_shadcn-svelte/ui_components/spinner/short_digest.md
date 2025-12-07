@@ -3,37 +3,28 @@
 Loading state indicator component.
 
 ### Installation
-
 ```bash
 npx shadcn-svelte@latest add spinner -y -o
 ```
 
 ### Basic Usage
-
 ```svelte
-<script lang="ts">
-  import { Spinner } from "$lib/components/ui/spinner/index.js";
-</script>
 <Spinner />
 ```
 
-### Customization
+### Customization & Examples
 
-Replace the default LoaderIcon by editing the component to use any other icon.
-
-### Examples
-
-**Size & Color**: Use `size-*` and `text-*` utility classes:
+Customize size with `size-*` and color with `text-*` classes:
 ```svelte
 <Spinner class="size-6 text-red-500" />
 ```
 
-**Button**: 
+Use in buttons, badges, input groups, empty states, and item components:
 ```svelte
-<Button disabled size="sm">
-  <Spinner />
-  Loading...
-</Button>
+<Button disabled><Spinner /> Loading...</Button>
+<Badge><Spinner /> Syncing</Badge>
+<InputGroup.Addon><Spinner /></InputGroup.Addon>
+<Item.Media><Spinner /></Item.Media>
 ```
 
-**Badge, Input Group, Empty, Item**: Can be placed in the Media/Addon slots of these components to indicate loading states.
+Replace default icon by editing the component with a custom icon from lucide-svelte.

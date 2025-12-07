@@ -1,1 +1,0 @@
-Framework-agnostic UI toolkit with useChat, useCompletion, useObject hooks for React/Svelte/Vue.js/Angular; useObject unavailable in Vue.js.

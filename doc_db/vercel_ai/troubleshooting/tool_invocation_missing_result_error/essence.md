@@ -1,1 +1,1 @@
-Fix "ToolInvocation must have a result" by either adding `execute` functions to tools or providing results via `addToolOutput` in `useChat`'s `onToolCall` handler.
+Fix "ToolInvocation must have a result" error by either adding `execute` function to tool or using `useChat` with `addToolOutput` for client-side result handling.

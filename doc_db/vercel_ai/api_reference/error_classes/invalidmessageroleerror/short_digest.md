@@ -1,0 +1,1 @@
+Error thrown for invalid message roles. Check with `InvalidMessageRoleError.isInstance(error)`. Has `role` and `message` properties.

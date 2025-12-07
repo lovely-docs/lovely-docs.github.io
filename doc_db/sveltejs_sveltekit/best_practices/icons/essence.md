@@ -1,1 +1,1 @@
-Best practices for including icons in SvelteKit: use CSS-based Iconify or choose Svelte icon libraries that don't create individual .svelte files per icon to avoid Vite optimization problems.
+Two icon approaches: CSS-based via Iconify (supports many sets, integrates with Tailwind/UnoCSS); Svelte libraries (avoid per-icon .svelte files due to Vite optimization issues).

@@ -1,0 +1,1 @@
+Added `$onUpdate()` for dynamic column values on update/insert across PostgreSQL, MySQL, SQLite. Fixed smallserial column insertion optionality.

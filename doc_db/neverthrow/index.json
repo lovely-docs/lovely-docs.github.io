@@ -4,19 +4,20 @@
     "displayName": "",
     "relevant": true,
     "usage": {
-      "input": 17038,
-      "output": 3462,
+      "input": 17105,
+      "output": 2546,
       "details": null
     },
     "token_counts": {
       "fulltext": 15874,
-      "digest": 2753,
-      "short_digest": 574
+      "digest": 2163,
+      "short_digest": 233
     },
     "children": {}
   },
   "name": "neverthrow",
   "ecosystems": [
+    "webdev",
     "js"
   ],
   "source_type": "git",
@@ -24,6 +25,7 @@
     "name": "neverthrow",
     "comment": null,
     "ecosystems": [
+      "webdev",
       "js"
     ],
     "include": [
@@ -34,7 +36,7 @@
     "repo": "https://github.com/supermacro/neverthrow",
     "commit": "de73e225d76bddadec1f2e1c86ec91996f8087a9"
   },
-  "date": "2025-11-16T06:58:34.913400+00:00",
+  "date": "2025-12-07T02:48:11.691613+00:00",
   "model": "claude-haiku-4.5",
-  "commit": "03cf6836cc2db6d6059e9e6e17d1b6e52e660d18-dirty"
+  "commit": "89d7a82f10a43f14d4fd63c518b2eaed000cc5c9-dirty"
 }

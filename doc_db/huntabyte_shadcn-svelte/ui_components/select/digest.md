@@ -8,7 +8,7 @@ Displays a dropdown list of options for users to pick from, triggered by a butto
 npx shadcn-svelte@latest add select -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Basic Usage
 
@@ -27,16 +27,7 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </Select.Root>
 ```
 
-### Key Components
-
-- `Select.Root`: Container with `type="single"` for single selection, accepts `name` and `bind:value` for form binding
-- `Select.Trigger`: Button that opens the dropdown
-- `Select.Content`: Container for dropdown items
-- `Select.Group`: Groups related items
-- `Select.Label`: Labels for item groups
-- `Select.Item`: Individual selectable item with `value`, `label`, and optional `disabled` props
-
-### Dynamic Options Example
+### With State Management
 
 ```svelte
 <script lang="ts">
@@ -57,9 +48,7 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </script>
 
 <Select.Root type="single" name="favoriteFruit" bind:value>
-  <Select.Trigger class="w-[180px]">
-    {triggerContent}
-  </Select.Trigger>
+  <Select.Trigger class="w-[180px]">{triggerContent}</Select.Trigger>
   <Select.Content>
     <Select.Group>
       <Select.Label>Fruits</Select.Label>
@@ -78,8 +67,6 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 ```
 
 ### Form Integration
-
-Integrate with sveltekit-superforms and Zod validation:
 
 ```svelte
 <script lang="ts" module>
@@ -107,7 +94,6 @@ Integrate with sveltekit-superforms and Zod validation:
       }
     }
   });
-  
   const { form: formData, enhance } = form;
 </script>
 
@@ -116,13 +102,9 @@ Integrate with sveltekit-superforms and Zod validation:
     <Form.Control>
       {#snippet children({ props })}
         <Form.Label>Email</Form.Label>
-        <Select.Root
-          type="single"
-          bind:value={$formData.email}
-          name={props.name}
-        >
+        <Select.Root type="single" bind:value={$formData.email} name={props.name}>
           <Select.Trigger {...props}>
-            {$formData.email ?? "Select a verified email to display"}
+            {$formData.email ? $formData.email : "Select a verified email to display"}
           </Select.Trigger>
           <Select.Content>
             <Select.Item value="m@example.com" label="m@example.com" />
@@ -133,7 +115,7 @@ Integrate with sveltekit-superforms and Zod validation:
       {/snippet}
     </Form.Control>
     <Form.Description>
-      You can manage email addresses in your email settings.
+      You can manage email address in your email settings.
     </Form.Description>
     <Form.FieldErrors />
   </Form.Field>
@@ -141,4 +123,12 @@ Integrate with sveltekit-superforms and Zod validation:
 </form>
 ```
 
-Reference the Bits UI documentation for full API reference and additional options.
+### Key Features
+
+- **Root component**: `Select.Root` with `type="single"` for single selection
+- **Trigger**: `Select.Trigger` displays the selected value
+- **Content**: `Select.Content` wraps the dropdown options
+- **Items**: `Select.Item` with `value`, `label`, and optional `disabled` props
+- **Grouping**: `Select.Group` and `Select.Label` for organizing items
+- **Binding**: Use `bind:value` to connect to reactive state
+- **Form integration**: Works with sveltekit-superforms for validation and submission

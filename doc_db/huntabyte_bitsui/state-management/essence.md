@@ -1,1 +1,1 @@
-Two state management patterns for Bits UI components: simple two-way binding with bind: and advanced function binding with custom getter/setter logic.
+Two state management patterns: two-way binding for simple cases, function binding (getter/setter) for complex transformations, conditionals, debouncing, or external state integration.

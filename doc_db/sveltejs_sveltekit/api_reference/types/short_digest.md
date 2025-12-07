@@ -1,15 +1,1 @@
-## Generated Types
-
-SvelteKit generates `.d.ts` files for routes, exporting typed `RequestHandler` and `PageLoad` from `$types`:
-```js
-/** @type {import('./$types').RequestHandler} */
-export async function GET({ params }) {}
-```
-
-`$types` exports: `PageData`, `LayoutData`, `ActionData`, `PageProps`, `LayoutProps`.
-
-Extend `tsconfig.json` from `.svelte-kit/tsconfig.json` to enable `$types` imports.
-
-## app.d.ts Ambient Types
-
-Define `App.Error`, `App.Locals`, `App.PageData`, `App.PageState`, `App.Platform` in `app.d.ts` to type SvelteKit features globally.
+SvelteKit auto-generates `.d.ts` files for routes providing typed `RequestHandler` and `Load` with route params via `$types` module. Import types: `PageProps`, `LayoutProps`, `PageData`, `ActionData`. Configure via `tsconfig.json` extending `.svelte-kit/tsconfig.json`. `app.d.ts` defines ambient types: `App.Error`, `App.Locals`, `App.PageData`, `App.PageState`, `App.Platform`. `$lib` and `$lib/server` aliases for common modules and server-only code.

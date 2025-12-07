@@ -1,0 +1,1 @@
+Conditional filtering with `.where()`, combining filters with `and()`/`or()`, dynamic filter arrays, and custom operator creation via `sql` expressions.

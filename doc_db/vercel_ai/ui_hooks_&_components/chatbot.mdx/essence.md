@@ -1,0 +1,1 @@
+useChat hook for building conversational UIs with real-time streaming, state management, customizable status/error handling, request configuration (hook/dynamic/request-level), message metadata, custom transports with trigger-based routing, response stream control (errors, usage, reasoning, sources), image generation, file attachments (FileList/objects), and tool type inference.

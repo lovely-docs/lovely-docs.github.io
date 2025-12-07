@@ -1,9 +1,1 @@
-Type-safe Context API wrapper for sharing data between components.
-
-**Create:** `new Context<Type>("name")`
-
-**Set in parent:** `myContext.set(value)` during initialization
-
-**Read in child:** `myContext.get()` or `myContext.getOr(fallback)`
-
-**Methods:** `exists()`, `get()`, `getOr()`, `set()` - all must be called during component initialization.
+Type-safe Svelte Context API wrapper. Create with `new Context<Type>("name")`, set in parent with `.set(value)` during initialization, read in children with `.get()` or `.getOr(fallback)`. All operations must occur during component initialization.

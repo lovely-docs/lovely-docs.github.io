@@ -1,1 +1,1 @@
-Implement dark mode using mode-watcher library with toggle components and theme persistence.
+Implement dark mode with mode-watcher package: install, add ModeWatcher component to layout, create toggle controls using toggleMode/setMode/resetMode functions.

@@ -1,0 +1,1 @@
+Type helper adding optional `ref` prop to components: `WithElementRef<PropsType, ElementType>` intersects props with `{ ref?: ElementType | null }`

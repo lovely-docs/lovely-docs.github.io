@@ -1,1 +1,1 @@
-Form input component supporting multiple types (text, email, file), disabled/invalid states, labels, helper text, and sveltekit-superforms integration.
+Form input component supporting email, file, disabled, invalid states, labels, descriptions, buttons, and sveltekit-superforms validation integration.

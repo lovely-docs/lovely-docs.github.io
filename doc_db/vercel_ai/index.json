@@ -4,14 +4,14 @@
     "displayName": "",
     "relevant": true,
     "usage": {
-      "input": 16076,
-      "output": 4252,
+      "input": 33032,
+      "output": 1267,
       "details": null
     },
     "token_counts": {
-      "fulltext": 14879,
-      "digest": 3561,
-      "short_digest": 557
+      "fulltext": 31656,
+      "digest": 1016,
+      "short_digest": 145
     },
     "children": {
       "foundations": {
@@ -19,29 +19,29 @@
         "displayName": "Foundations",
         "relevant": true,
         "usage": {
-          "input": 7520,
-          "output": 1195,
+          "input": 7453,
+          "output": 1958,
           "details": null
         },
         "token_counts": {
-          "fulltext": 6396,
-          "digest": 853,
-          "short_digest": 222
+          "fulltext": 6153,
+          "digest": 1686,
+          "short_digest": 166
         },
         "children": {
-          "overview": {
+          "foundational_ai_concepts": {
             "origPath": "02-foundations/01-overview.mdx",
-            "displayName": "Overview",
+            "displayName": "Foundational AI Concepts",
             "relevant": true,
             "usage": {
-              "input": 1792,
-              "output": 501,
+              "input": 1866,
+              "output": 437,
               "details": null
             },
             "token_counts": {
               "fulltext": 624,
-              "digest": 282,
-              "short_digest": 100
+              "digest": 234,
+              "short_digest": 76
             },
             "children": {}
           },
@@ -50,46 +50,46 @@
             "displayName": "Providers and Models",
             "relevant": true,
             "usage": {
-              "input": 6519,
-              "output": 1810,
+              "input": 6593,
+              "output": 2218,
               "details": null
             },
             "token_counts": {
               "fulltext": 5347,
-              "digest": 1238,
-              "short_digest": 439
+              "digest": 1873,
+              "short_digest": 202
             },
             "children": {}
           },
           "prompts": {
             "origPath": "02-foundations/03-prompts.mdx",
-            "displayName": "Prompts",
+            "displayName": "prompts",
             "relevant": true,
             "usage": {
-              "input": 6188,
-              "output": 4102,
+              "input": 6262,
+              "output": 3081,
               "details": null
             },
             "token_counts": {
               "fulltext": 5019,
-              "digest": 3205,
-              "short_digest": 770
+              "digest": 2497,
+              "short_digest": 456
             },
             "children": {}
           },
           "tools": {
             "origPath": "02-foundations/04-tools.mdx",
-            "displayName": "Tools",
+            "displayName": "tools",
             "relevant": true,
             "usage": {
-              "input": 3850,
-              "output": 1709,
+              "input": 3924,
+              "output": 1627,
               "details": null
             },
             "token_counts": {
               "fulltext": 2682,
-              "digest": 1078,
-              "short_digest": 471
+              "digest": 983,
+              "short_digest": 511
             },
             "children": {}
           },
@@ -98,14 +98,14 @@
             "displayName": "Streaming",
             "relevant": true,
             "usage": {
-              "input": 1939,
-              "output": 660,
+              "input": 2013,
+              "output": 626,
               "details": null
             },
             "token_counts": {
               "fulltext": 771,
-              "digest": 359,
-              "short_digest": 177
+              "digest": 343,
+              "short_digest": 164
             },
             "children": {}
           },
@@ -114,14 +114,14 @@
             "displayName": "Foundations",
             "relevant": false,
             "usage": {
-              "input": 1490,
-              "output": 381,
+              "input": 1564,
+              "output": 299,
               "details": null
             },
             "token_counts": {
               "fulltext": 324,
-              "digest": 209,
-              "short_digest": 59
+              "digest": 146,
+              "short_digest": 39
             },
             "children": {}
           }
@@ -132,29 +132,29 @@
         "displayName": "Getting Started",
         "relevant": true,
         "usage": {
-          "input": 11701,
-          "output": 1185,
+          "input": 11471,
+          "output": 4789,
           "details": null
         },
         "token_counts": {
-          "fulltext": 10551,
-          "digest": 807,
-          "short_digest": 262
+          "fulltext": 10139,
+          "digest": 4261,
+          "short_digest": 420
         },
         "children": {
-          "navigating_the_library": {
+          "navigating-the-library": {
             "origPath": "02-getting-started/01-navigating-the-library.mdx",
-            "displayName": "Navigating the Library",
+            "displayName": "navigating-the-library",
             "relevant": true,
             "usage": {
-              "input": 2986,
-              "output": 669,
+              "input": 3060,
+              "output": 901,
               "details": null
             },
             "token_counts": {
               "fulltext": 1809,
-              "digest": 399,
-              "short_digest": 118
+              "digest": 569,
+              "short_digest": 178
             },
             "children": {}
           },
@@ -163,14 +163,14 @@
             "displayName": "Next.js App Router Quickstart",
             "relevant": true,
             "usage": {
-              "input": 7448,
-              "output": 2333,
+              "input": 7522,
+              "output": 2468,
               "details": null
             },
             "token_counts": {
               "fulltext": 6271,
-              "digest": 1679,
-              "short_digest": 514
+              "digest": 1570,
+              "short_digest": 755
             },
             "children": {}
           },
@@ -179,30 +179,30 @@
             "displayName": "Next.js Pages Router Quickstart",
             "relevant": true,
             "usage": {
-              "input": 7318,
-              "output": 2447,
+              "input": 7392,
+              "output": 2396,
               "details": null
             },
             "token_counts": {
               "fulltext": 6141,
-              "digest": 1662,
-              "short_digest": 628
+              "digest": 1617,
+              "short_digest": 636
             },
             "children": {}
           },
-          "svelte": {
+          "svelte-quickstart": {
             "origPath": "02-getting-started/04-svelte.mdx",
-            "displayName": "Svelte",
+            "displayName": "svelte-quickstart",
             "relevant": true,
             "usage": {
-              "input": 7983,
-              "output": 2398,
+              "input": 8057,
+              "output": 1945,
               "details": null
             },
             "token_counts": {
               "fulltext": 6810,
-              "digest": 1453,
-              "short_digest": 796
+              "digest": 1261,
+              "short_digest": 531
             },
             "children": {}
           },
@@ -211,14 +211,14 @@
             "displayName": "Nuxt Quickstart",
             "relevant": true,
             "usage": {
-              "input": 7363,
-              "output": 1964,
+              "input": 7437,
+              "output": 2145,
               "details": null
             },
             "token_counts": {
               "fulltext": 6190,
-              "digest": 1165,
-              "short_digest": 670
+              "digest": 1295,
+              "short_digest": 705
             },
             "children": {}
           },
@@ -227,14 +227,14 @@
             "displayName": "Node.js Quickstart",
             "relevant": true,
             "usage": {
-              "input": 6138,
-              "output": 1910,
+              "input": 6212,
+              "output": 2113,
               "details": null
             },
             "token_counts": {
               "fulltext": 4966,
-              "digest": 1250,
-              "short_digest": 527
+              "digest": 1278,
+              "short_digest": 681
             },
             "children": {}
           },
@@ -243,14 +243,14 @@
             "displayName": "Expo Quickstart",
             "relevant": true,
             "usage": {
-              "input": 9012,
-              "output": 3341,
+              "input": 9086,
+              "output": 2591,
               "details": null
             },
             "token_counts": {
               "fulltext": 7840,
-              "digest": 2570,
-              "short_digest": 654
+              "digest": 2105,
+              "short_digest": 329
             },
             "children": {}
           },
@@ -259,14 +259,14 @@
             "displayName": "Getting Started",
             "relevant": false,
             "usage": {
-              "input": 1529,
-              "output": 305,
+              "input": 1603,
+              "output": 314,
               "details": null
             },
             "token_counts": {
               "fulltext": 359,
-              "digest": 133,
-              "short_digest": 53
+              "digest": 148,
+              "short_digest": 47
             },
             "children": {}
           }
@@ -277,29 +277,29 @@
         "displayName": "Agents",
         "relevant": true,
         "usage": {
-          "input": 5802,
-          "output": 1173,
+          "input": 8554,
+          "output": 3418,
           "details": null
         },
         "token_counts": {
-          "fulltext": 4678,
-          "digest": 944,
-          "short_digest": 113
+          "fulltext": 7254,
+          "digest": 3075,
+          "short_digest": 236
         },
         "children": {
-          "agents_overview": {
+          "agents-overview": {
             "origPath": "03-agents/01-overview.mdx",
-            "displayName": "Agents Overview",
+            "displayName": "agents-overview",
             "relevant": true,
             "usage": {
-              "input": 2087,
-              "output": 1201,
+              "input": 2161,
+              "output": 1082,
               "details": null
             },
             "token_counts": {
               "fulltext": 919,
-              "digest": 657,
-              "short_digest": 407
+              "digest": 613,
+              "short_digest": 341
             },
             "children": {}
           },
@@ -308,30 +308,30 @@
             "displayName": "Building Agents",
             "relevant": true,
             "usage": {
-              "input": 3788,
-              "output": 2542,
+              "input": 3862,
+              "output": 2207,
               "details": null
             },
             "token_counts": {
               "fulltext": 2618,
-              "digest": 1869,
-              "short_digest": 522
+              "digest": 1708,
+              "short_digest": 341
             },
             "children": {}
           },
-          "workflow_patterns": {
+          "workflow-patterns": {
             "origPath": "03-agents/03-workflows.mdx",
-            "displayName": "Workflow Patterns",
+            "displayName": "workflow-patterns",
             "relevant": true,
             "usage": {
-              "input": 4531,
-              "output": 793,
+              "input": 4605,
+              "output": 2523,
               "details": null
             },
             "token_counts": {
               "fulltext": 3363,
-              "digest": 432,
-              "short_digest": 219
+              "digest": 2167,
+              "short_digest": 223
             },
             "children": {}
           },
@@ -340,14 +340,14 @@
             "displayName": "Loop Control",
             "relevant": true,
             "usage": {
-              "input": 3639,
-              "output": 1762,
+              "input": 3713,
+              "output": 1313,
               "details": null
             },
             "token_counts": {
               "fulltext": 2469,
-              "digest": 1084,
-              "short_digest": 550
+              "digest": 1003,
+              "short_digest": 163
             },
             "children": {}
           },
@@ -356,143 +356,143 @@
             "displayName": "Configuring Call Options",
             "relevant": true,
             "usage": {
-              "input": 3362,
-              "output": 610,
+              "input": 3436,
+              "output": 1845,
               "details": null
             },
             "token_counts": {
               "fulltext": 2189,
-              "digest": 378,
-              "short_digest": 105
+              "digest": 1502,
+              "short_digest": 222
             },
             "children": {}
           },
           "agents": {
             "origPath": "03-agents/index.mdx",
-            "displayName": "Agents",
+            "displayName": "agents",
             "relevant": false,
             "usage": {
-              "input": 1480,
-              "output": 340,
+              "input": 1554,
+              "output": 283,
               "details": null
             },
             "token_counts": {
               "fulltext": 314,
-              "digest": 164,
-              "short_digest": 56
+              "digest": 114,
+              "short_digest": 49
             },
             "children": {}
           }
         }
       },
-      "core_functions_&_features": {
+      "core_functions": {
         "origPath": "03-ai-sdk-core",
-        "displayName": "Core Functions & Features",
+        "displayName": "Core Functions",
         "relevant": true,
         "usage": {
-          "input": 26528,
-          "output": 3114,
+          "input": 25692,
+          "output": 2240,
           "details": null
         },
         "token_counts": {
-          "fulltext": 25257,
-          "digest": 2498,
-          "short_digest": 485
+          "fulltext": 24208,
+          "digest": 1941,
+          "short_digest": 175
         },
         "children": {
           "overview": {
             "origPath": "03-ai-sdk-core/01-overview.mdx",
-            "displayName": "Overview",
+            "displayName": "overview",
             "relevant": true,
             "usage": {
-              "input": 1744,
-              "output": 361,
+              "input": 1818,
+              "output": 412,
               "details": null
             },
             "token_counts": {
               "fulltext": 568,
-              "digest": 181,
-              "short_digest": 59
+              "digest": 209,
+              "short_digest": 81
             },
             "children": {}
           },
-          "generating_text": {
+          "generating-text": {
             "origPath": "03-ai-sdk-core/05-generating-text.mdx",
-            "displayName": "Generating Text",
+            "displayName": "generating-text",
             "relevant": true,
             "usage": {
-              "input": 6362,
-              "output": 2954,
+              "input": 6436,
+              "output": 3207,
               "details": null
             },
             "token_counts": {
               "fulltext": 5184,
-              "digest": 2244,
-              "short_digest": 570
+              "digest": 2499,
+              "short_digest": 567
             },
             "children": {}
           },
-          "generating_structured_data": {
+          "generating-structured-data": {
             "origPath": "03-ai-sdk-core/10-generating-structured-data.mdx",
-            "displayName": "Generating Structured Data",
+            "displayName": "generating-structured-data",
             "relevant": true,
             "usage": {
-              "input": 5704,
-              "output": 2739,
+              "input": 5778,
+              "output": 2814,
               "details": null
             },
             "token_counts": {
               "fulltext": 4524,
-              "digest": 1975,
-              "short_digest": 612
+              "digest": 2282,
+              "short_digest": 388
             },
             "children": {}
           },
-          "tool_calling": {
+          "tool-calling": {
             "origPath": "03-ai-sdk-core/15-tools-and-tool-calling.mdx",
-            "displayName": "Tool Calling",
+            "displayName": "tool-calling",
             "relevant": true,
             "usage": {
-              "input": 9086,
-              "output": 6493,
+              "input": 9160,
+              "output": 4415,
               "details": null
             },
             "token_counts": {
               "fulltext": 7904,
-              "digest": 4226,
-              "short_digest": 2088
+              "digest": 3570,
+              "short_digest": 691
             },
             "children": {}
           },
-          "model_context_protocol_(mcp)": {
+          "mcp-tools": {
             "origPath": "03-ai-sdk-core/16-mcp-tools.mdx",
-            "displayName": "Model Context Protocol (MCP)",
+            "displayName": "mcp-tools",
             "relevant": true,
             "usage": {
-              "input": 3984,
-              "output": 1786,
+              "input": 4058,
+              "output": 1963,
               "details": null
             },
             "token_counts": {
               "fulltext": 2805,
-              "digest": 1180,
-              "short_digest": 457
+              "digest": 1322,
+              "short_digest": 508
             },
             "children": {}
           },
-          "prompt_engineering": {
+          "prompt-engineering": {
             "origPath": "03-ai-sdk-core/20-prompt-engineering.mdx",
-            "displayName": "Prompt Engineering",
+            "displayName": "prompt-engineering",
             "relevant": true,
             "usage": {
-              "input": 2459,
-              "output": 1023,
+              "input": 2533,
+              "output": 1026,
               "details": null
             },
             "token_counts": {
               "fulltext": 1281,
-              "digest": 752,
-              "short_digest": 148
+              "digest": 785,
+              "short_digest": 123
             },
             "children": {}
           },
@@ -501,46 +501,46 @@
             "displayName": "Settings",
             "relevant": true,
             "usage": {
-              "input": 2233,
-              "output": 1103,
+              "input": 2307,
+              "output": 939,
               "details": null
             },
             "token_counts": {
               "fulltext": 1057,
-              "digest": 687,
-              "short_digest": 268
+              "digest": 584,
+              "short_digest": 203
             },
             "children": {}
           },
           "embeddings": {
             "origPath": "03-ai-sdk-core/30-embeddings.mdx",
-            "displayName": "Embeddings",
+            "displayName": "embeddings",
             "relevant": true,
             "usage": {
-              "input": 3858,
-              "output": 2006,
+              "input": 3932,
+              "output": 1800,
               "details": null
             },
             "token_counts": {
               "fulltext": 2681,
-              "digest": 1471,
-              "short_digest": 366
+              "digest": 1340,
+              "short_digest": 309
             },
             "children": {}
           },
           "reranking": {
             "origPath": "03-ai-sdk-core/31-reranking.mdx",
-            "displayName": "Reranking",
+            "displayName": "reranking",
             "relevant": true,
             "usage": {
-              "input": 3415,
-              "output": 1881,
+              "input": 3489,
+              "output": 1778,
               "details": null
             },
             "token_counts": {
               "fulltext": 2237,
-              "digest": 1342,
-              "short_digest": 398
+              "digest": 1254,
+              "short_digest": 362
             },
             "children": {}
           },
@@ -549,46 +549,46 @@
             "displayName": "Image Generation",
             "relevant": true,
             "usage": {
-              "input": 7559,
-              "output": 1981,
+              "input": 7633,
+              "output": 1922,
               "details": null
             },
             "token_counts": {
               "fulltext": 6381,
-              "digest": 1421,
-              "short_digest": 400
+              "digest": 1431,
+              "short_digest": 363
             },
             "children": {}
           },
           "transcription": {
             "origPath": "03-ai-sdk-core/36-transcription.mdx",
-            "displayName": "Transcription",
+            "displayName": "transcription",
             "relevant": true,
             "usage": {
-              "input": 3330,
-              "output": 1388,
+              "input": 3404,
+              "output": 1393,
               "details": null
             },
             "token_counts": {
               "fulltext": 2153,
-              "digest": 976,
-              "short_digest": 267
+              "digest": 960,
+              "short_digest": 269
             },
             "children": {}
           },
           "speech": {
             "origPath": "03-ai-sdk-core/37-speech.mdx",
-            "displayName": "Speech",
+            "displayName": "speech",
             "relevant": true,
             "usage": {
-              "input": 2835,
-              "output": 1245,
+              "input": 2909,
+              "output": 1078,
               "details": null
             },
             "token_counts": {
               "fulltext": 1659,
-              "digest": 799,
-              "short_digest": 305
+              "digest": 753,
+              "short_digest": 175
             },
             "children": {}
           },
@@ -597,46 +597,46 @@
             "displayName": "Language Model Middleware",
             "relevant": true,
             "usage": {
-              "input": 4525,
-              "output": 1556,
+              "input": 4599,
+              "output": 1652,
               "details": null
             },
             "token_counts": {
               "fulltext": 3349,
-              "digest": 1177,
-              "short_digest": 230
+              "digest": 1341,
+              "short_digest": 157
             },
             "children": {}
           },
-          "provider_&_model_management": {
+          "provider-and-model-management": {
             "origPath": "03-ai-sdk-core/45-provider-management.mdx",
-            "displayName": "Provider & Model Management",
+            "displayName": "provider-and-model-management",
             "relevant": true,
             "usage": {
-              "input": 3996,
-              "output": 2126,
+              "input": 4070,
+              "output": 1701,
               "details": null
             },
             "token_counts": {
               "fulltext": 2818,
-              "digest": 1646,
-              "short_digest": 343
+              "digest": 1438,
+              "short_digest": 120
             },
             "children": {}
           },
-          "error_handling": {
+          "error-handling": {
             "origPath": "03-ai-sdk-core/50-error-handling.mdx",
-            "displayName": "Error Handling",
+            "displayName": "error-handling",
             "relevant": true,
             "usage": {
-              "input": 2234,
-              "output": 970,
+              "input": 2308,
+              "output": 871,
               "details": null
             },
             "token_counts": {
               "fulltext": 1056,
-              "digest": 715,
-              "short_digest": 130
+              "digest": 679,
+              "short_digest": 64
             },
             "children": {}
           },
@@ -645,223 +645,223 @@
             "displayName": "Testing",
             "relevant": true,
             "usage": {
-              "input": 2977,
-              "output": 1746,
+              "input": 3051,
+              "output": 1956,
               "details": null
             },
             "token_counts": {
               "fulltext": 1801,
-              "digest": 1451,
-              "short_digest": 161
+              "digest": 1387,
+              "short_digest": 431
             },
             "children": {}
           },
           "telemetry": {
             "origPath": "03-ai-sdk-core/60-telemetry.mdx",
-            "displayName": "Telemetry",
+            "displayName": "telemetry",
             "relevant": true,
             "usage": {
-              "input": 6043,
-              "output": 2640,
+              "input": 6117,
+              "output": 1674,
               "details": null
             },
             "token_counts": {
               "fulltext": 4865,
-              "digest": 2012,
-              "short_digest": 454
+              "digest": 1440,
+              "short_digest": 96
             },
             "children": {}
           },
-          "ai_sdk_core": {
+          "core_features": {
             "origPath": "03-ai-sdk-core/index.mdx",
-            "displayName": "AI SDK Core",
+            "displayName": "Core Features",
             "relevant": false,
             "usage": {
-              "input": 1948,
-              "output": 511,
+              "input": 2022,
+              "output": 509,
               "details": null
             },
             "token_counts": {
               "fulltext": 774,
-              "digest": 315,
-              "short_digest": 68
+              "digest": 323,
+              "short_digest": 59
             },
             "children": {}
           }
         }
       },
-      "ui_toolkit": {
+      "ui_hooks_&_components": {
         "origPath": "04-ai-sdk-ui",
-        "displayName": "UI Toolkit",
+        "displayName": "UI Hooks & Components",
         "relevant": true,
         "usage": {
-          "input": 22262,
-          "output": 1384,
+          "input": 24655,
+          "output": 8056,
           "details": null
         },
         "token_counts": {
-          "fulltext": 21026,
-          "digest": 984,
-          "short_digest": 269
+          "fulltext": 23216,
+          "digest": 7038,
+          "short_digest": 830
         },
         "children": {
           "overview": {
             "origPath": "04-ai-sdk-ui/01-overview.mdx",
-            "displayName": "Overview",
+            "displayName": "overview",
             "relevant": true,
             "usage": {
-              "input": 2040,
-              "output": 442,
+              "input": 2114,
+              "output": 361,
               "details": null
             },
             "token_counts": {
               "fulltext": 864,
-              "digest": 227,
-              "short_digest": 89
+              "digest": 175,
+              "short_digest": 61
             },
             "children": {}
           },
-          "chatbot": {
+          "chatbot.mdx": {
             "origPath": "04-ai-sdk-ui/02-chatbot.mdx",
-            "displayName": "Chatbot",
+            "displayName": "chatbot.mdx",
             "relevant": true,
             "usage": {
-              "input": 11236,
-              "output": 6697,
+              "input": 11310,
+              "output": 6300,
               "details": null
             },
             "token_counts": {
               "fulltext": 10059,
-              "digest": 5905,
-              "short_digest": 651
+              "digest": 5010,
+              "short_digest": 1123
             },
             "children": {}
           },
-          "chatbot_message_persistence": {
+          "chatbot-message-persistence": {
             "origPath": "04-ai-sdk-ui/03-chatbot-message-persistence.mdx",
-            "displayName": "Chatbot Message Persistence",
+            "displayName": "chatbot-message-persistence",
             "relevant": true,
             "usage": {
-              "input": 5643,
-              "output": 2899,
+              "input": 5717,
+              "output": 3339,
               "details": null
             },
             "token_counts": {
               "fulltext": 4462,
-              "digest": 2318,
-              "short_digest": 439
+              "digest": 2851,
+              "short_digest": 317
             },
             "children": {}
           },
-          "chatbot_resume_streams": {
+          "resumable_streams": {
             "origPath": "04-ai-sdk-ui/03-chatbot-resume-streams.mdx",
-            "displayName": "Chatbot Resume Streams",
+            "displayName": "Resumable Streams",
             "relevant": true,
             "usage": {
-              "input": 3695,
-              "output": 2301,
+              "input": 3769,
+              "output": 2254,
               "details": null
             },
             "token_counts": {
               "fulltext": 2514,
-              "digest": 1704,
-              "short_digest": 453
+              "digest": 1542,
+              "short_digest": 586
             },
             "children": {}
           },
-          "chatbot_tool_usage": {
+          "chatbot-tool-usage": {
             "origPath": "04-ai-sdk-ui/03-chatbot-tool-usage.mdx",
-            "displayName": "Chatbot Tool Usage",
+            "displayName": "chatbot-tool-usage",
             "relevant": true,
             "usage": {
-              "input": 6116,
-              "output": 3882,
+              "input": 6190,
+              "output": 4672,
               "details": null
             },
             "token_counts": {
               "fulltext": 4935,
-              "digest": 2554,
-              "short_digest": 1139
+              "digest": 2958,
+              "short_digest": 1530
             },
             "children": {}
           },
-          "generative_user_interfaces": {
+          "generative-user-interfaces": {
             "origPath": "04-ai-sdk-ui/04-generative-user-interfaces.mdx",
-            "displayName": "Generative User Interfaces",
+            "displayName": "generative-user-interfaces",
             "relevant": true,
             "usage": {
-              "input": 4485,
-              "output": 952,
+              "input": 4559,
+              "output": 2129,
               "details": null
             },
             "token_counts": {
               "fulltext": 3304,
-              "digest": 534,
-              "short_digest": 280
+              "digest": 1897,
+              "short_digest": 99
             },
             "children": {}
           },
-          "completion": {
+          "usecompletion": {
             "origPath": "04-ai-sdk-ui/05-completion.mdx",
-            "displayName": "Completion",
+            "displayName": "useCompletion",
             "relevant": true,
             "usage": {
-              "input": 2788,
-              "output": 1169,
+              "input": 2862,
+              "output": 968,
               "details": null
             },
             "token_counts": {
               "fulltext": 1612,
-              "digest": 758,
-              "short_digest": 293
+              "digest": 709,
+              "short_digest": 95
             },
             "children": {}
           },
-          "object_generation": {
+          "useobject_hook": {
             "origPath": "04-ai-sdk-ui/08-object-generation.mdx",
-            "displayName": "Object Generation",
+            "displayName": "useObject Hook",
             "relevant": true,
             "usage": {
-              "input": 3650,
-              "output": 1890,
+              "input": 3724,
+              "output": 1509,
               "details": null
             },
             "token_counts": {
               "fulltext": 2472,
-              "digest": 1504,
+              "digest": 1121,
               "short_digest": 253
             },
             "children": {}
           },
-          "streaming_custom_data": {
+          "streaming-custom-data": {
             "origPath": "04-ai-sdk-ui/20-streaming-data.mdx",
-            "displayName": "Streaming Custom Data",
+            "displayName": "streaming-custom-data",
             "relevant": true,
             "usage": {
-              "input": 4350,
-              "output": 1456,
+              "input": 4424,
+              "output": 2164,
               "details": null
             },
             "token_counts": {
               "fulltext": 3172,
-              "digest": 1196,
-              "short_digest": 131
+              "digest": 1933,
+              "short_digest": 103
             },
             "children": {}
           },
-          "error_handling": {
+          "error-handling": {
             "origPath": "04-ai-sdk-ui/21-error-handling.mdx",
-            "displayName": "Error Handling",
+            "displayName": "error-handling",
             "relevant": true,
             "usage": {
-              "input": 2577,
-              "output": 779,
+              "input": 2651,
+              "output": 934,
               "details": null
             },
             "token_counts": {
               "fulltext": 1399,
-              "digest": 458,
-              "short_digest": 163
+              "digest": 664,
+              "short_digest": 133
             },
             "children": {}
           },
@@ -870,14 +870,14 @@
             "displayName": "Transport",
             "relevant": true,
             "usage": {
-              "input": 2051,
-              "output": 997,
+              "input": 2125,
+              "output": 936,
               "details": null
             },
             "token_counts": {
               "fulltext": 875,
-              "digest": 596,
-              "short_digest": 280
+              "digest": 547,
+              "short_digest": 252
             },
             "children": {}
           },
@@ -886,62 +886,62 @@
             "displayName": "Reading UIMessage Streams",
             "relevant": true,
             "usage": {
-              "input": 1993,
-              "output": 1147,
+              "input": 2067,
+              "output": 856,
               "details": null
             },
             "token_counts": {
               "fulltext": 811,
-              "digest": 747,
-              "short_digest": 266
+              "digest": 619,
+              "short_digest": 94
             },
             "children": {}
           },
-          "message_metadata": {
+          "message-metadata": {
             "origPath": "04-ai-sdk-ui/25-message-metadata.mdx",
-            "displayName": "Message Metadata",
+            "displayName": "message-metadata",
             "relevant": true,
             "usage": {
-              "input": 2463,
-              "output": 1145,
+              "input": 2537,
+              "output": 1045,
               "details": null
             },
             "token_counts": {
               "fulltext": 1285,
-              "digest": 695,
-              "short_digest": 320
+              "digest": 837,
+              "short_digest": 74
             },
             "children": {}
           },
-          "stream_protocols": {
+          "stream-protocols.mdx": {
             "origPath": "04-ai-sdk-ui/50-stream-protocol.mdx",
-            "displayName": "Stream Protocols",
+            "displayName": "stream-protocols.mdx",
             "relevant": true,
             "usage": {
-              "input": 4275,
-              "output": 1487,
+              "input": 4349,
+              "output": 1965,
               "details": null
             },
             "token_counts": {
               "fulltext": 3097,
-              "digest": 1096,
-              "short_digest": 239
+              "digest": 1552,
+              "short_digest": 279
             },
             "children": {}
           },
-          "ai_sdk_ui": {
+          "ui_components": {
             "origPath": "04-ai-sdk-ui/index.mdx",
-            "displayName": "AI SDK UI",
+            "displayName": "UI Components",
             "relevant": false,
             "usage": {
-              "input": 1733,
-              "output": 382,
+              "input": 1807,
+              "output": 357,
               "details": null
             },
             "token_counts": {
               "fulltext": 559,
-              "digest": 221,
-              "short_digest": 49
+              "digest": 196,
+              "short_digest": 45
             },
             "children": {}
           }
@@ -952,29 +952,29 @@
         "displayName": "React Server Components",
         "relevant": true,
         "usage": {
-          "input": 12065,
-          "output": 1552,
+          "input": 13017,
+          "output": 2163,
           "details": null
         },
         "token_counts": {
-          "fulltext": 10876,
-          "digest": 1143,
-          "short_digest": 295
+          "fulltext": 11637,
+          "digest": 1845,
+          "short_digest": 200
         },
         "children": {
-          "overview": {
+          "rsc_overview": {
             "origPath": "05-ai-sdk-rsc/01-overview.mdx",
-            "displayName": "Overview",
+            "displayName": "RSC Overview",
             "relevant": true,
             "usage": {
-              "input": 2075,
-              "output": 626,
+              "input": 2149,
+              "output": 542,
               "details": null
             },
             "token_counts": {
               "fulltext": 897,
-              "digest": 330,
-              "short_digest": 167
+              "digest": 319,
+              "short_digest": 106
             },
             "children": {}
           },
@@ -983,142 +983,142 @@
             "displayName": "Streaming React Components",
             "relevant": true,
             "usage": {
-              "input": 3673,
-              "output": 1578,
+              "input": 3747,
+              "output": 1433,
               "details": null
             },
             "token_counts": {
               "fulltext": 2491,
-              "digest": 1090,
-              "short_digest": 362
+              "digest": 1044,
+              "short_digest": 272
             },
             "children": {}
           },
-          "managing_generative_ui_state": {
+          "managing-generative-ui-state": {
             "origPath": "05-ai-sdk-rsc/03-generative-ui-state.mdx",
-            "displayName": "Managing Generative UI State",
+            "displayName": "managing-generative-ui-state",
             "relevant": true,
             "usage": {
-              "input": 3889,
-              "output": 1923,
+              "input": 3963,
+              "output": 1838,
               "details": null
             },
             "token_counts": {
               "fulltext": 2706,
               "digest": 1390,
-              "short_digest": 378
+              "short_digest": 293
             },
             "children": {}
           },
-          "saving_and_restoring_states": {
+          "saving-and-restoring-states": {
             "origPath": "05-ai-sdk-rsc/03-saving-and-restoring-states.mdx",
-            "displayName": "Saving and Restoring States",
+            "displayName": "saving-and-restoring-states",
             "relevant": true,
             "usage": {
-              "input": 2216,
-              "output": 752,
+              "input": 2290,
+              "output": 636,
               "details": null
             },
             "token_counts": {
               "fulltext": 1031,
-              "digest": 533,
-              "short_digest": 90
+              "digest": 447,
+              "short_digest": 60
             },
             "children": {}
           },
-          "multistep_interfaces": {
+          "multistep-interfaces": {
             "origPath": "05-ai-sdk-rsc/04-multistep-interfaces.mdx",
-            "displayName": "Multistep Interfaces",
+            "displayName": "multistep-interfaces",
             "relevant": true,
             "usage": {
-              "input": 3839,
-              "output": 1740,
+              "input": 3913,
+              "output": 3075,
               "details": null
             },
             "token_counts": {
               "fulltext": 2657,
-              "digest": 1339,
-              "short_digest": 277
+              "digest": 1751,
+              "short_digest": 1196
             },
             "children": {}
           },
-          "streaming_values": {
+          "streaming-values": {
             "origPath": "05-ai-sdk-rsc/05-streaming-values.mdx",
-            "displayName": "Streaming Values",
+            "displayName": "streaming-values",
             "relevant": true,
             "usage": {
-              "input": 2717,
-              "output": 1161,
+              "input": 2791,
+              "output": 1023,
               "details": null
             },
             "token_counts": {
               "fulltext": 1537,
-              "digest": 816,
-              "short_digest": 226
+              "digest": 690,
+              "short_digest": 195
             },
             "children": {}
           },
-          "handling_loading_state": {
+          "loading-state": {
             "origPath": "05-ai-sdk-rsc/06-loading-state.mdx",
-            "displayName": "Handling Loading State",
+            "displayName": "loading-state",
             "relevant": true,
             "usage": {
-              "input": 3388,
-              "output": 1885,
+              "input": 3462,
+              "output": 1394,
               "details": null
             },
             "token_counts": {
               "fulltext": 2208,
-              "digest": 1606,
-              "short_digest": 154
+              "digest": 1159,
+              "short_digest": 113
             },
             "children": {}
           },
-          "error_handling": {
+          "error-handling": {
             "origPath": "05-ai-sdk-rsc/08-error-handling.mdx",
-            "displayName": "Error Handling",
+            "displayName": "error-handling",
             "relevant": true,
             "usage": {
-              "input": 1974,
-              "output": 827,
+              "input": 2048,
+              "output": 699,
               "details": null
             },
             "token_counts": {
               "fulltext": 794,
-              "digest": 570,
-              "short_digest": 138
+              "digest": 499,
+              "short_digest": 77
             },
             "children": {}
           },
-          "handling_authentication": {
+          "authentication": {
             "origPath": "05-ai-sdk-rsc/09-authentication.mdx",
-            "displayName": "Handling Authentication",
+            "displayName": "authentication",
             "relevant": true,
             "usage": {
-              "input": 1560,
-              "output": 504,
+              "input": 1634,
+              "output": 356,
               "details": null
             },
             "token_counts": {
               "fulltext": 382,
-              "digest": 300,
-              "short_digest": 91
+              "digest": 224,
+              "short_digest": 31
             },
             "children": {}
           },
-          "migrating_from_rsc_to_ui": {
+          "migrating-to-ui": {
             "origPath": "05-ai-sdk-rsc/10-migrating-to-ui.mdx",
-            "displayName": "Migrating from RSC to UI",
+            "displayName": "migrating-to-ui",
             "relevant": true,
             "usage": {
-              "input": 7212,
-              "output": 3039,
+              "input": 7286,
+              "output": 4138,
               "details": null
             },
             "token_counts": {
               "fulltext": 6029,
-              "digest": 2475,
-              "short_digest": 418
+              "digest": 3695,
+              "short_digest": 291
             },
             "children": {}
           },
@@ -1127,14 +1127,14 @@
             "displayName": "RSC",
             "relevant": false,
             "usage": {
-              "input": 1704,
-              "output": 364,
+              "input": 1778,
+              "output": 369,
               "details": null
             },
             "token_counts": {
               "fulltext": 528,
-              "digest": 194,
-              "short_digest": 55
+              "digest": 208,
+              "short_digest": 50
             },
             "children": {}
           }
@@ -1145,14 +1145,14 @@
         "displayName": "Advanced Patterns",
         "relevant": true,
         "usage": {
-          "input": 8142,
-          "output": 1232,
+          "input": 8394,
+          "output": 2533,
           "details": null
         },
         "token_counts": {
-          "fulltext": 6946,
-          "digest": 752,
-          "short_digest": 370
+          "fulltext": 7004,
+          "digest": 2067,
+          "short_digest": 356
         },
         "children": {
           "prompt_engineering": {
@@ -1160,29 +1160,29 @@
             "displayName": "Prompt Engineering",
             "relevant": true,
             "usage": {
-              "input": 2555,
-              "output": 865,
+              "input": 2629,
+              "output": 880,
               "details": null
             },
             "token_counts": {
               "fulltext": 1385,
-              "digest": 580,
-              "short_digest": 157
+              "digest": 577,
+              "short_digest": 184
             },
             "children": {}
           },
-          "stopping_streams": {
+          "stopping-streams": {
             "origPath": "06-advanced/02-stopping-streams.mdx",
-            "displayName": "Stopping Streams",
+            "displayName": "stopping-streams",
             "relevant": true,
             "usage": {
-              "input": 2689,
-              "output": 1207,
+              "input": 2763,
+              "output": 1213,
               "details": null
             },
             "token_counts": {
               "fulltext": 1519,
-              "digest": 861,
+              "digest": 882,
               "short_digest": 206
             },
             "children": {}
@@ -1192,30 +1192,30 @@
             "displayName": "Backpressure",
             "relevant": true,
             "usage": {
-              "input": 3368,
-              "output": 903,
+              "input": 3442,
+              "output": 1104,
               "details": null
             },
             "token_counts": {
               "fulltext": 2197,
-              "digest": 544,
-              "short_digest": 224
+              "digest": 701,
+              "short_digest": 270
             },
             "children": {}
           },
           "caching": {
             "origPath": "06-advanced/04-caching.mdx",
-            "displayName": "Caching",
+            "displayName": "caching",
             "relevant": true,
             "usage": {
-              "input": 2900,
-              "output": 1409,
+              "input": 2974,
+              "output": 1270,
               "details": null
             },
             "token_counts": {
               "fulltext": 1731,
-              "digest": 1081,
-              "short_digest": 207
+              "digest": 1029,
+              "short_digest": 119
             },
             "children": {}
           },
@@ -1224,62 +1224,62 @@
             "displayName": "Multiple Streamables",
             "relevant": true,
             "usage": {
-              "input": 1853,
-              "output": 751,
+              "input": 1927,
+              "output": 681,
               "details": null
             },
             "token_counts": {
               "fulltext": 682,
-              "digest": 515,
-              "short_digest": 117
+              "digest": 474,
+              "short_digest": 93
             },
             "children": {}
           },
-          "rate_limiting": {
+          "rate-limiting": {
             "origPath": "06-advanced/06-rate-limiting.mdx",
-            "displayName": "Rate Limiting",
+            "displayName": "rate-limiting",
             "relevant": true,
             "usage": {
-              "input": 1734,
-              "output": 567,
+              "input": 1808,
+              "output": 615,
               "details": null
             },
             "token_counts": {
               "fulltext": 564,
-              "digest": 358,
-              "short_digest": 79
+              "digest": 409,
+              "short_digest": 80
             },
             "children": {}
           },
-          "rendering_ui_with_language_models": {
+          "rendering-ui-with-language-models": {
             "origPath": "06-advanced/07-rendering-ui-with-language-models.mdx",
-            "displayName": "Rendering UI with Language Models",
+            "displayName": "rendering-ui-with-language-models",
             "relevant": true,
             "usage": {
-              "input": 3243,
-              "output": 939,
+              "input": 3317,
+              "output": 1003,
               "details": null
             },
             "token_counts": {
               "fulltext": 2067,
-              "digest": 584,
-              "short_digest": 216
+              "digest": 640,
+              "short_digest": 225
             },
             "children": {}
           },
-          "language_models_as_routers": {
+          "language-models-as-routers": {
             "origPath": "06-advanced/08-model-as-router.mdx",
-            "displayName": "Language Models as Routers",
+            "displayName": "language-models-as-routers",
             "relevant": true,
             "usage": {
-              "input": 2546,
-              "output": 769,
+              "input": 2620,
+              "output": 989,
               "details": null
             },
             "token_counts": {
               "fulltext": 1374,
-              "digest": 573,
-              "short_digest": 75
+              "digest": 570,
+              "short_digest": 285
             },
             "children": {}
           },
@@ -1288,30 +1288,30 @@
             "displayName": "Multistep Interfaces",
             "relevant": true,
             "usage": {
-              "input": 2868,
-              "output": 1185,
+              "input": 2942,
+              "output": 800,
               "details": null
             },
             "token_counts": {
               "fulltext": 1696,
-              "digest": 765,
-              "short_digest": 301
+              "digest": 554,
+              "short_digest": 130
             },
             "children": {}
           },
-          "sequential_generations": {
+          "sequential-generations": {
             "origPath": "06-advanced/09-sequential-generations.mdx",
-            "displayName": "Sequential Generations",
+            "displayName": "sequential-generations",
             "relevant": true,
             "usage": {
-              "input": 1715,
-              "output": 350,
+              "input": 1789,
+              "output": 536,
               "details": null
             },
             "token_counts": {
               "fulltext": 545,
-              "digest": 197,
-              "short_digest": 45
+              "digest": 387,
+              "short_digest": 41
             },
             "children": {}
           },
@@ -1320,14 +1320,14 @@
             "displayName": "Vercel Deployment Guide",
             "relevant": true,
             "usage": {
-              "input": 2600,
-              "output": 652,
+              "input": 2674,
+              "output": 576,
               "details": null
             },
             "token_counts": {
               "fulltext": 1427,
-              "digest": 455,
-              "short_digest": 73
+              "digest": 375,
+              "short_digest": 77
             },
             "children": {}
           },
@@ -1336,14 +1336,14 @@
             "displayName": "Advanced",
             "relevant": false,
             "usage": {
-              "input": 1274,
-              "output": 211,
+              "input": 1348,
+              "output": 212,
               "details": null
             },
             "token_counts": {
               "fulltext": 108,
               "digest": 70,
-              "short_digest": 37
+              "short_digest": 34
             },
             "children": {}
           }
@@ -1354,29 +1354,29 @@
         "displayName": "API Reference",
         "relevant": true,
         "usage": {
-          "input": 4185,
-          "output": 1984,
+          "input": 7303,
+          "output": 6160,
           "details": null
         },
         "token_counts": {
-          "fulltext": 3071,
-          "digest": 1477,
-          "short_digest": 389
+          "fulltext": 6002,
+          "digest": 5600,
+          "short_digest": 434
         },
         "children": {
-          "core_api_reference": {
+          "core_api_functions": {
             "origPath": "07-reference/01-ai-sdk-core",
-            "displayName": "Core API Reference",
+            "displayName": "Core API Functions",
             "relevant": true,
             "usage": {
-              "input": 31146,
-              "output": 1609,
+              "input": 29601,
+              "output": 2407,
               "details": null
             },
             "token_counts": {
-              "fulltext": 29595,
-              "digest": 1052,
-              "short_digest": 441
+              "fulltext": 27769,
+              "digest": 1947,
+              "short_digest": 339
             },
             "children": {
               "generatetext": {
@@ -1384,14 +1384,14 @@
                 "displayName": "generateText",
                 "relevant": true,
                 "usage": {
-                  "input": 16016,
-                  "output": 1994,
+                  "input": 16090,
+                  "output": 2510,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 14830,
-                  "digest": 1465,
-                  "short_digest": 413
+                  "digest": 1937,
+                  "short_digest": 453
                 },
                 "children": {}
               },
@@ -1400,14 +1400,14 @@
                 "displayName": "streamText",
                 "relevant": true,
                 "usage": {
-                  "input": 24357,
-                  "output": 2902,
+                  "input": 24431,
+                  "output": 3712,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 23171,
-                  "digest": 2314,
-                  "short_digest": 460
+                  "digest": 2821,
+                  "short_digest": 769
                 },
                 "children": {}
               },
@@ -1416,14 +1416,14 @@
                 "displayName": "generateObject",
                 "relevant": true,
                 "usage": {
-                  "input": 7343,
-                  "output": 2475,
+                  "input": 7417,
+                  "output": 1861,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 6157,
-                  "digest": 1498,
-                  "short_digest": 850
+                  "digest": 1325,
+                  "short_digest": 414
                 },
                 "children": {}
               },
@@ -1432,14 +1432,14 @@
                 "displayName": "streamObject",
                 "relevant": true,
                 "usage": {
-                  "input": 9821,
-                  "output": 2629,
+                  "input": 9895,
+                  "output": 2074,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 8635,
-                  "digest": 1774,
-                  "short_digest": 730
+                  "digest": 1438,
+                  "short_digest": 515
                 },
                 "children": {}
               },
@@ -1448,14 +1448,14 @@
                 "displayName": "embed",
                 "relevant": true,
                 "usage": {
-                  "input": 2512,
-                  "output": 1009,
+                  "input": 2586,
+                  "output": 766,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 1328,
-                  "digest": 589,
-                  "short_digest": 288
+                  "digest": 501,
+                  "short_digest": 146
                 },
                 "children": {}
               },
@@ -1464,13 +1464,13 @@
                 "displayName": "embedMany",
                 "relevant": true,
                 "usage": {
-                  "input": 2455,
-                  "output": 829,
+                  "input": 2529,
+                  "output": 809,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 1269,
-                  "digest": 558,
+                  "digest": 526,
                   "short_digest": 153
                 },
                 "children": {}
@@ -1480,14 +1480,14 @@
                 "displayName": "rerank",
                 "relevant": true,
                 "usage": {
-                  "input": 3486,
-                  "output": 1738,
+                  "input": 3560,
+                  "output": 1497,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 2301,
-                  "digest": 1042,
-                  "short_digest": 557
+                  "digest": 1044,
+                  "short_digest": 336
                 },
                 "children": {}
               },
@@ -1496,14 +1496,14 @@
                 "displayName": "generateImage",
                 "relevant": true,
                 "usage": {
-                  "input": 2654,
-                  "output": 829,
+                  "input": 2728,
+                  "output": 825,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 1468,
-                  "digest": 489,
-                  "short_digest": 179
+                  "digest": 503,
+                  "short_digest": 170
                 },
                 "children": {}
               },
@@ -1512,14 +1512,14 @@
                 "displayName": "transcribe",
                 "relevant": true,
                 "usage": {
-                  "input": 2186,
-                  "output": 863,
+                  "input": 2260,
+                  "output": 651,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 1001,
-                  "digest": 460,
-                  "short_digest": 284
+                  "digest": 388,
+                  "short_digest": 154
                 },
                 "children": {}
               },
@@ -1528,30 +1528,30 @@
                 "displayName": "generateSpeech",
                 "relevant": true,
                 "usage": {
-                  "input": 2738,
-                  "output": 990,
+                  "input": 2812,
+                  "output": 691,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 1552,
-                  "digest": 642,
-                  "short_digest": 210
+                  "digest": 509,
+                  "short_digest": 53
                 },
                 "children": {}
               },
-              "agent_interface": {
+              "agent.mdx": {
                 "origPath": "07-reference/01-ai-sdk-core/15-agent.mdx",
-                "displayName": "Agent Interface",
+                "displayName": "agent.mdx",
                 "relevant": true,
                 "usage": {
-                  "input": 3166,
-                  "output": 1365,
+                  "input": 3240,
+                  "output": 1493,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 1982,
-                  "digest": 850,
-                  "short_digest": 389
+                  "digest": 995,
+                  "short_digest": 371
                 },
                 "children": {}
               },
@@ -1560,14 +1560,14 @@
                 "displayName": "ToolLoopAgent",
                 "relevant": true,
                 "usage": {
-                  "input": 4608,
-                  "output": 1864,
+                  "input": 4682,
+                  "output": 1605,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 3420,
-                  "digest": 1281,
-                  "short_digest": 464
+                  "digest": 1089,
+                  "short_digest": 392
                 },
                 "children": {}
               },
@@ -1576,14 +1576,14 @@
                 "displayName": "createAgentUIStream",
                 "relevant": true,
                 "usage": {
-                  "input": 2484,
-                  "output": 1189,
+                  "input": 2558,
+                  "output": 920,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 1294,
-                  "digest": 783,
-                  "short_digest": 274
+                  "digest": 590,
+                  "short_digest": 208
                 },
                 "children": {}
               },
@@ -1592,14 +1592,14 @@
                 "displayName": "createAgentUIStreamResponse",
                 "relevant": true,
                 "usage": {
-                  "input": 2518,
-                  "output": 909,
+                  "input": 2592,
+                  "output": 772,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 1326,
-                  "digest": 540,
-                  "short_digest": 225
+                  "digest": 494,
+                  "short_digest": 152
                 },
                 "children": {}
               },
@@ -1608,14 +1608,14 @@
                 "displayName": "pipeAgentUIStreamToResponse",
                 "relevant": true,
                 "usage": {
-                  "input": 2596,
-                  "output": 1306,
+                  "input": 2670,
+                  "output": 900,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 1402,
-                  "digest": 889,
-                  "short_digest": 281
+                  "digest": 605,
+                  "short_digest": 152
                 },
                 "children": {}
               },
@@ -1624,14 +1624,14 @@
                 "displayName": "tool",
                 "relevant": true,
                 "usage": {
-                  "input": 2919,
-                  "output": 1034,
+                  "input": 2993,
+                  "output": 1163,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 1735,
-                  "digest": 688,
-                  "short_digest": 228
+                  "digest": 809,
+                  "short_digest": 249
                 },
                 "children": {}
               },
@@ -1640,46 +1640,46 @@
                 "displayName": "dynamicTool",
                 "relevant": true,
                 "usage": {
-                  "input": 2540,
-                  "output": 1282,
+                  "input": 2614,
+                  "output": 853,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 1354,
-                  "digest": 826,
-                  "short_digest": 292
+                  "digest": 672,
+                  "short_digest": 67
                 },
                 "children": {}
               },
-              "experimental_createmcpclient": {
+              "createmcpclient": {
                 "origPath": "07-reference/01-ai-sdk-core/23-create-mcp-client.mdx",
-                "displayName": "experimental_createMCPClient",
+                "displayName": "createMCPClient",
                 "relevant": true,
                 "usage": {
-                  "input": 4149,
-                  "output": 1625,
+                  "input": 4223,
+                  "output": 919,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 2960,
-                  "digest": 1019,
-                  "short_digest": 444
+                  "digest": 663,
+                  "short_digest": 119
                 },
                 "children": {}
               },
-              "experimental_stdiomcptransport": {
+              "stdiomcptransport": {
                 "origPath": "07-reference/01-ai-sdk-core/24-mcp-stdio-transport.mdx",
-                "displayName": "Experimental_StdioMCPTransport",
+                "displayName": "StdioMCPTransport",
                 "relevant": true,
                 "usage": {
-                  "input": 1683,
-                  "output": 492,
+                  "input": 1757,
+                  "output": 375,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 494,
-                  "digest": 230,
-                  "short_digest": 137
+                  "digest": 210,
+                  "short_digest": 45
                 },
                 "children": {}
               },
@@ -1688,14 +1688,14 @@
                 "displayName": "jsonSchema",
                 "relevant": true,
                 "usage": {
-                  "input": 1898,
-                  "output": 838,
+                  "input": 1972,
+                  "output": 773,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 712,
-                  "digest": 430,
-                  "short_digest": 295
+                  "digest": 432,
+                  "short_digest": 228
                 },
                 "children": {}
               },
@@ -1704,14 +1704,14 @@
                 "displayName": "zodSchema",
                 "relevant": true,
                 "usage": {
-                  "input": 2078,
-                  "output": 895,
+                  "input": 2152,
+                  "output": 819,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 891,
-                  "digest": 503,
-                  "short_digest": 271
+                  "digest": 490,
+                  "short_digest": 208
                 },
                 "children": {}
               },
@@ -1720,14 +1720,14 @@
                 "displayName": "valibotSchema",
                 "relevant": true,
                 "usage": {
-                  "input": 1568,
-                  "output": 484,
+                  "input": 1642,
+                  "output": 461,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 380,
-                  "digest": 247,
-                  "short_digest": 119
+                  "digest": 227,
+                  "short_digest": 121
                 },
                 "children": {}
               },
@@ -1736,14 +1736,14 @@
                 "displayName": "ModelMessage",
                 "relevant": true,
                 "usage": {
-                  "input": 3621,
-                  "output": 1347,
+                  "input": 3695,
+                  "output": 1286,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 2435,
-                  "digest": 834,
-                  "short_digest": 380
+                  "digest": 803,
+                  "short_digest": 351
                 },
                 "children": {}
               },
@@ -1752,14 +1752,14 @@
                 "displayName": "UIMessage",
                 "relevant": true,
                 "usage": {
-                  "input": 2811,
-                  "output": 2020,
+                  "input": 2885,
+                  "output": 1621,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 1625,
-                  "digest": 1275,
-                  "short_digest": 604
+                  "digest": 1215,
+                  "short_digest": 276
                 },
                 "children": {}
               },
@@ -1768,14 +1768,14 @@
                 "displayName": "validateUIMessages",
                 "relevant": true,
                 "usage": {
-                  "input": 1843,
-                  "output": 995,
+                  "input": 1917,
+                  "output": 773,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 655,
-                  "digest": 692,
-                  "short_digest": 189
+                  "digest": 610,
+                  "short_digest": 51
                 },
                 "children": {}
               },
@@ -1784,30 +1784,30 @@
                 "displayName": "safeValidateUIMessages",
                 "relevant": true,
                 "usage": {
-                  "input": 1966,
-                  "output": 1123,
+                  "input": 2040,
+                  "output": 905,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 776,
-                  "digest": 771,
-                  "short_digest": 229
+                  "digest": 681,
+                  "short_digest": 111
                 },
                 "children": {}
               },
-              "createproviderregistry": {
+              "provider_registry": {
                 "origPath": "07-reference/01-ai-sdk-core/40-provider-registry.mdx",
-                "displayName": "createProviderRegistry",
+                "displayName": "Provider Registry",
                 "relevant": true,
                 "usage": {
-                  "input": 2512,
-                  "output": 1061,
+                  "input": 2586,
+                  "output": 916,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 1326,
-                  "digest": 607,
-                  "short_digest": 327
+                  "digest": 567,
+                  "short_digest": 226
                 },
                 "children": {}
               },
@@ -1816,14 +1816,14 @@
                 "displayName": "customProvider",
                 "relevant": true,
                 "usage": {
-                  "input": 2093,
-                  "output": 808,
+                  "input": 2167,
+                  "output": 684,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 907,
-                  "digest": 510,
-                  "short_digest": 160
+                  "digest": 454,
+                  "short_digest": 91
                 },
                 "children": {}
               },
@@ -1832,14 +1832,14 @@
                 "displayName": "cosineSimilarity",
                 "relevant": true,
                 "usage": {
-                  "input": 1576,
-                  "output": 551,
+                  "input": 1650,
+                  "output": 505,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 389,
-                  "digest": 284,
-                  "short_digest": 143
+                  "digest": 248,
+                  "short_digest": 141
                 },
                 "children": {}
               },
@@ -1848,14 +1848,14 @@
                 "displayName": "wrapLanguageModel",
                 "relevant": true,
                 "usage": {
-                  "input": 1634,
-                  "output": 451,
+                  "input": 1708,
+                  "output": 408,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 446,
-                  "digest": 234,
-                  "short_digest": 96
+                  "digest": 227,
+                  "short_digest": 56
                 },
                 "children": {}
               },
@@ -1864,46 +1864,46 @@
                 "displayName": "LanguageModelV3Middleware",
                 "relevant": true,
                 "usage": {
-                  "input": 1626,
-                  "output": 445,
+                  "input": 1700,
+                  "output": 489,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 435,
-                  "digest": 224,
-                  "short_digest": 81
+                  "digest": 293,
+                  "short_digest": 76
                 },
                 "children": {}
               },
-              "extractreasoningmiddleware": {
+              "extract-reasoning-middleware": {
                 "origPath": "07-reference/01-ai-sdk-core/66-extract-reasoning-middleware.mdx",
-                "displayName": "extractReasoningMiddleware",
+                "displayName": "extract-reasoning-middleware",
                 "relevant": true,
                 "usage": {
-                  "input": 1676,
-                  "output": 585,
+                  "input": 1750,
+                  "output": 509,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 488,
-                  "digest": 285,
-                  "short_digest": 146
+                  "digest": 287,
+                  "short_digest": 85
                 },
                 "children": {}
               },
-              "simulatestreamingmiddleware": {
+              "simulate-streaming-middleware": {
                 "origPath": "07-reference/01-ai-sdk-core/67-simulate-streaming-middleware.mdx",
-                "displayName": "simulateStreamingMiddleware",
+                "displayName": "simulate-streaming-middleware",
                 "relevant": true,
                 "usage": {
-                  "input": 1656,
-                  "output": 601,
+                  "input": 1730,
+                  "output": 511,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 468,
-                  "digest": 339,
-                  "short_digest": 133
+                  "digest": 290,
+                  "short_digest": 104
                 },
                 "children": {}
               },
@@ -1912,14 +1912,14 @@
                 "displayName": "defaultSettingsMiddleware",
                 "relevant": true,
                 "usage": {
-                  "input": 1715,
-                  "output": 654,
+                  "input": 1789,
+                  "output": 592,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 527,
-                  "digest": 399,
-                  "short_digest": 138
+                  "digest": 391,
+                  "short_digest": 77
                 },
                 "children": {}
               },
@@ -1928,14 +1928,14 @@
                 "displayName": "stepCountIs",
                 "relevant": true,
                 "usage": {
-                  "input": 1767,
-                  "output": 648,
+                  "input": 1841,
+                  "output": 434,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 579,
-                  "digest": 374,
-                  "short_digest": 146
+                  "digest": 264,
+                  "short_digest": 50
                 },
                 "children": {}
               },
@@ -1944,14 +1944,14 @@
                 "displayName": "hasToolCall",
                 "relevant": true,
                 "usage": {
-                  "input": 2000,
-                  "output": 826,
+                  "input": 2074,
+                  "output": 588,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 812,
-                  "digest": 499,
-                  "short_digest": 197
+                  "digest": 416,
+                  "short_digest": 57
                 },
                 "children": {}
               },
@@ -1960,14 +1960,14 @@
                 "displayName": "simulateReadableStream",
                 "relevant": true,
                 "usage": {
-                  "input": 1886,
-                  "output": 841,
+                  "input": 1960,
+                  "output": 531,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 698,
-                  "digest": 450,
-                  "short_digest": 261
+                  "digest": 339,
+                  "short_digest": 72
                 },
                 "children": {}
               },
@@ -1976,14 +1976,14 @@
                 "displayName": "smoothStream",
                 "relevant": true,
                 "usage": {
-                  "input": 2194,
-                  "output": 1135,
+                  "input": 2268,
+                  "output": 1027,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 1008,
-                  "digest": 624,
-                  "short_digest": 388
+                  "digest": 579,
+                  "short_digest": 324
                 },
                 "children": {}
               },
@@ -1992,14 +1992,14 @@
                 "displayName": "generateId",
                 "relevant": true,
                 "usage": {
-                  "input": 1419,
-                  "output": 282,
+                  "input": 1493,
+                  "output": 280,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 233,
-                  "digest": 123,
-                  "short_digest": 54
+                  "digest": 119,
+                  "short_digest": 56
                 },
                 "children": {}
               },
@@ -2008,48 +2008,48 @@
                 "displayName": "createIdGenerator",
                 "relevant": true,
                 "usage": {
-                  "input": 1799,
-                  "output": 488,
+                  "input": 1873,
+                  "output": 571,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 611,
-                  "digest": 279,
-                  "short_digest": 99
+                  "digest": 322,
+                  "short_digest": 135
                 },
                 "children": {}
               },
-              "ai_sdk_core": {
+              "core_functions_reference": {
                 "origPath": "07-reference/01-ai-sdk-core/index.mdx",
-                "displayName": "AI SDK Core",
+                "displayName": "Core Functions Reference",
                 "relevant": false,
                 "usage": {
-                  "input": 2571,
-                  "output": 745,
+                  "input": 2645,
+                  "output": 624,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 1389,
-                  "digest": 462,
-                  "short_digest": 165
+                  "digest": 447,
+                  "short_digest": 52
                 },
                 "children": {}
               }
             }
           },
-          "ui_hooks_&_utilities": {
+          "ui_hooks_&_streaming": {
             "origPath": "07-reference/02-ai-sdk-ui",
-            "displayName": "UI Hooks & Utilities",
+            "displayName": "UI Hooks & Streaming",
             "relevant": true,
             "usage": {
-              "input": 7922,
-              "output": 853,
+              "input": 7909,
+              "output": 1557,
               "details": null
             },
             "token_counts": {
-              "fulltext": 6719,
-              "digest": 539,
-              "short_digest": 192
+              "fulltext": 6497,
+              "digest": 1136,
+              "short_digest": 303
             },
             "children": {
               "usechat": {
@@ -2057,14 +2057,14 @@
                 "displayName": "useChat",
                 "relevant": true,
                 "usage": {
-                  "input": 4904,
-                  "output": 1483,
+                  "input": 4978,
+                  "output": 1015,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 3718,
-                  "digest": 1088,
-                  "short_digest": 273
+                  "digest": 829,
+                  "short_digest": 70
                 },
                 "children": {}
               },
@@ -2073,14 +2073,14 @@
                 "displayName": "useCompletion",
                 "relevant": true,
                 "usage": {
-                  "input": 2631,
-                  "output": 955,
+                  "input": 2705,
+                  "output": 886,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 1445,
-                  "digest": 625,
-                  "short_digest": 212
+                  "digest": 629,
+                  "short_digest": 139
                 },
                 "children": {}
               },
@@ -2089,14 +2089,14 @@
                 "displayName": "useObject",
                 "relevant": true,
                 "usage": {
-                  "input": 2536,
-                  "output": 986,
+                  "input": 2610,
+                  "output": 871,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 1350,
-                  "digest": 622,
-                  "short_digest": 236
+                  "digest": 584,
+                  "short_digest": 165
                 },
                 "children": {}
               },
@@ -2105,14 +2105,14 @@
                 "displayName": "convertToModelMessages",
                 "relevant": true,
                 "usage": {
-                  "input": 2968,
-                  "output": 1307,
+                  "input": 3042,
+                  "output": 882,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 1778,
-                  "digest": 887,
-                  "short_digest": 293
+                  "digest": 705,
+                  "short_digest": 64
                 },
                 "children": {}
               },
@@ -2121,14 +2121,14 @@
                 "displayName": "pruneMessages",
                 "relevant": true,
                 "usage": {
-                  "input": 2221,
-                  "output": 960,
+                  "input": 2295,
+                  "output": 866,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 1034,
-                  "digest": 613,
-                  "short_digest": 232
+                  "digest": 595,
+                  "short_digest": 153
                 },
                 "children": {}
               },
@@ -2137,14 +2137,14 @@
                 "displayName": "createUIMessageStream",
                 "relevant": true,
                 "usage": {
-                  "input": 2351,
-                  "output": 1068,
+                  "input": 2425,
+                  "output": 1057,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 1161,
-                  "digest": 609,
-                  "short_digest": 325
+                  "digest": 640,
+                  "short_digest": 290
                 },
                 "children": {}
               },
@@ -2153,14 +2153,14 @@
                 "displayName": "createUIMessageStreamResponse",
                 "relevant": true,
                 "usage": {
-                  "input": 1908,
-                  "output": 945,
+                  "input": 1982,
+                  "output": 829,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 716,
-                  "digest": 504,
-                  "short_digest": 319
+                  "digest": 457,
+                  "short_digest": 249
                 },
                 "children": {}
               },
@@ -2169,14 +2169,14 @@
                 "displayName": "pipeUIMessageStreamToResponse",
                 "relevant": true,
                 "usage": {
-                  "input": 1727,
-                  "output": 513,
+                  "input": 1801,
+                  "output": 421,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 533,
-                  "digest": 281,
-                  "short_digest": 115
+                  "digest": 266,
+                  "short_digest": 31
                 },
                 "children": {}
               },
@@ -2185,14 +2185,14 @@
                 "displayName": "readUIMessageStream",
                 "relevant": true,
                 "usage": {
-                  "input": 1616,
-                  "output": 507,
+                  "input": 1690,
+                  "output": 499,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 426,
-                  "digest": 245,
-                  "short_digest": 133
+                  "digest": 232,
+                  "short_digest": 134
                 },
                 "children": {}
               },
@@ -2201,14 +2201,14 @@
                 "displayName": "InferUITools",
                 "relevant": true,
                 "usage": {
-                  "input": 1876,
-                  "output": 1058,
+                  "input": 1950,
+                  "output": 981,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 687,
-                  "digest": 542,
-                  "short_digest": 383
+                  "digest": 530,
+                  "short_digest": 332
                 },
                 "children": {}
               },
@@ -2217,30 +2217,30 @@
                 "displayName": "InferUITool",
                 "relevant": true,
                 "usage": {
-                  "input": 1653,
-                  "output": 469,
+                  "input": 1727,
+                  "output": 549,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 464,
-                  "digest": 297,
-                  "short_digest": 63
+                  "digest": 309,
+                  "short_digest": 131
                 },
                 "children": {}
               },
-              "ai_sdk_ui": {
+              "ui_hooks_reference": {
                 "origPath": "07-reference/02-ai-sdk-ui/index.mdx",
-                "displayName": "AI SDK UI",
-                "relevant": false,
+                "displayName": "UI Hooks Reference",
+                "relevant": true,
                 "usage": {
-                  "input": 2126,
-                  "output": 492,
+                  "input": 2200,
+                  "output": 549,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 944,
-                  "digest": 303,
-                  "short_digest": 72
+                  "digest": 301,
+                  "short_digest": 116
                 },
                 "children": {}
               }
@@ -2251,14 +2251,14 @@
             "displayName": "RSC API Reference",
             "relevant": true,
             "usage": {
-              "input": 5317,
-              "output": 955,
+              "input": 5289,
+              "output": 1545,
               "details": null
             },
             "token_counts": {
-              "fulltext": 4102,
-              "digest": 628,
-              "short_digest": 217
+              "fulltext": 3876,
+              "digest": 1250,
+              "short_digest": 182
             },
             "children": {
               "streamui": {
@@ -2266,14 +2266,14 @@
                 "displayName": "streamUI",
                 "relevant": true,
                 "usage": {
-                  "input": 6328,
-                  "output": 1770,
+                  "input": 6402,
+                  "output": 1328,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 5140,
-                  "digest": 1315,
-                  "short_digest": 324
+                  "digest": 1032,
+                  "short_digest": 162
                 },
                 "children": {}
               },
@@ -2282,14 +2282,14 @@
                 "displayName": "createAI",
                 "relevant": true,
                 "usage": {
-                  "input": 1869,
-                  "output": 496,
+                  "input": 1943,
+                  "output": 451,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 681,
-                  "digest": 272,
-                  "short_digest": 103
+                  "digest": 283,
+                  "short_digest": 55
                 },
                 "children": {}
               },
@@ -2298,14 +2298,14 @@
                 "displayName": "createStreamableUI",
                 "relevant": true,
                 "usage": {
-                  "input": 1866,
-                  "output": 517,
+                  "input": 1940,
+                  "output": 433,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 675,
-                  "digest": 291,
-                  "short_digest": 102
+                  "digest": 249,
+                  "short_digest": 66
                 },
                 "children": {}
               },
@@ -2314,14 +2314,14 @@
                 "displayName": "createStreamableValue",
                 "relevant": true,
                 "usage": {
-                  "input": 1515,
-                  "output": 425,
+                  "input": 1589,
+                  "output": 312,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 324,
-                  "digest": 194,
-                  "short_digest": 117
+                  "digest": 143,
+                  "short_digest": 55
                 },
                 "children": {}
               },
@@ -2330,14 +2330,14 @@
                 "displayName": "readStreamableValue",
                 "relevant": true,
                 "usage": {
-                  "input": 1698,
-                  "output": 502,
+                  "input": 1772,
+                  "output": 594,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 507,
-                  "digest": 300,
-                  "short_digest": 83
+                  "digest": 377,
+                  "short_digest": 88
                 },
                 "children": {}
               },
@@ -2346,14 +2346,14 @@
                 "displayName": "getAIState",
                 "relevant": true,
                 "usage": {
-                  "input": 1513,
-                  "output": 376,
+                  "input": 1587,
+                  "output": 308,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 323,
-                  "digest": 160,
-                  "short_digest": 90
+                  "digest": 161,
+                  "short_digest": 35
                 },
                 "children": {}
               },
@@ -2362,14 +2362,14 @@
                 "displayName": "getMutableAIState",
                 "relevant": true,
                 "usage": {
-                  "input": 1654,
-                  "output": 401,
+                  "input": 1728,
+                  "output": 379,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 461,
-                  "digest": 201,
-                  "short_digest": 77
+                  "digest": 196,
+                  "short_digest": 63
                 },
                 "children": {}
               },
@@ -2378,14 +2378,14 @@
                 "displayName": "useAIState",
                 "relevant": true,
                 "usage": {
-                  "input": 1437,
-                  "output": 292,
+                  "input": 1511,
+                  "output": 312,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 247,
-                  "digest": 125,
-                  "short_digest": 49
+                  "digest": 134,
+                  "short_digest": 48
                 },
                 "children": {}
               },
@@ -2394,14 +2394,14 @@
                 "displayName": "useActions",
                 "relevant": true,
                 "usage": {
-                  "input": 1554,
-                  "output": 355,
+                  "input": 1628,
+                  "output": 322,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 366,
-                  "digest": 199,
-                  "short_digest": 48
+                  "digest": 158,
+                  "short_digest": 47
                 },
                 "children": {}
               },
@@ -2410,14 +2410,14 @@
                 "displayName": "useUIState",
                 "relevant": true,
                 "usage": {
-                  "input": 1487,
-                  "output": 314,
+                  "input": 1561,
+                  "output": 342,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 297,
-                  "digest": 128,
-                  "short_digest": 70
+                  "digest": 141,
+                  "short_digest": 66
                 },
                 "children": {}
               },
@@ -2426,79 +2426,79 @@
                 "displayName": "useStreamableValue",
                 "relevant": true,
                 "usage": {
-                  "input": 1571,
-                  "output": 383,
+                  "input": 1645,
+                  "output": 413,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 380,
-                  "digest": 212,
-                  "short_digest": 56
+                  "digest": 239,
+                  "short_digest": 62
                 },
                 "children": {}
               },
-              "render_(removed)": {
+              "render-removed": {
                 "origPath": "07-reference/03-ai-sdk-rsc/20-render.mdx",
-                "displayName": "render (Removed)",
-                "relevant": true,
+                "displayName": "render-removed",
+                "relevant": false,
                 "usage": {
-                  "input": 3116,
-                  "output": 514,
+                  "input": 3190,
+                  "output": 664,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 1930,
-                  "digest": 318,
-                  "short_digest": 85
+                  "digest": 457,
+                  "short_digest": 76
                 },
                 "children": {}
               },
-              "ai_sdk_rsc": {
+              "rsc_reference": {
                 "origPath": "07-reference/03-ai-sdk-rsc/index.mdx",
-                "displayName": "AI SDK RSC",
-                "relevant": false,
+                "displayName": "RSC Reference",
+                "relevant": true,
                 "usage": {
-                  "input": 1841,
-                  "output": 606,
+                  "input": 1915,
+                  "output": 630,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 657,
-                  "digest": 317,
-                  "short_digest": 141
+                  "digest": 327,
+                  "short_digest": 161
                 },
                 "children": {}
               }
             }
           },
-          "deprecated_stream_helpers": {
+          "stream_helpers": {
             "origPath": "07-reference/04-stream-helpers",
-            "displayName": "Deprecated Stream Helpers",
-            "relevant": false,
+            "displayName": "Stream Helpers",
+            "relevant": true,
             "usage": {
-              "input": 6072,
-              "output": 923,
+              "input": 2811,
+              "output": 740,
               "details": null
             },
             "token_counts": {
-              "fulltext": 4847,
-              "digest": 565,
-              "short_digest": 236
+              "fulltext": 1521,
+              "digest": 540,
+              "short_digest": 98
             },
             "children": {
               "aistream": {
                 "origPath": "07-reference/04-stream-helpers/01-ai-stream.mdx",
                 "displayName": "AIStream",
-                "relevant": true,
+                "relevant": false,
                 "usage": {
-                  "input": 1889,
-                  "output": 518,
+                  "input": 1963,
+                  "output": 617,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 707,
-                  "digest": 318,
-                  "short_digest": 85
+                  "digest": 330,
+                  "short_digest": 163
                 },
                 "children": {}
               },
@@ -2507,62 +2507,62 @@
                 "displayName": "StreamingTextResponse",
                 "relevant": true,
                 "usage": {
-                  "input": 1831,
-                  "output": 566,
+                  "input": 1905,
+                  "output": 495,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 647,
-                  "digest": 315,
-                  "short_digest": 124
+                  "digest": 280,
+                  "short_digest": 100
                 },
                 "children": {}
               },
               "streamtoresponse": {
                 "origPath": "07-reference/04-stream-helpers/05-stream-to-response.mdx",
                 "displayName": "streamToResponse",
-                "relevant": true,
+                "relevant": false,
                 "usage": {
-                  "input": 2010,
-                  "output": 832,
+                  "input": 2084,
+                  "output": 713,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 826,
-                  "digest": 520,
-                  "short_digest": 186
+                  "digest": 453,
+                  "short_digest": 138
                 },
                 "children": {}
               },
               "openaistream": {
                 "origPath": "07-reference/04-stream-helpers/07-openai-stream.mdx",
                 "displayName": "OpenAIStream",
-                "relevant": true,
+                "relevant": false,
                 "usage": {
-                  "input": 1837,
-                  "output": 470,
+                  "input": 1911,
+                  "output": 552,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 654,
-                  "digest": 238,
-                  "short_digest": 97
+                  "digest": 315,
+                  "short_digest": 100
                 },
                 "children": {}
               },
               "anthropicstream": {
                 "origPath": "07-reference/04-stream-helpers/08-anthropic-stream.mdx",
                 "displayName": "AnthropicStream",
-                "relevant": true,
+                "relevant": false,
                 "usage": {
-                  "input": 1813,
-                  "output": 489,
+                  "input": 1887,
+                  "output": 420,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 630,
-                  "digest": 231,
-                  "short_digest": 121
+                  "digest": 235,
+                  "short_digest": 58
                 },
                 "children": {}
               },
@@ -2571,14 +2571,14 @@
                 "displayName": "AWSBedrockStream",
                 "relevant": false,
                 "usage": {
-                  "input": 1895,
-                  "output": 476,
+                  "input": 1969,
+                  "output": 454,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 710,
-                  "digest": 270,
-                  "short_digest": 89
+                  "digest": 282,
+                  "short_digest": 50
                 },
                 "children": {}
               },
@@ -2587,62 +2587,62 @@
                 "displayName": "AWSBedrockAnthropicStream",
                 "relevant": false,
                 "usage": {
-                  "input": 1931,
-                  "output": 494,
+                  "input": 2005,
+                  "output": 536,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 743,
-                  "digest": 285,
-                  "short_digest": 83
+                  "digest": 316,
+                  "short_digest": 78
                 },
                 "children": {}
               },
               "awsbedrockanthropicmessagesstream": {
                 "origPath": "07-reference/04-stream-helpers/10-aws-bedrock-messages-stream.mdx",
                 "displayName": "AWSBedrockAnthropicMessagesStream",
-                "relevant": true,
+                "relevant": false,
                 "usage": {
-                  "input": 1942,
-                  "output": 495,
+                  "input": 2016,
+                  "output": 461,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 755,
-                  "digest": 293,
-                  "short_digest": 73
+                  "digest": 279,
+                  "short_digest": 54
                 },
                 "children": {}
               },
               "awsbedrockcoherestream": {
                 "origPath": "07-reference/04-stream-helpers/11-aws-bedrock-cohere-stream.mdx",
                 "displayName": "AWSBedrockCohereStream",
-                "relevant": true,
+                "relevant": false,
                 "usage": {
-                  "input": 1920,
-                  "output": 488,
+                  "input": 1994,
+                  "output": 502,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 732,
-                  "digest": 275,
-                  "short_digest": 89
+                  "digest": 307,
+                  "short_digest": 53
                 },
                 "children": {}
               },
               "awsbedrockllama2stream": {
                 "origPath": "07-reference/04-stream-helpers/12-aws-bedrock-llama-2-stream.mdx",
                 "displayName": "AWSBedrockLlama2Stream",
-                "relevant": false,
+                "relevant": true,
                 "usage": {
-                  "input": 1928,
-                  "output": 477,
+                  "input": 2002,
+                  "output": 475,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 738,
-                  "digest": 278,
-                  "short_digest": 73
+                  "digest": 283,
+                  "short_digest": 51
                 },
                 "children": {}
               },
@@ -2651,30 +2651,30 @@
                 "displayName": "CohereStream",
                 "relevant": false,
                 "usage": {
-                  "input": 1810,
-                  "output": 490,
+                  "input": 1884,
+                  "output": 420,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 627,
-                  "digest": 238,
-                  "short_digest": 110
+                  "digest": 237,
+                  "short_digest": 61
                 },
                 "children": {}
               },
               "googlegenerativeaistream": {
                 "origPath": "07-reference/04-stream-helpers/14-google-generative-ai-stream.mdx",
                 "displayName": "GoogleGenerativeAIStream",
-                "relevant": true,
+                "relevant": false,
                 "usage": {
-                  "input": 1887,
-                  "output": 510,
+                  "input": 1961,
+                  "output": 458,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 700,
-                  "digest": 269,
-                  "short_digest": 117
+                  "digest": 268,
+                  "short_digest": 66
                 },
                 "children": {}
               },
@@ -2683,14 +2683,14 @@
                 "displayName": "HuggingFaceStream",
                 "relevant": false,
                 "usage": {
-                  "input": 1945,
-                  "output": 517,
+                  "input": 2019,
+                  "output": 557,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 760,
-                  "digest": 307,
-                  "short_digest": 93
+                  "digest": 343,
+                  "short_digest": 96
                 },
                 "children": {}
               },
@@ -2699,14 +2699,14 @@
                 "displayName": "LangChain Adapter",
                 "relevant": true,
                 "usage": {
-                  "input": 2043,
-                  "output": 931,
+                  "input": 2117,
+                  "output": 708,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 860,
-                  "digest": 664,
-                  "short_digest": 127
+                  "digest": 389,
+                  "short_digest": 181
                 },
                 "children": {}
               },
@@ -2715,62 +2715,62 @@
                 "displayName": "LlamaIndex Adapter",
                 "relevant": true,
                 "usage": {
-                  "input": 1764,
-                  "output": 638,
+                  "input": 1838,
+                  "output": 602,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 580,
-                  "digest": 401,
-                  "short_digest": 103
+                  "digest": 396,
+                  "short_digest": 79
                 },
                 "children": {}
               },
               "mistralstream": {
                 "origPath": "07-reference/04-stream-helpers/17-mistral-stream.mdx",
                 "displayName": "MistralStream",
-                "relevant": true,
+                "relevant": false,
                 "usage": {
-                  "input": 1810,
-                  "output": 468,
+                  "input": 1884,
+                  "output": 423,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 627,
-                  "digest": 260,
-                  "short_digest": 78
+                  "digest": 230,
+                  "short_digest": 55
                 },
                 "children": {}
               },
               "replicatestream": {
                 "origPath": "07-reference/04-stream-helpers/18-replicate-stream.mdx",
                 "displayName": "ReplicateStream",
-                "relevant": true,
+                "relevant": false,
                 "usage": {
-                  "input": 1909,
-                  "output": 487,
+                  "input": 1983,
+                  "output": 464,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 726,
-                  "digest": 275,
-                  "short_digest": 87
+                  "digest": 280,
+                  "short_digest": 62
                 },
                 "children": {}
               },
               "inkeepstream": {
                 "origPath": "07-reference/04-stream-helpers/19-inkeep-stream.mdx",
                 "displayName": "InkeepStream",
-                "relevant": true,
+                "relevant": false,
                 "usage": {
-                  "input": 1826,
-                  "output": 488,
+                  "input": 1900,
+                  "output": 472,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 642,
-                  "digest": 259,
-                  "short_digest": 107
+                  "digest": 275,
+                  "short_digest": 68
                 },
                 "children": {}
               },
@@ -2779,79 +2779,79 @@
                 "displayName": "Stream Helpers",
                 "relevant": false,
                 "usage": {
-                  "input": 2199,
-                  "output": 739,
+                  "input": 2273,
+                  "output": 632,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 1021,
-                  "digest": 414,
-                  "short_digest": 162
+                  "digest": 402,
+                  "short_digest": 81
                 },
                 "children": {}
               }
             }
           },
-          "error_reference": {
+          "error_classes": {
             "origPath": "07-reference/05-ai-sdk-errors",
-            "displayName": "Error Reference",
+            "displayName": "Error Classes",
             "relevant": true,
             "usage": {
-              "input": 6364,
-              "output": 1080,
+              "input": 5791,
+              "output": 1276,
               "details": null
             },
             "token_counts": {
-              "fulltext": 4969,
-              "digest": 732,
-              "short_digest": 243
+              "fulltext": 4154,
+              "digest": 991,
+              "short_digest": 181
             },
             "children": {
-              "ai_apicallerror": {
+              "apicallerror": {
                 "origPath": "07-reference/05-ai-sdk-errors/ai-api-call-error.mdx",
-                "displayName": "AI_APICallError",
+                "displayName": "APICallError",
                 "relevant": true,
                 "usage": {
-                  "input": 1403,
-                  "output": 372,
+                  "input": 1477,
+                  "output": 319,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 215,
-                  "digest": 179,
-                  "short_digest": 67
+                  "digest": 154,
+                  "short_digest": 49
                 },
                 "children": {}
               },
-              "ai_downloaderror": {
+              "downloaderror": {
                 "origPath": "07-reference/05-ai-sdk-errors/ai-download-error.mdx",
-                "displayName": "AI_DownloadError",
+                "displayName": "DownloadError",
                 "relevant": true,
                 "usage": {
-                  "input": 1359,
-                  "output": 304,
+                  "input": 1433,
+                  "output": 279,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 173,
-                  "digest": 136,
+                  "digest": 118,
                   "short_digest": 43
                 },
                 "children": {}
               },
-              "ai_emptyresponsebodyerror": {
+              "emptyresponsebodyerror": {
                 "origPath": "07-reference/05-ai-sdk-errors/ai-empty-response-body-error.mdx",
-                "displayName": "AI_EmptyResponseBodyError",
+                "displayName": "EmptyResponseBodyError",
                 "relevant": true,
                 "usage": {
-                  "input": 1328,
-                  "output": 254,
+                  "input": 1402,
+                  "output": 223,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 138,
-                  "digest": 96,
-                  "short_digest": 39
+                  "digest": 83,
+                  "short_digest": 31
                 },
                 "children": {}
               },
@@ -2860,14 +2860,14 @@
                 "displayName": "InvalidArgumentError",
                 "relevant": true,
                 "usage": {
-                  "input": 1333,
-                  "output": 294,
+                  "input": 1407,
+                  "output": 248,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 145,
-                  "digest": 119,
-                  "short_digest": 61
+                  "digest": 98,
+                  "short_digest": 37
                 },
                 "children": {}
               },
@@ -2876,30 +2876,30 @@
                 "displayName": "InvalidDataContentError",
                 "relevant": true,
                 "usage": {
-                  "input": 1368,
-                  "output": 299,
+                  "input": 1442,
+                  "output": 279,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 178,
-                  "digest": 130,
-                  "short_digest": 51
+                  "digest": 119,
+                  "short_digest": 42
                 },
                 "children": {}
               },
-              "ai_invaliddatacontent": {
+              "invaliddatacontent_error": {
                 "origPath": "07-reference/05-ai-sdk-errors/ai-invalid-data-content.mdx",
-                "displayName": "AI_InvalidDataContent",
+                "displayName": "InvalidDataContent Error",
                 "relevant": true,
                 "usage": {
-                  "input": 1331,
-                  "output": 381,
+                  "input": 1405,
+                  "output": 257,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 143,
-                  "digest": 159,
-                  "short_digest": 107
+                  "digest": 98,
+                  "short_digest": 38
                 },
                 "children": {}
               },
@@ -2908,30 +2908,30 @@
                 "displayName": "InvalidMessageRoleError",
                 "relevant": true,
                 "usage": {
-                  "input": 1336,
-                  "output": 296,
+                  "input": 1410,
+                  "output": 269,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 146,
-                  "digest": 138,
-                  "short_digest": 43
+                  "digest": 114,
+                  "short_digest": 39
                 },
                 "children": {}
               },
-              "ai_invalidprompterror": {
+              "invalidprompterror": {
                 "origPath": "07-reference/05-ai-sdk-errors/ai-invalid-prompt-error.mdx",
-                "displayName": "AI_InvalidPromptError",
+                "displayName": "InvalidPromptError",
                 "relevant": true,
                 "usage": {
-                  "input": 1456,
-                  "output": 477,
+                  "input": 1530,
+                  "output": 402,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 268,
-                  "digest": 229,
-                  "short_digest": 123
+                  "digest": 225,
+                  "short_digest": 54
                 },
                 "children": {}
               },
@@ -2940,14 +2940,14 @@
                 "displayName": "InvalidResponseDataError",
                 "relevant": true,
                 "usage": {
-                  "input": 1334,
-                  "output": 267,
+                  "input": 1408,
+                  "output": 237,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 144,
-                  "digest": 105,
-                  "short_digest": 46
+                  "digest": 87,
+                  "short_digest": 38
                 },
                 "children": {}
               },
@@ -2956,62 +2956,62 @@
                 "displayName": "InvalidToolInputError",
                 "relevant": true,
                 "usage": {
-                  "input": 1354,
-                  "output": 326,
+                  "input": 1428,
+                  "output": 272,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 164,
-                  "digest": 163,
-                  "short_digest": 46
+                  "digest": 110,
+                  "short_digest": 44
                 },
                 "children": {}
               },
-              "ai_jsonparseerror": {
+              "jsonparseerror": {
                 "origPath": "07-reference/05-ai-sdk-errors/ai-json-parse-error.mdx",
-                "displayName": "AI_JSONParseError",
+                "displayName": "JSONParseError",
                 "relevant": true,
                 "usage": {
-                  "input": 1334,
-                  "output": 276,
+                  "input": 1408,
+                  "output": 248,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 146,
-                  "digest": 111,
+                  "digest": 90,
                   "short_digest": 46
                 },
                 "children": {}
               },
-              "ai_loadapikeyerror": {
+              "loadapikeyerror": {
                 "origPath": "07-reference/05-ai-sdk-errors/ai-load-api-key-error.mdx",
-                "displayName": "AI_LoadAPIKeyError",
+                "displayName": "LoadAPIKeyError",
                 "relevant": true,
                 "usage": {
-                  "input": 1321,
-                  "output": 282,
+                  "input": 1395,
+                  "output": 209,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 131,
-                  "digest": 119,
-                  "short_digest": 47
+                  "digest": 73,
+                  "short_digest": 29
                 },
                 "children": {}
               },
-              "ai_loadsettingerror": {
+              "loadsettingerror": {
                 "origPath": "07-reference/05-ai-sdk-errors/ai-load-setting-error.mdx",
-                "displayName": "AI_LoadSettingError",
+                "displayName": "LoadSettingError",
                 "relevant": true,
                 "usage": {
-                  "input": 1319,
-                  "output": 263,
+                  "input": 1393,
+                  "output": 241,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 131,
-                  "digest": 109,
-                  "short_digest": 38
+                  "digest": 92,
+                  "short_digest": 37
                 },
                 "children": {}
               },
@@ -3020,14 +3020,14 @@
                 "displayName": "MessageConversionError",
                 "relevant": true,
                 "usage": {
-                  "input": 1334,
-                  "output": 294,
+                  "input": 1408,
+                  "output": 240,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 146,
-                  "digest": 127,
-                  "short_digest": 53
+                  "digest": 86,
+                  "short_digest": 37
                 },
                 "children": {}
               },
@@ -3036,46 +3036,46 @@
                 "displayName": "NoContentGeneratedError",
                 "relevant": true,
                 "usage": {
-                  "input": 1328,
-                  "output": 249,
+                  "input": 1402,
+                  "output": 227,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 138,
-                  "digest": 97,
-                  "short_digest": 39
+                  "digest": 76,
+                  "short_digest": 38
                 },
                 "children": {}
               },
-              "ai_noimagegeneratederror": {
+              "noimagegeneratederror": {
                 "origPath": "07-reference/05-ai-sdk-errors/ai-no-image-generated-error.mdx",
-                "displayName": "AI_NoImageGeneratedError",
+                "displayName": "NoImageGeneratedError",
                 "relevant": true,
                 "usage": {
-                  "input": 1460,
-                  "output": 471,
+                  "input": 1534,
+                  "output": 375,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 270,
-                  "digest": 219,
-                  "short_digest": 134
+                  "digest": 212,
+                  "short_digest": 47
                 },
                 "children": {}
               },
-              "ai_noobjectgeneratederror": {
+              "noobjectgeneratederror": {
                 "origPath": "07-reference/05-ai-sdk-errors/ai-no-object-generated-error.mdx",
-                "displayName": "AI_NoObjectGeneratedError",
+                "displayName": "NoObjectGeneratedError",
                 "relevant": true,
                 "usage": {
-                  "input": 1618,
-                  "output": 483,
+                  "input": 1692,
+                  "output": 500,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 428,
-                  "digest": 288,
-                  "short_digest": 62
+                  "digest": 298,
+                  "short_digest": 67
                 },
                 "children": {}
               },
@@ -3084,13 +3084,13 @@
                 "displayName": "NoSpeechGeneratedError",
                 "relevant": true,
                 "usage": {
-                  "input": 1349,
-                  "output": 281,
+                  "input": 1423,
+                  "output": 261,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 159,
-                  "digest": 118,
+                  "digest": 98,
                   "short_digest": 43
                 },
                 "children": {}
@@ -3100,46 +3100,46 @@
                 "displayName": "NoSuchModelError",
                 "relevant": true,
                 "usage": {
-                  "input": 1352,
-                  "output": 333,
+                  "input": 1426,
+                  "output": 273,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 162,
-                  "digest": 168,
+                  "digest": 107,
                   "short_digest": 45
                 },
                 "children": {}
               },
-              "ai_nosuchprovidererror": {
+              "nosuchprovidererror": {
                 "origPath": "07-reference/05-ai-sdk-errors/ai-no-such-provider-error.mdx",
-                "displayName": "AI_NoSuchProviderError",
+                "displayName": "NoSuchProviderError",
                 "relevant": true,
                 "usage": {
-                  "input": 1383,
-                  "output": 341,
+                  "input": 1457,
+                  "output": 312,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 193,
-                  "digest": 154,
-                  "short_digest": 57
+                  "digest": 130,
+                  "short_digest": 54
                 },
                 "children": {}
               },
-              "ai_nosuchtoolerror": {
+              "nosuchtoolerror": {
                 "origPath": "07-reference/05-ai-sdk-errors/ai-no-such-tool-error.mdx",
-                "displayName": "AI_NoSuchToolError",
+                "displayName": "NoSuchToolError",
                 "relevant": true,
                 "usage": {
-                  "input": 1357,
-                  "output": 349,
+                  "input": 1431,
+                  "output": 278,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 167,
-                  "digest": 176,
-                  "short_digest": 49
+                  "digest": 109,
+                  "short_digest": 44
                 },
                 "children": {}
               },
@@ -3148,29 +3148,29 @@
                 "displayName": "NoTranscriptGeneratedError",
                 "relevant": true,
                 "usage": {
-                  "input": 1349,
-                  "output": 286,
+                  "input": 1423,
+                  "output": 252,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 159,
-                  "digest": 128,
-                  "short_digest": 41
+                  "digest": 93,
+                  "short_digest": 40
                 },
                 "children": {}
               },
-              "ai_retryerror": {
+              "retryerror": {
                 "origPath": "07-reference/05-ai-sdk-errors/ai-retry-error.mdx",
-                "displayName": "AI_RetryError",
+                "displayName": "RetryError",
                 "relevant": true,
                 "usage": {
-                  "input": 1349,
-                  "output": 315,
+                  "input": 1423,
+                  "output": 280,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 163,
-                  "digest": 146,
+                  "digest": 119,
                   "short_digest": 44
                 },
                 "children": {}
@@ -3180,13 +3180,13 @@
                 "displayName": "TooManyEmbeddingValuesForCallError",
                 "relevant": true,
                 "usage": {
-                  "input": 1430,
-                  "output": 426,
+                  "input": 1504,
+                  "output": 350,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 234,
-                  "digest": 223,
+                  "digest": 161,
                   "short_digest": 65
                 },
                 "children": {}
@@ -3196,14 +3196,14 @@
                 "displayName": "ToolCallRepairError",
                 "relevant": true,
                 "usage": {
-                  "input": 1404,
-                  "output": 356,
+                  "input": 1478,
+                  "output": 346,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 214,
-                  "digest": 166,
-                  "short_digest": 65
+                  "digest": 162,
+                  "short_digest": 54
                 },
                 "children": {}
               },
@@ -3212,273 +3212,64 @@
                 "displayName": "TypeValidationError",
                 "relevant": true,
                 "usage": {
-                  "input": 1329,
-                  "output": 260,
+                  "input": 1403,
+                  "output": 246,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 141,
-                  "digest": 105,
+                  "digest": 91,
                   "short_digest": 44
                 },
                 "children": {}
               },
-              "ai_unsupportedfunctionalityerror": {
+              "unsupportedfunctionalityerror": {
                 "origPath": "07-reference/05-ai-sdk-errors/ai-unsupported-functionality-error.mdx",
-                "displayName": "AI_UnsupportedFunctionalityError",
+                "displayName": "UnsupportedFunctionalityError",
                 "relevant": true,
                 "usage": {
-                  "input": 1364,
-                  "output": 326,
+                  "input": 1438,
+                  "output": 276,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 174,
-                  "digest": 157,
+                  "digest": 107,
                   "short_digest": 44
                 },
                 "children": {}
               },
-              "ai_sdk_errors": {
+              "error_reference": {
                 "origPath": "07-reference/05-ai-sdk-errors/index.mdx",
-                "displayName": "AI SDK Errors",
+                "displayName": "Error Reference",
                 "relevant": false,
                 "usage": {
-                  "input": 2075,
-                  "output": 813,
+                  "input": 2149,
+                  "output": 743,
                   "details": null
                 },
                 "token_counts": {
                   "fulltext": 893,
-                  "digest": 489,
-                  "short_digest": 210
+                  "digest": 484,
+                  "short_digest": 149
                 },
                 "children": {}
               }
             }
           },
-          "reference": {
+          "api_reference": {
             "origPath": "07-reference/index.mdx",
-            "displayName": "Reference",
+            "displayName": "API Reference",
             "relevant": false,
             "usage": {
-              "input": 1404,
-              "output": 357,
+              "input": 1478,
+              "output": 321,
               "details": null
             },
             "token_counts": {
               "fulltext": 238,
-              "digest": 175,
-              "short_digest": 64
-            },
-            "children": {}
-          }
-        }
-      },
-      "migration_guides": {
-        "origPath": "08-migration-guides",
-        "displayName": "Migration Guides",
-        "relevant": true,
-        "usage": {
-          "input": 11220,
-          "output": 2136,
-          "details": null
-        },
-        "token_counts": {
-          "fulltext": 10022,
-          "digest": 1561,
-          "short_digest": 459
-        },
-        "children": {
-          "versioning": {
-            "origPath": "08-migration-guides/00-versioning.mdx",
-            "displayName": "Versioning",
-            "relevant": true,
-            "usage": {
-              "input": 1543,
-              "output": 444,
-              "details": null
-            },
-            "token_counts": {
-              "fulltext": 370,
-              "digest": 235,
-              "short_digest": 82
-            },
-            "children": {}
-          },
-          "migrate_data_to_ai_sdk_5.0": {
-            "origPath": "08-migration-guides/25-migration-guide-5-0-data.mdx",
-            "displayName": "Migrate Data to AI SDK 5.0",
-            "relevant": true,
-            "usage": {
-              "input": 8797,
-              "output": 2754,
-              "details": null
-            },
-            "token_counts": {
-              "fulltext": 7617,
-              "digest": 1959,
-              "short_digest": 549
-            },
-            "children": {}
-          },
-          "migrate_ai_sdk_4.0_to_5.0": {
-            "origPath": "08-migration-guides/26-migration-guide-5-0.mdx",
-            "displayName": "Migrate AI SDK 4.0 to 5.0",
-            "relevant": true,
-            "usage": {
-              "input": 28740,
-              "output": 3261,
-              "details": null
-            },
-            "token_counts": {
-              "fulltext": 27562,
-              "digest": 2518,
-              "short_digest": 527
-            },
-            "children": {}
-          },
-          "migrate_ai_sdk_4.1_to_4.2": {
-            "origPath": "08-migration-guides/27-migration-guide-4-2.mdx",
-            "displayName": "Migrate AI SDK 4.1 to 4.2",
-            "relevant": true,
-            "usage": {
-              "input": 2112,
-              "output": 972,
-              "details": null
-            },
-            "token_counts": {
-              "fulltext": 934,
-              "digest": 588,
-              "short_digest": 225
-            },
-            "children": {}
-          },
-          "migrate_ai_sdk_5.0_to_6.0_beta": {
-            "origPath": "08-migration-guides/27-migration-guide-6-0.mdx",
-            "displayName": "Migrate AI SDK 5.0 to 6.0 Beta",
-            "relevant": true,
-            "usage": {
-              "input": 1807,
-              "output": 781,
-              "details": null
-            },
-            "token_counts": {
-              "fulltext": 629,
-              "digest": 395,
-              "short_digest": 187
-            },
-            "children": {}
-          },
-          "migrate_4.0_to_4.1": {
-            "origPath": "08-migration-guides/28-migration-guide-4-1.mdx",
-            "displayName": "Migrate 4.0 to 4.1",
-            "relevant": true,
-            "usage": {
-              "input": 1302,
-              "output": 212,
-              "details": null
-            },
-            "token_counts": {
-              "fulltext": 124,
-              "digest": 71,
-              "short_digest": 29
-            },
-            "children": {}
-          },
-          "migrate_ai_sdk_3.4_to_4.0": {
-            "origPath": "08-migration-guides/29-migration-guide-4-0.mdx",
-            "displayName": "Migrate AI SDK 3.4 to 4.0",
-            "relevant": true,
-            "usage": {
-              "input": 11229,
-              "output": 2102,
-              "details": null
-            },
-            "token_counts": {
-              "fulltext": 10051,
-              "digest": 1533,
-              "short_digest": 352
-            },
-            "children": {}
-          },
-          "migrate_3.3_to_3.4": {
-            "origPath": "08-migration-guides/36-migration-guide-3-4.mdx",
-            "displayName": "Migrate 3.3 to 3.4",
-            "relevant": true,
-            "usage": {
-              "input": 1302,
-              "output": 215,
-              "details": null
-            },
-            "token_counts": {
-              "fulltext": 124,
-              "digest": 71,
-              "short_digest": 29
-            },
-            "children": {}
-          },
-          "migrate_ai_sdk_3.2_to_3.3": {
-            "origPath": "08-migration-guides/37-migration-guide-3-3.mdx",
-            "displayName": "Migrate AI SDK 3.2 to 3.3",
-            "relevant": true,
-            "usage": {
-              "input": 2091,
-              "output": 746,
-              "details": null
-            },
-            "token_counts": {
-              "fulltext": 913,
-              "digest": 477,
-              "short_digest": 105
-            },
-            "children": {}
-          },
-          "migrate_ai_sdk_3.1_to_3.2": {
-            "origPath": "08-migration-guides/38-migration-guide-3-2.mdx",
-            "displayName": "Migrate AI SDK 3.1 to 3.2",
-            "relevant": true,
-            "usage": {
-              "input": 1647,
-              "output": 435,
-              "details": null
-            },
-            "token_counts": {
-              "fulltext": 469,
-              "digest": 203,
-              "short_digest": 91
-            },
-            "children": {}
-          },
-          "migrate_ai_sdk_3.0_to_3.1": {
-            "origPath": "08-migration-guides/39-migration-guide-3-1.mdx",
-            "displayName": "Migrate AI SDK 3.0 to 3.1",
-            "relevant": true,
-            "usage": {
-              "input": 2997,
-              "output": 1734,
-              "details": null
-            },
-            "token_counts": {
-              "fulltext": 1819,
-              "digest": 1070,
-              "short_digest": 506
-            },
-            "children": {}
-          },
-          "migration_guides": {
-            "origPath": "08-migration-guides/index.mdx",
-            "displayName": "Migration Guides",
-            "relevant": false,
-            "usage": {
-              "input": 1502,
-              "output": 298,
-              "details": null
-            },
-            "token_counts": {
-              "fulltext": 332,
-              "digest": 156,
-              "short_digest": 33
+              "digest": 146,
+              "short_digest": 51
             },
             "children": {}
           }
@@ -3489,29 +3280,29 @@
         "displayName": "Troubleshooting",
         "relevant": true,
         "usage": {
-          "input": 11502,
-          "output": 1318,
+          "input": 11015,
+          "output": 2038,
           "details": null
         },
         "token_counts": {
-          "fulltext": 10076,
-          "digest": 921,
-          "short_digest": 279
+          "fulltext": 9337,
+          "digest": 1504,
+          "short_digest": 422
         },
         "children": {
-          "azure_openai_slow_to_stream": {
+          "azure-stream-slow": {
             "origPath": "09-troubleshooting/01-azure-stream-slow.mdx",
-            "displayName": "Azure OpenAI Slow to Stream",
+            "displayName": "azure-stream-slow",
             "relevant": true,
             "usage": {
-              "input": 1427,
-              "output": 448,
+              "input": 1501,
+              "output": 389,
               "details": null
             },
             "token_counts": {
               "fulltext": 249,
-              "digest": 227,
-              "short_digest": 97
+              "digest": 178,
+              "short_digest": 94
             },
             "children": {}
           },
@@ -3520,14 +3311,14 @@
             "displayName": "Client-Side Function Calls Not Invoked",
             "relevant": true,
             "usage": {
-              "input": 1384,
-              "output": 371,
+              "input": 1458,
+              "output": 298,
               "details": null
             },
             "token_counts": {
               "fulltext": 199,
-              "digest": 150,
-              "short_digest": 97
+              "digest": 116,
+              "short_digest": 48
             },
             "children": {}
           },
@@ -3536,30 +3327,30 @@
             "displayName": "Server Actions in Client Components",
             "relevant": true,
             "usage": {
-              "input": 1501,
-              "output": 467,
+              "input": 1575,
+              "output": 454,
               "details": null
             },
             "token_counts": {
               "fulltext": 319,
-              "digest": 272,
-              "short_digest": 75
+              "digest": 240,
+              "short_digest": 87
             },
             "children": {}
           },
-          "stream_output_contains_protocol_markers_instead_of_text": {
+          "strange-stream-output": {
             "origPath": "09-troubleshooting/04-strange-stream-output.mdx",
-            "displayName": "Stream output contains protocol markers instead of text",
+            "displayName": "strange-stream-output",
             "relevant": true,
             "usage": {
-              "input": 1550,
-              "output": 445,
+              "input": 1624,
+              "output": 454,
               "details": null
             },
             "token_counts": {
               "fulltext": 372,
-              "digest": 253,
-              "short_digest": 56
+              "digest": 266,
+              "short_digest": 68
             },
             "children": {}
           },
@@ -3568,14 +3359,14 @@
             "displayName": "Streamable UI Errors",
             "relevant": true,
             "usage": {
-              "input": 1289,
-              "output": 288,
+              "input": 1363,
+              "output": 291,
               "details": null
             },
             "token_counts": {
               "fulltext": 110,
-              "digest": 118,
-              "short_digest": 51
+              "digest": 121,
+              "short_digest": 49
             },
             "children": {}
           },
@@ -3584,14 +3375,14 @@
             "displayName": "Tool Invocation Missing Result Error",
             "relevant": true,
             "usage": {
-              "input": 2035,
-              "output": 1030,
+              "input": 2109,
+              "output": 864,
               "details": null
             },
             "token_counts": {
               "fulltext": 854,
-              "digest": 651,
-              "short_digest": 244
+              "digest": 595,
+              "short_digest": 136
             },
             "children": {}
           },
@@ -3600,13 +3391,13 @@
             "displayName": "Streaming Not Working When Deployed",
             "relevant": true,
             "usage": {
-              "input": 1384,
-              "output": 314,
+              "input": 1458,
+              "output": 310,
               "details": null
             },
             "token_counts": {
               "fulltext": 202,
-              "digest": 140,
+              "digest": 135,
               "short_digest": 55
             },
             "children": {}
@@ -3616,30 +3407,30 @@
             "displayName": "Streaming Not Working When Proxied",
             "relevant": true,
             "usage": {
-              "input": 1380,
-              "output": 356,
+              "input": 1454,
+              "output": 281,
               "details": null
             },
             "token_counts": {
               "fulltext": 197,
-              "digest": 152,
-              "short_digest": 82
+              "digest": 116,
+              "short_digest": 42
             },
             "children": {}
           },
-          "getting_timeouts_when_deploying_on_vercel": {
+          "timeout_on_vercel": {
             "origPath": "09-troubleshooting/06-timeout-on-vercel.mdx",
-            "displayName": "Getting Timeouts When Deploying on Vercel",
+            "displayName": "Timeout on Vercel",
             "relevant": true,
             "usage": {
-              "input": 1696,
-              "output": 482,
+              "input": 1770,
+              "output": 448,
               "details": null
             },
             "token_counts": {
               "fulltext": 517,
-              "digest": 266,
-              "short_digest": 72
+              "digest": 245,
+              "short_digest": 67
             },
             "children": {}
           },
@@ -3648,14 +3439,14 @@
             "displayName": "Unclosed Streams",
             "relevant": true,
             "usage": {
-              "input": 1458,
-              "output": 346,
+              "input": 1532,
+              "output": 326,
               "details": null
             },
             "token_counts": {
               "fulltext": 281,
-              "digest": 174,
-              "short_digest": 65
+              "digest": 157,
+              "short_digest": 63
             },
             "children": {}
           },
@@ -3664,30 +3455,30 @@
             "displayName": "useChat Failed to Parse Stream",
             "relevant": true,
             "usage": {
-              "input": 1570,
-              "output": 504,
+              "input": 1644,
+              "output": 381,
               "details": null
             },
             "token_counts": {
               "fulltext": 386,
-              "digest": 239,
-              "short_digest": 123
+              "digest": 186,
+              "short_digest": 65
             },
             "children": {}
           },
-          "server_action_plain_objects_error": {
+          "server-action-plain-objects-error": {
             "origPath": "09-troubleshooting/09-client-stream-error.mdx",
-            "displayName": "Server Action Plain Objects Error",
+            "displayName": "server-action-plain-objects-error",
             "relevant": true,
             "usage": {
-              "input": 1525,
-              "output": 339,
+              "input": 1599,
+              "output": 316,
               "details": null
             },
             "token_counts": {
               "fulltext": 347,
-              "digest": 169,
-              "short_digest": 54
+              "digest": 146,
+              "short_digest": 48
             },
             "children": {}
           },
@@ -3696,62 +3487,62 @@
             "displayName": "useChat No Response",
             "relevant": true,
             "usage": {
-              "input": 1449,
-              "output": 420,
+              "input": 1523,
+              "output": 418,
               "details": null
             },
             "token_counts": {
               "fulltext": 267,
-              "digest": 227,
-              "short_digest": 83
+              "digest": 219,
+              "short_digest": 87
             },
             "children": {}
           },
-          "custom_headers,_body,_and_credentials_not_working_with_usechat": {
+          "usechat_custom_request_options": {
             "origPath": "09-troubleshooting/11-use-chat-custom-request-options.mdx",
-            "displayName": "Custom headers, body, and credentials not working with useChat",
+            "displayName": "useChat custom request options",
             "relevant": true,
             "usage": {
-              "input": 2354,
-              "output": 1107,
+              "input": 2428,
+              "output": 936,
               "details": null
             },
             "token_counts": {
               "fulltext": 1172,
-              "digest": 722,
-              "short_digest": 248
+              "digest": 695,
+              "short_digest": 115
             },
             "children": {}
           },
-          "typescript_performance_issues_with_zod": {
+          "typescript-performance-zod": {
             "origPath": "09-troubleshooting/12-typescript-performance-zod.mdx",
-            "displayName": "TypeScript performance issues with Zod",
+            "displayName": "typescript-performance-zod",
             "relevant": true,
             "usage": {
-              "input": 1591,
-              "output": 483,
+              "input": 1665,
+              "output": 515,
               "details": null
             },
             "token_counts": {
               "fulltext": 412,
-              "digest": 266,
-              "short_digest": 91
+              "digest": 278,
+              "short_digest": 98
             },
             "children": {}
           },
-          "usechat_\"an_error_occurred\"_troubleshooting": {
+          "usechat-error-occurred-masking": {
             "origPath": "09-troubleshooting/12-use-chat-an-error-occurred.mdx",
-            "displayName": "useChat \"An error occurred\" Troubleshooting",
+            "displayName": "useChat-error-occurred-masking",
             "relevant": true,
             "usage": {
-              "input": 1545,
-              "output": 630,
+              "input": 1619,
+              "output": 591,
               "details": null
             },
             "token_counts": {
               "fulltext": 363,
-              "digest": 288,
-              "short_digest": 196
+              "digest": 284,
+              "short_digest": 178
             },
             "children": {}
           },
@@ -3760,30 +3551,30 @@
             "displayName": "Repeated assistant messages in useChat",
             "relevant": true,
             "usage": {
-              "input": 1746,
-              "output": 626,
+              "input": 1820,
+              "output": 497,
               "details": null
             },
             "token_counts": {
               "fulltext": 568,
-              "digest": 381,
-              "short_digest": 123
+              "digest": 322,
+              "short_digest": 53
             },
             "children": {}
           },
-          "onfinish_not_called_when_stream_is_aborted": {
+          "stream-abort-onfinish-callback": {
             "origPath": "09-troubleshooting/14-stream-abort-handling.mdx",
-            "displayName": "onFinish not called when stream is aborted",
+            "displayName": "stream-abort-onfinish-callback",
             "relevant": true,
             "usage": {
-              "input": 1806,
-              "output": 660,
+              "input": 1880,
+              "output": 502,
               "details": null
             },
             "token_counts": {
               "fulltext": 628,
-              "digest": 380,
-              "short_digest": 151
+              "digest": 307,
+              "short_digest": 63
             },
             "children": {}
           },
@@ -3792,158 +3583,158 @@
             "displayName": "Tool calling with structured outputs",
             "relevant": true,
             "usage": {
-              "input": 1630,
-              "output": 531,
+              "input": 1704,
+              "output": 511,
               "details": null
             },
             "token_counts": {
               "fulltext": 448,
-              "digest": 337,
-              "short_digest": 75
+              "digest": 343,
+              "short_digest": 51
             },
             "children": {}
           },
-          "abort_breaks_resumable_streams": {
+          "abort-breaks-resumable-streams": {
             "origPath": "09-troubleshooting/15-abort-breaks-resumable-streams.mdx",
-            "displayName": "Abort breaks resumable streams",
+            "displayName": "abort-breaks-resumable-streams",
             "relevant": true,
             "usage": {
-              "input": 1591,
-              "output": 462,
+              "input": 1665,
+              "output": 417,
               "details": null
             },
             "token_counts": {
               "fulltext": 410,
-              "digest": 254,
-              "short_digest": 92
+              "digest": 230,
+              "short_digest": 65
             },
             "children": {}
           },
-          "streamtext_fails_silently": {
+          "streamtext-silent-failures": {
             "origPath": "09-troubleshooting/15-stream-text-not-working.mdx",
-            "displayName": "streamText fails silently",
+            "displayName": "streamText-silent-failures",
             "relevant": true,
             "usage": {
-              "input": 1435,
-              "output": 433,
+              "input": 1509,
+              "output": 411,
               "details": null
             },
             "token_counts": {
               "fulltext": 255,
-              "digest": 210,
-              "short_digest": 111
+              "digest": 186,
+              "short_digest": 108
             },
             "children": {}
           },
-          "streaming_status_shows_but_no_text_appears": {
+          "streaming-status-delay": {
             "origPath": "09-troubleshooting/16-streaming-status-delay.mdx",
-            "displayName": "Streaming Status Shows But No Text Appears",
+            "displayName": "streaming-status-delay",
             "relevant": true,
             "usage": {
-              "input": 1631,
-              "output": 728,
+              "input": 1705,
+              "output": 587,
               "details": null
             },
             "token_counts": {
               "fulltext": 453,
-              "digest": 410,
-              "short_digest": 160
+              "digest": 370,
+              "short_digest": 98
             },
             "children": {}
           },
-          "stale_body_values_with_usechat": {
+          "usechat_stale_body_data": {
             "origPath": "09-troubleshooting/17-use-chat-stale-body-data.mdx",
-            "displayName": "Stale body values with useChat",
+            "displayName": "useChat stale body data",
             "relevant": true,
             "usage": {
-              "input": 2260,
-              "output": 874,
+              "input": 2334,
+              "output": 852,
               "details": null
             },
             "token_counts": {
               "fulltext": 1077,
-              "digest": 590,
-              "short_digest": 157
+              "digest": 523,
+              "short_digest": 206
             },
             "children": {}
           },
-          "type_error_with_ontoolcall": {
+          "ontoolcall_type_narrowing": {
             "origPath": "09-troubleshooting/18-ontoolcall-type-narrowing.mdx",
-            "displayName": "Type Error with onToolCall",
+            "displayName": "onToolCall Type Narrowing",
             "relevant": true,
             "usage": {
-              "input": 1747,
-              "output": 574,
+              "input": 1821,
+              "output": 515,
               "details": null
             },
             "token_counts": {
               "fulltext": 565,
-              "digest": 373,
-              "short_digest": 82
+              "digest": 316,
+              "short_digest": 73
             },
             "children": {}
           },
-          "unsupported_model_version_error": {
+          "unsupported-model-version-error": {
             "origPath": "09-troubleshooting/19-unsupported-model-version.mdx",
-            "displayName": "Unsupported model version error",
+            "displayName": "unsupported-model-version-error",
             "relevant": true,
             "usage": {
-              "input": 1759,
-              "output": 705,
+              "input": 1833,
+              "output": 718,
               "details": null
             },
             "token_counts": {
               "fulltext": 579,
-              "digest": 437,
-              "short_digest": 111
+              "digest": 404,
+              "short_digest": 145
             },
             "children": {}
           },
-          "object_generation_failed_with_openai": {
+          "object-generation-failed-with-openai": {
             "origPath": "09-troubleshooting/20-no-object-generated-content-filter.mdx",
-            "displayName": "Object generation failed with OpenAI",
+            "displayName": "object-generation-failed-with-openai",
             "relevant": true,
             "usage": {
-              "input": 2029,
-              "output": 780,
+              "input": 2103,
+              "output": 961,
               "details": null
             },
             "token_counts": {
               "fulltext": 847,
-              "digest": 497,
-              "short_digest": 159
+              "digest": 599,
+              "short_digest": 237
             },
             "children": {}
           },
-          "model_is_not_assignable_to_type_languagemodelv1": {
+          "model-not-assignable-to-language-model-v1": {
             "origPath": "09-troubleshooting/30-model-is-not-assignable-to-type.mdx",
-            "displayName": "Model is not assignable to type LanguageModelV1",
+            "displayName": "model-not-assignable-to-language-model-v1",
             "relevant": true,
             "usage": {
-              "input": 1355,
-              "output": 317,
+              "input": 1429,
+              "output": 318,
               "details": null
             },
             "token_counts": {
               "fulltext": 170,
-              "digest": 113,
-              "short_digest": 84
+              "digest": 121,
+              "short_digest": 76
             },
             "children": {}
           },
-          "typescript_error_\"cannot_find_namespace_'jsx'\"": {
+          "typescript_cannot_find_namespace_jsx": {
             "origPath": "09-troubleshooting/40-typescript-cannot-find-namespace-jsx.mdx",
-            "displayName": "TypeScript error \"Cannot find namespace 'JSX'\"",
+            "displayName": "TypeScript Cannot Find Namespace JSX",
             "relevant": true,
             "usage": {
-              "input": 1364,
-              "output": 313,
+              "input": 1438,
+              "output": 296,
               "details": null
             },
             "token_counts": {
               "fulltext": 182,
               "digest": 112,
-              "short_digest": 68
+              "short_digest": 57
             },
             "children": {}
           },
@@ -3952,30 +3743,30 @@
             "displayName": "React Maximum Update Depth Exceeded",
             "relevant": true,
             "usage": {
-              "input": 1481,
-              "output": 474,
+              "input": 1555,
+              "output": 363,
               "details": null
             },
             "token_counts": {
               "fulltext": 299,
-              "digest": 228,
-              "short_digest": 111
+              "digest": 185,
+              "short_digest": 57
             },
             "children": {}
           },
-          "jest:_cannot_find_module_'@ai-sdk_rsc'": {
+          "jest_module_resolution_for_rsc": {
             "origPath": "09-troubleshooting/60-jest-cannot-find-module-ai-rsc.mdx",
-            "displayName": "Jest: cannot find module '@ai-sdk/rsc'",
+            "displayName": "Jest Module Resolution for RSC",
             "relevant": true,
             "usage": {
-              "input": 1373,
-              "output": 346,
+              "input": 1447,
+              "output": 371,
               "details": null
             },
             "token_counts": {
               "fulltext": 188,
-              "digest": 153,
-              "short_digest": 70
+              "digest": 158,
+              "short_digest": 79
             },
             "children": {}
           },
@@ -3984,32 +3775,32 @@
             "displayName": "Troubleshooting",
             "relevant": false,
             "usage": {
-              "input": 1253,
-              "output": 190,
+              "input": 1327,
+              "output": 216,
               "details": null
             },
             "token_counts": {
               "fulltext": 81,
-              "digest": 66,
-              "short_digest": 22
+              "digest": 82,
+              "short_digest": 27
             },
             "children": {}
           }
         }
       },
-      "ai_sdk_by_vercel": {
+      "introduction": {
         "origPath": "00-introduction/index.mdx",
-        "displayName": "AI SDK by Vercel",
+        "displayName": "Introduction",
         "relevant": false,
         "usage": {
-          "input": 1844,
-          "output": 506,
+          "input": 1918,
+          "output": 535,
           "details": null
         },
         "token_counts": {
           "fulltext": 678,
-          "digest": 264,
-          "short_digest": 110
+          "digest": 311,
+          "short_digest": 100
         },
         "children": {}
       },
@@ -4018,14 +3809,14 @@
         "displayName": "AI SDK 6 Beta",
         "relevant": true,
         "usage": {
-          "input": 5092,
-          "output": 3034,
+          "input": 5166,
+          "output": 2935,
           "details": null
         },
         "token_counts": {
           "fulltext": 3910,
-          "digest": 2557,
-          "short_digest": 333
+          "digest": 2241,
+          "short_digest": 531
         },
         "children": {}
       }
@@ -4048,7 +3839,7 @@
     "repo": "https://github.com/vercel/ai",
     "commit": "84bfff95214fa19919d3821de05889b4e5be0e8b"
   },
-  "date": "2025-11-28T03:34:29.173904+00:00",
+  "date": "2025-12-07T03:00:50.931532+00:00",
   "model": "claude-haiku-4.5",
-  "commit": "2c4bf0c7fa6373b1d34ead5d097eafca3fdf7205-dirty"
+  "commit": "89d7a82f10a43f14d4fd63c518b2eaed000cc5c9-dirty"
 }

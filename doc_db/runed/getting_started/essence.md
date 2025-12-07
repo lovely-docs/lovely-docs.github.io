@@ -1,1 +1,0 @@
-Install via npm; import utilities into .svelte or .svelte.js|ts files; use reactively with $state and $effect.

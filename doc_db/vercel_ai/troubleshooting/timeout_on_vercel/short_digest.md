@@ -1,0 +1,1 @@
+Vercel functions default to 5-minute timeout. Extend with `export const maxDuration = 600` (Next.js) or configure in `vercel.json`. Pro/Enterprise plans support up to 800 seconds; Hobby limited to 300 seconds.

@@ -1,0 +1,1 @@
+Enhanced label component for form inputs. Accepts `ref` (bindable HTMLLabelElement), `children` (Snippet), and `child` (render delegation Snippet). Includes `data-label-root` attribute. Use with `for` attribute to associate with input elements.

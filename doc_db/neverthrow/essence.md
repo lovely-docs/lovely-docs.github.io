@@ -1,1 +1,1 @@
-Result/ResultAsync types for explicit error handling: Ok/Err variants with chainable methods (map, andThen, match, etc.) for sync/async operations, plus utilities for wrapping throwing functions and combining multiple Results.
+Complete API reference for Result<T,E> and ResultAsync<T,E> types with transformation methods (map, andThen, orElse, match), utilities (fromThrowable, fromPromise, safeTry), and static combinators (combine, combineWithAllErrors).

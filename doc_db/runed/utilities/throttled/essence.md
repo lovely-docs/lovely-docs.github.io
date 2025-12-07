@@ -1,1 +1,1 @@
-Throttled state wrapper: delays reactive value updates by specified interval; supports cancel() and setImmediately() for manual control.
+Throttled state wrapper with configurable delay; provides cancel() and setImmediately() methods.

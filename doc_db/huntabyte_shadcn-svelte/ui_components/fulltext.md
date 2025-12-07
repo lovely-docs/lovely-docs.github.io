@@ -3,7 +3,7 @@
 ## Pages
 
 ### accordion
-Accordion component with Root, Item, Trigger, and Content subcomponents; supports single/multiple type; WAI-ARIA accessible; install with `npx shadcn-svelte@latest add accordion -y -o`
+Accordion component with single/multiple expand modes, WAI-ARIA accessible, installed via `npx shadcn-svelte@latest add accordion -y -o`.
 
 ## Accordion
 
@@ -15,63 +15,43 @@ A vertically stacked set of interactive headings that each reveal a section of c
 npx shadcn-svelte@latest add accordion -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Usage
-
-Import and use the accordion components:
 
 ```svelte
 <script lang="ts">
   import * as Accordion from "$lib/components/ui/accordion/index.js";
 </script>
 
-<Accordion.Root type="single">
+<!-- Single type (only one item open at a time) -->
+<Accordion.Root type="single" class="w-full sm:max-w-[70%]" value="item-1">
   <Accordion.Item value="item-1">
     <Accordion.Trigger>Is it accessible?</Accordion.Trigger>
     <Accordion.Content>
       Yes. It adheres to the WAI-ARIA design pattern.
     </Accordion.Content>
   </Accordion.Item>
-</Accordion.Root>
-```
-
-### Key Components
-
-- **Accordion.Root**: Container component with `type` prop (`"single"` or `"multiple"`)
-- **Accordion.Item**: Individual accordion section with `value` prop
-- **Accordion.Trigger**: Clickable heading that toggles content visibility
-- **Accordion.Content**: Hidden content revealed when trigger is clicked
-
-### Props
-
-- `Accordion.Root` accepts `type` (single/multiple), `class`, and `value` (initial open item)
-- `Accordion.Item` accepts `value` identifier
-- `Accordion.Content` accepts `class` for styling
-
-### Example with Multiple Items
-
-```svelte
-<Accordion.Root type="single" class="w-full sm:max-w-[70%]" value="item-1">
-  <Accordion.Item value="item-1">
+  <Accordion.Item value="item-2">
     <Accordion.Trigger>Product Information</Accordion.Trigger>
     <Accordion.Content class="flex flex-col gap-4 text-balance">
-      <p>Product details here</p>
-    </Accordion.Content>
-  </Accordion.Item>
-  <Accordion.Item value="item-2">
-    <Accordion.Trigger>Shipping Details</Accordion.Trigger>
-    <Accordion.Content class="flex flex-col gap-4 text-balance">
-      <p>Shipping information here</p>
+      <p>Our flagship product combines cutting-edge technology with sleek design.</p>
+      <p>Key features include advanced processing capabilities and an intuitive user interface.</p>
     </Accordion.Content>
   </Accordion.Item>
 </Accordion.Root>
 ```
 
-The component is built on Bits UI and follows WAI-ARIA design patterns for accessibility.
+**Key props:**
+- `Accordion.Root`: `type="single"` (only one item open) or `type="multiple"` (multiple items can be open), `value` (initial open item), `class` (styling)
+- `Accordion.Item`: `value` (unique identifier)
+- `Accordion.Trigger`: clickable heading
+- `Accordion.Content`: revealed content section
+
+Adheres to WAI-ARIA design patterns for accessibility.
 
 ### alert-dialog
-Modal dialog component with Root, Trigger, Content, Header, Title, Description, Footer, Cancel, and Action sub-components; install with `npx shadcn-svelte@latest add alert-dialog -y -o`.
+Modal dialog component with Root, Trigger, Content, Header, Title, Description, Footer, Cancel, and Action subcomponents.
 
 ## Alert Dialog
 
@@ -87,18 +67,12 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Usage
 
-Import the AlertDialog components:
-
 ```svelte
 <script lang="ts">
   import * as AlertDialog from "$lib/components/ui/alert-dialog/index.js";
   import { buttonVariants } from "$lib/components/ui/button/index.js";
 </script>
-```
 
-Basic structure with all available sub-components:
-
-```svelte
 <AlertDialog.Root>
   <AlertDialog.Trigger class={buttonVariants({ variant: "outline" })}>
     Show Dialog
@@ -131,14 +105,14 @@ Basic structure with all available sub-components:
 - `AlertDialog.Cancel` - Cancel button
 - `AlertDialog.Action` - Action/confirm button
 
-The component is built on Bits UI. See Bits UI documentation for API reference and additional configuration options.
+See Bits UI documentation for full API reference.
 
 ### alert
-Alert component with Root/Title/Description subcomponents; supports default and destructive variants; accepts icons and rich content.
+Alert component for callouts with optional icon, title, description; supports default and destructive variants.
 
-## Alert Component
+## Alert
 
-Displays a callout for user attention with customizable variants and content.
+Displays a callout for user attention.
 
 ### Installation
 
@@ -146,67 +120,87 @@ Displays a callout for user attention with customizable variants and content.
 npx shadcn-svelte@latest add alert -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
-### Basic Usage
+### Usage
 
 ```svelte
 <script lang="ts">
   import * as Alert from "$lib/components/ui/alert/index.js";
+  import CheckCircle2Icon from "@lucide/svelte/icons/check-circle-2";
+  import AlertCircleIcon from "@lucide/svelte/icons/alert-circle";
 </script>
 
+<!-- Basic alert with title and description -->
 <Alert.Root>
   <Alert.Title>Heads up!</Alert.Title>
   <Alert.Description>
     You can add components to your app using the cli.
   </Alert.Description>
 </Alert.Root>
-```
 
-### Component Structure
-
-- `Alert.Root`: Container component
-- `Alert.Title`: Title text
-- `Alert.Description`: Description content
-- Supports icon elements (from lucide-svelte or custom)
-
-### Variants
-
-**Default variant** - Standard alert styling:
-```svelte
+<!-- Alert with icon -->
 <Alert.Root>
   <CheckCircle2Icon />
   <Alert.Title>Success! Your changes have been saved</Alert.Title>
   <Alert.Description>This is an alert with icon, title and description.</Alert.Description>
 </Alert.Root>
-```
 
-**Destructive variant** - Error/warning styling:
-```svelte
+<!-- Alert with title and icon only (no description) -->
+<Alert.Root>
+  <CheckCircle2Icon />
+  <Alert.Title>This Alert has a title and an icon. No description.</Alert.Title>
+</Alert.Root>
+
+<!-- Destructive variant -->
 <Alert.Root variant="destructive">
-  <CircleAlertIcon class="size-4" />
+  <AlertCircleIcon />
+  <Alert.Title>Unable to process your payment.</Alert.Title>
+  <Alert.Description>
+    <p>Please verify your billing information and try again.</p>
+    <ul class="list-inside list-disc text-sm">
+      <li>Check your card details</li>
+      <li>Ensure sufficient funds</li>
+      <li>Verify billing address</li>
+    </ul>
+  </Alert.Description>
+</Alert.Root>
+
+<!-- Error variant example -->
+<Alert.Root variant="destructive">
+  <AlertCircleIcon class="size-4" />
   <Alert.Title>Error</Alert.Title>
   <Alert.Description>Your session has expired. Please login again.</Alert.Description>
 </Alert.Root>
 ```
 
-### Features
+### Components
 
-- Flexible composition: can include title only, description only, or both
-- Icon support via slot (typically lucide-svelte icons)
-- Rich content support in description (paragraphs, lists, etc.)
-- Two built-in variants: default and destructive
+- `Alert.Root`: Container for the alert
+- `Alert.Title`: Alert title
+- `Alert.Description`: Alert description (optional)
+
+### Variants
+
+- Default: Standard alert styling
+- `destructive`: Error/warning styling for destructive actions or errors
 
 ### aspect-ratio
-AspectRatio component maintains content at specified ratio (e.g., 16/9); accepts ratio prop and class styling.
+AspectRatio component maintains content at specified ratio (e.g., 16/9); install with `npx shadcn-svelte@latest add aspect-ratio -y -o`
 
 ## Aspect Ratio
 
-Component that constrains content to a specific aspect ratio.
+Displays content within a desired ratio.
+
+### Installation
+
+```bash
+npx shadcn-svelte@latest add aspect-ratio -y -o
+```
+
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Usage
-
-Import and wrap content with the `AspectRatio` component, specifying the desired ratio:
 
 ```svelte
 <script lang="ts">
@@ -220,20 +214,12 @@ Import and wrap content with the `AspectRatio` component, specifying the desired
 </div>
 ```
 
-The `ratio` prop accepts a numeric value (e.g., `16 / 9` for widescreen). Child content will be scaled to maintain the specified aspect ratio. Apply additional styling via the `class` prop.
-
-### Installation
-
-```bash
-npx shadcn-svelte@latest add aspect-ratio -y -o
-```
-
-Flags: `-y` skips confirmation prompt, `-o` overwrites existing files.
+The `AspectRatio` component wraps content and maintains a specified aspect ratio. Pass the desired ratio as a number (e.g., `16 / 9` for widescreen). Content inside scales to fill the container while preserving the ratio.
 
 ### avatar
-Avatar component with Image and Fallback subcomponents; displays user image or initials fallback text.
+Avatar component: image with fallback text, composed of Root/Image/Fallback subcomponents, styleable via class prop.
 
-## Avatar Component
+## Avatar
 
 Image element with fallback for user representation.
 
@@ -243,33 +229,28 @@ Image element with fallback for user representation.
 npx shadcn-svelte@latest add avatar -y -o
 ```
 
-The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
+Use `-y` to skip confirmation prompt and `-o` to overwrite existing files.
 
-### Basic Usage
+### Usage
 
 ```svelte
 <script lang="ts">
   import * as Avatar from "$lib/components/ui/avatar/index.js";
 </script>
 
+<!-- Basic avatar -->
 <Avatar.Root>
   <Avatar.Image src="https://github.com/shadcn.png" alt="@shadcn" />
   <Avatar.Fallback>CN</Avatar.Fallback>
 </Avatar.Root>
-```
 
-### Variants
-
-**Rounded corners:**
-```svelte
+<!-- Rounded variant -->
 <Avatar.Root class="rounded-lg">
   <Avatar.Image src="https://github.com/evilrabbit.png" alt="@evilrabbit" />
   <Avatar.Fallback>ER</Avatar.Fallback>
 </Avatar.Root>
-```
 
-**Avatar group with styling:**
-```svelte
+<!-- Multiple avatars with styling -->
 <div class="*:data-[slot=avatar]:ring-background flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:grayscale">
   <Avatar.Root>
     <Avatar.Image src="https://github.com/shadcn.png" alt="@shadcn" />
@@ -279,21 +260,21 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
     <Avatar.Image src="https://github.com/leerob.png" alt="@leerob" />
     <Avatar.Fallback>LR</Avatar.Fallback>
   </Avatar.Root>
+  <Avatar.Root>
+    <Avatar.Image src="https://github.com/evilrabbit.png" alt="@evilrabbit" />
+    <Avatar.Fallback>ER</Avatar.Fallback>
+  </Avatar.Root>
 </div>
 ```
 
-### Structure
-
-- `Avatar.Root`: Container component
-- `Avatar.Image`: Image element with src and alt attributes
-- `Avatar.Fallback`: Text displayed when image fails to load
+Structure: `Avatar.Root` wraps `Avatar.Image` (with src and alt) and `Avatar.Fallback` (text shown if image fails to load). Supports custom styling via class prop.
 
 ### badge
-Badge component with default/secondary/destructive/outline variants; supports custom styling and link styling via badgeVariants helper.
+Badge component with variants (default, secondary, destructive, outline); supports icons, custom styling, and badgeVariants helper for link badges.
 
-## Badge Component
+## Badge
 
-A UI component for displaying badges with multiple style variants.
+Displays a badge or badge-like component.
 
 ### Installation
 
@@ -301,48 +282,40 @@ A UI component for displaying badges with multiple style variants.
 npx shadcn-svelte@latest add badge -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
-### Basic Usage
+### Usage
 
-Import and use the Badge component:
+Basic badge with variants:
 
 ```svelte
 <script lang="ts">
   import { Badge } from "$lib/components/ui/badge/index.js";
+  import BadgeCheckIcon from "@lucide/svelte/icons/badge-check";
 </script>
 
 <Badge>Badge</Badge>
 <Badge variant="secondary">Secondary</Badge>
 <Badge variant="destructive">Destructive</Badge>
 <Badge variant="outline">Outline</Badge>
-```
 
-### Variants
-
-The component supports four built-in variants: default, secondary, destructive, and outline.
-
-### Customization
-
-Badges can be customized with additional classes for styling:
-
-```svelte
+<!-- With icon -->
 <Badge variant="secondary" class="bg-blue-500 text-white dark:bg-blue-600">
   <BadgeCheckIcon />
   Verified
 </Badge>
-```
 
-Circular badge variants can be created using custom classes:
-
-```svelte
+<!-- Circular badges with numbers -->
 <Badge class="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums">8</Badge>
 <Badge class="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums" variant="destructive">99</Badge>
+<Badge class="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums" variant="outline">20+</Badge>
 ```
+
+Available variants: `default`, `secondary`, `destructive`, `outline`.
 
 ### Link Badge
 
-Use the `badgeVariants` helper to style links as badges:
+Use `badgeVariants` helper to style a link as a badge:
 
 ```svelte
 <script lang="ts">
@@ -353,9 +326,9 @@ Use the `badgeVariants` helper to style links as badges:
 ```
 
 ### breadcrumb
-Breadcrumb component with Link, Page, Separator, Ellipsis; supports custom separators, dropdown/drawer integration, and responsive collapsed states.
+Navigation breadcrumb component with Root/List/Item/Link/Page/Separator/Ellipsis subcomponents; supports custom separators, dropdowns, collapsing, and responsive desktop/mobile variants.
 
-## Breadcrumb Component
+## Breadcrumb
 
 Displays the path to the current resource using a hierarchy of links.
 
@@ -391,30 +364,26 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </Breadcrumb.Root>
 ```
 
-### Component Structure
+### Components
 
 - `<Breadcrumb.Root>` - Root container
 - `<Breadcrumb.List>` - List wrapper
 - `<Breadcrumb.Item>` - Individual breadcrumb item
-- `<Breadcrumb.Link>` - Clickable link with `href` prop
+- `<Breadcrumb.Link href="...">` - Clickable link in breadcrumb
 - `<Breadcrumb.Page>` - Current page (non-clickable)
 - `<Breadcrumb.Separator>` - Separator between items (default: forward slash)
 - `<Breadcrumb.Ellipsis>` - Collapsed state indicator
 
-### Custom Separator
+### Examples
 
-Pass a custom component to the `<Breadcrumb.Separator />` slot:
-
+**Custom separator** - Pass a custom component to `<Breadcrumb.Separator>` slot:
 ```svelte
 <Breadcrumb.Separator>
   <SlashIcon />
 </Breadcrumb.Separator>
 ```
 
-### Dropdown Integration
-
-Compose `<Breadcrumb.Item />` with `<DropdownMenu />` to create interactive breadcrumbs:
-
+**Dropdown** - Compose with `<DropdownMenu>` to create collapsible breadcrumb sections:
 ```svelte
 <Breadcrumb.Item>
   <DropdownMenu.Root>
@@ -431,31 +400,19 @@ Compose `<Breadcrumb.Item />` with `<DropdownMenu />` to create interactive brea
 </Breadcrumb.Item>
 ```
 
-### Collapsed State
-
-Use `<Breadcrumb.Ellipsis />` to show a collapsed state for long breadcrumbs:
-
+**Collapsed** - Use `<Breadcrumb.Ellipsis />` to show collapsed state for long breadcrumbs:
 ```svelte
 <Breadcrumb.Item>
   <Breadcrumb.Ellipsis />
 </Breadcrumb.Item>
 ```
 
-### Custom Link Component
+**Custom link component** - Use `asChild` prop on `<Breadcrumb.Link>` to integrate with routing libraries.
 
-Use the `asChild` prop on `<Breadcrumb.Link />` to integrate with routing libraries.
-
-### Responsive Breadcrumb
-
-Compose with `<DropdownMenu />` for desktop and `<Drawer />` for mobile using `MediaQuery`:
-
+**Responsive** - Compose with `<DropdownMenu>` for desktop and `<Drawer>` for mobile using `MediaQuery`:
 ```svelte
 <script lang="ts">
   import { MediaQuery } from "svelte/reactivity";
-  import * as Breadcrumb from "$lib/components/ui/breadcrumb/index.js";
-  import * as Drawer from "$lib/components/ui/drawer/index.js";
-  import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.js";
-  
   const items = [
     { href: "#", label: "Home" },
     { href: "#", label: "Documentation" },
@@ -533,8 +490,9 @@ Compose with `<DropdownMenu />` for desktop and `<Drawer />` for mobile using `M
 </Breadcrumb.Root>
 ```
 
+
 ### button-group
-Container for grouping related buttons with consistent styling, supporting vertical/horizontal orientation, separators, nesting, and integration with Input, DropdownMenu, Select, Popover components; accessible with role="group" and aria-label support.
+ButtonGroup component for grouping related buttons with consistent styling, supporting vertical/horizontal orientation, separators, nesting, and composition with other UI components.
 
 ## Button Group
 
@@ -564,26 +522,24 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 
 ### Accessibility
 
-- The component has `role="group"` set automatically
+- Component has `role="group"` attribute
 - Use `tabindex` to navigate between buttons
-- Label with `aria-label` or `aria-labelledby`:
-
-```svelte
-<ButtonGroup.Root aria-label="Button group">
-  <Button>Button 1</Button>
-  <Button>Button 2</Button>
-</ButtonGroup.Root>
-```
+- Use `aria-label` or `aria-labelledby` to label the group:
+  ```svelte
+  <ButtonGroup.Root aria-label="Button group">
+    <Button>Button 1</Button>
+    <Button>Button 2</Button>
+  </ButtonGroup.Root>
+  ```
 
 ### ButtonGroup vs ToggleGroup
 
-- **ButtonGroup**: Group buttons that perform actions
-- **ToggleGroup**: Group buttons that toggle state
+- **ButtonGroup**: Group buttons that perform an action
+- **ToggleGroup**: Group buttons that toggle a state
 
-### Orientation
+### Examples
 
-Set `orientation="vertical"` for vertical layout:
-
+**Orientation** - Set `orientation="vertical"` for vertical layout:
 ```svelte
 <ButtonGroup.Root orientation="vertical" aria-label="Media controls" class="h-fit">
   <Button variant="outline" size="icon"><Plus /></Button>
@@ -591,10 +547,7 @@ Set `orientation="vertical"` for vertical layout:
 </ButtonGroup.Root>
 ```
 
-### Size
-
-Control button sizes using the `size` prop on individual buttons (sm, default, lg, icon-sm, icon, icon-lg):
-
+**Size** - Control button sizes with `size` prop on individual buttons (sm, default, lg, icon-sm, icon, icon-lg):
 ```svelte
 <ButtonGroup.Root>
   <Button variant="outline" size="sm">Small</Button>
@@ -603,16 +556,12 @@ Control button sizes using the `size` prop on individual buttons (sm, default, l
 </ButtonGroup.Root>
 ```
 
-### Nested Groups
-
-Nest `ButtonGroup` components to create groups with spacing:
-
+**Nested** - Nest ButtonGroup components for spacing:
 ```svelte
 <ButtonGroup.Root>
   <ButtonGroup.Root>
     <Button variant="outline" size="sm">1</Button>
     <Button variant="outline" size="sm">2</Button>
-    <Button variant="outline" size="sm">3</Button>
   </ButtonGroup.Root>
   <ButtonGroup.Root>
     <Button variant="outline" size="icon-sm" aria-label="Previous"><ArrowLeft /></Button>
@@ -621,10 +570,7 @@ Nest `ButtonGroup` components to create groups with spacing:
 </ButtonGroup.Root>
 ```
 
-### Separator
-
-Use `ButtonGroup.Separator` to visually divide buttons. Recommended for non-outline variants:
-
+**Separator** - Use `ButtonGroup.Separator` to visually divide buttons. Recommended for non-outline variants:
 ```svelte
 <ButtonGroup.Root>
   <Button variant="secondary" size="sm">Copy</Button>
@@ -633,10 +579,7 @@ Use `ButtonGroup.Separator` to visually divide buttons. Recommended for non-outl
 </ButtonGroup.Root>
 ```
 
-### Split Button
-
-Create a split button with a separator and icon button:
-
+**Split Button** - Separator with two buttons:
 ```svelte
 <ButtonGroup.Root>
   <Button variant="secondary">Button</Button>
@@ -645,10 +588,7 @@ Create a split button with a separator and icon button:
 </ButtonGroup.Root>
 ```
 
-### With Input
-
-Wrap an `Input` component with buttons:
-
+**With Input**:
 ```svelte
 <ButtonGroup.Root>
   <Input placeholder="Search..." />
@@ -656,10 +596,7 @@ Wrap an `Input` component with buttons:
 </ButtonGroup.Root>
 ```
 
-### With InputGroup
-
-Create complex input layouts with `InputGroup`:
-
+**With InputGroup** - Complex input layouts with nested ButtonGroups and InputGroup components:
 ```svelte
 <ButtonGroup.Root class="[--radius:9999rem]">
   <ButtonGroup.Root>
@@ -678,19 +615,14 @@ Create complex input layouts with `InputGroup`:
 </ButtonGroup.Root>
 ```
 
-### With DropdownMenu
-
-Create a split button with dropdown menu:
-
+**With DropdownMenu** - Split button with dropdown:
 ```svelte
 <ButtonGroup.Root>
   <Button variant="outline">Follow</Button>
   <DropdownMenu.Root>
     <DropdownMenu.Trigger>
       {#snippet child({ props })}
-        <Button {...props} variant="outline" class="!pl-2">
-          <ChevronDown />
-        </Button>
+        <Button {...props} variant="outline" class="!pl-2"><ChevronDown /></Button>
       {/snippet}
     </DropdownMenu.Trigger>
     <DropdownMenu.Content align="end">
@@ -703,56 +635,54 @@ Create a split button with dropdown menu:
 </ButtonGroup.Root>
 ```
 
-### With Select
-
-Pair with a `Select` component:
-
+**With Select**:
 ```svelte
 <ButtonGroup.Root>
   <ButtonGroup.Root>
     <Select.Root type="single" bind:value={currency}>
       <Select.Trigger class="font-mono">{currency}</Select.Trigger>
-      <Select.Content>
-        <Select.Item value="$">$ US Dollar</Select.Item>
-        <Select.Item value="€">€ Euro</Select.Item>
+      <Select.Content class="min-w-24">
+        {#each CURRENCIES as currencyOption (currencyOption.value)}
+          <Select.Item value={currencyOption.value}>{currencyOption.value}</Select.Item>
+        {/each}
       </Select.Content>
     </Select.Root>
-    <Input placeholder="10.00" />
+    <Input placeholder="10.00" pattern="[0-9]*" />
   </ButtonGroup.Root>
   <ButtonGroup.Root>
-    <Button size="icon" variant="outline"><ArrowRight /></Button>
+    <Button aria-label="Send" size="icon" variant="outline"><ArrowRight /></Button>
   </ButtonGroup.Root>
 </ButtonGroup.Root>
 ```
 
-### With Popover
-
-Use with a `Popover` component:
-
+**With Popover**:
 ```svelte
 <ButtonGroup.Root>
   <Button variant="outline"><Bot />Copilot</Button>
   <Popover.Root>
     <Popover.Trigger>
       {#snippet child({ props })}
-        <Button {...props} variant="outline" size="icon"><ChevronDown /></Button>
+        <Button {...props} variant="outline" size="icon" aria-label="Open Popover"><ChevronDown /></Button>
       {/snippet}
     </Popover.Trigger>
-    <Popover.Content align="end" class="rounded-xl p-0">
-      <div class="px-4 py-3">Agent Tasks</div>
+    <Popover.Content align="end" class="rounded-xl p-0 text-sm">
+      <div class="px-4 py-3"><div class="text-sm font-medium">Agent Tasks</div></div>
       <Separator />
-      <div class="p-4"><Textarea placeholder="Describe your task..." /></div>
+      <div class="p-4 text-sm">
+        <Textarea placeholder="Describe your task..." class="mb-4 resize-none" />
+        <p class="font-medium">Start a new task with Copilot</p>
+      </div>
     </Popover.Content>
   </Popover.Root>
 </ButtonGroup.Root>
 ```
 
 ### button
-Button component with variants (outline, secondary, destructive, ghost, link), href support for links, icon/size props, and disabled state.
+Button component with variants (default, secondary, destructive, outline, ghost, link), icon support, size prop, and href for link conversion.
 
 ## Button Component
 
-Displays a button or a component that looks like a button.
+A reusable button component that can render as `<button>` or `<a>` element with multiple style variants.
 
 ### Installation
 
@@ -760,88 +690,73 @@ Displays a button or a component that looks like a button.
 npx shadcn-svelte@latest add button -y -o
 ```
 
-The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
+Flags: `-y` skips confirmation prompt, `-o` overwrites existing files.
 
 ### Basic Usage
-
-Import and render a button:
 
 ```svelte
 <script lang="ts">
   import { Button } from "$lib/components/ui/button/index.js";
 </script>
+
+<!-- Default button -->
 <Button>Button</Button>
-```
 
-### Variants
+<!-- With variant -->
+<Button variant="outline">Button</Button>
 
-The `variant` prop controls the button's appearance:
-
-```svelte
-<Button variant="outline">Outline</Button>
-<Button variant="secondary">Secondary</Button>
-<Button variant="destructive">Destructive</Button>
-<Button variant="ghost">Ghost</Button>
-<Button variant="link">Link</Button>
-```
-
-### Link Conversion
-
-Convert the button to an `<a>` element by passing an `href` prop:
-
-```svelte
+<!-- As link -->
 <Button href="/dashboard">Dashboard</Button>
 ```
 
-Alternatively, use the `buttonVariants` helper to style a link as a button:
-
+Alternatively, use `buttonVariants` helper to style links as buttons:
 ```svelte
-<script lang="ts">
-  import { buttonVariants } from "$lib/components/ui/button";
-</script>
 <a href="/dashboard" class={buttonVariants({ variant: "outline" })}>
   Dashboard
 </a>
 ```
 
-### Size and Icons
+### Variants
 
-Use the `size` prop to control button size. The `size="icon"` variant creates icon-only buttons:
+- `default` (primary): Default button style
+- `secondary`: Secondary button style
+- `destructive`: Red/danger button style
+- `outline`: Outlined button style
+- `ghost`: Minimal button style
+- `link`: Link-styled button
+
+### Examples
 
 ```svelte
-<script lang="ts">
-  import GitBranchIcon from "@lucide/svelte/icons/git-branch";
-  import ChevronRightIcon from "@lucide/svelte/icons/chevron-right";
-  import { Button } from "$lib/components/ui/button/index.js";
-</script>
+<Button>Primary</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="destructive">Destructive</Button>
+<Button variant="outline">Outline</Button>
+<Button variant="ghost">Ghost</Button>
+<Button variant="link">Link</Button>
+
+<!-- With icon -->
 <Button variant="outline" size="sm">
   <GitBranchIcon />
   Login with Email
 </Button>
+
+<!-- Icon only -->
 <Button variant="secondary" size="icon" class="size-8">
   <ChevronRightIcon />
 </Button>
-```
 
-### Disabled State
-
-Disable buttons with the `disabled` attribute. Commonly used with loading indicators:
-
-```svelte
-<script lang="ts">
-  import Loader2Icon from "@lucide/svelte/icons/loader-2";
-  import { Button } from "$lib/components/ui/button/index.js";
-</script>
+<!-- Loading state -->
 <Button disabled>
   <Loader2Icon class="animate-spin" />
   Please wait
 </Button>
 ```
 
-See Bits UI Button documentation for full API reference.
+Supports `size` prop (e.g., `sm`, `icon`) and standard HTML button attributes.
 
 ### calendar
-Date selection component with single/multi-month display, dropdown caption layouts, timezone support, and examples for popover pickers, date+time, and natural language parsing.
+Date selection component with single/range modes, dropdown month/year selectors, popover integration, natural language parsing, and 30+ block variants.
 
 ## Calendar Component
 
@@ -849,143 +764,106 @@ A date selection component built on Bits UI Calendar using @internationalized/da
 
 ### Basic Usage
 ```svelte
-<script lang="ts">
-  import { getLocalTimeZone, today } from "@internationalized/date";
-  import { Calendar } from "$lib/components/ui/calendar/index.js";
-  let value = today(getLocalTimeZone());
-</script>
-<Calendar type="single" bind:value class="rounded-md border shadow-sm" captionLayout="dropdown" />
+import { getLocalTimeZone, today } from "@internationalized/date";
+import { Calendar } from "$lib/components/ui/calendar/index.js";
+
+let value = today(getLocalTimeZone());
+```
+```svelte
+<Calendar
+  type="single"
+  bind:value
+  class="rounded-md border shadow-sm"
+  captionLayout="dropdown"
+/>
 ```
 
 ### Installation
 ```bash
 npx shadcn-svelte@latest add calendar -y -o
 ```
-Flags: `-y` skips confirmation, `-o` overwrites existing files.
-
-### Key Features
-- Single date selection with `type="single"`
-- Multiple month display with `numberOfMonths` prop
-- Caption layout options: `"dropdown"` (month/year), `"dropdown-months"` (month only), `"dropdown-years"` (year only)
-- Date constraints with `maxValue` and `minValue` props
-- Event handling with `onValueChange` callback
-- Timezone support via @internationalized/date
+(-y: skip confirmation, -o: overwrite existing files)
 
 ### Examples
 
-**Multiple Months:**
+**Multiple Months Display**
 ```svelte
+let value = new CalendarDate(2025, 6, 12);
 <Calendar type="single" bind:value numberOfMonths={2} />
 ```
 
-**Month/Year Selector with Dropdown:**
+**Month/Year Selector with Dropdown Options**
 ```svelte
-<script lang="ts">
-  import Calendar from "$lib/components/ui/calendar/calendar.svelte";
-  import * as Select from "$lib/components/ui/select/index.js";
-  let value = $state(new CalendarDate(2025, 6, 12));
-  let dropdown = $state("dropdown");
-</script>
+let dropdown = "dropdown"; // or "dropdown-months", "dropdown-years"
 <Calendar type="single" bind:value captionLayout={dropdown} />
-<Select.Root type="single" bind:value={dropdown}>
-  <Select.Trigger>
-    {selectedDropdown}
-  </Select.Trigger>
-  <Select.Content>
-    <Select.Item value="dropdown">Month and Year</Select.Item>
-    <Select.Item value="dropdown-months">Month Only</Select.Item>
-    <Select.Item value="dropdown-years">Year Only</Select.Item>
-  </Select.Content>
-</Select.Root>
 ```
+Pair with Select component to switch between "Month and Year", "Month Only", "Year Only" layouts.
 
-**Date of Birth Picker (with Popover):**
+**Date of Birth Picker (in Popover)**
 ```svelte
-<script lang="ts">
-  import Calendar from "$lib/components/ui/calendar/calendar.svelte";
-  import * as Popover from "$lib/components/ui/popover/index.js";
-  import { Button } from "$lib/components/ui/button/index.js";
-  import { today } from "@internationalized/date";
-  let open = $state(false);
-  let value = $state();
-</script>
+let open = false;
+let value;
 <Popover.Root bind:open>
   <Popover.Trigger>
-    {#snippet child({ props })}
-      <Button {...props} variant="outline">
-        {value ? value.toDate(getLocalTimeZone()).toLocaleDateString() : "Select date"}
-      </Button>
-    {/snippet}
+    <Button variant="outline">
+      {value ? value.toDate(getLocalTimeZone()).toLocaleDateString() : "Select date"}
+    </Button>
   </Popover.Trigger>
   <Popover.Content class="w-auto p-0">
-    <Calendar type="single" bind:value maxValue={today(getLocalTimeZone())} 
-      onValueChange={() => { open = false; }} />
+    <Calendar
+      type="single"
+      bind:value
+      captionLayout="dropdown"
+      onValueChange={() => { open = false; }}
+      maxValue={today(getLocalTimeZone())}
+    />
   </Popover.Content>
 </Popover.Root>
 ```
 
-**Date and Time Picker:**
+**Date and Time Picker**
+Combine Calendar in Popover with time Input:
 ```svelte
-<div class="flex gap-4">
-  <Popover.Root bind:open>
-    <Popover.Trigger>
-      {#snippet child({ props })}
-        <Button {...props} variant="outline">
-          {value ? value.toDate(getLocalTimeZone()).toLocaleDateString() : "Select date"}
-        </Button>
-      {/snippet}
-    </Popover.Trigger>
-    <Popover.Content class="w-auto p-0">
-      <Calendar type="single" bind:value onValueChange={() => { open = false; }} />
-    </Popover.Content>
-  </Popover.Root>
-  <Input type="time" value="10:30:00" />
-</div>
+<Calendar type="single" bind:value captionLayout="dropdown" />
+<Input type="time" step="1" value="10:30:00" />
 ```
 
-**Natural Language Date Picker (using chrono-node):**
+**Natural Language Date Input**
+Uses chrono-node to parse text like "In 2 days", "Tomorrow", "next week":
 ```svelte
-<script lang="ts">
-  import { Calendar } from "$lib/components/ui/calendar/index.js";
-  import { Input } from "$lib/components/ui/input/index.js";
-  import { parseDate } from "chrono-node";
-  import { CalendarDate, getLocalTimeZone } from "@internationalized/date";
-  
-  let open = $state(false);
-  let inputValue = $state("In 2 days");
-  let value = $state(parseDate(inputValue) ? new CalendarDate(...) : undefined);
-</script>
-<Input bind:value={inputValue} placeholder="Tomorrow or next week" 
-  onkeydown={(e) => { if (e.key === "ArrowDown") open = true; }} />
-<Popover.Root bind:open>
-  <Popover.Trigger>Calendar Icon</Popover.Trigger>
-  <Popover.Content class="w-auto p-0">
-    <Calendar type="single" bind:value 
-      onValueChange={(v) => { inputValue = formatDate(v); open = false; }} />
-  </Popover.Content>
-</Popover.Root>
+import { parseDate } from "chrono-node";
+import { CalendarDate } from "@internationalized/date";
+
+let inputValue = "In 2 days";
+let value = parseDate(inputValue) 
+  ? new CalendarDate(date.getFullYear(), date.getMonth() + 1, date.getDate())
+  : undefined;
+
+<Input
+  bind:value={inputValue}
+  placeholder="Tomorrow or next week"
+  onkeydown={(e) => { if (e.key === "ArrowDown") open = true; }}
+/>
+<Calendar type="single" bind:value onValueChange={(v) => { inputValue = formatDate(v); }} />
 ```
 
 ### Related Components
 - Range Calendar: for date range selection
-- Date Picker: higher-level date selection component
+- Date Picker: wrapper component using Calendar
 - 30+ calendar blocks available in Blocks Library
 
 ### Upgrade
 ```bash
 npx shadcn-svelte@latest add calendar -y -o
 ```
-If you've customized the component, manually merge changes. After upgrading, add new blocks:
-```bash
-npx shadcn-svelte@latest add calendar-02 -y -o
-```
+Then add new blocks: `npx shadcn-svelte@latest add calendar-02 -y -o`
 
 ### card
 Composable card component with Root, Header, Title, Description, Action, Content, Footer sub-components; supports Tailwind styling.
 
 ## Card Component
 
-A composable card component for displaying structured content with header, content, and footer sections.
+A composable card component with header, content, and footer sections for displaying structured information.
 
 ### Installation
 
@@ -995,17 +873,15 @@ npx shadcn-svelte@latest add card -y -o
 
 The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
-### Structure
+### Components
 
-The Card component is composed of several sub-components:
-
-- **Card.Root**: Container wrapper
-- **Card.Header**: Top section, typically contains title and description
-- **Card.Title**: Heading text within header
-- **Card.Description**: Subtitle or descriptive text within header
-- **Card.Action**: Optional action area within header (e.g., buttons)
-- **Card.Content**: Main content area
-- **Card.Footer**: Bottom section, typically for actions
+- `Card.Root` - Main container
+- `Card.Header` - Header section
+- `Card.Title` - Title text
+- `Card.Description` - Description text
+- `Card.Action` - Action area (optional)
+- `Card.Content` - Main content area
+- `Card.Footer` - Footer section
 
 ### Basic Usage
 
@@ -1072,10 +948,10 @@ The Card component is composed of several sub-components:
 </Card.Root>
 ```
 
-All sub-components accept standard HTML class attributes for styling via Tailwind CSS.
+Supports Tailwind classes for styling and layout customization.
 
 ### carousel
-Embla Carousel component with sizing, spacing, vertical/horizontal orientation, options, reactive API for state/events, and plugin support.
+Embla-based carousel with sizing (basis classes), spacing (pl-/ml- utilities), vertical/horizontal orientation, configurable options, API access via setApi callback, and plugin support (Autoplay).
 
 ## Carousel
 
@@ -1087,20 +963,27 @@ A carousel component built on Embla Carousel with motion and swipe support.
 npx shadcn-svelte@latest add carousel -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Basic Usage
 
 ```svelte
 <script lang="ts">
   import * as Carousel from "$lib/components/ui/carousel/index.js";
+  import * as Card from "$lib/components/ui/card/index.js";
 </script>
 
 <Carousel.Root>
   <Carousel.Content>
-    <Carousel.Item>...</Carousel.Item>
-    <Carousel.Item>...</Carousel.Item>
-    <Carousel.Item>...</Carousel.Item>
+    {#each Array(5) as _, i (i)}
+      <Carousel.Item>
+        <Card.Root>
+          <Card.Content class="flex aspect-square items-center justify-center p-6">
+            <span class="text-4xl font-semibold">{i + 1}</span>
+          </Card.Content>
+        </Card.Root>
+      </Carousel.Item>
+    {/each}
   </Carousel.Content>
   <Carousel.Previous />
   <Carousel.Next />
@@ -1109,10 +992,10 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 
 ### Sizing Items
 
-Use the `basis` utility class on `<Carousel.Item />` to control item size:
+Use `basis` utility classes on `<Carousel.Item />`:
 
 ```svelte
-<Carousel.Root>
+<Carousel.Root class="w-full max-w-sm">
   <Carousel.Content>
     <Carousel.Item class="basis-1/3">...</Carousel.Item>
     <Carousel.Item class="md:basis-1/2 lg:basis-1/3">...</Carousel.Item>
@@ -1122,12 +1005,11 @@ Use the `basis` utility class on `<Carousel.Item />` to control item size:
 
 ### Spacing Between Items
 
-Use `pl-[VALUE]` on `<Carousel.Item />` and `-ml-[VALUE]` on `<Carousel.Content />`:
+Use `pl-[VALUE]` on items and `-ml-[VALUE]` on content:
 
 ```svelte
 <Carousel.Root>
   <Carousel.Content class="-ml-4 md:-ml-6">
-    <Carousel.Item class="pl-4 md:pl-6">...</Carousel.Item>
     <Carousel.Item class="pl-4 md:pl-6">...</Carousel.Item>
   </Carousel.Content>
 </Carousel.Root>
@@ -1135,21 +1017,19 @@ Use `pl-[VALUE]` on `<Carousel.Item />` and `-ml-[VALUE]` on `<Carousel.Content 
 
 ### Orientation
 
-Set carousel direction with the `orientation` prop:
-
 ```svelte
-<Carousel.Root orientation="vertical" class="h-[200px]">
-  <Carousel.Content class="-mt-1">
+<Carousel.Root orientation="vertical" class="w-full max-w-xs">
+  <Carousel.Content class="-mt-1 h-[200px]">
     <Carousel.Item class="pt-1">...</Carousel.Item>
   </Carousel.Content>
 </Carousel.Root>
 ```
 
-Accepts `"vertical"` or `"horizontal"`.
+Use `orientation="vertical | horizontal"`.
 
 ### Options
 
-Pass Embla Carousel options via the `opts` prop:
+Pass options via the `opts` prop (see Embla Carousel docs for full list):
 
 ```svelte
 <Carousel.Root opts={{ align: "start", loop: true }}>
@@ -1159,15 +1039,13 @@ Pass Embla Carousel options via the `opts` prop:
 </Carousel.Root>
 ```
 
-### API & State Management
+### API & Events
 
-Use the `setApi` callback to access the carousel API instance:
+Get carousel instance via `setApi` callback:
 
 ```svelte
 <script lang="ts">
   import type { CarouselAPI } from "$lib/components/ui/carousel/context.js";
-  import * as Carousel from "$lib/components/ui/carousel/index.js";
-  
   let api = $state<CarouselAPI>();
   const count = $derived(api ? api.scrollSnapList().length : 0);
   let current = $state(0);
@@ -1191,33 +1069,11 @@ Use the `setApi` callback to access the carousel API instance:
 <div>Slide {current} of {count}</div>
 ```
 
-Available API methods: `scrollSnapList()`, `selectedScrollSnap()`, and event listeners via `api.on()`.
-
-### Events
-
-Listen to carousel events using the API instance:
-
-```svelte
-<script lang="ts">
-  let api = $state<CarouselAPI>();
-  
-  $effect(() => {
-    if (api) {
-      api.on("select", () => {
-        // Handle selection change
-      });
-    }
-  });
-</script>
-
-<Carousel.Root setApi={(emblaApi) => (api = emblaApi)}>
-  ...
-</Carousel.Root>
-```
+Listen to events with `api.on("select", callback)`.
 
 ### Plugins
 
-Add Embla Carousel plugins via the `plugins` prop:
+Add plugins via the `plugins` prop:
 
 ```svelte
 <script lang="ts">
@@ -1238,16 +1094,16 @@ Add Embla Carousel plugins via the `plugins` prop:
 </Carousel.Root>
 ```
 
-Refer to Embla Carousel documentation for available plugins and options.
+See Embla Carousel docs for available plugins.
 
 ### chart
-Beautiful, composable charts built on LayerChart with customizable config, theming via CSS variables or direct colors, and flexible tooltips with custom keys.
+Composable chart components built on LayerChart; define data, config (labels/colors), build with LayerChart components; supports CSS variable theming and customizable tooltips.
 
-## Chart
+## Chart Component
 
-Beautiful, customizable charts built on LayerChart. Copy and paste into your apps.
+Beautiful, composable charts built on LayerChart. Copy-paste components into your apps.
 
-**Important:** LayerChart v2 is in pre-release and actively evolving. Only use if comfortable with potential breaking changes. Track development status on GitHub.
+**Important:** LayerChart v2 is in pre-release with potential breaking changes. Track development at the LayerChart PR #449.
 
 ### Installation
 
@@ -1255,11 +1111,11 @@ Beautiful, customizable charts built on LayerChart. Copy and paste into your app
 npx shadcn-svelte@latest add chart -y -o
 ```
 
-Flags: `-y` skips confirmation prompt, `-o` overwrites existing files.
+Flags: `-y` skips confirmation, `-o` overwrites existing files.
 
-### Component Design
+### Core Concept
 
-Charts use composition with LayerChart components. You build charts using LayerChart components and only bring in custom components like `ChartTooltip` when needed. LayerChart is not wrapped, so you're not locked into an abstraction and can follow official upgrade paths.
+Charts use composition with LayerChart components. You build charts using LayerChart's components and only import custom components like `ChartTooltip` when needed. LayerChart is not wrapped, so you're not locked into an abstraction and can follow official upgrade paths.
 
 ```svelte
 <script lang="ts">
@@ -1278,8 +1134,7 @@ Charts use composition with LayerChart components. You build charts using LayerC
 
 ### Building Your First Chart
 
-Define data in any shape using `dataKey` prop to map to the chart:
-
+**1. Define data** (any shape; use `dataKey` prop to map):
 ```ts
 const chartData = [
   { month: "January", desktop: 186, mobile: 80 },
@@ -1288,23 +1143,15 @@ const chartData = [
 ];
 ```
 
-Define chart config with labels, icons, and colors:
-
+**2. Define chart config** (labels, icons, colors):
 ```ts
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "#2563eb",
-  },
-  mobile: {
-    label: "Mobile",
-    color: "#60a5fa",
-  },
+  desktop: { label: "Desktop", color: "#2563eb" },
+  mobile: { label: "Mobile", color: "#60a5fa" },
 } satisfies Chart.ChartConfig;
 ```
 
-Build chart using LayerChart's simplified components (e.g., `BarChart`):
-
+**3. Build chart with LayerChart components**:
 ```svelte
 <Chart.Container config={chartConfig} class="min-h-[200px] w-full">
   <BarChart
@@ -1317,53 +1164,20 @@ Build chart using LayerChart's simplified components (e.g., `BarChart`):
       { key: "desktop", label: chartConfig.desktop.label, color: chartConfig.desktop.color },
       { key: "mobile", label: chartConfig.mobile.label, color: chartConfig.mobile.color }
     ]}
-  />
+    props={{
+      xAxis: { format: (d) => d.slice(0, 3) }
+    }}
+  >
+    {#snippet tooltip()}
+      <Chart.Tooltip />
+    {/snippet}
+  </BarChart>
 </Chart.Container>
 ```
 
-### Customizing Axis Ticks
+### Chart Config
 
-Use `props` prop to pass custom props to chart components. Format x-axis ticks:
-
-```svelte
-<BarChart
-  {data}
-  {/* ... */}
-  props={{
-    xAxis: {
-      format: (d) => d.slice(0, 3),
-    },
-  }}
-/>
-```
-
-### Adding Tooltip
-
-Replace `tooltip={false}` with `tooltip` snippet containing `Chart.Tooltip`:
-
-```svelte
-<BarChart {data} {/* ... */}>
-  {#snippet tooltip()}
-    <Chart.Tooltip />
-  {/snippet}
-</BarChart>
-```
-
-### Adding Legend
-
-Set `legend` prop to `true`:
-
-```svelte
-<BarChart {data} {/* ... */} legend>
-  {#snippet tooltip()}
-    <Chart.Tooltip />
-  {/snippet}
-</BarChart>
-```
-
-## Chart Config
-
-Chart config holds labels, icons, and colors. Intentionally decoupled from chart data to share config and color tokens between charts.
+Decoupled from chart data. Holds labels, icons, and colors. Supports theme objects with light/dark variants:
 
 ```ts
 const chartConfig = {
@@ -1371,21 +1185,15 @@ const chartConfig = {
     label: "Desktop",
     icon: MonitorIcon,
     color: "#2563eb",
-    // OR theme object with 'light' and 'dark' keys
-    theme: {
-      light: "#2563eb",
-      dark: "#dc2626",
-    },
-  },
+    // OR theme object:
+    theme: { light: "#2563eb", dark: "#dc2626" }
+  }
 } satisfies Chart.ChartConfig;
 ```
 
-## Theming
+### Theming
 
-### CSS Variables (Recommended)
-
-Define colors in CSS:
-
+**CSS Variables (recommended)**:
 ```css
 :root {
   --chart-1: oklch(0.646 0.222 41.116);
@@ -1397,82 +1205,60 @@ Define colors in CSS:
 }
 ```
 
-Add to chart config:
-
+Reference in config:
 ```ts
 const chartConfig = {
   desktop: { label: "Desktop", color: "var(--chart-1)" },
-  mobile: { label: "Mobile", color: "var(--chart-2)" },
+  mobile: { label: "Mobile", color: "var(--chart-2)" }
 } satisfies Chart.ChartConfig;
 ```
 
-### Direct Color Values
+Use in components: `<Bar fill="var(--color-desktop)" />`
 
-Use hex, hsl, or oklch directly:
+Use in data: `{ browser: "chrome", visitors: 275, color: "var(--color-chrome)" }`
 
-```ts
-const chartConfig = {
-  desktop: { label: "Desktop", color: "#2563eb" },
-} satisfies Chart.ChartConfig;
-```
+Use in Tailwind: `<Label class="fill-(--color-desktop)" />`
 
-### Using Colors
+Also supports hex, hsl, oklch directly in config.
 
-Reference colors using `var(--color-KEY)` format:
+### Tooltip Component
 
-In components: `<Bar fill="var(--color-desktop)" />`
+`<Chart.Tooltip>` customizes tooltips with label, name, indicator, and value.
 
-In chart data: `{ browser: "chrome", visitors: 275, color: "var(--color-chrome)" }`
+**Props**:
+- `labelKey` (string): Config/data key for label
+- `nameKey` (string): Config/data key for name
+- `indicator` (`dot` | `line` | `dashed`): Indicator style
+- `hideLabel` (boolean): Hide label
+- `hideIndicator` (boolean): Hide indicator
+- `label` (string): Custom label
+- `labelFormatter` (function): Format label
+- `formatter` (Snippet): Custom tooltip rendering
 
-In Tailwind: `<Label class="fill-(--color-desktop)" />`
-
-## Tooltip
-
-Chart tooltip contains label, name, indicator, and value. Customize using `hideLabel`, `hideIndicator` props and `indicator` prop (values: `dot`, `line`, `dashed`).
-
-Use `labelKey` and `nameKey` to use custom keys for tooltip label and name.
-
-### Chart.Tooltip Props
-
-| Prop | Type | Description |
-|------|------|-------------|
-| `labelKey` | string | Config or data key for label |
-| `nameKey` | string | Config or data key for name |
-| `indicator` | `dot` \| `line` \| `dashed` | Indicator style |
-| `hideLabel` | boolean | Hide label |
-| `hideIndicator` | boolean | Hide indicator |
-| `label` | string | Custom label |
-| `labelFormatter` | function | Format label |
-| `formatter` | Snippet | Flexible tooltip rendering |
-
-Colors automatically reference chart config.
-
-### Custom Tooltip Keys
-
-```ts
-const chartData = [
-  { browser: "chrome", visitors: 187 },
-  { browser: "safari", visitors: 200 },
-];
-const chartConfig = {
-  visitors: { label: "Total Visitors" },
-  chrome: { label: "Chrome", color: "var(--chart-1)" },
-  safari: { label: "Safari", color: "var(--chart-2)" },
-} satisfies ChartConfig;
-```
-
+**Example with custom keys**:
 ```svelte
+<script lang="ts">
+  const chartData = [
+    { browser: "chrome", visitors: 187 },
+    { browser: "safari", visitors: 200 }
+  ];
+  const chartConfig = {
+    visitors: { label: "Total Visitors" },
+    chrome: { label: "Chrome", color: "var(--chart-1)" },
+    safari: { label: "Safari", color: "var(--chart-2)" }
+  } satisfies ChartConfig;
+</script>
 <Chart.Tooltip labelKey="visitors" nameKey="browser" />
 ```
 
-Uses "Total Visitors" for label and "Chrome"/"Safari" for names.
+Colors are automatically referenced from chart config.
 
 ### checkbox
-Checkbox component with checked/disabled states, data-[state=checked] styling, and sveltekit-superforms integration via onCheckedChange callback.
+Toggle control with checked/disabled states, data-[state=checked] styling, onCheckedChange event, sveltekit-superforms integration.
 
 ## Checkbox
 
-A control that allows users to toggle between checked and not checked states.
+A control that allows the user to toggle between checked and not checked.
 
 ### Installation
 
@@ -1480,7 +1266,7 @@ A control that allows users to toggle between checked and not checked states.
 npx shadcn-svelte@latest add checkbox -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Basic Usage
 
@@ -1489,6 +1275,8 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
   import { Checkbox } from "$lib/components/ui/checkbox/index.js";
   import { Label } from "$lib/components/ui/label/index.js";
 </script>
+
+<Checkbox />
 
 <div class="flex items-center gap-3">
   <Checkbox id="terms" />
@@ -1509,7 +1297,7 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 
 ### Styling
 
-Customize appearance with the `class` prop:
+Customize appearance with class prop:
 
 ```svelte
 <Checkbox
@@ -1519,7 +1307,13 @@ Customize appearance with the `class` prop:
 />
 ```
 
-Use `data-[state=checked]` selector for checked state styling and `has-[[aria-checked=true]]` on parent elements for container-level styling.
+Use `has-[[aria-checked=true]]` selector on parent Label for conditional styling:
+
+```svelte
+<Label class="has-[[aria-checked=true]]:border-blue-600 has-[[aria-checked=true]]:bg-blue-50">
+  <Checkbox id="toggle-2" checked />
+</Label>
+```
 
 ### Form Integration
 
@@ -1543,7 +1337,12 @@ Use with sveltekit-superforms for form handling:
 
   const form = superForm(defaults(zod4(formSchema)), {
     SPA: true,
-    validators: zod4(formSchema)
+    validators: zod4(formSchema),
+    onUpdate: ({ form: f }) => {
+      if (f.valid) {
+        toast.success(`Submitted: ${JSON.stringify(f.data, null, 2)}`);
+      }
+    }
   });
   const { form: formData, enhance } = form;
 
@@ -1558,42 +1357,38 @@ Use with sveltekit-superforms for form handling:
 <form method="POST" use:enhance>
   <Form.Fieldset {form} name="items">
     <Form.Legend>Sidebar</Form.Legend>
-    <Form.Description>Select items to display in sidebar</Form.Description>
-    <div class="space-y-2">
-      {#each items as item (item.id)}
-        {@const checked = $formData.items.includes(item.id)}
-        <div class="flex items-start space-x-3">
-          <Form.Control>
-            {#snippet children({ props })}
-              <Checkbox
-                {...props}
-                {checked}
-                value={item.id}
-                onCheckedChange={(v) => {
-                  if (v) addItem(item.id);
-                  else removeItem(item.id);
-                }}
-              />
-              <Form.Label class="font-normal">{item.label}</Form.Label>
-            {/snippet}
-          </Form.Control>
-        </div>
-      {/each}
-      <Form.FieldErrors />
-    </div>
+    <Form.Description>Select items to display</Form.Description>
+    {#each items as item (item.id)}
+      {@const checked = $formData.items.includes(item.id)}
+      <Form.Control>
+        {#snippet children({ props })}
+          <Checkbox
+            {...props}
+            {checked}
+            value={item.id}
+            onCheckedChange={(v) => {
+              if (v) addItem(item.id);
+              else removeItem(item.id);
+            }}
+          />
+          <Form.Label>{item.label}</Form.Label>
+        {/snippet}
+      </Form.Control>
+    {/each}
+    <Form.FieldErrors />
   </Form.Fieldset>
-  <Form.Button>Update display</Form.Button>
+  <Form.Button>Update</Form.Button>
 </form>
 ```
 
-Handle checked state changes with `onCheckedChange` callback. Integrate with Form components for validation and error handling.
+Checkbox emits `onCheckedChange` event when toggled. Use with form libraries for validation and submission handling.
 
 ### collapsible
-Collapsible component with Root, Trigger, and Content parts; install with `npx shadcn-svelte@latest add collapsible -y -o`; trigger toggles content visibility.
+Collapsible component with Root, Trigger, and Content subcomponents for expandable panels.
 
 ## Collapsible
 
-Interactive component that expands/collapses a panel to show/hide content.
+Interactive component that expands/collapses a panel.
 
 ### Installation
 
@@ -1601,7 +1396,7 @@ Interactive component that expands/collapses a panel to show/hide content.
 npx shadcn-svelte@latest add collapsible -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Usage
 
@@ -1612,12 +1407,7 @@ Import the component:
 </script>
 ```
 
-Basic structure with three main parts:
-- `Collapsible.Root`: Container wrapper
-- `Collapsible.Trigger`: Button that toggles the collapsed state
-- `Collapsible.Content`: Panel that expands/collapses
-
-Minimal example:
+Basic example:
 ```svelte
 <Collapsible.Root>
   <Collapsible.Trigger>Can I use this in my project?</Collapsible.Trigger>
@@ -1627,42 +1417,39 @@ Minimal example:
 </Collapsible.Root>
 ```
 
-Full example with styling and icon:
+Advanced example with icon and styling:
 ```svelte
 <script lang="ts">
   import ChevronsUpDownIcon from "@lucide/svelte/icons/chevrons-up-down";
-  import * as Collapsible from "$lib/components/ui/collapsible/index.js";
   import { buttonVariants } from "$lib/components/ui/button/index.js";
 </script>
 
 <Collapsible.Root class="w-[350px] space-y-2">
   <div class="flex items-center justify-between space-x-4 px-4">
     <h4 class="text-sm font-semibold">@huntabyte starred 3 repositories</h4>
-    <Collapsible.Trigger
-      class={buttonVariants({ variant: "ghost", size: "sm", class: "w-9 p-0" })}
-    >
+    <Collapsible.Trigger class={buttonVariants({ variant: "ghost", size: "sm", class: "w-9 p-0" })}>
       <ChevronsUpDownIcon />
       <span class="sr-only">Toggle</span>
     </Collapsible.Trigger>
   </div>
-  <div class="rounded-md border px-4 py-3 font-mono text-sm">
-    @huntabyte/bits-ui
-  </div>
+  <div class="rounded-md border px-4 py-3 font-mono text-sm">@huntabyte/bits-ui</div>
   <Collapsible.Content class="space-y-2">
-    <div class="rounded-md border px-4 py-3 font-mono text-sm">
-      @melt-ui/melt-ui
-    </div>
-    <div class="rounded-md border px-4 py-3 font-mono text-sm">
-      @sveltejs/svelte
-    </div>
+    <div class="rounded-md border px-4 py-3 font-mono text-sm">@melt-ui/melt-ui</div>
+    <div class="rounded-md border px-4 py-3 font-mono text-sm">@sveltejs/svelte</div>
   </Collapsible.Content>
 </Collapsible.Root>
 ```
 
-The Trigger can be styled with button variants and icons. Content is hidden by default and shown when trigger is clicked. Supports custom classes on Root and Content for layout and spacing.
+### Components
+
+- `Collapsible.Root`: Container for the collapsible component
+- `Collapsible.Trigger`: Button that toggles the collapsed state
+- `Collapsible.Content`: Content that expands/collapses
+
+See the Bits UI documentation for full API reference.
 
 ### combobox
-Autocomplete input and command palette composed from Popover and Command; supports basic selection, status indicators with icons, dropdown menu integration, and form submission with proper accessibility attributes.
+Searchable dropdown/autocomplete built from Popover + Command; use $state/$derived for open/value, closeAndFocusTrigger() after selection, Form.Control for form integration.
 
 ## Combobox
 
@@ -1670,13 +1457,11 @@ Autocomplete input and command palette with a list of suggestions. Built by comp
 
 ### Installation
 
-Install via CLI with confirmation and overwrite flags:
+Install Popover and Command components:
 ```
-npx shadcn-svelte@latest add combobox -y -o
+npx shadcn-svelte@latest add popover -y -o
+npx shadcn-svelte@latest add command -y -o
 ```
-(-y: skip confirmation, -o: overwrite existing files)
-
-Requires Popover and Command components to be installed.
 
 ### Basic Usage
 
@@ -1701,16 +1486,14 @@ Requires Popover and Command components to be installed.
   let open = $state(false);
   let value = $state("");
   let triggerRef = $state<HTMLButtonElement>(null!);
-
+  
   const selectedValue = $derived(
     frameworks.find((f) => f.value === value)?.label
   );
 
   function closeAndFocusTrigger() {
     open = false;
-    tick().then(() => {
-      triggerRef.focus();
-    });
+    tick().then(() => triggerRef.focus());
   }
 </script>
 
@@ -1759,8 +1542,9 @@ Requires Popover and Command components to be installed.
 </Popover.Root>
 ```
 
-### Status Selector Example
+### Examples
 
+**Status Selector with Icons:**
 ```svelte
 <script lang="ts">
   import CircleIcon from "@lucide/svelte/icons/circle";
@@ -1792,15 +1576,12 @@ Requires Popover and Command components to be installed.
   let open = $state(false);
   let value = $state("");
   const selectedStatus = $derived(statuses.find((s) => s.value === value));
+  const triggerId = useId();
 
   function closeAndFocusTrigger(triggerId: string) {
     open = false;
-    tick().then(() => {
-      document.getElementById(triggerId)?.focus();
-    });
+    tick().then(() => document.getElementById(triggerId)?.focus());
   }
-
-  const triggerId = useId();
 </script>
 
 <div class="flex items-center space-x-4">
@@ -1855,8 +1636,7 @@ Requires Popover and Command components to be installed.
 </div>
 ```
 
-### Dropdown Menu with Combobox
-
+**Dropdown Menu with Submenu:**
 ```svelte
 <script lang="ts">
   import CalendarIcon from "@lucide/svelte/icons/calendar";
@@ -1870,13 +1650,7 @@ Requires Popover and Command components to be installed.
   import { Button } from "$lib/components/ui/button/index.js";
 
   const labels = [
-    "feature",
-    "bug",
-    "enhancement",
-    "documentation",
-    "design",
-    "question",
-    "maintenance"
+    "feature", "bug", "enhancement", "documentation", "design", "question", "maintenance"
   ];
 
   let open = $state(false);
@@ -1885,19 +1659,13 @@ Requires Popover and Command components to be installed.
 
   function closeAndFocusTrigger() {
     open = false;
-    tick().then(() => {
-      triggerRef.focus();
-    });
+    tick().then(() => triggerRef.focus());
   }
 </script>
 
-<div
-  class="flex w-full flex-col items-start justify-between rounded-md border px-4 py-3 sm:flex-row sm:items-center"
->
+<div class="flex w-full flex-col items-start justify-between rounded-md border px-4 py-3 sm:flex-row sm:items-center">
   <p class="text-sm font-medium leading-none">
-    <span
-      class="bg-primary text-primary-foreground mr-2 rounded-lg px-2 py-1 text-xs"
-    >
+    <span class="bg-primary text-primary-foreground mr-2 rounded-lg px-2 py-1 text-xs">
       {selectedLabel}
     </span>
     <span class="text-muted-foreground">Create a new project</span>
@@ -1961,9 +1729,8 @@ Requires Popover and Command components to be installed.
 </div>
 ```
 
-### Form Integration
-
-Use Form.Control to apply proper aria attributes and hidden input for form submission. Requires formsnap version 0.5.0 or higher.
+**Form Integration:**
+Use Form.Control to apply aria attributes and hidden input for form submission. Requires formsnap v0.5.0+.
 
 ```svelte
 <script lang="ts" module>
@@ -2012,15 +1779,12 @@ Use Form.Control to apply proper aria attributes and hidden input for form submi
 
   const { form: formData, enhance } = form;
   let open = false;
+  const triggerId = useId();
 
   function closeAndFocusTrigger(triggerId: string) {
     open = false;
-    tick().then(() => {
-      document.getElementById(triggerId)?.focus();
-    });
+    tick().then(() => document.getElementById(triggerId)?.focus());
   }
-
-  const triggerId = useId();
 </script>
 
 <form method="POST" class="space-y-6" use:enhance>
@@ -2084,24 +1848,20 @@ Use Form.Control to apply proper aria attributes and hidden input for form submi
 </form>
 ```
 
-### Key Implementation Details
-
-- Combobox is a composition of Popover and Command components
-- Use `$state` for reactive state management (open, value, triggerRef)
-- Use `$derived` to compute selectedValue from the current value
+**Key patterns:**
+- Use `$state` for open/value, `$derived` for computed selections
 - Call `closeAndFocusTrigger()` after selection to refocus trigger button for keyboard navigation
-- Use `tick()` to ensure DOM updates before focusing
-- Apply `role="combobox"` and `aria-expanded={open}` to trigger button for accessibility
-- Use CheckIcon with conditional `text-transparent` class to show/hide checkmarks
-- For form integration, wrap Popover.Trigger in Form.Control and add hidden input with form field name
+- Use `Command.Root`, `Command.Input`, `Command.List`, `Command.Group`, `Command.Item` for searchable lists
+- Wrap in `Popover.Root` with `Popover.Trigger` and `Popover.Content`
+- For forms, use `Form.Control` with hidden input to ensure proper submission
 
 
 ### command
-Unstyled command menu component with Root/Input/List/Group/Item/Separator/Shortcut subcomponents; supports dialog mode with keyboard shortcuts (Cmd/Ctrl+K); auto-styles icons in items.
+Unstyled command menu component with Root/Input/List/Group/Item/Separator/Shortcut/Dialog variants; supports keyboard shortcuts, disabled items, and automatic icon styling.
 
-## Command Component
+## Command
 
-Fast, composable, unstyled command menu for Svelte. Built on Bits UI.
+Fast, composable, unstyled command menu component for Svelte.
 
 ### Installation
 
@@ -2109,11 +1869,9 @@ Fast, composable, unstyled command menu for Svelte. Built on Bits UI.
 npx shadcn-svelte@latest add command -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Basic Usage
-
-Import and use the Command component with its subcomponents:
 
 ```svelte
 <script lang="ts">
@@ -2127,32 +1885,42 @@ Import and use the Command component with its subcomponents:
     <Command.Group heading="Suggestions">
       <Command.Item>Calendar</Command.Item>
       <Command.Item>Search Emoji</Command.Item>
-      <Command.Item>Calculator</Command.Item>
+      <Command.Item disabled>Calculator</Command.Item>
     </Command.Group>
     <Command.Separator />
     <Command.Group heading="Settings">
-      <Command.Item>Profile</Command.Item>
-      <Command.Item>Billing</Command.Item>
-      <Command.Item>Settings</Command.Item>
+      <Command.Item>
+        <span>Profile</span>
+        <Command.Shortcut>P</Command.Shortcut>
+      </Command.Item>
+      <Command.Item>
+        <span>Billing</span>
+        <Command.Shortcut>B</Command.Shortcut>
+      </Command.Item>
+      <Command.Item>
+        <span>Settings</span>
+        <Command.Shortcut>S</Command.Shortcut>
+      </Command.Item>
     </Command.Group>
   </Command.List>
 </Command.Root>
 ```
 
-### Component Structure
+### Components
 
-- `<Command.Root>` - Container component, accepts styling classes
-- `<Command.Input>` - Search/filter input field
-- `<Command.List>` - Scrollable list container
+- `<Command.Root>` - Container for the command menu
+- `<Command.Input>` - Search/input field
+- `<Command.List>` - Container for command items
 - `<Command.Empty>` - Message shown when no results match
 - `<Command.Group>` - Groups items with an optional heading
-- `<Command.Item>` - Individual command item (can be disabled)
-- `<Command.Separator>` - Visual divider between groups
-- `<Command.Shortcut>` - Display keyboard shortcut hint within an item
+- `<Command.Item>` - Individual command item (supports `disabled` prop)
+- `<Command.Separator>` - Visual separator between groups
+- `<Command.Shortcut>` - Displays keyboard shortcut hint
+- `<Command.Dialog>` - Dialog variant that wraps Command.Root with Dialog.Root
 
 ### Dialog Example
 
-Use `<Command.Dialog>` to display the command menu in a modal dialog:
+Use `<Command.Dialog>` to display the command menu in a modal dialog. It accepts props for both Dialog and Command components.
 
 ```svelte
 <script lang="ts">
@@ -2179,26 +1947,27 @@ Use `<Command.Dialog>` to display the command menu in a modal dialog:
       <Command.Item>Search Emoji</Command.Item>
       <Command.Item>Calculator</Command.Item>
     </Command.Group>
+    <Command.Group heading="Settings">
+      <Command.Item>Profile</Command.Item>
+      <Command.Item>Billing</Command.Item>
+      <Command.Item>Settings</Command.Item>
+    </Command.Group>
   </Command.List>
 </Command.Dialog>
 ```
 
-`<Command.Dialog>` accepts props for both Dialog.Root and Command.Root components. Bind the `open` state to control visibility.
+### Styling
 
-### Icon Styling
-
-As of 2024-10-30, `<Command.Item>` automatically applies icon styling: `gap-2 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0`. Icons placed inside items are automatically sized and spaced correctly.
-
-### API Reference
-
-Full API documentation available in Bits UI docs for the Command component.
+- Icons inside `<Command.Item>` are automatically styled with `gap-2 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0` classes
+- Component is unstyled by default; apply custom classes to `<Command.Root>` (e.g., `rounded-lg border shadow-md`)
+- Use Lucide Svelte icons for consistent iconography
 
 ### context-menu
-Right-click context menu with items, submenus, checkboxes, radio buttons, separators, and keyboard shortcuts; install with `npx shadcn-svelte@latest add context-menu -y -o`.
+Right-click context menu with items, checkboxes, radio groups, separators, nested submenus, and keyboard shortcuts.
 
 ## Context Menu
 
-A component that displays a menu triggered by right-click, containing actions, functions, or options.
+A component that displays a menu triggered by right-click, containing actions, functions, and interactive elements.
 
 ### Installation
 
@@ -2226,22 +1995,37 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 </ContextMenu.Root>
 ```
 
-### Components
+### Features
 
-- **Root**: Container for the context menu
-- **Trigger**: Element that triggers the menu on right-click
-- **Content**: Menu container with optional `class` prop for styling (e.g., `w-52`)
-- **Item**: Menu item with optional `inset` and `disabled` props
-- **Shortcut**: Displays keyboard shortcut text within an item
-- **Sub/SubTrigger/SubContent**: Nested submenu structure
-- **Separator**: Visual divider between menu sections
-- **CheckboxItem**: Menu item with checkbox state, use `bind:checked` for reactivity
-- **RadioGroup/RadioItem**: Radio button group within menu, use `bind:value` for selection
-- **Group/GroupHeading**: Groups related items with optional heading
+**Structure:**
+- `ContextMenu.Root` - wrapper component
+- `ContextMenu.Trigger` - element that triggers the menu on right-click
+- `ContextMenu.Content` - container for menu items
 
-### Example with All Features
+**Item Types:**
+- `ContextMenu.Item` - basic menu item with optional `inset` and `disabled` props
+- `ContextMenu.Shortcut` - displays keyboard shortcut text within items
+- `ContextMenu.Separator` - divider between item groups
+- `ContextMenu.CheckboxItem` - toggleable item with `bind:checked` for state binding
+- `ContextMenu.RadioItem` - radio button item within `ContextMenu.RadioGroup`
+- `ContextMenu.Group` - groups related items
+- `ContextMenu.GroupHeading` - label for item groups
+
+**Nested Menus:**
+- `ContextMenu.Sub` - container for submenu
+- `ContextMenu.SubTrigger` - opens submenu on hover/click
+- `ContextMenu.SubContent` - submenu content container
+
+### Complete Example
 
 ```svelte
+<script lang="ts">
+  import * as ContextMenu from "$lib/components/ui/context-menu/index.js";
+  let showBookmarks = $state(false);
+  let showFullURLs = $state(true);
+  let value = $state("pedro");
+</script>
+
 <ContextMenu.Root>
   <ContextMenu.Trigger class="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
     Right click here
@@ -2255,16 +2039,28 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
       Forward
       <ContextMenu.Shortcut>]</ContextMenu.Shortcut>
     </ContextMenu.Item>
+    <ContextMenu.Item inset>
+      Reload
+      <ContextMenu.Shortcut>R</ContextMenu.Shortcut>
+    </ContextMenu.Item>
     <ContextMenu.Sub>
       <ContextMenu.SubTrigger inset>More Tools</ContextMenu.SubTrigger>
       <ContextMenu.SubContent class="w-48">
-        <ContextMenu.Item>Save Page As...<ContextMenu.Shortcut>S</ContextMenu.Shortcut></ContextMenu.Item>
+        <ContextMenu.Item>Save Page As... <ContextMenu.Shortcut>S</ContextMenu.Shortcut></ContextMenu.Item>
+        <ContextMenu.Item>Create Shortcut...</ContextMenu.Item>
+        <ContextMenu.Item>Name Window...</ContextMenu.Item>
         <ContextMenu.Separator />
         <ContextMenu.Item>Developer Tools</ContextMenu.Item>
       </ContextMenu.SubContent>
     </ContextMenu.Sub>
     <ContextMenu.Separator />
-    <ContextMenu.CheckboxItem bind:checked={showBookmarks}>Show Bookmarks</ContextMenu.CheckboxItem>
+    <ContextMenu.CheckboxItem bind:checked={showBookmarks}>
+      Show Bookmarks
+    </ContextMenu.CheckboxItem>
+    <ContextMenu.CheckboxItem bind:checked={showFullURLs}>
+      Show Full URLs
+    </ContextMenu.CheckboxItem>
+    <ContextMenu.Separator />
     <ContextMenu.RadioGroup bind:value>
       <ContextMenu.Group>
         <ContextMenu.GroupHeading inset>People</ContextMenu.GroupHeading>
@@ -2276,27 +2072,12 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 </ContextMenu.Root>
 ```
 
-### State Management
-
-Use reactive state variables with `$state()` for checkbox and radio items:
-
-```svelte
-<script lang="ts">
-  let showBookmarks = $state(false);
-  let value = $state("pedro");
-</script>
-```
-
-### Documentation
-
-Full API reference available at bits-ui documentation for context-menu component.
-
 ### data-table
-TanStack Table v8 integration with Svelte 5: define columns with ColumnDef, create table with createSvelteTable, render with FlexRender, add pagination/sorting/filtering/visibility/selection via state managers and row models.
+TanStack Table v8 integration for building customizable data tables with pagination, sorting, filtering, column visibility, row selection, and cell formatting using Svelte 5 snippets and components.
 
 ## Data Table
 
-Powerful table and datagrids built using TanStack Table v8.
+Build powerful tables and datagrids using TanStack Table v8 with Svelte 5 snippets and components.
 
 ### Installation
 
@@ -2305,11 +2086,11 @@ npm i @tanstack/table-core
 npx shadcn-svelte@latest add table data-table -y -o
 ```
 
-The `-y` flag skips confirmation prompts, `-o` overwrites existing files.
+The `-y` flag skips confirmation prompts and `-o` overwrites existing files.
 
 ### Basic Setup
 
-Define column types and column definitions:
+Define your data type and column definitions:
 
 ```ts
 // columns.ts
@@ -2323,18 +2104,9 @@ export type Payment = {
 };
 
 export const columns: ColumnDef<Payment>[] = [
-  {
-    accessorKey: "status",
-    header: "Status",
-  },
-  {
-    accessorKey: "email",
-    header: "Email",
-  },
-  {
-    accessorKey: "amount",
-    header: "Amount",
-  },
+  { accessorKey: "status", header: "Status" },
+  { accessorKey: "email", header: "Email" },
+  { accessorKey: "amount", header: "Amount" },
 ];
 ```
 
@@ -2354,9 +2126,7 @@ Create a reusable DataTable component:
   let { data, columns }: DataTableProps<TData, TValue> = $props();
 
   const table = createSvelteTable({
-    get data() {
-      return data;
-    },
+    get data() { return data; },
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
@@ -2370,10 +2140,7 @@ Create a reusable DataTable component:
           {#each headerGroup.headers as header (header.id)}
             <Table.Head colspan={header.colSpan}>
               {#if !header.isPlaceholder}
-                <FlexRender
-                  content={header.column.columnDef.header}
-                  context={header.getContext()}
-                />
+                <FlexRender content={header.column.columnDef.header} context={header.getContext()} />
               {/if}
             </Table.Head>
           {/each}
@@ -2385,18 +2152,13 @@ Create a reusable DataTable component:
         <Table.Row data-state={row.getIsSelected() && "selected"}>
           {#each row.getVisibleCells() as cell (cell.id)}
             <Table.Cell>
-              <FlexRender
-                content={cell.column.columnDef.cell}
-                context={cell.getContext()}
-              />
+              <FlexRender content={cell.column.columnDef.cell} context={cell.getContext()} />
             </Table.Cell>
           {/each}
         </Table.Row>
       {:else}
         <Table.Row>
-          <Table.Cell colspan={columns.length} class="h-24 text-center">
-            No results.
-          </Table.Cell>
+          <Table.Cell colspan={columns.length} class="h-24 text-center">No results.</Table.Cell>
         </Table.Row>
       {/each}
     </Table.Body>
@@ -2406,7 +2168,7 @@ Create a reusable DataTable component:
 
 ### Cell Formatting
 
-Format cells using `createRawSnippet` and `renderSnippet`:
+Use `createRawSnippet` and `renderSnippet` for custom cell rendering:
 
 ```ts
 import { createRawSnippet } from "svelte";
@@ -2416,28 +2178,18 @@ export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "amount",
     header: () => {
-      const amountHeaderSnippet = createRawSnippet(() => ({
+      const snippet = createRawSnippet(() => ({
         render: () => `<div class="text-right">Amount</div>`,
       }));
-      return renderSnippet(amountHeaderSnippet);
+      return renderSnippet(snippet);
     },
     cell: ({ row }) => {
-      const formatter = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
+      const formatter = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" });
+      const snippet = createRawSnippet<[{ amount: number }]>((getAmount) => {
+        const { amount } = getAmount();
+        return { render: () => `<div class="text-right font-medium">${formatter.format(amount)}</div>` };
       });
-      const amountCellSnippet = createRawSnippet<[{ amount: number }]>(
-        (getAmount) => {
-          const { amount } = getAmount();
-          const formatted = formatter.format(amount);
-          return {
-            render: () => `<div class="text-right font-medium">${formatted}</div>`,
-          };
-        }
-      );
-      return renderSnippet(amountCellSnippet, {
-        amount: row.original.amount,
-      });
+      return renderSnippet(snippet, { amount: row.original.amount });
     },
   },
 ];
@@ -2448,7 +2200,7 @@ export const columns: ColumnDef<Payment>[] = [
 Create an actions dropdown component:
 
 ```svelte
-<!-- data-table-actions.svelte -->
+// data-table-actions.svelte
 <script lang="ts">
   import EllipsisIcon from "@lucide/svelte/icons/ellipsis";
   import { Button } from "$lib/components/ui/button/index.js";
@@ -2469,9 +2221,7 @@ Create an actions dropdown component:
   <DropdownMenu.Content>
     <DropdownMenu.Group>
       <DropdownMenu.Label>Actions</DropdownMenu.Label>
-      <DropdownMenu.Item onclick={() => navigator.clipboard.writeText(id)}>
-        Copy payment ID
-      </DropdownMenu.Item>
+      <DropdownMenu.Item onclick={() => navigator.clipboard.writeText(id)}>Copy payment ID</DropdownMenu.Item>
     </DropdownMenu.Group>
     <DropdownMenu.Separator />
     <DropdownMenu.Item>View customer</DropdownMenu.Item>
@@ -2489,62 +2239,36 @@ import DataTableActions from "./data-table-actions.svelte";
 export const columns: ColumnDef<Payment>[] = [
   {
     id: "actions",
-    cell: ({ row }) =>
-      renderComponent(DataTableActions, { id: row.original.id }),
+    cell: ({ row }) => renderComponent(DataTableActions, { id: row.original.id }),
   },
 ];
 ```
 
 ### Pagination
 
-Add pagination state and row models:
+```ts
+import { type PaginationState, getPaginationRowModel } from "@tanstack/table-core";
+
+let pagination = $state<PaginationState>({ pageIndex: 0, pageSize: 10 });
+
+const table = createSvelteTable({
+  // ... other config
+  state: { get pagination() { return pagination; } },
+  onPaginationChange: (updater) => {
+    pagination = typeof updater === "function" ? updater(pagination) : updater;
+  },
+  getPaginationRowModel: getPaginationRowModel(),
+});
+```
+
+Add pagination controls:
 
 ```svelte
-<script lang="ts" generics="TData, TValue">
-  import {
-    type ColumnDef,
-    type PaginationState,
-    getCoreRowModel,
-    getPaginationRowModel,
-  } from "@tanstack/table-core";
-  import { Button } from "$lib/components/ui/button/index.js";
-
-  let { data, columns }: DataTableProps<TData, TValue> = $props();
-  let pagination = $state<PaginationState>({ pageIndex: 0, pageSize: 10 });
-
-  const table = createSvelteTable({
-    get data() {
-      return data;
-    },
-    columns,
-    state: {
-      get pagination() {
-        return pagination;
-      },
-    },
-    onPaginationChange: (updater) => {
-      pagination = typeof updater === "function" ? updater(pagination) : updater;
-    },
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-  });
-</script>
-
 <div class="flex items-center justify-end space-x-2 py-4">
-  <Button
-    variant="outline"
-    size="sm"
-    onclick={() => table.previousPage()}
-    disabled={!table.getCanPreviousPage()}
-  >
+  <Button variant="outline" size="sm" onclick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
     Previous
   </Button>
-  <Button
-    variant="outline"
-    size="sm"
-    onclick={() => table.nextPage()}
-    disabled={!table.getCanNextPage()}
-  >
+  <Button variant="outline" size="sm" onclick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
     Next
   </Button>
 </div>
@@ -2555,7 +2279,7 @@ Add pagination state and row models:
 Create a sortable header button component:
 
 ```svelte
-<!-- data-table-email-button.svelte -->
+// data-table-email-button.svelte
 <script lang="ts">
   import type { ComponentProps } from "svelte";
   import ArrowUpDownIcon from "@lucide/svelte/icons/arrow-up-down";
@@ -2570,113 +2294,90 @@ Create a sortable header button component:
 </Button>
 ```
 
-Add sorting to table and column:
+Enable sorting in DataTable:
 
 ```ts
 import { type SortingState, getSortedRowModel } from "@tanstack/table-core";
-import { renderComponent } from "$lib/components/ui/data-table/index.js";
-import DataTableEmailButton from "./data-table-email-button.svelte";
 
-// In DataTable component:
 let sorting = $state<SortingState>([]);
 
 const table = createSvelteTable({
-  // ...
-  state: {
-    get sorting() {
-      return sorting;
-    },
-  },
+  // ... other config
+  state: { get sorting() { return sorting; } },
   onSortingChange: (updater) => {
     sorting = typeof updater === "function" ? updater(sorting) : updater;
   },
   getSortedRowModel: getSortedRowModel(),
 });
+```
 
-// In columns:
+Update column definition:
+
+```ts
+import { renderComponent } from "$lib/components/ui/data-table/index.js";
+import DataTableEmailButton from "./data-table-email-button.svelte";
+
 export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "email",
-    header: ({ column }) =>
-      renderComponent(DataTableEmailButton, {
-        onclick: column.getToggleSortingHandler(),
-      }),
+    header: ({ column }) => renderComponent(DataTableEmailButton, { onclick: column.getToggleSortingHandler() }),
   },
 ];
 ```
 
 ### Filtering
 
-Add filtering state and row model:
+```ts
+import { type ColumnFiltersState, getFilteredRowModel } from "@tanstack/table-core";
+import { Input } from "$lib/components/ui/input/index.js";
+
+let columnFilters = $state<ColumnFiltersState>([]);
+
+const table = createSvelteTable({
+  // ... other config
+  state: { get columnFilters() { return columnFilters; } },
+  onColumnFiltersChange: (updater) => {
+    columnFilters = typeof updater === "function" ? updater(columnFilters) : updater;
+  },
+  getFilteredRowModel: getFilteredRowModel(),
+});
+```
+
+Add filter input:
 
 ```svelte
-<script lang="ts" generics="TData, TValue">
-  import {
-    type ColumnFiltersState,
-    getFilteredRowModel,
-  } from "@tanstack/table-core";
-  import { Input } from "$lib/components/ui/input/index.js";
-
-  let columnFilters = $state<ColumnFiltersState>([]);
-
-  const table = createSvelteTable({
-    // ...
-    state: {
-      get columnFilters() {
-        return columnFilters;
-      },
-    },
-    onColumnFiltersChange: (updater) => {
-      columnFilters = typeof updater === "function" ? updater(columnFilters) : updater;
-    },
-    getFilteredRowModel: getFilteredRowModel(),
-  });
-</script>
-
-<div class="flex items-center py-4">
-  <Input
-    placeholder="Filter emails..."
-    value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-    oninput={(e) => table.getColumn("email")?.setFilterValue(e.currentTarget.value)}
-    class="max-w-sm"
-  />
-</div>
+<Input
+  placeholder="Filter emails..."
+  value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+  oninput={(e) => table.getColumn("email")?.setFilterValue(e.currentTarget.value)}
+  class="max-w-sm"
+/>
 ```
 
 ### Column Visibility
 
-Add visibility state and toggle dropdown:
+```ts
+import { type VisibilityState } from "@tanstack/table-core";
+import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.js";
+
+let columnVisibility = $state<VisibilityState>({});
+
+const table = createSvelteTable({
+  // ... other config
+  state: { get columnVisibility() { return columnVisibility; } },
+  onColumnVisibilityChange: (updater) => {
+    columnVisibility = typeof updater === "function" ? updater(columnVisibility) : updater;
+  },
+});
+```
+
+Add visibility toggle dropdown:
 
 ```svelte
-<script lang="ts" generics="TData, TValue">
-  import {
-    type VisibilityState,
-  } from "@tanstack/table-core";
-  import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.js";
-  import { Button } from "$lib/components/ui/button/index.js";
-  import ChevronDownIcon from "@lucide/svelte/icons/chevron-down";
-
-  let columnVisibility = $state<VisibilityState>({});
-
-  const table = createSvelteTable({
-    // ...
-    state: {
-      get columnVisibility() {
-        return columnVisibility;
-      },
-    },
-    onColumnVisibilityChange: (updater) => {
-      columnVisibility = typeof updater === "function" ? updater(columnVisibility) : updater;
-    },
-  });
-</script>
-
 <DropdownMenu.Root>
   <DropdownMenu.Trigger>
     {#snippet child({ props })}
-      <Button {...props} variant="outline" class="ml-auto">
-        Columns <ChevronDownIcon class="ml-2 size-4" />
-      </Button>
+      <Button {...props} variant="outline" class="ml-auto">Columns</Button>
     {/snippet}
   </DropdownMenu.Trigger>
   <DropdownMenu.Content align="end">
@@ -2694,56 +2395,49 @@ Add visibility state and toggle dropdown:
 
 ### Row Selection
 
-Create a checkbox component:
+Create checkbox component:
 
 ```svelte
-<!-- data-table-checkbox.svelte -->
+// data-table-checkbox.svelte
 <script lang="ts">
   import type { ComponentProps } from "svelte";
   import { Checkbox } from "$lib/components/ui/checkbox/index.js";
 
-  let {
-    checked = false,
-    onCheckedChange = (v) => (checked = v),
-    ...restProps
-  }: ComponentProps<typeof Checkbox> = $props();
+  let { checked = false, onCheckedChange = (v) => (checked = v), ...restProps }: ComponentProps<typeof Checkbox> = $props();
 </script>
 
 <Checkbox bind:checked={() => checked, onCheckedChange} {...restProps} />
 ```
 
-Add row selection state and checkbox column:
+Enable row selection in DataTable:
 
 ```ts
 import { type RowSelectionState } from "@tanstack/table-core";
-import { renderComponent } from "$lib/components/ui/data-table/index.js";
-import DataTableCheckbox from "./data-table-checkbox.svelte";
 
-// In DataTable component:
 let rowSelection = $state<RowSelectionState>({});
 
 const table = createSvelteTable({
-  // ...
-  state: {
-    get rowSelection() {
-      return rowSelection;
-    },
-  },
+  // ... other config
+  state: { get rowSelection() { return rowSelection; } },
   onRowSelectionChange: (updater) => {
     rowSelection = typeof updater === "function" ? updater(rowSelection) : updater;
   },
 });
+```
 
-// In columns:
+Add select column:
+
+```ts
+import { renderComponent } from "$lib/components/ui/data-table/index.js";
+import DataTableCheckbox from "./data-table-checkbox.svelte";
+
 export const columns: ColumnDef<Payment>[] = [
   {
     id: "select",
     header: ({ table }) =>
       renderComponent(DataTableCheckbox, {
         checked: table.getIsAllPageRowsSelected(),
-        indeterminate:
-          table.getIsSomePageRowsSelected() &&
-          !table.getIsAllPageRowsSelected(),
+        indeterminate: table.getIsSomePageRowsSelected() && !table.getIsAllPageRowsSelected(),
         onCheckedChange: (value) => table.toggleAllPageRowsSelected(!!value),
         "aria-label": "Select all",
       }),
@@ -2763,36 +2457,39 @@ Display selected row count:
 
 ```svelte
 <div class="text-muted-foreground flex-1 text-sm">
-  {table.getFilteredSelectedRowModel().rows.length} of
-  {table.getFilteredRowModel().rows.length} row(s) selected.
+  {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length} row(s) selected.
 </div>
 ```
 
-### Key APIs
+### Project Structure
 
-- `createSvelteTable()`: Initialize table with data, columns, and state
-- `getCoreRowModel()`: Required for basic table rendering
-- `getPaginationRowModel()`: Enable pagination
-- `getSortedRowModel()`: Enable sorting
-- `getFilteredRowModel()`: Enable filtering
-- `FlexRender`: Render column definitions (headers/cells)
-- `renderComponent()`: Render Svelte components in cells/headers
-- `renderSnippet()`: Render Svelte snippets in cells/headers
-- `row.original`: Access row data in cell definitions
-- `table.getColumn(name)`: Get column by accessor key for filtering/sorting
-- `table.getFilteredSelectedRowModel()`: Get selected rows after filtering
-- `table.getFilteredRowModel()`: Get rows after filtering
+```
+routes/payments/
+  columns.ts                    # Column definitions
+  data-table.svelte             # Main DataTable component
+  data-table-actions.svelte     # Row actions dropdown
+  data-table-checkbox.svelte    # Row selection checkbox
+  data-table-email-button.svelte # Sortable email header
+  +page.svelte                  # Page component
+```
+
+Extract DataTable into a reusable component at `components/ui/data-table.svelte` if used in multiple places. See Tasks example for advanced patterns.
 
 ### date-picker
-Date picker component composition using Popover + Calendar/RangeCalendar; supports single/range selection, presets, and form integration with date constraints.
+Date picker component using Popover + Calendar/RangeCalendar; supports single dates, ranges, presets, and form integration with date constraints.
 
 ## Date Picker
 
-A composable date picker component built from Popover and Calendar/RangeCalendar components.
+A date picker component combining Popover and Calendar (or RangeCalendar) components for selecting single dates, date ranges, or dates with presets.
 
 ### Installation
 
-The Date Picker is a composition of `<Popover />` and either `<Calendar />` or `<RangeCalendar />` components. Install dependencies via the Popover, Calendar, and Range Calendar component installation instructions.
+Install via the CLI (skip confirmation and overwrite existing files):
+```
+npx shadcn-svelte@latest add date-picker -y -o
+```
+
+Requires Popover, Calendar, and RangeCalendar components.
 
 ### Basic Usage
 
@@ -2801,25 +2498,21 @@ The Date Picker is a composition of `<Popover />` and either `<Calendar />` or `
   import CalendarIcon from "@lucide/svelte/icons/calendar";
   import { DateFormatter, type DateValue, getLocalTimeZone } from "@internationalized/date";
   import { cn } from "$lib/utils.js";
-  import { Button } from "$lib/components/ui/button/index.js";
+  import { buttonVariants } from "$lib/components/ui/button/index.js";
   import { Calendar } from "$lib/components/ui/calendar/index.js";
   import * as Popover from "$lib/components/ui/popover/index.js";
   
   const df = new DateFormatter("en-US", { dateStyle: "long" });
-  let value = $state<DateValue>();
+  let value = $state<DateValue | undefined>();
 </script>
 
 <Popover.Root>
-  <Popover.Trigger>
-    {#snippet child({ props })}
-      <Button variant="outline" class={cn("w-[280px] justify-start text-left font-normal", !value && "text-muted-foreground")} {...props}>
-        <CalendarIcon class="mr-2 size-4" />
-        {value ? df.format(value.toDate(getLocalTimeZone())) : "Select a date"}
-      </Button>
-    {/snippet}
+  <Popover.Trigger class={cn(buttonVariants({ variant: "outline", class: "w-[280px] justify-start text-left font-normal" }), !value && "text-muted-foreground")}>
+    <CalendarIcon />
+    {value ? df.format(value.toDate(getLocalTimeZone())) : "Pick a date"}
   </Popover.Trigger>
   <Popover.Content class="w-auto p-0">
-    <Calendar bind:value type="single" initialFocus />
+    <Calendar type="single" bind:value />
   </Popover.Content>
 </Popover.Root>
 ```
@@ -2828,13 +2521,9 @@ The Date Picker is a composition of `<Popover />` and either `<Calendar />` or `
 
 ```svelte
 <script lang="ts">
-  import CalendarIcon from "@lucide/svelte/icons/calendar";
-  import type { DateRange } from "bits-ui";
   import { CalendarDate, DateFormatter, type DateValue, getLocalTimeZone } from "@internationalized/date";
-  import { cn } from "$lib/utils.js";
-  import { buttonVariants } from "$lib/components/ui/button/index.js";
+  import type { DateRange } from "bits-ui";
   import { RangeCalendar } from "$lib/components/ui/range-calendar/index.js";
-  import * as Popover from "$lib/components/ui/popover/index.js";
   
   const df = new DateFormatter("en-US", { dateStyle: "medium" });
   let value: DateRange = $state({
@@ -2844,39 +2533,32 @@ The Date Picker is a composition of `<Popover />` and either `<Calendar />` or `
   let startValue: DateValue | undefined = $state(undefined);
 </script>
 
-<div class="grid gap-2">
-  <Popover.Root>
-    <Popover.Trigger class={cn(buttonVariants({ variant: "outline" }), !value && "text-muted-foreground")}>
-      <CalendarIcon class="mr-2 size-4" />
-      {#if value && value.start}
-        {#if value.end}
-          {df.format(value.start.toDate(getLocalTimeZone()))} - {df.format(value.end.toDate(getLocalTimeZone()))}
-        {:else}
-          {df.format(value.start.toDate(getLocalTimeZone()))}
-        {/if}
-      {:else if startValue}
-        {df.format(startValue.toDate(getLocalTimeZone()))}
+<Popover.Root>
+  <Popover.Trigger class={cn(buttonVariants({ variant: "outline" }), !value && "text-muted-foreground")}>
+    <CalendarIcon class="mr-2 size-4" />
+    {#if value?.start}
+      {#if value.end}
+        {df.format(value.start.toDate(getLocalTimeZone()))} - {df.format(value.end.toDate(getLocalTimeZone()))}
       {:else}
-        Pick a date
+        {df.format(value.start.toDate(getLocalTimeZone()))}
       {/if}
-    </Popover.Trigger>
-    <Popover.Content class="w-auto p-0" align="start">
-      <RangeCalendar bind:value onStartValueChange={(v) => { startValue = v; }} numberOfMonths={2} />
-    </Popover.Content>
-  </Popover.Root>
-</div>
+    {:else if startValue}
+      {df.format(startValue.toDate(getLocalTimeZone()))}
+    {:else}
+      Pick a date
+    {/if}
+  </Popover.Trigger>
+  <Popover.Content class="w-auto p-0" align="start">
+    <RangeCalendar bind:value onStartValueChange={(v) => { startValue = v; }} numberOfMonths={2} />
+  </Popover.Content>
+</Popover.Root>
 ```
 
 ### With Presets
 
 ```svelte
 <script lang="ts">
-  import CalendarIcon from "@lucide/svelte/icons/calendar";
   import { DateFormatter, type DateValue, getLocalTimeZone, today } from "@internationalized/date";
-  import { cn } from "$lib/utils.js";
-  import { buttonVariants } from "$lib/components/ui/button/index.js";
-  import { Calendar } from "$lib/components/ui/calendar/index.js";
-  import * as Popover from "$lib/components/ui/popover/index.js";
   import * as Select from "$lib/components/ui/select/index.js";
   
   const df = new DateFormatter("en-US", { dateStyle: "long" });
@@ -2896,7 +2578,7 @@ The Date Picker is a composition of `<Popover />` and either `<Calendar />` or `
     {value ? df.format(value.toDate(getLocalTimeZone())) : "Pick a date"}
   </Popover.Trigger>
   <Popover.Content class="flex w-auto flex-col space-y-2 p-2">
-    <Select.Root type="single" bind:value={() => valueString, (v) => { if (!v) return; value = today(getLocalTimeZone()).add({ days: Number.parseInt(v) }); }}>
+    <Select.Root type="single" bind:value={() => valueString, (v) => { if (v) value = today(getLocalTimeZone()).add({ days: Number.parseInt(v) }); }}>
       <Select.Trigger>{valueString}</Select.Trigger>
       <Select.Content>
         {#each items as item (item.value)}
@@ -2922,15 +2604,11 @@ The Date Picker is a composition of `<Popover />` and either `<Calendar />` or `
 </script>
 
 <script lang="ts">
-  import CalendarIcon from "@lucide/svelte/icons/calendar";
   import { CalendarDate, DateFormatter, type DateValue, getLocalTimeZone, parseDate, today } from "@internationalized/date";
   import { defaults, superForm } from "sveltekit-superforms";
   import { zod4 } from "sveltekit-superforms/adapters";
   import { toast } from "svelte-sonner";
-  import { cn } from "$lib/utils.js";
-  import { Button, buttonVariants } from "$lib/components/ui/button/index.js";
-  import { Calendar } from "$lib/components/ui/calendar/index.js";
-  import * as Popover from "$lib/components/ui/popover/index.js";
+  import { Button } from "$lib/components/ui/button/index.js";
   import * as Form from "$lib/components/ui/form/index.js";
   
   const form = superForm(defaults(zod4(formSchema)), {
@@ -2944,7 +2622,6 @@ The Date Picker is a composition of `<Popover />` and either `<Calendar />` or `
       }
     }
   });
-  
   const { form: formData, enhance } = form;
   const df = new DateFormatter("en-US", { dateStyle: "long" });
   let value = $derived($formData.dob ? parseDate($formData.dob) : undefined);
@@ -2962,7 +2639,7 @@ The Date Picker is a composition of `<Popover />` and either `<Calendar />` or `
             <CalendarIcon class="ml-auto size-4 opacity-50" />
           </Popover.Trigger>
           <Popover.Content class="w-auto p-0" side="top">
-            <Calendar type="single" value={value as DateValue} bind:placeholder minValue={new CalendarDate(1900, 1, 1)} maxValue={today(getLocalTimeZone())} calendarLabel="Date of birth" onValueChange={(v) => { if (v) { $formData.dob = v.toString(); } else { $formData.dob = ""; } }} />
+            <Calendar type="single" value={value as DateValue} bind:placeholder minValue={new CalendarDate(1900, 1, 1)} maxValue={today(getLocalTimeZone())} calendarLabel="Date of birth" onValueChange={(v) => { $formData.dob = v ? v.toString() : ""; }} />
           </Popover.Content>
         </Popover.Root>
         <Form.Description>Your date of birth is used to calculate your age</Form.Description>
@@ -2976,7 +2653,7 @@ The Date Picker is a composition of `<Popover />` and either `<Calendar />` or `
 ```
 
 ### dialog
-Modal overlay component with Root, Trigger, Content, Header, Title, Description, and Footer subcomponents; install with `npx shadcn-svelte@latest add dialog -y -o`.
+Modal dialog overlay component with composable subcomponents (Root, Trigger, Content, Header, Title, Description, Footer); install via CLI with -y -o flags.
 
 ## Dialog
 
@@ -2997,35 +2674,11 @@ Import and compose dialog components:
 ```svelte
 <script lang="ts">
   import * as Dialog from "$lib/components/ui/dialog/index.js";
+  import { Button, buttonVariants } from "$lib/components/ui/button/index.js";
+  import { Input } from "$lib/components/ui/input/index.js";
+  import { Label } from "$lib/components/ui/label/index.js";
 </script>
 
-<Dialog.Root>
-  <Dialog.Trigger>Open</Dialog.Trigger>
-  <Dialog.Content>
-    <Dialog.Header>
-      <Dialog.Title>Are you sure absolutely sure?</Dialog.Title>
-      <Dialog.Description>
-        This action cannot be undone. This will permanently delete your account
-        and remove your data from our servers.
-      </Dialog.Description>
-    </Dialog.Header>
-  </Dialog.Content>
-</Dialog.Root>
-```
-
-### Components
-
-- `Dialog.Root` - Container for the dialog
-- `Dialog.Trigger` - Button or element that opens the dialog
-- `Dialog.Content` - Main dialog container with styling
-- `Dialog.Header` - Header section wrapper
-- `Dialog.Title` - Dialog title
-- `Dialog.Description` - Dialog description text
-- `Dialog.Footer` - Footer section wrapper
-
-### Example with Form
-
-```svelte
 <Dialog.Root>
   <Dialog.Trigger class={buttonVariants({ variant: "outline" })}>
     Edit Profile
@@ -3054,12 +2707,38 @@ Import and compose dialog components:
 </Dialog.Root>
 ```
 
-Built on Bits UI dialog component. See Bits UI documentation for full API reference and advanced options.
+**Components:**
+- `Dialog.Root`: Container for the dialog
+- `Dialog.Trigger`: Button or element that opens the dialog
+- `Dialog.Content`: Modal content wrapper with optional `class` for sizing (e.g., `sm:max-w-[425px]`)
+- `Dialog.Header`: Header section
+- `Dialog.Title`: Dialog title
+- `Dialog.Description`: Dialog description text
+- `Dialog.Footer`: Footer section for actions
+
+Minimal example:
+
+```svelte
+<Dialog.Root>
+  <Dialog.Trigger>Open</Dialog.Trigger>
+  <Dialog.Content>
+    <Dialog.Header>
+      <Dialog.Title>Are you sure absolutely sure?</Dialog.Title>
+      <Dialog.Description>
+        This action cannot be undone. This will permanently delete your account
+        and remove your data from our servers.
+      </Dialog.Description>
+    </Dialog.Header>
+  </Dialog.Content>
+</Dialog.Root>
+```
+
+Full API reference available in the Bits UI documentation.
 
 ### drawer
-Drawer component for slide-out panels; built on Vaul Svelte; supports responsive Dialog/Drawer pattern with MediaQuery for desktop/mobile.
+Slide-out panel component (Vaul Svelte-based) with Root/Trigger/Content/Header/Title/Description/Footer/Close subcomponents; supports responsive Dialog/Drawer switching via MediaQuery.
 
-## Drawer Component
+## Drawer
 
 A slide-out panel component built on Vaul Svelte (Svelte port of Vaul by Emil Kowalski).
 
@@ -3069,7 +2748,7 @@ A slide-out panel component built on Vaul Svelte (Svelte port of Vaul by Emil Ko
 npx shadcn-svelte@latest add drawer -y -o
 ```
 
-Flags: `-y` skips confirmation prompt, `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Basic Usage
 
@@ -3083,7 +2762,7 @@ Flags: `-y` skips confirmation prompt, `-o` overwrites existing files.
   <Drawer.Content>
     <Drawer.Header>
       <Drawer.Title>Title</Drawer.Title>
-      <Drawer.Description>Description</Drawer.Description>
+      <Drawer.Description>Description text</Drawer.Description>
     </Drawer.Header>
     <Drawer.Footer>
       <Button>Submit</Button>
@@ -3093,20 +2772,88 @@ Flags: `-y` skips confirmation prompt, `-o` overwrites existing files.
 </Drawer.Root>
 ```
 
-### Components
+### Example: Interactive Goal Setter
 
-- `Drawer.Root` - Container
-- `Drawer.Trigger` - Opens drawer
-- `Drawer.Content` - Main content area
-- `Drawer.Header` - Header section
-- `Drawer.Title` - Title text
-- `Drawer.Description` - Description text
-- `Drawer.Footer` - Footer section
-- `Drawer.Close` - Closes drawer
+Drawer with interactive controls and animated bar chart:
+
+```svelte
+<script lang="ts">
+  import MinusIcon from "@lucide/svelte/icons/minus";
+  import PlusIcon from "@lucide/svelte/icons/plus";
+  import * as Drawer from "$lib/components/ui/drawer/index.js";
+  import { Button, buttonVariants } from "$lib/components/ui/button/index.js";
+  import { BarChart } from "layerchart";
+  import { scaleBand } from "d3-scale";
+  import { cubicInOut } from "svelte/easing";
+
+  const data = Array.from({ length: 13 }, (_, i) => ({ goal: [400, 300, 200, 300, 200, 278, 189, 239, 300, 200, 278, 189, 349][i] }));
+  let goal = $state(350);
+
+  function handleClick(adjustment: number) {
+    goal = Math.max(200, Math.min(400, goal + adjustment));
+  }
+
+  let context = $state();
+</script>
+
+<Drawer.Root>
+  <Drawer.Trigger class={buttonVariants({ variant: "outline" })}>Open Drawer</Drawer.Trigger>
+  <Drawer.Content>
+    <div class="mx-auto w-full max-w-sm">
+      <Drawer.Header>
+        <Drawer.Title>Move Goal</Drawer.Title>
+        <Drawer.Description>Set your daily activity goal.</Drawer.Description>
+      </Drawer.Header>
+      <div class="p-4 pb-0">
+        <div class="flex items-center justify-center space-x-2">
+          <Button variant="outline" size="icon" class="size-8 shrink-0 rounded-full" onclick={() => handleClick(-10)} disabled={goal <= 200}>
+            <MinusIcon />
+          </Button>
+          <div class="flex-1 text-center">
+            <div class="text-7xl font-bold">{goal}</div>
+            <div class="text-muted-foreground text-[0.70rem] uppercase">Calories/day</div>
+          </div>
+          <Button variant="outline" size="icon" class="size-8 shrink-0 rounded-full" onclick={() => handleClick(10)} disabled={goal >= 400}>
+            <PlusIcon />
+          </Button>
+        </div>
+        <div class="mt-3 h-[120px]">
+          <BarChart
+            bind:context
+            data={data.map((d, i) => ({ goal: d.goal, index: i }))}
+            y="goal"
+            x="index"
+            xScale={scaleBand().padding(0.25)}
+            axis={false}
+            tooltip={false}
+            props={{
+              bars: {
+                stroke: "none",
+                rounded: "all",
+                radius: 4,
+                initialY: context?.height,
+                initialHeight: 0,
+                motion: { x: { type: "tween", duration: 500, easing: cubicInOut }, width: { type: "tween", duration: 500, easing: cubicInOut }, height: { type: "tween", duration: 500, easing: cubicInOut }, y: { type: "tween", duration: 500, easing: cubicInOut } },
+                fill: "var(--color-foreground)",
+                fillOpacity: 0.9
+              },
+              highlight: { area: { fill: "none" } }
+            }}
+          />
+        </div>
+      </div>
+      <Drawer.Footer>
+        <Button>Submit</Button>
+        <Drawer.Close class={buttonVariants({ variant: "outline" })}>Cancel</Drawer.Close>
+      </Drawer.Footer>
+    </div>
+  </Drawer.Content>
+</Drawer.Root>
+```
 
 ### Responsive Dialog/Drawer
 
-Combine Dialog and Drawer to render Dialog on desktop (min-width: 768px) and Drawer on mobile:
+Combine Dialog and Drawer to render Dialog on desktop (≥768px) and Drawer on mobile:
 
 ```svelte
 <script lang="ts">
@@ -3116,7 +2863,7 @@ Combine Dialog and Drawer to render Dialog on desktop (min-width: 768px) and Dra
   import { Input } from "$lib/components/ui/input/index.js";
   import { Label } from "$lib/components/ui/label/index.js";
   import { Button, buttonVariants } from "$lib/components/ui/button/index.js";
-  
+
   let open = $state(false);
   const isDesktop = new MediaQuery("(min-width: 768px)");
   const id = $props.id();
@@ -3124,15 +2871,11 @@ Combine Dialog and Drawer to render Dialog on desktop (min-width: 768px) and Dra
 
 {#if isDesktop.current}
   <Dialog.Root bind:open>
-    <Dialog.Trigger class={buttonVariants({ variant: "outline" })}>
-      Edit Profile
-    </Dialog.Trigger>
+    <Dialog.Trigger class={buttonVariants({ variant: "outline" })}>Edit Profile</Dialog.Trigger>
     <Dialog.Content class="sm:max-w-[425px]">
       <Dialog.Header>
         <Dialog.Title>Edit profile</Dialog.Title>
-        <Dialog.Description>
-          Make changes to your profile here. Click save when you're done.
-        </Dialog.Description>
+        <Dialog.Description>Make changes to your profile here. Click save when you're done.</Dialog.Description>
       </Dialog.Header>
       <form class="grid items-start gap-4">
         <div class="grid gap-2">
@@ -3149,15 +2892,11 @@ Combine Dialog and Drawer to render Dialog on desktop (min-width: 768px) and Dra
   </Dialog.Root>
 {:else}
   <Drawer.Root bind:open>
-    <Drawer.Trigger class={buttonVariants({ variant: "outline" })}>
-      Edit Profile
-    </Drawer.Trigger>
+    <Drawer.Trigger class={buttonVariants({ variant: "outline" })}>Edit Profile</Drawer.Trigger>
     <Drawer.Content>
       <Drawer.Header class="text-left">
         <Drawer.Title>Edit profile</Drawer.Title>
-        <Drawer.Description>
-          Make changes to your profile here. Click save when you're done.
-        </Drawer.Description>
+        <Drawer.Description>Make changes to your profile here. Click save when you're done.</Drawer.Description>
       </Drawer.Header>
       <form class="grid items-start gap-4 px-4">
         <div class="grid gap-2">
@@ -3171,25 +2910,30 @@ Combine Dialog and Drawer to render Dialog on desktop (min-width: 768px) and Dra
         <Button type="submit">Save changes</Button>
       </form>
       <Drawer.Footer class="pt-2">
-        <Drawer.Close class={buttonVariants({ variant: "outline" })}>
-          Cancel
-        </Drawer.Close>
+        <Drawer.Close class={buttonVariants({ variant: "outline" })}>Cancel</Drawer.Close>
       </Drawer.Footer>
     </Drawer.Content>
   </Drawer.Root>
 {/if}
 ```
 
-### Full Example with Chart
+### Components
 
-The documentation includes a complete example showing a drawer with interactive controls (plus/minus buttons) and an animated bar chart displaying goal data. The example demonstrates state management with `$state`, event handling, and integration with the layerchart library for data visualization.
+- `Drawer.Root` - Container
+- `Drawer.Trigger` - Opens drawer
+- `Drawer.Content` - Main content area
+- `Drawer.Header` - Header section
+- `Drawer.Title` - Title text
+- `Drawer.Description` - Description text
+- `Drawer.Footer` - Footer section
+- `Drawer.Close` - Closes drawer
 
-### dropdown_menu
-Dropdown menu component with Root/Trigger/Content structure; supports items, groups, separators, shortcuts, submenus, checkboxes (bind:checked), and radio groups (bind:value); install with `npx shadcn-svelte@latest add dropdown-menu -y -o`.
+### dropdown-menu
+Dropdown menu with Root/Trigger/Content/Item/Group/Separator/Sub/CheckboxItem/RadioGroup components; supports disabled items, shortcuts, and nested submenus.
 
 ## Dropdown Menu
 
-A menu component that displays a set of actions or functions triggered by a button.
+A menu component triggered by a button that displays a set of actions or functions.
 
 ### Installation
 
@@ -3197,7 +2941,7 @@ A menu component that displays a set of actions or functions triggered by a butt
 npx shadcn-svelte@latest add dropdown-menu -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+Use `-y` to skip confirmation and `-o` to overwrite existing files.
 
 ### Basic Usage
 
@@ -3224,6 +2968,17 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
       <DropdownMenu.Item>Settings</DropdownMenu.Item>
     </DropdownMenu.Group>
     <DropdownMenu.Separator />
+    <DropdownMenu.Group>
+      <DropdownMenu.Item>Team</DropdownMenu.Item>
+      <DropdownMenu.Sub>
+        <DropdownMenu.SubTrigger>Invite users</DropdownMenu.SubTrigger>
+        <DropdownMenu.SubContent>
+          <DropdownMenu.Item>Email</DropdownMenu.Item>
+          <DropdownMenu.Item>Message</DropdownMenu.Item>
+        </DropdownMenu.SubContent>
+      </DropdownMenu.Sub>
+    </DropdownMenu.Group>
+    <DropdownMenu.Separator />
     <DropdownMenu.Item disabled>API</DropdownMenu.Item>
   </DropdownMenu.Content>
 </DropdownMenu.Root>
@@ -3231,51 +2986,80 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 
 ### Components
 
-- **Root**: Container for the dropdown menu
-- **Trigger**: Button that opens the menu (accepts snippet with props)
-- **Content**: Menu container with optional `align` and `class` props
-- **Label**: Section label
-- **Group**: Groups related items
-- **Item**: Menu item (supports `disabled` prop)
-- **Shortcut**: Keyboard shortcut display
-- **Separator**: Visual divider
-- **Sub/SubTrigger/SubContent**: Nested submenu support
-- **CheckboxItem**: Menu item with checkbox (bind:checked for state)
-- **RadioGroup/RadioItem**: Radio button group in menu
+- `Root`: Container for the dropdown menu
+- `Trigger`: Button that opens the menu (accepts snippet with `props`)
+- `Content`: Menu container with optional `align` and `class` props
+- `Label`: Section label
+- `Group`: Groups related items
+- `Item`: Menu item (supports `disabled` prop)
+- `Shortcut`: Keyboard shortcut display
+- `Separator`: Visual divider
+- `Sub`/`SubTrigger`/`SubContent`: Nested submenu
 
-### Examples
+### Checkboxes Example
 
-**Checkboxes with state binding:**
 ```svelte
 <script lang="ts">
   let showStatusBar = $state(true);
+  let showActivityBar = $state(false);
 </script>
 
-<DropdownMenu.CheckboxItem bind:checked={showStatusBar}>
-  Status Bar
-</DropdownMenu.CheckboxItem>
+<DropdownMenu.Root>
+  <DropdownMenu.Trigger>
+    {#snippet child({ props })}
+      <Button {...props} variant="outline">Open</Button>
+    {/snippet}
+  </DropdownMenu.Trigger>
+  <DropdownMenu.Content class="w-56">
+    <DropdownMenu.Group>
+      <DropdownMenu.Label>Appearance</DropdownMenu.Label>
+      <DropdownMenu.Separator />
+      <DropdownMenu.CheckboxItem bind:checked={showStatusBar}>
+        Status Bar
+      </DropdownMenu.CheckboxItem>
+      <DropdownMenu.CheckboxItem bind:checked={showActivityBar} disabled>
+        Activity Bar
+      </DropdownMenu.CheckboxItem>
+    </DropdownMenu.Group>
+  </DropdownMenu.Content>
+</DropdownMenu.Root>
 ```
 
-**Radio group:**
+### Radio Group Example
+
 ```svelte
 <script lang="ts">
   let position = $state("bottom");
 </script>
 
-<DropdownMenu.RadioGroup bind:value={position}>
-  <DropdownMenu.RadioItem value="top">Top</DropdownMenu.RadioItem>
-  <DropdownMenu.RadioItem value="bottom">Bottom</DropdownMenu.RadioItem>
-</DropdownMenu.RadioGroup>
+<DropdownMenu.Root>
+  <DropdownMenu.Trigger>
+    {#snippet child({ props })}
+      <Button {...props} variant="outline">Open</Button>
+    {/snippet}
+  </DropdownMenu.Trigger>
+  <DropdownMenu.Content class="w-56">
+    <DropdownMenu.Group>
+      <DropdownMenu.Label>Panel Position</DropdownMenu.Label>
+      <DropdownMenu.Separator />
+      <DropdownMenu.RadioGroup bind:value={position}>
+        <DropdownMenu.RadioItem value="top">Top</DropdownMenu.RadioItem>
+        <DropdownMenu.RadioItem value="bottom">Bottom</DropdownMenu.RadioItem>
+        <DropdownMenu.RadioItem value="right">Right</DropdownMenu.RadioItem>
+      </DropdownMenu.RadioGroup>
+    </DropdownMenu.Group>
+  </DropdownMenu.Content>
+</DropdownMenu.Root>
 ```
 
 ### Changelog
 
-**2024-10-30**: Added automatic styling for `DropdownMenu.SubTrigger` with `gap-2 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0` classes to style icons. Icon `size-4` class removed from manual implementation as it's now handled by parent.
+**2024-10-30**: Added automatic icon styling to `SubTrigger` with classes `gap-2 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0`. Removed manual `size-4` from icons inside `SubTrigger`.
 
 ### empty
-Empty state component with Root, Header (Media/Title/Description), and Content sections; supports icon/avatar variants and Tailwind styling for borders and gradients.
+Empty state component with Root, Header (Media/Title/Description), and Content sections; supports icon/avatar variants, borders, gradients, and input groups.
 
-## Empty Component
+## Empty State Component
 
 Display empty states with customizable content structure.
 
@@ -3284,8 +3068,6 @@ Display empty states with customizable content structure.
 ```bash
 npx shadcn-svelte@latest add empty -y -o
 ```
-
-Use `-y` to skip confirmation and `-o` to overwrite existing files.
 
 ### Basic Usage
 
@@ -3308,194 +3090,97 @@ Use `-y` to skip confirmation and `-o` to overwrite existing files.
   </Empty.Header>
   <Empty.Content>
     <Button>Create Project</Button>
+    <Button variant="outline">Import Project</Button>
   </Empty.Content>
 </Empty.Root>
 ```
 
 ### Component Structure
 
-- `Empty.Root` - Container wrapper
-- `Empty.Header` - Header section containing media, title, and description
-- `Empty.Media` - Media container with `variant="icon"` (default) or `variant="default"` for custom content
-- `Empty.Title` - Title text
-- `Empty.Description` - Description text
-- `Empty.Content` - Content area for buttons, forms, or other interactive elements
+- `Empty.Root`: Container
+- `Empty.Header`: Header section containing media, title, and description
+- `Empty.Media`: Media container with `variant="icon"` (for icons) or `variant="default"` (for custom content like avatars)
+- `Empty.Title`: Title text
+- `Empty.Description`: Description text
+- `Empty.Content`: Action content area (buttons, forms, etc.)
 
 ### Examples
 
-**Outline variant** - Add dashed border:
+**Outline variant** - Add `class="border border-dashed"` to `Empty.Root` for a bordered empty state.
+
+**Background variant** - Use Tailwind utilities like `class="from-muted/50 to-background h-full bg-gradient-to-b from-30%"` on `Empty.Root` for gradient backgrounds.
+
+**Avatar** - Use `Empty.Media variant="default"` with `Avatar.Root` component:
 ```svelte
-<Empty.Root class="border border-dashed">
-  <Empty.Header>
-    <Empty.Media variant="icon">
-      <CloudIcon />
-    </Empty.Media>
-    <Empty.Title>Cloud Storage Empty</Empty.Title>
-    <Empty.Description>Upload files to your cloud storage to access them anywhere.</Empty.Description>
-  </Empty.Header>
-  <Empty.Content>
-    <Button variant="outline" size="sm">Upload Files</Button>
-  </Empty.Content>
-</Empty.Root>
+<Empty.Media variant="default">
+  <Avatar.Root class="size-12">
+    <Avatar.Image src="..." class="grayscale" />
+    <Avatar.Fallback>LR</Avatar.Fallback>
+  </Avatar.Root>
+</Empty.Media>
 ```
 
-**Background variant** - Add gradient background:
+**Avatar Group** - Multiple avatars in `Empty.Media` with negative margin and ring styling:
 ```svelte
-<Empty.Root class="from-muted/50 to-background h-full bg-gradient-to-b from-30%">
-  <Empty.Header>
-    <Empty.Media variant="icon">
-      <BellIcon />
-    </Empty.Media>
-    <Empty.Title>No Notifications</Empty.Title>
-    <Empty.Description>You're all caught up. New notifications will appear here.</Empty.Description>
-  </Empty.Header>
-  <Empty.Content>
-    <Button variant="outline" size="sm">
-      <RefreshCcwIcon />
-      Refresh
-    </Button>
-  </Empty.Content>
-</Empty.Root>
+<Empty.Media>
+  <div class="*:ring-background flex -space-x-2 *:size-12 *:ring-2 *:grayscale">
+    <Avatar.Root>...</Avatar.Root>
+    <Avatar.Root>...</Avatar.Root>
+    <Avatar.Root>...</Avatar.Root>
+  </div>
+</Empty.Media>
 ```
 
-**Avatar** - Display single avatar in media:
+**With InputGroup** - Add search/input functionality to `Empty.Content`:
 ```svelte
-<Empty.Root>
-  <Empty.Header>
-    <Empty.Media variant="default">
-      <Avatar.Root class="size-12">
-        <Avatar.Image src="https://github.com/shadcn.png" class="grayscale" />
-        <Avatar.Fallback>LR</Avatar.Fallback>
-      </Avatar.Root>
-    </Empty.Media>
-    <Empty.Title>User Offline</Empty.Title>
-    <Empty.Description>This user is currently offline. You can leave a message to notify them or try again later.</Empty.Description>
-  </Empty.Header>
-  <Empty.Content>
-    <Button size="sm">Leave Message</Button>
-  </Empty.Content>
-</Empty.Root>
+<Empty.Content>
+  <InputGroup.Root class="sm:w-3/4">
+    <InputGroup.Input placeholder="Try searching..." />
+    <InputGroup.Addon>
+      <SearchIcon />
+    </InputGroup.Addon>
+    <InputGroup.Addon align="inline-end">
+      <Kbd.Root>/</Kbd.Root>
+    </InputGroup.Addon>
+  </InputGroup.Root>
+</Empty.Content>
 ```
-
-**Avatar Group** - Display multiple overlapping avatars:
-```svelte
-<Empty.Root>
-  <Empty.Header>
-    <Empty.Media>
-      <div class="*:ring-background flex -space-x-2 *:size-12 *:ring-2 *:grayscale">
-        <Avatar.Root>
-          <Avatar.Image src="https://github.com/shadcn.png" alt="@shadcn" />
-          <Avatar.Fallback>CN</Avatar.Fallback>
-        </Avatar.Root>
-        <Avatar.Root>
-          <Avatar.Image src="https://github.com/maxleiter.png" alt="@maxleiter" />
-          <Avatar.Fallback>ML</Avatar.Fallback>
-        </Avatar.Root>
-        <Avatar.Root>
-          <Avatar.Image src="https://github.com/evilrabbit.png" alt="@evilrabbit" />
-          <Avatar.Fallback>ER</Avatar.Fallback>
-        </Avatar.Root>
-      </div>
-    </Empty.Media>
-    <Empty.Title>No Team Members</Empty.Title>
-    <Empty.Description>Invite your team to collaborate on this project.</Empty.Description>
-  </Empty.Header>
-  <Empty.Content>
-    <Button size="sm">
-      <PlusIcon />
-      Invite Members
-    </Button>
-  </Empty.Content>
-</Empty.Root>
-```
-
-**With InputGroup** - Add search input to empty state:
-```svelte
-<Empty.Root>
-  <Empty.Header>
-    <Empty.Title>404 - Not Found</Empty.Title>
-    <Empty.Description>The page you're looking for doesn't exist. Try searching for what you need below.</Empty.Description>
-  </Empty.Header>
-  <Empty.Content>
-    <InputGroup.Root class="sm:w-3/4">
-      <InputGroup.Input placeholder="Try searching for pages..." />
-      <InputGroup.Addon>
-        <SearchIcon />
-      </InputGroup.Addon>
-      <InputGroup.Addon align="inline-end">
-        <Kbd.Root>/</Kbd.Root>
-      </InputGroup.Addon>
-    </InputGroup.Root>
-    <Empty.Description>
-      Need help? <a href="#/">Contact support</a>
-    </Empty.Description>
-  </Empty.Content>
-</Empty.Root>
-```
-
-### Styling
-
-Use Tailwind utility classes on `Empty.Root` to customize appearance:
-- `border border-dashed` - Add dashed border outline
-- `bg-gradient-to-b from-muted/50 to-background from-30%` - Add gradient background
-- `h-full` - Full height container
 
 ### field
-Composable form field components with labels, descriptions, errors, and validation; supports vertical/horizontal/responsive layouts; works with inputs, textareas, selects, sliders, checkboxes, radios, and switches.
+Composable form field components with labels, descriptions, errors, and validation; supports vertical/horizontal/responsive orientations and choice cards.
 
-## Field Component
+# Field Component
 
 Composable form field components for building accessible forms with labels, controls, help text, and validation states.
 
-### Core Components
-
-- `Field.Set`: Wrapper for a group of related fields with optional legend and description
-- `Field.Group`: Container to stack multiple fields vertically
-- `Field.Field`: Individual field wrapper with `orientation` prop ("vertical" default, "horizontal", or "responsive")
-- `Field.Label`: Label element with `for` attribute linking to input
-- `Field.Description`: Helper text displayed below the control
-- `Field.Error`: Validation error message
-- `Field.Legend`: Semantic heading for fieldsets
-- `Field.Content`: Flex column grouping label and description
-- `Field.Separator`: Visual divider between field groups
-- `Field.Title`: Title within choice cards
-
-### Installation
+## Installation
 
 ```bash
 npx shadcn-svelte@latest add field -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+## Core Components
 
-### Basic Usage
+- `Field` - wrapper for a single field with `role="group"`
+- `FieldSet` - semantic grouping with `<fieldset>`
+- `FieldLegend` - legend for fieldsets
+- `FieldGroup` - flex column container for related fields
+- `FieldLabel` - label element, can wrap fields for choice cards
+- `FieldDescription` - helper text
+- `FieldError` - validation error message
+- `FieldContent` - flex column grouping label and description
+- `FieldSeparator` - divider between field groups
+- `FieldTitle` - title for choice cards
 
-```svelte
-<script lang="ts">
-  import * as Field from "$lib/components/ui/field/index.js";
-  import { Input } from "$lib/components/ui/input/index.js";
-</script>
+## Orientation
 
-<Field.Set>
-  <Field.Legend>Profile</Field.Legend>
-  <Field.Description>This appears on invoices and emails.</Field.Description>
-  <Field.Group>
-    <Field.Field>
-      <Field.Label for="name">Full name</Field.Label>
-      <Input id="name" placeholder="Evil Rabbit" />
-      <Field.Description>This appears on invoices and emails.</Field.Description>
-    </Field.Field>
-    <Field.Field>
-      <Field.Label for="username">Username</Field.Label>
-      <Input id="username" aria-invalid />
-      <Field.Error>Choose another username.</Field.Error>
-    </Field.Field>
-  </Field.Group>
-</Field.Set>
-```
+- Default (vertical): stacks label, control, helper text
+- `orientation="horizontal"`: aligns label and control side-by-side with `FieldContent` for aligned descriptions
+- `orientation="responsive"`: automatic column layouts with container queries using `@container/field-group`
 
-### Input Fields
+## Examples
 
+**Input fields:**
 ```svelte
 <Field.Set>
   <Field.Group>
@@ -3513,35 +3198,17 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </Field.Set>
 ```
 
-### Textarea
-
+**Textarea:**
 ```svelte
-<Field.Set>
-  <Field.Group>
-    <Field.Field>
-      <Field.Label for="feedback">Feedback</Field.Label>
-      <Textarea id="feedback" placeholder="Your feedback helps us improve..." rows={4} />
-      <Field.Description>Share your thoughts about our service.</Field.Description>
-    </Field.Field>
-  </Field.Group>
-</Field.Set>
+<Field.Field>
+  <Field.Label for="feedback">Feedback</Field.Label>
+  <Textarea id="feedback" placeholder="Your feedback helps us improve..." rows={4} />
+  <Field.Description>Share your thoughts about our service.</Field.Description>
+</Field.Field>
 ```
 
-### Select
-
+**Select:**
 ```svelte
-<script lang="ts">
-  let department = $state<string>();
-  const departments = [
-    { value: "engineering", label: "Engineering" },
-    { value: "design", label: "Design" },
-    { value: "marketing", label: "Marketing" }
-  ];
-  const departmentLabel = $derived(
-    departments.find((d) => d.value === department)?.label ?? "Choose department"
-  );
-</script>
-
 <Field.Field>
   <Field.Label for="department">Department</Field.Label>
   <Select.Root type="single" bind:value={department}>
@@ -3556,24 +3223,40 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </Field.Field>
 ```
 
-### Slider
-
+**Slider:**
 ```svelte
-<script lang="ts">
-  let value = $state([200, 800]);
-</script>
-
 <Field.Field>
   <Field.Label>Price Range</Field.Label>
-  <Field.Description>
-    Set your budget range ($<span class="font-medium">{value[0]}</span> - <span class="font-medium">{value[1]}</span>).
-  </Field.Description>
-  <Slider type="multiple" bind:value max={1000} min={0} step={10} class="mt-2 w-full" aria-label="Price Range" />
+  <Field.Description>Set your budget range (${value[0]} - ${value[1]}).</Field.Description>
+  <Slider type="multiple" bind:value max={1000} min={0} step={10} class="mt-2 w-full" />
 </Field.Field>
 ```
 
-### Checkbox
+**Fieldset with legend:**
+```svelte
+<Field.Set>
+  <Field.Legend>Address Information</Field.Legend>
+  <Field.Description>We need your address to deliver your order.</Field.Description>
+  <Field.Group>
+    <Field.Field>
+      <Field.Label for="street">Street Address</Field.Label>
+      <Input id="street" type="text" placeholder="123 Main St" />
+    </Field.Field>
+    <div class="grid grid-cols-2 gap-4">
+      <Field.Field>
+        <Field.Label for="city">City</Field.Label>
+        <Input id="city" type="text" placeholder="New York" />
+      </Field.Field>
+      <Field.Field>
+        <Field.Label for="zip">Postal Code</Field.Label>
+        <Input id="zip" type="text" placeholder="90502" />
+      </Field.Field>
+    </div>
+  </Field.Group>
+</Field.Set>
+```
 
+**Checkbox group:**
 ```svelte
 <Field.Group>
   <Field.Set>
@@ -3601,13 +3284,8 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </Field.Group>
 ```
 
-### Radio
-
+**Radio group:**
 ```svelte
-<script lang="ts">
-  let plan = $state("monthly");
-</script>
-
 <Field.Set>
   <Field.Label>Subscription Plan</Field.Label>
   <Field.Description>Yearly and lifetime plans offer significant savings.</Field.Description>
@@ -3624,27 +3302,19 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </Field.Set>
 ```
 
-### Switch
-
+**Switch:**
 ```svelte
 <Field.Field orientation="horizontal">
   <Field.Content>
     <Field.Label for="2fa">Multi-factor authentication</Field.Label>
-    <Field.Description>Enable multi-factor authentication. If you do not have a two-factor device, you can use a one-time code sent to your email.</Field.Description>
+    <Field.Description>Enable multi-factor authentication for added security.</Field.Description>
   </Field.Content>
   <Switch id="2fa" />
 </Field.Field>
 ```
 
-### Choice Card (Selectable Field Groups)
-
-Wrap Field components inside FieldLabel to create selectable field groups. Works with RadioItem, Checkbox, and Switch components.
-
+**Choice card (selectable field groups):**
 ```svelte
-<script lang="ts">
-  let computeEnvironment = $state("kubernetes");
-</script>
-
 <Field.Group>
   <Field.Set>
     <Field.Label for="compute-environment">Compute Environment</Field.Label>
@@ -3673,44 +3343,7 @@ Wrap Field components inside FieldLabel to create selectable field groups. Works
 </Field.Group>
 ```
 
-### Field Groups with Separators
-
-```svelte
-<Field.Group>
-  <Field.Set>
-    <Field.Label>Responses</Field.Label>
-    <Field.Description>Get notified when ChatGPT responds to requests that take time.</Field.Description>
-    <Field.Group data-slot="checkbox-group">
-      <Field.Field orientation="horizontal">
-        <Checkbox id="push" checked disabled />
-        <Field.Label for="push" class="font-normal">Push notifications</Field.Label>
-      </Field.Field>
-    </Field.Group>
-  </Field.Set>
-  <Field.Separator />
-  <Field.Set>
-    <Field.Label>Tasks</Field.Label>
-    <Field.Description>Get notified when tasks you've created have updates.</Field.Description>
-    <Field.Group data-slot="checkbox-group">
-      <Field.Field orientation="horizontal">
-        <Checkbox id="push-tasks" />
-        <Field.Label for="push-tasks" class="font-normal">Push notifications</Field.Label>
-      </Field.Field>
-      <Field.Field orientation="horizontal">
-        <Checkbox id="email-tasks" />
-        <Field.Label for="email-tasks" class="font-normal">Email notifications</Field.Label>
-      </Field.Field>
-    </Field.Group>
-  </Field.Set>
-</Field.Group>
-```
-
-### Responsive Layout
-
-- **Vertical fields** (default): Stacks label, control, and helper text vertically—ideal for mobile-first layouts
-- **Horizontal fields**: Set `orientation="horizontal"` on Field to align label and control side-by-side. Pair with FieldContent to keep descriptions aligned
-- **Responsive fields**: Set `orientation="responsive"` for automatic column layouts inside container-aware parents. Apply `@container/field-group` classes on FieldGroup to switch orientations at specific breakpoints
-
+**Responsive layout:**
 ```svelte
 <Field.Set>
   <Field.Legend>Profile</Field.Legend>
@@ -3732,18 +3365,13 @@ Wrap Field components inside FieldLabel to create selectable field groups. Works
       </Field.Content>
       <Textarea id="message" placeholder="Hello, world!" required class="min-h-[100px] resize-none sm:min-w-[300px]" />
     </Field.Field>
-    <Field.Separator />
-    <Field.Field orientation="responsive">
-      <Button type="submit">Submit</Button>
-      <Button type="button" variant="outline">Cancel</Button>
-    </Field.Field>
   </Field.Group>
 </Field.Set>
 ```
 
-### Validation and Errors
+## Validation
 
-Add `data-invalid` to Field to switch the entire block into an error state. Add `aria-invalid` on the input itself for assistive technologies. Render FieldError immediately after the control or inside FieldContent to keep error messages aligned with the field.
+Add `data-invalid` to `Field` to switch into error state. Add `aria-invalid` on the input for assistive technologies. Render `FieldError` after the control or inside `FieldContent`:
 
 ```svelte
 <Field.Field data-invalid>
@@ -3753,24 +3381,27 @@ Add `data-invalid` to Field to switch the entire block into an error state. Add 
 </Field.Field>
 ```
 
-### Accessibility
+## Accessibility
 
-- FieldSet and FieldLegend keep related controls grouped for keyboard and assistive tech users
-- Field outputs `role="group"` so nested controls inherit labeling from FieldLabel and FieldLegend when combined
-- Apply FieldSeparator sparingly to ensure screen readers encounter clear section boundaries
+- `FieldSet` and `FieldLegend` group related controls for keyboard and assistive tech users
+- `Field` outputs `role="group"` so nested controls inherit labeling from `FieldLabel` and `FieldLegend`
+- Use `FieldSeparator` sparingly to ensure screen readers encounter clear section boundaries
+
 
 ### form
-Composable form components with Formsnap/Superforms/Zod integration for type-safe, accessible forms with client/server validation.
+Form components wrapping Formsnap & Superforms with Zod validation, ARIA attributes, and composable field structure (Field/Control/Label/Description/FieldErrors); install with `npx shadcn-svelte@latest add form -y -o`; define schema, load via superValidate, create component with superForm hook, handle via server action.
 
 ## Building Forms with Formsnap, Superforms & Zod
 
-The Form components in shadcn-svelte wrap Formsnap and Superforms to provide composable form building with:
-- Semantic HTML structure with proper ARIA attributes
-- Client and server-side validation using Zod
-- Integration with shadcn-svelte components (Select, RadioGroup, Switch, Checkbox, etc.)
-- Type-safe form handling
+Well-designed forms must be semantically correct, keyboard-navigable, accessible with ARIA attributes, support client/server validation, and styled consistently.
 
-### Component Anatomy
+The Form components wrap Formsnap & Superforms to provide:
+- Composable form field components for scoping state
+- Zod validation (or other Superforms-supported validators)
+- Automatic ARIA attributes based on field states
+- Integration with Select, RadioGroup, Switch, Checkbox, and other UI components
+
+### Anatomy
 ```
 <form>
   <Form.Field>
@@ -3783,9 +3414,15 @@ The Form components in shadcn-svelte wrap Formsnap and Superforms to provide com
 </form>
 ```
 
-### Setup Steps
+### Installation
+```bash
+npx shadcn-svelte@latest add form -y -o
+```
+(-y: skip confirmation, -o: overwrite existing files)
 
-1. **Define schema** (src/routes/settings/schema.ts):
+### Usage
+
+**1. Create a form schema** (src/routes/settings/schema.ts):
 ```ts
 import { z } from "zod";
 export const formSchema = z.object({
@@ -3794,7 +3431,7 @@ export const formSchema = z.object({
 export type FormSchema = typeof formSchema;
 ```
 
-2. **Setup load function** (src/routes/settings/+page.server.ts):
+**2. Setup the load function** (src/routes/settings/+page.server.ts):
 ```ts
 import type { PageServerLoad } from "./$types.js";
 import { superValidate } from "sveltekit-superforms";
@@ -3808,7 +3445,7 @@ export const load: PageServerLoad = async () => {
 };
 ```
 
-3. **Create form component** (src/routes/settings/settings-form.svelte):
+**3. Create form component** (src/routes/settings/settings-form.svelte):
 ```svelte
 <script lang="ts">
   import * as Form from "$lib/components/ui/form/index.js";
@@ -3839,18 +3476,19 @@ export const load: PageServerLoad = async () => {
 </form>
 ```
 
-4. **Use component** (src/routes/settings/+page.svelte):
+The `name`, `id`, and accessibility attributes are applied via spreading `props` from Form.Control. Form.Label automatically associates with input via `for` attribute.
+
+**4. Use the component** (src/routes/settings/+page.svelte):
 ```svelte
 <script lang="ts">
   import type { PageData } from "./$types.js";
   import SettingsForm from "./settings-form.svelte";
   let { data }: { data: PageData } = $props();
 </script>
-
 <SettingsForm {data} />
 ```
 
-5. **Create server action** (src/routes/settings/+page.server.ts):
+**5. Create an Action** (src/routes/settings/+page.server.ts):
 ```ts
 import type { PageServerLoad, Actions } from "./$types.js";
 import { fail } from "@sveltejs/kit";
@@ -3875,7 +3513,7 @@ export const actions: Actions = {
 };
 ```
 
-### SPA Example with Client-Side Validation
+**SPA Example** (client-side only):
 ```svelte
 <script lang="ts" module>
   import { z } from "zod";
@@ -3883,7 +3521,6 @@ export const actions: Actions = {
     username: z.string().min(2).max(50)
   });
 </script>
-
 <script lang="ts">
   import { defaults, superForm } from "sveltekit-superforms";
   import { zod4 } from "sveltekit-superforms/adapters";
@@ -3920,21 +3557,15 @@ export const actions: Actions = {
 </form>
 ```
 
-### Installation
-```bash
-npx shadcn-svelte@latest add form -y -o
-```
-(-y: skip confirmation, -o: overwrite existing files)
-
-### Integration Examples
-Form components work with: Checkbox, Date Picker, Input, Radio Group, Select, Switch, Textarea. See component-specific documentation for examples.
+### Related Components
+Form examples also available for: Checkbox, Date Picker, Input, Radio Group, Select, Switch, Textarea
 
 ### hover-card
-Hover card component for displaying link preview content on hover; composed of Root, Trigger (link element), and Content (preview) subcomponents.
+Hover card component for displaying link preview content on hover; install with `add hover-card -y -o`; use Root/Trigger/Content structure with optional href on Trigger.
 
 ## Hover Card
 
-A component that displays preview content when users hover over a link, useful for showing additional information without navigation.
+A component that displays preview content when hovering over a link, useful for showing additional information to sighted users.
 
 ### Installation
 
@@ -3942,7 +3573,7 @@ A component that displays preview content when users hover over a link, useful f
 npx shadcn-svelte@latest add hover-card -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Basic Usage
 
@@ -3959,7 +3590,7 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </HoverCard.Root>
 ```
 
-### Complete Example with Avatar
+### Example with Avatar and Metadata
 
 ```svelte
 <script lang="ts">
@@ -3998,16 +3629,16 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </HoverCard.Root>
 ```
 
-### Structure
+### Components
 
 - `HoverCard.Root`: Container component
-- `HoverCard.Trigger`: The element that triggers the hover preview (can be a link with href, target, rel attributes)
-- `HoverCard.Content`: The preview content displayed on hover (supports custom styling with class prop)
+- `HoverCard.Trigger`: The element that triggers the hover card (can be a link with href)
+- `HoverCard.Content`: The content displayed on hover
 
-The component is built on Bits UI's link-preview component. See Bits UI documentation for full API reference.
+See Bits UI documentation for full API reference.
 
-### input_group
-Component for attaching icons, text, buttons, and other UI elements to input/textarea fields with flexible alignment (inline-end, block-start, block-end) and integration with tooltips, dropdowns, and custom inputs.
+### input-group
+Input/textarea wrapper component with configurable addons for icons, text, buttons, tooltips, dropdowns, and loading indicators; supports inline and block alignment.
 
 ## Input Group
 
@@ -4040,37 +3671,50 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 </InputGroup.Root>
 ```
 
-### Core Components
+### Components
 
-- **InputGroup.Root**: Container wrapper
-- **InputGroup.Input**: Text input field
-- **InputGroup.Textarea**: Multi-line text input
-- **InputGroup.Addon**: Container for additional content (icons, text, buttons)
-- **InputGroup.Text**: Display text content
-- **InputGroup.Button**: Action buttons within addons
+- `InputGroup.Root`: Container wrapper
+- `InputGroup.Input`: Text input element
+- `InputGroup.Textarea`: Multi-line text input
+- `InputGroup.Addon`: Container for additional content (icons, text, buttons)
+- `InputGroup.Text`: Text content within addons
+- `InputGroup.Button`: Button element within addons
 
 ### Addon Alignment
 
 The `align` prop on `InputGroup.Addon` controls positioning:
-- `inline-end`: Right side (default for inline content)
+- `inline-end`: Right side (default for most cases)
 - `block-end`: Bottom (for textarea)
 - `block-start`: Top (for textarea)
 
-### Icon Addon
+### Examples
 
+**Icons:**
 ```svelte
+<InputGroup.Root>
+  <InputGroup.Input placeholder="Search..." />
+  <InputGroup.Addon>
+    <SearchIcon />
+  </InputGroup.Addon>
+</InputGroup.Root>
+
 <InputGroup.Root>
   <InputGroup.Input type="email" placeholder="Enter your email" />
   <InputGroup.Addon>
     <MailIcon />
   </InputGroup.Addon>
 </InputGroup.Root>
+
+<InputGroup.Root>
+  <InputGroup.Input placeholder="Card number" />
+  <InputGroup.Addon align="inline-end">
+    <StarIcon />
+    <InfoIcon />
+  </InputGroup.Addon>
+</InputGroup.Root>
 ```
 
-### Text Addon
-
-Display currency, domain prefixes, or status information:
-
+**Text:**
 ```svelte
 <InputGroup.Root>
   <InputGroup.Addon>
@@ -4081,23 +3725,76 @@ Display currency, domain prefixes, or status information:
     <InputGroup.Text>USD</InputGroup.Text>
   </InputGroup.Addon>
 </InputGroup.Root>
-```
 
-### Button Addon
-
-```svelte
 <InputGroup.Root>
-  <InputGroup.Input placeholder="https://x.com/shadcn" readonly />
+  <InputGroup.Addon>
+    <InputGroup.Text>https://</InputGroup.Text>
+  </InputGroup.Addon>
+  <InputGroup.Input placeholder="example.com" />
   <InputGroup.Addon align="inline-end">
-    <InputGroup.Button size="icon-xs" onclick={() => clipboard.copy(...)}>
-      <CopyIcon />
-    </InputGroup.Button>
+    <InputGroup.Text>.com</InputGroup.Text>
+  </InputGroup.Addon>
+</InputGroup.Root>
+
+<InputGroup.Root>
+  <InputGroup.Input placeholder="Enter your username" />
+  <InputGroup.Addon align="inline-end">
+    <InputGroup.Text>@company.com</InputGroup.Text>
+  </InputGroup.Addon>
+</InputGroup.Root>
+
+<InputGroup.Root>
+  <InputGroup.Textarea placeholder="Enter your message" />
+  <InputGroup.Addon align="block-end">
+    <InputGroup.Text class="text-muted-foreground text-xs">
+      120 characters left
+    </InputGroup.Text>
   </InputGroup.Addon>
 </InputGroup.Root>
 ```
 
-### Tooltip Integration
+**Buttons with Actions:**
+```svelte
+<script lang="ts">
+  import { UseClipboard } from "$lib/hooks/use-clipboard.svelte.js";
+  let isFavorite = $state(false);
+  const clipboard = new UseClipboard();
+</script>
 
+<InputGroup.Root>
+  <InputGroup.Input placeholder="https://x.com/shadcn" readonly />
+  <InputGroup.Addon align="inline-end">
+    <InputGroup.Button
+      size="icon-xs"
+      onclick={() => clipboard.copy("https://x.com/shadcn")}
+    >
+      {#if clipboard.copied}
+        <CheckIcon />
+      {:else}
+        <CopyIcon />
+      {/if}
+    </InputGroup.Button>
+  </InputGroup.Addon>
+</InputGroup.Root>
+
+<InputGroup.Root>
+  <InputGroup.Input placeholder="Type to search..." />
+  <InputGroup.Addon align="inline-end">
+    <InputGroup.Button variant="secondary">Search</InputGroup.Button>
+  </InputGroup.Addon>
+</InputGroup.Root>
+
+<InputGroup.Root>
+  <InputGroup.Input placeholder="@shadcn" />
+  <InputGroup.Addon align="inline-end">
+    <div class="bg-primary text-primary-foreground flex size-4 items-center justify-center rounded-full">
+      <CheckIcon class="size-3" />
+    </div>
+  </InputGroup.Addon>
+</InputGroup.Root>
+```
+
+**Tooltips:**
 ```svelte
 <InputGroup.Root>
   <InputGroup.Input placeholder="Enter password" type="password" />
@@ -4116,30 +3813,46 @@ Display currency, domain prefixes, or status information:
     </Tooltip.Root>
   </InputGroup.Addon>
 </InputGroup.Root>
-```
 
-### Textarea with Block Addons
-
-Use `block-start` and `block-end` alignment for textarea:
-
-```svelte
 <InputGroup.Root>
-  <InputGroup.Addon align="block-start" class="border-b">
-    <InputGroup.Text>script.js</InputGroup.Text>
-    <InputGroup.Button class="ml-auto" size="icon-xs">
-      <RefreshCwIcon />
-    </InputGroup.Button>
-  </InputGroup.Addon>
-  <InputGroup.Textarea placeholder="console.log('Hello, world!');" />
-  <InputGroup.Addon align="block-end" class="border-t">
-    <InputGroup.Text>Line 1, Column 1</InputGroup.Text>
-    <InputGroup.Button size="sm" class="ml-auto">Run</InputGroup.Button>
+  <InputGroup.Input placeholder="Your email address" />
+  <InputGroup.Addon align="inline-end">
+    <Tooltip.Root>
+      <Tooltip.Trigger>
+        {#snippet child({ props })}
+          <InputGroup.Button {...props} variant="ghost" size="icon-xs">
+            <HelpCircleIcon />
+          </InputGroup.Button>
+        {/snippet}
+      </Tooltip.Trigger>
+      <Tooltip.Content>
+        <p>We'll use this to send you notifications</p>
+      </Tooltip.Content>
+    </Tooltip.Root>
   </InputGroup.Addon>
 </InputGroup.Root>
 ```
 
-### Loading State
+**Textarea with Block Alignment:**
+```svelte
+<InputGroup.Root>
+  <InputGroup.Addon align="block-start" class="border-b">
+    <InputGroup.Text class="font-mono font-medium">script.js</InputGroup.Text>
+    <InputGroup.Button class="ml-auto" size="icon-xs">
+      <RefreshCwIcon />
+    </InputGroup.Button>
+  </InputGroup.Addon>
+  <InputGroup.Textarea placeholder="console.log('Hello, world!');" class="min-h-[200px]" />
+  <InputGroup.Addon align="block-end" class="border-t">
+    <InputGroup.Text>Line 1, Column 1</InputGroup.Text>
+    <InputGroup.Button size="sm" class="ml-auto" variant="default">
+      Run <CornerDownLeftIcon />
+    </InputGroup.Button>
+  </InputGroup.Addon>
+</InputGroup.Root>
+```
 
+**Loading Indicators:**
 ```svelte
 <InputGroup.Root data-disabled>
   <InputGroup.Input placeholder="Searching..." disabled />
@@ -4147,33 +3860,24 @@ Use `block-start` and `block-end` alignment for textarea:
     <Spinner />
   </InputGroup.Addon>
 </InputGroup.Root>
-```
 
-### Dropdown Integration
+<InputGroup.Root data-disabled>
+  <InputGroup.Input placeholder="Processing..." disabled />
+  <InputGroup.Addon>
+    <Spinner />
+  </InputGroup.Addon>
+</InputGroup.Root>
 
-```svelte
-<InputGroup.Root>
-  <InputGroup.Input placeholder="Enter search query" />
+<InputGroup.Root data-disabled>
+  <InputGroup.Input placeholder="Saving changes..." disabled />
   <InputGroup.Addon align="inline-end">
-    <DropdownMenu.Root>
-      <DropdownMenu.Trigger>
-        {#snippet child({ props })}
-          <InputGroup.Button {...props} variant="ghost">
-            Search In... <ChevronDownIcon class="size-3" />
-          </InputGroup.Button>
-        {/snippet}
-      </DropdownMenu.Trigger>
-      <DropdownMenu.Content align="end">
-        <DropdownMenu.Item>Documentation</DropdownMenu.Item>
-        <DropdownMenu.Item>Blog Posts</DropdownMenu.Item>
-      </DropdownMenu.Content>
-    </DropdownMenu.Root>
+    <InputGroup.Text>Saving...</InputGroup.Text>
+    <Spinner />
   </InputGroup.Addon>
 </InputGroup.Root>
 ```
 
-### Label Integration
-
+**Labels:**
 ```svelte
 <InputGroup.Root>
   <InputGroup.Input id="email" placeholder="shadcn" />
@@ -4181,12 +3885,71 @@ Use `block-start` and `block-end` alignment for textarea:
     <Label.Root for="email">@</Label.Root>
   </InputGroup.Addon>
 </InputGroup.Root>
+
+<InputGroup.Root>
+  <InputGroup.Input id="email-2" placeholder="shadcn@vercel.com" />
+  <InputGroup.Addon align="block-start">
+    <Label.Root for="email-2" class="text-foreground">Email</Label.Root>
+    <Tooltip.Root>
+      <Tooltip.Trigger>
+        {#snippet child({ props })}
+          <InputGroup.Button {...props} variant="ghost" class="ml-auto rounded-full" size="icon-xs">
+            <InfoIcon />
+          </InputGroup.Button>
+        {/snippet}
+      </Tooltip.Trigger>
+      <Tooltip.Content>
+        <p>We'll use this to send you notifications</p>
+      </Tooltip.Content>
+    </Tooltip.Root>
+  </InputGroup.Addon>
+</InputGroup.Root>
 ```
 
-### Button Group Wrapper
+**Dropdown Menus:**
+```svelte
+<InputGroup.Root>
+  <InputGroup.Input placeholder="Enter file name" />
+  <InputGroup.Addon align="inline-end">
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger>
+        {#snippet child({ props })}
+          <InputGroup.Button {...props} variant="ghost" size="icon-xs">
+            <MoreHorizontalIcon />
+          </InputGroup.Button>
+        {/snippet}
+      </DropdownMenu.Trigger>
+      <DropdownMenu.Content align="end">
+        <DropdownMenu.Item>Settings</DropdownMenu.Item>
+        <DropdownMenu.Item>Copy path</DropdownMenu.Item>
+        <DropdownMenu.Item>Open location</DropdownMenu.Item>
+      </DropdownMenu.Content>
+    </DropdownMenu.Root>
+  </InputGroup.Addon>
+</InputGroup.Root>
 
-Combine with ButtonGroup for complex layouts:
+<InputGroup.Root class="[--radius:1rem]">
+  <InputGroup.Input placeholder="Enter search query" />
+  <InputGroup.Addon align="inline-end">
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger>
+        {#snippet child({ props })}
+          <InputGroup.Button {...props} variant="ghost" class="!pr-1.5 text-xs">
+            Search In... <ChevronDownIcon class="size-3" />
+          </InputGroup.Button>
+        {/snippet}
+      </DropdownMenu.Trigger>
+      <DropdownMenu.Content align="end" class="[--radius:0.95rem]">
+        <DropdownMenu.Item>Documentation</DropdownMenu.Item>
+        <DropdownMenu.Item>Blog Posts</DropdownMenu.Item>
+        <DropdownMenu.Item>Changelog</DropdownMenu.Item>
+      </DropdownMenu.Content>
+    </DropdownMenu.Root>
+  </InputGroup.Addon>
+</InputGroup.Root>
+```
 
+**Button Group Integration:**
 ```svelte
 <ButtonGroup.Root>
   <ButtonGroup.Text>
@@ -4202,15 +3965,15 @@ Combine with ButtonGroup for complex layouts:
 </ButtonGroup.Root>
 ```
 
-### Custom Input
+**Custom Input:**
 
-Add `data-slot="input-group-control"` to custom input elements for automatic behavior and focus state handling:
+Add the `data-slot="input-group-control"` attribute to custom input elements for automatic behavior and focus state handling. No styles are applied; use the `class` prop for styling.
 
 ```svelte
 <InputGroup.Root>
   <textarea
     data-slot="input-group-control"
-    class="field-sizing-content flex min-h-16 w-full resize-none rounded-md bg-transparent px-3 py-2.5 text-base outline-none transition-[color,box-shadow]"
+    class="field-sizing-content flex min-h-16 w-full resize-none rounded-md bg-transparent px-3 py-2.5 text-base outline-none transition-[color,box-shadow] md:text-sm"
     placeholder="Autoresize textarea..."
   ></textarea>
   <InputGroup.Addon align="block-end">
@@ -4221,14 +3984,12 @@ Add `data-slot="input-group-control"` to custom input elements for automatic beh
 </InputGroup.Root>
 ```
 
-No styles are applied to custom inputs; apply your own using the `class` prop.
-
 ### input-otp
 Accessible OTP input component with configurable length, pattern validation, separators, and form integration support.
 
 ## Input OTP
 
-Accessible one-time password component with copy-paste functionality, built on Bits UI's PinInput component.
+Accessible one-time password component with copy-paste functionality, built on Bits UI's PinInput.
 
 ### Installation
 
@@ -4236,7 +3997,7 @@ Accessible one-time password component with copy-paste functionality, built on B
 npx shadcn-svelte@latest add input-otp -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+(-y: skip confirmation, -o: overwrite existing files)
 
 ### Basic Usage
 
@@ -4264,20 +4025,16 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 
 ### Components
 
-- **InputOTP.Root**: Container with `maxlength` prop to set OTP length
-- **InputOTP.Group**: Groups cells together
-- **InputOTP.Slot**: Individual input cell that receives `{cell}` prop
-- **InputOTP.Separator**: Visual separator between groups
+- `InputOTP.Root` - Container with `maxlength` prop
+- `InputOTP.Group` - Groups cells together
+- `InputOTP.Slot` - Individual cell, accepts `{cell}` prop
+- `InputOTP.Separator` - Visual separator between groups
 
-### Pattern Validation
+### Examples
 
-Use the `pattern` prop to restrict input characters:
-
+**Pattern validation:**
 ```svelte
-<script lang="ts">
-  import * as InputOTP from "$lib/components/ui/input-otp/index.js";
-  import { REGEXP_ONLY_DIGITS_AND_CHARS } from "bits-ui";
-</script>
+import { REGEXP_ONLY_DIGITS_AND_CHARS } from "bits-ui";
 
 <InputOTP.Root maxlength={6} pattern={REGEXP_ONLY_DIGITS_AND_CHARS}>
   {#snippet children({ cells })}
@@ -4290,21 +4047,37 @@ Use the `pattern` prop to restrict input characters:
 </InputOTP.Root>
 ```
 
-### Invalid State
-
-Mark slots as invalid using the `aria-invalid` attribute:
-
+**Multiple separators:**
 ```svelte
 <InputOTP.Root maxlength={6}>
   {#snippet children({ cells })}
     <InputOTP.Group>
-      {#each cells.slice(0, 3) as cell (cell)}
-        <InputOTP.Slot aria-invalid {cell} />
+      {#each cells.slice(0, 2) as cell (cell)}
+        <InputOTP.Slot {cell} />
       {/each}
     </InputOTP.Group>
     <InputOTP.Separator />
     <InputOTP.Group>
-      {#each cells.slice(3, 6) as cell (cell)}
+      {#each cells.slice(2, 4) as cell (cell)}
+        <InputOTP.Slot {cell} />
+      {/each}
+    </InputOTP.Group>
+    <InputOTP.Separator />
+    <InputOTP.Group>
+      {#each cells.slice(4, 6) as cell (cell)}
+        <InputOTP.Slot {cell} />
+      {/each}
+    </InputOTP.Group>
+  {/snippet}
+</InputOTP.Root>
+```
+
+**Invalid state:**
+```svelte
+<InputOTP.Root maxlength={6}>
+  {#snippet children({ cells })}
+    <InputOTP.Group>
+      {#each cells as cell (cell)}
         <InputOTP.Slot aria-invalid {cell} />
       {/each}
     </InputOTP.Group>
@@ -4312,10 +4085,7 @@ Mark slots as invalid using the `aria-invalid` attribute:
 </InputOTP.Root>
 ```
 
-### Form Integration
-
-Integrate with sveltekit-superforms for validation:
-
+**Form integration with validation:**
 ```svelte
 <script lang="ts" module>
   import { z } from "zod/v4";
@@ -4370,11 +4140,11 @@ Integrate with sveltekit-superforms for validation:
 ```
 
 ### input
-Form input component supporting multiple types (text, email, file), disabled/invalid states, labels, helper text, and sveltekit-superforms integration.
+Form input component supporting email, file, disabled, invalid states, labels, descriptions, buttons, and sveltekit-superforms validation integration.
 
 ## Input Component
 
-A form input field component for text, email, file, and other input types.
+Form input field component.
 
 ### Installation
 
@@ -4382,9 +4152,7 @@ A form input field component for text, email, file, and other input types.
 npx shadcn-svelte@latest add input -y -o
 ```
 
-The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
-
-### Basic Usage
+### Usage
 
 ```svelte
 <script lang="ts">
@@ -4395,20 +4163,15 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Examples
 
-**Default input:**
+**Default & Disabled:**
 ```svelte
 <Input type="email" placeholder="email" class="max-w-xs" />
-```
-
-**Disabled state:**
-```svelte
 <Input disabled type="email" placeholder="email" class="max-w-sm" />
 ```
 
-**With label:**
+**With Label:**
 ```svelte
 <script lang="ts">
-  import { Input } from "$lib/components/ui/input/index.js";
   import { Label } from "$lib/components/ui/label/index.js";
   const id = $props.id();
 </script>
@@ -4418,7 +4181,7 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 </div>
 ```
 
-**With helper text:**
+**With Description Text:**
 ```svelte
 <div class="flex w-full max-w-sm flex-col gap-1.5">
   <Label for="email">Email</Label>
@@ -4427,11 +4190,10 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 </div>
 ```
 
-**With button (subscribe form):**
+**With Button:**
 ```svelte
 <script lang="ts">
   import { Button } from "$lib/components/ui/button/index.js";
-  import { Input } from "$lib/components/ui/input/index.js";
 </script>
 <form class="flex w-full max-w-sm items-center space-x-2">
   <Input type="email" placeholder="email" />
@@ -4439,12 +4201,18 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 </form>
 ```
 
-**Invalid state:**
+**Invalid State:**
 ```svelte
-<Input aria-invalid type="email" placeholder="email" value="shadcn@example" class="max-w-sm" />
+<Input
+  aria-invalid
+  type="email"
+  placeholder="email"
+  value="shadcn@example"
+  class="max-w-sm"
+/>
 ```
 
-**File input:**
+**File Input:**
 ```svelte
 <div class="grid w-full max-w-sm items-center gap-1.5">
   <Label for="picture">Picture</Label>
@@ -4452,7 +4220,7 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 </div>
 ```
 
-**With form validation (using sveltekit-superforms and zod):**
+**Form Integration with Validation:**
 ```svelte
 <script lang="ts" module>
   import { z } from "zod/v4";
@@ -4465,7 +4233,6 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
   import { zod4 } from "sveltekit-superforms/adapters";
   import { toast } from "svelte-sonner";
   import * as Form from "$lib/components/ui/form/index.js";
-  import { Input } from "$lib/components/ui/input/index.js";
   
   const form = superForm(defaults(zod4(formSchema)), {
     validators: zod4(formSchema),
@@ -4495,14 +4262,12 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 </form>
 ```
 
-The component supports standard HTML input attributes (type, placeholder, disabled, aria-invalid) and integrates with other shadcn-svelte components like Label, Button, and Form for building complete form interfaces.
-
 ### item
-Flex container component for displaying content (title, description, media, actions); supports variants (default/outline/muted), sizes (default/sm), media types (icon/avatar/image), grouping with separators, link rendering via child snippet, and dropdown integration.
+Flex container for content display with variants, sizes, media types, grouping, and link/dropdown integration.
 
 ## Item Component
 
-A flex container component for displaying content with optional title, description, media, and actions. Use when displaying content-only layouts; use Field component instead for form inputs.
+A flex container for displaying content with title, description, and actions. Can be grouped with `ItemGroup` to create lists.
 
 ### Installation
 
@@ -4510,13 +4275,14 @@ A flex container component for displaying content with optional title, descripti
 npx shadcn-svelte@latest add item -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+(-y: skip confirmation, -o: overwrite existing files)
 
 ### Basic Usage
 
 ```svelte
 <script lang="ts">
   import * as Item from "$lib/components/ui/item/index.js";
+  import { Button } from "$lib/components/ui/button/index.js";
 </script>
 
 <Item.Root>
@@ -4533,7 +4299,7 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 
 ### Variants
 
-Three variants available: default (subtle background and borders), `outline` (clear borders, transparent background), and `muted` (subdued appearance for secondary content).
+Three variants available: default (subtle background/borders), `outline` (clear borders, transparent background), `muted` (subdued appearance).
 
 ```svelte
 <Item.Root variant="outline">
@@ -4544,6 +4310,13 @@ Three variants available: default (subtle background and borders), `outline` (cl
   <Item.Actions>
     <Button variant="outline" size="sm">Open</Button>
   </Item.Actions>
+</Item.Root>
+
+<Item.Root variant="muted">
+  <Item.Content>
+    <Item.Title>Muted Variant</Item.Title>
+    <Item.Description>Subdued appearance for secondary content.</Item.Description>
+  </Item.Content>
 </Item.Root>
 ```
 
@@ -4571,7 +4344,7 @@ Default and `sm` (compact) sizes available.
 
 ### Media Variants
 
-**Icon**: Display icons in media slot with `variant="icon"`.
+**Icon**: Display icons in media slot.
 
 ```svelte
 <Item.Root variant="outline">
@@ -4588,7 +4361,7 @@ Default and `sm` (compact) sizes available.
 </Item.Root>
 ```
 
-**Avatar**: Use Avatar component in media slot.
+**Avatar**: Display single or multiple avatars.
 
 ```svelte
 <Item.Root variant="outline">
@@ -4610,7 +4383,7 @@ Default and `sm` (compact) sizes available.
 </Item.Root>
 ```
 
-**Image**: Use `variant="image"` for image media.
+**Image**: Display images in media slot.
 
 ```svelte
 <Item.Root variant="outline">
@@ -4623,14 +4396,17 @@ Default and `sm` (compact) sizes available.
         <Item.Title>Song Title</Item.Title>
         <Item.Description>Artist Name</Item.Description>
       </Item.Content>
+      <Item.Content class="flex-none text-center">
+        <Item.Description>3:45</Item.Description>
+      </Item.Content>
     </a>
   {/snippet}
 </Item.Root>
 ```
 
-### Grouping Items
+### Grouping
 
-Use `Item.Group` to create a list of items. Add `Item.Separator` between items.
+Use `Item.Group` to create lists of items with separators.
 
 ```svelte
 <Item.Group>
@@ -4638,7 +4414,7 @@ Use `Item.Group` to create a list of items. Add `Item.Separator` between items.
     <Item.Root>
       <Item.Media>
         <Avatar.Root>
-          <Avatar.Image src={person.avatar} />
+          <Avatar.Image src={person.avatar} class="grayscale" />
           <Avatar.Fallback>{person.username.charAt(0)}</Avatar.Fallback>
         </Avatar.Root>
       </Item.Media>
@@ -4659,25 +4435,29 @@ Use `Item.Group` to create a list of items. Add `Item.Separator` between items.
 </Item.Group>
 ```
 
-### Header Section
+### Header
 
-Use `Item.Header` for full-width content like images at the top.
+Use `Item.Header` for full-width content like images.
 
 ```svelte
-<Item.Root variant="outline">
-  <Item.Header>
-    <img src="..." alt="..." class="aspect-square w-full rounded-sm object-cover" />
-  </Item.Header>
-  <Item.Content>
-    <Item.Title>Model Name</Item.Title>
-    <Item.Description>Model description</Item.Description>
-  </Item.Content>
-</Item.Root>
+<Item.Group class="grid grid-cols-3 gap-4">
+  {#each models as model (model.name)}
+    <Item.Root variant="outline">
+      <Item.Header>
+        <img src={model.image} alt={model.name} class="aspect-square w-full rounded-sm object-cover" />
+      </Item.Header>
+      <Item.Content>
+        <Item.Title>{model.name}</Item.Title>
+        <Item.Description>{model.description}</Item.Description>
+      </Item.Content>
+    </Item.Root>
+  {/each}
+</Item.Group>
 ```
 
-### Link Items
+### Links
 
-Use the `child` snippet to render items as links. Hover and focus states apply to the anchor element.
+Use the `child` snippet to render as a link. Hover and focus states apply to the anchor element.
 
 ```svelte
 <Item.Root>
@@ -4685,10 +4465,24 @@ Use the `child` snippet to render items as links. Hover and focus states apply t
     <a href="#/" {...props}>
       <Item.Content>
         <Item.Title>Visit our documentation</Item.Title>
-        <Item.Description>Learn how to get started.</Item.Description>
+        <Item.Description>Learn how to get started with our components.</Item.Description>
       </Item.Content>
       <Item.Actions>
         <ChevronRightIcon class="size-4" />
+      </Item.Actions>
+    </a>
+  {/snippet}
+</Item.Root>
+
+<Item.Root variant="outline">
+  {#snippet child({ props })}
+    <a href="#/" target="_blank" rel="noopener noreferrer" {...props}>
+      <Item.Content>
+        <Item.Title>External resource</Item.Title>
+        <Item.Description>Opens in a new tab with security attributes.</Item.Description>
+      </Item.Content>
+      <Item.Actions>
+        <ExternalLinkIcon class="size-4" />
       </Item.Actions>
     </a>
   {/snippet}
@@ -4697,24 +4491,24 @@ Use the `child` snippet to render items as links. Hover and focus states apply t
 
 ### Dropdown Integration
 
-Items work well inside dropdown menus.
+Use Item within dropdown menus for styled list items.
 
 ```svelte
 <DropdownMenu.Root>
   <DropdownMenu.Trigger>
     {#snippet child({ props })}
-      <Button {...props} variant="outline" size="sm">
+      <Button {...props} variant="outline" size="sm" class="w-fit">
         Select <ChevronDown />
       </Button>
     {/snippet}
   </DropdownMenu.Trigger>
-  <DropdownMenu.Content class="w-72">
+  <DropdownMenu.Content class="w-72 [--radius:0.65rem]" align="end">
     {#each people as person (person.username)}
       <DropdownMenu.Item class="p-0">
         <Item.Root size="sm" class="w-full p-2">
           <Item.Media>
             <Avatar.Root class="size-8">
-              <Avatar.Image src={person.avatar} />
+              <Avatar.Image src={person.avatar} class="grayscale" />
               <Avatar.Fallback>{person.username.charAt(0)}</Avatar.Fallback>
             </Avatar.Root>
           </Item.Media>
@@ -4729,21 +4523,12 @@ Items work well inside dropdown menus.
 </DropdownMenu.Root>
 ```
 
-### Component Structure
+### Item vs Field
 
-- `Item.Root`: Main container with `variant` and `size` props
-- `Item.Header`: Full-width top section
-- `Item.Media`: Left-side media container (icon, avatar, or image)
-- `Item.Content`: Main content area with title and description
-- `Item.Title`: Item title text
-- `Item.Description`: Item description text
-- `Item.Actions`: Right-side action buttons/icons
-- `Item.Footer`: Full-width bottom section
-- `Item.Group`: Container for multiple items
-- `Item.Separator`: Visual divider between grouped items
+Use Field for form inputs (checkbox, input, radio, select). Use Item for displaying content (title, description, actions).
 
 ### kbd
-Kbd component for displaying keyboard keys; use Kbd.Root for individual keys and Kbd.Group to combine multiple keys; integrates with Button, Tooltip, and InputGroup components.
+Kbd component displays keyboard input; supports grouping and nesting in buttons, tooltips, and input groups.
 
 ## Kbd Component
 
@@ -4755,9 +4540,9 @@ Displays textual user input from keyboard.
 npx shadcn-svelte@latest add kbd -y -o
 ```
 
-Use `-y` to skip confirmation prompt and `-o` to overwrite existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
-### Basic Usage
+### Usage
 
 ```svelte
 <script lang="ts">
@@ -4766,14 +4551,9 @@ Use `-y` to skip confirmation prompt and `-o` to overwrite existing files.
 <Kbd.Root>B</Kbd.Root>
 ```
 
-### Components
-
-- `Kbd.Root`: Individual keyboard key display
-- `Kbd.Group`: Groups multiple keyboard keys together
-
 ### Examples
 
-**Group keys together:**
+**Group**: Use `Kbd.Group` to group multiple keyboard keys together:
 ```svelte
 <Kbd.Group>
   <Kbd.Root>Ctrl</Kbd.Root>
@@ -4782,66 +4562,37 @@ Use `-y` to skip confirmation prompt and `-o` to overwrite existing files.
 </Kbd.Group>
 ```
 
-**Inside Button:**
+**Button**: Embed `Kbd.Root` inside a `Button` component:
 ```svelte
 <Button variant="outline" size="sm" class="pr-2">
-  Accept <Kbd.Root></Kbd.Root>
-</Button>
-<Button variant="outline" size="sm" class="pr-2">
-  Cancel <Kbd.Root>Esc</Kbd.Root>
+  Accept <Kbd.Root>Enter</Kbd.Root>
 </Button>
 ```
 
-**Inside Tooltip:**
+**Tooltip**: Use `Kbd.Root` inside `Tooltip.Content`:
 ```svelte
-<Tooltip.Root>
-  <Tooltip.Trigger>
-    {#snippet child({ props })}
-      <Button size="sm" variant="outline" {...props}>Save</Button>
-    {/snippet}
-  </Tooltip.Trigger>
-  <Tooltip.Content>
-    <div class="flex items-center gap-2">
-      Save Changes <Kbd.Root>S</Kbd.Root>
-    </div>
-  </Tooltip.Content>
-</Tooltip.Root>
-<Tooltip.Root>
-  <Tooltip.Trigger>
-    {#snippet child({ props })}
-      <Button size="sm" variant="outline" {...props}>Print</Button>
-    {/snippet}
-  </Tooltip.Trigger>
-  <Tooltip.Content>
-    <div class="flex items-center gap-2">
-      Print Document
-      <Kbd.Group>
-        <Kbd.Root>Ctrl</Kbd.Root>
-        <Kbd.Root>P</Kbd.Root>
-      </Kbd.Group>
-    </div>
-  </Tooltip.Content>
-</Tooltip.Root>
+<Tooltip.Content>
+  <div class="flex items-center gap-2">
+    Save Changes <Kbd.Root>S</Kbd.Root>
+  </div>
+</Tooltip.Content>
 ```
 
-**Inside InputGroup:**
+**Input Group**: Use `Kbd.Root` inside `InputGroup.Addon`:
 ```svelte
 <InputGroup.Root>
   <InputGroup.Input placeholder="Search..." />
-  <InputGroup.Addon>
-    <SearchIcon />
-  </InputGroup.Addon>
   <InputGroup.Addon align="inline-end">
-    <Kbd.Root></Kbd.Root>
+    <Kbd.Root>Ctrl</Kbd.Root>
     <Kbd.Root>K</Kbd.Root>
   </InputGroup.Addon>
 </InputGroup.Root>
 ```
 
 ### label
-Accessible label component with for attribute to associate with form controls; install with `npx shadcn-svelte@latest add label -y -o`
+Accessible label component; use `for` attribute to link to form control `id`
 
-## Label Component
+## Label
 
 Renders an accessible label associated with form controls.
 
@@ -4851,44 +4602,34 @@ Renders an accessible label associated with form controls.
 npx shadcn-svelte@latest add label -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Usage
 
-Import the Label component:
-
 ```svelte
 <script lang="ts">
   import { Label } from "$lib/components/ui/label/index.js";
-</script>
-
-<Label for="email">Your email address</Label>
-```
-
-### Example with Checkbox
-
-```svelte
-<script lang="ts">
   import { Checkbox } from "$lib/components/ui/checkbox/index.js";
-  import { Label } from "$lib/components/ui/label/index.js";
 </script>
 
 <div class="flex items-center space-x-2">
   <Checkbox id="terms" />
   <Label for="terms">Accept terms and conditions</Label>
 </div>
+
+<Label for="email">Your email address</Label>
 ```
 
-The `for` attribute associates the label with a form control by matching the control's `id`.
+The `for` attribute associates the label with a form control by its `id`.
 
-For full API reference and additional documentation, see the Bits UI Label documentation.
+See the Bits UI documentation for the full API reference.
 
 ### menubar
-Desktop menubar with File/Edit/View menus, submenus, checkboxes, radio groups, shortcuts, and separators.
+Desktop menubar with Root/Menu/Trigger/Content/Item/Shortcut/Separator/Sub/CheckboxItem/RadioGroup components; supports nested submenus, keyboard shortcuts, checkboxes, and radio selections.
 
 ## Menubar
 
-A persistent menu component common in desktop applications providing quick access to a consistent set of commands.
+A persistent menu component common in desktop applications providing quick access to commands.
 
 ### Installation
 
@@ -4896,7 +4637,7 @@ A persistent menu component common in desktop applications providing quick acces
 npx shadcn-svelte@latest add menubar -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+Use `-y` to skip confirmation and `-o` to overwrite existing files.
 
 ### Basic Usage
 
@@ -4909,40 +4650,41 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
   <Menubar.Menu>
     <Menubar.Trigger>File</Menubar.Trigger>
     <Menubar.Content>
-      <Menubar.Item>
-        New Tab
-        <Menubar.Shortcut>T</Menubar.Shortcut>
-      </Menubar.Item>
-      <Menubar.Item>New Window</Menubar.Item>
+      <Menubar.Item>New Tab <Menubar.Shortcut>T</Menubar.Shortcut></Menubar.Item>
+      <Menubar.Item>New Window <Menubar.Shortcut>N</Menubar.Shortcut></Menubar.Item>
       <Menubar.Separator />
-      <Menubar.Item>Share</Menubar.Item>
-      <Menubar.Separator />
-      <Menubar.Item>Print</Menubar.Item>
+      <Menubar.Sub>
+        <Menubar.SubTrigger>Share</Menubar.SubTrigger>
+        <Menubar.SubContent>
+          <Menubar.Item>Email link</Menubar.Item>
+          <Menubar.Item>Messages</Menubar.Item>
+        </Menubar.SubContent>
+      </Menubar.Sub>
     </Menubar.Content>
   </Menubar.Menu>
 </Menubar.Root>
 ```
 
-### Component Structure
+### Components
 
 - **Menubar.Root**: Container for all menus
 - **Menubar.Menu**: Individual menu group
 - **Menubar.Trigger**: Menu label/button
 - **Menubar.Content**: Menu dropdown container
-- **Menubar.Item**: Menu item
+- **Menubar.Item**: Menu item with optional `inset` prop for alignment
 - **Menubar.Shortcut**: Keyboard shortcut display
-- **Menubar.Separator**: Visual divider between items
+- **Menubar.Separator**: Visual divider
 - **Menubar.Sub / Menubar.SubTrigger / Menubar.SubContent**: Nested submenu
-- **Menubar.CheckboxItem**: Checkbox menu item with `bind:checked` binding
-- **Menubar.RadioGroup / Menubar.RadioItem**: Radio button group with `bind:value` binding
-- **Menubar.Item inset**: Item with inset styling (typically for secondary actions)
+- **Menubar.CheckboxItem**: Checkbox menu item with `bind:checked` for state
+- **Menubar.RadioGroup / Menubar.RadioItem**: Radio button group with `bind:value` for selection
 
 ### Advanced Example
 
 ```svelte
 <script lang="ts">
   let bookmarks = $state(false);
-  let profileValue = $state("benoit");
+  let fullUrls = $state(true);
+  let profileRadioValue = $state("benoit");
 </script>
 
 <Menubar.Root>
@@ -4952,56 +4694,32 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
       <Menubar.CheckboxItem bind:checked={bookmarks}>
         Always Show Bookmarks Bar
       </Menubar.CheckboxItem>
+      <Menubar.CheckboxItem bind:checked={fullUrls}>
+        Always Show Full URLs
+      </Menubar.CheckboxItem>
       <Menubar.Separator />
-      <Menubar.Item inset>
-        Reload <Menubar.Shortcut>R</Menubar.Shortcut>
-      </Menubar.Item>
+      <Menubar.Item inset>Reload <Menubar.Shortcut>R</Menubar.Shortcut></Menubar.Item>
     </Menubar.Content>
   </Menubar.Menu>
   <Menubar.Menu>
     <Menubar.Trigger>Profiles</Menubar.Trigger>
     <Menubar.Content>
-      <Menubar.RadioGroup bind:value={profileValue}>
+      <Menubar.RadioGroup bind:value={profileRadioValue}>
         <Menubar.RadioItem value="andy">Andy</Menubar.RadioItem>
         <Menubar.RadioItem value="benoit">Benoit</Menubar.RadioItem>
+        <Menubar.RadioItem value="luis">Luis</Menubar.RadioItem>
       </Menubar.RadioGroup>
-      <Menubar.Separator />
-      <Menubar.Item inset>Edit...</Menubar.Item>
-    </Menubar.Content>
-  </Menubar.Menu>
-  <Menubar.Menu>
-    <Menubar.Trigger>Edit</Menubar.Trigger>
-    <Menubar.Content>
-      <Menubar.Sub>
-        <Menubar.SubTrigger>Find</Menubar.SubTrigger>
-        <Menubar.SubContent>
-          <Menubar.Item>Search the web</Menubar.Item>
-          <Menubar.Separator />
-          <Menubar.Item>Find...</Menubar.Item>
-        </Menubar.SubContent>
-      </Menubar.Sub>
     </Menubar.Content>
   </Menubar.Menu>
 </Menubar.Root>
 ```
 
-### Features
-
-- Multiple independent menus in a single menubar
-- Nested submenus with SubTrigger and SubContent
-- Checkbox items with reactive state binding
-- Radio button groups with reactive value binding
-- Keyboard shortcuts display
-- Visual separators
-- Inset styling for secondary menu items
-- Full keyboard navigation support (via underlying Bits UI component)
-
 ### native-select
-Native HTML select wrapper with styling, grouping (OptGroup), disabled/invalid states, and full accessibility support.
+Native HTML select component with design system styling, option groups, disabled/invalid states, and accessibility features.
 
 ## Native Select
 
-A styled wrapper around the native HTML select element with consistent design system integration.
+A styled wrapper around the native HTML `<select>` element with design system integration.
 
 ### Installation
 
@@ -5009,7 +4727,7 @@ A styled wrapper around the native HTML select element with consistent design sy
 npx shadcn-svelte@latest add native-select -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+Use `-y` to skip confirmation and `-o` to overwrite existing files.
 
 ### Basic Usage
 
@@ -5023,12 +4741,13 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
   <NativeSelect.Option value="todo">Todo</NativeSelect.Option>
   <NativeSelect.Option value="in-progress">In Progress</NativeSelect.Option>
   <NativeSelect.Option value="done">Done</NativeSelect.Option>
+  <NativeSelect.Option value="cancelled">Cancelled</NativeSelect.Option>
 </NativeSelect.Root>
 ```
 
-### Grouped Options
+### Option Groups
 
-Use `NativeSelect.OptGroup` to organize related options:
+Organize options with `NativeSelect.OptGroup`:
 
 ```svelte
 <NativeSelect.Root>
@@ -5036,85 +4755,86 @@ Use `NativeSelect.OptGroup` to organize related options:
   <NativeSelect.OptGroup label="Engineering">
     <NativeSelect.Option value="frontend">Frontend</NativeSelect.Option>
     <NativeSelect.Option value="backend">Backend</NativeSelect.Option>
+    <NativeSelect.Option value="devops">DevOps</NativeSelect.Option>
   </NativeSelect.OptGroup>
   <NativeSelect.OptGroup label="Sales">
     <NativeSelect.Option value="sales-rep">Sales Rep</NativeSelect.Option>
+    <NativeSelect.Option value="account-manager">Account Manager</NativeSelect.Option>
+    <NativeSelect.Option value="sales-director">Sales Director</NativeSelect.Option>
   </NativeSelect.OptGroup>
 </NativeSelect.Root>
 ```
 
-### Disabled State
+### States
 
-Disable individual options or the entire select:
-
+**Disabled:**
 ```svelte
 <NativeSelect.Root disabled>
   <NativeSelect.Option value="">Select priority</NativeSelect.Option>
   <NativeSelect.Option value="low">Low</NativeSelect.Option>
+  <NativeSelect.Option value="medium">Medium</NativeSelect.Option>
   <NativeSelect.Option value="high">High</NativeSelect.Option>
 </NativeSelect.Root>
 ```
 
-Or disable specific options:
-
-```svelte
-<NativeSelect.Option value="grapes" disabled>Grapes</NativeSelect.Option>
-```
-
-### Invalid State
-
-Use `aria-invalid="true"` to show validation errors:
-
+**Invalid (with aria-invalid):**
 ```svelte
 <NativeSelect.Root aria-invalid="true">
   <NativeSelect.Option value="">Select role</NativeSelect.Option>
   <NativeSelect.Option value="admin">Admin</NativeSelect.Option>
   <NativeSelect.Option value="editor">Editor</NativeSelect.Option>
+  <NativeSelect.Option value="viewer">Viewer</NativeSelect.Option>
 </NativeSelect.Root>
+```
+
+**Individual option disabled:**
+```svelte
+<NativeSelect.Option value="grapes" disabled>Grapes</NativeSelect.Option>
 ```
 
 ### API Reference
 
-**NativeSelect.Root** - Main select component wrapping native HTML select
-- `class`: string - Custom CSS classes
-- All other props pass through to the underlying `<select>` element
+**NativeSelect.Root** - Main select wrapper
+- `class`: string (optional)
+- All other props passed to native `<select>`
 
-**NativeSelect.Option** - Individual option element
-- `value`: string - Option value
-- `disabled`: boolean (default: false) - Disable this option
-- `class`: string - Custom CSS classes
-- All other props pass through to the underlying `<option>` element
+**NativeSelect.Option** - Individual option
+- `value`: string (required)
+- `disabled`: boolean (default: false)
+- `class`: string (optional)
+- All other props passed to native `<option>`
 
-**NativeSelect.OptGroup** - Groups related options
-- `label`: string - Group label
-- `disabled`: boolean (default: false) - Disable entire group
-- `class`: string - Custom CSS classes
-- All other props pass through to the underlying `<optgroup>` element
-
-### When to Use
-
-Use `NativeSelect` for native browser behavior, better performance, and mobile-optimized dropdowns. Use the `Select` component instead when you need custom styling, animations, or complex interactions.
+**NativeSelect.OptGroup** - Option grouping
+- `label`: string (required)
+- `disabled`: boolean (default: false)
+- `class`: string (optional)
+- All other props passed to native `<optgroup>`
 
 ### Accessibility
 
-- Maintains all native HTML select accessibility features
-- Screen readers navigate through options using arrow keys
-- Chevron icon marked as `aria-hidden="true"` to avoid duplication
-- Use `aria-label` or `aria-labelledby` for additional context:
+- Maintains native HTML select accessibility
+- Screen readers navigate with arrow keys
+- Chevron icon marked `aria-hidden="true"`
+- Use `aria-label` or `aria-labelledby` for context:
 
 ```svelte
 <NativeSelect.Root aria-label="Choose your preferred language">
   <NativeSelect.Option value="en">English</NativeSelect.Option>
   <NativeSelect.Option value="es">Spanish</NativeSelect.Option>
+  <NativeSelect.Option value="fr">French</NativeSelect.Option>
 </NativeSelect.Root>
 ```
 
+### NativeSelect vs Select
+
+Use `NativeSelect` for native browser behavior, better performance, or mobile-optimized dropdowns. Use `Select` for custom styling, animations, or complex interactions.
+
 ### navigation-menu
-Navigation menu component with Root/List/Item/Trigger/Content/Link subcomponents; supports grid layouts, descriptions, icons, and snippet-based children; install with `npx shadcn-svelte@latest add navigation-menu -y -o`.
+Navigation menu component with triggers, dropdowns, and links; supports grid layouts, icons, and Tailwind styling.
 
 ## Navigation Menu
 
-A collection of links for navigating websites. Built on Bits UI with Tailwind CSS styling.
+A collection of links for navigating websites. Built on Bits UI.
 
 ### Installation
 
@@ -5122,7 +4842,7 @@ A collection of links for navigating websites. Built on Bits UI with Tailwind CS
 npx shadcn-svelte@latest add navigation-menu -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+Use `-y` to skip confirmation prompt and `-o` to overwrite existing files.
 
 ### Basic Usage
 
@@ -5131,43 +4851,68 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
   import * as NavigationMenu from "$lib/components/ui/navigation-menu/index.js";
 </script>
 
-<NavigationMenu.Root>
+<NavigationMenu.Root viewport={false}>
   <NavigationMenu.List>
     <NavigationMenu.Item>
       <NavigationMenu.Trigger>Item One</NavigationMenu.Trigger>
       <NavigationMenu.Content>
-        <NavigationMenu.Link>Link</NavigationMenu.Link>
+        <NavigationMenu.Link href="/">Link</NavigationMenu.Link>
       </NavigationMenu.Content>
     </NavigationMenu.Item>
   </NavigationMenu.List>
 </NavigationMenu.Root>
 ```
 
-### Component Structure
+### Components
 
-- `NavigationMenu.Root` - Container with optional `viewport={false}` prop
+- `NavigationMenu.Root` - Container with optional `viewport` prop
 - `NavigationMenu.List` - Wrapper for menu items
 - `NavigationMenu.Item` - Individual menu item
-- `NavigationMenu.Trigger` - Clickable trigger that opens content
+- `NavigationMenu.Trigger` - Clickable trigger text
 - `NavigationMenu.Content` - Dropdown content container
-- `NavigationMenu.Link` - Link element with snippet-based child content
+- `NavigationMenu.Link` - Link element with optional `href` prop and `child` snippet
 
-### Advanced Examples
+### Examples
 
-**Grid Layout with Descriptions:**
+**Grid layout with descriptions:**
+```svelte
+<NavigationMenu.Root viewport={false}>
+  <NavigationMenu.List>
+    <NavigationMenu.Item>
+      <NavigationMenu.Trigger>Components</NavigationMenu.Trigger>
+      <NavigationMenu.Content>
+        <ul class="grid w-[400px] gap-2 p-2 md:w-[500px] md:grid-cols-2">
+          <li>
+            <NavigationMenu.Link>
+              {#snippet child()}
+                <a href="/docs/components/alert-dialog" class="block p-3 rounded-md hover:bg-accent">
+                  <div class="font-medium">Alert Dialog</div>
+                  <p class="text-sm text-muted-foreground">A modal dialog that interrupts the user...</p>
+                </a>
+              {/snippet}
+            </NavigationMenu.Link>
+          </li>
+        </ul>
+      </NavigationMenu.Content>
+    </NavigationMenu.Item>
+  </NavigationMenu.List>
+</NavigationMenu.Root>
+```
+
+**With icons:**
 ```svelte
 <NavigationMenu.Item>
-  <NavigationMenu.Trigger>Components</NavigationMenu.Trigger>
+  <NavigationMenu.Trigger>With Icon</NavigationMenu.Trigger>
   <NavigationMenu.Content>
-    <ul class="grid w-[400px] gap-2 p-2 md:w-[500px] md:grid-cols-2">
+    <ul class="grid w-[200px] gap-4 p-2">
       <li>
-        <NavigationMenu.Link>
-          {#snippet child()}
-            <a href="/docs/components/alert-dialog" class="block p-3 rounded-md hover:bg-accent">
-              <div class="text-sm font-medium">Alert Dialog</div>
-              <p class="text-muted-foreground text-sm">A modal dialog that interrupts the user with important content.</p>
-            </a>
-          {/snippet}
+        <NavigationMenu.Link href="##" class="flex-row items-center gap-2">
+          <CircleHelpIcon />
+          Backlog
+        </NavigationMenu.Link>
+        <NavigationMenu.Link href="##" class="flex-row items-center gap-2">
+          <CircleCheckIcon />
+          Done
         </NavigationMenu.Link>
       </li>
     </ul>
@@ -5175,49 +4920,25 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </NavigationMenu.Item>
 ```
 
-**Featured Item with Grid:**
+**Simple list:**
 ```svelte
-<ul class="grid gap-2 p-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-  <li class="row-span-3">
-    <NavigationMenu.Link class="bg-linear-to-b from-muted/50 to-muted flex h-full flex-col justify-end rounded-md p-6">
-      {#snippet child({ props })}
-        <a {...props} href="/">
-          <div class="text-lg font-medium">shadcn-svelte</div>
-          <p class="text-muted-foreground text-sm">Beautifully designed components built with Tailwind CSS.</p>
-        </a>
-      {/snippet}
-    </NavigationMenu.Link>
-  </li>
-</ul>
+<NavigationMenu.Item>
+  <NavigationMenu.Trigger>Simple</NavigationMenu.Trigger>
+  <NavigationMenu.Content>
+    <ul class="grid w-[200px] gap-4 p-2">
+      <li>
+        <NavigationMenu.Link href="##">Components</NavigationMenu.Link>
+        <NavigationMenu.Link href="##">Documentation</NavigationMenu.Link>
+      </li>
+    </ul>
+  </NavigationMenu.Content>
+</NavigationMenu.Item>
 ```
 
-**With Icons:**
-```svelte
-<NavigationMenu.Link href="##" class="flex-row items-center gap-2">
-  <CircleCheckIcon />
-  Done
-</NavigationMenu.Link>
-```
-
-### Styling
-
-- Use `navigationMenuTriggerStyle()` utility for consistent trigger styling
-- Use `cn()` utility to combine classes
-- Supports Tailwind CSS classes for customization (hover states, colors, spacing, etc.)
-- Supports snippet-based child content for flexible rendering
-
-### Key Props
-
-- `NavigationMenu.Root`: `viewport` - boolean to control viewport behavior
-- `NavigationMenu.Link`: `href` - link destination, `class` - custom styling
-- All components support standard HTML attributes and Svelte event handlers
-
-### Related Documentation
-
-See Bits UI documentation for full API reference and additional configuration options.
+Use `navigationMenuTriggerStyle()` utility for consistent trigger styling. Use `cn()` utility to combine classes. Customize with Tailwind CSS classes on any component.
 
 ### pagination
-Pagination component with page navigation, prev/next buttons, and ellipsis; configure via count, perPage, siblingCount props; render pages with Pagination.Link and highlight active page.
+Pagination component with configurable page count, items per page, and sibling count; renders page links, prev/next buttons, and ellipsis for skipped pages.
 
 ## Pagination Component
 
@@ -5229,11 +4950,9 @@ A UI component for navigating through paginated content with page numbers, previ
 npx shadcn-svelte@latest add pagination -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Basic Usage
-
-Import and use the Pagination component:
 
 ```svelte
 <script lang="ts">
@@ -5267,32 +4986,29 @@ Import and use the Pagination component:
 </Pagination.Root>
 ```
 
-### Component Structure
+### Configuration
 
-- **Pagination.Root**: Container that accepts `count` (total items), `perPage` (items per page), and optional `siblingCount` (page numbers shown around current page)
-- **Pagination.Content**: Wrapper for pagination items
-- **Pagination.Item**: Individual pagination element container
-- **Pagination.Link**: Clickable page number link with `isActive` prop to highlight current page
-- **Pagination.PrevButton**: Previous page button
-- **Pagination.NextButton**: Next page button
-- **Pagination.Ellipsis**: Ellipsis indicator for skipped pages
+- `count`: Total number of items to paginate
+- `perPage`: Items per page
+- `siblingCount`: Number of page links to show on either side of the current page (useful for responsive design)
 
-### Advanced Example with Responsive Behavior
+### Responsive Example
+
+Use `MediaQuery` to adjust pagination behavior on different screen sizes:
 
 ```svelte
 <script lang="ts">
+  import { MediaQuery } from "svelte/reactivity";
   import ChevronLeftIcon from "@lucide/svelte/icons/chevron-left";
   import ChevronRightIcon from "@lucide/svelte/icons/chevron-right";
-  import { MediaQuery } from "svelte/reactivity";
   import * as Pagination from "$lib/components/ui/pagination/index.js";
   
   const isDesktop = new MediaQuery("(min-width: 768px)");
-  const count = 20;
   const perPage = $derived(isDesktop.current ? 3 : 8);
   const siblingCount = $derived(isDesktop.current ? 1 : 0);
 </script>
 
-<Pagination.Root {count} {perPage} {siblingCount}>
+<Pagination.Root count={20} {perPage} {siblingCount}>
   {#snippet children({ pages, currentPage })}
     <Pagination.Content>
       <Pagination.Item>
@@ -5325,14 +5041,32 @@ Import and use the Pagination component:
 </Pagination.Root>
 ```
 
-This example shows responsive pagination that adjusts `perPage` and `siblingCount` based on screen size, and adds icons and conditional text labels to navigation buttons.
+### Components
+
+- `Pagination.Root`: Container with `count`, `perPage`, and `siblingCount` props
+- `Pagination.Content`: Wrapper for pagination items
+- `Pagination.Item`: Individual pagination element wrapper
+- `Pagination.Link`: Clickable page number with `page` and `isActive` props
+- `Pagination.PrevButton`: Previous page button
+- `Pagination.NextButton`: Next page button
+- `Pagination.Ellipsis`: Ellipsis indicator for skipped pages
+
+The snippet receives `pages` (array of page objects with `type`, `key`, and `value` properties) and `currentPage` (current page number).
 
 ### popover
-Portal component displaying rich content triggered by button; compose with Root, Trigger, and Content subcomponents.
+Popover component with Root, Trigger, and Content subcomponents; displays portal content on button click.
 
 ## Popover
 
 A component that displays rich content in a portal, triggered by a button.
+
+### Installation
+
+```bash
+npx shadcn-svelte@latest add popover -y -o
+```
+
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Basic Usage
 
@@ -5347,15 +5081,7 @@ A component that displays rich content in a portal, triggered by a button.
 </Popover.Root>
 ```
 
-### Installation
-
-```bash
-npx shadcn-svelte@latest add popover -y -o
-```
-
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
-
-### Complete Example
+### Example with Form Controls
 
 ```svelte
 <script lang="ts">
@@ -5400,16 +5126,16 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </Popover.Root>
 ```
 
-### API Reference
+### API
 
-See the Bits UI documentation for the complete API reference.
+Refer to the Bits UI Popover documentation for complete API reference and additional configuration options.
 
 ### progress
-Progress bar component with reactive value binding, max prop, and class styling support.
+Progress bar component with value and max props; install via CLI with -y -o flags
 
-## Progress Component
+## Progress
 
-Displays a visual indicator showing task completion progress, typically as a progress bar.
+Displays a progress bar indicator showing task completion.
 
 ### Installation
 
@@ -5419,17 +5145,7 @@ npx shadcn-svelte@latest add progress -y -o
 
 The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
-### Basic Usage
-
-```svelte
-<script lang="ts">
-  import { Progress } from "$lib/components/ui/progress/index.js";
-</script>
-
-<Progress value={33} />
-```
-
-### With Dynamic Value
+### Usage
 
 ```svelte
 <script lang="ts">
@@ -5447,20 +5163,19 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 <Progress {value} max={100} class="w-[60%]" />
 ```
 
-### Props
-
-- `value`: Current progress value (number)
-- `max`: Maximum value (default: 100)
+The component accepts:
+- `value`: current progress value (number)
+- `max`: maximum value (default: 100)
 - `class`: CSS classes for styling
 
-The component is built on Bits UI's progress component (see Bits UI docs for full API reference).
+Reference: Bits UI Progress component documentation and API reference available in upstream docs.
 
 ### radio-group
-Mutually exclusive radio button component; install with `npx shadcn-svelte@latest add radio-group -y -o`; use `RadioGroup.Root` with `RadioGroup.Item` elements; bind to form data with `bind:value`; integrates with sveltekit-superforms for validation.
+Radio button group component for single-selection from multiple options; install with -y -o flags; use RadioGroup.Root/Item with Label; integrates with sveltekit-superforms for form validation.
 
 ## Radio Group
 
-A set of mutually exclusive radio buttons where only one button can be checked at a time.
+Mutually exclusive selection component where only one option can be selected at a time.
 
 ### Installation
 
@@ -5468,16 +5183,14 @@ A set of mutually exclusive radio buttons where only one button can be checked a
 npx shadcn-svelte@latest add radio-group -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+Use `-y` to skip confirmation prompt and `-o` to overwrite existing files.
 
 ### Basic Usage
 
-Import the RadioGroup components and Label:
-
 ```svelte
 <script lang="ts">
-  import { Label } from "$lib/components/ui/label/index.js";
   import * as RadioGroup from "$lib/components/ui/radio-group/index.js";
+  import { Label } from "$lib/components/ui/label/index.js";
 </script>
 
 <RadioGroup.Root value="option-one">
@@ -5492,11 +5205,9 @@ Import the RadioGroup components and Label:
 </RadioGroup.Root>
 ```
 
-The `RadioGroup.Root` component wraps the radio buttons and manages the selected value. Each `RadioGroup.Item` represents a single radio button option with a corresponding label.
-
 ### Form Integration
 
-RadioGroup integrates with sveltekit-superforms for form handling:
+Use with sveltekit-superforms for form handling:
 
 ```svelte
 <script lang="ts" module>
@@ -5512,7 +5223,7 @@ RadioGroup integrates with sveltekit-superforms for form handling:
   import { toast } from "svelte-sonner";
   import * as Form from "$lib/components/ui/form/index.js";
   import * as RadioGroup from "$lib/components/ui/radio-group/index.js";
-
+  
   const form = superForm(defaults(zod4(formSchema)), {
     validators: zod4(formSchema),
     SPA: true,
@@ -5530,11 +5241,7 @@ RadioGroup integrates with sveltekit-superforms for form handling:
 <form method="POST" class="w-2/3 space-y-6" use:enhance>
   <Form.Fieldset {form} name="type" class="space-y-3">
     <Form.Legend>Notify me about...</Form.Legend>
-    <RadioGroup.Root
-      bind:value={$formData.type}
-      class="flex flex-col space-y-1"
-      name="type"
-    >
+    <RadioGroup.Root bind:value={$formData.type} class="flex flex-col space-y-1" name="type">
       <div class="flex items-center space-x-3 space-y-0">
         <Form.Control>
           {#snippet children({ props })}
@@ -5566,14 +5273,21 @@ RadioGroup integrates with sveltekit-superforms for form handling:
 </form>
 ```
 
-Bind the RadioGroup value to form data using `bind:value={$formData.fieldName}`. Wrap items with `Form.Control` and `Form.Label` for proper form integration. Use `Form.FieldErrors` to display validation errors.
+### API
+
+- `RadioGroup.Root`: Container component with `value` prop for controlled selection
+- `RadioGroup.Item`: Individual radio button with `value` and `id` props
+- Bind to form data with `bind:value={$formData.fieldName}`
+- Integrate with Form component for validation and error handling
 
 ### range-calendar
-Date range picker component built on Bits UI, uses @internationalized/date for date handling, bind value object with start/end properties.
+Date range picker calendar component built on Bits UI, uses @internationalized/date, binds {start, end} value object.
 
 ## Range Calendar
 
 A calendar component for selecting a date range.
+
+Built on Bits UI's Range Calendar component using the @internationalized/date package for date handling.
 
 ### Basic Usage
 
@@ -5581,6 +5295,7 @@ A calendar component for selecting a date range.
 <script lang="ts">
   import { getLocalTimeZone, today } from "@internationalized/date";
   import { RangeCalendar } from "$lib/components/ui/range-calendar/index.js";
+  
   const start = today(getLocalTimeZone());
   const end = start.add({ days: 7 });
   let value = $state({
@@ -5588,15 +5303,11 @@ A calendar component for selecting a date range.
     end
   });
 </script>
+
 <RangeCalendar bind:value class="rounded-md border" />
 ```
 
-### Implementation Details
-
-- Built on top of Bits Range Calendar component
-- Uses `@internationalized/date` package for date handling
-- Accepts `value` object with `start` and `end` date properties
-- Supports standard HTML class binding for styling
+The component accepts a `value` object with `start` and `end` date properties and supports standard HTML class binding for styling.
 
 ### Installation
 
@@ -5604,15 +5315,14 @@ A calendar component for selecting a date range.
 npx shadcn-svelte@latest add range-calendar -y -o
 ```
 
-Use `-y` to skip confirmation prompt and `-o` to overwrite existing files.
+Use `-y` to skip confirmation and `-o` to overwrite existing files.
 
 ### Related Resources
 
-- Bits UI Range Calendar documentation and API reference available
-- 30+ Calendar Blocks available showcasing the component in action
+30+ Calendar Blocks are available showcasing the component in action.
 
 ### resizable
-Resizable panel groups with horizontal/vertical directions, defaultSize prop, withHandle indicator, and nested layout support.
+Resizable panel component with horizontal/vertical direction, defaultSize percentages, nested pane support, and optional handle indicators.
 
 ## Resizable
 
@@ -5624,11 +5334,9 @@ Accessible resizable panel groups and layouts with keyboard support, built on Pa
 npx shadcn-svelte@latest add resizable -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Basic Usage
-
-Import and use the Resizable components:
 
 ```svelte
 <script lang="ts">
@@ -5642,14 +5350,15 @@ Import and use the Resizable components:
 </Resizable.PaneGroup>
 ```
 
-### Components
+### Key Components
 
-- **PaneGroup**: Container for resizable panes with `direction` prop ("horizontal" or "vertical")
+- **PaneGroup**: Container with `direction` prop (`"horizontal"` or `"vertical"`)
 - **Pane**: Individual resizable panel with optional `defaultSize` prop (percentage)
-- **Handle**: Divider between panes, can show visual indicator with `withHandle` prop
+- **Handle**: Divider between panes, accepts `withHandle` prop to show/hide visual indicator
 
-### Vertical Layout
+### Examples
 
+**Vertical layout:**
 ```svelte
 <Resizable.PaneGroup direction="vertical" class="min-h-[200px] max-w-md rounded-lg border">
   <Resizable.Pane defaultSize={25}>
@@ -5666,19 +5375,16 @@ Import and use the Resizable components:
 </Resizable.PaneGroup>
 ```
 
-### Nested Layouts
-
-Combine horizontal and vertical pane groups:
-
+**Nested panes with visible handle:**
 ```svelte
-<Resizable.PaneGroup direction="horizontal" class="max-w-md rounded-lg border">
-  <Resizable.Pane defaultSize={50}>
-    <div class="flex h-[200px] items-center justify-center p-6">
-      <span class="font-semibold">One</span>
+<Resizable.PaneGroup direction="horizontal" class="min-h-[200px] max-w-md rounded-lg border">
+  <Resizable.Pane defaultSize={25}>
+    <div class="flex h-full items-center justify-center p-6">
+      <span class="font-semibold">Sidebar</span>
     </div>
   </Resizable.Pane>
-  <Resizable.Handle />
-  <Resizable.Pane defaultSize={50}>
+  <Resizable.Handle withHandle />
+  <Resizable.Pane defaultSize={75}>
     <Resizable.PaneGroup direction="vertical">
       <Resizable.Pane defaultSize={25}>
         <div class="flex h-full items-center justify-center p-6">
@@ -5696,30 +5402,10 @@ Combine horizontal and vertical pane groups:
 </Resizable.PaneGroup>
 ```
 
-### Handle Visibility
-
-Use `withHandle` prop on Handle to display a visual indicator:
-
-```svelte
-<Resizable.PaneGroup direction="horizontal" class="min-h-[200px] max-w-md rounded-lg border">
-  <Resizable.Pane defaultSize={25}>
-    <div class="flex h-full items-center justify-center p-6">
-      <span class="font-semibold">Sidebar</span>
-    </div>
-  </Resizable.Pane>
-  <Resizable.Handle withHandle />
-  <Resizable.Pane defaultSize={75}>
-    <div class="flex h-full items-center justify-center p-6">
-      <span class="font-semibold">Content</span>
-    </div>
-  </Resizable.Pane>
-</Resizable.PaneGroup>
-```
-
-For all available props and features, see the PaneForge documentation.
+For all available props and advanced features, see PaneForge documentation.
 
 ### scroll-area
-ScrollArea component for custom cross-browser scrollable containers with vertical, horizontal, or bidirectional scrolling via orientation prop.
+Custom-styled scroll area component with configurable orientation (vertical/horizontal/both) via prop.
 
 ## Scroll Area
 
@@ -5731,7 +5417,7 @@ Augments native scroll functionality for custom, cross-browser styling.
 npx shadcn-svelte@latest add scroll-area -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+Use `-y` to skip confirmation prompt and `-o` to overwrite existing files.
 
 ### Basic Usage
 
@@ -5741,34 +5427,30 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </script>
 
 <ScrollArea class="h-[200px] w-[350px] rounded-md border p-4">
-  Content that exceeds the container dimensions will be scrollable.
+  Content that overflows the container will be scrollable.
 </ScrollArea>
 ```
 
-### Horizontal Scrolling
+### Orientation Prop
 
-Set `orientation="horizontal"` to enable horizontal scrolling:
+Control scrolling direction with the `orientation` prop:
 
+- `"vertical"` (default): Vertical scrolling only
+- `"horizontal"`: Horizontal scrolling only
+- `"both"`: Both horizontal and vertical scrolling
+
+**Horizontal example:**
 ```svelte
-<script lang="ts">
-  import { ScrollArea } from "$lib/components/ui/scroll-area/index.js";
-</script>
-
-<ScrollArea class="w-96 whitespace-nowrap rounded-md border" orientation="horizontal">
+<ScrollArea class="w-96 rounded-md border" orientation="horizontal">
   <div class="flex w-max space-x-4 p-4">
     {#each items as item}
-      <div class="shrink-0">
-        {item}
-      </div>
+      <div class="shrink-0">{item}</div>
     {/each}
   </div>
 </ScrollArea>
 ```
 
-### Horizontal and Vertical Scrolling
-
-Set `orientation="both"` to enable scrolling in both directions:
-
+**Both directions example:**
 ```svelte
 <ScrollArea class="h-[200px] w-[350px] rounded-md border p-4" orientation="both">
   <div class="w-[400px]">
@@ -5777,15 +5459,12 @@ Set `orientation="both"` to enable scrolling in both directions:
 </ScrollArea>
 ```
 
-### Props
+### Styling
 
-- `orientation`: Controls scroll direction - `"vertical"` (default), `"horizontal"`, or `"both"`
-- `class`: Tailwind classes for styling (dimensions, borders, padding, etc.)
-
-The component wraps native scroll functionality with custom styling capabilities that work consistently across browsers.
+Apply Tailwind classes directly to the ScrollArea component for sizing and appearance (e.g., `h-72`, `w-48`, `rounded-md`, `border`).
 
 ### select
-Dropdown select component with single selection, dynamic options, grouping, and form integration via sveltekit-superforms.
+Dropdown select component with single selection, grouping, state binding, and form integration support.
 
 ## Select Component
 
@@ -5797,7 +5476,7 @@ Displays a dropdown list of options for users to pick from, triggered by a butto
 npx shadcn-svelte@latest add select -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Basic Usage
 
@@ -5816,16 +5495,7 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </Select.Root>
 ```
 
-### Key Components
-
-- `Select.Root`: Container with `type="single"` for single selection, accepts `name` and `bind:value` for form binding
-- `Select.Trigger`: Button that opens the dropdown
-- `Select.Content`: Container for dropdown items
-- `Select.Group`: Groups related items
-- `Select.Label`: Labels for item groups
-- `Select.Item`: Individual selectable item with `value`, `label`, and optional `disabled` props
-
-### Dynamic Options Example
+### With State Management
 
 ```svelte
 <script lang="ts">
@@ -5846,9 +5516,7 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </script>
 
 <Select.Root type="single" name="favoriteFruit" bind:value>
-  <Select.Trigger class="w-[180px]">
-    {triggerContent}
-  </Select.Trigger>
+  <Select.Trigger class="w-[180px]">{triggerContent}</Select.Trigger>
   <Select.Content>
     <Select.Group>
       <Select.Label>Fruits</Select.Label>
@@ -5867,8 +5535,6 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 ```
 
 ### Form Integration
-
-Integrate with sveltekit-superforms and Zod validation:
 
 ```svelte
 <script lang="ts" module>
@@ -5896,7 +5562,6 @@ Integrate with sveltekit-superforms and Zod validation:
       }
     }
   });
-  
   const { form: formData, enhance } = form;
 </script>
 
@@ -5905,13 +5570,9 @@ Integrate with sveltekit-superforms and Zod validation:
     <Form.Control>
       {#snippet children({ props })}
         <Form.Label>Email</Form.Label>
-        <Select.Root
-          type="single"
-          bind:value={$formData.email}
-          name={props.name}
-        >
+        <Select.Root type="single" bind:value={$formData.email} name={props.name}>
           <Select.Trigger {...props}>
-            {$formData.email ?? "Select a verified email to display"}
+            {$formData.email ? $formData.email : "Select a verified email to display"}
           </Select.Trigger>
           <Select.Content>
             <Select.Item value="m@example.com" label="m@example.com" />
@@ -5922,7 +5583,7 @@ Integrate with sveltekit-superforms and Zod validation:
       {/snippet}
     </Form.Control>
     <Form.Description>
-      You can manage email addresses in your email settings.
+      You can manage email address in your email settings.
     </Form.Description>
     <Form.FieldErrors />
   </Form.Field>
@@ -5930,10 +5591,18 @@ Integrate with sveltekit-superforms and Zod validation:
 </form>
 ```
 
-Reference the Bits UI documentation for full API reference and additional options.
+### Key Features
+
+- **Root component**: `Select.Root` with `type="single"` for single selection
+- **Trigger**: `Select.Trigger` displays the selected value
+- **Content**: `Select.Content` wraps the dropdown options
+- **Items**: `Select.Item` with `value`, `label`, and optional `disabled` props
+- **Grouping**: `Select.Group` and `Select.Label` for organizing items
+- **Binding**: Use `bind:value` to connect to reactive state
+- **Form integration**: Works with sveltekit-superforms for validation and submission
 
 ### separator
-Separator component for horizontal/vertical content division; supports orientation prop and custom styling via class.
+Separator component with horizontal/vertical orientation support; install via shadcn-svelte CLI.
 
 ## Separator
 
@@ -5949,29 +5618,19 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Usage
 
-Import and use the Separator component:
-
 ```svelte
 <script lang="ts">
   import { Separator } from "$lib/components/ui/separator/index.js";
 </script>
 
-<Separator />
-```
-
-### Examples
-
-**Horizontal separator with text content:**
-```svelte
+<!-- Horizontal separator (default) -->
 <div class="space-y-1">
   <h4 class="text-sm font-medium leading-none">Bits UI Primitives</h4>
   <p class="text-muted-foreground text-sm">An open-source UI component library.</p>
 </div>
 <Separator class="my-4" />
-```
 
-**Vertical separators between inline items:**
-```svelte
+<!-- Vertical separator -->
 <div class="flex h-5 items-center space-x-4 text-sm">
   <div>Blog</div>
   <Separator orientation="vertical" />
@@ -5984,27 +5643,23 @@ Import and use the Separator component:
 The component supports an `orientation` prop that accepts `"vertical"` for vertical separators (default is horizontal). Custom styling can be applied via the `class` prop.
 
 ### sheet
-Sheet component extends Dialog to display complementary content sliding from screen edges (top/right/bottom/left); configure with side prop and size via CSS classes.
+Dialog-based sheet component with configurable side positioning (top/right/bottom/left) and CSS-customizable sizing.
 
-## Sheet Component
+## Sheet
 
 A dialog-based component that displays complementary content sliding in from screen edges.
 
-### Installation
-
+**Installation:**
 ```bash
 npx shadcn-svelte@latest add sheet -y -o
 ```
+(-y: skip confirmation, -o: overwrite existing files)
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
-
-### Basic Usage
-
+**Basic usage:**
 ```svelte
 <script lang="ts">
   import * as Sheet from "$lib/components/ui/sheet/index.js";
 </script>
-
 <Sheet.Root>
   <Sheet.Trigger>Open</Sheet.Trigger>
   <Sheet.Content>
@@ -6016,87 +5671,47 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </Sheet.Root>
 ```
 
-### Structure
+**Side positioning:** Pass `side` prop to `<Sheet.Content />` with values: `top`, `right`, `bottom`, or `left`.
 
-- `Sheet.Root` - Container
-- `Sheet.Trigger` - Button to open the sheet
-- `Sheet.Content` - Main content area
-- `Sheet.Header` - Header section
-- `Sheet.Title` - Title text
-- `Sheet.Description` - Description text
-- `Sheet.Footer` - Footer section (optional)
-- `Sheet.Close` - Close button
-
-### Side Property
-
-Control which edge the sheet slides from using the `side` prop on `Sheet.Content`:
-
-```svelte
-<Sheet.Content side="right">
-  <!-- content -->
-</Sheet.Content>
-```
-
-Valid values: `top`, `right`, `bottom`, `left`
-
-### Sizing
-
-Adjust sheet width using CSS classes on `Sheet.Content`:
-
+**Size customization:** Use CSS classes on `<Sheet.Content />`:
 ```svelte
 <Sheet.Content class="w-[400px] sm:w-[540px]">
-  <!-- content -->
-</Sheet.Content>
 ```
 
-### Complete Example
-
+**Complete example with form:**
 ```svelte
-<script lang="ts">
-  import * as Sheet from "$lib/components/ui/sheet/index.js";
-  import { buttonVariants } from "$lib/components/ui/button/index.js";
-  import { Input } from "$lib/components/ui/input/index.js";
-  import { Label } from "$lib/components/ui/label/index.js";
-</script>
-
 <Sheet.Root>
-  <Sheet.Trigger class={buttonVariants({ variant: "outline" })}>
-    Open
-  </Sheet.Trigger>
+  <Sheet.Trigger class={buttonVariants({ variant: "outline" })}>Open</Sheet.Trigger>
   <Sheet.Content side="right">
     <Sheet.Header>
       <Sheet.Title>Edit profile</Sheet.Title>
-      <Sheet.Description>
-        Make changes to your profile here. Click save when you're done.
-      </Sheet.Description>
+      <Sheet.Description>Make changes to your profile here.</Sheet.Description>
     </Sheet.Header>
     <div class="grid flex-1 auto-rows-min gap-6 px-4">
       <div class="grid gap-3">
-        <Label for="name" class="text-right">Name</Label>
+        <Label for="name">Name</Label>
         <Input id="name" value="Pedro Duarte" />
       </div>
       <div class="grid gap-3">
-        <Label for="username" class="text-right">Username</Label>
+        <Label for="username">Username</Label>
         <Input id="username" value="@peduarte" />
       </div>
     </div>
     <Sheet.Footer>
-      <Sheet.Close class={buttonVariants({ variant: "outline" })}>
-        Save changes
-      </Sheet.Close>
+      <Sheet.Close class={buttonVariants({ variant: "outline" })}>Save changes</Sheet.Close>
     </Sheet.Footer>
   </Sheet.Content>
 </Sheet.Root>
 ```
 
-Extends the Dialog component from bits-ui. See bits-ui Dialog documentation for full API reference.
+Extends Dialog component. See bits-ui Dialog docs for full API reference.
 
 ### sidebar
-Composable sidebar component with collapse-to-icons, multiple variants (sidebar/floating/inset), collapsible modes (offcanvas/icon/none), menu system, header/footer, groups, badges, skeletons, separators, and theming via CSS variables.
+Composable sidebar component with Provider/Root/Header/Content/Group/Menu/Footer/Trigger subcomponents; supports left/right, sidebar/floating/inset variants, offcanvas/icon/none collapse modes; useSidebar() hook for state control; theming via CSS variables; integrates with Collapsible and DropdownMenu.
 
 ## Sidebar Component
 
-A composable, themeable, and customizable sidebar component that collapses to icons. Sidebars are complex with many moving parts; this component provides a solid foundation built from 30+ configurations.
+A composable, themeable, customizable sidebar component that collapses to icons. Built from 30+ configurations extracted into reusable `sidebar-*.svelte` files.
 
 ### Installation
 
@@ -6132,7 +5747,7 @@ Add CSS variables to `src/app.css`:
 
 - `Sidebar.Provider` - Handles collapsible state
 - `Sidebar.Root` - Sidebar container
-- `Sidebar.Header` / `Sidebar.Footer` - Sticky at top/bottom
+- `Sidebar.Header` / `Sidebar.Footer` - Sticky top/bottom
 - `Sidebar.Content` - Scrollable content
 - `Sidebar.Group` - Section within content
 - `Sidebar.Trigger` - Toggle button
@@ -6176,10 +5791,16 @@ Add CSS variables to `src/app.css`:
   import * as Sidebar from "$lib/components/ui/sidebar/index.js";
   import HouseIcon from "@lucide/svelte/icons/house";
   import InboxIcon from "@lucide/svelte/icons/inbox";
+  import CalendarIcon from "@lucide/svelte/icons/calendar";
+  import SearchIcon from "@lucide/svelte/icons/search";
+  import SettingsIcon from "@lucide/svelte/icons/settings";
   
   const items = [
     { title: "Home", url: "#", icon: HouseIcon },
     { title: "Inbox", url: "#", icon: InboxIcon },
+    { title: "Calendar", url: "#", icon: CalendarIcon },
+    { title: "Search", url: "#", icon: SearchIcon },
+    { title: "Settings", url: "#", icon: SettingsIcon },
   ];
 </script>
 <Sidebar.Root>
@@ -6209,15 +5830,19 @@ Add CSS variables to `src/app.css`:
 
 ### Sidebar.Provider
 
-Provides sidebar context. Wrap your application in it.
+Provides sidebar context. Wrap application in this component.
 
 **Props:**
-- `open` (boolean, bindable) - Open state
-- `onOpenChange` ((open: boolean) => void) - Callback fired after state changes
+- `open: boolean` - Open state (bindable)
+- `onOpenChange: (open: boolean) => void` - Callback on state change
 
 **Width Configuration:**
 
-Use `SIDEBAR_WIDTH` and `SIDEBAR_WIDTH_MOBILE` constants in `src/lib/components/ui/sidebar/constants.ts` (default: `16rem` and `18rem`).
+Default constants in `src/lib/components/ui/sidebar/constants.ts`:
+```ts
+export const SIDEBAR_WIDTH = "16rem";
+export const SIDEBAR_WIDTH_MOBILE = "18rem";
+```
 
 For multiple sidebars, use CSS variables:
 ```svelte
@@ -6228,16 +5853,19 @@ For multiple sidebars, use CSS variables:
 
 **Keyboard Shortcut:**
 
-Change `SIDEBAR_KEYBOARD_SHORTCUT` in constants file (default: `"b"` for cmd+b on Mac, ctrl+b on Windows).
+Default: `cmd+b` (Mac) / `ctrl+b` (Windows). Change in constants:
+```ts
+export const SIDEBAR_KEYBOARD_SHORTCUT = "b";
+```
 
 ### Sidebar.Root
 
 Main sidebar component.
 
 **Props:**
-- `side` - `"left"` or `"right"` (default: left)
-- `variant` - `"sidebar"`, `"floating"`, or `"inset"`
-- `collapsible` - `"offcanvas"`, `"icon"`, or `"none"`
+- `side: "left" | "right"` - Sidebar position
+- `variant: "sidebar" | "floating" | "inset"` - Visual variant
+- `collapsible: "offcanvas" | "icon" | "none"` - Collapse behavior
 
 For `inset` variant, wrap main content in `Sidebar.Inset`:
 ```svelte
@@ -6252,25 +5880,24 @@ For `inset` variant, wrap main content in `Sidebar.Inset`:
 
 ### useSidebar Hook
 
-Access sidebar context (cannot be destructured, must be called during component lifecycle):
-
+Access sidebar context (cannot be destructured):
 ```svelte
 <script lang="ts">
   import { useSidebar } from "$lib/components/ui/sidebar/index.js";
   const sidebar = useSidebar();
-  sidebar.state; // "expanded" or "collapsed"
-  sidebar.open; // boolean
-  sidebar.setOpen(boolean);
-  sidebar.openMobile; // boolean on mobile
-  sidebar.setOpenMobile(boolean);
-  sidebar.isMobile; // boolean
-  sidebar.toggle(); // toggle desktop and mobile
+  sidebar.state;        // "expanded" | "collapsed"
+  sidebar.open;         // boolean
+  sidebar.setOpen(bool);
+  sidebar.openMobile;   // boolean
+  sidebar.setOpenMobile(bool);
+  sidebar.isMobile;     // boolean
+  sidebar.toggle();     // toggle desktop and mobile
 </script>
 ```
 
-### Sidebar.Header / Sidebar.Footer
+### Sidebar.Header & Sidebar.Footer
 
-Sticky header and footer. Example with dropdown menu:
+Sticky header/footer components. Example with dropdown menu:
 
 ```svelte
 <Sidebar.Header>
@@ -6287,6 +5914,7 @@ Sticky header and footer. Example with dropdown menu:
         </DropdownMenu.Trigger>
         <DropdownMenu.Content class="w-(--bits-dropdown-menu-anchor-width)">
           <DropdownMenu.Item><span>Acme Inc</span></DropdownMenu.Item>
+          <DropdownMenu.Item><span>Acme Corp.</span></DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu.Root>
     </Sidebar.MenuItem>
@@ -6296,11 +5924,20 @@ Sticky header and footer. Example with dropdown menu:
 
 ### Sidebar.Content
 
-Scrollable container for `Sidebar.Group` components.
+Scrollable content wrapper. Contains `Sidebar.Group` components.
+
+```svelte
+<Sidebar.Root>
+  <Sidebar.Content>
+    <Sidebar.Group />
+    <Sidebar.Group />
+  </Sidebar.Content>
+</Sidebar.Root>
+```
 
 ### Sidebar.Group
 
-Section within sidebar. Contains `GroupLabel`, `GroupContent`, and optional `GroupAction`:
+Section within sidebar with label, content, and optional action.
 
 ```svelte
 <Sidebar.Group>
@@ -6333,13 +5970,11 @@ Wrap in `Collapsible.Root`:
 </Collapsible.Root>
 ```
 
-### Sidebar.Menu
+### Sidebar.Menu Components
 
-Menu component composed of `MenuItem`, `MenuButton`, `MenuAction`, and `MenuSub`.
+**Sidebar.MenuButton:**
 
-**MenuButton:**
-
-Renders a button by default, use `child` snippet for custom elements:
+Renders button/link in menu. Use `child` snippet for custom elements:
 ```svelte
 <Sidebar.MenuButton isActive>
   {#snippet child({ props })}
@@ -6351,11 +5986,11 @@ Renders a button by default, use `child` snippet for custom elements:
 </Sidebar.MenuButton>
 ```
 
-Props: `isActive` (boolean) - marks item as active
+Props: `isActive: boolean` - Mark as active
 
-**MenuAction:**
+**Sidebar.MenuAction:**
 
-Independent button within menu item, works with `DropdownMenu`:
+Independent button in menu item. Works with `DropdownMenu`:
 ```svelte
 <Sidebar.MenuItem>
   <Sidebar.MenuButton>
@@ -6375,16 +6010,16 @@ Independent button within menu item, works with `DropdownMenu`:
       {/snippet}
     </DropdownMenu.Trigger>
     <DropdownMenu.Content side="right" align="start">
-      <DropdownMenu.Item><span>Edit</span></DropdownMenu.Item>
-      <DropdownMenu.Item><span>Delete</span></DropdownMenu.Item>
+      <DropdownMenu.Item><span>Edit Project</span></DropdownMenu.Item>
+      <DropdownMenu.Item><span>Delete Project</span></DropdownMenu.Item>
     </DropdownMenu.Content>
   </DropdownMenu.Root>
 </Sidebar.MenuItem>
 ```
 
-**MenuSub:**
+**Sidebar.MenuSub:**
 
-Submenu using `MenuSubItem` and `MenuSubButton`:
+Submenu within menu:
 ```svelte
 <Sidebar.MenuItem>
   <Sidebar.MenuButton />
@@ -6420,7 +6055,7 @@ Wrap in `Collapsible.Root`:
 
 ### Sidebar.MenuBadge
 
-Badge within menu item:
+Badge in menu item:
 ```svelte
 <Sidebar.MenuItem>
   <Sidebar.MenuButton />
@@ -6443,7 +6078,7 @@ Loading skeleton for menu items:
 
 ### Sidebar.Separator
 
-Separator within sidebar:
+Separator line:
 ```svelte
 <Sidebar.Root>
   <Sidebar.Header />
@@ -6513,9 +6148,28 @@ Or simpler:
 </Sidebar.Provider>
 ```
 
+### Styling
+
+**Hide element in icon mode:**
+```svelte
+<Sidebar.Root collapsible="icon">
+  <Sidebar.Content>
+    <Sidebar.Group class="group-data-[collapsible=icon]:hidden" />
+  </Sidebar.Content>
+</Sidebar.Root>
+```
+
+**Style action based on button active state:**
+```svelte
+<Sidebar.MenuItem>
+  <Sidebar.MenuButton />
+  <Sidebar.MenuAction class="peer-data-[active=true]/menu-button:opacity-100" />
+</Sidebar.MenuItem>
+```
+
 ### Theming
 
-CSS variables (use different variables from main app for distinct styling):
+CSS variables (light/dark):
 ```css
 :root {
   --sidebar: oklch(0.985 0 0);
@@ -6539,31 +6193,14 @@ CSS variables (use different variables from main app for distinct styling):
 }
 ```
 
-### Styling Tips
-
-Hide element in icon mode:
-```svelte
-<Sidebar.Root collapsible="icon">
-  <Sidebar.Content>
-    <Sidebar.Group class="group-data-[collapsible=icon]:hidden" />
-  </Sidebar.Content>
-</Sidebar.Root>
-```
-
-Show menu action when button is active:
-```svelte
-<Sidebar.MenuItem>
-  <Sidebar.MenuButton />
-  <Sidebar.MenuAction class="peer-data-[active=true]/menu-button:opacity-100" />
-</Sidebar.MenuItem>
-```
+Sidebar uses separate variables from main app to allow different styling (e.g., darker sidebar).
 
 ### skeleton
-Placeholder component for loading states; import from $lib/components/ui/skeleton and style with Tailwind classes.
+Skeleton loader component; customize dimensions and shape via Tailwind classes
 
 ## Skeleton
 
-A placeholder component for displaying loading states while content is being fetched.
+Placeholder component for displaying loading states.
 
 ### Installation
 
@@ -6571,34 +6208,30 @@ A placeholder component for displaying loading states while content is being fet
 npx shadcn-svelte@latest add skeleton -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Usage
-
-Import the Skeleton component:
 
 ```svelte
 <script lang="ts">
   import { Skeleton } from "$lib/components/ui/skeleton/index.js";
 </script>
+
+<!-- Circular skeleton (e.g., avatar) -->
+<Skeleton class="size-12 rounded-full" />
+
+<!-- Text skeleton placeholders -->
+<Skeleton class="h-4 w-[250px]" />
+<Skeleton class="h-4 w-[200px]" />
+
+<!-- Custom dimensions -->
+<Skeleton class="h-[20px] w-[100px] rounded-full" />
 ```
 
-Apply to elements with custom dimensions and styling:
-
-```svelte
-<div class="flex items-center space-x-4">
-  <Skeleton class="size-12 rounded-full" />
-  <div class="space-y-2">
-    <Skeleton class="h-4 w-[250px]" />
-    <Skeleton class="h-4 w-[200px]" />
-  </div>
-</div>
-```
-
-Use Skeleton to create placeholder layouts matching your content structure. Style with Tailwind classes for sizing (`h-`, `w-`, `size-`) and shape (`rounded-full`, etc.).
+Use the `class` prop to customize dimensions and styling with Tailwind utilities.
 
 ### slider
-Range input with single/multiple thumbs, vertical/horizontal orientation, configurable max and step values.
+Range input with single/multiple thumbs, configurable max/step/orientation
 
 ## Slider
 
@@ -6610,12 +6243,11 @@ An input component where users select a value from a given range.
 npx shadcn-svelte@latest add slider -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
-### Basic Usage
+### Usage
 
 Single value slider:
-
 ```svelte
 <script lang="ts">
   import { Slider } from "$lib/components/ui/slider/index.js";
@@ -6624,10 +6256,7 @@ Single value slider:
 <Slider type="single" bind:value max={100} step={1} />
 ```
 
-### Multiple Thumbs
-
-Range slider with two handles:
-
+Multiple thumbs (range slider):
 ```svelte
 <script lang="ts">
   import { Slider } from "$lib/components/ui/slider/index.js";
@@ -6636,33 +6265,30 @@ Range slider with two handles:
 <Slider type="multiple" bind:value max={100} step={1} />
 ```
 
-### Vertical Orientation
-
+Vertical orientation:
 ```svelte
 <script lang="ts">
   import { Slider } from "$lib/components/ui/slider/index.js";
   let value = $state(50);
 </script>
-<Slider type="single" orientation="vertical" bind:value max={100} step={1} />
+<Slider type="vertical" orientation="vertical" bind:value max={100} step={1} />
 ```
 
 ### Props
 
-- `type`: "single" or "multiple" - determines if one or multiple thumbs are used
+- `type`: "single" or "multiple" - determines if one or multiple values can be selected
 - `bind:value`: reactive binding to the selected value(s)
 - `max`: maximum value of the range
-- `step`: increment step size
+- `step`: increment between selectable values
 - `orientation`: "vertical" for vertical layout (default is horizontal)
 - `class`: CSS classes for styling
 
-Reference: Bits UI Slider documentation and API reference available in external docs.
-
 ### sonner
-Toast notifications with success/error types, descriptions, and action buttons; dark mode support via system preference or mode-watcher.
+Svelte toast component; install via CLI, add Toaster to layout, call toast() with message and optional description/action callback.
 
 ## Sonner
 
-Toast notification component for Svelte, ported from the React Sonner library by Emil Kowalski.
+Toast component for Svelte, ported from the React Sonner library by Emil Kowalski.
 
 ### Installation
 
@@ -6670,12 +6296,9 @@ Install via CLI:
 ```bash
 npx shadcn-svelte@latest add sonner -y -o
 ```
+(-y: skip confirmation, -o: overwrite existing files)
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
-
-### Setup
-
-Add the Toaster component to your root layout file (+layout.svelte):
+Add the Toaster component to your root layout:
 ```svelte
 <script lang="ts">
   import { Toaster } from "$lib/components/ui/sonner/index.js";
@@ -6685,17 +6308,15 @@ Add the Toaster component to your root layout file (+layout.svelte):
 {@render children?.()}
 ```
 
-### Dark Mode
+### Theme Support
 
-By default, Sonner uses the system's theme preference. To customize theme behavior, either:
-- Pass a custom `theme` prop to the Toaster component
-- Use mode-watcher to hardcode `dark` or `light` mode
+By default, Sonner uses system preferences for light/dark theme. To customize, pass a `theme` prop to the Toaster component, or use mode-watcher to hardcode a theme. See Dark Mode documentation for setup details.
 
-If you don't want dark mode support, uninstall mode-watcher and remove the `theme` prop from the component.
+To opt out of Dark Mode support, uninstall mode-watcher and remove the `theme` prop from the component.
 
 ### Usage
 
-Import the `toast` function and call it with a message:
+Import `toast` from "svelte-sonner" and call it with a message:
 ```svelte
 <script lang="ts">
   import { toast } from "svelte-sonner";
@@ -6704,31 +6325,21 @@ Import the `toast` function and call it with a message:
 <Button onclick={() => toast("Hello world")}>Show toast</Button>
 ```
 
-Toast types include `toast.success()`, `toast.error()`, etc. Options include:
-- `description`: Additional text below the message
-- `action`: Object with `label` and `onClick` callback for action buttons
-
-Example with success toast and action:
+Toast types and options:
 ```svelte
-<Button
-  variant="outline"
-  onclick={() =>
-    toast.success("Event has been created", {
-      description: "Sunday, December 03, 2023 at 9:00 AM",
-      action: {
-        label: "Undo",
-        onClick: () => console.info("Undo")
-      }
-    })}
->
-  Show Toast
-</Button>
+toast.success("Event has been created", {
+  description: "Sunday, December 03, 2023 at 9:00 AM",
+  action: {
+    label: "Undo",
+    onClick: () => console.info("Undo")
+  }
+})
 ```
 
-See the svelte-sonner documentation for complete API reference.
+Supports `toast.success()`, `toast.error()`, and other variants. Options include `description` for additional text and `action` object with `label` and `onClick` callback.
 
 ### spinner
-Spinner component for loading states; customize size/color with utility classes; works in Button, Badge, InputGroup, Empty, and Item components.
+Loading indicator component; install with `add spinner -y -o`; customize size/color with utility classes; works in buttons, badges, input groups, items, empty states; replace icon by editing component.
 
 ## Spinner
 
@@ -6740,9 +6351,9 @@ A loading state indicator component.
 npx shadcn-svelte@latest add spinner -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
-### Basic Usage
+### Usage
 
 ```svelte
 <script lang="ts">
@@ -6753,7 +6364,7 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 
 ### Customization
 
-Replace the default spinner icon by editing the component. The default uses a `LoaderIcon` with `animate-spin` class:
+Replace the default spinner icon by editing the component. Example with a custom loader icon:
 
 ```svelte
 <script lang="ts">
@@ -6773,7 +6384,7 @@ Replace the default spinner icon by editing the component. The default uses a `L
 
 ### Examples
 
-**Size**: Use `size-*` utility classes to adjust spinner size:
+**Size**: Use `size-*` utility classes to adjust spinner size.
 ```svelte
 <Spinner class="size-3" />
 <Spinner class="size-4" />
@@ -6781,30 +6392,38 @@ Replace the default spinner icon by editing the component. The default uses a `L
 <Spinner class="size-8" />
 ```
 
-**Color**: Use `text-*` utility classes to change color:
+**Color**: Use `text-*` utility classes to change color.
 ```svelte
 <Spinner class="size-6 text-red-500" />
 <Spinner class="size-6 text-green-500" />
 <Spinner class="size-6 text-blue-500" />
 ```
 
-**Button**: Add spinner to buttons to indicate loading state. Button component handles spacing:
+**Button**: Add spinner to buttons to indicate loading state. The Button component handles spacing.
 ```svelte
 <Button disabled size="sm">
   <Spinner />
   Loading...
 </Button>
+<Button variant="outline" disabled size="sm">
+  <Spinner />
+  Please wait
+</Button>
 ```
 
-**Badge**: Use inside Badge component:
+**Badge**: Use spinner inside badges.
 ```svelte
 <Badge>
   <Spinner />
   Syncing
 </Badge>
+<Badge variant="secondary">
+  <Spinner />
+  Updating
+</Badge>
 ```
 
-**Input Group**: Place spinners in `<InputGroup.Addon>`:
+**Input Group**: Place spinners in `<InputGroup.Addon>`.
 ```svelte
 <InputGroup.Root>
   <InputGroup.Input placeholder="Send a message..." disabled />
@@ -6812,21 +6431,36 @@ Replace the default spinner icon by editing the component. The default uses a `L
     <Spinner />
   </InputGroup.Addon>
 </InputGroup.Root>
+<InputGroup.Root>
+  <InputGroup.Textarea placeholder="Send a message..." disabled />
+  <InputGroup.Addon align="block-end">
+    <Spinner /> Validating...
+    <InputGroup.Button class="ml-auto" variant="default">
+      <ArrowUpIcon />
+    </InputGroup.Button>
+  </InputGroup.Addon>
+</InputGroup.Root>
 ```
 
-**Empty State**: Use in Empty component's Media slot:
+**Empty State**: Use in empty state components.
 ```svelte
-<Empty.Root>
+<Empty.Root class="w-full">
   <Empty.Header>
     <Empty.Media variant="icon">
       <Spinner />
     </Empty.Media>
     <Empty.Title>Processing your request</Empty.Title>
+    <Empty.Description>
+      Please wait while we process your request. Do not refresh the page.
+    </Empty.Description>
   </Empty.Header>
+  <Empty.Content>
+    <Button variant="outline" size="sm">Cancel</Button>
+  </Empty.Content>
 </Empty.Root>
 ```
 
-**Item**: Use in Item.Media to show loading state with progress:
+**Item**: Use in `<Item.Media>` to show loading state.
 ```svelte
 <Item.Root variant="outline">
   <Item.Media variant="icon">
@@ -6836,18 +6470,36 @@ Replace the default spinner icon by editing the component. The default uses a `L
     <Item.Title>Downloading...</Item.Title>
     <Item.Description>129 MB / 1000 MB</Item.Description>
   </Item.Content>
+  <Item.Actions class="hidden sm:flex">
+    <Button variant="outline" size="sm">Cancel</Button>
+  </Item.Actions>
   <Item.Footer>
     <Progress value={75} />
   </Item.Footer>
 </Item.Root>
 ```
 
+**Item with Payment**: Example combining Item, Spinner, and text.
+```svelte
+<Item.Root variant="muted">
+  <Item.Media>
+    <Spinner />
+  </Item.Media>
+  <Item.Content>
+    <Item.Title class="line-clamp-1">Processing payment...</Item.Title>
+  </Item.Content>
+  <Item.Content class="flex-none justify-end">
+    <span class="text-sm tabular-nums">$100.00</span>
+  </Item.Content>
+</Item.Root>
+```
+
 ### switch
-Toggle control for checked/unchecked states; install with `npx shadcn-svelte@latest add switch -y -o`; bind to form data with `bind:checked`; supports disabled and aria-readonly.
+Toggle switch component; install via CLI; bind to checked property; supports disabled/aria-readonly states; integrates with form libraries.
 
-## Switch Component
+## Switch
 
-A toggle control for binary states (checked/unchecked).
+A toggle control for checked/unchecked states.
 
 ### Installation
 
@@ -6855,14 +6507,14 @@ A toggle control for binary states (checked/unchecked).
 npx shadcn-svelte@latest add switch -y -o
 ```
 
-Use `-y` to skip confirmation and `-o` to overwrite existing files.
+Flags: `-y` skips confirmation prompt, `-o` overwrites existing files.
 
 ### Basic Usage
 
 ```svelte
 <script lang="ts">
-  import { Switch } from "$lib/components/ui/switch/index.js";
   import { Label } from "$lib/components/ui/label/index.js";
+  import { Switch } from "$lib/components/ui/switch/index.js";
 </script>
 
 <div class="flex items-center space-x-2">
@@ -6873,7 +6525,7 @@ Use `-y` to skip confirmation and `-o` to overwrite existing files.
 
 ### Form Integration
 
-Use with sveltekit-superforms and Zod validation:
+Use with sveltekit-superforms and zod validation:
 
 ```svelte
 <script lang="ts" module>
@@ -6890,15 +6542,15 @@ Use with sveltekit-superforms and Zod validation:
   import { toast } from "svelte-sonner";
   import * as Form from "$lib/components/ui/form/index.js";
   import { Switch } from "$lib/components/ui/switch/index.js";
-
+  
   const form = superForm(defaults(zod4(formSchema)), {
     validators: zod4(formSchema),
     SPA: true,
     onUpdate: ({ form: f }) => {
       if (f.valid) {
-        toast.success(`You submitted ${JSON.stringify(f.data, null, 2)}`);
+        toast.success(`Submitted: ${JSON.stringify(f.data, null, 2)}`);
       } else {
-        toast.error("Please fix the errors in the form.");
+        toast.error("Please fix errors.");
       }
     }
   });
@@ -6909,42 +6561,26 @@ Use with sveltekit-superforms and Zod validation:
   <fieldset>
     <legend class="mb-4 text-lg font-medium">Email Notifications</legend>
     <div class="space-y-4">
-      <Form.Field
-        {form}
-        name="marketing_emails"
-        class="flex flex-row items-center justify-between rounded-lg border p-4"
-      >
+      <Form.Field {form} name="marketing_emails" class="flex flex-row items-center justify-between rounded-lg border p-4">
         <Form.Control>
           {#snippet children({ props })}
             <div class="space-y-0.5">
               <Form.Label>Marketing emails</Form.Label>
-              <Form.Description>
-                Receive emails about new products, features, and more.
-              </Form.Description>
+              <Form.Description>Receive emails about new products, features, and more.</Form.Description>
             </div>
             <Switch {...props} bind:checked={$formData.marketing_emails} />
           {/snippet}
         </Form.Control>
       </Form.Field>
-      <Form.Field
-        {form}
-        name="security_emails"
-        class="flex flex-row items-center justify-between rounded-lg border p-4"
-      >
+      
+      <Form.Field {form} name="security_emails" class="flex flex-row items-center justify-between rounded-lg border p-4">
         <Form.Control>
           {#snippet children({ props })}
             <div class="space-y-0.5">
               <Form.Label>Security emails</Form.Label>
-              <Form.Description>
-                Receive emails about your account security.
-              </Form.Description>
+              <Form.Description>Receive emails about your account security.</Form.Description>
             </div>
-            <Switch
-              {...props}
-              aria-readonly
-              disabled
-              bind:checked={$formData.security_emails}
-            />
+            <Switch {...props} aria-readonly disabled bind:checked={$formData.security_emails} />
           {/snippet}
         </Form.Control>
       </Form.Field>
@@ -6954,10 +6590,10 @@ Use with sveltekit-superforms and Zod validation:
 </form>
 ```
 
-Switches support `disabled` and `aria-readonly` attributes for accessibility.
+Supports `disabled` and `aria-readonly` attributes. Bind to `checked` property for reactive state.
 
 ### table
-Responsive table component with Root, Header, Body, Footer, Row, Head, and Cell subcomponents; supports colspan and custom styling via classes.
+Responsive table component with Root, Caption, Header, Body, Footer, Row, Head, Cell elements; supports colspan and custom styling via classes.
 
 ## Table Component
 
@@ -6974,15 +6610,13 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 ### Usage
 
 Import the table components:
-
 ```svelte
 <script lang="ts">
   import * as Table from "$lib/components/ui/table/index.js";
 </script>
 ```
 
-Build tables using the following structure:
-
+Basic table structure with header, body, and footer:
 ```svelte
 <Table.Root>
   <Table.Caption>A list of your recent invoices.</Table.Caption>
@@ -7013,19 +6647,18 @@ Build tables using the following structure:
 </Table.Root>
 ```
 
-### Components
-
-- `Table.Root`: Container for the entire table
-- `Table.Caption`: Optional caption/title for the table
-- `Table.Header`: Header section containing column definitions
-- `Table.Body`: Body section containing data rows
-- `Table.Footer`: Optional footer section for totals or summary
-- `Table.Row`: Individual row container
-- `Table.Head`: Header cell
-- `Table.Cell`: Data cell (supports `colspan` attribute and custom classes for alignment/styling)
+Components available:
+- `Table.Root` - wrapper element
+- `Table.Caption` - table caption
+- `Table.Header` - header section
+- `Table.Body` - body section
+- `Table.Footer` - footer section
+- `Table.Row` - table row
+- `Table.Head` - header cell
+- `Table.Cell` - data cell (supports `colspan` attribute and custom classes for styling)
 
 ### tabs
-Tabbed interface component with Tabs.Root, Tabs.List, Tabs.Trigger, and Tabs.Content; install with `npx shadcn-svelte@latest add tabs -y -o`; set active tab via Root's value prop matching Trigger/Content values.
+Tabbed interface component with Root, List, Trigger, and Content sub-components; install with `npx shadcn-svelte@latest add tabs -y -o`.
 
 ## Tabs Component
 
@@ -7037,11 +6670,9 @@ A tabbed interface component that displays multiple sections of content (tab pan
 npx shadcn-svelte@latest add tabs -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Basic Usage
-
-Import the Tabs component:
 
 ```svelte
 <script lang="ts">
@@ -7056,94 +6687,80 @@ Import the Tabs component:
   <Tabs.Content value="account">
     Make changes to your account here.
   </Tabs.Content>
-  <Tabs.Content value="password">Change your password here.</Tabs.Content>
+  <Tabs.Content value="password">
+    Change your password here.
+  </Tabs.Content>
 </Tabs.Root>
 ```
 
 ### Component Structure
 
-- **Tabs.Root**: Container component that accepts a `value` prop to set the active tab
-- **Tabs.List**: Container for tab triggers
-- **Tabs.Trigger**: Individual tab button with a `value` prop that must match a corresponding Tabs.Content
-- **Tabs.Content**: Panel content that displays when its corresponding trigger is active
+- `Tabs.Root`: Container component that accepts a `value` prop for the active tab
+- `Tabs.List`: Wrapper for tab triggers
+- `Tabs.Trigger`: Individual tab button with a `value` prop that must match a corresponding `Tabs.Content`
+- `Tabs.Content`: Content panel that displays when its `value` matches the active tab
 
-### Complete Example with Card Integration
+### Example with Card Integration
 
 ```svelte
-<script lang="ts">
-  import * as Tabs from "$lib/components/ui/tabs/index.js";
-  import * as Card from "$lib/components/ui/card/index.js";
-  import { Button } from "$lib/components/ui/button/index.js";
-  import { Input } from "$lib/components/ui/input/index.js";
-  import { Label } from "$lib/components/ui/label/index.js";
-</script>
-
-<div class="flex w-full max-w-sm flex-col gap-6">
-  <Tabs.Root value="account">
-    <Tabs.List>
-      <Tabs.Trigger value="account">Account</Tabs.Trigger>
-      <Tabs.Trigger value="password">Password</Tabs.Trigger>
-    </Tabs.List>
-    <Tabs.Content value="account">
-      <Card.Root>
-        <Card.Header>
-          <Card.Title>Account</Card.Title>
-          <Card.Description>
-            Make changes to your account here. Click save when you're done.
-          </Card.Description>
-        </Card.Header>
-        <Card.Content class="grid gap-6">
-          <div class="grid gap-3">
-            <Label for="tabs-demo-name">Name</Label>
-            <Input id="tabs-demo-name" value="Pedro Duarte" />
-          </div>
-          <div class="grid gap-3">
-            <Label for="tabs-demo-username">Username</Label>
-            <Input id="tabs-demo-username" value="@peduarte" />
-          </div>
-        </Card.Content>
-        <Card.Footer>
-          <Button>Save changes</Button>
-        </Card.Footer>
-      </Card.Root>
-    </Tabs.Content>
-    <Tabs.Content value="password">
-      <Card.Root>
-        <Card.Header>
-          <Card.Title>Password</Card.Title>
-          <Card.Description>
-            Change your password here. After saving, you'll be logged out.
-          </Card.Description>
-        </Card.Header>
-        <Card.Content class="grid gap-6">
-          <div class="grid gap-3">
-            <Label for="tabs-demo-current">Current password</Label>
-            <Input id="tabs-demo-current" type="password" />
-          </div>
-          <div class="grid gap-3">
-            <Label for="tabs-demo-new">New password</Label>
-            <Input id="tabs-demo-new" type="password" />
-          </div>
-        </Card.Content>
-        <Card.Footer>
-          <Button>Save password</Button>
-        </Card.Footer>
-      </Card.Root>
-    </Tabs.Content>
-  </Tabs.Root>
-</div>
+<Tabs.Root value="account">
+  <Tabs.List>
+    <Tabs.Trigger value="account">Account</Tabs.Trigger>
+    <Tabs.Trigger value="password">Password</Tabs.Trigger>
+  </Tabs.List>
+  <Tabs.Content value="account">
+    <Card.Root>
+      <Card.Header>
+        <Card.Title>Account</Card.Title>
+        <Card.Description>Make changes to your account here.</Card.Description>
+      </Card.Header>
+      <Card.Content class="grid gap-6">
+        <div class="grid gap-3">
+          <Label for="name">Name</Label>
+          <Input id="name" value="Pedro Duarte" />
+        </div>
+        <div class="grid gap-3">
+          <Label for="username">Username</Label>
+          <Input id="username" value="@peduarte" />
+        </div>
+      </Card.Content>
+      <Card.Footer>
+        <Button>Save changes</Button>
+      </Card.Footer>
+    </Card.Root>
+  </Tabs.Content>
+  <Tabs.Content value="password">
+    <Card.Root>
+      <Card.Header>
+        <Card.Title>Password</Card.Title>
+        <Card.Description>Change your password here.</Card.Description>
+      </Card.Header>
+      <Card.Content class="grid gap-6">
+        <div class="grid gap-3">
+          <Label for="current">Current password</Label>
+          <Input id="current" type="password" />
+        </div>
+        <div class="grid gap-3">
+          <Label for="new">New password</Label>
+          <Input id="new" type="password" />
+        </div>
+      </Card.Content>
+      <Card.Footer>
+        <Button>Save password</Button>
+      </Card.Footer>
+    </Card.Root>
+  </Tabs.Content>
+</Tabs.Root>
 ```
 
-### API Reference
-
-Full API documentation available in the Bits UI Tabs documentation and API reference.
+Built on Bits UI tabs component. See Bits UI documentation for full API reference.
 
 ### textarea
-Textarea form component supporting disabled state, labels, and sveltekit-superforms validation integration.
+Textarea component for form text input; supports disabled state, labels, validation with zod/superforms, and integration with form components.
 
-## Textarea Component
+## Textarea
 
-A form textarea component for shadcn-svelte.
+A form textarea component for text input.
 
 ### Installation
 
@@ -7153,29 +6770,25 @@ npx shadcn-svelte@latest add textarea -y -o
 
 The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
-### Basic Usage
+### Usage
 
 ```svelte
-<script lang="ts">
-  import { Textarea } from "$lib/components/ui/textarea/index.js";
-</script>
+import { Textarea } from "$lib/components/ui/textarea/index.js";
 
 <Textarea placeholder="Type your message here." />
 ```
 
 ### Examples
 
-**Disabled state:**
+**Default & Disabled:**
 ```svelte
+<Textarea placeholder="Type your message here." />
 <Textarea disabled placeholder="Type your message here." />
 ```
 
 **With Label:**
 ```svelte
-<script lang="ts">
-  import { Label } from "$lib/components/ui/label/index.js";
-  import { Textarea } from "$lib/components/ui/textarea/index.js";
-</script>
+import { Label } from "$lib/components/ui/label/index.js";
 
 <div class="grid w-full gap-1.5">
   <Label for="message">Your message</Label>
@@ -7183,57 +6796,48 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 </div>
 ```
 
-**With descriptive text:**
+**With Label, Text, and Button:**
 ```svelte
-<div class="grid w-full gap-1.5">
-  <Label for="message-2">Your Message</Label>
-  <Textarea placeholder="Type your message here." id="message-2" />
-  <p class="text-muted-foreground text-sm">
-    Your message will be copied to the support team.
-  </p>
-</div>
-```
+import { Button } from "$lib/components/ui/button/index.js";
 
-**With Button:**
-```svelte
+<div class="grid w-full gap-1.5">
+  <Label for="message">Your Message</Label>
+  <Textarea placeholder="Type your message here." id="message" />
+  <p class="text-muted-foreground text-sm">Your message will be copied to the support team.</p>
+</div>
+
 <div class="grid w-full gap-2">
   <Textarea placeholder="Type your message here." />
   <Button>Send message</Button>
 </div>
 ```
 
-**Form integration with validation:**
+**Form with Validation:**
 ```svelte
 <script lang="ts" module>
   import { z } from "zod/v4";
   const formSchema = z.object({
-    bio: z
-      .string()
-      .min(10, "Bio must be at least 10 characters.")
-      .max(160, "Bio must be at most 160 characters.")
+    bio: z.string().min(10, "Bio must be at least 10 characters.").max(160, "Bio must be at most 160 characters.")
   });
 </script>
 
-<script lang="ts">
-  import { defaults, superForm } from "sveltekit-superforms";
-  import { zod4 } from "sveltekit-superforms/adapters";
-  import { toast } from "svelte-sonner";
-  import * as Form from "$lib/components/ui/form/index.js";
-  import { Textarea } from "$lib/components/ui/textarea/index.js";
-  
-  const form = superForm(defaults(zod4(formSchema)), {
-    validators: zod4(formSchema),
-    SPA: true,
-    onUpdate: ({ form: f }) => {
-      if (f.valid) {
-        toast.success(`You submitted ${JSON.stringify(f.data, null, 2)}`);
-      } else {
-        toast.error("Please fix the errors in the form.");
-      }
+import { defaults, superForm } from "sveltekit-superforms";
+import { zod4 } from "sveltekit-superforms/adapters";
+import { toast } from "svelte-sonner";
+import * as Form from "$lib/components/ui/form/index.js";
+
+const form = superForm(defaults(zod4(formSchema)), {
+  validators: zod4(formSchema),
+  SPA: true,
+  onUpdate: ({ form: f }) => {
+    if (f.valid) {
+      toast.success(`You submitted ${JSON.stringify(f.data, null, 2)}`);
+    } else {
+      toast.error("Please fix the errors in the form.");
     }
-  });
-  const { form: formData, enhance } = form;
-</script>
+  }
+});
+const { form: formData, enhance } = form;
 
 <form method="POST" class="w-2/3 space-y-6" use:enhance>
   <Form.Field {form} name="bio">
@@ -7246,9 +6850,7 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
           class="resize-none"
           bind:value={$formData.bio}
         />
-        <Form.Description>
-          You can <span>@mention</span> other users and organizations.
-        </Form.Description>
+        <Form.Description>You can <span>@mention</span> other users and organizations.</Form.Description>
       {/snippet}
     </Form.Control>
     <Form.FieldErrors />
@@ -7257,14 +6859,12 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 </form>
 ```
 
-Supports standard HTML textarea attributes like `placeholder`, `disabled`, and `id`. Can be combined with Label component for accessibility and with Form component for validation.
-
 ### toggle-group
-Toggle group component with single/multiple selection modes, outline variant, sm/lg sizes, and disabled state.
+Toggle group component with single/multiple selection modes, size variants (sm/lg), outline styling, and disabled state support.
 
 ## Toggle Group
 
-A set of two-state buttons that can be toggled on or off. Supports single or multiple selection modes.
+A set of two-state buttons that can be toggled on or off. Built on Bits UI.
 
 ### Installation
 
@@ -7272,7 +6872,7 @@ A set of two-state buttons that can be toggled on or off. Supports single or mul
 npx shadcn-svelte@latest add toggle-group -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Basic Usage
 
@@ -7288,16 +6888,9 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </ToggleGroup.Root>
 ```
 
-### Key Props
-
-- `type`: "single" (only one item can be selected) or "multiple" (multiple items can be selected)
-- `variant`: "outline" for outlined style
-- `size`: "sm" or "lg" for different sizes (default is medium)
-- `disabled`: disables all items in the group
-
 ### Examples
 
-**Multiple selection with outline variant:**
+**Default/Multiple with icons:**
 ```svelte
 <ToggleGroup.Root variant="outline" type="multiple">
   <ToggleGroup.Item value="bold" aria-label="Toggle bold">
@@ -7318,21 +6911,18 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
   <ToggleGroup.Item value="bold" aria-label="Toggle bold">
     <BoldIcon class="size-4" />
   </ToggleGroup.Item>
-  <ToggleGroup.Item value="italic" aria-label="Toggle italic">
-    <ItalicIcon class="size-4" />
-  </ToggleGroup.Item>
-  <ToggleGroup.Item value="strikethrough" aria-label="Toggle strikethrough">
-    <UnderlineIcon class="size-4" />
-  </ToggleGroup.Item>
+  <!-- ... more items ... -->
 </ToggleGroup.Root>
 ```
 
 **Size variants:**
 ```svelte
+<!-- Small -->
 <ToggleGroup.Root size="sm" type="multiple">
   <!-- items -->
 </ToggleGroup.Root>
 
+<!-- Large -->
 <ToggleGroup.Root size="lg" type="multiple">
   <!-- items -->
 </ToggleGroup.Root>
@@ -7345,14 +6935,19 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </ToggleGroup.Root>
 ```
 
-Each `ToggleGroup.Item` accepts a `value` prop and should include an `aria-label` for accessibility. Icons can be nested inside items.
+### Props
+
+- `type`: "single" (only one item can be selected) or "multiple" (multiple items can be selected)
+- `variant`: "outline" (and others available)
+- `size`: "sm", default, "lg"
+- `disabled`: boolean to disable all items
 
 ### toggle
-Two-state toggle button with variants (default/outline), sizes (sm/md/lg), icon/text support, and disabled state.
+Two-state button component with variants (default/outline), sizes (sm/default/lg), disabled state, and icon/text support
 
 ## Toggle
 
-A two-state button component that toggles between on and off states.
+A two-state button component that can be toggled on or off.
 
 ### Installation
 
@@ -7386,34 +6981,30 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 </Toggle>
 ```
 
-**Outline variant:**
+**Variants and sizes:**
 ```svelte
+<!-- Outline variant -->
 <Toggle variant="outline" aria-label="Toggle italic">
   <ItalicIcon class="size-4" />
 </Toggle>
-```
 
-**With text and icon:**
-```svelte
+<!-- With text -->
 <Toggle aria-label="Toggle italic">
   <ItalicIcon class="mr-2 size-4" />
   Italic
 </Toggle>
-```
 
-**Size variants (small and large):**
-```svelte
+<!-- Size small -->
 <Toggle size="sm" aria-label="Toggle italic">
   <ItalicIcon class="size-4" />
 </Toggle>
 
+<!-- Size large -->
 <Toggle size="lg" aria-label="Toggle italic">
   <ItalicIcon class="size-4" />
 </Toggle>
-```
 
-**Disabled state:**
-```svelte
+<!-- Disabled -->
 <Toggle aria-label="Toggle underline" disabled>
   <UnderlineIcon class="size-4" />
 </Toggle>
@@ -7421,15 +7012,15 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Props
 
-- `variant`: "default" or "outline" - controls button styling
-- `size`: "sm", "md" (default), or "lg" - controls button size
-- `disabled`: boolean - disables the toggle button
-- `aria-label`: string - accessibility label for the button
+- `variant`: "default" | "outline" (default: "default")
+- `size`: "sm" | "default" | "lg" (default: "default")
+- `disabled`: boolean (default: false)
+- `aria-label`: string (recommended for accessibility)
 
 ### tooltip
-Tooltip component with Provider/Root/Trigger/Content structure; displays on hover or focus; install with `npx shadcn-svelte@latest add tooltip -y -o`
+Tooltip component: popup on hover/focus with Provider/Root/Trigger/Content structure
 
-## Tooltip Component
+## Tooltip
 
 A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.
 
@@ -7446,11 +7037,14 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 ```svelte
 <script lang="ts">
   import * as Tooltip from "$lib/components/ui/tooltip/index.js";
+  import { buttonVariants } from "../ui/button/index.js";
 </script>
 
 <Tooltip.Provider>
   <Tooltip.Root>
-    <Tooltip.Trigger>Hover</Tooltip.Trigger>
+    <Tooltip.Trigger class={buttonVariants({ variant: "outline" })}>
+      Hover
+    </Tooltip.Trigger>
     <Tooltip.Content>
       <p>Add to library</p>
     </Tooltip.Content>
@@ -7458,122 +7052,108 @@ The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 </Tooltip.Provider>
 ```
 
-The component structure consists of:
-- `Tooltip.Provider`: Wraps the tooltip context
-- `Tooltip.Root`: The root container for the tooltip
-- `Tooltip.Trigger`: The element that triggers the tooltip on hover or focus
-- `Tooltip.Content`: The popup content displayed when triggered
-
-The trigger element can accept styling through class bindings, such as button variants.
+Wrap content in `Tooltip.Provider`, then use `Tooltip.Root` with `Tooltip.Trigger` (the element that activates the tooltip) and `Tooltip.Content` (the popup content). The trigger can accept any styling classes.
 
 ### typography
-Utility class examples for styling headings (h1-h4), paragraphs (standard, lead, large, small, muted), blockquotes, inline code, lists, and tables using Tailwind CSS.
+Typography styling examples using Tailwind utility classes for headings (h1-h4), paragraphs, blockquotes, code, lists, and tables with no default styles provided.
 
-## Overview
-Typography documentation provides utility class examples for styling text elements. No typography styles are shipped by default; this page demonstrates how to use Tailwind utility classes to style headings, paragraphs, lists, blockquotes, tables, and other text elements.
+## Typography
 
-## Heading Styles
+No default typography styles are shipped. Use utility classes to style text elements.
 
-**h1** - Large primary heading with scroll margin, 4xl text, extra bold weight, and tight tracking. Responsive: lg:text-5xl
+### Heading Styles
+
+**h1** - Large primary heading:
 ```svelte
 <h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-  Taxing Laughter: The Joke Tax Chronicles
+  Title
 </h1>
 ```
 
-**h2** - Medium heading with bottom border, 3xl text, semibold weight, tight tracking, and transition effects
+**h2** - Secondary heading with bottom border:
 ```svelte
 <h2 class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
-  The People of the Kingdom
+  Subtitle
 </h2>
 ```
 
-**h3** - Smaller heading with 2xl text and semibold weight
+**h3** - Tertiary heading:
 ```svelte
-<h3 class="scroll-m-20 text-2xl font-semibold tracking-tight">The Joke Tax</h3>
+<h3 class="scroll-m-20 text-2xl font-semibold tracking-tight">Heading</h3>
 ```
 
-**h4** - Extra small heading with xl text and semibold weight
+**h4** - Quaternary heading:
 ```svelte
-<h4 class="scroll-m-20 text-xl font-semibold tracking-tight">
-  People stopped telling jokes
-</h4>
+<h4 class="scroll-m-20 text-xl font-semibold tracking-tight">Small heading</h4>
 ```
 
-## Paragraph Styles
+### Paragraph & Text
 
-**Standard paragraph** - 7 line height with top margin on non-first children
+**p** - Standard paragraph with margin between siblings:
 ```svelte
-<p class="leading-7 [&:not(:first-child)]:mt-6">
-  The king, seeing how much happier his subjects were, realized the error of his ways and repealed the joke tax.
-</p>
+<p class="leading-7 [&:not(:first-child)]:mt-6">Text content</p>
 ```
 
-**Lead paragraph** - Muted foreground color, xl text size, used for introductory text
+**Lead** - Emphasized introductory text:
 ```svelte
-<p class="text-muted-foreground text-xl">
-  A modal dialog that interrupts the user with important content and expects a response.
-</p>
+<p class="text-muted-foreground text-xl">Important intro text</p>
 ```
 
-**Large text** - lg font size with semibold weight
+**Large** - Large bold text:
 ```svelte
-<div class="text-lg font-semibold">Are you sure absolutely sure?</div>
+<div class="text-lg font-semibold">Large text</div>
 ```
 
-**Small text** - sm font size with medium weight and no leading
+**Small** - Small text for labels:
 ```svelte
-<small class="text-sm font-medium leading-none">Email address</small>
+<small class="text-sm font-medium leading-none">Label</small>
 ```
 
-**Muted text** - Muted foreground color with sm font size
+**Muted** - Subtle secondary text:
 ```svelte
-<p class="text-muted-foreground text-sm">Enter your email address.</p>
+<p class="text-muted-foreground text-sm">Secondary text</p>
 ```
 
-## Other Elements
+### Other Elements
 
-**Blockquote** - Left border (2px), left padding, and italic styling
+**blockquote** - Quoted text with left border:
 ```svelte
 <blockquote class="mt-6 border-l-2 pl-6 italic">
-  "After all," he said, "everyone enjoys a good joke, so it's only fair that they should pay for the privilege."
+  "Quote text"
 </blockquote>
 ```
 
-**Inline code** - Muted background, rounded corners, horizontal padding, monospace font, sm size, semibold weight
+**Inline code** - Code snippets within text:
 ```svelte
 <code class="bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
-  @lucide/svelte
+  code
 </code>
 ```
 
-**Unordered list** - Disc bullets with top margin between items
+**list** - Unordered list with disc bullets:
 ```svelte
 <ul class="my-6 ml-6 list-disc [&>li]:mt-2">
-  <li>1st level of puns: 5 gold coins</li>
-  <li>2nd level of jokes: 10 gold coins</li>
-  <li>3rd level of one-liners: 20 gold coins</li>
+  <li>Item 1</li>
+  <li>Item 2</li>
 </ul>
 ```
 
-**Table** - Wrapped in overflow container, full width with bordered cells, bold headers, alternating row backgrounds
+**table** - Responsive table with borders:
 ```svelte
 <div class="my-6 w-full overflow-y-auto">
   <table class="w-full">
     <thead>
       <tr class="even:bg-muted m-0 border-t p-0">
         <th class="border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right">
-          King's Treasury
-        </th>
-        <th class="border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right">
-          People's happiness
+          Header
         </th>
       </tr>
     </thead>
     <tbody>
       <tr class="even:bg-muted m-0 border-t p-0">
-        <td class="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">Empty</td>
-        <td class="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">Overflowing</td>
+        <td class="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
+          Cell
+        </td>
       </tr>
     </tbody>
   </table>

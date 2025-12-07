@@ -1,0 +1,1 @@
+Framework-agnostic UI toolkit with three hooks: useChat (real-time chat streaming), useCompletion (text completions), useObject (streamed JSON). Supports React, Svelte, Vue.js, Angular with varying feature coverage.

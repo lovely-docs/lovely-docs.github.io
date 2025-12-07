@@ -1,6 +1,6 @@
 ## Card Component
 
-A composable card component for displaying structured content with header, content, and footer sections.
+A composable card component with header, content, and footer sections for displaying structured information.
 
 ### Installation
 
@@ -10,17 +10,15 @@ npx shadcn-svelte@latest add card -y -o
 
 The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
-### Structure
+### Components
 
-The Card component is composed of several sub-components:
-
-- **Card.Root**: Container wrapper
-- **Card.Header**: Top section, typically contains title and description
-- **Card.Title**: Heading text within header
-- **Card.Description**: Subtitle or descriptive text within header
-- **Card.Action**: Optional action area within header (e.g., buttons)
-- **Card.Content**: Main content area
-- **Card.Footer**: Bottom section, typically for actions
+- `Card.Root` - Main container
+- `Card.Header` - Header section
+- `Card.Title` - Title text
+- `Card.Description` - Description text
+- `Card.Action` - Action area (optional)
+- `Card.Content` - Main content area
+- `Card.Footer` - Footer section
 
 ### Basic Usage
 
@@ -87,4 +85,4 @@ The Card component is composed of several sub-components:
 </Card.Root>
 ```
 
-All sub-components accept standard HTML class attributes for styling via Tailwind CSS.
+Supports Tailwind classes for styling and layout customization.

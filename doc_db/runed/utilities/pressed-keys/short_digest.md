@@ -1,0 +1,1 @@
+Tracks currently pressed keys. Check with `has("ArrowDown")` or `has("Control", "a")`, get all with `keys.all`, or register callbacks with `onKeys(["meta", "k"], callback)`.

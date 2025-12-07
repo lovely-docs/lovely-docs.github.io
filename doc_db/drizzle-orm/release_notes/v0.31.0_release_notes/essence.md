@@ -1,1 +1,1 @@
-v0.31.0: PostgreSQL indexes API redesigned (ordering per-column, .using() for index type), pg_vector support with distance helpers, point/line/geometry types, drizzle-kit v0.22.0 with extensionsFilters, SSL config, index expression fixes.
+v0.31.0 breaking change: PostgreSQL indexes API - ordering modifiers move to per-column/expression level, `.using()` specifies index type; new pg_vector, point, line, PostGIS geometry types; Kit v0.22.0 adds extensionsFilters, SSL options, fixes index expressions.

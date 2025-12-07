@@ -1,0 +1,1 @@
+Error thrown on failed API calls. Check with `APICallError.isInstance(error)`. Properties include `url`, `statusCode`, `responseBody`, `isRetryable`, and more.

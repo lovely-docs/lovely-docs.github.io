@@ -1,6 +1,6 @@
-## Drawer Component
+## Drawer
 
-Slide-out panel built on Vaul Svelte.
+Slide-out panel component built on Vaul Svelte.
 
 ### Installation
 
@@ -32,25 +32,4 @@ npx shadcn-svelte@latest add drawer -y -o
 
 ### Responsive Dialog/Drawer
 
-Use `MediaQuery` to render Dialog on desktop and Drawer on mobile:
-
-```svelte
-<script lang="ts">
-  import { MediaQuery } from "svelte/reactivity";
-  import * as Dialog from "$lib/components/ui/dialog/index.js";
-  import * as Drawer from "$lib/components/ui/drawer/index.js";
-  
-  let open = $state(false);
-  const isDesktop = new MediaQuery("(min-width: 768px)");
-</script>
-
-{#if isDesktop.current}
-  <Dialog.Root bind:open>
-    <!-- Dialog content -->
-  </Dialog.Root>
-{:else}
-  <Drawer.Root bind:open>
-    <!-- Drawer content -->
-  </Drawer.Root>
-{/if}
-```
+Use `MediaQuery("(min-width: 768px)")` to render Dialog on desktop and Drawer on mobile, sharing the same form content structure.

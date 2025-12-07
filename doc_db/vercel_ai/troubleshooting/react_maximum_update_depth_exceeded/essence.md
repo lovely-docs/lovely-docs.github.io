@@ -1,1 +1,1 @@
-Throttle streaming updates with `experimental_throttle` option in `useChat`/`useCompletion` to prevent "Maximum update depth exceeded" error from excessive re-renders on each chunk.
+Fix "Maximum update depth exceeded" in useChat/useCompletion by throttling updates with experimental_throttle option (milliseconds).

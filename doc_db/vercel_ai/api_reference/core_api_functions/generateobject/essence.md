@@ -1,0 +1,1 @@
+API for generating structured objects/arrays/enums from LLMs with Zod/JSON schemas, supporting multiple output modes, token controls, and provider options.

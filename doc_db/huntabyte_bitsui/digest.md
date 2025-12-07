@@ -1,185 +1,219 @@
-## UI Components Library
+## Core Concepts
 
-Complete collection of accessible, composable UI components for Svelte with state management, keyboard navigation, and Floating UI positioning.
+**Components**: 50+ headless UI components with compound architecture, flexible state management (two-way binding or getter/setter), keyboard navigation, ARIA accessibility, and data-attribute/CSS-variable styling. Categories: Disclosure (Accordion, Collapsible, Tabs), Dialogs (AlertDialog, Dialog, Popover, LinkPreview, Tooltip), Dropdowns (DropdownMenu, ContextMenu, Combobox, Command, Select, NavigationMenu), Forms (Checkbox, RadioGroup, Switch, Toggle, ToggleGroup, RatingGroup, PinInput), Date/Time (Calendar, DateField, DatePicker, DateRangeField, DateRangePicker, RangeCalendar, TimeField, TimeRangeField), Data Display (Progress, Meter, Pagination, ScrollArea), Layout (AspectRatio, Separator, Label), Ranges (Slider), Buttons, Utilities (Avatar, Menubar).
 
-**State Management**: Two-way binding (`bind:value`) or function binding with custom getter/setter logic for complex transformations.
+**State Management**: Two approaches—two-way binding (`bind:value={state}`) for simple cases, or function binding (`bind:value={getter, setter}`) for complex transformations, conditionals, debouncing, or external state integration.
 
-**Compound Components**: Sub-component architecture (Root, Trigger, Content, etc.) for maximum flexibility.
+**Styling**: Five approaches—CSS frameworks (pass classes directly), data attributes (target `[data-state]`, `[data-disabled]`, etc. in global CSS), global classes, scoped styles via `child` snippet, or `style` prop. Components expose CSS variables like `--bits-[component]-content-height` for animations.
 
-**Data Attributes & CSS Variables**: Components expose `data-*` attributes for styling states and CSS variables for dynamic values.
+**Child Snippet**: Override default element rendering via `child` snippet parameter containing `props` object. Spread `{...props}` onto custom element. For floating components (Popover.Content, Tooltip.Content, etc.), use two-level structure with `wrapperProps` (outer, unstyled) and `props` (inner, styled). Enables Svelte transitions, actions, scoped styles, and custom component integration.
 
-### Component Categories
+**Ref Prop**: Bindable `ref` prop accesses underlying HTML elements. Works with `child` snippet via element IDs. Use `WithElementRef` type helper for custom components.
 
-**Form Controls**: Checkbox, Radio Group, Toggle, Switch, Slider, Range Slider, Select, Combobox, PIN Input, Rating Group
+**Transitions**: Use `forceMount` prop + `child` snippet with conditional rendering and Svelte transitions. For floating components, wrap with `wrapperProps` element.
 
-**Date/Time**: Calendar, Range Calendar, DateField, DateRangeField, TimeField, TimeRangeField, DatePicker, DateRangePicker
+**Date/Time**: Uses `DateValue` types from `@internationalized/date` (CalendarDate, CalendarDateTime, ZonedDateTime)—immutable with `.set()`, `.add()`, `.subtract()`, `.cycle()` methods. Months are 1-indexed. `placeholder` prop acts as initial date and controls calendar view. Use `DateFormatter` for formatting.
 
-**Disclosure**: Accordion, Collapsible, Tabs
+**Utilities**: 
+- `BitsConfig`: Global context for default props (defaultPortalTo, defaultLocale) with scoped inheritance
+- `IsUsingKeyboard`: Tracks keyboard usage via shared state
+- `mergeProps`: Merges props with event handler chaining, class combining, style merging
+- `Portal`: Renders children to specified DOM location (body by default)
+- `useId`: Generates unique IDs for element association
 
-**Menus & Navigation**: Dropdown Menu, Context Menu, Menubar, Navigation Menu, Command
+**Type Helpers**: `WithElementRef<T, U>` adds optional `ref` prop; `WithoutChild` excludes `child` snippet; `WithoutChildren` excludes `children` snippet; `WithoutChildrenOrChild` excludes both.
 
-**Dialogs & Overlays**: Dialog, Alert Dialog, Popover, Tooltip, Link Preview
+**Policies**: Changelog entries use format `- <type>(<scope>): <description>` with types (fix, feat, improve, chore, docs). Feature requests start as Discussions, move to Issues only after acceptance.
 
-**Progress & Feedback**: Progress, Meter, Pagination
-
-**Layout**: Separator, Scroll Area, Aspect Ratio, Label, Button, Avatar, Toolbar
-
-### Key Features
-
-**Accessibility**: WAI-ARIA compliant with keyboard navigation and focus management.
-
-**Positioning**: Floating UI integration for automatic collision detection.
-
-**Animations**: `forceMount` prop with `child` snippet enables Svelte transitions on visibility changes.
-
-**Keyboard Navigation**: Arrow keys, Enter, Escape, and component-specific shortcuts.
-
-**Validation**: Date/time components support min/max constraints and custom validation.
-
-**Form Integration**: Hidden inputs via `name` prop; `required` prop for validation.
-
-**Customization**: Snippet props for rendering, data attributes for styling, CSS variables for dynamic values.
-
-## Getting Started
-
+## Installation & Setup
 ```bash
-npm install bits-ui
+npm install bits-ui @internationalized/date
 ```
 
 ```svelte
 <script lang="ts">
-  import { Accordion } from "bits-ui";
+  import { Accordion, BitsConfig } from "bits-ui";
+  import { today, getLocalTimeZone } from "@internationalized/date";
+  
+  let value = $state("item-1");
+  let placeholder = $state(today(getLocalTimeZone()));
 </script>
-<Accordion.Root type="single">
-  <Accordion.Item value="item-1">
-    <Accordion.Trigger>Item 1</Accordion.Trigger>
-    <Accordion.Content>Content</Accordion.Content>
-  </Accordion.Item>
-</Accordion.Root>
+
+<BitsConfig defaultPortalTo="#portal" defaultLocale="en">
+  <Accordion.Root bind:value type="single">
+    <Accordion.Item value="item-1">
+      <Accordion.Header>
+        <Accordion.Trigger>Title</Accordion.Trigger>
+      </Accordion.Header>
+      <Accordion.Content>Content</Accordion.Content>
+    </Accordion.Item>
+  </Accordion.Root>
+</BitsConfig>
 ```
 
-## Styling
-
-Components are headless with no default styles. Apply styles via `class` prop or data attributes:
-
+## Styling Examples
 ```svelte
-<Accordion.Trigger class="h-12 bg-blue-500">Click me</Accordion.Trigger>
-```
+<!-- TailwindCSS -->
+<Accordion.Trigger class="h-12 w-full bg-blue-500 hover:bg-blue-600">Click</Accordion.Trigger>
 
-```css
-[data-accordion-trigger][data-state="open"] { background-color: #f0f0f0; }
-```
+<!-- Data attributes -->
+<style>
+  [data-accordion-trigger][data-state="open"] { background-color: #f0f0f0; }
+  [data-accordion-trigger][data-disabled] { opacity: 0.5; }
+</style>
 
-## Child Snippet
-
-Override rendered elements while preserving accessibility:
-
-```svelte
-<Accordion.Trigger id="my-id">
+<!-- Scoped styles via child snippet -->
+<Accordion.Trigger>
   {#snippet child({ props })}
-    <button {...props} class="custom-button">Toggle</button>
+    <button {...props} class="my-trigger">Click</button>
   {/snippet}
 </Accordion.Trigger>
+<style>
+  .my-trigger { background-color: #3182ce; }
+</style>
+
+<!-- CSS variables for animations -->
+<style>
+  [data-accordion-content] {
+    height: 0;
+    transition: height 300ms;
+  }
+  [data-accordion-content][data-state="open"] {
+    height: var(--bits-accordion-content-height);
+  }
+</style>
 ```
 
-For floating components (Popover, Tooltip, etc.), use two-level structure:
-
+## State Management Examples
 ```svelte
-<Popover.Content>
+<!-- Two-way binding -->
+<script>
+  let selected = $state("option-1");
+</script>
+<Select.Root bind:value={selected} type="single">
+  <!-- ... -->
+</Select.Root>
+
+<!-- Function binding with conditional logic -->
+<script>
+  let value = $state("default");
+  function getValue() { return value; }
+  function setValue(newValue) {
+    if (newValue.length > 0) value = newValue;
+  }
+</script>
+<Combobox.Root bind:value={getValue, setValue} type="single">
+  <!-- ... -->
+</Combobox.Root>
+```
+
+## Child Snippet Examples
+```svelte
+<!-- Basic custom element -->
+<Accordion.Trigger>
+  {#snippet child({ props })}
+    <div {...props} class="custom-trigger">Custom content</div>
+  {/snippet}
+</Accordion.Trigger>
+
+<!-- With Svelte transitions -->
+<Dialog.Content forceMount>
+  {#snippet child({ props, open })}
+    {#if open}
+      <div {...props} transition:fly={{ y: -10 }}>
+        Dialog content
+      </div>
+    {/if}
+  {/snippet}
+</Dialog.Content>
+
+<!-- Floating component with wrapper -->
+<Popover.Content forceMount>
   {#snippet child({ wrapperProps, props, open })}
     {#if open}
       <div {...wrapperProps}>
-        <div {...props}>Content</div>
+        <div {...props} transition:fade>Popover content</div>
       </div>
     {/if}
   {/snippet}
 </Popover.Content>
-```
 
-## Transitions
-
-Use `forceMount` with `child` snippet for Svelte transitions:
-
-```svelte
-<Dialog.Content forceMount>
-  {#snippet child({ props, open })}
-    {#if open}
-      <div {...props} transition:fly>Content</div>
-    {/if}
+<!-- Custom component integration -->
+<Accordion.Trigger>
+  {#snippet child({ props })}
+    <MyCustomButton {...props}>Toggle</MyCustomButton>
   {/snippet}
-</Dialog.Content>
+</Accordion.Trigger>
 ```
 
-## Ref Prop Binding
-
-Access underlying HTML elements via `ref` prop:
-
+## Date/Time Examples
 ```svelte
-<script lang="ts">
-  let triggerRef = $state<HTMLButtonElement | null>(null);
+<script>
+  import { Calendar, DatePicker } from "bits-ui";
+  import { today, getLocalTimeZone, parseDate } from "@internationalized/date";
+  
+  let placeholder = $state(today(getLocalTimeZone()));
+  let selected = $state(parseDate("2024-07-10"));
 </script>
-<Accordion.Trigger bind:ref={triggerRef}>Trigger</Accordion.Trigger>
-<button onclick={() => triggerRef?.focus()}>Focus</button>
+
+<!-- Calendar with month navigation -->
+<Calendar.Root bind:placeholder bind:value={selected}>
+  <Calendar.Header>
+    <Calendar.PrevButton>Prev</Calendar.PrevButton>
+    <Calendar.Heading />
+    <Calendar.NextButton>Next</Calendar.NextButton>
+  </Calendar.Header>
+  <Calendar.Months>
+    <Calendar.Month>
+      <Calendar.Grid>
+        <Calendar.GridHead>
+          <Calendar.GridRow>
+            <Calendar.HeadCell>Su</Calendar.HeadCell>
+            <!-- ... -->
+          </Calendar.GridRow>
+        </Calendar.GridHead>
+        <Calendar.GridBody>
+          <Calendar.GridRow>
+            <Calendar.Cell>
+              <Calendar.Day>1</Calendar.Day>
+            </Calendar.Cell>
+            <!-- ... -->
+          </Calendar.GridRow>
+        </Calendar.GridBody>
+      </Calendar.Grid>
+    </Calendar.Month>
+  </Calendar.Months>
+</Calendar.Root>
+
+<!-- DatePicker (Calendar + DateField + Popover) -->
+<DatePicker.Root bind:value={selected}>
+  <DatePicker.Trigger>Open</DatePicker.Trigger>
+  <DatePicker.Portal>
+    <DatePicker.Content>
+      <!-- Calendar content -->
+    </DatePicker.Content>
+  </DatePicker.Portal>
+</DatePicker.Root>
+
+<!-- Update immutable DateValue -->
+<script>
+  placeholder = placeholder.set({ month: 8 });
+  placeholder = placeholder.add({ days: 1 });
+  placeholder = placeholder.subtract({ months: 1 });
+</script>
 ```
 
-## DateValue Types
-
-Use immutable `DateValue` objects from `@internationalized/date`:
-
-```ts
-import { CalendarDate, parseDate, today, getLocalTimeZone } from "@internationalized/date";
-
-const date = new CalendarDate(2024, 7, 10);
-const parsedDate = parseDate("2024-07-10");
-const localToday = today(getLocalTimeZone());
-
-// Update via methods returning new instances
-date = date.add({ days: 1 });
-date = date.set({ month: 8 });
-```
-
-Months are 1-indexed (January = 1). Use `ZonedDateTime` for timezone-aware dates.
-
-## Utilities
-
-**BitsConfig**: Global context for default props (portal target, locale) with inheritance:
-
-```svelte
-<BitsConfig defaultPortalTo="#main-portal" defaultLocale="de">
-  <Dialog.Root>...</Dialog.Root>
-</BitsConfig>
-```
-
-**IsUsingKeyboard**: Tracks keyboard usage globally.
-
-**mergeProps**: Merges props with special handling for event handlers (preventDefault stops chain), functions, classes, and styles.
-
-**Portal**: Renders children in a portal to prevent layout issues.
-
-**useId**: Generates unique IDs for components.
-
-## Type Helpers
-
-**WithElementRef**: Adds `ref` prop to custom components.
-
-**WithoutChild/WithoutChildren/WithoutChildrenOrChild**: Exclude snippet props when building wrappers.
-
-## Contribution Guidelines
-
-**Changelog Format**: `- <type>(<scope>): <description>`
-- Types: `fix`, `feat`, `improve`, `chore`, `docs`
-- Scope: Component name or general term
-- Description: Concise, lowercase, 10-15 words max
-
-**Issues vs Discussions**: Start feature requests in Discussions, move to Issues after consensus.
-
-## Migration from v0.x to v1
-
-**Global**: `el` → `ref`, `asChild` → `child` snippet, `transition` props removed, `let:` → snippet props
-
-**Component-specific**:
-- Accordion: `multiple` prop → required `type` prop
-- Checkbox: `Indicator` removed, `indeterminate` state removed
-- Combobox/Select/Menu: `*Indicator` removed, auto-portalling removed (use `Portal` component)
-- Slider: `type` prop now required, new `onValueCommit` callback
-- Tooltip: New required `Tooltip.Provider` component
+## Migration from v0 to v1
+- `el` → `ref` prop
+- `asChild` → `child` snippet
+- `transition` props → `forceMount` + `child` snippet with Svelte transitions
+- `let:` directives → `children`/`child` snippet props
+- `multiple` prop → required `type` prop ('single' or 'multiple')
+- `selected` → `value` prop
+- Indicator components removed → use `children` snippet to access state
+- Auto-portalling removed → wrap content in explicit `Portal` component
+- `Checkbox.Input` removed → auto-renders when `name` prop provided
+- `Tooltip.Provider` now required (wraps app/section)
+- `Slider` requires `type` prop, adds `onValueCommit` callback
+- `AlertDialog.Action` no longer closes by default
+- `Pin Input` completely overhauled for OTP use case

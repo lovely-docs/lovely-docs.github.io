@@ -1,79 +1,67 @@
 ## streamUI
 
-A helper function from AI SDK RSC that creates a streamable UI from LLM providers, supporting the same model interfaces as AI SDK Core APIs.
-
-**Note:** AI SDK RSC is experimental. Use AI SDK UI for production; see migration guide for transitioning from RSC to UI.
+Helper function to create streamable UI from LLM providers. Similar to AI SDK Core APIs with same model interfaces.
 
 ### Import
-```
+```javascript
 import { streamUI } from "@ai-sdk/rsc"
 ```
 
 ### Parameters
 
-**Core Configuration:**
-- `model` (LanguageModel): The language model to use, e.g., `openai("gpt-4.1")`
+**Core inputs:**
+- `model` (LanguageModel): Language model to use, e.g. `openai("gpt-4.1")`
 - `system` (string | SystemModelMessage): System prompt specifying model behavior
 - `prompt` (string): Input prompt to generate text from
+- `messages` (Array): Conversation messages - CoreSystemMessage, CoreUserMessage, CoreAssistantMessage, CoreToolMessage, or UIMessage from useChat hook
+  - CoreUserMessage content can include TextPart, ImagePart (base64/data URL/http(s) URL), or FilePart
+  - CoreAssistantMessage content can include TextPart or ToolCallPart
+  - CoreToolMessage content contains ToolResultPart with tool execution results
 - `initial` (ReactNode, optional): Initial UI to render
 
-**Messages:**
-- `messages` (Array): Conversation history supporting CoreSystemMessage, CoreUserMessage, CoreAssistantMessage, CoreToolMessage, or UIMessage from useChat hook
-  - CoreSystemMessage: `{ role: 'system', content: string }`
-  - CoreUserMessage: `{ role: 'user', content: string | Array<TextPart | ImagePart | FilePart> }`
-    - TextPart: `{ type: 'text', text: string }`
-    - ImagePart: `{ type: 'image', image: string | Uint8Array | Buffer | ArrayBuffer | URL, mediaType?: string }`
-    - FilePart: `{ type: 'file', data: string | Uint8Array | Buffer | ArrayBuffer | URL, mediaType: string }`
-  - CoreAssistantMessage: `{ role: 'assistant', content: string | Array<TextPart | ToolCallPart> }`
-    - ToolCallPart: `{ type: 'tool-call', toolCallId: string, toolName: string, args: object }`
-  - CoreToolMessage: `{ role: 'tool', content: Array<ToolResultPart> }`
-    - ToolResultPart: `{ type: 'tool-result', toolCallId: string, toolName: string, result: unknown, isError?: boolean }`
-
-**Generation Parameters:**
+**Generation options:**
 - `maxOutputTokens` (number, optional): Maximum tokens to generate
-- `temperature` (number, optional): Temperature setting (set either temperature or topP, not both)
-- `topP` (number, optional): Nucleus sampling (set either temperature or topP, not both)
-- `topK` (number, optional): Sample from top K options per token (advanced use only)
-- `presencePenalty` (number, optional): Affects likelihood of repeating information in prompt
+- `temperature` (number, optional): Temperature setting (recommend setting either temperature or topP, not both)
+- `topP` (number, optional): Nucleus sampling
+- `topK` (number, optional): Sample from top K options per token
+- `presencePenalty` (number, optional): Affects likelihood of repeating prompt information
 - `frequencyPenalty` (number, optional): Affects likelihood of repeating same words/phrases
 - `stopSequences` (string[], optional): Sequences that stop generation
 - `seed` (number, optional): Integer seed for deterministic results if supported
 
-**Request Control:**
-- `maxRetries` (number, optional): Maximum retries, default 2; set to 0 to disable
-- `abortSignal` (AbortSignal, optional): Cancel the call
-- `headers` (Record<string, string>, optional): Additional HTTP headers for HTTP-based providers
-
-**Tools:**
-- `tools` (ToolSet): Tools accessible to the model
-  - Tool: `{ description?: string, parameters: zod schema, generate?: (async (parameters) => ReactNode) | AsyncGenerator<ReactNode, ReactNode, void> }`
-- `toolChoice` (optional): `"auto" | "none" | "required" | { "type": "tool", "toolName": string }` - specifies how tools are selected (default: "auto")
+**Tool configuration:**
+- `tools` (ToolSet, optional): Tools accessible to model with:
+  - `description` (string, optional): Purpose and usage details
+  - `parameters` (zod schema): Typed schema for tool parameters
+  - `generate` (async function or AsyncGenerator, optional): Called with tool arguments, yields React nodes as UI
+- `toolChoice` (optional): How tools are selected - "auto" (default), "none", "required", or `{ "type": "tool", "toolName": string }`
 
 **Callbacks:**
-- `text` ((Text) => ReactNode, optional): Callback for generated tokens with `{ content: string, delta: string, done: boolean }`
-- `onFinish` ((OnFinishResult) => void, optional): Called when LLM response and tool executions finish
-  - OnFinishResult: `{ usage: TokenUsage, value: ReactNode, warnings?: Warning[], response?: Response }`
-  - TokenUsage: `{ promptTokens: number, completionTokens: number, totalTokens: number }`
-  - Response: `{ headers?: Record<string, string> }`
+- `text` (function, optional): Callback handling generated tokens with `{ content, delta, done }`
+- `onFinish` (function, optional): Called when LLM response and tool executions complete, receives `{ usage: { promptTokens, completionTokens, totalTokens }, value: ReactNode, warnings?, response? }`
 
-**Provider:**
+**Other:**
+- `maxRetries` (number, optional): Max retries, default 2, set to 0 to disable
+- `abortSignal` (AbortSignal, optional): Cancel the call
+- `headers` (Record<string, string>, optional): Additional HTTP headers for HTTP-based providers
 - `providerOptions` (Record<string, JSONObject>, optional): Provider-specific options
 
 ### Returns
 
-- `value` (ReactNode): The user interface based on stream output
+- `value` (ReactNode): User interface based on stream output
 - `response` (Response, optional): Response data with optional headers
-- `warnings` (Warning[], optional): Warnings from model provider
-- `stream` (AsyncIterable<StreamPart> & ReadableStream<StreamPart>): Stream of all events
-  - StreamPart types:
-    - Text delta: `{ type: 'text-delta', textDelta: string }`
-    - Tool call: `{ type: 'tool-call', toolCallId: string, toolName: string, args: object }`
-    - Error: `{ type: 'error', error: Error }`
-    - Finish: `{ type: 'finish', finishReason: 'stop' | 'length' | 'content-filter' | 'tool-calls' | 'error' | 'other' | 'unknown', usage: TokenUsage }`
+- `warnings` (Warning[], optional): Provider warnings
+- `stream` (AsyncIterable<StreamPart> & ReadableStream<StreamPart>): Stream with all events:
+  - `{ type: 'text-delta', textDelta: string }`: Text delta
+  - `{ type: 'tool-call', toolCallId, toolName, args }`: Tool call
+  - `{ type: 'error', error: Error }`: Error during execution
+  - `{ type: 'finish', finishReason, usage }`: Completion with reason ('stop' | 'length' | 'content-filter' | 'tool-calls' | 'error' | 'other' | 'unknown')
 
 ### Examples
 
-- Render React components as function calls using language model in Next.js
-- Persist and restore UI/AI states in Next.js
-- Route React components using language model in Next.js
-- Stream component updates to client in Next.js
+1. **Render React component as function call** - Use streamUI with a model to generate and render React components based on LLM output
+2. **Persist and restore UI/AI states** - Save and restore both UI state and AI state in Next.js applications
+3. **Route React components** - Use language model to dynamically route between different React components
+4. **Stream component updates** - Stream component updates to client in real-time
+
+**Note:** AI SDK RSC is experimental. Use AI SDK UI for production; migration guide available.

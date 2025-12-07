@@ -1,0 +1,1 @@
+Svelte 3/4 imperative component API: instantiate with `new Component(options)`, use `$set()`, `$on()`, `$destroy()` for lifecycle, optional `accessors: true` for prop getters/setters. Server-side: `Component.render(props, options)` returns `{head, html, css}`. All replaced by `mount()`/`unmount()` in Svelte 5.

@@ -1,0 +1,1 @@
+API for creating and converting attachments: createAttachmentKey() returns symbol for spreading attachments onto elements; fromAction() converts actions to attachments; Attachment is a mount/unmount lifecycle function.

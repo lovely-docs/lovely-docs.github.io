@@ -1,11 +1,24 @@
 ## Back-pressure and Cancellation
 
-Back-pressure is the consumer signaling the producer that more data isn't needed yet. Cancellation is stopping production when consumption stops.
+**Problem:** Eager `for await (...)` in `ReadableStream.start()` continuously pushes values without respecting back-pressure, causing unbounded buffer growth and preventing cancellation.
 
-**Problem (Eager Approach):** Using `for await (...)` in `ReadableStream.start()` creates a perpetual loop that pushes data regardless of consumer demand, causing unbounded buffer growth and memory exhaustion if the consumer stops reading.
+**Solution:** Use the `pull` handler with manual `iterator.next()` calls to produce values lazily, only when the consumer requests them.
 
-**Solution (Lazy Approach):** Use the `pull` handler to produce data only when requested:
+**Eager (bad):**
+```jsx
+function createStream(iterator) {
+  return new ReadableStream({
+    async start(controller) {
+      for await (const v of iterator) {
+        controller.enqueue(v);
+      }
+      controller.close();
+    },
+  });
+}
+```
 
+**Lazy (good):**
 ```jsx
 function createStream(iterator) {
   return new ReadableStream({
@@ -18,4 +31,4 @@ function createStream(iterator) {
 }
 ```
 
-This ties producer lifetime to consumer lifetime—when the consumer stops (e.g., user navigates away), production stops automatically and resources are freed.
+Lazy approach ties producer lifetime to consumer lifetime, preventing memory leaks when consumers disconnect and enabling proper resource cleanup in streaming AI responses.

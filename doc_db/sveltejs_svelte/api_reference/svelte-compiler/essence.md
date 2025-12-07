@@ -1,0 +1,1 @@
+Svelte compiler API: compile/compileModule/parse/preprocess/migrate functions with CompileOptions (name, customElement, css, runes, etc.), ModuleCompileOptions (dev, generate, filename), CompileResult (js/css/warnings/metadata/ast), PreprocessorGroup/Preprocessor/Processed types, and comprehensive AST type definitions.

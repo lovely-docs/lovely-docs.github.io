@@ -1,0 +1,1 @@
+InvalidResponseDataError: thrown on invalid server response data; check with isInstance(); has data and message properties

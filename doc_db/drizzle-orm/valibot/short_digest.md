@@ -1,7 +1,10 @@
-Generate Valibot schemas from Drizzle ORM tables for validation.
+Plugin to generate Valibot validation schemas from Drizzle ORM table definitions.
 
-**Functions**: `createSelectSchema()` (all fields required), `createInsertSchema()` (excludes auto-generated), `createUpdateSchema()` (all optional, no auto-generated).
+**Three schema types**:
+- `createSelectSchema()` - validates queried data
+- `createInsertSchema()` - validates data for insertion (excludes auto-generated columns)
+- `createUpdateSchema()` - validates data for updates (all fields optional, no generated columns)
 
-**Refinements**: Pass optional parameter with field overrides - callback functions extend/modify, Valibot schemas overwrite.
+All accept optional refinements parameter to extend/modify/overwrite field schemas via callback or Valibot schema.
 
-**Type Mapping**: Boolean → `boolean()`, Date → `date()`, String → `string()`, UUID → `pipe(string(), uuid())`, Char → `pipe(string(), length(n))`, Varchar → `pipe(string(), maxLength(n))`, Enum → `enum([...])`, Integer types with min/max bounds, Float types with bounds, BigInt modes, Geometry (tuple/xy), Vector/Line, JSON, Buffer, Arrays.
+**Data type mapping**: Boolean, Date, String, UUID, Char/Varchar with length constraints, Enum, Integer types with range validation (tinyint to bigint with signed/unsigned variants), Float/Double, Year, Geometry (point/line), Vectors, JSON, Buffer, and Arrays.

@@ -1,1 +1,1 @@
-Special element for safely binding to window events and properties with automatic cleanup.
+Special element for attaching window event listeners and binding to window properties (innerWidth, innerHeight, outerWidth, outerHeight, scrollX, scrollY, online, devicePixelRatio) with automatic cleanup; must be top-level; scrollX/scrollY are writable, others readonly.

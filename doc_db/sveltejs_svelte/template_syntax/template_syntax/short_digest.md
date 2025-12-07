@@ -1,1 +1,0 @@
-Documentation index page for Svelte template syntax. Content is auto-generated.

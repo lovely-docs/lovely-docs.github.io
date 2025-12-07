@@ -1,1 +1,1 @@
-Documentation index for Svelte Runes, the framework's reactivity primitives.
+Runes are Svelte's reactivity primitives for state and side-effect management.

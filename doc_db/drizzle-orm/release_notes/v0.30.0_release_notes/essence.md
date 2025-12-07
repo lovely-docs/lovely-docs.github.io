@@ -1,1 +1,1 @@
-v0.30.0 breaks postgres.js date handling by mutating clients to return date strings, which Drizzle remaps per mode; fixes 8 timestamp/date bugs including mode mismatches and timezone issues.
+v0.30.0 changes postgres.js to return date strings with Drizzle mode-based mapping; fixes 8 timestamp/date-related bugs including timezone and type inconsistencies.

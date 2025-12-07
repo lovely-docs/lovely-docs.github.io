@@ -1,1 +1,0 @@
-Upgrade from AI SDK 4.0 to 4.1 with no breaking changes required.

@@ -1,11 +1,11 @@
 ## Problem
 `generateObject` and `streamObject` don't support tool calling. To combine tool calling with structured outputs, you must use `generateText` or `streamText` with the `output` option instead.
 
-## Key Consideration
-When using `output` with tool calling, structured output generation counts as an additional step in the execution flow. This affects the `stopWhen` condition.
+## Key Detail
+When using `output` with tool calling, structured output generation counts as an additional execution step. This affects the `stopWhen` condition.
 
 ## Solution
-Adjust your `stopWhen` condition to account for the extra step. Add at least 1 to your intended step count:
+Adjust `stopWhen` to account for the extra step:
 
 ```tsx
 const result = await generateText({
@@ -32,4 +32,4 @@ const result = await generateText({
 });
 ```
 
-The execution flow includes: tool call → tool result → structured output generation. Plan your `stopWhen` accordingly.
+The `stopWhen: stepCountIs(3)` accounts for: tool call execution, tool result processing, and structured output generation. Increment your intended step count by at least 1 to accommodate the structured output step.

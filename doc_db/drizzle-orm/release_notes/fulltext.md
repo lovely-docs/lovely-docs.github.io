@@ -2,23 +2,23 @@
 
 ## Pages
 
-### v0.23.2_release_notes
-v0.23.2 fixes PostgreSQL schemaFilter enum detection bug and drizzle-kit up command
+### v0.23.2_release
+v0.23.2 bug fixes: PostgreSQL schemaFilter enum detection, drizzle-kit up command restoration
 
 ## Bug Fixes
 
-**PostgreSQL schemaFilter Bug**: Fixed an issue where the `schemaFilter` object in push and introspect operations was not being respected. The tool was incorrectly detecting enums in schemas that were not included in the schemaFilter configuration.
+**PostgreSQL schemaFilter bug**: Fixed an issue where the `schemaFilter` object in push and introspect commands was incorrectly detecting enums in schemas that were not defined in the filter.
 
-**drizzle-kit up Command**: Fixed the `drizzle-kit up` command to function correctly starting from the sequences release.
+**drizzle-kit up command**: Fixed the `drizzle-kit up` command to work correctly starting from the sequences release.
 
-### drizzleorm_v0.11.0_release
-TypeScript ORM for PostgreSQL with fully typed schemas, compile-time safe queries, joins, CRUD operations, and automatic migration generation.
+### v0.11.0_release
+TypeScript ORM with in-code typed SQL schema; supports PostgreSQL; features typed queries, joins, filters, and automatic migration generation.
 
 ## Overview
-DrizzleORM is an open-source TypeScript ORM supporting PostgreSQL with MySQL and SQLite support planned. It provides fully typed SQL schemas in-code for type safety and developer experience benefits.
+Open source TypeScript ORM with fully typed SQL schema in-code. Supports PostgreSQL with MySQL and SQLite coming soon.
 
 ## Schema Definition
-Define tables as classes extending `PgTable` with typed columns. Supports enums, indexes, and foreign keys:
+Define tables as classes extending `PgTable` with typed columns:
 ```ts
 export const popularityEnum = createEnum({ alias: 'popularity', values: ['unknown', 'known', 'popular'] });
 
@@ -38,32 +38,49 @@ export class CitiesTable extends PgTable<CitiesTable> {
 }
 ```
 
-## Connection and Basic Queries
-Connect to database and execute typed queries:
+## Connection & Basic Queries
 ```ts
+import { drizzle } from 'drizzle-orm'
+
+export class UsersTable extends PgTable<UsersTable> {
+  public id = this.serial('id').primaryKey();
+  public fullName = this.text('full_name');
+  public phone = this.varchar('phone', { size: 256 });
+  public tableName(): string { return 'users'; }
+}
+export type User = InferType<UsersTable>
+
 const db = await drizzle.connect("postgres://user:password@host:port/db");
 const usersTable = new UsersTable(db);
 const users: User[] = await usersTable.select().execute();
 ```
 
-## Filtering and Query Modifiers
-Use `where` with `eq()`, `and()`, `or()` filters; support partial select, limit/offset, and ordering:
+## Filtering & Selection
 ```ts
+// WHERE with filters
 await table.select().where(eq(table.id, 42)).execute();
 await table.select().where(and([eq(table.id, 42), eq(table.name, "Dan")])).execute();
 await table.select().where(or([eq(table.id, 42), eq(table.id, 1)])).execute();
 
-const result = await table.select({ mapped1: table.id, mapped2: table.name }).execute();
-const { mapped1, mapped2 } = result[0];
+// Partial select
+const result = await table.select({
+  mapped1: table.id,
+  mapped2: table.name,
+}).execute();
 
+// Pagination & ordering
 await table.select().limit(10).offset(10).execute()
 await table.select().orderBy((table) => table.name, Order.ASC).execute()
+await table.select().orderBy((table) => table.name, Order.DESC).execute()
 ```
 
 ## Insert, Update, Delete
 ```ts
 await usersTable.insert({ name: "Andrew", createdAt: new Date() }).execute();
-await usersTable.insertMany([{ name: "Andrew", createdAt: new Date() }, { name: "Dan", createdAt: new Date() }]).execute();
+await usersTable.insertMany([
+  { name: "Andrew", createdAt: new Date() },
+  { name: "Dan", createdAt: new Date() }
+]).execute();
 await usersTable.update().where(eq(usersTable.name, 'Dan')).set({ name: 'Mr. Dan' }).execute();
 await usersTable.delete().where(eq(usersTable.name, 'Dan')).execute();
 ```
@@ -80,6 +97,13 @@ const citiesWithUsers: { city: City, user: User }[] = result.map((city, user) =>
 
 ## Many-to-Many Relationships
 ```ts
+export class UsersTable extends PgTable<UsersTable> {
+  id = this.serial("id").primaryKey();
+  name = this.varchar("name");
+}
+export class ChatGroupsTable extends PgTable<ChatGroupsTable> {
+  id = this.serial("id").primaryKey();
+}
 export class ManyToManyTable extends PgTable<ManyToManyTable> {
   userId = this.int('user_id').foreignKey(UsersTable, (table) => table.id, { onDelete: 'CASCADE' });
   groupId = this.int('group_id').foreignKey(ChatGroupsTable, (table) => table.id, { onDelete: 'CASCADE' });
@@ -93,13 +117,48 @@ const usersWithUserGroups = await manyToManyTable.select()
 ```
 
 ## Migrations
-CLI tool generates automatic migrations from TypeScript schema, handling renames and deletes with prompts. Generates SQL with table creation, indexes, and foreign key constraints.
+CLI tool generates migrations automatically from TypeScript schema, handling renames and deletes with prompts.
+
+Schema:
+```ts
+export class UsersTable extends PgTable<UsersTable> {
+  public id = this.serial("id").primaryKey();
+  public fullName = this.varchar("full_name", { size: 256 });
+  public fullNameIndex = this.index(this.fullName);
+  public tableName(): string { return "users"; }
+}
+export class AuthOtpTable extends PgTable<AuthOtpTable> {
+  public id = this.serial("id").primaryKey();
+  public phone = this.varchar("phone", { size: 256 });
+  public userId = this.int("user_id").foreignKey(UsersTable, (t) => t.id);
+  public tableName(): string { return "auth_otp"; }
+}
+```
+
+Generated SQL:
+```sql
+CREATE TABLE IF NOT EXISTS auth_otp (
+    "id" SERIAL PRIMARY KEY,
+    "phone" character varying(256),
+    "user_id" INT
+);
+CREATE TABLE IF NOT EXISTS users (
+    "id" SERIAL PRIMARY KEY,
+    "full_name" character varying(256)
+);
+DO $$ BEGIN
+ ALTER TABLE auth_otp ADD CONSTRAINT auth_otp_user_id_fkey FOREIGN KEY ("user_id") REFERENCES users(id);
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+CREATE INDEX IF NOT EXISTS users_full_name_index ON users (full_name);
+```
 
 ### v0.16.2_release_notes
-v0.16.2 adds PostgreSQL/MySQL schemas, database introspection, postgres.js driver support, and custom type definitions.
+PostgreSQL/MySQL schema support, database introspection, postgres.js driver, custom type operators
 
 ## PostgreSQL Schemas
-Declare PostgreSQL schemas and create tables within them using `pgSchema()`:
+Declare PostgreSQL schemas and create tables within them:
 ```ts
 import { pgSchema } from "drizzle-orm-pg";
 export const mySchema = pgSchema("my_schema");
@@ -109,11 +168,19 @@ export const users = mySchema("users", {
   email: text("email"),
 });
 ```
-Generates: `CREATE SCHEMA "my_schema"; CREATE TABLE "my_schema"."users" (...)`
+Generates:
+```sql
+CREATE SCHEMA "my_schema";
+CREATE TABLE IF NOT EXISTS "my_schema"."users" (
+  "id" serial PRIMARY KEY NOT NULL,
+  "name" text,
+  "email" text
+);
+```
 drizzle-kit auto-generates migrations: `drizzle-kit generate:pg --schema=src/schema.ts --out=migrations/`
 
 ## MySQL Databases/Schemas
-Declare MySQL databases/schemas and tables using `mysqlSchema()`:
+Similar schema support for MySQL:
 ```ts
 import { mysqlSchema } from "drizzle-orm-mysql";
 const mySchema = mysqlSchema("my_schema");
@@ -123,72 +190,80 @@ const users = mySchema("users", {
   email: text("email"),
 });
 ```
-Generates: `CREATE DATABASE \`my_schema\`; CREATE TABLE \`my_schema\`.\`users\` (...)`
-drizzle-kit auto-generates migrations: `drizzle-kit generate:mysql --schema=src/schema.ts --out=migrations/`
+Generates:
+```sql
+CREATE DATABASE `my_schema`;
+CREATE TABLE `my_schema`.`users` (
+  `id` serial PRIMARY KEY NOT NULL,
+  `name` text,
+  `email` text
+);
+```
+Command: `drizzle-kit generate:mysql --schema=src/schema.ts --out=migrations/`
 
 ## PostgreSQL Introspection
-Pull existing PostgreSQL database schema using drizzle-kit:
+Pull existing PostgreSQL database schema automatically with drizzle-kit. Supports enums, tables with native/non-native columns, indexes, foreign keys, self-references, cyclic foreign keys, and schemas:
 ```shell
 drizzle-kit introspect:pg --out=migrations/ --connectionString=postgresql://user:pass@host:port/db_name
 ```
-Supports: enums, tables with native/non-native columns, indexes, foreign keys (including self-references and cyclic), and schemas. Generates `schema.ts` with full type definitions for all columns and relationships.
+Generates complete `schema.ts` with all detected types, enums, tables, columns, defaults, and relationships including cyclic references and self-references.
 
 ## Postgres.js Driver Support
-Full support for postgres.js driver (lightweight and fast):
+Full support for postgres.js driver:
 ```ts
-import { drizzle, PostgresJsDatabase } from "drizzle-orm-pg/postgres.js";
+import { pgTable, serial, text, varchar } from "drizzle-orm-pg";
+import { drizzle } from "drizzle-orm-pg/postgres.js";
 import postgres from "postgres";
-import { users } from "./schema";
+
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  fullName: text("full_name"),
+  phone: varchar("phone", { length: 256 }),
+});
 
 const client = postgres(connectionString);
-const db: PostgresJsDatabase = drizzle(client);
+const db = drizzle(client);
 const allUsers = await db.select(users);
 ```
 
-## Custom Types for PostgreSQL and MySQL
-Create non-native types using `customType()`:
+## Custom Types
+Create non-native PostgreSQL or MySQL types:
 ```ts
-// PostgreSQL
 const customText = customType<{ data: string }>({
   dataType() { return "text"; }
 });
-const usersTable = pgTable("users", {
+
+// PostgreSQL
+const pgUsersTable = pgTable("users", {
   name: customText("name").notNull(),
 });
 
 // MySQL
-const customText = customType<{ data: string }>({
-  dataType() { return "text"; }
-});
-const usersTable = mysqlTable("users", {
+const mysqlUsersTable = mysqlTable("users", {
   name: customText("name").notNull(),
 });
 ```
 
-### unique_constraints_support
-UNIQUE constraints for PostgreSQL (with NULLS NOT DISTINCT), MySQL, and SQLite via `.unique()` at column level or `unique('name').on(cols)` for multi-column constraints.
+### v0.27.2_-_unique_constraints_support
+Added UNIQUE constraint support for PostgreSQL (with NULLS NOT DISTINCT option), MySQL, and SQLite via column-level `.unique()` or table-level `unique().on()` methods with optional custom names.
 
-## UNIQUE Constraints Support
+## UNIQUE Constraints Support Added
 
-Added support for UNIQUE constraints across PostgreSQL, MySQL, and SQLite databases.
+Support for `UNIQUE` constraints across PostgreSQL, MySQL, and SQLite databases.
 
 ### PostgreSQL
-- Single-column constraints: defined at column level with `.unique()` or `.unique('custom_name')`
-- Multi-column constraints: defined in table config third parameter using `unique('name').on(columns)`
-- Supports custom constraint names
-- Supports `NULLS NOT DISTINCT` option to restrict multiple NULL values: `.unique('name', { nulls: 'not distinct' })` or `.nullsNotDistinct()`
-
-Example:
+Single-column constraints defined at column level with optional custom name:
 ```ts
-// Single column
 const table = pgTable('table', {
   id: serial('id').primaryKey(),
   name: text('name').notNull().unique(),
   state: char('state', { length: 2 }).unique('custom'),
   field: char('field', { length: 2 }).unique('custom_field', { nulls: 'not distinct' }),
 });
+```
 
-// Multiple columns
+Multi-column constraints defined in table config with `nullsNotDistinct()` option:
+```ts
 const table = pgTable('table', {
   id: serial('id').primaryKey(),
   name: text('name').notNull(),
@@ -199,22 +274,17 @@ const table = pgTable('table', {
 }));
 ```
 
-### MySQL
-- Single-column constraints: `.unique()` or `.unique('custom_name')`
-- Multi-column constraints: `unique('name').on(columns)` in table config
-- Supports custom constraint names
-- Does not support `NULLS NOT DISTINCT`
+PostgreSQL supports `NULLS NOT DISTINCT` option to restrict multiple NULL values.
 
-Example:
+### MySQL
+Same syntax as PostgreSQL but without `NULLS NOT DISTINCT` support:
 ```ts
-// Single column
 const table = mysqlTable('table', {
   id: serial('id').primaryKey(),
   name: text('name').notNull().unique(),
   state: text('state').unique('custom'),
 });
 
-// Multiple columns
 const table = mysqlTable('cities1', {
   id: serial('id').primaryKey(),
   name: text('name').notNull(),
@@ -226,21 +296,14 @@ const table = mysqlTable('cities1', {
 ```
 
 ### SQLite
-- Unique constraints are implemented as unique indexes internally
-- Single-column constraints: `.unique()` or `.unique('custom_name')`
-- Multi-column constraints: `unique('name').on(columns)` in table config
-- Supports custom index names
-
-Example:
+Unique constraints implemented as unique indexes. Supports optional naming:
 ```ts
-// Single column
 const table = sqliteTable('table', {
   id: int('id').primaryKey(),
   name: text('name').notNull().unique(),
   state: text('state').unique('custom'),
 });
 
-// Multiple columns
 const table = sqliteTable('table', {
   id: int('id').primaryKey(),
   name: text('name').notNull(),
@@ -252,39 +315,46 @@ const table = sqliteTable('table', {
 ```
 
 ### v0.28.0_release_notes
-v0.28.0: Removed nested relation filtering in where clauses, added mysql2 mode config for PlanetScale support, 430% IntelliSense speedup, rewrote relational queries with lateral joins for better performance, added insert with all defaults via empty objects.
+v0.28.0: Removed nested relation filtering, added mysql2 mode config, 430% IntelliSense speedup, rewrote relational queries with lateral joins for better performance, added insert with all defaults.
 
 ## Breaking Changes
 
-**Removed support for filtering by nested relations**: The `table` object in the `where` callback no longer includes fields from `with` and `extras`. This change enables more efficient relational queries with improved performance and row reads. Workarounds include applying filters manually after fetching rows or using the core API.
+### Removed support for filtering by nested relations
+The `table` object in the `where` callback no longer includes fields from `with` and `extras`. This change improves relational query efficiency.
 
-Example that no longer works:
 ```ts
+// This no longer works:
 const usersWithPosts = await db.query.users.findMany({
   where: (table, { sql }) => (sql`json_array_length(${table.posts}) > 0`),
   with: { posts: true },
 });
 ```
 
-**Added Relational Queries `mode` config for `mysql2` driver**: Drizzle relational queries generate a single SQL statement using lateral joins of subqueries. PlanetScale doesn't support lateral joins, so a mode configuration is required:
-- `mode: "default"` for regular MySQL databases
-- `mode: "planetscale"` for PlanetScale
+Workarounds: apply filters manually after fetching, or use the core API.
+
+### Added Relational Queries `mode` config for `mysql2` driver
+Relational queries use lateral joins which PlanetScale doesn't support. Specify the mode when creating the connection:
 
 ```ts
 const db = drizzle({ client, schema, mode: 'planetscale' });
+// or
+const db = drizzle({ client, schema, mode: 'default' }); // for regular MySQL
 ```
 
 ## Performance Improvements
 
-**IntelliSense performance**: 430% speed improvement for large schemas (tested on 85 tables, 666 columns, 26 enums, 172 indexes, 133 foreign keys).
+### IntelliSense performance for large schemas
+Optimized internal types resulting in **430% speed up** for IntelliSense on schemas with 85 tables, 666 columns, 26 enums, 172 indexes, and 133 foreign keys.
 
-**Relational Queries performance and read usage**: Complete rewrite of query generation strategy:
+### Relational Queries Performance and Read Usage
+Completely rewrote query generation strategy:
 1. **Lateral Joins**: Uses "LEFT JOIN LATERAL" for efficient data retrieval; MySQL PlanetScale and SQLite use simple subquery selects
-2. **Selective Data Retrieval**: Only necessary data is fetched, reducing dataset size and execution time
-3. **Reduced Aggregations**: Replaced multiple aggregation functions with direct `json_build_array` within lateral joins
-4. **Simplified Grouping**: Removed GROUP BY clause as lateral joins and subqueries handle aggregation more efficiently
+2. **Selective Data Retrieval**: Only fetches necessary columns, reducing dataset size
+3. **Reduced Aggregations**: Uses `json_build_array` directly within lateral joins instead of multiple aggregation functions
+4. **Simplified Grouping**: Removed GROUP BY clause as lateral joins handle aggregation more efficiently
 
 Example query transformation:
+
 ```ts
 const items = await db.query.comments.findMany({
   limit,
@@ -299,73 +369,96 @@ const items = await db.query.comments.findMany({
 });
 ```
 
-Old query used multiple GROUP BY clauses and CASE statements with json_agg. New query uses nested lateral joins with json_build_array for cleaner, more efficient execution.
+**New query** (with lateral joins):
+```sql
+select "comments"."id", "comments"."user_id", "comments"."post_id", "comments"."content",
+       "comments_user"."data" as "user", "comments_post"."data" as "post"
+from "comments"
+left join lateral (select json_build_array("comments_user"."name") as "data"
+                   from (select * from "users" "comments_user"
+                         where "comments_user"."id" = "comments"."user_id" limit 1) "comments_user") "comments_user" on true
+left join lateral (select json_build_array("comments_post"."title", "comments_post_user"."data") as "data"
+                   from (select * from "posts" "comments_post"
+                         where "comments_post"."id" = "comments"."post_id" limit 1) "comments_post"
+                   left join lateral (select json_build_array("comments_post_user"."name") as "data"
+                                      from (select * from "users" "comments_post_user"
+                                            where "comments_post_user"."id" = "comments_post"."user_id" limit 1) "comments_post_user") "comments_post_user" on true) "comments_post" on true
+order by "comments"."id" limit 1
+```
+
+**Old query** (with GROUP BY and aggregations) - significantly more complex with multiple CASE statements and json_agg calls.
 
 ## New Features
 
-**Insert rows with default values for all columns**: Pass empty objects to insert rows with all default values:
+### Insert rows with default values for all columns
+Provide empty objects to insert rows with all default values:
+
 ```ts
-await db.insert(usersTable).values({});
-await db.insert(usersTable).values([{}, {}]);
+await db.insert(usersTable).values({});        // Insert 1 row with all defaults
+await db.insert(usersTable).values([{}, {}]);  // Insert 2 rows with all defaults
 ```
 
 ### v0.28.1_release
-v0.28.1 patch fixes Postgres array regressions from 0.28.0
+v0.28.1 patch fixes Postgres array bugs from v0.28.0
 
-## Release: v0.28.1 (2023-08-07)
+## v0.28.1 Release
 
-This is a patch release that fixes Postgres array-related issues that were introduced in version 0.28.0.
+**Release Date:** August 7, 2023
 
 ### Fixes
-- Resolved Postgres array handling bugs from 0.28.0 (issues #983, #992)
+
+Fixed Postgres array-related issues that were introduced in version 0.28.0. This patch addresses problems reported in issues #983 and #992.
 
 ### v0.28.2_release_notes
-v0.28.2: MySQL timestamp milliseconds fix, SQLite `.get()` type correction, sqlite-proxy double-execution fix, Typebox package added
+v0.28.2: fixes for MySQL timestamp milliseconds, SQLite .get() typing, SQLite proxy double-execution; adds Typebox support
 
-## v0.28.2 Release (2023-08-10)
+## v0.28.2 Release
 
-### Internal Features and Changes
-- Added comprehensive test suite for D1 database
-- Fixed issues in internal documentation
+### Community Contributions
+This release includes contributions from the community.
+
+### Internal Changes
+- Added comprehensive test suite for d1
+- Fixed documentation issues
 
 ### Bug Fixes
-- Resolved MySQL timestamp milliseconds truncation issue
-- Corrected `.get()` method type signature for sqlite-based dialects (issue #565)
-- Fixed sqlite-proxy bug causing queries to execute twice
+- **MySQL timestamp milliseconds**: Fixed truncation issue where milliseconds were being lost in timestamp values
+- **SQLite `.get()` method**: Corrected type signature for sqlite-based dialects (issue #565)
+- **SQLite proxy**: Fixed bug causing queries to execute twice
 
-### New Packages
-- Added Typebox support via new drizzle-typebox package for schema validation integration
+### New Features
+- **Typebox support**: Added official support for Typebox package integration via new `drizzle-typebox` package
+  - Enables type-safe schema validation using Typebox
+  - See `/docs/typebox` for usage examples and documentation
 
 ### v0.28.3_release_notes
-v0.28.3: SQLite query API, column `.$defaultFn()` for runtime defaults, `$inferSelect`/`$inferInsert` table type inference, deprecated `InferModel`, fixed sqlite-proxy/SQL.js `.get()` empty results
+v0.28.3: SQLite query API, column runtime defaults via .$defaultFn(), table type inference via .$inferSelect/$inferInsert, fixed sqlite-proxy/SQL.js .get() empty results
 
 ## Fixes
-- Fixed sqlite-proxy and SQL.js response from `.get()` when the result is empty
+- Fixed sqlite-proxy and SQL.js `.get()` response when result is empty
 
 ## New Features
 
 ### SQLite Simplified Query API
-Added a simplified query API for SQLite databases.
+Added simplified query API for SQLite.
 
-### Column Builder Default Methods
-Added `.$defaultFn()` and `.$default()` methods to column builders for specifying runtime default values. These methods accept a function that can implement any logic (e.g., `cuid()` for generating IDs). The default value is only used at runtime in drizzle-orm and does not affect drizzle-kit behavior.
+### Column Builder Methods: `.$defaultFn()` / `.$default()`
+Define runtime default values for columns with custom logic. Available for PostgreSQL, MySQL, and SQLite.
 
-Example:
 ```ts
 import { varchar, mysqlTable } from "drizzle-orm/mysql-core";
 import { createId } from '@paralleldrive/cuid2';
 
 const table = mysqlTable('table', {
-	id: varchar('id', { length: 128 }).$defaultFn(() => createId()),
+  id: varchar('id', { length: 128 }).$defaultFn(() => createId()),
 });
 ```
 
-Available for PostgreSQL, MySQL, and SQLite column types.
+Note: Runtime defaults only affect drizzle-orm behavior, not drizzle-kit.
 
-### Table Model Type Inference
-Added `table.$inferSelect` / `table._.inferSelect` and `table.$inferInsert` / `table._.inferInsert` methods for convenient table model type inference. These replace the deprecated `InferModel` type.
+### Table Model Type Inference: `$inferSelect` / `$inferInsert`
+Convenient methods for inferring table types. Replaces deprecated `InferModel`.
 
-Example:
 ```ts
 import { InferSelectModel, InferInsertModel } from 'drizzle-orm'
 
@@ -377,9 +470,11 @@ const usersTable = pgTable('users', {
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 });
 
+// New approach
 type SelectUser = typeof usersTable.$inferSelect;
 type InsertUser = typeof usersTable.$inferInsert;
 
+// Legacy approach (deprecated)
 type SelectUser2 = InferSelectModel<typeof usersTable>;
 type InsertUser2 = InferInsertModel<typeof usersTable>;
 ```
@@ -389,9 +484,9 @@ type InsertUser2 = InferInsertModel<typeof usersTable>;
 - Disabled `.d.ts` files bundling
 
 ### v0.28.4_release
-v0.28.4 fixes ESM imports and Postgres table type errors; @opentelemetry/api issue resolved in v0.28.5
+v0.28.4 fixes ESM imports and Postgres table type errors; v0.28.5 fixes missing @opentelemetry/api package.
 
-## Release v0.28.4 (2023-08-24)
+## v0.28.4 Release (2023-08-24)
 
 ### Fixes
 - Fixed imports in ESM-based projects (issue #1088)
@@ -400,30 +495,27 @@ v0.28.4 fixes ESM imports and Postgres table type errors; @opentelemetry/api iss
 ### Note
 If you encounter a `Cannot find package '@opentelemetry/api'` error, update to v0.28.5 where this is resolved.
 
-### v0.28.5_release_-_opentelemetry_type_import_fix
-v0.28.5 fixed runtime error from incorrect OpenTelemetry type import syntax (`import { type }` vs `import type`), causing disabled OpenTelemetry code to leak into runtime.
+### v0.28.5_release_notes
+v0.28.5 fixes OpenTelemetry type import syntax error causing runtime failures; OpenTelemetry feature is disabled.
 
-## v0.28.5 Release - OpenTelemetry Type Import Fix
+## v0.28.5 Release
 
-**Fix:** Corrected an incorrect OpenTelemetry type import that caused a runtime error.
+**Fix:** Corrected incorrect OpenTelemetry type import that caused a runtime error.
 
-**Context:** The OpenTelemetry implementation in drizzle-orm is currently disabled and non-functional. It was an experimental feature designed to allow users to collect query statistics and send them to their own telemetry consumers, but it was disabled before release and does nothing in the current version. Drizzle itself does not collect or send any statistics.
+**Details:** The issue was caused by using `import { type ... }` syntax instead of `import type { ... }` on the tracing.ts file, which caused the `import '@opentelemetry/api'` line to leak into runtime code.
 
-**Root Cause:** The issue occurred due to incorrect import syntax on the tracing.ts file. The code used `import { type ... }` instead of the correct `import type { ... }` syntax. This caused the `import '@opentelemetry/api'` statement to leak into the runtime instead of being tree-shaken during compilation, resulting in a runtime error.
-
-**Impact:** This was a critical fix for users experiencing runtime errors related to OpenTelemetry imports, even though the OpenTelemetry functionality itself is not active.
+**Context:** OpenTelemetry integration in drizzle-orm is currently disabled and does nothing. It was an experimental feature designed to allow users to collect query statistics and send them to their own telemetry consumers. The ORM itself never collects or sends any stats. OpenTelemetry is simply a protocol that the library provides hooks for, but the feature is not active in current versions.
 
 ### v0.28.6_release_notes
-v0.28.6: LibSQL batch API, SQLite JSON text mode, Relational Query .toSQL(), PostgreSQL array operators (arrayContains/arrayContained/arrayOverlaps), relational query where filter operators, MySQL datetime UTC fix.
+v0.28.6: LibSQL batch API, SQLite JSON text mode, Relational Query .toSQL(), PostgreSQL array operators (arrayContains/arrayContained/arrayOverlaps), Relational Query where operators from callback, MySQL datetime UTC fix.
 
 ## Changes
-MySQL `datetime` with `mode: 'date'` now stores and retrieves dates in UTC strings to align with MySQL behavior. Use `mode: 'string'` or custom types for different behavior.
+MySQL `datetime` with `mode: 'date'` now stores and retrieves dates in UTC strings. Use `mode: 'string'` or custom types for different behavior.
 
 ## New Features
 
-**LibSQL batch API support**: Execute multiple queries in a single batch call using `db.batch()`. Supports all query builders: `db.all()`, `db.get()`, `db.values()`, `db.run()`, `db.query.<table>.findMany()`, `db.query.<table>.findFirst()`, `db.select()`, `db.update()`, `db.delete()`, `db.insert()`.
-
-Example:
+**LibSQL batch API support**
+Execute multiple queries in a single batch call:
 ```ts
 const batchResponse = await db.batch([
   db.insert(usersTable).values({ id: 1, name: 'John' }).returning({ id: usersTable.id }),
@@ -431,39 +523,38 @@ const batchResponse = await db.batch([
   db.query.usersTable.findMany({}),
   db.select().from(usersTable).where(eq(usersTable.id, 1)),
 ]);
+// Returns: [{ id: number }[], ResultSet, User[], User[]]
 ```
+Supported builders: `db.all()`, `db.get()`, `db.values()`, `db.run()`, `db.query.<table>.findMany()`, `db.query.<table>.findFirst()`, `db.select()...`, `db.update()...`, `db.delete()...`, `db.insert()...`
 
-**JSON mode for SQLite text columns**: Store and retrieve JSON data using text columns with `mode: 'json'`:
+**JSON mode for SQLite text columns**
 ```ts
 const test = sqliteTable('test', {
   dataTyped: text('data_typed', { mode: 'json' }).$type<{ a: 1 }>().notNull(),
 });
 ```
 
-**`.toSQL()` for Relational Query API**: Convert relational queries to SQL:
+**`.toSQL()` on Relational Query API**
 ```ts
 const query = db.query.usersTable.findFirst().toSQL();
 ```
 
-**PostgreSQL array operators**: New operators for array operations:
-- `arrayContains(posts.tags, ['Typescript', 'ORM'])` - check if array contains values
-- `arrayContained(posts.tags, ['Typescript', 'ORM'])` - check if array is contained in values
-- `arrayOverlaps(posts.tags, ['Typescript', 'ORM'])` - check if arrays overlap
-
-Supports subqueries:
+**PostgreSQL array operators**
 ```ts
-db.select({ id: posts.id }).from(posts).where(
-  arrayContains(posts.tags, db.select({ tags: posts.tags }).from(posts).where(eq(posts.id, 1)))
-);
+const contains = await db.select({ id: posts.id }).from(posts)
+  .where(arrayContains(posts.tags, ['Typescript', 'ORM']));
+const contained = await db.select({ id: posts.id }).from(posts)
+  .where(arrayContained(posts.tags, ['Typescript', 'ORM']));
+const overlaps = await db.select({ id: posts.id }).from(posts)
+  .where(arrayOverlaps(posts.tags, ['Typescript', 'ORM']));
+const withSubQuery = await db.select({ id: posts.id }).from(posts)
+  .where(arrayContains(posts.tags, db.select({ tags: posts.tags }).from(posts).where(eq(posts.id, 1))));
 ```
 
-**More SQL operators in Relational Query where filters**: Operators like `inArray` are now available as parameters in the where callback:
+**More SQL operators in Relational Query where filters**
 ```ts
-// Before
-await db.users.findFirst({ where: (table, _) => inArray(table.id, [...]) })
-
-// After
-await db.users.findFirst({ where: (table, { inArray }) => inArray(table.id, [...]) })
+// Before: import { inArray } from "drizzle-orm/pg-core"; await db.users.findFirst({ where: (table, _) => inArray(table.id, [...]) })
+// After: await db.users.findFirst({ where: (table, { inArray }) => inArray(table.id, [...]) })
 ```
 
 ## Fixes
@@ -473,23 +564,34 @@ await db.users.findFirst({ where: (table, { inArray }) => inArray(table.id, [...
 - Fix datetime mapping for MySQL
 - Fix smallserial generating as serial
 
-### v0.29.0_release
-v0.29.0 adds MySQL unsigned bigint, strict query builder types with dynamic mode, custom constraint names, read replicas, set operators (UNION/INTERSECT/EXCEPT), MySQL/PostgreSQL proxy drivers, and D1 Batch API support; requires Kit 0.20.0.
+### v0.29.0_release_notes
+v0.29.0 adds MySQL unsigned bigint, dynamic query building with .$dynamic(), custom constraint names, read replicas with withReplicas(), set operators (UNION/INTERSECT/EXCEPT), MySQL/PostgreSQL proxy drivers, D1 Batch API, and requires Kit 0.20.0
 
 ## MySQL unsigned bigint
-Specify `bigint unsigned` type with `bigint('id', { mode: 'number', unsigned: true })`.
+```ts
+const table = mysqlTable('table', {
+  id: bigint('id', { mode: 'number', unsigned: true }),
+});
+```
 
 ## Improved query builder types
-Query builders now enforce single invocation of most methods by default (e.g., `.where()` can only be called once) to match SQL semantics. Enable dynamic mode with `.$dynamic()` to remove this restriction for dynamic query building:
+By default, query builder methods can only be invoked once (e.g., `.where()` once per query) to match SQL semantics. Use `.$dynamic()` to enable multiple invocations for dynamic query building:
 
 ```ts
-const query = db.select().from(users).$dynamic();
+function withPagination<T extends PgSelect>(qb: T, page: number, pageSize: number = 10) {
+  return qb.limit(pageSize).offset(page * pageSize);
+}
+
+const query = db.select().from(users).where(eq(users.id, 1)).$dynamic();
 withPagination(query, 1); // ✅ OK
+
+function withFriends<T extends PgSelect>(qb: T) {
+  return qb.leftJoin(friends, eq(friends.userId, users.id));
+}
+query = withFriends(query);
 ```
 
 ## Custom names for primary and foreign keys
-Specify custom constraint names to avoid database truncation issues:
-
 ```ts
 const table = pgTable('table', {
   id: integer('id'),
@@ -505,17 +607,18 @@ const table = pgTable('table', {
 ```
 
 ## Read replicas support
-Use `withReplicas()` to specify read replicas and primary database for writes:
-
 ```ts
+const primaryDb = drizzle({ client });
+const read1 = drizzle({ client });
+const read2 = drizzle({ client });
 const db = withReplicas(primaryDb, [read1, read2]);
+
 db.$primary.select().from(usersTable); // read from primary
-db.select().from(usersTable); // read from random replica
+db.select().from(usersTable); // read from replica
 db.delete(usersTable).where(eq(usersTable.id, 1)); // write to primary
 ```
 
-Implement custom replica selection logic:
-
+Custom replica selection with weighted probability:
 ```ts
 const db = withReplicas(primaryDb, [read1, read2], (replicas) => {
   const weight = [0.7, 0.3];
@@ -530,41 +633,38 @@ const db = withReplicas(primaryDb, [read1, read2], (replicas) => {
 ```
 
 ## Set operators (UNION, UNION ALL, INTERSECT, INTERSECT ALL, EXCEPT, EXCEPT ALL)
-Use import or builder approach:
-
 ```ts
 // Import approach
 import { union } from 'drizzle-orm/pg-core'
-const result = await union(allUsersQuery, allCustomersQuery);
+const result = await union(
+  db.select().from(users),
+  db.select().from(customers)
+);
 
 // Builder approach
 const result = await db.select().from(users).union(db.select().from(customers));
 ```
 
 ## MySQL proxy driver
-Create custom HTTP driver implementation for MySQL. Implement two endpoints: one for queries and one for migrations (optional). Example:
-
+Implement HTTP endpoints for queries and migrations. Driver example:
 ```ts
 import { drizzle } from 'drizzle-orm/mysql-proxy';
 import { migrate } from 'drizzle-orm/mysql-proxy/migrator';
 
 const db = drizzle(async (sql, params, method) => {
-  const rows = await axios.post(`${process.env.REMOTE_DRIVER}/query`, {
-    sql,
-    params,
-    method,
-  });
+  const rows = await axios.post(`${process.env.REMOTE_DRIVER}/query`, { sql, params, method });
   return { rows: rows.data };
 });
 
 await migrate(db, async (queries) => {
   await axios.post(`${process.env.REMOTE_DRIVER}/migrate`, { queries });
 }, { migrationsFolder: 'drizzle' });
+
+await db.insert(cities).values({ id: 1, name: 'name' });
 ```
 
 ## PostgreSQL proxy driver
-Same as MySQL proxy driver but for PostgreSQL:
-
+Same as MySQL proxy driver:
 ```ts
 import { drizzle } from 'drizzle-orm/pg-proxy';
 import { migrate } from 'drizzle-orm/pg-proxy/migrator';
@@ -580,21 +680,28 @@ await migrate(db, async (queries) => {
 ```
 
 ## D1 Batch API support
-Execute multiple queries in a single batch with proper typing:
-
 ```ts
 const batchResponse = await db.batch([
   db.insert(usersTable).values({ id: 1, name: 'John' }).returning({ id: usersTable.id }),
   db.update(usersTable).set({ name: 'Dan' }).where(eq(usersTable.id, 1)),
   db.query.usersTable.findMany({}),
   db.select().from(usersTable).where(eq(usersTable.id, 1)),
+  db.select({ id: usersTable.id, invitedBy: usersTable.invitedBy }).from(usersTable),
 ]);
+
+type BatchResponse = [
+  { id: number }[],
+  D1Result,
+  { id: number; name: string; verified: number; invitedBy: number | null }[],
+  { id: number; name: string; verified: number; invitedBy: number | null }[],
+  { id: number; invitedBy: number | null }[],
+];
 ```
 
 Supported builders: `db.all()`, `db.get()`, `db.values()`, `db.run()`, `db.query.<table>.findMany()`, `db.query.<table>.findFirst()`, `db.select()...`, `db.update()...`, `db.delete()...`, `db.insert()...`
 
 ## Drizzle Kit 0.20.0
-- New `defineConfig` function for drizzle.config
+- `defineConfig` function for config definition
 - Cloudflare D1 access in Drizzle Studio via wrangler.toml
 - Drizzle Studio migrated to https://local.drizzle.studio/
 - `bigint unsigned` support
@@ -602,47 +709,57 @@ Supported builders: `db.all()`, `db.get()`, `db.values()`, `db.run()`, `db.query
 - Automatic environment variable fetching
 - Bug fixes and improvements
 
-**Minimum version requirement:** Drizzle ORM v0.29.0 requires Drizzle Kit v0.20.0 and vice versa.
+**Note:** v0.29.0 requires minimum Drizzle Kit v0.20.0 and vice versa.
 
 ### v0.29.1_release_notes
-v0.29.1 adds aggregate function helpers (count, avg, sum, max, min with distinct variants), enhanced JSDoc for all query builders, fixes withReplica and selectDistinctOn, and introduces eslint-plugin-drizzle with enforce-delete-with-where and enforce-update-with-where rules.
+v0.29.1: Fixed withReplica args and selectDistinctOn; added aggregate helpers (count, sum, avg, max, min with Distinct variants); introduced ESLint plugin with enforce-delete-with-where and enforce-update-with-where rules.
 
 ## Fixes
-- Fixed withReplica feature to correctly forward arguments
-- Fixed selectDistinctOn to work with multiple columns
+
+- **withReplica**: Fixed argument forwarding when using the withReplica feature
+- **selectDistinctOn**: Fixed issue where selectDistinctOn was not working with multiple columns
 
 ## New Features
 
-### Enhanced JSDoc Documentation
-All query builders across all dialects now include detailed JSDoc with hints, documentation links, and IDE integration support.
+### Detailed JSDoc for Query Builders
+JSDoc documentation is now available for all query builders across all dialects, providing hints and documentation links directly in IDEs.
 
 ### Aggregate Function Helpers
 New SQL helper functions for aggregation operations (typically used with GROUP BY):
 
-- `count()` / `count(column)` - equivalent to `sql\`count('*')\`` or `sql\`count(${column})\``
-- `countDistinct(column)` - equivalent to `sql\`count(distinct ${column})\``
-- `avg(column)` / `avgDistinct(column)` - equivalent to `sql\`avg(${column})\`` or `sql\`avg(distinct ${column})\``
-- `sum(column)` / `sumDistinct(column)` - equivalent to `sql\`sum(${column})\`` or `sql\`sum(distinct ${column})\``
-- `max(column)` / `min(column)` - equivalent to `sql\`max(${column})\`` or `sql\`min(${column})\``
-
-Example usage:
 ```ts
+// count
 await db.select({ value: count() }).from(users);
+await db.select({ value: count(users.id) }).from(users);
+
+// countDistinct
 await db.select({ value: countDistinct(users.id) }).from(users);
+
+// avg / avgDistinct
 await db.select({ value: avg(users.id) }).from(users);
+await db.select({ value: avgDistinct(users.id) }).from(users);
+
+// sum / sumDistinct
+await db.select({ value: sum(users.id) }).from(users);
+await db.select({ value: sumDistinct(users.id) }).from(users);
+
+// max / min
+await db.select({ value: max(users.id) }).from(users);
+await db.select({ value: min(users.id) }).from(users);
 ```
 
-## New Package: Drizzle ESLint Plugin
+These are equivalent to using `sql` template with `.mapWith()` for type mapping.
 
-ESLint plugin providing rules for scenarios where type checking is insufficient or produces unclear error messages.
+### ESLint Drizzle Plugin
+New package `eslint-plugin-drizzle` for enforcing best practices where type checking is insufficient.
 
-### Installation
+**Installation**:
 ```
-npm install eslint eslint-plugin-drizzle @typescript-eslint/eslint-plugin @typescript-eslint/parser
+npm install eslint eslint-plugin-drizzle
+npm install @typescript-eslint/eslint-plugin @typescript-eslint/parser
 ```
 
-### Configuration
-Create `.eslintrc.yml`:
+**Configuration** (`.eslintrc.yml`):
 ```yaml
 root: true
 parser: '@typescript-eslint/parser'
@@ -650,28 +767,28 @@ parserOptions:
   project: './tsconfig.json'
 plugins:
   - drizzle
-extends:
-  - "plugin:drizzle/recommended"
 rules:
   'drizzle/enforce-delete-with-where': "error"
   'drizzle/enforce-update-with-where': "error"
 ```
 
-### Rules
-
-**enforce-delete-with-where**: Prevents accidental deletion of all table rows by requiring `.where()` clause in delete statements. Optionally configure `drizzleObjectName` to target specific objects (e.g., only `db.delete()`, not other class delete methods).
-
-**enforce-update-with-where**: Prevents accidental update of all table rows by requiring `.where()` clause in update statements. Same `drizzleObjectName` configuration option available.
-
-Example with drizzleObjectName:
-```json
-"rules": {
-  "drizzle/enforce-delete-with-where": ["error", { "drizzleObjectName": ["db"] }]
-}
+Or use the `all`/`recommended` config:
+```yaml
+extends:
+  - "plugin:drizzle/all"
 ```
 
+**Rules**:
+
+1. **enforce-delete-with-where**: Requires `.where()` clause in `.delete()` statements to prevent accidental deletion of all rows. Optionally configure `drizzleObjectName` to target specific objects:
+```json
+"drizzle/enforce-delete-with-where": ["error", { "drizzleObjectName": ["db"] }]
+```
+
+2. **enforce-update-with-where**: Requires `.where()` clause in `.update()` statements to prevent accidental updates of all rows. Same `drizzleObjectName` option available.
+
 ### v0.29.2_release_notes
-v0.29.2 release: bug fixes for PgArray, SQLite exists, AWS Data API dates; ESLint plugin v0.2.3 with function support; new Expo SQLite driver with migration support via babel/metro config and useMigrations hook.
+v0.29.2: Bug fixes (PgArray escaping, SQLite exists, AWS dates, Hermes), ESLint plugin v0.2.3 improvements, new Expo SQLite driver with migration support via babel/metro config and useMigrations hook.
 
 ## Bug Fixes
 - Improved planescale relational tests
@@ -684,8 +801,12 @@ v0.29.2 release: bug fixes for PgArray, SQLite exists, AWS Data API dates; ESLin
 - Added support for Drizzle objects retrieved from functions
 - Improved error message context in suggestions
 
-## New Expo SQLite Driver
-Install with: `npm install drizzle-orm expo-sqlite@next`
+## New: Expo SQLite Driver
+
+Install packages:
+```bash
+npm install drizzle-orm expo-sqlite@next
+```
 
 Basic usage:
 ```ts
@@ -696,11 +817,13 @@ const expoDb = openDatabaseSync("db.db");
 const db = drizzle(expoDb);
 
 await db.select().from(...);
-// or db.select().from(...).then(...);
-// or db.select().from(...).all();
+// or
+db.select().from(...).then(...);
+// or
+db.select().from(...).all();
 ```
 
-For migrations support, install `babel-plugin-inline-import` and update configuration files:
+For migrations support, configure Babel and Metro:
 
 **babel.config.js:**
 ```ts
@@ -733,9 +856,12 @@ export default {
 } satisfies Config;
 ```
 
-Generate migrations with: `npx drizzle-kit generate`
+Generate migrations:
+```bash
+npx drizzle-kit generate
+```
 
-In **App.tsx**, use the migration hook:
+Use migrations in **App.tsx:**
 ```ts
 import { drizzle } from "drizzle-orm/expo-sqlite";
 import { openDatabaseSync } from "expo-sqlite";
@@ -747,33 +873,41 @@ const db = drizzle(expoDb);
 
 export default function App() {
   const { success, error } = useMigrations(db, migrations);
-  
+
   if (error) {
     return <View><Text>Migration error: {error.message}</Text></View>;
   }
+
   if (!success) {
     return <View><Text>Migration is in progress...</Text></View>;
   }
-  
+
   return ...your application component;
 }
 ```
 
 ### v0.29.3_release
-v0.29.3 makes expo peer dependencies optional to fix Expo SQLite integration.
+v0.29.3 made Expo peer dependencies optional, fixing dependency conflicts for non-Expo users.
 
-DrizzleORM v0.29.3 fixes expo peer dependencies by making them optional. This resolves issues where expo was being treated as a required dependency. The fix is relevant for projects using Expo SQLite with Drizzle, allowing the library to work properly in Expo environments without forcing expo as a hard dependency.
+## v0.29.3 Release
+
+**Fix:** Expo peer dependencies are now optional.
+
+This release addresses an issue where Expo peer dependencies were required, which could cause problems for users not using Expo. The fix makes these dependencies optional, allowing developers to use DrizzleORM with Expo SQLite without unnecessary dependency constraints.
+
+Related: Expo documentation and Expo SQLite integration guide.
 
 ### v0.29.4_release_notes
-v0.29.4 adds Neon HTTP batch queries and deprecates PlanetScale connect() in favor of Client instance (breaking in v0.30.0).
+v0.29.4 adds Neon HTTP batch queries and deprecates PlanetScale's connect() in favor of Client instances (breaking in v0.30.0).
 
 ## Neon HTTP Batch Support
 
-Added support for batching multiple queries with Neon HTTP driver. Use `db.batch()` to execute multiple operations (inserts, queries) in a single request:
+Added support for batching multiple queries in a single request using Neon's HTTP driver:
 
 ```ts
 import { neon } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
+import { usersTable } from './schema';
 
 const sql = neon(process.env.DRIZZLE_DATABASE_URL!);
 const db = drizzle(sql);
@@ -786,11 +920,11 @@ const batchResponse = await db.batch([
 ]);
 ```
 
-The batch response is a tuple with types matching each operation in order.
+The batch method returns a tuple with typed results for each query in the batch.
 
-## PlanetScale Client Instance Change
+## PlanetScale Client Instance Update
 
-Updated PlanetScale integration to use `Client` instance instead of `connect()` function. The new recommended approach:
+Updated PlanetScale integration to use `Client` instance instead of `connect()` function:
 
 ```ts
 import { Client } from '@planetscale/database';
@@ -805,15 +939,16 @@ const client = new Client({
 const db = drizzle(client);
 ```
 
-Using `connect()` now shows a deprecation warning. Starting from version 0.30.0, passing anything other than a `Client` instance will throw an error. No breaking changes in v0.29.4, but migration is recommended.
+**Breaking change warning**: Version 0.30.0 will require `Client` instances and reject `connect()` results. A deprecation warning is shown in v0.29.4 when using `connect()`. Migrate now to avoid runtime errors.
 
 ### v0.29.5_release_notes
-WITH clauses for INSERT/UPDATE/DELETE, custom migrations table/schema configuration, SQLite proxy batch and relational query support
+v0.29.5: WITH clauses for INSERT/UPDATE/DELETE, custom migrations table/schema, SQLite proxy batch and relational query support.
 
-## WITH Clauses for DML Statements
+## WITH Statements for INSERT, UPDATE, DELETE
 
-WITH (CTE) support added for INSERT, UPDATE, and DELETE statements. Example with DELETE:
+You can now use `WITH` (CTE) clauses with INSERT, UPDATE, and DELETE statements.
 
+Example with DELETE:
 ```ts
 const averageAmount = db.$with('average_amount').as(
 	db.select({ value: sql`avg(${orders.amount})`.as('value') }).from(orders),
@@ -826,11 +961,17 @@ const result = await db
 	.returning({ id: orders.id });
 ```
 
-Generates: `with "average_amount" as (select avg("amount") as "value" from "orders") delete from "orders" where "orders"."amount" > (select * from "average_amount") returning "id";`
+Generates:
+```sql
+with "average_amount" as (select avg("amount") as "value" from "orders") 
+delete from "orders" 
+where "orders"."amount" > (select * from "average_amount") 
+returning "id";
+```
 
-## Custom Migrations Configuration
+## Custom Migrations Table and Schema
 
-**Custom migrations table name** - Use `migrationsTable` option to specify table name (default: `__drizzle_migrations`):
+**Custom migrations table name** (all databases):
 ```ts
 await migrate(db, {
 	migrationsFolder: './drizzle',
@@ -838,7 +979,9 @@ await migrate(db, {
 });
 ```
 
-**Custom migrations schema** - PostgreSQL only, use `migrationsSchema` option (default: `drizzle` schema):
+By default migrations are stored in `__drizzle_migrations` table (in `drizzle` schema for PostgreSQL).
+
+**Custom migrations schema** (PostgreSQL only):
 ```ts
 await migrate(db, {
 	migrationsFolder: './drizzle',
@@ -846,56 +989,64 @@ await migrate(db, {
 });
 ```
 
-## SQLite Proxy Enhancements
+## SQLite Proxy Batch and Relational Queries
 
-- Relational queries support: `.query.findFirst()` and `.query.findMany()` now work with sqlite proxy driver
-- Batch requests support: Pass a batch callback function as second parameter to `drizzle()` to handle multiple queries:
+SQLite proxy driver now supports:
+- Relational queries: `.query.findFirst()` and `.query.findMany()`
+- Batch requests via `db.batch([])`
 
+Batch callback setup:
 ```ts
+import { drizzle } from 'drizzle-orm/sqlite-proxy';
+
+type ResponseType = { rows: any[][] | any[] }[];
+
 const db = drizzle(
-	async (sql, params, method) => { /* single query */ },
+	async (sql, params, method) => {
+		// single query logic
+	},
 	async (queries: { sql: string; params: any[]; method: 'all' | 'run' | 'get' | 'values' }[]) => {
-		const result = await axios.post('http://localhost:3000/batch', { queries });
-		return result; // array of raw values in same order as sent
+		const result: ResponseType = await axios.post('http://localhost:3000/batch', { queries });
+		return result;
 	},
 );
-
-await db.batch([/* queries */]);
 ```
 
+Response must be an array of raw values in the same order as sent queries.
+
 ### v0.30.0_release_notes
-v0.30.0 breaks postgres.js date handling by mutating clients to return date strings, which Drizzle remaps per mode; fixes 8 timestamp/date bugs including mode mismatches and timezone issues.
+v0.30.0 changes postgres.js to return date strings with Drizzle mode-based mapping; fixes 8 timestamp/date-related bugs including timezone and type inconsistencies.
 
-## Breaking Changes
+## Breaking Changes: Postgres Timestamp Handling
 
-The postgres.js driver instance has been modified to always return strings for dates. Drizzle then maps these strings to either strings or Date objects based on the selected mode. This is a breaking change because:
+The `postgres.js` driver instance has been modified to always return strings for dates. Drizzle then maps these to either strings or Date objects based on the selected `mode`. This is a breaking change that affects how timestamps are handled.
 
-1. The behavior of postgres.js client objects passed to Drizzle will be mutated - all dates will be strings in responses
-2. Timestamps with and without timezone now always use `.toISOString()` for mapping to the driver
-3. If you were relying on specific timestamp response types, behavior will change
+**Key Impact:**
+- Timestamps with and without timezone now always use `.toISOString()` for mapping to the driver
+- All `postgres.js` clients passed to Drizzle will have mutated behavior - dates will always be strings in responses
+- If you were expecting specific timestamp responses, behavior has changed
 
-The change was necessary because postgres.js doesn't support per-query mapping interceptors. The following parsers were overridden:
-
+**Parser Override for postgres.js:**
 ```ts
 const transparentParser = (val: any) => val;
+
+// Override postgres.js default date parsers
 for (const type of ['1184', '1082', '1083', '1114']) {
 	client.options.parsers[type as any] = transparentParser;
 	client.options.serializers[type as any] = transparentParser;
 }
 ```
 
-This aligns all drivers with consistent behavior. The team is reaching out to postgres.js maintainers to explore per-query mapping capabilities to avoid client mutation in the future.
+The team notes this is not ideal since the driver client gets mutated. They're working with the `postgres.js` library creator to enable per-query mapping interceptors instead.
 
 ## Fixes
 
-Multiple timestamp and date handling issues were resolved:
-- timestamp with mode string returned Date object instead of string
-- Dates always returned as dates regardless of mode
-- Inconsistencies between TypeScript types and actual runtime values for timestamps
-- String type annotations on timestamp columns that actually returned Date objects
-- Wrong data types for postgres date columns
-- Invalid timestamp conversion with PostgreSQL UTC timezone
-- Milliseconds being removed during postgres timestamp inserts
+Multiple timestamp and date-related issues resolved:
+- Timestamp with mode string returning Date object instead of string
+- Inconsistent date/datetime handling across drivers
+- Type mismatches (columns showing string type but returning Date objects)
+- PostgreSQL timezone-related conversion issues
+- Millisecond loss during timestamp inserts
 - Invalid dates from relational queries
 
 ### v0.30.1_release_notes
@@ -903,7 +1054,7 @@ v0.30.1: Added OP-SQLite driver support; fixed Expo driver migration hook
 
 ## OP-SQLite Driver Support
 
-Added support for the OP-SQLite driver. To use it, import the driver from `@op-engineering/op-sqlite` and initialize it with a database name, then pass it to `drizzle()`:
+New driver added for OP-SQLite. Initialize with:
 
 ```ts
 import { open } from '@op-engineering/op-sqlite';
@@ -911,7 +1062,6 @@ import { drizzle } from 'drizzle-orm/op-sqlite';
 
 const opsqlite = open({ name: 'myDB' });
 const db = drizzle(opsqlite);
-
 await db.select().from(users);
 ```
 
@@ -919,13 +1069,14 @@ await db.select().from(users);
 
 - Migration hook fixed for Expo driver
 
-### v0.30.10_release_notes
-Added `.if()` conditional method to WHERE expressions; fixed AWS DataAPI session method mappings
+### v0.30.10_release
+v0.30.10: Added `.if()` for conditional WHERE clauses; fixed AWS DataAPI session method mappings
 
 ## New Features
 
 ### `.if()` function for WHERE expressions
-Added conditional `.if()` method to all WHERE expressions, enabling conditional query building. Example:
+
+Conditional WHERE clauses using `.if()` method:
 
 ```ts
 await db
@@ -934,41 +1085,41 @@ await db
   .where(gt(posts.views, views).if(views > 100));
 ```
 
-This allows WHERE conditions to be applied only when a certain predicate is true, useful for optional filtering based on runtime values.
+The `.if()` function is available on all WHERE expressions and allows conditional filtering based on runtime values.
 
 ## Bug Fixes
 
-- Fixed internal mappings for sessions `.all()`, `.values()`, and `.execute()` functions in AWS DataAPI
+- Fixed internal mappings for sessions `.all()`, `.values()`, `.execute()` functions in AWS DataAPI
 
 ### v0.30.2_release_notes
-v0.30.2: LibSQL migrations switched to batch execution; bun:sqlite findFirst fixed
+v0.30.2: LibSQL migrations use batch execution; bun:sqlite findFirst fix
 
-## LibSQL Migrations Update
+## Improvements
 
-LibSQL migrations now use batch execution instead of transactions. Batch operations execute multiple SQL statements sequentially within an implicit transaction - the backend commits all changes on success or performs a full rollback on any failure with no modifications applied.
+LibSQL migrations now use batch execution instead of transactions. Batch operations execute multiple SQL statements sequentially within an implicit transaction - the backend commits all changes on success or rolls back completely on any failure.
 
 ## Fixes
 
-- Fixed findFirst query for bun:sqlite (PR #1885)
+- Fixed findFirst query for bun:sqlite
 
 ### v0.30.3_release_notes
-v0.30.3: raw query batching for Neon HTTP, fixed serverless types and sqlite-proxy .run() result
+v0.30.3: raw query batch support for Neon HTTP, fixed @neondatabase/serverless types, fixed sqlite-proxy .run() result
 
 ## New Features
 
-- Added raw query support (`db.execute(...)`) to batch API in Neon HTTP driver, enabling batch execution of raw SQL queries alongside prepared statements
+- Added raw query support (`db.execute(...)`) to batch API in Neon HTTP driver
 
 ## Fixes
 
-- Fixed `@neondatabase/serverless` HTTP driver types issue (GitHub issues #1945 and neondatabase/serverless#66)
-- Fixed sqlite-proxy driver `.run()` result to return correct response format
+- Fixed `@neondatabase/serverless` HTTP driver types issue
+- Fixed sqlite-proxy driver `.run()` result
 
-### xata_driver_support
-v0.30.4 adds native xata-http driver support for Xata Postgres platform; use drizzle-orm/xata-http with @xata.io/client or standard pg/postgres.js drivers
+### xata-http-driver-support
+Drizzle ORM v0.30.4 adds native xata-http driver support for Xata Postgres platform; also supports pg/postgres.js drivers
 
 ## Xata HTTP Driver Support
 
-Drizzle ORM v0.30.4 adds native support for the Xata driver. Xata is a Postgres data platform focused on reliability, scalability, and developer experience. The Xata Postgres service is currently in beta.
+Xata is a Postgres data platform focused on reliability, scalability, and developer experience. Drizzle ORM v0.30.4 adds native support for the Xata driver via the `drizzle-orm/xata` package. The Xata Postgres service is currently in beta.
 
 ### Installation
 
@@ -979,32 +1130,31 @@ npm install -D drizzle-kit
 
 ### Usage with Xata Client
 
-Use the Xata-generated client obtained by running `xata init` CLI command:
+Use the Xata generated client obtained by running `xata init` CLI command:
 
 ```ts
 import { drizzle } from 'drizzle-orm/xata-http';
-import { getXataClient } from './xata'; // Generated client
+import { getXataClient } from './xata';
 
 const xata = getXataClient();
 const db = drizzle(xata);
-
 const result = await db.select().from(...);
 ```
 
 ### Alternative Drivers
 
-You can also connect to Xata using standard `pg` or `postgres.js` drivers instead of the native xata driver.
+You can also connect to Xata using standard `pg` or `postgres.js` drivers instead of the native Xata driver.
 
-### drizzleorm_v0.30.5_release
-v0.30.5: Added $onUpdate() for dynamic column values on updates (PostgreSQL/MySQL/SQLite); fixed smallserial insertion optionality
+### v0.30.5_release_notes
+v0.30.5: Added $onUpdate() for runtime column value computation on update (and insert if no default); fixed smallserial insertion behavior.
 
-## $onUpdate Functionality
+## `$onUpdate` functionality for PostgreSQL, MySQL and SQLite
 
-Adds dynamic update values to columns for PostgreSQL, MySQL, and SQLite. The `$onUpdate()` function is called when a row is updated, and its returned value is used as the column value if none is provided. If no `default` or `$defaultFn` is set, the function also runs on insert.
+Adds dynamic update values to columns. The `$onUpdate()` function is called when a row is updated, and its returned value is used as the column value if none is provided. If no `default` or `$defaultFn` is set, the function is also called on insert.
 
-This is a runtime-only feature in drizzle-orm and does not affect drizzle-kit behavior.
+Note: This is runtime-only behavior in drizzle-orm and does not affect drizzle-kit.
 
-Example with multiple use cases:
+Example:
 ```ts
 const usersOnUpdate = pgTable('users_on_update', {
   id: serial('id').primaryKey(),
@@ -1015,23 +1165,16 @@ const usersOnUpdate = pgTable('users_on_update', {
 });
 ```
 
-The example shows: incrementing a counter on update, setting current timestamp on update, and setting a column to null on update.
-
 ## Fixes
 
 - Insertions on columns with smallserial datatype are now correctly non-optional (issue #1848)
 
 ### pglite_driver_support
-PGlite driver support: WASM Postgres for browser/Node.js/Bun with in-memory or persistent storage, integrated via drizzle-orm/pglite
+v0.30.6 adds PGlite driver: WASM Postgres (2.6mb) for browser/Node.js/Bun with in-memory or file/indexedDB persistence, no VM required.
 
 ## PGlite Driver Support
 
-PGlite is a WASM-based Postgres implementation packaged as a TypeScript client library, enabling Postgres to run in browsers, Node.js, and Bun without external dependencies. The library is 2.6mb gzipped.
-
-**Key characteristics:**
-- Pure WASM Postgres (no Linux VM required)
-- Supports ephemeral in-memory databases
-- Supports persistent storage: file system (Node/Bun) or indexedDB (Browser)
+PGlite is a WASM Postgres build packaged as a TypeScript client library that runs Postgres in the browser, Node.js, and Bun without additional dependencies. It's 2.6mb gzipped and can operate as an ephemeral in-memory database or with persistence to the file system (Node/Bun) or indexedDB (Browser). Unlike previous "Postgres in the browser" projects, PGlite uses pure Postgres in WASM without a Linux virtual machine.
 
 **Usage:**
 ```ts
@@ -1041,28 +1184,20 @@ import { users } from './schema';
 
 const client = new PGlite();
 const db = drizzle(client);
-
 await db.select().from(users);
 ```
 
-The drizzle-orm integration allows you to use PGlite as a database client with the standard Drizzle ORM API.
-
-### v0.30.7_release_notes
-v0.30.7: Added Vercel Postgres mappings, fixed Neon driver interval type mapping
+### v0.30.7_release
+v0.30.7 adds Vercel Postgres mappings and fixes Neon interval mapping
 
 ## Fixes
 
-**@vercel/postgres package mappings added**
-- Enables support for Vercel Postgres driver
-- Documentation available for getting started with Vercel Postgres integration
+- Added mappings for `@vercel/postgres` package. Vercel Postgres is a serverless PostgreSQL database service. To get started with Drizzle and Vercel Postgres, refer to the PostgreSQL getting started documentation section on Vercel Postgres.
 
-**Interval mapping fix for neon drivers**
-- Resolves issue #1542 where interval types were incorrectly mapped in Neon driver
-- Neon PostgreSQL driver now correctly handles interval data types
-- Documentation available for getting started with Neon integration
+- Fixed interval mapping for `neon` drivers (issue #1542). Neon is a serverless PostgreSQL platform. To get started with Drizzle and Neon, refer to the PostgreSQL getting started documentation section on Neon.
 
 ### v0.30.8_release_notes
-v0.30.8: Postgres enum schema support, D1 batch API migration, split onConflictDoUpdate where clauses (setWhere/targetWhere), onConflictDoNothing where fix, AWS Data API array fixes.
+v0.30.8: Postgres enum schema support, D1 batch migrations, onConflict where clause split (setWhere/targetWhere), AWS Data API fixes
 
 ## New Features
 
@@ -1073,13 +1208,12 @@ import { pgSchema } from 'drizzle-orm/pg-core';
 const mySchema = pgSchema('mySchema');
 const colors = mySchema.enum('colors', ['red', 'green', 'blue']);
 ```
-Enums can now be created within custom schemas in Postgres.
 
 ## Fixes
 
-**D1 migrate() function:** Changed to use batch API for better performance with Cloudflare D1.
+**D1 migrate() function:** Changed to use batch API for better performance.
 
-**Postgres .onConflictDoUpdate() method:** Split `where` clause into `setWhere` and `targetWhere` to properly support both where cases in ON CONFLICT clauses:
+**Postgres `.onConflictDoUpdate` method:** Split `where` clause into `setWhere` and `targetWhere` to support both where cases in on conflict clause.
 ```ts
 await db.insert(employees)
   .values({ employeeId: 123, name: 'John Doe' })
@@ -1088,7 +1222,7 @@ await db.insert(employees)
     targetWhere: sql`name <> 'John Doe'`,
     set: { name: sql`excluded.name` }
   });
-
+  
 await db.insert(employees)
   .values({ employeeId: 123, name: 'John Doe' })
   .onConflictDoUpdate({
@@ -1098,22 +1232,19 @@ await db.insert(employees)
   });
 ```
 
-**Postgres .onConflictDoNothing() method:** Fixed query generation for `where` clause which was being placed in wrong location.
+**Postgres `.onConflictDoNothing` method:** Fixed query generation for `where` clause placement.
 
 **AWS Data API driver:** Fixed multiple issues including inserting and updating array values.
 
-### v0.30.9_release_notes
-v0.30.9: Split SQLite `.onConflictDoUpdate()` `where` into `targetWhere` and `setWhere`, added `db._.fullSchema` for schema access, fixed AWS Data API migrator.
+### v0.30.9_release
+v0.30.9: SQLite onConflictDoUpdate split where into targetWhere/setWhere, added db._.fullSchema for schema introspection, fixed AWS Data API migrator
 
 ## New Features
 
-**Enhanced `.onConflictDoUpdate()` for SQLite**: Replaced single `where` field with separate `setWhere` and `targetWhere` fields for more granular control over conflict resolution.
+**Enhanced `.onConflictDoUpdate()` in SQLite**: Added `setWhere` and `targetWhere` fields to replace the single `where` field, enabling more granular control over conflict resolution:
 
-- `targetWhere`: Filters which rows are considered for the conflict check
-- `setWhere`: Filters which rows receive the update
-
-Example with `targetWhere`:
 ```ts
+// Using targetWhere to filter which conflicts to handle
 await db.insert(employees)
   .values({ employeeId: 123, name: 'John Doe' })
   .onConflictDoUpdate({
@@ -1121,10 +1252,8 @@ await db.insert(employees)
     targetWhere: sql`name <> 'John Doe'`,
     set: { name: sql`excluded.name` }
   });
-```
 
-Example with `setWhere`:
-```ts
+// Using setWhere to conditionally apply updates
 await db.insert(employees)
   .values({ employeeId: 123, name: 'John Doe' })
   .onConflictDoUpdate({
@@ -1134,34 +1263,39 @@ await db.insert(employees)
   });
 ```
 
-**Schema Information Access**: Added `db._.fullSchema` to access schema information from Drizzle instances.
+**Schema introspection**: Added `db._.fullSchema` to access schema information from Drizzle instances.
 
 ## Fixes
 
 - Fixed migrator in AWS Data API
 
 ### v0.31.0_release_notes
-v0.31.0: PostgreSQL indexes API redesigned (ordering per-column, .using() for index type), pg_vector support with distance helpers, point/line/geometry types, drizzle-kit v0.22.0 with extensionsFilters, SSL config, index expression fixes.
+v0.31.0 breaking change: PostgreSQL indexes API - ordering modifiers move to per-column/expression level, `.using()` specifies index type; new pg_vector, point, line, PostGIS geometry types; Kit v0.22.0 adds extensionsFilters, SSL options, fixes index expressions.
 
 ## Breaking Changes
 
-**PostgreSQL Indexes API Overhaul**
+**PostgreSQL indexes API was changed** to align with PostgreSQL documentation. The previous API didn't support SQL expressions in `.on()`, conflated `.using()` and `.on()`, and placed ordering modifiers on the index instead of per-column.
 
-The PostgreSQL indexes API was redesigned to align with PostgreSQL documentation. The previous API had fundamental issues:
-- No support for SQL expressions in `.on()`
-- `.using()` and `.on()` were conflated
-- Ordering modifiers (`.asc()`, `.desc()`, `.nullsFirst()`, `.nullsLast()`) were on the index instead of per-column
-
-New API structure:
-
+Previous API:
 ```ts
-// With .on() - ordering per column/expression
+index('name')
+  .on(table.column1, table.column2)
+  .using(sql``)
+  .asc() / .desc()
+  .nullsFirst() / .nullsLast()
+  .where(sql``)
+```
+
+New API:
+```ts
+// With .on()
 index('name')
   .on(table.column1.asc(), table.column2.nullsFirst())
+  .concurrently()
   .where(sql``)
   .with({ fillfactor: '70' })
 
-// With .using() - specify index type and operator classes
+// With .using()
 index('name')
   .using('btree', table.column1.asc(), sql`lower(${table.column2})`, table.column1.op('text_ops'))
   .where(sql``)
@@ -1172,9 +1306,9 @@ Requires `drizzle-kit@0.22.0` or higher.
 
 ## New Features
 
-**pg_vector Extension Support**
+### pg_vector extension support
 
-Vector type with multiple distance metrics:
+Define vector indexes and use vector distance functions:
 
 ```ts
 const table = pgTable('items', {
@@ -1189,20 +1323,27 @@ const table = pgTable('items', {
 }))
 ```
 
-Helper functions for vector queries:
-
+Helper functions for queries:
 ```ts
 import { l2Distance, l1Distance, innerProduct, cosineDistance, hammingDistance, jaccardDistance } from 'drizzle-orm'
 
-db.select().from(items).orderBy(l2Distance(items.embedding, [3,1,2])).limit(5)
-db.select({ distance: l2Distance(items.embedding, [3,1,2]) }).from(items)
+l2Distance(table.column, [3, 1, 2]) // <->
+l1Distance(table.column, [3, 1, 2]) // <+>
+innerProduct(table.column, [3, 1, 2]) // <#>
+cosineDistance(table.column, [3, 1, 2]) // <=>
+hammingDistance(table.column, '101') // <~>
+jaccardDistance(table.column, '101') // <%>
+```
 
-const subquery = db.select({ embedding: items.embedding }).from(items).where(eq(items.id, 1))
+Query examples:
+```ts
+db.select().from(items).orderBy(l2Distance(items.embedding, [3,1,2]))
+db.select({ distance: l2Distance(items.embedding, [3,1,2]) }).from(items)
+const subquery = db.select({ embedding: items.embedding }).from(items).where(eq(items.id, 1));
 db.select().from(items).orderBy(l2Distance(items.embedding, subquery)).limit(5)
 ```
 
 Custom distance functions can be created by replicating the pattern:
-
 ```ts
 export function l2Distance(column: SQLWrapper | AnyColumn, value: number[] | string[] | TypedQueryBuilder<any> | string): SQL {
   if (is(value, TypedQueryBuilder<any>) || typeof value === 'string') {
@@ -1212,30 +1353,27 @@ export function l2Distance(column: SQLWrapper | AnyColumn, value: number[] | str
 }
 ```
 
-**PostgreSQL Geometric Types: point and line**
+### New PostgreSQL types: point and line
 
-`point` type with two modes:
-
+**point** type with two modes:
 ```ts
 const items = pgTable('items', {
- point: point('point'),  // tuple mode: [1,2]
- pointObj: point('point_xy', { mode: 'xy' }),  // xy mode: { x: 1, y: 2 }
+ point: point('point'), // tuple mode: [1,2]
+ pointObj: point('point_xy', { mode: 'xy' }), // xy mode: { x: 1, y: 2 }
 });
 ```
 
-`line` type with two modes:
-
+**line** type with two modes:
 ```ts
 const items = pgTable('items', {
- line: line('line'),  // tuple mode: [1,2,3]
- lineObj: line('line_abc', { mode: 'abc' }),  // abc mode: { a: 1, b: 2, c: 3 }
+ line: line('line'), // tuple mode: [1,2,3]
+ lineObj: line('line_abc', { mode: 'abc' }), // abc mode: { a: 1, b: 2, c: 3 }
 });
 ```
 
-**PostGIS Extension Support**
+### PostGIS extension support
 
-`geometry` type with configurable geometry type and modes:
-
+**geometry** type from postgis:
 ```ts
 const items = pgTable('items', {
   geo: geometry('geo', { type: 'point' }),
@@ -1244,79 +1382,91 @@ const items = pgTable('items', {
 });
 ```
 
+Modes: `tuple` (default, maps to [x,y]) and `xy` (maps to { x, y }). Type defaults to `point` but accepts any string.
+
 ## Drizzle Kit v0.22.0 Updates
 
-**New Type Support**
+### New type support
+- `point` and `line` from PostgreSQL
+- `vector` from pg_vector extension
+- `geometry` from PostGIS extension
 
-Kit now handles `point`, `line`, `vector`, and `geometry` types.
+### extensionsFilters config parameter
 
-**extensionsFilters Config**
-
-Skip extension-created tables during push/introspect:
-
+Skip tables created by extensions:
 ```ts
 export default defineConfig({
   dialect: "postgresql",
-  extensionsFilters: ["postgis"],  // skips geography_columns, geometry_columns, spatial_ref_sys
+  extensionsFilters: ["postgis"], // skips geography_columns, geometry_columns, spatial_ref_sys
 })
 ```
 
-**SSL Configuration**
+### SSL configuration improvements
 
-Full SSL parameter support for PostgreSQL and MySQL:
-
+Full SSL parameter support:
 ```ts
+// PostgreSQL
 export default defineConfig({
   dialect: "postgresql",
   dbCredentials: {
     ssl: true, // or "require" | "allow" | "prefer" | "verify-full" | node:tls options
   }
 })
+
+// MySQL
+export default defineConfig({
+  dialect: "mysql",
+  dbCredentials: {
+    ssl: "", // string | mysql2 SslOptions
+  }
+})
 ```
 
-**SQLite/libsql URL Normalization**
+### Normalized SQLite URLs
 
-Kit now accepts both file path patterns for libsql and better-sqlite3 drivers.
+libsql and better-sqlite3 drivers now accept both file path patterns and normalize them correctly.
 
-**MySQL/SQLite Index Expression Handling**
+### MySQL and SQLite index-as-expression behavior
 
-Expressions in indexes are no longer escaped as strings:
-
+Expressions are no longer escaped in strings, columns are properly handled:
 ```ts
-// Before: CREATE UNIQUE INDEX `emailUniqueIndex` ON `users` (`lower("users"."email")`)
-// After: CREATE UNIQUE INDEX `emailUniqueIndex` ON `users` (lower("email"))
-
 export const users = sqliteTable('users', {
     id: integer('id').primaryKey(),
     email: text('email').notNull(),
-  }, (table) => ({
+}, (table) => ({
     emailUniqueIndex: uniqueIndex('emailUniqueIndex').on(sql`lower(${table.email})`),
-  }));
+}));
+
+// Before: CREATE UNIQUE INDEX `emailUniqueIndex` ON `users` (`lower("users"."email")`);
+// Now: CREATE UNIQUE INDEX `emailUniqueIndex` ON `users` (lower("email"));
 ```
 
-**Index Limitations**
+### Index limitations
 
-- Must specify index name manually if using expressions: `index('my_name').on(sql`lower(${table.email})`)`
-- Push won't regenerate if these fields change: expressions in `.on()`/`.using()`, `.where()` statements, operator classes `.op()`. Workaround: comment out index, push, uncomment and modify, push again.
-- Generate command has no such limitations.
+Must specify index name manually if using expressions:
+```ts
+index().on(table.id, table.email) // auto-named, works
+index('my_name').on(table.id, table.email) // works
+index().on(sql`lower(${table.email})`) // error
+index('my_name').on(sql`lower(${table.email})`) // works
+```
 
-**Bug Fixes**
+Push won't generate statements if these fields change in existing indexes: expressions in `.on()`/`.using()`, `.where()` statements, or `.op()` operator classes. For changes, comment out the index, push, uncomment and modify, then push again. Generate command has no such limitations.
 
+### Bug fixes
 - Multiple constraints not added (only first generated)
 - Drizzle Studio connection termination errors
 - SQLite local migrations execution
 - Unknown '--config' option errors
 
-### live_queries_with_expo_sqlite
-useLiveQuery React Hook for Expo SQLite auto-rerunning queries on database changes, returning {data, error, updatedAt}
+### live-queries
+v0.31.1 adds useLiveQuery React Hook for Expo SQLite that auto-reruns queries and rerenders on data changes, returning {data, error, updatedAt}
 
 ## Live Queries for Expo SQLite
 
-Drizzle ORM v0.31.1 introduces native support for Expo SQLite Live Queries through a `useLiveQuery` React Hook that automatically observes database changes and re-runs queries when data changes.
+Drizzle ORM v0.31.1 introduces native support for Expo SQLite Live Queries via the `useLiveQuery` React Hook. This hook automatically observes database changes and re-runs queries when data changes.
 
-### Setup
-
-Enable change listeners when opening the database:
+**Setup:**
 ```tsx
 import { useLiveQuery, drizzle } from 'drizzle-orm/expo-sqlite';
 import { openDatabaseSync } from 'expo-sqlite';
@@ -1325,35 +1475,30 @@ const expo = openDatabaseSync('db.db', { enableChangeListener: true });
 const db = drizzle(expo);
 ```
 
-### Usage
-
-The hook works with both SQL-like and Drizzle query syntax:
+**Usage:**
+The hook works with both SQL-like and Drizzle queries:
 ```tsx
-import { Text } from 'react-native';
-import { users } from './schema';
-
-const App = () => {
-  // Automatically re-renders when data changes
-  const { data } = useLiveQuery(db.select().from(users));
-  
-  // Also works with Drizzle query API
-  // const { data, error, updatedAt } = useLiveQuery(db.query.users.findFirst());
-  // const { data, error, updatedAt } = useLiveQuery(db.query.users.findMany());
-
-  return <Text>{JSON.stringify(data)}</Text>;
-};
+const { data, error, updatedAt } = useLiveQuery(db.select().from(users));
+// or
+const { data, error, updatedAt } = useLiveQuery(db.query.users.findFirst());
+const { data, error, updatedAt } = useLiveQuery(db.query.users.findMany());
 ```
 
-### API Design
+The hook returns an object with `data`, `error`, and `updatedAt` fields for explicit error handling. Components automatically re-render when the observed data changes.
 
-The hook returns an object with `data`, `error`, and `updatedAt` fields for explicit error handling, following patterns from React Query and Electric SQL. The API intentionally uses `useLiveQuery(databaseQuery)` rather than method chaining to maintain conventional React Hook patterns.
+**Design decisions:**
+- The ORM API itself remains unchanged; the hook follows conventional React Hook patterns rather than adding methods like `.useLive()` to queries
+- Result structure follows practices from React Query and Electric SQL
 
-### tidb_cloud_serverless_driver_support
-v0.31.2: TiDB Cloud Serverless driver support via @tidbcloud/serverless and drizzle-orm/tidb-serverless
+### v0.31.2_tidb_cloud_serverless_support
+v0.31.2 adds TiDB Cloud Serverless driver support via `drizzle-orm/tidb-serverless` module with standard connection pattern.
 
-DrizzleORM v0.31.2 added support for TiDB Cloud Serverless driver. To use it, import the connect function from @tidbcloud/serverless and the drizzle function from drizzle-orm/tidb-serverless. Create a client by calling connect with a URL configuration, then initialize the database instance by passing the client to drizzle(). After setup, you can execute queries normally using the db instance.
+## TiDB Cloud Serverless Driver Support
 
-Example:
+Added support for TiDB Cloud Serverless driver in v0.31.2.
+
+**Usage:**
+
 ```ts
 import { connect } from '@tidbcloud/serverless';
 import { drizzle } from 'drizzle-orm/tidb-serverless';
@@ -1363,17 +1508,19 @@ const db = drizzle(client);
 await db.select().from(...);
 ```
 
-### v0.31.3_release_notes
-v0.31.3: RQB schema name collision fix, RDS Data API type hints fix, new Prisma integration extension via $extends(drizzle())
+Initialize a TiDB Cloud Serverless client with a connection URL, pass it to `drizzle()` from the `tidb-serverless` module, then use standard Drizzle ORM queries.
+
+### v0.31.3_release
+v0.31.3: Fixed RQB schema handling and RDS Data API types; added Prisma extension for native Drizzle query integration via `$extends(drizzle())`
 
 ## Bug Fixes
 
-- Fixed RQB (Relational Query Builder) behavior for tables with identical names across different schemas
-- Fixed type hint mismatch when using RDS Data API (issue #2097)
+- Fixed RQB behavior for tables with same names in different schemas
+- Fixed mismatched type hints when using RDS Data API (#2097)
 
-## New Prisma-Drizzle Extension
+## Prisma-Drizzle Extension
 
-A new extension enables seamless integration between Prisma and Drizzle ORM, allowing you to use Drizzle queries within Prisma's client:
+New extension allows using Drizzle queries within Prisma Client:
 
 ```ts
 import { PrismaClient } from '@prisma/client';
@@ -1384,34 +1531,41 @@ const prisma = new PrismaClient().$extends(drizzle());
 const users = await prisma.$drizzle.select().from(User);
 ```
 
-The extension is accessed via `prisma.$drizzle` and supports standard Drizzle query operations like `select().from()`. Additional documentation available in the Prisma integration guide.
+The extension is initialized via `$extends(drizzle())` and provides `$drizzle` property for executing Drizzle queries. See Prisma integration docs for more details.
 
-### v0.31.4_release_notes
-v0.31.4 makes prisma clients package optional
+### v0.31.4_release
+v0.31.4: prisma clients package now optional
 
-DrizzleORM v0.31.4 release marks the prisma clients package as optional, reducing unnecessary dependencies for users who don't use Prisma integration.
+DrizzleORM v0.31.4 marks the prisma clients package as optional, reducing unnecessary dependencies for users who don't use Prisma integration.
 
 ### v0.32.0_release_notes
-v0.32.0 adds MySQL $returningId(), PostgreSQL sequences/identity columns, and generated columns (PostgreSQL/MySQL/SQLite) with Drizzle Kit migrations support and configurable migration file prefixes.
+MySQL $returningId() for inserted IDs; PostgreSQL sequences, identity columns, and generated columns; MySQL/SQLite generated columns with stored/virtual modes; Drizzle Kit migrations support and --force flag; customizable migration file prefixes.
 
-## MySQL `$returningId()` Function
+## MySQL `$returningId()` function
 
-MySQL lacks native `RETURNING` support for `INSERT`. Drizzle provides `$returningId()` to automatically retrieve inserted primary key IDs from autoincrement/serial columns:
+MySQL lacks native `RETURNING` support for `INSERT`. Drizzle provides `$returningId()` to automatically retrieve inserted IDs from autoincrement primary keys:
 
 ```ts
+const usersTable = mysqlTable('users', {
+  id: int('id').primaryKey(),
+  name: text('name').notNull(),
+  verified: boolean('verified').notNull().default(false),
+});
+
 const result = await db.insert(usersTable).values([{ name: 'John' }, { name: 'John1' }]).$returningId();
-// Returns: { id: number }[]
+// { id: number }[]
 ```
 
-Also works with custom primary keys generated via `$default` function:
+Also works with custom primary keys generated via `$defaultFn()`:
 
 ```ts
 const usersTableDefFn = mysqlTable('users_default_fn', {
   customId: varchar('id', { length: 256 }).primaryKey().$defaultFn(createId),
   name: text('name').notNull(),
 });
+
 const result = await db.insert(usersTableDefFn).values([{ name: 'John' }, { name: 'John1' }]).$returningId();
-// Returns: { customId: string }[]
+// { customId: string }[]
 ```
 
 If no primary keys exist, returns `{}[]`.
@@ -1439,7 +1593,7 @@ export const customSequence = customSchema.sequence("name");
 
 ## PostgreSQL Identity Columns
 
-Replace deprecated `serial` type with identity columns (recommended approach):
+Recommended replacement for deprecated `serial` type. Use `.generatedAlwaysAsIdentity()` with optional sequence properties:
 
 ```ts
 import { pgTable, integer, text } from 'drizzle-orm/pg-core' 
@@ -1451,11 +1605,9 @@ export const ingredients = pgTable("ingredients", {
 });
 ```
 
-Supports all sequence properties and custom sequence names.
-
 ## PostgreSQL Generated Columns
 
-Create generated columns with expressions referencing other columns or static values:
+Create generated columns using `.generatedAlwaysAs()` with SQL expressions or strings:
 
 ```ts
 import { SQL, sql } from "drizzle-orm";
@@ -1474,7 +1626,6 @@ export const test = pgTable("test", {
   idx: index("idx_content_search").using("gin", t.contentSearch),
 }));
 
-// Static expressions
 export const users = pgTable("users", {
   id: integer("id"),
   name: text("name"),
@@ -1485,7 +1636,7 @@ export const users = pgTable("users", {
 
 ## MySQL Generated Columns
 
-Specify `stored` or `virtual` generated columns:
+Supports both `stored` and `virtual` modes. Drizzle Kit `push` limitations: can't change expression/type (drop and recreate instead); `generate` has no limitations.
 
 ```ts
 export const users = mysqlTable("users", {
@@ -1502,51 +1653,42 @@ export const users = mysqlTable("users", {
 });
 ```
 
-Drizzle Kit `push` limitations: Cannot change generated expression or type; must drop and recreate columns. `generate` has no limitations.
-
 ## SQLite Generated Columns
 
-Support for `stored` and `virtual` generated columns with limitations:
-
-- Cannot change stored generated expressions in existing tables (requires table recreation)
-- Cannot add stored expressions to existing columns (but can add virtual)
-- Cannot change stored expressions (but can change virtual)
-- Cannot change from virtual to stored (but can change from stored to virtual)
+Supports `stored` and `virtual` modes. Drizzle Kit limitations: can't change stored expressions in existing tables (requires recreation); can't add stored expressions to existing columns (but can add virtual); can't change stored to virtual (but can change virtual to stored).
 
 ## Drizzle Kit Features
 
-**Migrations support**: Full support for PostgreSQL sequences, identity columns, and generated columns across all dialects.
+**Migrations support**: PostgreSQL sequences, identity columns, and generated columns for all dialects.
 
-**`--force` flag for `push`**: Auto-accept all data-loss statements in CLI.
+**`--force` flag for `push`**: Auto-accept all data-loss statements.
 
-**Migration file prefix customization**:
-```ts
-import { defineConfig } from "drizzle-kit";
-
-export default defineConfig({
-  dialect: "postgresql",
-  migrations: {
-    prefix: 'supabase'  // or 'timestamp', 'unix', 'none'
-  }
-});
-```
-
+**`migrations.prefix` flag**: Customize migration file naming:
 - `index` (default): `0001_name.sql`
 - `supabase`/`timestamp`: `20240627123900_name.sql`
 - `unix`: `1719481298_name.sql`
 - `none`: no prefix
 
+```ts
+import { defineConfig } from "drizzle-kit";
+
+export default defineConfig({
+  dialect: "postgresql",
+  migrations: { prefix: 'supabase' }
+});
+```
+
 ### v0.32.1_release_notes
-v0.32.1 bug fixes: index typings for 3+ columns, limit 0 support, empty array handling in inArray/notInArray, doc corrections
+v0.32.1: index typing fixes for 3+ columns, limit 0 support, empty array handling for inArray/notInArray, doc fixes
 
 ## Bug Fixes and Improvements
 
 **Index Typings and Multi-Column Support**
 - Fixed typings for indexes
-- Added support for creating indexes on 3 or more columns with mixed columns and expressions
+- Now supports creating indexes on 3+ columns with mixed columns and expressions
 
 **Limit 0 Support**
-- Added support for "limit 0" across all database dialects (resolves issue #2011)
+- Added support for "limit 0" across all dialects (resolves issue #2011)
 
 **Array Operations**
 - `inArray` and `notInArray` now accept empty lists (resolves issue #1295)
@@ -1555,18 +1697,20 @@ v0.32.1 bug fixes: index typings for 3+ columns, limit 0 support, empty array ha
 - Fixed typo in `lt` typedoc
 - Corrected wrong example in README.md
 
-### v0.32.2_release_notes
-v0.32.2 patch: AWS Data API type fixes, MySQL transaction bug fix, useLiveQuery dependency forwarding, expanded SQLite type exports
+### v0.32.2_release
+v0.32.2 release: AWS Data API type hints fix, MySQL transactions fix, useLiveQuery dependency forwarding, additional SQLite type exports
 
 ## Bug Fixes and Improvements
 
-**AWS Data API Type Hints**: Fixed type hint bugs in the RQB (Query Builder) for AWS Data API integration.
+**AWS Data API Type Hints**
+- Fixed type hints bugs in RQB (Query Builder) for AWS Data API
 
-**MySQL Transactions**: Resolved a bug affecting set transactions in MySQL.
+**MySQL Transactions**
+- Fixed set transactions bug in MySQL
 
-**useLiveQuery Dependencies**: Added forwarding dependencies within `useLiveQuery` hook, addressing issue #2651 where dependencies were not properly propagated.
+**useLiveQuery Hook**
+- Added forwarding dependencies within useLiveQuery, resolving issue #2651
 
-**SQLite Type Exports**: Expanded SQLite package exports to include additional types such as `AnySQLiteUpdate`, providing better type support for update operations.
-
-This release focuses on stability improvements across multiple database drivers and query building utilities.
+**SQLite Exports**
+- Added export of additional types from SQLite package, including `AnySQLiteUpdate`
 

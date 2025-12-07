@@ -1,0 +1,1 @@
+Three error handling patterns: try/catch for regular errors and simple streams; switch on `part.type` for full streams with error/abort/tool-error cases; `onAbort` callback for cleanup on stream abort (receives completed steps, not called on normal completion).

@@ -1,0 +1,1 @@
+Watch element intersection with `useIntersectionObserver(targetGetter, callback, options)`. Returns observer with `pause()`, `resume()`, `stop()` methods and `isActive` getter property.

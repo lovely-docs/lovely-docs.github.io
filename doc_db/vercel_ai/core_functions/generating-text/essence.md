@@ -1,0 +1,1 @@
+generateText for complete text generation, streamText for streaming with backpressure; both support callbacks (onFinish, onError, onChunk), fullStream for all events, experimental_transform for stream filtering/smoothing, sources from some providers.

@@ -1,0 +1,1 @@
+Middleware applying default language model settings (temperature, tokens, provider options) that can be overridden per-call; used with wrapLanguageModel().

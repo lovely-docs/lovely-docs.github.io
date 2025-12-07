@@ -1,1 +1,0 @@
-Legacy mode automatically makes top-level variables reactive through assignments, requiring explicit reassignment after mutations.

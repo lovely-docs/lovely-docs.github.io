@@ -1,0 +1,1 @@
+AspectRatio.Root component with ratio prop (number, default 1), bindable ref, children/child snippets, data-aspect-ratio-root attribute.

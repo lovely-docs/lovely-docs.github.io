@@ -1,0 +1,1 @@
+AI_InvalidDataContent error reference: thrown on invalid data content; detect with isInstance() method; exposes content, message, and cause properties.

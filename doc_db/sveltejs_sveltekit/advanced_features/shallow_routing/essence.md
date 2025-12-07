@@ -1,1 +1,0 @@
-Create history entries without navigation to implement modals and overlays that can be dismissed by navigating back.

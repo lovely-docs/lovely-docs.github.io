@@ -1,0 +1,1 @@
+SvelteKit prevents browser code from importing server-only modules (marked with `.server` suffix or in `$lib/server/`) to prevent leaking secrets; errors on any import chain from browser code to server code, even indirect or unused imports; disabled during tests.

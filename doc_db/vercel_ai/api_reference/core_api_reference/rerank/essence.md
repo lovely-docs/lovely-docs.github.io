@@ -1,1 +1,0 @@
-Rerank documents by semantic relevance to a query; accepts strings or objects, returns ranking with scores (0-1) and reordered documents; supports topN limiting, retries, custom headers, provider options, and telemetry.

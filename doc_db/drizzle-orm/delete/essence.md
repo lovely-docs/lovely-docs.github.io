@@ -1,1 +1,1 @@
-Delete rows with optional WHERE, LIMIT, ORDER BY; return deleted rows (PostgreSQL/SQLite); support CTEs via WITH clause.
+SQL DELETE with where, limit (MySQL/SQLite/SingleStore), orderBy, returning (PostgreSQL/SQLite), and WITH clause support.

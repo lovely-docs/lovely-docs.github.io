@@ -1,0 +1,1 @@
+Experimental middleware for intercepting language model calls. Provides three hooks: `transformParams` (modify call parameters), `wrapGenerate` (wrap generate operations), and `wrapStream` (wrap stream operations). Enables guardrails, RAG, caching, and logging in a model-agnostic way.

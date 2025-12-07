@@ -1,0 +1,1 @@
+Star rating component with customizable items, half-ratings, form integration, keyboard navigation (direct number input, arrows, Home/End), RTL support, and ARIA slider pattern.

@@ -1,1 +1,1 @@
-Breadcrumb component with Link, Page, Separator, Ellipsis; supports custom separators, dropdown/drawer integration, and responsive collapsed states.
+Navigation breadcrumb component with Root/List/Item/Link/Page/Separator/Ellipsis subcomponents; supports custom separators, dropdowns, collapsing, and responsive desktop/mobile variants.

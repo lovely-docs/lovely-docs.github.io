@@ -1,1 +1,0 @@
-Added `.if()` conditional method to WHERE expressions; fixed AWS DataAPI session method mappings

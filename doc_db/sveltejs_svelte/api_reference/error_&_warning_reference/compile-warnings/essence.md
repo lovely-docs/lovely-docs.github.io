@@ -1,1 +1,1 @@
-Reference of all Svelte compiler warnings covering accessibility, attributes, and code quality issues.
+Comprehensive reference of 100+ compiler warnings covering accessibility (a11y) rules, deprecated syntax, code quality issues, and reactivity gotchas in Svelte 5.

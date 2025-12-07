@@ -1,0 +1,1 @@
+Create unique case-insensitive email indexes using lower() function in uniqueIndex() for PostgreSQL/SQLite; MySQL requires parentheses and version 8.0.13+; query with eq(lower(column), lowercased_value).

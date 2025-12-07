@@ -1,26 +1,23 @@
 ## Prepared Statements for Query Performance
 
-Prepared statements reduce overhead by performing SQL concatenation once, allowing the database driver to reuse precompiled binary SQL.
+Prepared statements allow SQL concatenation to happen once, letting the database reuse precompiled binary SQL for repeated executions.
 
-**Basic usage (PostgreSQL requires statement name):**
+**Basic usage:**
 ```typescript
-const prepared = db.select().from(customers).prepare("statement_name"); // PostgreSQL
-const prepared = db.select().from(customers).prepare(); // MySQL/SQLite/SingleStore
-await prepared.execute(); // PostgreSQL/MySQL/SingleStore
-prepared.all(); // SQLite
+const prepared = db.select().from(customers).prepare("name"); // PostgreSQL requires name
+await prepared.execute(); // or .all()/.get() for SQLite
 ```
 
-**With dynamic placeholders:**
+**With dynamic values using placeholders:**
 ```typescript
-const p1 = db.select().from(customers)
+import { sql } from "drizzle-orm";
+
+const p = db.select().from(customers)
   .where(eq(customers.id, sql.placeholder('id')))
   .prepare();
-await p1.execute({ id: 10 });
 
-const p2 = db.select().from(customers)
-  .where(sql`lower(${customers.name}) like ${sql.placeholder('name')}`)
-  .prepare();
-await p2.execute({ name: '%an%' });
+await p.execute({ id: 10 });
+await p.execute({ id: 12 });
 ```
 
-SQLite uses `.get()` and `.all()` instead of `.execute()`.
+Different databases have slightly different APIs (PostgreSQL/MySQL/SingleStore use `.execute()`, SQLite uses `.get()`/`.all()`).

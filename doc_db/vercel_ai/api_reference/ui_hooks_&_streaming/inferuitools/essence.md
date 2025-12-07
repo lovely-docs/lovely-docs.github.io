@@ -1,0 +1,1 @@
+Type helper that maps a ToolSet to inferred input/output types for each tool, enabling type-safe tool usage in UI messages.

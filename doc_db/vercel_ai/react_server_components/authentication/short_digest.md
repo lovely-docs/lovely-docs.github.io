@@ -1,0 +1,1 @@
+Server Actions are public endpoints—validate user authorization before returning data. Extract tokens from cookies and check them before processing requests.

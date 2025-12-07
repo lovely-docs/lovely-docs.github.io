@@ -17,35 +17,11 @@ Import and compose dialog components:
 ```svelte
 <script lang="ts">
   import * as Dialog from "$lib/components/ui/dialog/index.js";
+  import { Button, buttonVariants } from "$lib/components/ui/button/index.js";
+  import { Input } from "$lib/components/ui/input/index.js";
+  import { Label } from "$lib/components/ui/label/index.js";
 </script>
 
-<Dialog.Root>
-  <Dialog.Trigger>Open</Dialog.Trigger>
-  <Dialog.Content>
-    <Dialog.Header>
-      <Dialog.Title>Are you sure absolutely sure?</Dialog.Title>
-      <Dialog.Description>
-        This action cannot be undone. This will permanently delete your account
-        and remove your data from our servers.
-      </Dialog.Description>
-    </Dialog.Header>
-  </Dialog.Content>
-</Dialog.Root>
-```
-
-### Components
-
-- `Dialog.Root` - Container for the dialog
-- `Dialog.Trigger` - Button or element that opens the dialog
-- `Dialog.Content` - Main dialog container with styling
-- `Dialog.Header` - Header section wrapper
-- `Dialog.Title` - Dialog title
-- `Dialog.Description` - Dialog description text
-- `Dialog.Footer` - Footer section wrapper
-
-### Example with Form
-
-```svelte
 <Dialog.Root>
   <Dialog.Trigger class={buttonVariants({ variant: "outline" })}>
     Edit Profile
@@ -74,4 +50,30 @@ Import and compose dialog components:
 </Dialog.Root>
 ```
 
-Built on Bits UI dialog component. See Bits UI documentation for full API reference and advanced options.
+**Components:**
+- `Dialog.Root`: Container for the dialog
+- `Dialog.Trigger`: Button or element that opens the dialog
+- `Dialog.Content`: Modal content wrapper with optional `class` for sizing (e.g., `sm:max-w-[425px]`)
+- `Dialog.Header`: Header section
+- `Dialog.Title`: Dialog title
+- `Dialog.Description`: Dialog description text
+- `Dialog.Footer`: Footer section for actions
+
+Minimal example:
+
+```svelte
+<Dialog.Root>
+  <Dialog.Trigger>Open</Dialog.Trigger>
+  <Dialog.Content>
+    <Dialog.Header>
+      <Dialog.Title>Are you sure absolutely sure?</Dialog.Title>
+      <Dialog.Description>
+        This action cannot be undone. This will permanently delete your account
+        and remove your data from our servers.
+      </Dialog.Description>
+    </Dialog.Header>
+  </Dialog.Content>
+</Dialog.Root>
+```
+
+Full API reference available in the Bits UI documentation.

@@ -1,0 +1,1 @@
+Index of AI SDK UI components: chatbot, completion, object generation, streaming, message persistence, tool usage, error handling, and stream protocol.

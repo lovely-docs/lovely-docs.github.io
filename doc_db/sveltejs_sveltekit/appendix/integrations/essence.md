@@ -1,1 +1,0 @@
-Guide to available preprocessors, add-ons, and plugins for SvelteKit projects.

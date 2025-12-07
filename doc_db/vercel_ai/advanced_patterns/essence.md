@@ -1,1 +1,1 @@
-Production patterns for streaming, caching, UI rendering, routing, rate limiting, and deploying AI applications.
+Advanced patterns for prompt engineering, stream management, caching, UI rendering, routing, and deployment with language models.

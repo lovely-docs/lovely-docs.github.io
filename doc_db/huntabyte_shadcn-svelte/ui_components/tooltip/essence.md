@@ -1,1 +1,1 @@
-Tooltip component with Provider/Root/Trigger/Content structure; displays on hover or focus; install with `npx shadcn-svelte@latest add tooltip -y -o`
+Tooltip component: popup on hover/focus with Provider/Root/Trigger/Content structure

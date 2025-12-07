@@ -1,1 +1,1 @@
-API reference for $app/server module providing remote functions (command, query, form, prerender) and utilities (getRequestEvent, read) for server-side operations in SvelteKit.
+$app/server exports remote function creators (command, form, query, prerender, query.batch) for server execution from browser, getRequestEvent for request context access, and read for asset loading; all support optional schema validation.

@@ -1,0 +1,1 @@
+Adapter that converts LlamaIndex ChatEngine and QueryEngine streams to Vercel AI SDK data streams using `toDataStream()`, `toDataStreamResponse()`, or `mergeIntoDataStream()` methods. Example: wrap `chatEngine.chat({message, stream: true})` with `toDataStreamResponse()`.

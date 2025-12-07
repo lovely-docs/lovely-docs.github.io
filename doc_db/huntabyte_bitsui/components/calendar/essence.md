@@ -1,0 +1,1 @@
+Date picker component with single/multiple selection, validation (min/max/disabled/unavailable dates), localization, customizable appearance (fixed weeks, multiple months, paged navigation), and month/year selectors; uses @internationalized/date for date handling.

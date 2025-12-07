@@ -1,1 +1,1 @@
-Upcoming documentation on team-based migrations structure; currently a placeholder with reference to GitHub discussion #2832.
+Placeholder for upcoming migrations folder structure documentation for team workflows.

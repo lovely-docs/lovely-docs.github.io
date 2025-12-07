@@ -1,0 +1,1 @@
+Seven transition functions: **blur**, **fade**, **fly**, **scale**, **slide**, **draw** (SVG), **crossfade** (paired send/receive). Each accepts `delay`, `duration`, `easing` plus function-specific params. Returns `TransitionConfig` with optional `css` and `tick` callbacks.

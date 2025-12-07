@@ -1,1 +1,1 @@
-Special elements for error handling, global object access, dynamic rendering, and component configuration.
+Special DOM and rendering control elements: error boundaries, window/document/body access, head injection, dynamic elements, and compiler options.

@@ -1,40 +1,53 @@
-## Two-Way Binding
+## State Management
 
-Use Svelte's `bind:` directive for simple state management:
+Bits UI components support multiple approaches to manage component state. Each component's API reference highlights which props are `bindable`, and you can replace the `value` prop with any `bindable` prop.
+
+### Two-Way Binding
+
+Use Svelte's built-in two-way binding with `bind:`:
 
 ```svelte
-<script lang="ts">
-  import { ComponentName } from "bits-ui";
-  let myValue = $state("default-value");
-</script>
+import { ComponentName } from "bits-ui";
+let myValue = $state("default-value");
+```
+
+```svelte
 <button onclick={() => (myValue = "new-value")}> Update Value </button>
 <ComponentName.Root bind:value={myValue}></ComponentName.Root>
 ```
 
-Benefits: zero-boilerplate state updates, external controls work automatically, ideal for simple use cases.
+**Why use it:**
+- Zero-boilerplate state updates
+- External controls work automatically
+- Great for simple use cases
 
-## Function Binding
+### Function Binding
 
-For advanced control, use Function Binding with custom getter and setter logic:
+Use a Function Binding for complete control with both getter and setter:
 
 ```svelte
-<script lang="ts">
-  import { ComponentName } from "bits-ui";
-  let myValue = $state("default-value");
-  function getValue() {
-    return myValue;
+let myValue = $state("default-value");
+function getValue() {
+  return myValue;
+}
+function setValue(newValue: string) {
+  const now = new Date();
+  const hour = now.getHours();
+  if (hour >= 9 && hour <= 17) {
+    myValue = newValue;
   }
-  function setValue(newValue: string) {
-    const now = new Date();
-    const hour = now.getHours();
-    if (hour >= 9 && hour <= 17) {
-      myValue = newValue;
-    }
-  }
-</script>
+}
+```
+
+```svelte
 <ComponentName.Root bind:value={getValue, setValue}></ComponentName.Root>
 ```
 
-Use when you need: complex state transformation logic, conditional updates, debouncing/throttling, maintaining additional state alongside the primary value, or integrating with external state systems.
+When the component wants to set the value from an internal action, it invokes the setter, where you can determine if the setter actually updates the state or not.
 
-Note: Any `bindable` prop can be used instead of `value`.
+**When to use:**
+- Complex state transformation logic
+- Conditional updates
+- Debouncing or throttling state changes
+- Maintaining additional state alongside the primary value
+- Integrating with external state systems

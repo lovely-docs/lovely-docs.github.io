@@ -1,0 +1,1 @@
+When `streamText` or `streamObject` return non-serializable objects in Server Actions, extract only serializable data and use `createStreamableValue` to safely pass it to Client Components.

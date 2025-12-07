@@ -1,0 +1,1 @@
+Step-by-step guide to integrate Drizzle ORM with Bun and PostgreSQL using Bun:SQL native bindings; includes installation, environment setup, schema definition, migrations, and query execution with `bun src/index.ts`.

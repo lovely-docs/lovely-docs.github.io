@@ -1,0 +1,1 @@
+InvalidToolInputError: error for invalid tool input; check with isInstance(); has toolName, toolInput, message, cause properties

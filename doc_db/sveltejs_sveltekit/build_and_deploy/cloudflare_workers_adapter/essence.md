@@ -1,1 +1,0 @@
-Deprecated adapter for deploying SvelteKit to Cloudflare Workers with Workers Sites; use adapter-cloudflare instead.

@@ -1,10 +1,17 @@
-## Prompt Engineering Fundamentals
+## LLMs and Prompts
 
-LLMs predict likely text sequences based on training data. Prompt engineering shapes responses through instruction clarity, examples, and model settings.
+LLMs predict likely text sequences based on input. Prompt engineering shapes responses using techniques like semantic search and ReActive architecture. Different models have cost/performance trade-offs.
 
-**Techniques:**
-- **Clear instructions:** "organic coffee shop" produces better results than generic "coffee shop"
-- **Examples:** Demonstrate expected output patterns to guide the model toward desired results
-- **Temperature setting:** Controls randomness (0 = deterministic, 1 = varied). Use ~0.6 for diverse suggestions.
+## Techniques
 
-**Cost-Performance Tradeoff:** Different models vary in cost, speed, and effectiveness (e.g., GPT-4 vs GPT-3.5-turbo).
+**Instructions:** Make prompts specific. `Create a slogan for an organic coffee shop.` works better than generic versions.
+
+**Examples:** Include input-output examples to demonstrate patterns:
+```
+Business: Bookstore with cats
+Slogans: "Purr-fect Pages", "Books and Whiskers", "Novels and Nuzzles"
+Business: Coffee shop with live music
+Slogans:
+```
+
+**Temperature:** Controls randomness (0-1). Lower = deterministic, higher = varied. Use ~0.6 for diverse suggestions.

@@ -1,1 +1,1 @@
-Hover card component for displaying link preview content on hover; composed of Root, Trigger (link element), and Content (preview) subcomponents.
+Hover card component for displaying link preview content on hover; install with `add hover-card -y -o`; use Root/Trigger/Content structure with optional href on Trigger.

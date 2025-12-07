@@ -1,1 +1,1 @@
-Utility type helpers for customizing component prop interfaces when wrapping Bits UI components.
+Type utilities for managing component props when creating custom wrappers and adding ref support.

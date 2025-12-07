@@ -1,0 +1,1 @@
+Deprecated `<svelte:self>` element for recursive component inclusion; replaced by direct self-imports.

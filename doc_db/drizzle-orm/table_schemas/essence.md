@@ -1,1 +1,0 @@
-Declare SQL schemas with pgSchema/mysqlSchema/singlestoreSchema; tables within schemas are automatically prefixed in queries; SQLite unsupported.

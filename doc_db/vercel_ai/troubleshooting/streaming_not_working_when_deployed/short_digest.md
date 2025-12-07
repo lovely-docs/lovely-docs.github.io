@@ -1,1 +1,1 @@
-Streaming fails in deployed apps while working locally. Solution: add `Transfer-Encoding: chunked` and `Connection: keep-alive` headers to the response via `toUIMessageStreamResponse({ headers: {...} })`.
+Streaming fails in deployed apps when the full response is returned instead of chunks. Add `Transfer-Encoding: chunked` and `Connection: keep-alive` headers to `toUIMessageStreamResponse()` to fix it.

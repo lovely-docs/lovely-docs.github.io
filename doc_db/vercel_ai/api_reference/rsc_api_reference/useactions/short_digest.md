@@ -1,1 +1,1 @@
-Hook to access Server Actions from client components. Returns `Record<string, Action>` dictionary. Must be used to avoid "Cannot find Client Component" errors from direct server action access. Currently experimental.
+Client hook to access Server Actions from AI SDK RSC. Returns a dictionary of server actions. Required because actions are patched through context. Use for server interactions and state management in Next.js.

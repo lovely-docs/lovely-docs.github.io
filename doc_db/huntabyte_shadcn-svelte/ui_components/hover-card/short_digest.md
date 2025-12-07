@@ -16,13 +16,11 @@ npx shadcn-svelte@latest add hover-card -y -o
 </script>
 
 <HoverCard.Root>
-  <HoverCard.Trigger>Hover</HoverCard.Trigger>
-  <HoverCard.Content>Preview content</HoverCard.Content>
+  <HoverCard.Trigger href="...">Link text</HoverCard.Trigger>
+  <HoverCard.Content class="w-80">
+    Preview content with avatar, text, metadata, etc.
+  </HoverCard.Content>
 </HoverCard.Root>
 ```
 
-### Structure
-
-- `HoverCard.Root`: Container
-- `HoverCard.Trigger`: Hover target (supports href, target, rel attributes)
-- `HoverCard.Content`: Preview content shown on hover
+Components: `Root`, `Trigger` (accepts href, target, rel), `Content`.

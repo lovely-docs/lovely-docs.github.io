@@ -1,1 +1,1 @@
-Reactive, schema-validated URL search params with type safety, compression, debouncing, date formatting, custom codecs, and server-side validation; top-level reactivity only.
+Reactive, type-safe URL search params with schema validation (Zod/Valibot/Arktype/built-in), defaults, compression, debouncing, history control, date formatting, and Zod codec support; top-level reactivity only.

@@ -1,1 +1,0 @@
-Type incompatibility error after SDK update; caused by model spec changes; fix by updating SDK and provider packages.

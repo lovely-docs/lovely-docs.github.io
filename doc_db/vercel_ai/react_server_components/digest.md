@@ -1,108 +1,183 @@
-## React Server Components (RSC) Package
+## Experimental RSC Integration for Generative UI
 
-Experimental package for building AI applications with React Server Components, enabling server-side UI rendering and streaming to clients with end-to-end type safety.
+Experimental package (`@ai-sdk/rsc`) for building AI applications with React Server Components. RSCs render UI on the server and stream to client; combined with Server Actions, they enable LLMs to generate and stream UI directly.
 
-### Core Abstractions
+### Core Functions
 
-**Streaming UI & State:**
-- `streamUI`: Calls a model with tools that return React components; model acts as router selecting relevant UI based on intent
-- `useUIState` / `useAIState`: Client-side hooks managing visual (UI) and serializable (AI) state respectively
-- `useActions`: Provides client access to Server Actions
-- `createAI`: Context provider wrapping application, managing both UI and AI state with `initialAIState`, `initialUIState`, and `actions` object
+**Generative UI:**
+- `streamUI`: calls a model and allows it to respond with React Server Components. Tools return components via async generator functions that yield loading states before final UI.
+- `useUIState`: client hook returning current UI state and update function (like `useState`). UI State is the visual representation of AI state, can contain React elements.
+- `useAIState`: client hook returning current AI state and update function. AI state is serializable JSON containing context shared with model (system messages, function responses, conversation history).
+- `useActions`: provides access to Server Actions from client for user interactions.
+- `createAI`: creates a client-server context provider managing UI and AI states with callbacks for persistence.
 
-**Streamable Values:**
-- `createStreamableValue`: Streams serializable data from server to client with `.update()` and `.done()` methods
-- `createStreamableUI`: Streams React components with `.update()`, `.done()`, and `.error()` methods
-- `readStreamableValue`: Client-side async iterator consuming streamable values
+**Streaming Values:**
+- `createStreamableValue`: creates a stream sending serializable values (strings, numbers, objects, arrays) from server to client. Read with `readStreamableValue` async iterator.
+- `createStreamableUI`: creates a stream sending React components from server to client. Call `.update()` for intermediate states, `.done()` to finalize.
 
 ### State Management
 
 Split state into two parts:
-- **AI State**: Serializable JSON (conversation history, metadata) shared with LLM, accessible server/client via `getAIState()` / `getMutableAIState()` / `useAIState()`
-- **UI State**: Client-only React components, managed via `useUIState()`
+- **AI State**: Serializable JSON (conversation history, metadata) accessible/modifiable from server and client. Source of truth passed to LLM.
+- **UI State**: Client-only state containing rendered UI elements and React components.
 
-Persist AI state with `onSetAIState` callback (save when `done: true`), restore with `initialAIState` prop. Reconstruct UI state via `onGetUIState` callback by comparing database vs app history.
-
-### Patterns
-
-**Streaming Components with Loading States:**
-Generator functions in tool `generate` methods yield intermediate values (loading UI) before returning final components:
+Setup with `createAI`:
 ```tsx
-generate: async function* ({ location }) {
-  yield <LoadingComponent />;
-  const data = await fetchData(location);
-  return <FinalComponent data={data} />;
-}
-```
-
-**Multistep Interfaces:**
-Compose multiple tools into conversational flows. User sends message → appended to AI State → passed to model with tools → model calls tool → component renders → within component use `useActions` to trigger next step.
-
-**Client Interactions:**
-Convert tool components to client components using `useActions` to call Server Actions and `useUIState` to update conversation without requiring text input.
-
-**Loading State Approaches:**
-1. Client-side: Traditional `useState` with disabled inputs
-2. Server-streamed: Separate `createStreamableValue` for loading state
-3. Generator functions: Yield loading UI before final result
-
-**Error Handling:**
-- UI errors: Use `streamableUI.error()` and wrap with React Error Boundary
-- Other errors: Return error objects from try-catch blocks
-
-**Authentication:**
-Validate authorization in Server Actions by checking cookies before executing protected logic; return error object if token invalid.
-
-### Migration to AI SDK UI
-
-AI SDK RSC is experimental with limitations (no stream abort, component remounting flicker, quadratic data transfer). Migrate by:
-- Separating generation (route handler with `streamText`) from rendering (client with `useChat`)
-- Replacing `streamUI` tools with `streamText` tools that return data instead of components
-- Rendering components client-side based on `toolInvocations` state
-- Using `useChat` hook instead of `useActions` for client interactions
-- Replacing `onSetAIState` with `onFinish` callback in `streamText`
-- Loading initial messages via page static generation and passing to `useChat`
-
-### Setup Example
-
-```tsx
-// app/ai.ts
-import { createAI } from '@ai-sdk/rsc';
+export type ServerMessage = { role: 'user' | 'assistant'; content: string };
+export type ClientMessage = { id: string; role: 'user' | 'assistant'; display: ReactNode };
 
 export const AI = createAI<ServerMessage[], ClientMessage[]>({
   initialAIState: [],
   initialUIState: [],
   actions: { sendMessage },
   onSetAIState: async ({ state, done }) => {
-    if (done) await saveChatToDB(state);
+    if (done) saveChatToDB(state);
+  },
+  onGetUIState: async () => {
+    const historyFromDB = await loadChatFromDB();
+    return historyFromDB.map(({ role, content }) => ({
+      id: generateId(),
+      role,
+      display: role === 'function' ? <Component {...JSON.parse(content)} /> : content,
+    }));
   },
 });
+```
 
-// app/layout.tsx
-import { AI } from './ai';
-export default function RootLayout({ children }) {
-  return <AI>{children}</AI>;
-}
+Access states:
+- Client: `useUIState()`, `useAIState()`, `useActions()`
+- Server: `getAIState()`, `getMutableAIState()` (with `.update()` and `.done()` methods)
 
-// app/actions.tsx
-export async function sendMessage(input: string) {
+### Streaming React Components
+
+`streamUI` function streams components from server to client. Tools return components instead of text/objects:
+
+```tsx
+const result = await streamUI({
+  model: openai('gpt-4o'),
+  prompt: 'Get the weather for San Francisco',
+  text: ({ content }) => <div>{content}</div>,
+  tools: {
+    getWeather: {
+      description: 'Get the weather for a location',
+      inputSchema: z.object({ location: z.string() }),
+      generate: async function* ({ location }) {
+        yield <LoadingComponent />;
+        const weather = await getWeather(location);
+        return <WeatherComponent weather={weather} location={location} />;
+      },
+    },
+  },
+});
+```
+
+### Multi-Step Interfaces
+
+Build multi-step UIs with tool composition. Tools use async generators to yield intermediate UI then final components. Client components use `useActions`/`useUIState` for interactivity:
+
+```tsx
+// Server Action
+export async function submitUserMessage(input: string) {
   'use server';
-  const result = await streamUI({
+  const ui = await streamUI({
     model: openai('gpt-4o'),
+    system: 'you are a flight booking assistant',
     prompt: input,
-    text: ({ content }) => <div>{content}</div>,
-    tools: { /* tool definitions */ },
+    text: async ({ content }) => <div>{content}</div>,
+    tools: {
+      searchFlights: {
+        description: 'search for flights',
+        inputSchema: z.object({
+          source: z.string(),
+          destination: z.string(),
+          date: z.string(),
+        }),
+        generate: async function* ({ source, destination, date }) {
+          yield `Searching for flights from ${source} to ${destination} on ${date}...`;
+          const results = await searchFlights(source, destination, date);
+          return <Flights flights={results} />;
+        },
+      },
+    },
   });
-  return result.value;
+  return ui.value;
 }
 
-// app/page.tsx
+// Client component with interactivity
 'use client';
-const { sendMessage } = useActions();
-const [messages, setMessages] = useUIState();
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const response = await sendMessage(input);
-  setMessages([...messages, response]);
+export const Flights = ({ flights }) => {
+  const { submitUserMessage } = useActions();
+  const [_, setMessages] = useUIState();
+  return (
+    <div>
+      {flights.map(result => (
+        <div key={result.id} onClick={async () => {
+          const display = await submitUserMessage(`lookupFlight ${result.flightNumber}`);
+          setMessages((messages) => [...messages, display]);
+        }}>
+          {result.flightNumber}
+        </div>
+      ))}
+    </div>
+  );
 };
 ```
+
+### Loading State Patterns
+
+Three approaches:
+1. **Client-side**: Manage loading state variable, disable input while streaming.
+2. **Server-streamed**: Create separate streamable value for loading state, read both response and loading state on client.
+3. **Streaming components**: Use `streamUI` with generator functions to yield loading component while awaiting model response.
+
+### Error Handling
+
+For UI errors, use `streamableUI.error()`:
+```tsx
+export async function getStreamedUI() {
+  const ui = createStreamableUI();
+  (async () => {
+    ui.update(<div>loading</div>);
+    const data = await fetchData();
+    ui.done(<div>{data}</div>);
+  })().catch(e => {
+    ui.error(<div>Error: {e.message}</div>);
+  });
+  return ui.value;
+}
+```
+
+For other errors, return error objects from server actions. Wrap streamed components with React Error Boundary on client.
+
+### Authentication
+
+Server Actions are public endpoints. Validate authentication tokens from cookies before executing protected logic:
+```tsx
+'use server';
+import { cookies } from 'next/headers';
+import { validateToken } from '../utils/auth';
+
+export const getWeather = async () => {
+  const token = cookies().get('token');
+  if (!token || !validateToken(token)) {
+    return { error: 'This action requires authentication' };
+  }
+  // protected logic
+};
+```
+
+### Migration to AI SDK UI
+
+AI SDK RSC is experimental with limitations: cannot abort streams, components remount on `.done()` causing flicker, many suspense boundaries crash, `createStreamableUI` causes quadratic data transfer. AI SDK UI is the recommended stable alternative.
+
+Key differences:
+- **RSC**: `streamUI` in server action combines generation and rendering
+- **UI**: Separate concerns - `streamText` in route handler, `useChat` on client
+- **RSC**: Tools return components directly
+- **UI**: Tools return data, components render on client via tool invocations
+- **RSC**: `useActions` to trigger server actions
+- **UI**: `useChat` with same `id` in child components
+- **RSC**: `onSetAIState` callback for persistence
+- **UI**: `onFinish` callback in `streamText`
+- **RSC**: `onGetUIState` callback for restoration
+- **UI**: Load messages during page generation, pass as `initialMessages` to `useChat`

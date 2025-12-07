@@ -1,0 +1,1 @@
+Complete setup guide for Vercel Postgres with Drizzle: connection config, schema definition with pgTable, drizzle-kit migrations, and CRUD query patterns (insert/select/update/delete with joins, filtering, pagination).

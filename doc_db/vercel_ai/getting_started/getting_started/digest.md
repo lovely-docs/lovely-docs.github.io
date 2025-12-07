@@ -1,1 +1,12 @@
-This is an introductory page to the AI SDK that provides guidance on core features. It directs users to quickstart guides for different frameworks through a QuickstartFrameworkCards component. The page also lists backend framework examples for integrating AI SDK Core and AI SDK UI: Node.js HTTP Server for sending AI responses from a basic Node.js HTTP server, Express for Express servers, Hono for Hono servers, Fastify for Fastify servers, and Nest.js for Nest.js servers. Each framework example includes a brief description and a link to its respective documentation.
+Introduction to core features of the AI SDK with framework-specific guides.
+
+The page provides entry points for learning the AI SDK through quickstart guides for different frameworks (shown via QuickstartFrameworkCards component).
+
+Backend framework examples are available for:
+- Node.js HTTP Server: Send AI responses from a Node.js HTTP server
+- Express: Send AI responses from an Express server
+- Hono: Send AI responses from a Hono server
+- Fastify: Send AI responses from a Fastify server
+- Nest.js: Send AI responses from a Nest.js server
+
+All examples use AI SDK Core and AI SDK UI libraries.

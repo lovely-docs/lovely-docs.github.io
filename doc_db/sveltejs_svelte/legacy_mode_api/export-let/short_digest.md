@@ -1,0 +1,1 @@
+Legacy mode props use `export let` with optional defaults. Exported functions/classes become component API. Props can be renamed with `export { name as alias }` syntax.

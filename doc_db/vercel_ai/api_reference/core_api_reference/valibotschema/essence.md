@@ -1,1 +1,0 @@
-valibotSchema converts Valibot schemas to AI SDK-compatible JSON schemas for structured data generation and tool definitions; currently experimental.

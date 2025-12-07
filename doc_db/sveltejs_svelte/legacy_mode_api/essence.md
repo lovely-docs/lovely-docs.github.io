@@ -1,0 +1,1 @@
+Svelte 3/4 legacy mode API: reactive variables via assignment, `$:` reactive statements, `export let` props, `on:` event handlers with modifiers, `createEventDispatcher` for custom events, slots with `let:` data passing, imperative component constructor with `$set/$on/$destroy` methods.

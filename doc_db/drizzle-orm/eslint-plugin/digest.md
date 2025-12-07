@@ -1,18 +1,16 @@
 ## ESLint Plugin for Drizzle
 
-An ESLint plugin that provides rules for catching common mistakes during development that are difficult to enforce through TypeScript's type system.
+An ESLint plugin that provides rules for catching common mistakes during development that are difficult to type-check.
 
 ### Installation
 
-Install the plugin along with TypeScript ESLint dependencies:
 ```
-eslint-plugin-drizzle
-@typescript-eslint/eslint-plugin @typescript-eslint/parser
+npm install eslint-plugin-drizzle @typescript-eslint/eslint-plugin @typescript-eslint/parser
 ```
 
 ### Configuration
 
-Add to `.eslintrc.yml`:
+Basic setup in `.eslintrc.yml`:
 ```yml
 root: true
 parser: '@typescript-eslint/parser'
@@ -25,19 +23,15 @@ rules:
   'drizzle/enforce-update-with-where': "error"
 ```
 
-Use the `recommended` or `all` config (currently equivalent):
-```yml
-extends:
-  - "plugin:drizzle/recommended"
-```
+Use `extends: ["plugin:drizzle/recommended"]` or `extends: ["plugin:drizzle/all"]` (currently equivalent) to enable all rules at once.
 
 ### Rules
 
 **enforce-delete-with-where**
 
-Requires `.where()` clause on `.delete()` statements to prevent accidental deletion of all table rows.
+Requires `.where()` clause on `.delete()` statements to prevent accidental deletion of all rows.
 
-Optional `drizzleObjectName` config accepts `string` or `string[]` to specify which objects trigger the rule. Without this, any `.delete()` call triggers it. With it, only delete calls on specified objects (like `db`) trigger the rule:
+Optional `drizzleObjectName` config (string or string[]) restricts the rule to specific object names, useful when other classes have delete methods:
 
 ```yml
 rules:
@@ -50,20 +44,18 @@ rules:
 class MyClass {
   public delete() { return {} }
 }
-
 const myClassObj = new MyClass();
-myClassObj.delete()  // OK - not triggered
-
+myClassObj.delete() // OK - not triggered
 const db = drizzle(...)
-db.delete()  // ERROR - triggered
-db.delete().where(...)  // OK
+db.delete() // ERROR - triggered
+db.delete().where(...) // OK
 ```
 
 **enforce-update-with-where**
 
-Requires `.where()` clause on `.update()` statements to prevent accidental updates to all table rows.
+Requires `.where()` clause on `.update()` statements to prevent accidental updates to all rows.
 
-Same optional `drizzleObjectName` configuration as `enforce-delete-with-where`:
+Same `drizzleObjectName` configuration option as enforce-delete-with-where:
 
 ```yml
 rules:
@@ -76,11 +68,9 @@ rules:
 class MyClass {
   public update() { return {} }
 }
-
 const myClassObj = new MyClass();
-myClassObj.update()  // OK - not triggered
-
+myClassObj.update() // OK - not triggered
 const db = drizzle(...)
-db.update()  // ERROR - triggered
-db.update().set({...}).where(...)  // OK
+db.update() // ERROR - triggered
+db.update().where(...) // OK
 ```

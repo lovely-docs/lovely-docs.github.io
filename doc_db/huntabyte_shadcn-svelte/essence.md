@@ -1,1 +1,1 @@
-Complete reference for shadcn-svelte: 60+ composable UI components, dark mode setup, installation guides, migration paths, custom registries, theming system, and CLI commands.
+Complete Svelte UI component library with 60+ composable, accessible, themeable components; CLI-based installation with customization via CSS variables and registries.

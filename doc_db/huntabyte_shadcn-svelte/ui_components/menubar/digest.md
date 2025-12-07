@@ -1,6 +1,6 @@
 ## Menubar
 
-A persistent menu component common in desktop applications providing quick access to a consistent set of commands.
+A persistent menu component common in desktop applications providing quick access to commands.
 
 ### Installation
 
@@ -8,7 +8,7 @@ A persistent menu component common in desktop applications providing quick acces
 npx shadcn-svelte@latest add menubar -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+Use `-y` to skip confirmation and `-o` to overwrite existing files.
 
 ### Basic Usage
 
@@ -21,40 +21,41 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
   <Menubar.Menu>
     <Menubar.Trigger>File</Menubar.Trigger>
     <Menubar.Content>
-      <Menubar.Item>
-        New Tab
-        <Menubar.Shortcut>T</Menubar.Shortcut>
-      </Menubar.Item>
-      <Menubar.Item>New Window</Menubar.Item>
+      <Menubar.Item>New Tab <Menubar.Shortcut>T</Menubar.Shortcut></Menubar.Item>
+      <Menubar.Item>New Window <Menubar.Shortcut>N</Menubar.Shortcut></Menubar.Item>
       <Menubar.Separator />
-      <Menubar.Item>Share</Menubar.Item>
-      <Menubar.Separator />
-      <Menubar.Item>Print</Menubar.Item>
+      <Menubar.Sub>
+        <Menubar.SubTrigger>Share</Menubar.SubTrigger>
+        <Menubar.SubContent>
+          <Menubar.Item>Email link</Menubar.Item>
+          <Menubar.Item>Messages</Menubar.Item>
+        </Menubar.SubContent>
+      </Menubar.Sub>
     </Menubar.Content>
   </Menubar.Menu>
 </Menubar.Root>
 ```
 
-### Component Structure
+### Components
 
 - **Menubar.Root**: Container for all menus
 - **Menubar.Menu**: Individual menu group
 - **Menubar.Trigger**: Menu label/button
 - **Menubar.Content**: Menu dropdown container
-- **Menubar.Item**: Menu item
+- **Menubar.Item**: Menu item with optional `inset` prop for alignment
 - **Menubar.Shortcut**: Keyboard shortcut display
-- **Menubar.Separator**: Visual divider between items
+- **Menubar.Separator**: Visual divider
 - **Menubar.Sub / Menubar.SubTrigger / Menubar.SubContent**: Nested submenu
-- **Menubar.CheckboxItem**: Checkbox menu item with `bind:checked` binding
-- **Menubar.RadioGroup / Menubar.RadioItem**: Radio button group with `bind:value` binding
-- **Menubar.Item inset**: Item with inset styling (typically for secondary actions)
+- **Menubar.CheckboxItem**: Checkbox menu item with `bind:checked` for state
+- **Menubar.RadioGroup / Menubar.RadioItem**: Radio button group with `bind:value` for selection
 
 ### Advanced Example
 
 ```svelte
 <script lang="ts">
   let bookmarks = $state(false);
-  let profileValue = $state("benoit");
+  let fullUrls = $state(true);
+  let profileRadioValue = $state("benoit");
 </script>
 
 <Menubar.Root>
@@ -64,46 +65,22 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
       <Menubar.CheckboxItem bind:checked={bookmarks}>
         Always Show Bookmarks Bar
       </Menubar.CheckboxItem>
+      <Menubar.CheckboxItem bind:checked={fullUrls}>
+        Always Show Full URLs
+      </Menubar.CheckboxItem>
       <Menubar.Separator />
-      <Menubar.Item inset>
-        Reload <Menubar.Shortcut>R</Menubar.Shortcut>
-      </Menubar.Item>
+      <Menubar.Item inset>Reload <Menubar.Shortcut>R</Menubar.Shortcut></Menubar.Item>
     </Menubar.Content>
   </Menubar.Menu>
   <Menubar.Menu>
     <Menubar.Trigger>Profiles</Menubar.Trigger>
     <Menubar.Content>
-      <Menubar.RadioGroup bind:value={profileValue}>
+      <Menubar.RadioGroup bind:value={profileRadioValue}>
         <Menubar.RadioItem value="andy">Andy</Menubar.RadioItem>
         <Menubar.RadioItem value="benoit">Benoit</Menubar.RadioItem>
+        <Menubar.RadioItem value="luis">Luis</Menubar.RadioItem>
       </Menubar.RadioGroup>
-      <Menubar.Separator />
-      <Menubar.Item inset>Edit...</Menubar.Item>
-    </Menubar.Content>
-  </Menubar.Menu>
-  <Menubar.Menu>
-    <Menubar.Trigger>Edit</Menubar.Trigger>
-    <Menubar.Content>
-      <Menubar.Sub>
-        <Menubar.SubTrigger>Find</Menubar.SubTrigger>
-        <Menubar.SubContent>
-          <Menubar.Item>Search the web</Menubar.Item>
-          <Menubar.Separator />
-          <Menubar.Item>Find...</Menubar.Item>
-        </Menubar.SubContent>
-      </Menubar.Sub>
     </Menubar.Content>
   </Menubar.Menu>
 </Menubar.Root>
 ```
-
-### Features
-
-- Multiple independent menus in a single menubar
-- Nested submenus with SubTrigger and SubContent
-- Checkbox items with reactive state binding
-- Radio button groups with reactive value binding
-- Keyboard shortcuts display
-- Visual separators
-- Inset styling for secondary menu items
-- Full keyboard navigation support (via underlying Bits UI component)

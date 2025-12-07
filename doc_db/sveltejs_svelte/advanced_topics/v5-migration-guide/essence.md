@@ -1,0 +1,1 @@
+Svelte 5 migration: explicit reactivity runes ($state/$derived/$effect), event attributes replace on: directives with callback props, snippets replace slots, components are functions (mount/unmount), stricter HTML/attributes, modern browsers only, numerous breaking changes in runes mode.

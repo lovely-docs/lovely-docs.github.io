@@ -1,10 +1,16 @@
 ## Aspect Ratio
 
-Component that constrains content to a specific aspect ratio.
+Displays content within a desired ratio.
+
+### Installation
+
+```bash
+npx shadcn-svelte@latest add aspect-ratio -y -o
+```
+
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Usage
-
-Import and wrap content with the `AspectRatio` component, specifying the desired ratio:
 
 ```svelte
 <script lang="ts">
@@ -18,12 +24,4 @@ Import and wrap content with the `AspectRatio` component, specifying the desired
 </div>
 ```
 
-The `ratio` prop accepts a numeric value (e.g., `16 / 9` for widescreen). Child content will be scaled to maintain the specified aspect ratio. Apply additional styling via the `class` prop.
-
-### Installation
-
-```bash
-npx shadcn-svelte@latest add aspect-ratio -y -o
-```
-
-Flags: `-y` skips confirmation prompt, `-o` overwrites existing files.
+The `AspectRatio` component wraps content and maintains a specified aspect ratio. Pass the desired ratio as a number (e.g., `16 / 9` for widescreen). Content inside scales to fill the container while preserving the ratio.

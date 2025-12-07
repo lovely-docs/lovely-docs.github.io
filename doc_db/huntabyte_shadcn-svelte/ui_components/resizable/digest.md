@@ -8,11 +8,9 @@ Accessible resizable panel groups and layouts with keyboard support, built on Pa
 npx shadcn-svelte@latest add resizable -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+The `-y` flag skips the confirmation prompt, and `-o` overwrites existing files.
 
 ### Basic Usage
-
-Import and use the Resizable components:
 
 ```svelte
 <script lang="ts">
@@ -26,14 +24,15 @@ Import and use the Resizable components:
 </Resizable.PaneGroup>
 ```
 
-### Components
+### Key Components
 
-- **PaneGroup**: Container for resizable panes with `direction` prop ("horizontal" or "vertical")
+- **PaneGroup**: Container with `direction` prop (`"horizontal"` or `"vertical"`)
 - **Pane**: Individual resizable panel with optional `defaultSize` prop (percentage)
-- **Handle**: Divider between panes, can show visual indicator with `withHandle` prop
+- **Handle**: Divider between panes, accepts `withHandle` prop to show/hide visual indicator
 
-### Vertical Layout
+### Examples
 
+**Vertical layout:**
 ```svelte
 <Resizable.PaneGroup direction="vertical" class="min-h-[200px] max-w-md rounded-lg border">
   <Resizable.Pane defaultSize={25}>
@@ -50,19 +49,16 @@ Import and use the Resizable components:
 </Resizable.PaneGroup>
 ```
 
-### Nested Layouts
-
-Combine horizontal and vertical pane groups:
-
+**Nested panes with visible handle:**
 ```svelte
-<Resizable.PaneGroup direction="horizontal" class="max-w-md rounded-lg border">
-  <Resizable.Pane defaultSize={50}>
-    <div class="flex h-[200px] items-center justify-center p-6">
-      <span class="font-semibold">One</span>
+<Resizable.PaneGroup direction="horizontal" class="min-h-[200px] max-w-md rounded-lg border">
+  <Resizable.Pane defaultSize={25}>
+    <div class="flex h-full items-center justify-center p-6">
+      <span class="font-semibold">Sidebar</span>
     </div>
   </Resizable.Pane>
-  <Resizable.Handle />
-  <Resizable.Pane defaultSize={50}>
+  <Resizable.Handle withHandle />
+  <Resizable.Pane defaultSize={75}>
     <Resizable.PaneGroup direction="vertical">
       <Resizable.Pane defaultSize={25}>
         <div class="flex h-full items-center justify-center p-6">
@@ -80,24 +76,4 @@ Combine horizontal and vertical pane groups:
 </Resizable.PaneGroup>
 ```
 
-### Handle Visibility
-
-Use `withHandle` prop on Handle to display a visual indicator:
-
-```svelte
-<Resizable.PaneGroup direction="horizontal" class="min-h-[200px] max-w-md rounded-lg border">
-  <Resizable.Pane defaultSize={25}>
-    <div class="flex h-full items-center justify-center p-6">
-      <span class="font-semibold">Sidebar</span>
-    </div>
-  </Resizable.Pane>
-  <Resizable.Handle withHandle />
-  <Resizable.Pane defaultSize={75}>
-    <div class="flex h-full items-center justify-center p-6">
-      <span class="font-semibold">Content</span>
-    </div>
-  </Resizable.Pane>
-</Resizable.PaneGroup>
-```
-
-For all available props and features, see the PaneForge documentation.
+For all available props and advanced features, see PaneForge documentation.

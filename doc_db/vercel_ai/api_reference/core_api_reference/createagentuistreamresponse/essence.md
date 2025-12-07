@@ -1,1 +1,0 @@
-Streams Agent output as UI messages in HTTP Response for real-time API endpoints; validates/converts messages, calls agent.stream(), returns Promise<Response> with Readable Stream; server-side only, requires agent with tools and .stream() implementation.

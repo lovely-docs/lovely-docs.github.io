@@ -1,0 +1,1 @@
+HTML++ markup: lowercase/capitalized tags for elements/components, attributes with JS expressions and shorthand, event listeners with case-sensitive `on` prefix and delegation, text expressions in braces, `{@html}` for HTML, comments with `svelte-ignore` and `@component` directives.

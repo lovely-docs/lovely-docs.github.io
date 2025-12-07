@@ -1,0 +1,1 @@
+Set up component registry: create registry.json with items (name, type, title, description, files), build with CLI, serve locally or deploy publicly, optionally add token-based auth.

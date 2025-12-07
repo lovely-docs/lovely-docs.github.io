@@ -1,0 +1,1 @@
+Displays latest drizzle-orm releases and version updates via the LatestReleases component.

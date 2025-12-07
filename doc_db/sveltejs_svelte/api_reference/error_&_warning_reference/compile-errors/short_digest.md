@@ -1,137 +1,111 @@
-## Compile Errors Reference
+## Svelte Compiler Errors
 
-Complete list of Svelte compiler error codes with descriptions.
+Complete reference of all compiler error codes organized by category:
 
-**Animation**: `animation_duplicate`, `animation_invalid_placement`, `animation_missing_key`
+**Animation**: duplicate, invalid placement, missing key
 
-**Attributes**: `attribute_contenteditable_dynamic`, `attribute_contenteditable_missing`, `attribute_duplicate`, `attribute_empty_shorthand`, `attribute_invalid_event_handler`, `attribute_invalid_multiple`, `attribute_invalid_name`, `attribute_invalid_sequence_expression`, `attribute_invalid_type`, `attribute_unquoted_sequence`
+**Attributes**: contenteditable issues, duplicates, empty shorthand, invalid event handlers, invalid names/types/sequences, unquoted sequences
 
-**Bindings**: `bind_group_invalid_expression`, `bind_group_invalid_snippet_parameter`, `bind_invalid_expression`, `bind_invalid_name`, `bind_invalid_parens`, `bind_invalid_target`, `bind_invalid_value`
+**Bindings**: invalid expressions/names/targets/values, group binding issues, snippet parameter binding
 
-**Blocks**: `block_duplicate_clause`, `block_invalid_continuation_placement`, `block_invalid_elseif`, `block_invalid_placement`, `block_unclosed`, `block_unexpected_character`, `block_unexpected_close`
+**Blocks**: duplicate clauses, invalid placement/continuation, unclosed, unexpected characters/closes, wrong syntax (elseif vs else if)
 
-**Components**: `component_invalid_directive`
+**Components**: invalid directives
 
-**Const Tags**: `const_tag_cycle`, `const_tag_invalid_expression`, `const_tag_invalid_placement`, `const_tag_invalid_reference`
+**Const Tags**: cyclical dependencies, invalid expressions/placement/references. Example: `{@const}` in `<svelte:boundary>` becomes part of implicit `children` snippet, unavailable to other snippets.
 
-Example - const not available in snippet:
+**CSS**: empty declarations, invalid identifiers, `:global` issues (combinator, declaration, list mixing, modifiers, placement, selectors), nesting selector placement, invalid selectors
+
+Example invalid CSS mixing `:global` and scoped:
+```css
+:global, x { y { color: red; } }  /* error */
+/* split into: */
+:global { y { color: red; } }
+x y { color: red; }
+```
+
+**Declarations**: duplicates, module import conflicts
+
+**Derived/Directives**: invalid exports, invalid values, missing names
+
+**Dollar Prefix**: `$` reserved for variables/imports
+
+**Each Blocks**: invalid assignments in runes mode (use array[i] instead), key without as clause
+
+Example (runes mode):
 ```svelte
-<svelte:boundary>
-    {@const foo = 'bar'}
-    {#snippet failed()}
-        {foo}  <!-- error -->
-    {/snippet}
-</svelte:boundary>
+{#each array as entry, i}
+	<button onclick={() => array[i] = 4}>change</button>
+{/each}
 ```
 
-**Declarations**: `declaration_duplicate`, `declaration_duplicate_module_import`, `constant_assignment`, `constant_binding`
+**Effects**: invalid placement
 
-**CSS**: `css_empty_declaration`, `css_expected_identifier`, `css_global_block_invalid_combinator`, `css_global_block_invalid_declaration`, `css_global_block_invalid_list`, `css_global_block_invalid_modifier`, `css_global_block_invalid_modifier_start`, `css_global_block_invalid_placement`, `css_global_invalid_placement`, `css_global_invalid_selector`, `css_global_invalid_selector_list`, `css_nesting_selector_invalid_placement`, `css_selector_invalid`, `css_type_selector_invalid_placement`
+**Elements**: invalid/unclosed closing tags, auto-closed violations
 
-Invalid CSS: `:global, x { y { color: red; } }` - mixing global and scoped
-Valid: Split into separate selectors
+**Event Handlers**: invalid modifiers/combinations, component-only restrictions
 
-**Debug**: `debug_tag_invalid_arguments`
+**Expected**: attribute values, block types, identifiers, patterns, tokens, whitespace
 
-**Derived/Export**: `derived_invalid_export`, `state_invalid_export`
+**Experimental**: `await` requires `experimental.async` option
 
-**Directives**: `directive_invalid_value`, `directive_missing_name`
+**Exports**: undefined variables, invalid in runes mode
 
-**Dollar Prefix**: `dollar_binding_invalid`, `dollar_prefix_invalid`
+**Global References**: illegal names (use `globalThis.name`)
 
-**Each Blocks**: `each_item_invalid_assignment`, `each_key_without_as`
+**Host**: `$host()` only in custom elements
 
-Legacy: `{#each array as entry} <button on:click={() => entry = 4}>`
-Runes: `{#each array as entry, i} <button onclick={() => array[i] = 4}>`
+**Imports**: `svelte/internal/*` forbidden
 
-**Effects**: `effect_invalid_placement`
+**Inspect**: `$inspect.trace()` restrictions (no generators, first statement only)
 
-**Elements**: `element_invalid_closing_tag`, `element_invalid_closing_tag_autoclosed`, `element_unclosed`, `void_element_invalid_content`
+**Legacy**: `await`, `export let`, `$$props`, `$:`, `$$restProps` invalid in runes mode
 
-**Event Handlers**: `event_handler_invalid_component_modifier`, `event_handler_invalid_modifier`, `event_handler_invalid_modifier_combination`
+**Let Directives**: invalid placement
 
-**Exports**: `export_undefined`
+**Module**: no default exports
 
-**Global References**: `global_reference_invalid`
+**Node Placement**: HTML repair breaks Svelte assumptions (e.g., `<p><div>` → `<p></p><div>`)
 
-**Host**: `host_invalid_placement`
+**Options**: invalid/removed/unrecognized compiler options
 
-**Illegal Attributes**: `illegal_element_attribute`
+**Props**: duplicates, invalid placement/patterns/identifiers, illegal names ($$), `$props.id()` restrictions
 
-**Imports**: `import_svelte_internal_forbidden`
+**Reactive**: cyclical dependencies
 
-**Inspect**: `inspect_trace_generator`, `inspect_trace_invalid_placement`
+**Render Tags**: invalid expressions/calls/spreads
 
-**Legacy Mode**: `legacy_await_invalid`, `legacy_export_invalid`, `legacy_props_invalid`, `legacy_reactive_statement_invalid`, `legacy_rest_props_invalid`
+**Runes**: invalid arguments/names/usage, missing parentheses, removed/renamed runes
 
-**Let Directives**: `let_directive_invalid_placement`
+**Scripts**: duplicates, invalid attributes/context, reserved attributes, `$bindable()` placement
 
-**Mixed Syntax**: `mixed_event_handler_syntaxes`
+**Slots**: duplicates, invalid attributes/placement/names, default conflicts, invalid content, `<slot>` vs `{@render}` conflict
 
-**Modules**: `module_illegal_default_export`
+**Snippets**: conflicts with children, invalid exports (can't reference module-level script), no rest parameters, parameter assignment, prop shadowing
 
-**Node Placement**: `node_invalid_placement` - browser repairs HTML breaking Svelte assumptions
-
-Examples:
-- `<p>hello <div>world</div></p>` → `<p>hello </p><div>world</div><p></p>`
-- `<table><tr><td>cell</td></tr></table>` → `<table><tbody><tr><td>cell</td></tr></tbody></table>`
-
-**Options**: `options_invalid_value`, `options_removed`, `options_unrecognised`
-
-**Props**: `props_duplicate`, `props_id_invalid_placement`, `props_illegal_name`, `props_invalid_identifier`, `props_invalid_pattern`, `props_invalid_placement`
-
-**Reactive**: `reactive_declaration_cycle`
-
-**Render Tags**: `render_tag_invalid_call_expression`, `render_tag_invalid_expression`, `render_tag_invalid_spread_argument`
-
-**Runes**: `rune_invalid_arguments`, `rune_invalid_arguments_length`, `rune_invalid_computed_property`, `rune_invalid_name`, `rune_invalid_spread`, `rune_invalid_usage`, `rune_missing_parentheses`, `rune_removed`, `rune_renamed`, `runes_mode_invalid_import`
-
-**Scripts**: `script_duplicate`, `script_invalid_attribute_value`, `script_invalid_context`, `script_reserved_attribute`
-
-**Slots**: `slot_attribute_duplicate`, `slot_attribute_invalid`, `slot_attribute_invalid_placement`, `slot_default_duplicate`, `slot_element_invalid_attribute`, `slot_element_invalid_name`, `slot_element_invalid_name_default`, `slot_snippet_conflict`
-
-**Snippets**: `snippet_conflict`, `snippet_invalid_export`, `snippet_invalid_rest_parameter`, `snippet_parameter_assignment`, `snippet_shadowing_prop`
-
-Invalid exported snippet:
+Example invalid export:
 ```svelte
-<script module>
-	export { greeting };
-</script>
-<script>
-	let message = 'hello';
-</script>
-{#snippet greeting(name)}
-	<p>{message} {name}!</p>
-{/snippet}
+<script module>export { greeting };</script>
+<script>let message = 'hello';</script>
+{#snippet greeting(name)}<p>{message} {name}!</p>{/snippet}  /* error */
 ```
 
-**State**: `state_field_duplicate`, `state_field_invalid_assignment`, `state_invalid_placement`
+**State**: field duplicates, invalid assignments/exports/placement. Declarations in class body or constructor, only once.
 
-State field declaration (class body or constructor, once only):
-```js
-class Counter {
-	count = $state(0);
-}
-```
+**Stores**: subscription restrictions (top-level only, not in module, `.svelte` files only)
 
-**Stores**: `store_invalid_scoped_subscription`, `store_invalid_subscription`, `store_invalid_subscription_module`
+**Style**: invalid modifiers (only `important`), duplicates
 
-**Styles**: `style_directive_invalid_modifier`, `style_duplicate`
+**Svelte Elements**: `<svelte:body>` (no non-event attrs), `<svelte:boundary>` (onerror/failed only), `<svelte:component>` (needs this), `<svelte:element>` (needs this), `<svelte:fragment>` (slot/let only, direct child), `<svelte:head>` (no attrs), `<svelte:self>` (if/each/snippet/slots only), `<svelte:options>` (static attrs, customElement/tag/shadow/props validation)
 
-**Svelte Meta**: `svelte_body_illegal_attribute`, `svelte_boundary_invalid_attribute`, `svelte_boundary_invalid_attribute_value`, `svelte_component_invalid_this`, `svelte_component_missing_this`, `svelte_element_missing_this`, `svelte_fragment_invalid_attribute`, `svelte_fragment_invalid_placement`, `svelte_head_illegal_attribute`, `svelte_meta_duplicate`, `svelte_meta_invalid_content`, `svelte_meta_invalid_placement`, `svelte_meta_invalid_tag`, `title_illegal_attribute`, `title_invalid_content`
+**Tags**: invalid names, invalid placement
 
-**Svelte Options**: `svelte_options_deprecated_tag`, `svelte_options_invalid_attribute`, `svelte_options_invalid_attribute_value`, `svelte_options_invalid_customelement`, `svelte_options_invalid_customelement_props`, `svelte_options_invalid_customelement_shadow`, `svelte_options_invalid_tagname`, `svelte_options_reserved_tagname`, `svelte_options_unknown_attribute`
+**Textarea**: value attribute OR child content, not both
 
-**Svelte Self**: `svelte_self_invalid_placement`
+**Title**: no attributes/directives, text and `{tags}` only
 
-**Tags**: `tag_invalid_name`, `tag_invalid_placement`
+**Transitions**: conflicts, duplicates
 
-**Textarea**: `textarea_invalid_content`
+**TypeScript**: not natively supported; use preprocessor like `vitePreprocess({ script: true })`
 
-**Transitions**: `transition_conflict`, `transition_duplicate`
-
-**TypeScript**: `typescript_invalid_feature`
-
-**Parsing**: `expected_attribute_value`, `expected_block_type`, `expected_identifier`, `expected_pattern`, `expected_token`, `expected_whitespace`, `invalid_arguments_usage`, `js_parse_error`, `unexpected_eof`, `unexpected_reserved_word`, `unterminated_string_constant`
-
-**Async**: `experimental_async`
+**Misc**: unexpected EOF, reserved words, unterminated strings, void element content

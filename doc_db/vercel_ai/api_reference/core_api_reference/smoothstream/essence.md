@@ -1,1 +1,0 @@
-TransformStream utility for smoothing text streaming with configurable delays and chunking strategies (word/line/regex/custom callback), with special support for non-latin languages.

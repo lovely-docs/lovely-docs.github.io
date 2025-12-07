@@ -1,1 +1,1 @@
-Preserve ephemeral DOM state across page navigation using snapshot capture and restore methods.
+Snapshots preserve ephemeral DOM state across navigation via capture/restore methods, stored in sessionStorage.

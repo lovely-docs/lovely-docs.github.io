@@ -1,0 +1,1 @@
+Added UNIQUE constraint support for PostgreSQL (with NULLS NOT DISTINCT option), MySQL, and SQLite via column-level `.unique()` or table-level `unique().on()` methods with optional custom names.

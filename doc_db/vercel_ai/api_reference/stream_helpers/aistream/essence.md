@@ -1,0 +1,1 @@
+AIStream (deprecated in v4.0): creates readable stream from fetch response with custom parsing and callbacks (onStart, onToken, onCompletion, onFinal)

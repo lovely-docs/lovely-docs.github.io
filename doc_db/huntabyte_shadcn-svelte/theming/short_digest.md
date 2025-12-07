@@ -1,16 +1,8 @@
-## CSS Variables Theming
+## CSS Variable Theming
 
-shadcn-svelte uses CSS variables with `background`/`foreground` convention for colors. Utility classes omit the `background` suffix:
+Uses `background`/`foreground` convention with OKLCH colors. Default variables include primary, secondary, accent, destructive, border, input, ring, chart colors, and sidebar variants.
 
-```svelte
-<div class="bg-primary text-primary-foreground">Hello</div>
-```
-
-**Core variables:** `--radius`, `--background`, `--foreground`, `--card`, `--popover`, `--primary`, `--secondary`, `--muted`, `--accent`, `--destructive`, `--border`, `--input`, `--ring`, `--chart-1` through `--chart-5`, `--sidebar` variants.
-
-Colors use OKLCH format with dark mode overrides in `.dark` selector.
-
-**Add custom colors:**
+Add custom colors:
 ```css
 :root {
   --warning: oklch(0.84 0.16 84);
@@ -26,6 +18,6 @@ Colors use OKLCH format with dark mode overrides in `.dark` selector.
 }
 ```
 
-Use as: `<div class="bg-warning text-warning-foreground"></div>`
+Use: `<div class="bg-warning text-warning-foreground"></div>`
 
-Preset schemes available: Neutral, Stone, Zinc, Gray, Slate.
+Pre-configured themes: Neutral, Stone, Zinc, Gray, Slate.

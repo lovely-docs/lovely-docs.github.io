@@ -1,1 +1,1 @@
-Documentation introduction page with no visible content in the provided excerpt.
+Empty introduction page serving as documentation entry point.

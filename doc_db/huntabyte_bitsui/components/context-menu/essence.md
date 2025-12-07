@@ -1,0 +1,1 @@
+Right-click context menu with nested submenus, checkbox/radio items, state binding, floating UI positioning, keyboard nav, and Svelte transition support.

@@ -1,20 +1,20 @@
-## Drizzle with Cloudflare Durable Objects SQLite
+## Cloudflare Durable Objects SQLite Setup
 
-Drizzle ORM fully supports Cloudflare Durable Objects database and Cloudflare Workers environment, supporting SQLite-like query methods (`all`, `get`, `values`, `run`).
+Drizzle ORM fully supports Cloudflare Durable Objects SQLite databases in Cloudflare Workers environment.
 
 ### Prerequisites
 - Database connection basics with Drizzle
 - Cloudflare SQLite Durable Objects - SQLite database embedded within a Durable Object
 
-### Setup
-
-**Install packages:**
+### Installation
 ```
-drizzle-orm
--D drizzle-kit
+npm install drizzle-orm
+npm install -D drizzle-kit
 ```
 
-**Configure wrangler.toml** with Durable Object bindings and migrations:
+### Configuration
+
+Create `wrangler.toml` with Durable Object bindings and migrations:
 ```toml
 name = "sqlite-durable-objects"
 main = "src/index.ts"
@@ -35,7 +35,9 @@ globs = ["**/*.sql"]
 fallthrough = true
 ```
 
-**Initialize driver and create Durable Object class:**
+### Usage
+
+Initialize driver and create Durable Object class:
 ```typescript
 import { drizzle, DrizzleSqliteDODatabase } from 'drizzle-orm/durable-sqlite';
 import { DurableObject } from 'cloudflare:workers'
@@ -53,58 +55,32 @@ export class MyDurableObject extends DurableObject {
 		this.db = drizzle(this.storage, { logger: false });
 
 		ctx.blockConcurrencyWhile(async () => {
-			await this._migrate();
+			await migrate(this.db, migrations);
 		});
 	}
 
 	async insertAndList(user: typeof usersTable.$inferInsert) {
-		await this.insert(user);
-		return this.select();
-	}
-
-	async insert(user: typeof usersTable.$inferInsert) {
 		await this.db.insert(usersTable).values(user);
-	}
-
-	async select() {
 		return this.db.select().from(usersTable);
 	}
-
-	async _migrate() {
-		migrate(this.db, migrations);
-	}
 }
-```
 
-**Use in Worker fetch handler:**
-```typescript
 export default {
 	async fetch(request: Request, env: Env): Promise<Response> {
-		const id: DurableObjectId = env.MY_DURABLE_OBJECT.idFromName('durable-object');
+		const id = env.MY_DURABLE_OBJECT.idFromName('durable-object');
 		const stub = env.MY_DURABLE_OBJECT.get(id);
 
-		// Option A - Maximum performance: bundle all database interactions in single DO call
-		const usersAll = await stub.insertAndList({
+		const users = await stub.insertAndList({
 			name: 'John',
 			age: 30,
 			email: 'john@example.com',
 		});
-
-		// Option B - Slower but useful for debugging: individual query calls
-		await stub.insert({
-			name: 'John',
-			age: 30,
-			email: 'john@example.com',
-		});
-		const users = await stub.select();
-
 		return Response.json(users);
 	}
 }
 ```
 
-**Key points:**
-- Initialize database with `drizzle(this.storage, { logger: false })`
-- Run migrations in constructor using `ctx.blockConcurrencyWhile()` to ensure they complete before accepting queries
-- Bundle database interactions within single Durable Object call for maximum performance
+### Performance Notes
+- Bundle all database interactions within a single Durable Object call for maximum performance
 - Each individual query call is a round-trip to the Durable Object instance
+- Run migrations during initialization with `blockConcurrencyWhile()` to prevent concurrent access before migrations complete

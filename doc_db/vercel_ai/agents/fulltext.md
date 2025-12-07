@@ -2,20 +2,19 @@
 
 ## Pages
 
-### agents_overview
-LLM agents use tools in loops via ToolLoopAgent class; define tools with descriptions, input schemas, and execute functions; agent automatically chains tool calls and generates responses; use for flexible task automation, core functions for deterministic workflows.
+### agents-overview
+ToolLoopAgent class orchestrates LLMs with tools in a loop; define tools with description/inputSchema/execute, call generate() with prompt, agent handles context and stopping conditions automatically.
 
 ## Agents
 
-Agents are LLMs that use tools in a loop to accomplish tasks. Three core components work together:
-
+Agents are LLMs that use tools in a loop to accomplish tasks. Three components work together:
 - **LLMs** process input and decide the next action
-- **Tools** extend capabilities beyond text generation (reading files, calling APIs, writing to databases)
-- **Loop** orchestrates execution through context management (maintaining conversation history and deciding what the model sees at each step) and stopping conditions (determining when the task is complete)
+- **Tools** extend capabilities (reading files, calling APIs, writing to databases)
+- **Loop** orchestrates execution through context management and stopping conditions
 
 ### ToolLoopAgent Class
 
-The ToolLoopAgent class handles these three components. Example:
+The ToolLoopAgent class handles these three components:
 
 ```ts
 import { ToolLoopAgent, stepCountIs, tool } from 'ai';
@@ -56,7 +55,7 @@ console.log(result.text); // agent's final answer
 console.log(result.steps); // steps taken by the agent
 ```
 
-The agent automatically calls tools in sequence, manages the loop, and generates a final response. The Agent class handles loop orchestration, context management, and stopping conditions.
+The agent automatically calls tools in sequence and generates a final response. The Agent class handles the loop, context management, and stopping conditions.
 
 ### Why Use the Agent Class
 
@@ -68,16 +67,22 @@ For most use cases, start with the Agent class. Use core functions (`generateTex
 
 ### Structured Workflows
 
-Agents are flexible but non-deterministic. For reliable, repeatable outcomes with explicit control flow, use core functions with structured workflow patterns combining conditional statements, standard functions, error handling, and explicit control flow. See workflow patterns documentation for more details.
+Agents are non-deterministic. For reliable, repeatable outcomes with explicit control flow, use core functions with structured workflow patterns combining conditional statements, standard functions, error handling, and explicit control flow.
 
 ### building_agents
-ToolLoopAgent class encapsulates model, tools, and instructions; supports loop control (default 20 steps), tool choice modes, structured output, system instructions for behavior definition, and three usage patterns (generate, stream, createAgentUIStreamResponse) with full TypeScript type inference.
+ToolLoopAgent class for encapsulating LLM config, tools, and behavior with automatic multi-step tool calling; configure model, instructions, tools, loop control (stopWhen), toolChoice, structured output; use via generate/stream/createAgentUIStreamResponse; supports TypeScript type inference for UI messages.
 
 ## ToolLoopAgent Class
 
-The ToolLoopAgent class encapsulates LLM configuration, tools, and behavior into reusable components. It handles the agent loop automatically, allowing the LLM to call tools multiple times in sequence to accomplish complex tasks.
+The ToolLoopAgent class encapsulates LLM configuration, tools, and behavior into reusable components. It handles the agent loop automatically, allowing the LLM to call tools multiple times in sequence.
 
-### Creating an Agent
+Benefits:
+- Reuse configurations across your application
+- Maintain consistent behavior and capabilities
+- Reduce boilerplate in API routes
+- Full TypeScript support
+
+## Creating an Agent
 
 ```ts
 import { ToolLoopAgent } from 'ai';
@@ -85,13 +90,11 @@ import { ToolLoopAgent } from 'ai';
 const myAgent = new ToolLoopAgent({
   model: 'anthropic/claude-sonnet-4.5',
   instructions: 'You are a helpful assistant.',
-  tools: {
-    // Your tools here
-  },
+  tools: { /* your tools */ },
 });
 ```
 
-### Configuration Options
+## Configuration Options
 
 **Model and System Instructions:**
 ```ts
@@ -103,71 +106,51 @@ const agent = new ToolLoopAgent({
 
 **Tools:**
 ```ts
-import { ToolLoopAgent, tool } from 'ai';
+import { tool } from 'ai';
 import { z } from 'zod';
 
-const codeAgent = new ToolLoopAgent({
+const agent = new ToolLoopAgent({
   model: 'anthropic/claude-sonnet-4.5',
   tools: {
     runCode: tool({
       description: 'Execute Python code',
-      inputSchema: z.object({
-        code: z.string(),
-      }),
-      execute: async ({ code }) => {
-        return { output: 'Code executed successfully' };
-      },
+      inputSchema: z.object({ code: z.string() }),
+      execute: async ({ code }) => ({ output: 'Code executed successfully' }),
     }),
   },
 });
 ```
 
 **Loop Control:**
-By default, agents run for 20 steps. Each step represents one generation (either text or a tool call). The loop continues until a finish reason other than tool-calls is returned, a tool without an execute function is invoked, a tool call needs approval, or a stop condition is met.
+By default, agents run for 20 steps. Each step is one generation (text or tool call). The loop continues until a finish reason other than tool-calls is returned, a tool without execute function is called, a tool needs approval, or a stop condition is met.
 
 ```ts
-import { ToolLoopAgent, stepCountIs } from 'ai';
+import { stepCountIs } from 'ai';
 
 const agent = new ToolLoopAgent({
   model: 'anthropic/claude-sonnet-4.5',
   stopWhen: stepCountIs(20), // Allow up to 20 steps
-});
-```
-
-Combine multiple conditions:
-```ts
-const agent = new ToolLoopAgent({
-  model: 'anthropic/claude-sonnet-4.5',
-  stopWhen: [
-    stepCountIs(20),
-    yourCustomCondition(),
-  ],
+  // or combine conditions:
+  stopWhen: [stepCountIs(20), yourCustomCondition()],
 });
 ```
 
 **Tool Choice:**
-Control how the agent uses tools with `toolChoice: 'required'` (force tool use), `'none'` (disable tools), or `'auto'` (default, let model decide). Force a specific tool:
-
 ```ts
 const agent = new ToolLoopAgent({
   model: 'anthropic/claude-sonnet-4.5',
-  tools: {
-    weather: weatherTool,
-    cityAttractions: attractionsTool,
-  },
-  toolChoice: {
-    type: 'tool',
-    toolName: 'weather',
-  },
+  tools: { weather: weatherTool, cityAttractions: attractionsTool },
+  toolChoice: 'required', // 'auto' (default), 'none', or specific tool
+  // or force specific tool:
+  toolChoice: { type: 'tool', toolName: 'weather' },
 });
 ```
 
 **Structured Output:**
 ```ts
-import { ToolLoopAgent, Output, stepCountIs } from 'ai';
-import { z } from 'zod';
+import { Output } from 'ai';
 
-const analysisAgent = new ToolLoopAgent({
+const agent = new ToolLoopAgent({
   model: 'anthropic/claude-sonnet-4.5',
   output: Output.object({
     schema: z.object({
@@ -179,16 +162,16 @@ const analysisAgent = new ToolLoopAgent({
   stopWhen: stepCountIs(10),
 });
 
-const { output } = await analysisAgent.generate({
+const { output } = await agent.generate({
   prompt: 'Analyze customer feedback from the last quarter',
 });
 ```
 
-### System Instructions
+## System Instructions
 
 System instructions define agent behavior, personality, and constraints. Examples:
 
-**Basic role definition:**
+**Basic role:**
 ```ts
 const agent = new ToolLoopAgent({
   model: 'anthropic/claude-sonnet-4.5',
@@ -198,10 +181,9 @@ const agent = new ToolLoopAgent({
 
 **Detailed behavioral guidelines:**
 ```ts
-const codeReviewAgent = new ToolLoopAgent({
+const agent = new ToolLoopAgent({
   model: 'anthropic/claude-sonnet-4.5',
   instructions: `You are a senior software engineer conducting code reviews.
-
   Your approach:
   - Focus on security vulnerabilities first
   - Identify performance bottlenecks
@@ -211,173 +193,336 @@ const codeReviewAgent = new ToolLoopAgent({
 });
 ```
 
-**Constrain behavior:**
+**Constrained behavior:**
 ```ts
-const customerSupportAgent = new ToolLoopAgent({
+const agent = new ToolLoopAgent({
   model: 'anthropic/claude-sonnet-4.5',
   instructions: `You are a customer support specialist for an e-commerce platform.
-
   Rules:
   - Never make promises about refunds without checking the policy
   - Always be empathetic and professional
   - If you don't know something, say so and offer to escalate
   - Keep responses concise and actionable
   - Never share internal company information`,
-  tools: {
-    checkOrderStatus,
-    lookupPolicy,
-    createTicket,
-  },
+  tools: { checkOrderStatus, lookupPolicy, createTicket },
 });
 ```
 
 **Tool usage guidance:**
 ```ts
-const researchAgent = new ToolLoopAgent({
+const agent = new ToolLoopAgent({
   model: 'anthropic/claude-sonnet-4.5',
   instructions: `You are a research assistant with access to search and document tools.
-
   When researching:
   1. Always start with a broad search to understand the topic
   2. Use document analysis for detailed information
   3. Cross-reference multiple sources before drawing conclusions
   4. Cite your sources when presenting information
   5. If information conflicts, present both viewpoints`,
-  tools: {
-    webSearch,
-    analyzeDocument,
-    extractQuotes,
-  },
+  tools: { webSearch, analyzeDocument, extractQuotes },
 });
 ```
 
 **Format and style:**
 ```ts
-const technicalWriterAgent = new ToolLoopAgent({
+const agent = new ToolLoopAgent({
   model: 'anthropic/claude-sonnet-4.5',
   instructions: `You are a technical documentation writer.
-
   Writing style:
   - Use clear, simple language
   - Avoid jargon unless necessary
   - Structure information with headers and bullet points
   - Include code examples where relevant
   - Write in second person ("you" instead of "the user")
-
   Always format responses in Markdown.`,
 });
 ```
 
-### Using an Agent
+## Using an Agent
 
 **Generate text (one-time):**
 ```ts
-const result = await myAgent.generate({
-  prompt: 'What is the weather like?',
-});
+const result = await myAgent.generate({ prompt: 'What is the weather like?' });
 console.log(result.text);
 ```
 
 **Stream text:**
 ```ts
-const stream = myAgent.stream({
-  prompt: 'Tell me a story',
-});
-
+const stream = myAgent.stream({ prompt: 'Tell me a story' });
 for await (const chunk of stream.textStream) {
   console.log(chunk);
 }
 ```
 
-**Create API response for client applications:**
+**API response for UI:**
 ```ts
 import { createAgentUIStreamResponse } from 'ai';
 
 export async function POST(request: Request) {
   const { messages } = await request.json();
-
-  return createAgentUIStreamResponse({
-    agent: myAgent,
-    messages,
-  });
+  return createAgentUIStreamResponse({ agent: myAgent, messages });
 }
 ```
 
-### Type Safety
+## Type Safety
 
 Infer types for agent UIMessages:
 ```ts
-import { ToolLoopAgent, InferAgentUIMessage } from 'ai';
+import { InferAgentUIMessage } from 'ai';
 
-const myAgent = new ToolLoopAgent({
-  // ... configuration
-});
-
+const myAgent = new ToolLoopAgent({ /* ... */ });
 export type MyAgentUIMessage = InferAgentUIMessage<typeof myAgent>;
 ```
 
 Use in client components:
 ```tsx
-'use client';
-
 import { useChat } from '@ai-sdk/react';
 import type { MyAgentUIMessage } from '@/agent/my-agent';
 
 export function Chat() {
   const { messages } = useChat<MyAgentUIMessage>();
-  // Full type safety for your messages and tools
+  // Full type safety for messages and tools
 }
 ```
 
-### workflow_patterns
-Five agent workflow patterns: sequential processing (chained steps), routing (context-based path selection), parallel processing (concurrent independent tasks), orchestrator-worker (coordinator with specialized agents), evaluator-optimizer (feedback loops with quality thresholds and retries).
+### workflow-patterns
+Five agent workflow patterns: sequential (chained steps), routing (context-based path selection), parallel (concurrent independent tasks), orchestrator-worker (coordinator + specialists), evaluator-optimizer (feedback loops with quality gates).
 
 ## Workflow Patterns for Agents
 
-Combine building blocks to add structure and reliability to agents. Five main patterns:
+Five core patterns for building reliable agent workflows:
 
-**Sequential Processing (Chains)** - Steps execute in order, each step's output becomes the next step's input. Example: Generate marketing copy, evaluate quality metrics, regenerate if quality thresholds not met (call-to-action present, emotional appeal ≥7, clarity ≥7).
+### Sequential Processing (Chains)
+Steps execute in order, each step's output feeds into the next. Use for well-defined sequences like content generation pipelines.
 
-**Routing** - Model decides which path to take based on context and intermediate results. Example: Classify customer query (type: general/refund/technical, complexity: simple/complex), then route to appropriate model size and system prompt based on classification.
+```ts
+async function generateMarketingCopy(input: string) {
+  const model = 'openai/gpt-4o';
+  
+  // Step 1: Generate copy
+  const { text: copy } = await generateText({
+    model,
+    prompt: `Write persuasive marketing copy for: ${input}...`,
+  });
 
-**Parallel Processing** - Independent subtasks execute simultaneously. Example: Run three specialized code reviews in parallel (security, performance, maintainability), each with different system prompts and schemas, then aggregate results.
+  // Step 2: Quality check
+  const { object: qualityMetrics } = await generateObject({
+    model,
+    schema: z.object({
+      hasCallToAction: z.boolean(),
+      emotionalAppeal: z.number().min(1).max(10),
+      clarity: z.number().min(1).max(10),
+    }),
+    prompt: `Evaluate this marketing copy: ${copy}`,
+  });
 
-**Orchestrator-Worker** - Primary model coordinates specialized workers. Each worker optimizes for specific subtasks while orchestrator maintains context. Example: Orchestrator plans feature implementation (files to create/modify/delete), then workers execute each change with specialized system prompts appropriate to the change type.
+  // Step 3: Conditional regeneration
+  if (!qualityMetrics.hasCallToAction || qualityMetrics.emotionalAppeal < 7 || qualityMetrics.clarity < 7) {
+    const { text: improvedCopy } = await generateText({
+      model,
+      prompt: `Rewrite with improvements...`,
+    });
+    return { copy: improvedCopy, qualityMetrics };
+  }
+  return { copy, qualityMetrics };
+}
+```
 
-**Evaluator-Optimizer** - Dedicated evaluation steps assess intermediate results and trigger retries or corrective action. Example: Translate text, evaluate translation (quality score, tone/nuance/cultural accuracy), if below threshold regenerate with feedback, repeat up to 3 iterations.
+### Routing
+Model decides which path to take based on context. First LLM call's results determine subsequent call's model size and system prompt.
+
+```ts
+async function handleCustomerQuery(query: string) {
+  // Classify query
+  const { object: classification } = await generateObject({
+    model: 'openai/gpt-4o',
+    schema: z.object({
+      type: z.enum(['general', 'refund', 'technical']),
+      complexity: z.enum(['simple', 'complex']),
+    }),
+    prompt: `Classify this customer query: ${query}`,
+  });
+
+  // Route based on classification
+  const { text: response } = await generateText({
+    model: classification.complexity === 'simple' ? 'openai/gpt-4o-mini' : 'openai/o4-mini',
+    system: {
+      general: 'You are an expert customer service agent...',
+      refund: 'You are a customer service agent specializing in refunds...',
+      technical: 'You are a technical support specialist...',
+    }[classification.type],
+    prompt: query,
+  });
+
+  return { response, classification };
+}
+```
+
+### Parallel Processing
+Independent subtasks execute simultaneously. Example: parallel code review with specialized reviewers.
+
+```ts
+async function parallelCodeReview(code: string) {
+  const [securityReview, performanceReview, maintainabilityReview] = await Promise.all([
+    generateObject({
+      model: 'openai/gpt-4o',
+      system: 'You are an expert in code security...',
+      schema: z.object({
+        vulnerabilities: z.array(z.string()),
+        riskLevel: z.enum(['low', 'medium', 'high']),
+        suggestions: z.array(z.string()),
+      }),
+      prompt: `Review this code: ${code}`,
+    }),
+    generateObject({
+      model: 'openai/gpt-4o',
+      system: 'You are an expert in code performance...',
+      schema: z.object({
+        issues: z.array(z.string()),
+        impact: z.enum(['low', 'medium', 'high']),
+        optimizations: z.array(z.string()),
+      }),
+      prompt: `Review this code: ${code}`,
+    }),
+    generateObject({
+      model: 'openai/gpt-4o',
+      system: 'You are an expert in code quality...',
+      schema: z.object({
+        concerns: z.array(z.string()),
+        qualityScore: z.number().min(1).max(10),
+        recommendations: z.array(z.string()),
+      }),
+      prompt: `Review this code: ${code}`,
+    }),
+  ]);
+
+  const { text: summary } = await generateText({
+    model: 'openai/gpt-4o',
+    system: 'You are a technical lead summarizing code reviews.',
+    prompt: `Synthesize these results: ${JSON.stringify([...], null, 2)}`,
+  });
+
+  return { reviews: [...], summary };
+}
+```
+
+### Orchestrator-Worker
+Primary model (orchestrator) coordinates specialized workers. Each worker optimizes for a specific subtask while orchestrator maintains overall context.
+
+```ts
+async function implementFeature(featureRequest: string) {
+  // Orchestrator: Plan
+  const { object: implementationPlan } = await generateObject({
+    model: 'openai/o4-mini',
+    schema: z.object({
+      files: z.array(z.object({
+        purpose: z.string(),
+        filePath: z.string(),
+        changeType: z.enum(['create', 'modify', 'delete']),
+      })),
+      estimatedComplexity: z.enum(['low', 'medium', 'high']),
+    }),
+    system: 'You are a senior software architect...',
+    prompt: `Analyze this feature request: ${featureRequest}`,
+  });
+
+  // Workers: Execute
+  const fileChanges = await Promise.all(
+    implementationPlan.files.map(async file => {
+      const { object: change } = await generateObject({
+        model: 'anthropic/claude-sonnet-4.5',
+        schema: z.object({
+          explanation: z.string(),
+          code: z.string(),
+        }),
+        system: {
+          create: 'You are an expert at implementing new files...',
+          modify: 'You are an expert at modifying existing code...',
+          delete: 'You are an expert at safely removing code...',
+        }[file.changeType],
+        prompt: `Implement changes for ${file.filePath}...`,
+      });
+      return { file, implementation: change };
+    }),
+  );
+
+  return { plan: implementationPlan, changes: fileChanges };
+}
+```
+
+### Evaluator-Optimizer
+Dedicated evaluation steps assess intermediate results. Based on evaluation, workflow proceeds, retries with adjusted parameters, or takes corrective action.
+
+```ts
+async function translateWithFeedback(text: string, targetLanguage: string) {
+  let currentTranslation = '';
+  let iterations = 0;
+  const MAX_ITERATIONS = 3;
+
+  const { text: translation } = await generateText({
+    model: 'openai/gpt-4o-mini',
+    system: 'You are an expert literary translator.',
+    prompt: `Translate to ${targetLanguage}: ${text}`,
+  });
+  currentTranslation = translation;
+
+  while (iterations < MAX_ITERATIONS) {
+    const { object: evaluation } = await generateObject({
+      model: 'anthropic/claude-sonnet-4.5',
+      schema: z.object({
+        qualityScore: z.number().min(1).max(10),
+        preservesTone: z.boolean(),
+        preservesNuance: z.boolean(),
+        culturallyAccurate: z.boolean(),
+        specificIssues: z.array(z.string()),
+        improvementSuggestions: z.array(z.string()),
+      }),
+      system: 'You are an expert in evaluating literary translations.',
+      prompt: `Evaluate this translation: Original: ${text}, Translation: ${currentTranslation}`,
+    });
+
+    if (evaluation.qualityScore >= 8 && evaluation.preservesTone && evaluation.preservesNuance && evaluation.culturallyAccurate) {
+      break;
+    }
+
+    const { text: improvedTranslation } = await generateText({
+      model: 'anthropic/claude-sonnet-4.5',
+      system: 'You are an expert literary translator.',
+      prompt: `Improve based on feedback: ${evaluation.specificIssues.join('\n')}...`,
+    });
+
+    currentTranslation = improvedTranslation;
+    iterations++;
+  }
+
+  return { finalTranslation: currentTranslation, iterationsRequired: iterations };
+}
+```
 
 ## Design Considerations
 
 Choose approach based on:
-- **Flexibility vs Control** - How much freedom does LLM need vs how tightly constrain actions
-- **Error Tolerance** - Consequences of mistakes in use case
-- **Cost** - More complex systems mean more LLM calls
-- **Maintenance** - Simpler architectures easier to debug
+- **Flexibility vs Control**: How much freedom does the LLM need vs how tightly you must constrain actions?
+- **Error Tolerance**: What are consequences of mistakes?
+- **Cost**: More complex systems mean more LLM calls
+- **Maintenance**: Simpler architectures are easier to debug
 
-Start with simplest approach meeting needs. Add complexity by: breaking tasks into clear steps, adding tools for capabilities, implementing feedback loops, introducing multiple agents.
+Start with simplest approach that meets needs. Add complexity by breaking tasks into clear steps, adding tools for specific capabilities, implementing feedback loops, and introducing multiple agents.
 
 ### loop_control
-Control agent loop execution with stopWhen conditions and prepareStep callbacks to modify model, tools, messages, and context between steps; or implement manual loops with generateText/streamText for complete control.
+Control agent loop execution with stopWhen conditions (built-in: stepCountIs, hasToolCall; custom via step inspection) and prepareStep callback to dynamically modify model, tools, messages, and settings per step; or implement manual loop with generateText/streamText for full control.
 
 ## Stop Conditions
 
-Control agent loop execution with the `stopWhen` parameter. By default, agents stop after 20 steps using `stepCountIs(20)`.
+Control agent loop execution with `stopWhen` parameter. Default stops after 20 steps using `stepCountIs(20)`.
 
 Built-in conditions:
-- `stepCountIs(n)` - Stop after n steps
-- `hasToolCall('toolName')` - Stop after calling a specific tool
+- `stepCountIs(n)` - stop after n steps
+- `hasToolCall('toolName')` - stop after calling specific tool
 
-Combine multiple conditions in an array; execution stops when any condition is met:
+Combine multiple conditions in an array; loop stops when any condition is met.
 
-```ts
-stopWhen: [
-  stepCountIs(20),
-  hasToolCall('someTool'),
-]
-```
-
-Create custom conditions by implementing `StopCondition<typeof tools>` that receives `{ steps }` and returns a boolean:
-
+Custom conditions receive step information:
 ```ts
 const hasAnswer: StopCondition<typeof tools> = ({ steps }) => {
   return steps.some(step => step.text?.includes('ANSWER:')) ?? false;
@@ -398,10 +543,9 @@ const budgetExceeded: StopCondition<typeof tools> = ({ steps }) => {
 
 ## Prepare Step
 
-The `prepareStep` callback runs before each step and receives `{ model, stepNumber, steps, messages }`. Return an object with any settings to override (or empty object for no changes).
+The `prepareStep` callback runs before each step and can modify model, tools, messages, and other settings. Receives `{ model, stepNumber, steps, messages }`.
 
-Dynamic model selection based on step requirements:
-
+Dynamic model selection:
 ```ts
 prepareStep: async ({ stepNumber, messages }) => {
   if (stepNumber > 2 && messages.length > 10) {
@@ -412,7 +556,6 @@ prepareStep: async ({ stepNumber, messages }) => {
 ```
 
 Context management - keep only recent messages:
-
 ```ts
 prepareStep: async ({ messages }) => {
   if (messages.length > 20) {
@@ -424,10 +567,9 @@ prepareStep: async ({ messages }) => {
 }
 ```
 
-Tool selection - control available tools per phase:
-
+Tool selection by phase:
 ```ts
-prepareStep: async ({ stepNumber }) => {
+prepareStep: async ({ stepNumber, steps }) => {
   if (stepNumber <= 2) {
     return { activeTools: ['search'], toolChoice: 'required' };
   }
@@ -438,8 +580,7 @@ prepareStep: async ({ stepNumber }) => {
 }
 ```
 
-Force specific tool usage:
-
+Force specific tool:
 ```ts
 prepareStep: async ({ stepNumber }) => {
   if (stepNumber === 0) {
@@ -452,10 +593,9 @@ prepareStep: async ({ stepNumber }) => {
 }
 ```
 
-Message modification - transform messages before sending to model:
-
+Message transformation:
 ```ts
-prepareStep: async ({ messages }) => {
+prepareStep: async ({ messages, stepNumber }) => {
   const processedMessages = messages.map(msg => {
     if (msg.role === 'tool' && msg.content.length > 1000) {
       return { ...msg, content: summarizeToolResult(msg.content) };
@@ -468,8 +608,7 @@ prepareStep: async ({ messages }) => {
 
 ## Manual Loop Control
 
-For complete control, use `generateText` or `streamText` from AI SDK Core to implement custom loop management:
-
+For complete control, use `generateText` or `streamText` directly:
 ```ts
 import { generateText, ModelMessage } from 'ai';
 
@@ -481,7 +620,7 @@ while (step < maxSteps) {
   const result = await generateText({
     model: 'anthropic/claude-sonnet-4.5',
     messages,
-    tools: { /* your tools */ },
+    tools: { /* tools */ },
   });
 
   messages.push(...result.response.messages);
@@ -490,26 +629,171 @@ while (step < maxSteps) {
 }
 ```
 
-This provides complete control over message history, step-by-step decisions, stopping conditions, dynamic tool/model selection, and error handling.
+Provides control over message history, step-by-step decisions, custom stopping, dynamic tool/model selection, and error handling.
 
 ### configuring_call_options
-Type-safe runtime agent configuration via callOptionsSchema and prepareCall: dynamically inject context, select models, configure tools, set provider options, fetch RAG data, combine modifications.
+Type-safe runtime configuration for agents via callOptionsSchema and prepareCall to dynamically modify models, tools, instructions, and provider options per request.
 
-Call options enable type-safe runtime configuration of agent behavior through structured inputs. Define them in three steps: specify inputs with `callOptionsSchema` using Zod, configure agent settings in `prepareCall` function, and pass options when calling `generate()` or `stream()`.
+## Call Options Overview
 
-**Dynamic Context Injection**: Add user data to prompts at runtime. Define schema with user properties, modify instructions in `prepareCall` to include context, pass options when generating.
+Call options allow passing type-safe structured inputs to agents to dynamically modify behavior at runtime without creating multiple agent instances.
 
-**Dynamic Model Selection**: Choose models based on request characteristics. Use `prepareCall` to return different model based on complexity option - e.g., use gpt-4o-mini for simple queries, o1-mini for complex reasoning.
+## Why Use Call Options
 
-**Dynamic Tool Configuration**: Adjust tool behavior per request. Configure tools in `prepareCall` with runtime values like user location for search tools or context size adjustments.
+- Add dynamic context (documents, preferences, session data) to prompts
+- Select models dynamically based on request complexity
+- Configure tools per request (e.g., pass user location to search tools)
+- Customize provider options (reasoning effort, temperature, etc.)
 
-**Provider-Specific Options**: Set provider settings dynamically like OpenAI's reasoningEffort based on task difficulty via `providerOptions` in `prepareCall`.
+## Implementation Pattern
 
-**Retrieval Augmented Generation (RAG)**: `prepareCall` can be async - fetch relevant documents via vector search and inject into instructions before agent execution.
+Define call options in three steps:
 
-**Combining Multiple Modifications**: Modify model, tools, and instructions together in single `prepareCall` - e.g., upgrade model for urgent requests, limit tools by user role, adjust instructions based on context.
+1. Define schema with `callOptionsSchema` using Zod
+2. Configure with `prepareCall` function to modify agent settings
+3. Pass options at runtime to `generate()` or `stream()`
 
-**API Integration**: Pass call options through `createAgentUIStreamResponse` in API routes by including them in the options parameter alongside agent and messages.
+## Examples
 
-The `options` parameter becomes required and type-checked when `callOptionsSchema` is defined. TypeScript enforces correct types at call sites.
+**Basic user context injection:**
+```ts
+const supportAgent = new ToolLoopAgent({
+  model: 'anthropic/claude-sonnet-4.5',
+  callOptionsSchema: z.object({
+    userId: z.string(),
+    accountType: z.enum(['free', 'pro', 'enterprise']),
+  }),
+  instructions: 'You are a helpful customer support agent.',
+  prepareCall: ({ options, ...settings }) => ({
+    ...settings,
+    instructions: settings.instructions + `\nUser context:
+- Account type: ${options.accountType}
+- User ID: ${options.userId}`,
+  }),
+});
+
+await supportAgent.generate({
+  prompt: 'How do I upgrade my account?',
+  options: { userId: 'user_123', accountType: 'free' },
+});
+```
+
+**Dynamic model selection:**
+```ts
+const agent = new ToolLoopAgent({
+  model: 'openai/gpt-4o-mini',
+  callOptionsSchema: z.object({ complexity: z.enum(['simple', 'complex']) }),
+  prepareCall: ({ options, ...settings }) => ({
+    ...settings,
+    model: options.complexity === 'simple' ? 'openai/gpt-4o-mini' : 'openai/o1-mini',
+  }),
+});
+
+await agent.generate({ prompt: 'What is 2+2?', options: { complexity: 'simple' } });
+await agent.generate({ prompt: 'Explain quantum entanglement', options: { complexity: 'complex' } });
+```
+
+**Dynamic tool configuration:**
+```ts
+const newsAgent = new ToolLoopAgent({
+  model: 'anthropic/claude-sonnet-4.5',
+  callOptionsSchema: z.object({
+    userCity: z.string().optional(),
+    userRegion: z.string().optional(),
+  }),
+  tools: { web_search: openai.tools.webSearch() },
+  prepareCall: ({ options, ...settings }) => ({
+    ...settings,
+    tools: {
+      web_search: openai.tools.webSearch({
+        searchContextSize: 'low',
+        userLocation: {
+          type: 'approximate',
+          city: options.userCity,
+          region: options.userRegion,
+          country: 'US',
+        },
+      }),
+    },
+  }),
+});
+
+await newsAgent.generate({
+  prompt: 'What are the top local news stories?',
+  options: { userCity: 'San Francisco', userRegion: 'California' },
+});
+```
+
+**Provider-specific options:**
+```ts
+const agent = new ToolLoopAgent({
+  model: 'openai/o1-mini',
+  callOptionsSchema: z.object({ taskDifficulty: z.enum(['low', 'medium', 'high']) }),
+  prepareCall: ({ options, ...settings }) => ({
+    ...settings,
+    providerOptions: {
+      openai: { reasoningEffort: options.taskDifficulty },
+    },
+  }),
+});
+
+await agent.generate({ prompt: 'Analyze this complex scenario...', options: { taskDifficulty: 'high' } });
+```
+
+**Retrieval Augmented Generation (RAG):**
+```ts
+const ragAgent = new ToolLoopAgent({
+  model: 'anthropic/claude-sonnet-4.5',
+  callOptionsSchema: z.object({ query: z.string() }),
+  prepareCall: async ({ options, ...settings }) => {
+    const documents = await vectorSearch(options.query);
+    return {
+      ...settings,
+      instructions: `Answer questions using the following context:\n\n${documents.map(doc => doc.content).join('\n\n')}`,
+    };
+  },
+});
+
+await ragAgent.generate({
+  prompt: 'What is our refund policy?',
+  options: { query: 'refund policy' },
+});
+```
+
+Note: `prepareCall` can be async, enabling data fetching before agent configuration.
+
+**Combining multiple modifications:**
+```ts
+const agent = new ToolLoopAgent({
+  model: 'openai/gpt-5-nano',
+  callOptionsSchema: z.object({
+    userRole: z.enum(['admin', 'user']),
+    urgency: z.enum(['low', 'high']),
+  }),
+  tools: { readDatabase: readDatabaseTool, writeDatabase: writeDatabaseTool },
+  prepareCall: ({ options, ...settings }) => ({
+    ...settings,
+    model: options.urgency === 'high' ? 'anthropic/claude-sonnet-4.5' : settings.model,
+    activeTools: options.userRole === 'admin' ? ['readDatabase', 'writeDatabase'] : ['readDatabase'],
+    instructions: `You are a ${options.userRole} assistant.\n${options.userRole === 'admin' ? 'You have full database access.' : 'You have read-only access.'}`,
+  }),
+});
+
+await agent.generate({
+  prompt: 'Update the user record',
+  options: { userRole: 'admin', urgency: 'high' },
+});
+```
+
+**Using with createAgentUIStreamResponse:**
+```ts
+export async function POST(request: Request) {
+  const { messages, userId, accountType } = await request.json();
+  return createAgentUIStreamResponse({
+    agent: myAgent,
+    messages,
+    options: { userId, accountType },
+  });
+}
+```
 

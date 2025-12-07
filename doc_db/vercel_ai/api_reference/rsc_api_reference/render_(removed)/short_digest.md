@@ -1,1 +1,0 @@
-The `render` function (removed in AI SDK 4.0) created streamable UI from LLM responses. It accepted a model, provider, messages array (system/user/assistant/tool roles), optional tools with render functions, text streaming callback, and temperature. Replaced by `streamUI`. AI SDK RSC is experimental; use AI SDK UI for production.

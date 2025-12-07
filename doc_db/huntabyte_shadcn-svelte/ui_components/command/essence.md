@@ -1,1 +1,1 @@
-Unstyled command menu component with Root/Input/List/Group/Item/Separator/Shortcut subcomponents; supports dialog mode with keyboard shortcuts (Cmd/Ctrl+K); auto-styles icons in items.
+Unstyled command menu component with Root/Input/List/Group/Item/Separator/Shortcut/Dialog variants; supports keyboard shortcuts, disabled items, and automatic icon styling.

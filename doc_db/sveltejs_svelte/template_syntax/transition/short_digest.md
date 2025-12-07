@@ -1,22 +1,11 @@
 ## Transitions
 
-Triggered when elements enter/leave DOM. Bidirectional and reversible.
+Bidirectional transitions triggered when elements enter/leave DOM. Use `transition:` directive with built-in transitions (fade, fly, etc.) or custom functions.
 
-```svelte
-<div transition:fade={{ duration: 2000 }}>fades in and out</div>
-```
+**Local vs Global**: Local transitions (default) play only when their block changes; use `|global` modifier for parent block changes.
 
-**Local vs Global**: Local by default (only when block changes). Use `|global` for parent changes.
+**Parameters**: Pass options as object: `transition:fade={{ duration: 2000 }}`
 
-**Custom functions** return object with `delay`, `duration`, `easing`, `css`, `tick`. Use `css` for performance:
-
-```js
-function whoosh(node, params) {
-  return {
-    duration: 400,
-    css: (t, u) => `transform: scale(${t})`
-  };
-}
-```
+**Custom Functions**: Return object with `delay`, `duration`, `easing`, `css(t, u)`, or `tick(t, u)`. The `t` value is 0-1 (0 for out, 1 for in), `u = 1 - t`. Prefer `css` over `tick` for performance.
 
 **Events**: `introstart`, `introend`, `outrostart`, `outroend`

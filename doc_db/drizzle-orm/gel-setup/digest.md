@@ -1,15 +1,12 @@
 ## Gel Integration Setup
 
-Drizzle provides native support for Gel database connections through the `gel-js` client.
+Drizzle has native support for Gel connections via the `gel-js` client.
 
-### Prerequisites
-- Database connection basics with Drizzle
-- gel-js basics
-
-### Installation
-Install `drizzle-orm`, `gel`, and `drizzle-kit` as dev dependency.
-
-### Driver Initialization
+**Installation:**
+```
+npm install drizzle-orm gel
+npm install -D drizzle-kit
+```
 
 **Basic initialization with connection string:**
 ```typescript
@@ -38,5 +35,3 @@ const gelClient = createClient();
 const db = drizzle({ client: gelClient });
 const result = await db.execute('select 1');
 ```
-
-All three approaches support executing raw SQL queries via `db.execute()`.

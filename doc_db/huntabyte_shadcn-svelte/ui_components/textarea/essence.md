@@ -1,1 +1,1 @@
-Textarea form component supporting disabled state, labels, and sveltekit-superforms validation integration.
+Textarea component for form text input; supports disabled state, labels, validation with zod/superforms, and integration with form components.

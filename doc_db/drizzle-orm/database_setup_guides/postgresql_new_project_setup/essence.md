@@ -1,1 +1,0 @@
-Step-by-step PostgreSQL project initialization: install pg/@types/pg, set DATABASE_URL, connect Drizzle with node-postgres, define tables, configure drizzle.config.ts, apply migrations, seed/query with TypeScript, run index.ts.

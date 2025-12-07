@@ -1,0 +1,1 @@
+StateHistory utility for tracking state changes with undo/redo; constructor takes getter/setter, provides undo/redo/clear methods and canUndo/canRedo/log properties.

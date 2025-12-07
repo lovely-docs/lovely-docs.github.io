@@ -1,1 +1,0 @@
-How to create a new SvelteKit project and understand its basic structure.

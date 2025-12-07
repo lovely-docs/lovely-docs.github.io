@@ -1,0 +1,1 @@
+When `onFinish` callback doesn't execute on stream abort with `toUIMessageStreamResponse`, add `consumeSseStream: consumeStream` to the configuration to ensure the callback fires even when aborted, with `isAborted` parameter indicating abort status.

@@ -1,1 +1,1 @@
-Overview of advanced topics for the AI SDK and RSC API, highlighting the different mental model required for LLM development compared to traditional software development.
+Overview of advanced topics for the SDK and RSC API, covering paradigms and mental models specific to LLM-based development.

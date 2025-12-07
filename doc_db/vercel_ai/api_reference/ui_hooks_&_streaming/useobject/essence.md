@@ -1,0 +1,1 @@
+Experimental hook for streaming and parsing JSON objects from API endpoints into typed objects using schemas; returns submit(), object, error, isLoading, stop(), clear().

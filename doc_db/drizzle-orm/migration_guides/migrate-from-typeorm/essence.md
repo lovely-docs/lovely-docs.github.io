@@ -1,0 +1,1 @@
+Step-by-step migration from TypeORM to Drizzle: install packages, create config, introspect DB, connect, then replace queries (insert/select/update/delete) with Drizzle equivalents; includes full examples for core and relational queries, filtering, pagination, aggregations, and transactions.

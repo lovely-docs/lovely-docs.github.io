@@ -1,1 +1,0 @@
-Deprecated OpenAIStream converts OpenAI responses to ReadableStream with onStart/onToken/onCompletion/onFinal callbacks; replaced by AI SDK OpenAI Provider in v4.0.

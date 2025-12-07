@@ -1,0 +1,1 @@
+This is a documentation index page for miscellaneous topics in Svelte. The page itself contains no substantive content—it serves as a structural container for organizing miscellaneous documentation sections. The actual content would be populated from other documentation files linked or included under this category.

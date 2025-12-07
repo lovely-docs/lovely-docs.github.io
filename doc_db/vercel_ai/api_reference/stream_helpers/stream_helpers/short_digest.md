@@ -1,0 +1,1 @@
+Helper functions for streaming AI responses: core utilities (`AIStream`, `StreamingTextResponse`, `streamToResponse`) and provider-specific transformers for OpenAI, Anthropic, AWS Bedrock, Cohere, Google, Hugging Face, LangChain, Mistral, Replicate, and Inkeeps.

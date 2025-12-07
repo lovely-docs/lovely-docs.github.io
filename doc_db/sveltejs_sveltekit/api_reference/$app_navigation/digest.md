@@ -1,23 +1,28 @@
 ## Navigation Functions
 
-**afterNavigate(callback)** - Lifecycle function that runs when component mounts and on every navigation. Must be called during component initialization.
+**afterNavigate(callback)** - Lifecycle function that runs when component mounts and on every navigation. Must be called during component initialization, remains active while mounted.
 
-**beforeNavigate(callback)** - Navigation interceptor that runs before navigation. Call `cancel()` to prevent navigation. For 'leave' type navigations, this triggers browser unload dialog. `navigation.willUnload` is true if navigation will unload the document.
+**beforeNavigate(callback)** - Navigation interceptor that triggers before navigation (link clicks, `goto()`, browser back/forward). Call `cancel()` to prevent navigation. For 'leave' type navigations (user leaving app), `cancel()` triggers browser unload dialog. `navigation.to.route.id` is `null` for non-SvelteKit routes. `navigation.willUnload` is `true` if navigation will unload document. Must be called during component initialization.
 
-**goto(url, opts)** - Programmatic navigation to a route. Options include `replaceState`, `noScroll`, `keepFocus`, `invalidateAll`, `invalidate` (array or predicate function), and `state`. Returns Promise. Use `window.location` for external URLs.
+**disableScrollHandling()** - Disables SvelteKit's built-in scroll handling when called during page update (in `onMount`, `afterNavigate`, or actions). Generally discouraged as it breaks user expectations.
 
-**invalidate(resource)** - Re-run load functions that depend on the given resource. Accepts string/URL (must match exactly) or function predicate. Example: `invalidate((url) => url.pathname === '/path')` to match regardless of query parameters.
+**goto(url, opts?)** - Programmatic navigation to given route. Returns Promise that resolves when navigation completes or rejects on failure. For external URLs use `window.location = url` instead. Options: `replaceState` (boolean), `noScroll` (boolean), `keepFocus` (boolean), `invalidateAll` (boolean), `invalidate` (array of strings/URLs/predicates), `state` (App.PageState).
 
-**invalidateAll()** - Re-run all load functions for current page.
+**invalidate(resource)** - Re-runs `load` functions for currently active page if they depend on the given resource via `fetch` or `depends`. Argument can be string/URL (must match exactly) or function predicate. Returns Promise resolving when page updates.
+```ts
+invalidate((url) => url.pathname === '/path'); // Match '/path' regardless of query params
+```
 
-**onNavigate(callback)** - Lifecycle function running before navigation (except full-page). Can return Promise to delay navigation (e.g., for `document.startViewTransition`). If callback returns a function, it's called after DOM updates.
+**invalidateAll()** - Re-runs all `load` functions for currently active page. Returns Promise resolving when page updates.
 
-**disableScrollHandling()** - Disable SvelteKit's built-in scroll handling during page updates (generally discouraged).
+**onNavigate(callback)** - Lifecycle function running immediately before navigation to new URL (except full-page navigations). If callback returns Promise, SvelteKit waits before completing navigation (useful for `document.startViewTransition`). If callback returns function, it's called after DOM updates. Must be called during component initialization.
 
-**preloadCode(pathname)** - Import code for routes without calling load functions. Accepts patterns like `/about` or `/blog/*`.
+**preloadCode(pathname)** - Programmatically imports code for routes not yet fetched. Specify routes by pathname like `/about` or `/blog/*`. Doesn't call `load` functions. Returns Promise resolving when modules imported.
 
-**preloadData(href)** - Preload page by loading code and calling load functions. Returns Promise with result object containing `type` ('loaded' or 'redirect'), `status`, `data`, or `location`.
+**preloadData(href)** - Preloads given page: ensures code is loaded and calls page's `load` function. Same behavior as SvelteKit triggers on `<a data-sveltekit-preload-data>`. If next navigation is to `href`, returned values are used making navigation instantaneous. Returns Promise resolving with `{type: 'loaded', status, data}` or `{type: 'redirect', location}`.
 
-**pushState(url, state)** - Create new history entry with given page state. Pass `''` for current URL. Used for shallow routing.
+**pushState(url, state)** - Programmatically create new history entry with given `page.state`. Pass `''` as url to use current URL. Used for shallow routing.
 
-**replaceState(url, state)** - Replace current history entry with given page state. Pass `''` for current URL. Used for shallow routing.
+**refreshAll(opts?)** - Re-runs all currently active remote functions and all `load` functions for currently active page (unless disabled via `includeLoadFunctions` option). Returns Promise resolving when page updates.
+
+**replaceState(url, state)** - Programmatically replace current history entry with given `page.state`. Pass `''` as url to use current URL. Used for shallow routing.

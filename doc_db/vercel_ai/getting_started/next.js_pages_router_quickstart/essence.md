@@ -1,1 +1,1 @@
-Build a streaming chat app with Next.js Pages Router: set up route handler with `streamText()`, use `useChat()` hook for UI, add tools with `tool()` and Zod schemas, enable multi-step tool calls with `stopWhen: stepCountIs(n)`.
+Build a streaming chat app with Next.js Pages Router using AI SDK: create route handler with streamText, wire useChat hook to UI, add tools with Zod schemas and execute functions, enable multi-step tool calls with stopWhen.

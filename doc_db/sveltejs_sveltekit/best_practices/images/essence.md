@@ -1,1 +1,1 @@
-Optimize images using Vite's built-in handling, the @sveltejs/enhanced-img build plugin for automatic format conversion and responsive sizing, or CDN-based solutions for runtime images.
+Image optimization via Vite built-in handling, @sveltejs/enhanced-img plugin (auto format/size/EXIF), or CDN dynamic loading; use `<enhanced:img>` with optional `sizes` and `?w=` query params; provide 2x resolution originals, set fetchpriority/width/height for performance.

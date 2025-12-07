@@ -4,13 +4,11 @@ Autocomplete input and command palette with a list of suggestions. Built by comp
 
 ### Installation
 
-Install via CLI with confirmation and overwrite flags:
+Install Popover and Command components:
 ```
-npx shadcn-svelte@latest add combobox -y -o
+npx shadcn-svelte@latest add popover -y -o
+npx shadcn-svelte@latest add command -y -o
 ```
-(-y: skip confirmation, -o: overwrite existing files)
-
-Requires Popover and Command components to be installed.
 
 ### Basic Usage
 
@@ -35,16 +33,14 @@ Requires Popover and Command components to be installed.
   let open = $state(false);
   let value = $state("");
   let triggerRef = $state<HTMLButtonElement>(null!);
-
+  
   const selectedValue = $derived(
     frameworks.find((f) => f.value === value)?.label
   );
 
   function closeAndFocusTrigger() {
     open = false;
-    tick().then(() => {
-      triggerRef.focus();
-    });
+    tick().then(() => triggerRef.focus());
   }
 </script>
 
@@ -93,8 +89,9 @@ Requires Popover and Command components to be installed.
 </Popover.Root>
 ```
 
-### Status Selector Example
+### Examples
 
+**Status Selector with Icons:**
 ```svelte
 <script lang="ts">
   import CircleIcon from "@lucide/svelte/icons/circle";
@@ -126,15 +123,12 @@ Requires Popover and Command components to be installed.
   let open = $state(false);
   let value = $state("");
   const selectedStatus = $derived(statuses.find((s) => s.value === value));
+  const triggerId = useId();
 
   function closeAndFocusTrigger(triggerId: string) {
     open = false;
-    tick().then(() => {
-      document.getElementById(triggerId)?.focus();
-    });
+    tick().then(() => document.getElementById(triggerId)?.focus());
   }
-
-  const triggerId = useId();
 </script>
 
 <div class="flex items-center space-x-4">
@@ -189,8 +183,7 @@ Requires Popover and Command components to be installed.
 </div>
 ```
 
-### Dropdown Menu with Combobox
-
+**Dropdown Menu with Submenu:**
 ```svelte
 <script lang="ts">
   import CalendarIcon from "@lucide/svelte/icons/calendar";
@@ -204,13 +197,7 @@ Requires Popover and Command components to be installed.
   import { Button } from "$lib/components/ui/button/index.js";
 
   const labels = [
-    "feature",
-    "bug",
-    "enhancement",
-    "documentation",
-    "design",
-    "question",
-    "maintenance"
+    "feature", "bug", "enhancement", "documentation", "design", "question", "maintenance"
   ];
 
   let open = $state(false);
@@ -219,19 +206,13 @@ Requires Popover and Command components to be installed.
 
   function closeAndFocusTrigger() {
     open = false;
-    tick().then(() => {
-      triggerRef.focus();
-    });
+    tick().then(() => triggerRef.focus());
   }
 </script>
 
-<div
-  class="flex w-full flex-col items-start justify-between rounded-md border px-4 py-3 sm:flex-row sm:items-center"
->
+<div class="flex w-full flex-col items-start justify-between rounded-md border px-4 py-3 sm:flex-row sm:items-center">
   <p class="text-sm font-medium leading-none">
-    <span
-      class="bg-primary text-primary-foreground mr-2 rounded-lg px-2 py-1 text-xs"
-    >
+    <span class="bg-primary text-primary-foreground mr-2 rounded-lg px-2 py-1 text-xs">
       {selectedLabel}
     </span>
     <span class="text-muted-foreground">Create a new project</span>
@@ -295,9 +276,8 @@ Requires Popover and Command components to be installed.
 </div>
 ```
 
-### Form Integration
-
-Use Form.Control to apply proper aria attributes and hidden input for form submission. Requires formsnap version 0.5.0 or higher.
+**Form Integration:**
+Use Form.Control to apply aria attributes and hidden input for form submission. Requires formsnap v0.5.0+.
 
 ```svelte
 <script lang="ts" module>
@@ -346,15 +326,12 @@ Use Form.Control to apply proper aria attributes and hidden input for form submi
 
   const { form: formData, enhance } = form;
   let open = false;
+  const triggerId = useId();
 
   function closeAndFocusTrigger(triggerId: string) {
     open = false;
-    tick().then(() => {
-      document.getElementById(triggerId)?.focus();
-    });
+    tick().then(() => document.getElementById(triggerId)?.focus());
   }
-
-  const triggerId = useId();
 </script>
 
 <form method="POST" class="space-y-6" use:enhance>
@@ -418,13 +395,9 @@ Use Form.Control to apply proper aria attributes and hidden input for form submi
 </form>
 ```
 
-### Key Implementation Details
-
-- Combobox is a composition of Popover and Command components
-- Use `$state` for reactive state management (open, value, triggerRef)
-- Use `$derived` to compute selectedValue from the current value
+**Key patterns:**
+- Use `$state` for open/value, `$derived` for computed selections
 - Call `closeAndFocusTrigger()` after selection to refocus trigger button for keyboard navigation
-- Use `tick()` to ensure DOM updates before focusing
-- Apply `role="combobox"` and `aria-expanded={open}` to trigger button for accessibility
-- Use CheckIcon with conditional `text-transparent` class to show/hide checkmarks
-- For form integration, wrap Popover.Trigger in Form.Control and add hidden input with form field name
+- Use `Command.Root`, `Command.Input`, `Command.List`, `Command.Group`, `Command.Item` for searchable lists
+- Wrap in `Popover.Root` with `Popover.Trigger` and `Popover.Content`
+- For forms, use `Form.Control` with hidden input to ensure proper submission

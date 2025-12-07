@@ -1,1 +1,1 @@
-Experimental feature for building AI applications with React Server Components. Supports streaming components, managing generative UI state, state persistence, multi-step workflows, value streaming, error handling, and authentication. Production use should prefer AI SDK UI.
+Experimental React Server Components feature for AI applications. Covers streaming components, UI state management, persistence, multi-step workflows, value streaming, error handling, and authentication. Production use should prefer AI SDK UI.

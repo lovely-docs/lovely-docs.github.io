@@ -1,1 +1,0 @@
-Headless separator component for visually dividing content with horizontal or vertical orientation.

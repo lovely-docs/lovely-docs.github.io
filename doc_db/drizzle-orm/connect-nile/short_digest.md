@@ -1,14 +1,14 @@
-## Drizzle with Nile
+## Nile Integration
 
-Nile is PostgreSQL for multi-tenant apps. Install `drizzle-orm` and `postgres`, then connect:
+Install: `npm install drizzle-orm postgres`
 
+Basic setup with node-postgres driver:
 ```typescript
 import { drizzle } from 'drizzle-orm/node-postgres'
 const db = drizzle(process.env.NILEDB_URL);
 ```
 
-For virtual tenant databases, wrap queries in transactions that set `nile.tenant_id`:
-
+For multi-tenant isolation, wrap queries in transactions that set tenant context:
 ```typescript
 function tenantDB<T>(tenantId: string, cb: (tx: any) => T | Promise<T>): Promise<T> {
   return db.transaction(async (tx) => {
@@ -22,4 +22,4 @@ function tenantDB<T>(tenantId: string, cb: (tx: any) => T | Promise<T>): Promise
 await tenantDB(tenantId, async (tx) => tx.select().from(todosTable));
 ```
 
-Use AsyncLocalStorage with middleware to automatically populate tenant context for all queries in a request.
+For web frameworks, use AsyncLocalStorage with middleware to populate tenant ID automatically.

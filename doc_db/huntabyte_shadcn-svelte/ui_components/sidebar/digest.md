@@ -1,6 +1,6 @@
 ## Sidebar Component
 
-A composable, themeable, and customizable sidebar component that collapses to icons. Sidebars are complex with many moving parts; this component provides a solid foundation built from 30+ configurations.
+A composable, themeable, customizable sidebar component that collapses to icons. Built from 30+ configurations extracted into reusable `sidebar-*.svelte` files.
 
 ### Installation
 
@@ -36,7 +36,7 @@ Add CSS variables to `src/app.css`:
 
 - `Sidebar.Provider` - Handles collapsible state
 - `Sidebar.Root` - Sidebar container
-- `Sidebar.Header` / `Sidebar.Footer` - Sticky at top/bottom
+- `Sidebar.Header` / `Sidebar.Footer` - Sticky top/bottom
 - `Sidebar.Content` - Scrollable content
 - `Sidebar.Group` - Section within content
 - `Sidebar.Trigger` - Toggle button
@@ -80,10 +80,16 @@ Add CSS variables to `src/app.css`:
   import * as Sidebar from "$lib/components/ui/sidebar/index.js";
   import HouseIcon from "@lucide/svelte/icons/house";
   import InboxIcon from "@lucide/svelte/icons/inbox";
+  import CalendarIcon from "@lucide/svelte/icons/calendar";
+  import SearchIcon from "@lucide/svelte/icons/search";
+  import SettingsIcon from "@lucide/svelte/icons/settings";
   
   const items = [
     { title: "Home", url: "#", icon: HouseIcon },
     { title: "Inbox", url: "#", icon: InboxIcon },
+    { title: "Calendar", url: "#", icon: CalendarIcon },
+    { title: "Search", url: "#", icon: SearchIcon },
+    { title: "Settings", url: "#", icon: SettingsIcon },
   ];
 </script>
 <Sidebar.Root>
@@ -113,15 +119,19 @@ Add CSS variables to `src/app.css`:
 
 ### Sidebar.Provider
 
-Provides sidebar context. Wrap your application in it.
+Provides sidebar context. Wrap application in this component.
 
 **Props:**
-- `open` (boolean, bindable) - Open state
-- `onOpenChange` ((open: boolean) => void) - Callback fired after state changes
+- `open: boolean` - Open state (bindable)
+- `onOpenChange: (open: boolean) => void` - Callback on state change
 
 **Width Configuration:**
 
-Use `SIDEBAR_WIDTH` and `SIDEBAR_WIDTH_MOBILE` constants in `src/lib/components/ui/sidebar/constants.ts` (default: `16rem` and `18rem`).
+Default constants in `src/lib/components/ui/sidebar/constants.ts`:
+```ts
+export const SIDEBAR_WIDTH = "16rem";
+export const SIDEBAR_WIDTH_MOBILE = "18rem";
+```
 
 For multiple sidebars, use CSS variables:
 ```svelte
@@ -132,16 +142,19 @@ For multiple sidebars, use CSS variables:
 
 **Keyboard Shortcut:**
 
-Change `SIDEBAR_KEYBOARD_SHORTCUT` in constants file (default: `"b"` for cmd+b on Mac, ctrl+b on Windows).
+Default: `cmd+b` (Mac) / `ctrl+b` (Windows). Change in constants:
+```ts
+export const SIDEBAR_KEYBOARD_SHORTCUT = "b";
+```
 
 ### Sidebar.Root
 
 Main sidebar component.
 
 **Props:**
-- `side` - `"left"` or `"right"` (default: left)
-- `variant` - `"sidebar"`, `"floating"`, or `"inset"`
-- `collapsible` - `"offcanvas"`, `"icon"`, or `"none"`
+- `side: "left" | "right"` - Sidebar position
+- `variant: "sidebar" | "floating" | "inset"` - Visual variant
+- `collapsible: "offcanvas" | "icon" | "none"` - Collapse behavior
 
 For `inset` variant, wrap main content in `Sidebar.Inset`:
 ```svelte
@@ -156,25 +169,24 @@ For `inset` variant, wrap main content in `Sidebar.Inset`:
 
 ### useSidebar Hook
 
-Access sidebar context (cannot be destructured, must be called during component lifecycle):
-
+Access sidebar context (cannot be destructured):
 ```svelte
 <script lang="ts">
   import { useSidebar } from "$lib/components/ui/sidebar/index.js";
   const sidebar = useSidebar();
-  sidebar.state; // "expanded" or "collapsed"
-  sidebar.open; // boolean
-  sidebar.setOpen(boolean);
-  sidebar.openMobile; // boolean on mobile
-  sidebar.setOpenMobile(boolean);
-  sidebar.isMobile; // boolean
-  sidebar.toggle(); // toggle desktop and mobile
+  sidebar.state;        // "expanded" | "collapsed"
+  sidebar.open;         // boolean
+  sidebar.setOpen(bool);
+  sidebar.openMobile;   // boolean
+  sidebar.setOpenMobile(bool);
+  sidebar.isMobile;     // boolean
+  sidebar.toggle();     // toggle desktop and mobile
 </script>
 ```
 
-### Sidebar.Header / Sidebar.Footer
+### Sidebar.Header & Sidebar.Footer
 
-Sticky header and footer. Example with dropdown menu:
+Sticky header/footer components. Example with dropdown menu:
 
 ```svelte
 <Sidebar.Header>
@@ -191,6 +203,7 @@ Sticky header and footer. Example with dropdown menu:
         </DropdownMenu.Trigger>
         <DropdownMenu.Content class="w-(--bits-dropdown-menu-anchor-width)">
           <DropdownMenu.Item><span>Acme Inc</span></DropdownMenu.Item>
+          <DropdownMenu.Item><span>Acme Corp.</span></DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu.Root>
     </Sidebar.MenuItem>
@@ -200,11 +213,20 @@ Sticky header and footer. Example with dropdown menu:
 
 ### Sidebar.Content
 
-Scrollable container for `Sidebar.Group` components.
+Scrollable content wrapper. Contains `Sidebar.Group` components.
+
+```svelte
+<Sidebar.Root>
+  <Sidebar.Content>
+    <Sidebar.Group />
+    <Sidebar.Group />
+  </Sidebar.Content>
+</Sidebar.Root>
+```
 
 ### Sidebar.Group
 
-Section within sidebar. Contains `GroupLabel`, `GroupContent`, and optional `GroupAction`:
+Section within sidebar with label, content, and optional action.
 
 ```svelte
 <Sidebar.Group>
@@ -237,13 +259,11 @@ Wrap in `Collapsible.Root`:
 </Collapsible.Root>
 ```
 
-### Sidebar.Menu
+### Sidebar.Menu Components
 
-Menu component composed of `MenuItem`, `MenuButton`, `MenuAction`, and `MenuSub`.
+**Sidebar.MenuButton:**
 
-**MenuButton:**
-
-Renders a button by default, use `child` snippet for custom elements:
+Renders button/link in menu. Use `child` snippet for custom elements:
 ```svelte
 <Sidebar.MenuButton isActive>
   {#snippet child({ props })}
@@ -255,11 +275,11 @@ Renders a button by default, use `child` snippet for custom elements:
 </Sidebar.MenuButton>
 ```
 
-Props: `isActive` (boolean) - marks item as active
+Props: `isActive: boolean` - Mark as active
 
-**MenuAction:**
+**Sidebar.MenuAction:**
 
-Independent button within menu item, works with `DropdownMenu`:
+Independent button in menu item. Works with `DropdownMenu`:
 ```svelte
 <Sidebar.MenuItem>
   <Sidebar.MenuButton>
@@ -279,16 +299,16 @@ Independent button within menu item, works with `DropdownMenu`:
       {/snippet}
     </DropdownMenu.Trigger>
     <DropdownMenu.Content side="right" align="start">
-      <DropdownMenu.Item><span>Edit</span></DropdownMenu.Item>
-      <DropdownMenu.Item><span>Delete</span></DropdownMenu.Item>
+      <DropdownMenu.Item><span>Edit Project</span></DropdownMenu.Item>
+      <DropdownMenu.Item><span>Delete Project</span></DropdownMenu.Item>
     </DropdownMenu.Content>
   </DropdownMenu.Root>
 </Sidebar.MenuItem>
 ```
 
-**MenuSub:**
+**Sidebar.MenuSub:**
 
-Submenu using `MenuSubItem` and `MenuSubButton`:
+Submenu within menu:
 ```svelte
 <Sidebar.MenuItem>
   <Sidebar.MenuButton />
@@ -324,7 +344,7 @@ Wrap in `Collapsible.Root`:
 
 ### Sidebar.MenuBadge
 
-Badge within menu item:
+Badge in menu item:
 ```svelte
 <Sidebar.MenuItem>
   <Sidebar.MenuButton />
@@ -347,7 +367,7 @@ Loading skeleton for menu items:
 
 ### Sidebar.Separator
 
-Separator within sidebar:
+Separator line:
 ```svelte
 <Sidebar.Root>
   <Sidebar.Header />
@@ -417,9 +437,28 @@ Or simpler:
 </Sidebar.Provider>
 ```
 
+### Styling
+
+**Hide element in icon mode:**
+```svelte
+<Sidebar.Root collapsible="icon">
+  <Sidebar.Content>
+    <Sidebar.Group class="group-data-[collapsible=icon]:hidden" />
+  </Sidebar.Content>
+</Sidebar.Root>
+```
+
+**Style action based on button active state:**
+```svelte
+<Sidebar.MenuItem>
+  <Sidebar.MenuButton />
+  <Sidebar.MenuAction class="peer-data-[active=true]/menu-button:opacity-100" />
+</Sidebar.MenuItem>
+```
+
 ### Theming
 
-CSS variables (use different variables from main app for distinct styling):
+CSS variables (light/dark):
 ```css
 :root {
   --sidebar: oklch(0.985 0 0);
@@ -443,21 +482,4 @@ CSS variables (use different variables from main app for distinct styling):
 }
 ```
 
-### Styling Tips
-
-Hide element in icon mode:
-```svelte
-<Sidebar.Root collapsible="icon">
-  <Sidebar.Content>
-    <Sidebar.Group class="group-data-[collapsible=icon]:hidden" />
-  </Sidebar.Content>
-</Sidebar.Root>
-```
-
-Show menu action when button is active:
-```svelte
-<Sidebar.MenuItem>
-  <Sidebar.MenuButton />
-  <Sidebar.MenuAction class="peer-data-[active=true]/menu-button:opacity-100" />
-</Sidebar.MenuItem>
-```
+Sidebar uses separate variables from main app to allow different styling (e.g., darker sidebar).

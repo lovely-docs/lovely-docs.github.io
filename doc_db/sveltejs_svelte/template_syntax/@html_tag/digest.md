@@ -1,22 +1,36 @@
-The `{@html ...}` tag injects raw HTML into a component:
+The `{@html ...}` tag injects raw HTML into a component.
 
+**Basic usage:**
 ```svelte
 <article>
 	{@html content}
 </article>
 ```
 
-**Security**: Always escape the passed string or only use values under your control to prevent XSS attacks. Never render unsanitized content.
+**Security:** Always escape the passed string or only use values under your control to prevent XSS attacks. Never render unsanitized content.
 
-**Valid HTML requirement**: The expression must be valid standalone HTML. This fails because `</div>` alone is invalid:
+**Valid HTML requirement:** The expression must be valid standalone HTML. This fails because `</div>` alone is invalid:
 ```svelte
 {@html '<div>'}content{@html '</div>'}
 ```
 
-The tag does not compile Svelte code.
+It also will not compile Svelte code.
 
-**Styling**: HTML rendered this way is invisible to Svelte and won't receive scoped styles. Scoped style rules won't apply to injected HTML content. Use the `:global` modifier to style the container:
+**Styling limitation:** Content rendered with `{@html ...}` is invisible to Svelte and won't receive scoped styles. Scoped style rules targeting elements inside injected HTML won't work:
+```svelte
+<article>
+	{@html content}
+</article>
 
+<style>
+	article {
+		a { color: hotpink }
+		img { width: 100% }
+	}
+</style>
+```
+
+Use the `:global` modifier to style injected content:
 ```svelte
 <style>
 	article :global {

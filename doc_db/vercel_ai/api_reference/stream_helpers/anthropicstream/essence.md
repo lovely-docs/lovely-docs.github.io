@@ -1,0 +1,1 @@
+Deprecated AnthropicStream utility (removed in v4.0) converted Anthropic responses to ReadableStream with optional lifecycle callbacks; replaced by Anthropic Provider.

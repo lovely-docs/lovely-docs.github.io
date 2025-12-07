@@ -1,0 +1,1 @@
+Increment columns with update().set(sql`${column} + value`) or a custom increment(column, value) helper; supports PostgreSQL, MySQL, SQLite.

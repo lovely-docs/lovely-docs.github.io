@@ -1,1 +1,1 @@
-Complete API reference for React Server Components integration with streaming UI, state management, and LLM tool execution.
+React Server Components API for streaming LLM-generated UI and data with bidirectional state management between server and client.

@@ -1,18 +1,21 @@
-## Expected Errors
+## Expected vs Unexpected Errors
 
-```js
-import { error } from '@sveltejs/kit';
-error(404, { message: 'Not found' });
-```
-
-Throws an exception caught by SvelteKit, sets status code, and renders nearest `+error.svelte` with `page.error`.
-
-Customize error shape with `App.Error` interface in TypeScript.
-
-## Unexpected Errors
-
-Any other exception is logged but not exposed to users (sends generic `{ message: "Internal Error" }`). Process in `handleError` hook.
+Expected errors use `error(status, message)` helper, caught by SvelteKit to render `+error.svelte` with `page.error`. Unexpected errors are generic `{ message: "Internal Error" }` for security, passed to `handleError` hook.
 
 ## Error Responses
 
-Customize fallback error page with `src/error.html` using `%sveltekit.status%` and `%sveltekit.error.message%` placeholders. Errors in `load` render nearest `+error.svelte`; errors in root layout use fallback page.
+Errors in `handle`/`+server.js` use fallback page or JSON. Customize with `src/error.html` using `%sveltekit.status%` and `%sveltekit.error.message%` placeholders. Errors in `load` render nearest `+error.svelte`; root layout errors use fallback.
+
+## Type Safety
+
+Define `App.Error` interface in `src/app.d.ts` to add custom properties (always includes `message: string`):
+```ts
+declare global {
+	namespace App {
+		interface Error {
+			code: string;
+			id: string;
+		}
+	}
+}
+```

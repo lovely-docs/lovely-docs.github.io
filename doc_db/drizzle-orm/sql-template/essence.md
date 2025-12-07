@@ -1,0 +1,1 @@
+Type-safe parameterized SQL template with automatic escaping, runtime mapping, aliasing, raw SQL fragments, chunk composition, and dialect-specific conversion to query strings and parameters.

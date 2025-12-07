@@ -1,16 +1,26 @@
 ## Declaring Views
 
 Views can be declared in three ways:
-1. **Inline query builder**: Pass a callback to `.as()` that receives the query builder
-2. **Standalone query builder**: Create a `QueryBuilder` instance and pass queries to `.as()`
-3. **Raw SQL**: Use the `sql` operator when query builder syntax is insufficient
-
-When using inline or standalone query builders, column schemas are automatically inferred. With raw SQL, you must explicitly declare the view columns schema.
+1. **Inline query builder** - passed directly to `.as()`
+2. **Standalone query builder** - created separately and passed to `.as()`
+3. **Raw SQL** - using `sql` operator with explicit column schema
 
 ### Basic Declaration (Inline Query Builder)
 
-PostgreSQL example:
+PostgreSQL:
 ```ts
+import { pgTable, pgView, serial, text, timestamp } from "drizzle-orm/pg-core";
+
+export const user = pgTable("user", {
+  id: serial(),
+  name: text(),
+  email: text(),
+  password: text(),
+  role: text().$type<"admin" | "customer">(),
+  createdAt: timestamp("created_at"),
+  updatedAt: timestamp("updated_at"),
+});
+
 export const userView = pgView("user_view").as((qb) => qb.select().from(user));
 export const customersView = pgView("customers_view").as((qb) => 
   qb.select().from(user).where(eq(user.role, "customer"))
@@ -36,9 +46,10 @@ export const customersView = pgView("customers_view").as((qb) => {
 ### Standalone Query Builder
 
 ```ts
-import { QueryBuilder } from "drizzle-orm/pg-core";
+import { pgTable, pgView, serial, text, timestamp, QueryBuilder } from "drizzle-orm/pg-core";
 
 const qb = new QueryBuilder();
+
 export const userView = pgView("user_view").as(qb.select().from(user));
 export const customersView = pgView("customers_view").as(
   qb.select().from(user).where(eq(user.role, "customer"))
@@ -47,7 +58,8 @@ export const customersView = pgView("customers_view").as(
 
 ### Raw SQL Declaration
 
-When query builder doesn't support needed syntax, explicitly define columns:
+When query builder syntax is insufficient, use `sql` operator with explicit column schema:
+
 ```ts
 const newYorkers = pgView('new_yorkers', {
   id: serial('id').primaryKey(),
@@ -56,11 +68,10 @@ const newYorkers = pgView('new_yorkers', {
 }).as(sql`select * from ${users} where ${eq(users.cityId, 1)}`);
 ```
 
-Parameters in raw SQL are inlined rather than replaced with `$1`, `$2`, etc.
+## Existing Views
 
-### Existing Views
+For read-only access to existing database views, use `.existing()` to prevent migration generation:
 
-For read-only access to existing database views, use `.existing()` so drizzle-kit won't generate a `CREATE VIEW` statement:
 ```ts
 export const trimmedUser = pgView("trimmed_user", {
   id: serial("id"),
@@ -69,9 +80,9 @@ export const trimmedUser = pgView("trimmed_user", {
 }).existing();
 ```
 
-### Materialized Views (PostgreSQL Only)
+## Materialized Views (PostgreSQL Only)
 
-PostgreSQL supports materialized views that persist results in table-like form:
+PostgreSQL supports materialized views that persist results in table-like form.
 
 ```ts
 const newYorkers = pgMaterializedView('new_yorkers').as((qb) => 
@@ -79,16 +90,17 @@ const newYorkers = pgMaterializedView('new_yorkers').as((qb) =>
 );
 ```
 
-Refresh materialized views at runtime:
+Refresh at runtime:
 ```ts
 await db.refreshMaterializedView(newYorkers);
 await db.refreshMaterializedView(newYorkers).concurrently();
 await db.refreshMaterializedView(newYorkers).withNoData();
 ```
 
-### Advanced Configuration
+## Extended Configuration
 
-Regular views support options like `checkOption`, `securityBarrier`, `securityInvoker`:
+Views support additional options via `.with()`, `.using()`, `.tablespace()`, and `.withNoData()`:
+
 ```ts
 const newYorkers = pgView('new_yorkers')
   .with({
@@ -96,12 +108,19 @@ const newYorkers = pgView('new_yorkers')
     securityBarrier: true,
     securityInvoker: true,
   })
-  .as((qb) => { /* query */ });
-```
+  .as((qb) => {
+    const sq = qb
+      .$with('sq')
+      .as(
+        qb.select({ userId: users.id, cityId: cities.id })
+          .from(users)
+          .leftJoin(cities, eq(cities.id, users.homeCity))
+          .where(sql`${users.age1} > 18`),
+      );
+    return qb.with(sq).select().from(sq).where(sql`${users.homeCity} = 1`);
+  });
 
-Materialized views support index method, storage parameters, tablespace, and `withNoData()`:
-```ts
-const newYorkers = pgMaterializedView('new_yorkers')
+const newYorkers2 = pgMaterializedView('new_yorkers')
   .using('btree')
   .with({
     fillfactor: 90,
@@ -110,7 +129,7 @@ const newYorkers = pgMaterializedView('new_yorkers')
   })
   .tablespace('custom_tablespace')
   .withNoData()
-  .as((qb) => { /* query */ });
+  .as((qb) => { /* ... */ });
 ```
 
-Supported databases: PostgreSQL, MySQL, SQLite (materialized views PostgreSQL only).
+**Supported databases**: PostgreSQL, SQLite, MySQL (not SingleStore)

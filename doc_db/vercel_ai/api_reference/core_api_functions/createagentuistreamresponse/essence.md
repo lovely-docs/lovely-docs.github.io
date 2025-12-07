@@ -1,0 +1,1 @@
+Streams Agent output as HTTP Response with UI messages; validates/transforms messages, calls agent.stream(), returns Promise<Response> with chunks; server-side only.

@@ -1,1 +1,1 @@
-Connect Drizzle to Vercel Postgres using @vercel/postgres driver or postgres/pg with postgresql:// URLs; supports serverless via websockets and serverful via TCP.
+Connect Drizzle to Vercel Postgres using @vercel/postgres driver (serverless-compatible) or postgres/pg drivers (serverful); initialize with drizzle() and execute queries.

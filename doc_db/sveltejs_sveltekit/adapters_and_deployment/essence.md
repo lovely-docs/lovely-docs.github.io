@@ -1,0 +1,1 @@
+Deployment adapters, build process, and platform-specific configuration for SvelteKit applications.

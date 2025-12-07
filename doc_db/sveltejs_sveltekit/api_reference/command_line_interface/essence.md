@@ -1,1 +1,0 @@
-SvelteKit CLI overview: Vite commands for development/building and svelte-kit sync for type generation.

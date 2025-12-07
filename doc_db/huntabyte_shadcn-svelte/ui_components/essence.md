@@ -1,1 +1,1 @@
-60+ composable, accessible UI components with Tailwind styling, form validation integration, and sub-component composition pattern.
+Complete UI component library for Svelte with 60+ composable, accessible, themeable components for forms, navigation, data display, and layouts.

@@ -1,1 +1,0 @@
-Legacy mode directive for dynamically rendering components by destroying and recreating instances when the component reference changes.

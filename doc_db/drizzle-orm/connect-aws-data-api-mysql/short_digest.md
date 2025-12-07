@@ -1,0 +1,1 @@
+AWS Data API for MySQL is not implemented in Drizzle ORM.

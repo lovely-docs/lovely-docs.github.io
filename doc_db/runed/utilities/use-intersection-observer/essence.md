@@ -1,0 +1,1 @@
+useIntersectionObserver hook: observe element intersection with callback, control via pause/resume/stop, check isActive getter

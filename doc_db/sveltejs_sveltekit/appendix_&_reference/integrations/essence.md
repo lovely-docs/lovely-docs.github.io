@@ -1,0 +1,1 @@
+vitePreprocess enables CSS preprocessors; svelte-preprocess alternative with more features; npx sv add for common integrations; Vite plugins supported.

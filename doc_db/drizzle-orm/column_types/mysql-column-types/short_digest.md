@@ -1,0 +1,1 @@
+MySQL column types: `int`, `bigint`, `decimal`, `float`, `double`, `real`, `serial`, `binary`, `varbinary`, `char`, `varchar`, `text`, `boolean`, `date`, `datetime`, `time`, `year`, `timestamp`, `json`, `mysqlEnum`. Modifiers: `.notNull()`, `.primaryKey()`, `.autoincrement()`, `.default(value)`, `.$defaultFn(fn)`, `.$onUpdate(fn)`, `.$type<T>()`.

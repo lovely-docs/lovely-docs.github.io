@@ -1,0 +1,1 @@
+Node.js HTTP adapter: createReadableStream, getRequest (IncomingMessage→Request), setResponse (Response→ServerResponse)

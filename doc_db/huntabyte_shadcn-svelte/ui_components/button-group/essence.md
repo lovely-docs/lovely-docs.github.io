@@ -1,1 +1,1 @@
-Container for grouping related buttons with consistent styling, supporting vertical/horizontal orientation, separators, nesting, and integration with Input, DropdownMenu, Select, Popover components; accessible with role="group" and aria-label support.
+ButtonGroup component for grouping related buttons with consistent styling, supporting vertical/horizontal orientation, separators, nesting, and composition with other UI components.

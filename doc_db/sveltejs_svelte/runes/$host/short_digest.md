@@ -1,5 +1,10 @@
-The `$host` rune accesses the host element in custom element components, enabling custom event dispatch:
+`$host` rune accesses the host element in custom element components, enabling custom event dispatch:
 
 ```svelte
-$host().dispatchEvent(new CustomEvent(type))
+<svelte:options customElement="my-stepper" />
+<script>
+	function dispatch(type) {
+		$host().dispatchEvent(new CustomEvent(type));
+	}
+</script>
 ```

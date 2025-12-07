@@ -1,0 +1,1 @@
+Setup Drizzle with Turso SQLite: install packages, set DB_FILE_NAME env var, introspect existing database, connect with drizzle(), perform CRUD operations (insert/select/update/delete with eq conditions).

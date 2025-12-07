@@ -1,1 +1,0 @@
-Deprecated AWS Bedrock stream transformer (removed in SDK 4.0); converts Bedrock responses to ReadableStream with optional lifecycle callbacks.

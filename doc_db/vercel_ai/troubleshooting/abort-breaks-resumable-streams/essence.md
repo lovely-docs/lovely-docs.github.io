@@ -1,0 +1,1 @@
+useChat's resume and abort features are mutually exclusive; choose one based on whether you need stream persistence across reloads or manual stop capability.

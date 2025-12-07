@@ -1,69 +1,57 @@
-## Special Elements
+## Special Elements Reference
 
-Svelte provides special elements for managing errors, accessing global objects, and rendering dynamic content.
+Svelte provides special elements prefixed with `svelte:` for accessing browser APIs and controlling rendering behavior.
 
-### `<svelte:boundary>`
-Error boundary and async state management. Catches rendering and effect errors, shows fallback UI, and handles pending states during async operations.
+### Error Boundary (`<svelte:boundary>`)
+Creates error boundaries to catch rendering/effect errors. Shows pending UI while `await` expressions resolve, and failed UI when errors occur. Receives `pending` and `failed` snippets, plus optional `onerror` handler. **Limitation**: Only catches rendering/effect errors, not event handler or external async errors.
 
 ```svelte
-<svelte:boundary onerror={(error, reset) => report(error)}>
-	<FlakyComponent />
-	{#snippet pending()}
-		<p>loading...</p>
-	{/snippet}
-	{#snippet failed(error, reset)}
-		<button onclick={reset}>retry</button>
-	{/snippet}
+<svelte:boundary onerror={(error, reset) => {}}>
+  <p>{await delayed('hello!')}</p>
+  {#snippet pending()}
+    <p>loading...</p>
+  {/snippet}
+  {#snippet failed(error, reset)}
+    <button onclick={reset}>retry</button>
+  {/snippet}
 </svelte:boundary>
 ```
 
-Only catches errors during rendering and effects, not in event handlers or async callbacks. Available since Svelte 5.3.0.
+### Window/Document/Body (`<svelte:window>`, `<svelte:document>`, `<svelte:body>`)
+Attach event listeners and bind to properties with automatic cleanup. Must be top-level only.
 
-### `<svelte:window>`
-Attaches event listeners to `window` with automatic cleanup. Bindable properties: `innerWidth`, `innerHeight`, `outerWidth`, `outerHeight`, `scrollX`, `scrollY`, `online`, `devicePixelRatio`.
+**svelte:window** - Bindable properties: `innerWidth`, `innerHeight`, `outerWidth`, `outerHeight`, `scrollX` (writable), `scrollY` (writable), `online`, `devicePixelRatio`. Attach events: `onkeydown`, `onresize`, etc.
 
-```svelte
-<svelte:window onkeydown={handleKeydown} bind:scrollY={y} />
-```
+**svelte:document** - Bindable properties: `activeElement`, `fullscreenElement`, `pointerLockElement`, `visibilityState`. Attach events like `onvisibilitychange`.
 
-### `<svelte:document>`
-Attaches event listeners and actions to `document`. Bindable readonly properties: `activeElement`, `fullscreenElement`, `pointerLockElement`, `visibilityState`.
+**svelte:body** - Attach events like `onmouseenter`, `onmouseleave` that don't fire on window.
 
 ```svelte
-<svelte:document onvisibilitychange={handler} use:someAction />
+<svelte:window bind:scrollY={y} onkeydown={handleKeydown} />
+<svelte:document bind:visibilityState={state} onvisibilitychange={handler} />
+<svelte:body onmouseenter={enter} onmouseleave={leave} />
 ```
 
-### `<svelte:body>`
-Attaches event listeners and actions to `document.body`.
-
-```svelte
-<svelte:body onmouseenter={handleMouseenter} use:someAction />
-```
-
-### `<svelte:head>`
-Inserts content into `document.head`. During SSR, head content is exposed separately.
+### Head (`<svelte:head>`)
+Inserts elements into `document.head`. Top-level only. Useful for title, meta tags, and SEO.
 
 ```svelte
 <svelte:head>
-	<title>Hello world!</title>
-	<meta name="description" content="..." />
+  <title>Page Title</title>
+  <meta name="description" content="..." />
 </svelte:head>
 ```
 
-### `<svelte:element>`
-Renders a DOM element with runtime-determined tag name via the `this` prop. If `this` is nullish, nothing renders. Only `bind:this` binding is supported.
+### Dynamic Element (`<svelte:element>`)
+Renders DOM element with tag name from `this` prop. Only `bind:this` binding supported. Throws error if void element (br, hr) has children. Use `xmlns` for explicit namespace (e.g., SVG).
 
 ```svelte
-<svelte:element this={tag} xmlns="http://www.w3.org/2000/svg">
-	Content
-</svelte:element>
+<svelte:element this={tagName} xmlns="http://www.w3.org/2000/svg" />
 ```
 
-### `<svelte:options>`
-Configures per-component compiler options: `runes`, `namespace`, `customElement`, `css`.
+### Options (`<svelte:options>`)
+Per-component compiler options: `runes={true|false}`, `namespace="html|svg|mathml"`, `customElement="tag-name"`, `css="injected"`. Deprecated: `immutable`, `accessors`.
 
 ```svelte
 <svelte:options customElement="my-element" namespace="svg" />
 ```
-
-All special elements except `<svelte:options>` must appear only at the top level of a component.

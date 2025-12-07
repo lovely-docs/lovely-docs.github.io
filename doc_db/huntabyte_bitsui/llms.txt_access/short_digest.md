@@ -1,0 +1,1 @@
+Append `/llms.txt` to any documentation URL for LLM-optimized format. Root index at `bits-ui.com/llms.txt`, full docs at `bits-ui.com/docs/llms.txt`. Each page has a "Copy Markdown" button with the same content.

@@ -1,1 +1,0 @@
-Filters ModelMessage arrays to reduce token count by removing reasoning, tool calls, and empty messages with configurable strategies per category.

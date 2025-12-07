@@ -1,0 +1,1 @@
+Registry item structure with multiple file types; custom Tailwind colors and theme variable overrides via cssVars configuration.

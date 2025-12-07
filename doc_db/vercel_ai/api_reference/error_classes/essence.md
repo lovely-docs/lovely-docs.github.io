@@ -1,0 +1,1 @@
+Complete error class reference with type-safe detection and detailed properties for all SDK failure scenarios.

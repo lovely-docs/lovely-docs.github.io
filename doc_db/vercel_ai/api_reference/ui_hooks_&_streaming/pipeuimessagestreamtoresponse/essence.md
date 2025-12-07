@@ -1,0 +1,1 @@
+pipeUIMessageStreamToResponse pipes ReadableStream<UIMessageChunk> to ServerResponse with status/headers and optional consumeSseStream callback

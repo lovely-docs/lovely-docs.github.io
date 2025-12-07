@@ -1,0 +1,1 @@
+Install via npm; import utilities into Svelte components/modules; use with $state and $effect for reactivity (e.g., activeElement.current).

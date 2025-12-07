@@ -1,1 +1,0 @@
-Type-safe client-server communication via remote functions that always execute on the server, supporting queries, forms, commands, and prerendering with validation and progressive enhancement.

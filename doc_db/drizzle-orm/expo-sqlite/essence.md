@@ -1,0 +1,1 @@
+Native Expo SQLite driver with live queries, Drizzle Kit migrations, and Studio support; requires babel plugin for SQL bundling and useMigrations hook for app startup.

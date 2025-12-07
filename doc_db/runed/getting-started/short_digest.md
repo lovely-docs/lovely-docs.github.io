@@ -1,0 +1,1 @@
+Install with `npm install runed`. Import utilities into `.svelte` or `.svelte.ts` files. Example: `import { activeElement } from "runed"` and access via `activeElement.current`. Works with `$state` and `$effect` for reactivity.

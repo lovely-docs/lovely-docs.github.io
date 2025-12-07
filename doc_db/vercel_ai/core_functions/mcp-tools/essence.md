@@ -1,0 +1,1 @@
+Connect to Model Context Protocol servers to access tools, resources, and prompts; supports HTTP/SSE/stdio transports, schema discovery or explicit definitions, resource/prompt access, and elicitation request handling.

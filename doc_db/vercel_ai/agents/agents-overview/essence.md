@@ -1,0 +1,1 @@
+ToolLoopAgent class orchestrates LLMs with tools in a loop; define tools with description/inputSchema/execute, call generate() with prompt, agent handles context and stopping conditions automatically.

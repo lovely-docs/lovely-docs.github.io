@@ -26,26 +26,24 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 
 ### Accessibility
 
-- The component has `role="group"` set automatically
+- Component has `role="group"` attribute
 - Use `tabindex` to navigate between buttons
-- Label with `aria-label` or `aria-labelledby`:
-
-```svelte
-<ButtonGroup.Root aria-label="Button group">
-  <Button>Button 1</Button>
-  <Button>Button 2</Button>
-</ButtonGroup.Root>
-```
+- Use `aria-label` or `aria-labelledby` to label the group:
+  ```svelte
+  <ButtonGroup.Root aria-label="Button group">
+    <Button>Button 1</Button>
+    <Button>Button 2</Button>
+  </ButtonGroup.Root>
+  ```
 
 ### ButtonGroup vs ToggleGroup
 
-- **ButtonGroup**: Group buttons that perform actions
-- **ToggleGroup**: Group buttons that toggle state
+- **ButtonGroup**: Group buttons that perform an action
+- **ToggleGroup**: Group buttons that toggle a state
 
-### Orientation
+### Examples
 
-Set `orientation="vertical"` for vertical layout:
-
+**Orientation** - Set `orientation="vertical"` for vertical layout:
 ```svelte
 <ButtonGroup.Root orientation="vertical" aria-label="Media controls" class="h-fit">
   <Button variant="outline" size="icon"><Plus /></Button>
@@ -53,10 +51,7 @@ Set `orientation="vertical"` for vertical layout:
 </ButtonGroup.Root>
 ```
 
-### Size
-
-Control button sizes using the `size` prop on individual buttons (sm, default, lg, icon-sm, icon, icon-lg):
-
+**Size** - Control button sizes with `size` prop on individual buttons (sm, default, lg, icon-sm, icon, icon-lg):
 ```svelte
 <ButtonGroup.Root>
   <Button variant="outline" size="sm">Small</Button>
@@ -65,16 +60,12 @@ Control button sizes using the `size` prop on individual buttons (sm, default, l
 </ButtonGroup.Root>
 ```
 
-### Nested Groups
-
-Nest `ButtonGroup` components to create groups with spacing:
-
+**Nested** - Nest ButtonGroup components for spacing:
 ```svelte
 <ButtonGroup.Root>
   <ButtonGroup.Root>
     <Button variant="outline" size="sm">1</Button>
     <Button variant="outline" size="sm">2</Button>
-    <Button variant="outline" size="sm">3</Button>
   </ButtonGroup.Root>
   <ButtonGroup.Root>
     <Button variant="outline" size="icon-sm" aria-label="Previous"><ArrowLeft /></Button>
@@ -83,10 +74,7 @@ Nest `ButtonGroup` components to create groups with spacing:
 </ButtonGroup.Root>
 ```
 
-### Separator
-
-Use `ButtonGroup.Separator` to visually divide buttons. Recommended for non-outline variants:
-
+**Separator** - Use `ButtonGroup.Separator` to visually divide buttons. Recommended for non-outline variants:
 ```svelte
 <ButtonGroup.Root>
   <Button variant="secondary" size="sm">Copy</Button>
@@ -95,10 +83,7 @@ Use `ButtonGroup.Separator` to visually divide buttons. Recommended for non-outl
 </ButtonGroup.Root>
 ```
 
-### Split Button
-
-Create a split button with a separator and icon button:
-
+**Split Button** - Separator with two buttons:
 ```svelte
 <ButtonGroup.Root>
   <Button variant="secondary">Button</Button>
@@ -107,10 +92,7 @@ Create a split button with a separator and icon button:
 </ButtonGroup.Root>
 ```
 
-### With Input
-
-Wrap an `Input` component with buttons:
-
+**With Input**:
 ```svelte
 <ButtonGroup.Root>
   <Input placeholder="Search..." />
@@ -118,10 +100,7 @@ Wrap an `Input` component with buttons:
 </ButtonGroup.Root>
 ```
 
-### With InputGroup
-
-Create complex input layouts with `InputGroup`:
-
+**With InputGroup** - Complex input layouts with nested ButtonGroups and InputGroup components:
 ```svelte
 <ButtonGroup.Root class="[--radius:9999rem]">
   <ButtonGroup.Root>
@@ -140,19 +119,14 @@ Create complex input layouts with `InputGroup`:
 </ButtonGroup.Root>
 ```
 
-### With DropdownMenu
-
-Create a split button with dropdown menu:
-
+**With DropdownMenu** - Split button with dropdown:
 ```svelte
 <ButtonGroup.Root>
   <Button variant="outline">Follow</Button>
   <DropdownMenu.Root>
     <DropdownMenu.Trigger>
       {#snippet child({ props })}
-        <Button {...props} variant="outline" class="!pl-2">
-          <ChevronDown />
-        </Button>
+        <Button {...props} variant="outline" class="!pl-2"><ChevronDown /></Button>
       {/snippet}
     </DropdownMenu.Trigger>
     <DropdownMenu.Content align="end">
@@ -165,45 +139,43 @@ Create a split button with dropdown menu:
 </ButtonGroup.Root>
 ```
 
-### With Select
-
-Pair with a `Select` component:
-
+**With Select**:
 ```svelte
 <ButtonGroup.Root>
   <ButtonGroup.Root>
     <Select.Root type="single" bind:value={currency}>
       <Select.Trigger class="font-mono">{currency}</Select.Trigger>
-      <Select.Content>
-        <Select.Item value="$">$ US Dollar</Select.Item>
-        <Select.Item value="€">€ Euro</Select.Item>
+      <Select.Content class="min-w-24">
+        {#each CURRENCIES as currencyOption (currencyOption.value)}
+          <Select.Item value={currencyOption.value}>{currencyOption.value}</Select.Item>
+        {/each}
       </Select.Content>
     </Select.Root>
-    <Input placeholder="10.00" />
+    <Input placeholder="10.00" pattern="[0-9]*" />
   </ButtonGroup.Root>
   <ButtonGroup.Root>
-    <Button size="icon" variant="outline"><ArrowRight /></Button>
+    <Button aria-label="Send" size="icon" variant="outline"><ArrowRight /></Button>
   </ButtonGroup.Root>
 </ButtonGroup.Root>
 ```
 
-### With Popover
-
-Use with a `Popover` component:
-
+**With Popover**:
 ```svelte
 <ButtonGroup.Root>
   <Button variant="outline"><Bot />Copilot</Button>
   <Popover.Root>
     <Popover.Trigger>
       {#snippet child({ props })}
-        <Button {...props} variant="outline" size="icon"><ChevronDown /></Button>
+        <Button {...props} variant="outline" size="icon" aria-label="Open Popover"><ChevronDown /></Button>
       {/snippet}
     </Popover.Trigger>
-    <Popover.Content align="end" class="rounded-xl p-0">
-      <div class="px-4 py-3">Agent Tasks</div>
+    <Popover.Content align="end" class="rounded-xl p-0 text-sm">
+      <div class="px-4 py-3"><div class="text-sm font-medium">Agent Tasks</div></div>
       <Separator />
-      <div class="p-4"><Textarea placeholder="Describe your task..." /></div>
+      <div class="p-4 text-sm">
+        <Textarea placeholder="Describe your task..." class="mb-4 resize-none" />
+        <p class="font-medium">Start a new task with Copilot</p>
+      </div>
     </Popover.Content>
   </Popover.Root>
 </ButtonGroup.Root>

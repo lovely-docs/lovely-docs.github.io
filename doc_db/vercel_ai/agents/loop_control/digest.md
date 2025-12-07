@@ -1,22 +1,14 @@
 ## Stop Conditions
 
-Control agent loop execution with the `stopWhen` parameter. By default, agents stop after 20 steps using `stepCountIs(20)`.
+Control agent loop execution with `stopWhen` parameter. Default stops after 20 steps using `stepCountIs(20)`.
 
 Built-in conditions:
-- `stepCountIs(n)` - Stop after n steps
-- `hasToolCall('toolName')` - Stop after calling a specific tool
+- `stepCountIs(n)` - stop after n steps
+- `hasToolCall('toolName')` - stop after calling specific tool
 
-Combine multiple conditions in an array; execution stops when any condition is met:
+Combine multiple conditions in an array; loop stops when any condition is met.
 
-```ts
-stopWhen: [
-  stepCountIs(20),
-  hasToolCall('someTool'),
-]
-```
-
-Create custom conditions by implementing `StopCondition<typeof tools>` that receives `{ steps }` and returns a boolean:
-
+Custom conditions receive step information:
 ```ts
 const hasAnswer: StopCondition<typeof tools> = ({ steps }) => {
   return steps.some(step => step.text?.includes('ANSWER:')) ?? false;
@@ -37,10 +29,9 @@ const budgetExceeded: StopCondition<typeof tools> = ({ steps }) => {
 
 ## Prepare Step
 
-The `prepareStep` callback runs before each step and receives `{ model, stepNumber, steps, messages }`. Return an object with any settings to override (or empty object for no changes).
+The `prepareStep` callback runs before each step and can modify model, tools, messages, and other settings. Receives `{ model, stepNumber, steps, messages }`.
 
-Dynamic model selection based on step requirements:
-
+Dynamic model selection:
 ```ts
 prepareStep: async ({ stepNumber, messages }) => {
   if (stepNumber > 2 && messages.length > 10) {
@@ -51,7 +42,6 @@ prepareStep: async ({ stepNumber, messages }) => {
 ```
 
 Context management - keep only recent messages:
-
 ```ts
 prepareStep: async ({ messages }) => {
   if (messages.length > 20) {
@@ -63,10 +53,9 @@ prepareStep: async ({ messages }) => {
 }
 ```
 
-Tool selection - control available tools per phase:
-
+Tool selection by phase:
 ```ts
-prepareStep: async ({ stepNumber }) => {
+prepareStep: async ({ stepNumber, steps }) => {
   if (stepNumber <= 2) {
     return { activeTools: ['search'], toolChoice: 'required' };
   }
@@ -77,8 +66,7 @@ prepareStep: async ({ stepNumber }) => {
 }
 ```
 
-Force specific tool usage:
-
+Force specific tool:
 ```ts
 prepareStep: async ({ stepNumber }) => {
   if (stepNumber === 0) {
@@ -91,10 +79,9 @@ prepareStep: async ({ stepNumber }) => {
 }
 ```
 
-Message modification - transform messages before sending to model:
-
+Message transformation:
 ```ts
-prepareStep: async ({ messages }) => {
+prepareStep: async ({ messages, stepNumber }) => {
   const processedMessages = messages.map(msg => {
     if (msg.role === 'tool' && msg.content.length > 1000) {
       return { ...msg, content: summarizeToolResult(msg.content) };
@@ -107,8 +94,7 @@ prepareStep: async ({ messages }) => {
 
 ## Manual Loop Control
 
-For complete control, use `generateText` or `streamText` from AI SDK Core to implement custom loop management:
-
+For complete control, use `generateText` or `streamText` directly:
 ```ts
 import { generateText, ModelMessage } from 'ai';
 
@@ -120,7 +106,7 @@ while (step < maxSteps) {
   const result = await generateText({
     model: 'anthropic/claude-sonnet-4.5',
     messages,
-    tools: { /* your tools */ },
+    tools: { /* tools */ },
   });
 
   messages.push(...result.response.messages);
@@ -129,4 +115,4 @@ while (step < maxSteps) {
 }
 ```
 
-This provides complete control over message history, step-by-step decisions, stopping conditions, dynamic tool/model selection, and error handling.
+Provides control over message history, step-by-step decisions, custom stopping, dynamic tool/model selection, and error handling.

@@ -1,0 +1,1 @@
+NoSuchProviderError thrown when provider ID not found; detect with isInstance() method; includes providerId, availableProviders, modelId, modelType properties.

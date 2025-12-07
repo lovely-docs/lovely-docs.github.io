@@ -1,1 +1,0 @@
-Type-safe parameterized SQL template with automatic escaping, SQL injection prevention, runtime value mapping, and support for database-specific expressions in any query clause.

@@ -1,0 +1,1 @@
+Deprecated utility that transforms Google Generative AI SDK AsyncIterable responses into ReadableStream with optional lifecycle callbacks; removed in AI SDK 4.0.

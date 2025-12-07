@@ -1,0 +1,1 @@
+Each blocks iterate over arrays/iterables with optional index, keying, destructuring, and else clause for empty lists.

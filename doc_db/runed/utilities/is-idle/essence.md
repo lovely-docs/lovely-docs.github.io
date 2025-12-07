@@ -1,0 +1,1 @@
+User idle detection utility tracking activity via events (mousemove, keydown, touch, etc.) with configurable timeout; exposes current idle state and lastActive timestamp.

@@ -1,1 +1,0 @@
-Error thrown when retry operations fail. Check with `RetryError.isInstance(error)`. Properties: `reason`, `lastError`, `errors` array, `message`.

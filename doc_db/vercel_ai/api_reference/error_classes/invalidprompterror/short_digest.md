@@ -1,0 +1,1 @@
+Thrown when prompt is invalid. Most common cause: passing `UIMessage[]` instead of `ModelMessage[]`. Convert using `convertToModelMessages()`. Check with `InvalidPromptError.isInstance(error)`.

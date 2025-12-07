@@ -1,0 +1,1 @@
+validateUIMessages: async validator for UI message arrays with optional Zod schemas for metadata, data parts, and tools

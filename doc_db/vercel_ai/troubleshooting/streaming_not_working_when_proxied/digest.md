@@ -1,8 +1,11 @@
-When using the AI SDK in a proxied environment (local development or deployed behind a proxy), streaming responses may fail and return only the full response after a delay instead of streaming incrementally.
+## Problem
+Streaming doesn't work in local development or proxied deployments. Instead of streaming responses, the full response is returned after a delay.
 
-**Cause**: Proxy middleware configured to compress responses breaks streaming functionality.
+## Root Cause
+Proxy middleware configured to compress responses breaks streaming.
 
-**Solution**: Disable content encoding by adding the `'Content-Encoding': 'none'` header to the streaming response:
+## Solution
+Add `'Content-Encoding': 'none'` header to disable compression on streaming responses:
 
 ```tsx
 return result.toUIMessageStreamResponse({
@@ -11,5 +14,3 @@ return result.toUIMessageStreamResponse({
   },
 });
 ```
-
-This header configuration only affects the streaming API and prevents the proxy from compressing the response, allowing streaming to work correctly.

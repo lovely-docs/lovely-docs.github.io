@@ -1,9 +1,10 @@
 ## Setup
-```
+```bash
 pnpm create next-app@latest my-ai-app
+cd my-ai-app
 pnpm add ai@beta @ai-sdk/react@beta zod@beta
 ```
-Create `.env.local` with `AI_GATEWAY_API_KEY`.
+Add `AI_GATEWAY_API_KEY` to `.env.local`.
 
 ## Route Handler (`app/api/chat/route.ts`)
 ```tsx
@@ -19,7 +20,7 @@ export async function POST(req: Request) {
 }
 ```
 
-## UI (`pages/index.tsx`)
+## UI Component (`pages/index.tsx`)
 ```tsx
 import { useChat } from '@ai-sdk/react';
 import { useState } from 'react';
@@ -27,18 +28,23 @@ import { useState } from 'react';
 export default function Chat() {
   const [input, setInput] = useState('');
   const { messages, sendMessage } = useChat();
+  
   return (
     <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
       {messages.map(message => (
         <div key={message.id}>
           {message.role === 'user' ? 'User: ' : 'AI: '}
-          {message.parts.map((part, i) => {
-            if (part.type === 'text') return <div key={i}>{part.text}</div>;
-          })}
+          {message.parts.map((part, i) => 
+            part.type === 'text' ? <div key={i}>{part.text}</div> : null
+          )}
         </div>
       ))}
-      <form onSubmit={e => { e.preventDefault(); sendMessage({ text: input }); setInput(''); }}>
-        <input value={input} placeholder="Say something..." onChange={e => setInput(e.currentTarget.value)} />
+      <form onSubmit={e => {
+        e.preventDefault();
+        sendMessage({ text: input });
+        setInput('');
+      }}>
+        <input value={input} onChange={e => setInput(e.target.value)} />
       </form>
     </div>
   );
@@ -61,4 +67,4 @@ tools: {
 }
 ```
 
-Tool parts appear as `tool-{toolName}` in `message.parts`. Enable multi-step tool use with `stopWhen: stepCountIs(5)` to allow model to use tool results for follow-up responses.
+Tool results appear as `tool-{toolName}` parts in messages. Enable multi-step tool calls with `stopWhen: stepCountIs(5)` to allow the model to use tool results in subsequent generations.

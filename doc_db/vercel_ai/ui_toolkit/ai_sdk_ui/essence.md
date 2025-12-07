@@ -1,1 +1,0 @@
-UI module providing chatbot, completion, object generation, streaming, and message persistence patterns with stream protocol and error handling.

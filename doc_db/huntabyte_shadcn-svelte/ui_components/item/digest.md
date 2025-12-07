@@ -1,6 +1,6 @@
 ## Item Component
 
-A flex container component for displaying content with optional title, description, media, and actions. Use when displaying content-only layouts; use Field component instead for form inputs.
+A flex container for displaying content with title, description, and actions. Can be grouped with `ItemGroup` to create lists.
 
 ### Installation
 
@@ -8,13 +8,14 @@ A flex container component for displaying content with optional title, descripti
 npx shadcn-svelte@latest add item -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+(-y: skip confirmation, -o: overwrite existing files)
 
 ### Basic Usage
 
 ```svelte
 <script lang="ts">
   import * as Item from "$lib/components/ui/item/index.js";
+  import { Button } from "$lib/components/ui/button/index.js";
 </script>
 
 <Item.Root>
@@ -31,7 +32,7 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 
 ### Variants
 
-Three variants available: default (subtle background and borders), `outline` (clear borders, transparent background), and `muted` (subdued appearance for secondary content).
+Three variants available: default (subtle background/borders), `outline` (clear borders, transparent background), `muted` (subdued appearance).
 
 ```svelte
 <Item.Root variant="outline">
@@ -42,6 +43,13 @@ Three variants available: default (subtle background and borders), `outline` (cl
   <Item.Actions>
     <Button variant="outline" size="sm">Open</Button>
   </Item.Actions>
+</Item.Root>
+
+<Item.Root variant="muted">
+  <Item.Content>
+    <Item.Title>Muted Variant</Item.Title>
+    <Item.Description>Subdued appearance for secondary content.</Item.Description>
+  </Item.Content>
 </Item.Root>
 ```
 
@@ -69,7 +77,7 @@ Default and `sm` (compact) sizes available.
 
 ### Media Variants
 
-**Icon**: Display icons in media slot with `variant="icon"`.
+**Icon**: Display icons in media slot.
 
 ```svelte
 <Item.Root variant="outline">
@@ -86,7 +94,7 @@ Default and `sm` (compact) sizes available.
 </Item.Root>
 ```
 
-**Avatar**: Use Avatar component in media slot.
+**Avatar**: Display single or multiple avatars.
 
 ```svelte
 <Item.Root variant="outline">
@@ -108,7 +116,7 @@ Default and `sm` (compact) sizes available.
 </Item.Root>
 ```
 
-**Image**: Use `variant="image"` for image media.
+**Image**: Display images in media slot.
 
 ```svelte
 <Item.Root variant="outline">
@@ -121,14 +129,17 @@ Default and `sm` (compact) sizes available.
         <Item.Title>Song Title</Item.Title>
         <Item.Description>Artist Name</Item.Description>
       </Item.Content>
+      <Item.Content class="flex-none text-center">
+        <Item.Description>3:45</Item.Description>
+      </Item.Content>
     </a>
   {/snippet}
 </Item.Root>
 ```
 
-### Grouping Items
+### Grouping
 
-Use `Item.Group` to create a list of items. Add `Item.Separator` between items.
+Use `Item.Group` to create lists of items with separators.
 
 ```svelte
 <Item.Group>
@@ -136,7 +147,7 @@ Use `Item.Group` to create a list of items. Add `Item.Separator` between items.
     <Item.Root>
       <Item.Media>
         <Avatar.Root>
-          <Avatar.Image src={person.avatar} />
+          <Avatar.Image src={person.avatar} class="grayscale" />
           <Avatar.Fallback>{person.username.charAt(0)}</Avatar.Fallback>
         </Avatar.Root>
       </Item.Media>
@@ -157,25 +168,29 @@ Use `Item.Group` to create a list of items. Add `Item.Separator` between items.
 </Item.Group>
 ```
 
-### Header Section
+### Header
 
-Use `Item.Header` for full-width content like images at the top.
+Use `Item.Header` for full-width content like images.
 
 ```svelte
-<Item.Root variant="outline">
-  <Item.Header>
-    <img src="..." alt="..." class="aspect-square w-full rounded-sm object-cover" />
-  </Item.Header>
-  <Item.Content>
-    <Item.Title>Model Name</Item.Title>
-    <Item.Description>Model description</Item.Description>
-  </Item.Content>
-</Item.Root>
+<Item.Group class="grid grid-cols-3 gap-4">
+  {#each models as model (model.name)}
+    <Item.Root variant="outline">
+      <Item.Header>
+        <img src={model.image} alt={model.name} class="aspect-square w-full rounded-sm object-cover" />
+      </Item.Header>
+      <Item.Content>
+        <Item.Title>{model.name}</Item.Title>
+        <Item.Description>{model.description}</Item.Description>
+      </Item.Content>
+    </Item.Root>
+  {/each}
+</Item.Group>
 ```
 
-### Link Items
+### Links
 
-Use the `child` snippet to render items as links. Hover and focus states apply to the anchor element.
+Use the `child` snippet to render as a link. Hover and focus states apply to the anchor element.
 
 ```svelte
 <Item.Root>
@@ -183,10 +198,24 @@ Use the `child` snippet to render items as links. Hover and focus states apply t
     <a href="#/" {...props}>
       <Item.Content>
         <Item.Title>Visit our documentation</Item.Title>
-        <Item.Description>Learn how to get started.</Item.Description>
+        <Item.Description>Learn how to get started with our components.</Item.Description>
       </Item.Content>
       <Item.Actions>
         <ChevronRightIcon class="size-4" />
+      </Item.Actions>
+    </a>
+  {/snippet}
+</Item.Root>
+
+<Item.Root variant="outline">
+  {#snippet child({ props })}
+    <a href="#/" target="_blank" rel="noopener noreferrer" {...props}>
+      <Item.Content>
+        <Item.Title>External resource</Item.Title>
+        <Item.Description>Opens in a new tab with security attributes.</Item.Description>
+      </Item.Content>
+      <Item.Actions>
+        <ExternalLinkIcon class="size-4" />
       </Item.Actions>
     </a>
   {/snippet}
@@ -195,24 +224,24 @@ Use the `child` snippet to render items as links. Hover and focus states apply t
 
 ### Dropdown Integration
 
-Items work well inside dropdown menus.
+Use Item within dropdown menus for styled list items.
 
 ```svelte
 <DropdownMenu.Root>
   <DropdownMenu.Trigger>
     {#snippet child({ props })}
-      <Button {...props} variant="outline" size="sm">
+      <Button {...props} variant="outline" size="sm" class="w-fit">
         Select <ChevronDown />
       </Button>
     {/snippet}
   </DropdownMenu.Trigger>
-  <DropdownMenu.Content class="w-72">
+  <DropdownMenu.Content class="w-72 [--radius:0.65rem]" align="end">
     {#each people as person (person.username)}
       <DropdownMenu.Item class="p-0">
         <Item.Root size="sm" class="w-full p-2">
           <Item.Media>
             <Avatar.Root class="size-8">
-              <Avatar.Image src={person.avatar} />
+              <Avatar.Image src={person.avatar} class="grayscale" />
               <Avatar.Fallback>{person.username.charAt(0)}</Avatar.Fallback>
             </Avatar.Root>
           </Item.Media>
@@ -227,15 +256,6 @@ Items work well inside dropdown menus.
 </DropdownMenu.Root>
 ```
 
-### Component Structure
+### Item vs Field
 
-- `Item.Root`: Main container with `variant` and `size` props
-- `Item.Header`: Full-width top section
-- `Item.Media`: Left-side media container (icon, avatar, or image)
-- `Item.Content`: Main content area with title and description
-- `Item.Title`: Item title text
-- `Item.Description`: Item description text
-- `Item.Actions`: Right-side action buttons/icons
-- `Item.Footer`: Full-width bottom section
-- `Item.Group`: Container for multiple items
-- `Item.Separator`: Visual divider between grouped items
+Use Field for form inputs (checkbox, input, radio, select). Use Item for displaying content (title, description, actions).

@@ -1,24 +1,22 @@
-## Overview
-`createStreamableUI` creates a stream that sends UI from the server to the client. The returned value can be rendered as a normal React node on the client side.
+## createStreamableUI
 
-## Import
+Server-side function that creates a stream for sending React UI components from server to client. The client receives and renders the streamed UI as normal React nodes.
+
+**Import:**
 ```
 import { createStreamableUI } from "@ai-sdk/rsc"
 ```
 
-## API
-
 **Parameters:**
-- `initialValue` (ReactNode, optional): The initial value of the streamable UI.
+- `initialValue` (ReactNode, optional): Initial UI value
 
 **Returns:**
-- `value` (ReactNode): The streamable UI value that can be returned from a Server Action and received by the client.
+- `value` (ReactNode): The streamable UI that can be returned from a Server Action and received by the client
 
 **Methods:**
-- `update(ReactNode)`: Replaces the current UI node with a new one. Previous node cannot be updated after appending.
-- `append(ReactNode)`: Appends a new UI node to the end. Once appended, the previous UI node cannot be updated anymore.
-- `done(ReactNode | null)`: Marks the UI as finalized and closes the stream. Required to be called, otherwise the response stays in loading state. After calling, UI cannot be updated or appended.
-- `error(Error)`: Signals an error in the UI stream. Thrown on client side and caught by nearest error boundary.
+- `update(ReactNode)`: Replace current UI node with a new one
+- `append(ReactNode)`: Append a new UI node; previous node becomes immutable after append
+- `done(ReactNode | null)`: Finalize and close the stream; required to call, otherwise response stays in loading state
+- `error(Error)`: Signal an error in the stream; thrown on client and caught by nearest error boundary
 
-## Note
-AI SDK RSC is experimental. Use AI SDK UI for production instead.
+**Example:** Render a React component during a tool call (see examples/next-app/tools/render-interface-during-tool-call)

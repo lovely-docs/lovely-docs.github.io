@@ -1,0 +1,1 @@
+requestAnimationFrame wrapper with FPS limiting, frame metrics (fps, delta), and automatic cleanup

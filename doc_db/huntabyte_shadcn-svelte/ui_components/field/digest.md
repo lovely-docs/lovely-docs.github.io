@@ -1,56 +1,35 @@
-## Field Component
+# Field Component
 
 Composable form field components for building accessible forms with labels, controls, help text, and validation states.
 
-### Core Components
-
-- `Field.Set`: Wrapper for a group of related fields with optional legend and description
-- `Field.Group`: Container to stack multiple fields vertically
-- `Field.Field`: Individual field wrapper with `orientation` prop ("vertical" default, "horizontal", or "responsive")
-- `Field.Label`: Label element with `for` attribute linking to input
-- `Field.Description`: Helper text displayed below the control
-- `Field.Error`: Validation error message
-- `Field.Legend`: Semantic heading for fieldsets
-- `Field.Content`: Flex column grouping label and description
-- `Field.Separator`: Visual divider between field groups
-- `Field.Title`: Title within choice cards
-
-### Installation
+## Installation
 
 ```bash
 npx shadcn-svelte@latest add field -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+## Core Components
 
-### Basic Usage
+- `Field` - wrapper for a single field with `role="group"`
+- `FieldSet` - semantic grouping with `<fieldset>`
+- `FieldLegend` - legend for fieldsets
+- `FieldGroup` - flex column container for related fields
+- `FieldLabel` - label element, can wrap fields for choice cards
+- `FieldDescription` - helper text
+- `FieldError` - validation error message
+- `FieldContent` - flex column grouping label and description
+- `FieldSeparator` - divider between field groups
+- `FieldTitle` - title for choice cards
 
-```svelte
-<script lang="ts">
-  import * as Field from "$lib/components/ui/field/index.js";
-  import { Input } from "$lib/components/ui/input/index.js";
-</script>
+## Orientation
 
-<Field.Set>
-  <Field.Legend>Profile</Field.Legend>
-  <Field.Description>This appears on invoices and emails.</Field.Description>
-  <Field.Group>
-    <Field.Field>
-      <Field.Label for="name">Full name</Field.Label>
-      <Input id="name" placeholder="Evil Rabbit" />
-      <Field.Description>This appears on invoices and emails.</Field.Description>
-    </Field.Field>
-    <Field.Field>
-      <Field.Label for="username">Username</Field.Label>
-      <Input id="username" aria-invalid />
-      <Field.Error>Choose another username.</Field.Error>
-    </Field.Field>
-  </Field.Group>
-</Field.Set>
-```
+- Default (vertical): stacks label, control, helper text
+- `orientation="horizontal"`: aligns label and control side-by-side with `FieldContent` for aligned descriptions
+- `orientation="responsive"`: automatic column layouts with container queries using `@container/field-group`
 
-### Input Fields
+## Examples
 
+**Input fields:**
 ```svelte
 <Field.Set>
   <Field.Group>
@@ -68,35 +47,17 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </Field.Set>
 ```
 
-### Textarea
-
+**Textarea:**
 ```svelte
-<Field.Set>
-  <Field.Group>
-    <Field.Field>
-      <Field.Label for="feedback">Feedback</Field.Label>
-      <Textarea id="feedback" placeholder="Your feedback helps us improve..." rows={4} />
-      <Field.Description>Share your thoughts about our service.</Field.Description>
-    </Field.Field>
-  </Field.Group>
-</Field.Set>
+<Field.Field>
+  <Field.Label for="feedback">Feedback</Field.Label>
+  <Textarea id="feedback" placeholder="Your feedback helps us improve..." rows={4} />
+  <Field.Description>Share your thoughts about our service.</Field.Description>
+</Field.Field>
 ```
 
-### Select
-
+**Select:**
 ```svelte
-<script lang="ts">
-  let department = $state<string>();
-  const departments = [
-    { value: "engineering", label: "Engineering" },
-    { value: "design", label: "Design" },
-    { value: "marketing", label: "Marketing" }
-  ];
-  const departmentLabel = $derived(
-    departments.find((d) => d.value === department)?.label ?? "Choose department"
-  );
-</script>
-
 <Field.Field>
   <Field.Label for="department">Department</Field.Label>
   <Select.Root type="single" bind:value={department}>
@@ -111,24 +72,40 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </Field.Field>
 ```
 
-### Slider
-
+**Slider:**
 ```svelte
-<script lang="ts">
-  let value = $state([200, 800]);
-</script>
-
 <Field.Field>
   <Field.Label>Price Range</Field.Label>
-  <Field.Description>
-    Set your budget range ($<span class="font-medium">{value[0]}</span> - <span class="font-medium">{value[1]}</span>).
-  </Field.Description>
-  <Slider type="multiple" bind:value max={1000} min={0} step={10} class="mt-2 w-full" aria-label="Price Range" />
+  <Field.Description>Set your budget range (${value[0]} - ${value[1]}).</Field.Description>
+  <Slider type="multiple" bind:value max={1000} min={0} step={10} class="mt-2 w-full" />
 </Field.Field>
 ```
 
-### Checkbox
+**Fieldset with legend:**
+```svelte
+<Field.Set>
+  <Field.Legend>Address Information</Field.Legend>
+  <Field.Description>We need your address to deliver your order.</Field.Description>
+  <Field.Group>
+    <Field.Field>
+      <Field.Label for="street">Street Address</Field.Label>
+      <Input id="street" type="text" placeholder="123 Main St" />
+    </Field.Field>
+    <div class="grid grid-cols-2 gap-4">
+      <Field.Field>
+        <Field.Label for="city">City</Field.Label>
+        <Input id="city" type="text" placeholder="New York" />
+      </Field.Field>
+      <Field.Field>
+        <Field.Label for="zip">Postal Code</Field.Label>
+        <Input id="zip" type="text" placeholder="90502" />
+      </Field.Field>
+    </div>
+  </Field.Group>
+</Field.Set>
+```
 
+**Checkbox group:**
 ```svelte
 <Field.Group>
   <Field.Set>
@@ -156,13 +133,8 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </Field.Group>
 ```
 
-### Radio
-
+**Radio group:**
 ```svelte
-<script lang="ts">
-  let plan = $state("monthly");
-</script>
-
 <Field.Set>
   <Field.Label>Subscription Plan</Field.Label>
   <Field.Description>Yearly and lifetime plans offer significant savings.</Field.Description>
@@ -179,27 +151,19 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 </Field.Set>
 ```
 
-### Switch
-
+**Switch:**
 ```svelte
 <Field.Field orientation="horizontal">
   <Field.Content>
     <Field.Label for="2fa">Multi-factor authentication</Field.Label>
-    <Field.Description>Enable multi-factor authentication. If you do not have a two-factor device, you can use a one-time code sent to your email.</Field.Description>
+    <Field.Description>Enable multi-factor authentication for added security.</Field.Description>
   </Field.Content>
   <Switch id="2fa" />
 </Field.Field>
 ```
 
-### Choice Card (Selectable Field Groups)
-
-Wrap Field components inside FieldLabel to create selectable field groups. Works with RadioItem, Checkbox, and Switch components.
-
+**Choice card (selectable field groups):**
 ```svelte
-<script lang="ts">
-  let computeEnvironment = $state("kubernetes");
-</script>
-
 <Field.Group>
   <Field.Set>
     <Field.Label for="compute-environment">Compute Environment</Field.Label>
@@ -228,44 +192,7 @@ Wrap Field components inside FieldLabel to create selectable field groups. Works
 </Field.Group>
 ```
 
-### Field Groups with Separators
-
-```svelte
-<Field.Group>
-  <Field.Set>
-    <Field.Label>Responses</Field.Label>
-    <Field.Description>Get notified when ChatGPT responds to requests that take time.</Field.Description>
-    <Field.Group data-slot="checkbox-group">
-      <Field.Field orientation="horizontal">
-        <Checkbox id="push" checked disabled />
-        <Field.Label for="push" class="font-normal">Push notifications</Field.Label>
-      </Field.Field>
-    </Field.Group>
-  </Field.Set>
-  <Field.Separator />
-  <Field.Set>
-    <Field.Label>Tasks</Field.Label>
-    <Field.Description>Get notified when tasks you've created have updates.</Field.Description>
-    <Field.Group data-slot="checkbox-group">
-      <Field.Field orientation="horizontal">
-        <Checkbox id="push-tasks" />
-        <Field.Label for="push-tasks" class="font-normal">Push notifications</Field.Label>
-      </Field.Field>
-      <Field.Field orientation="horizontal">
-        <Checkbox id="email-tasks" />
-        <Field.Label for="email-tasks" class="font-normal">Email notifications</Field.Label>
-      </Field.Field>
-    </Field.Group>
-  </Field.Set>
-</Field.Group>
-```
-
-### Responsive Layout
-
-- **Vertical fields** (default): Stacks label, control, and helper text vertically—ideal for mobile-first layouts
-- **Horizontal fields**: Set `orientation="horizontal"` on Field to align label and control side-by-side. Pair with FieldContent to keep descriptions aligned
-- **Responsive fields**: Set `orientation="responsive"` for automatic column layouts inside container-aware parents. Apply `@container/field-group` classes on FieldGroup to switch orientations at specific breakpoints
-
+**Responsive layout:**
 ```svelte
 <Field.Set>
   <Field.Legend>Profile</Field.Legend>
@@ -287,18 +214,13 @@ Wrap Field components inside FieldLabel to create selectable field groups. Works
       </Field.Content>
       <Textarea id="message" placeholder="Hello, world!" required class="min-h-[100px] resize-none sm:min-w-[300px]" />
     </Field.Field>
-    <Field.Separator />
-    <Field.Field orientation="responsive">
-      <Button type="submit">Submit</Button>
-      <Button type="button" variant="outline">Cancel</Button>
-    </Field.Field>
   </Field.Group>
 </Field.Set>
 ```
 
-### Validation and Errors
+## Validation
 
-Add `data-invalid` to Field to switch the entire block into an error state. Add `aria-invalid` on the input itself for assistive technologies. Render FieldError immediately after the control or inside FieldContent to keep error messages aligned with the field.
+Add `data-invalid` to `Field` to switch into error state. Add `aria-invalid` on the input for assistive technologies. Render `FieldError` after the control or inside `FieldContent`:
 
 ```svelte
 <Field.Field data-invalid>
@@ -308,8 +230,8 @@ Add `data-invalid` to Field to switch the entire block into an error state. Add 
 </Field.Field>
 ```
 
-### Accessibility
+## Accessibility
 
-- FieldSet and FieldLegend keep related controls grouped for keyboard and assistive tech users
-- Field outputs `role="group"` so nested controls inherit labeling from FieldLabel and FieldLegend when combined
-- Apply FieldSeparator sparingly to ensure screen readers encounter clear section boundaries
+- `FieldSet` and `FieldLegend` group related controls for keyboard and assistive tech users
+- `Field` outputs `role="group"` so nested controls inherit labeling from `FieldLabel` and `FieldLegend`
+- Use `FieldSeparator` sparingly to ensure screen readers encounter clear section boundaries

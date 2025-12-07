@@ -1,41 +1,21 @@
 ## Set Operations
 
-Combine results from multiple queries using UNION, INTERSECT, EXCEPT and their ALL variants.
+Six SQL set operations for combining query results:
 
-**UNION** - combines results, removes duplicates:
+- **UNION**: Combines results, removes duplicates
+- **UNION ALL**: Combines results, keeps duplicates
+- **INTERSECT**: Returns common rows, removes duplicates
+- **INTERSECT ALL**: Returns common rows, keeps duplicates
+- **EXCEPT**: Returns rows in first query but not second, removes duplicates
+- **EXCEPT ALL**: Returns rows in first query but not second, keeps duplicates
+
+Both function-based and method-based syntax:
 ```typescript
-const result = await db.select({ name: users.name }).from(users)
-  .union(db.select({ name: customers.name }).from(customers)).limit(10);
+// Function-based
+const result = await union(query1, query2);
+
+// Method-based
+const result = await query1.union(query2);
 ```
 
-**UNION ALL** - combines results, keeps duplicates:
-```typescript
-const result = await db.select({ transaction: onlineSales.transactionId }).from(onlineSales)
-  .unionAll(db.select({ transaction: inStoreSales.transactionId }).from(inStoreSales));
-```
-
-**INTERSECT** - returns common rows, removes duplicates:
-```typescript
-const result = await db.select({ courseName: depA.courseName }).from(depA)
-  .intersect(db.select({ courseName: depB.courseName }).from(depB));
-```
-
-**INTERSECT ALL** - returns common rows, keeps duplicates (PostgreSQL, MySQL only):
-```typescript
-const result = await db.select({ productId: regularOrders.productId, quantityOrdered: regularOrders.quantityOrdered }).from(regularOrders)
-  .intersectAll(db.select({ productId: vipOrders.productId, quantityOrdered: vipOrders.quantityOrdered }).from(vipOrders));
-```
-
-**EXCEPT** - returns rows from first query not in second, removes duplicates:
-```typescript
-const result = await db.select({ courseName: depA.projectsName }).from(depA)
-  .except(db.select({ courseName: depB.projectsName }).from(depB));
-```
-
-**EXCEPT ALL** - returns rows from first query not in second, keeps duplicates (PostgreSQL, MySQL only):
-```typescript
-const result = await db.select({ productId: regularOrders.productId, quantityOrdered: regularOrders.quantityOrdered }).from(regularOrders)
-  .exceptAll(db.select({ productId: vipOrders.productId, quantityOrdered: vipOrders.quantityOrdered }).from(vipOrders));
-```
-
-Both function-based and method-based (builder) syntax supported. Import from database-specific core modules (pg-core, mysql-core, sqlite-core, singlestore-core).
+Support varies by database: PostgreSQL/MySQL/SQLite support all; SingleStore supports UNION/UNION ALL/INTERSECT/EXCEPT only (not *ALL variants for INTERSECT/EXCEPT).

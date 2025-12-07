@@ -1,0 +1,1 @@
+Helper function enabling TypeScript type inference for tool definitions by connecting inputSchema to execute method parameters.

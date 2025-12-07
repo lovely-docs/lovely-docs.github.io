@@ -1,30 +1,19 @@
-## Prompt Engineering
-Temperature (0-1) controls prediction confidence. Add descriptive terms and examples to shape responses.
+**Prompt Engineering**: Use specific instructions, examples, and temperature (0=deterministic, 1=creative) to shape LLM responses.
 
-## Stream Management
-- **Cancellation**: `abortSignal` + `onAbort` (server), `stop()` hook (client)
-- **Back-pressure**: Use `ReadableStream.pull()` instead of eager `for await (...)` to prevent unbounded buffer growth
+**Stream Control**: Cancel with `abortSignal` (server) or `stop()` (client); use `pull()` handler for back-pressure to prevent memory leaks on client disconnect.
 
-## Caching
-Use `LanguageModelV3Middleware` with `wrapGenerate`/`wrapStream` or `onFinish` callbacks with KV storage.
+**Caching**: Middleware with `wrapGenerate`/`wrapStream` or `onFinish` callbacks; replay with `simulateReadableStream()`.
 
-## UI Rendering
-- **Multiple Streamables**: Return independent streamable UIs from single server action
-- **Server-Side Rendering**: `createStreamableUI()` renders React components server-side
-- **Language Models as Routers**: Function calling determines UIs and multi-step sequences
+**Multiple Streamables**: Return multiple independent UI components that update as async data resolves; nest streamables as props for sequential updates.
 
-## Multistep Interfaces
-Compose tools and maintain application context so user input in one step affects model output in subsequent steps.
+**Rate Limiting**: Use Vercel KV + Upstash Ratelimit with fixed window limiter, check IP-based limits, return 429 on exceeded threshold.
 
-## Sequential Generations
-Chain `generateText()` calls where outputs feed into subsequent prompts.
+**UI Rendering**: Tools return JSON instead of text; use `createStreamableUI()` server-side to render React components and stream to client, eliminating client-side conditional logic.
 
-## Rate Limiting
-```ts
-const ratelimit = new Ratelimit({ redis: kv, limiter: Ratelimit.fixedWindow(5, '30s') });
-const { success } = await ratelimit.limit(ip);
-if (!success) return new Response('Ratelimited!', { status: 429 });
-```
+**Models as Routers**: Function calling enables models to decide which operations/UIs to render based on user intent (parameter-based or sequential multi-step routing).
 
-## Deployment
-Set `maxDuration` for LLM timeouts (default 10s, max 60s on Hobby Tier).
+**Multistep Interfaces**: Compose tools and manage application context so model output in one step uses information from previous steps.
+
+**Sequential Generations**: Chain multiple AI calls where each output becomes next prompt input for dependent workflows.
+
+**Deployment**: Commit to GitHub, import to Vercel, add env vars, set `maxDuration` for LLM timeouts, implement rate limiting and firewall.

@@ -1,1 +1,0 @@
-Adapters are plugins that prepare SvelteKit apps for deployment to specific platforms.

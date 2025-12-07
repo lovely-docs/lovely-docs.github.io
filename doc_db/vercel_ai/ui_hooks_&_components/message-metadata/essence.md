@@ -1,0 +1,1 @@
+Attach typed metadata to messages at message level via server-side `messageMetadata` callback, access on client via `message.metadata` property; supports timestamps, model info, token usage, user context, performance metrics.

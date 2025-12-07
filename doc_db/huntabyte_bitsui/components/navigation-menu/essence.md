@@ -1,0 +1,1 @@
+Accessible navigation menu with dropdowns, submenus, Viewport for smooth transitions, Indicator for active state, force mounting, and configurable hover/click behavior.

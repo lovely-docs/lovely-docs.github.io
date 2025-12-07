@@ -1,1 +1,1 @@
-Component for rendering DOM elements with tag names determined at runtime.
+Dynamic element renderer that takes tag name from `this` prop; supports properties/listeners but only `bind:this` binding; errors on void elements with children; use `xmlns` for explicit namespace.

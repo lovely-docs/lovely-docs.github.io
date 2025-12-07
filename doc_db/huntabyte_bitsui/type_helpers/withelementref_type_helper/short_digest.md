@@ -1,1 +1,0 @@
-Type helper that adds a `ref` prop to custom components. Intersect your props type with `WithElementRef<YourProps, HTMLElementType>` and bind the ref to your element with `bind:this={ref}`.

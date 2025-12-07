@@ -1,0 +1,1 @@
+Scroll area component with four visibility types (hover/scroll/auto/always), customizable hide delay, and orientation control; compose from Root, Viewport, Scrollbar, Thumb, Corner subcomponents.

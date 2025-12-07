@@ -1,0 +1,1 @@
+Chain multiple `generateText()` calls where each step's output is embedded in the next step's prompt. Example: generate blog ideas → pick best → create outline.

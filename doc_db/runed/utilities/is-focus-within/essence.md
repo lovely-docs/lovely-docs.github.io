@@ -1,0 +1,1 @@
+IsFocusWithin utility class reactively tracks whether any descendant has focus in a container element; constructor takes getter returning HTMLElement, exposes readonly boolean current property.

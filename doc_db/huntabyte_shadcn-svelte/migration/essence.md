@@ -1,1 +1,1 @@
-Latest shadcn-svelte requires Svelte v5 and Tailwind v4; migration guides provided for each.
+Latest shadcn-svelte requires Svelte v5 and Tailwind v4; migration guides available for each.

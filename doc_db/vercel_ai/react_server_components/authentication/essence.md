@@ -1,0 +1,1 @@
+Protect Server Actions by validating authentication tokens from cookies before executing protected logic.

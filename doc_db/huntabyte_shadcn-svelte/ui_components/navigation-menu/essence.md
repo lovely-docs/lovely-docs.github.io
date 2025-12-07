@@ -1,1 +1,1 @@
-Navigation menu component with Root/List/Item/Trigger/Content/Link subcomponents; supports grid layouts, descriptions, icons, and snippet-based children; install with `npx shadcn-svelte@latest add navigation-menu -y -o`.
+Navigation menu component with triggers, dropdowns, and links; supports grid layouts, icons, and Tailwind styling.

@@ -1,0 +1,1 @@
+Component styles are automatically scoped via hash-based classes with +0-1-0 specificity; @keyframes are scoped and animation rules auto-adjusted.

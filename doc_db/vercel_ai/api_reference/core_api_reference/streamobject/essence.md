@@ -1,1 +1,0 @@
-Stream typed structured objects from LLMs with schema validation; supports object/array/enum/no-schema modes; returns partial streams, full event stream, and final typed object.

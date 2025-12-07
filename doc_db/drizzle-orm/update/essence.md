@@ -1,1 +1,1 @@
-UPDATE queries with .set(), .where(), optional .limit()/.orderBy()/.returning()/.with()/.from() clauses; database-specific feature support varies.
+UPDATE statements with .set(), .where(), optional .limit()/.orderBy()/.returning(), WITH clauses for CTEs, and FROM joins (PostgreSQL/SQLite)

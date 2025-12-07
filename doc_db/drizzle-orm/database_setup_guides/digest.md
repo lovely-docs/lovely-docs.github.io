@@ -1,74 +1,54 @@
 ## Database Setup Guides
 
-Comprehensive setup instructions for integrating Drizzle ORM with 25+ database platforms and drivers.
+Comprehensive setup instructions for integrating Drizzle ORM with 30+ databases and platforms.
 
 ### Supported Databases
 
-**PostgreSQL Variants:**
+**SQL Databases:**
 - PostgreSQL (node-postgres, postgres.js)
-- Supabase (PostgreSQL)
-- Neon (serverless PostgreSQL)
-- Vercel Postgres
+- MySQL (mysql2)
+- SQLite (libsql, better-sqlite3, bun:sqlite, expo-sqlite, op-sqlite)
+- SingleStore (mysql2)
+
+**Serverless/Cloud Platforms:**
+- Neon (serverless Postgres via HTTP/WebSocket)
+- Supabase (managed PostgreSQL)
+- Vercel Postgres (serverless Postgres)
+- PlanetScale (serverless MySQL via HTTP)
+- TiDB Serverless (distributed SQL via HTTP)
+- Turso (SQLite for production via libsql)
+- SQLite Cloud (cloud SQLite)
 - Xata (PostgreSQL)
 - Nile (multi-tenant PostgreSQL)
-- PGLite (in-process PostgreSQL)
 
-**MySQL Variants:**
-- MySQL (mysql2)
-- PlanetScale (MySQL via database-js HTTP driver)
-- SingleStore (mysql2)
-- TiDB (serverless via @tidbcloud/serverless HTTP driver)
-
-**SQLite Variants:**
-- SQLite (libsql, better-sqlite3)
-- Turso (LibSQL cloud)
-- SQLite Cloud (@sqlitecloud/drivers)
-- Bun:SQLite (native Bun driver)
+**Edge/Specialized:**
+- Cloudflare D1 (serverless SQLite)
+- Cloudflare Workers with SQLite Durable Objects
+- Bun SQL (native PostgreSQL bindings)
+- Bun SQLite (native SQLite bindings)
 - Expo SQLite (React Native)
 - OP-SQLite (React Native)
-
-**Specialized:**
-- Cloudflare D1 (serverless SQLite)
-- Cloudflare Durable Objects (SQLite)
-- Gel (PostgreSQL-compatible)
+- PGLite (in-process PostgreSQL)
+- Gel (database)
 
 ### Common Setup Pattern
 
-1. Install driver package and Drizzle ORM
-2. Configure `DATABASE_URL` or equivalent environment variable
-3. Create `drizzle.config.ts` with appropriate dialect
-4. For existing databases: run introspection (`drizzle-kit pull` or `drizzle-kit introspect:pg`)
-5. Define or transfer schema to `src/db/schema.ts`
-6. Connect Drizzle: `const db = drizzle({ connection: ... })`
-7. Apply migrations: `drizzle-kit push` or `drizzle-kit migrate`
-8. Execute queries: `db.select().from(table)`, `db.insert()`, `db.update()`, `db.delete()`
+Each guide follows this workflow:
 
-### Key Variations by Database Type
-
-**HTTP-based drivers** (PlanetScale, TiDB, Neon HTTP, Vercel Postgres):
-- Use HTTP connections for serverless environments
-- Typically faster for single transactions
-- Connection: `drizzle({ connection: { url, authToken } })`
-
-**WebSocket drivers** (Neon WebSocket):
-- Support interactive transactions and sessions
-- Better for persistent connections
-
-**Durable Objects** (Cloudflare):
-- Use `ctx.blockConcurrencyWhile()` to ensure migrations complete before queries
-- Bundle database interactions in single DO calls for performance
-
-**React Native** (Expo SQLite, OP-SQLite):
-- Use `useMigrations` hook to apply migrations
-- Configure Metro bundler and Babel for `.sql` file support
-
-**Bun Runtime:**
-- Bun 1.2.0 has concurrent query execution issues (tracked in GitHub)
-- Use `bun src/index.ts` to run
+1. **Install packages** - Database driver + drizzle-orm + drizzle-kit
+2. **Environment variables** - DATABASE_URL or equivalent connection string
+3. **Drizzle config** - `drizzle.config.ts` with dialect and credentials
+4. **Schema** - Define tables using Drizzle schema API or introspect existing database
+5. **Migrations** - Generate and apply with `drizzle-kit generate/push`
+6. **Connection** - Initialize Drizzle client with appropriate driver
+7. **Queries** - Execute CRUD operations
 
 ### Example: PostgreSQL Setup
 
 ```typescript
+// Install: npm install pg drizzle-orm
+// npm install -D drizzle-kit @types/pg
+
 // .env
 DATABASE_URL=postgresql://user:password@localhost:5432/dbname
 
@@ -76,12 +56,21 @@ DATABASE_URL=postgresql://user:password@localhost:5432/dbname
 import { defineConfig } from 'drizzle-kit';
 export default defineConfig({
   dialect: 'postgresql',
-  schema: './src/db/schema.ts',
   dbCredentials: { url: process.env.DATABASE_URL! },
+  schema: './src/schema.ts',
 });
 
-// src/db/schema.ts
+// src/db.ts
+import { drizzle } from 'drizzle-orm/node-postgres';
+import { Client } from 'pg';
+
+const client = new Client({ connectionString: process.env.DATABASE_URL });
+await client.connect();
+const db = drizzle(client);
+
+// src/schema.ts
 import { pgTable, serial, text, integer } from 'drizzle-orm/pg-core';
+
 export const users = pgTable('users', {
   id: serial().primaryKey(),
   name: text().notNull(),
@@ -89,21 +78,19 @@ export const users = pgTable('users', {
   email: text().notNull().unique(),
 });
 
-// src/index.ts
-import { drizzle } from 'drizzle-orm/node-postgres';
-import { Pool } from 'pg';
-import { users } from './db/schema';
-
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-const db = drizzle(pool);
-
+// Usage
 await db.insert(users).values({ name: 'John', age: 30, email: 'john@example.com' });
 const allUsers = await db.select().from(users);
+await db.update(users).set({ age: 31 }).where(eq(users.email, 'john@example.com'));
+await db.delete(users).where(eq(users.email, 'john@example.com'));
 ```
 
 ### Example: SQLite Setup
 
 ```typescript
+// Install: npm install @libsql/client drizzle-orm
+// npm install -D drizzle-kit
+
 // .env
 DB_FILE_NAME=file:local.db
 
@@ -111,59 +98,47 @@ DB_FILE_NAME=file:local.db
 import { defineConfig } from 'drizzle-kit';
 export default defineConfig({
   dialect: 'sqlite',
-  schema: './src/db/schema.ts',
   dbCredentials: { url: process.env.DB_FILE_NAME! },
+  schema: './src/schema.ts',
 });
 
-// src/index.ts
+// src/db.ts
 import { drizzle } from 'drizzle-orm/libsql';
-import { users } from './db/schema';
+import { createClient } from '@libsql/client';
 
-const db = drizzle({ connection: { url: process.env.DB_FILE_NAME! } });
-await db.insert(users).values({ name: 'John', age: 30, email: 'john@example.com' });
+const client = createClient({ url: process.env.DB_FILE_NAME! });
+const db = drizzle(client);
+
+// src/schema.ts
+import { sqliteTable, integer, text } from 'drizzle-orm/sqlite-core';
+
+export const users = sqliteTable('users', {
+  id: integer().primaryKey({ autoIncrement: true }),
+  name: text().notNull(),
+  age: integer(),
+  email: text().notNull().unique(),
+});
 ```
 
-### Example: Cloudflare D1
+### Introspection for Existing Databases
 
-```typescript
-// wrangler.toml
-[[d1_databases]]
-binding = "DB"
-database_name = "mydb"
-database_id = "abc123"
-
-// src/index.ts
-import { drizzle } from 'drizzle-orm/d1';
-
-export default {
-  async fetch(request: Request, env: Env) {
-    const db = drizzle(env.DB);
-    const result = await db.select().from(users).all();
-    return Response.json(result);
-  },
-};
+For existing databases, use introspection to auto-generate schema:
+```bash
+npx drizzle-kit introspect:pg  # PostgreSQL
+npx drizzle-kit introspect:mysql  # MySQL
+npx drizzle-kit introspect:sqlite  # SQLite
 ```
 
-### Example: Expo SQLite
+### Known Issues
 
-```typescript
-import * as SQLite from 'expo-sqlite';
-import { drizzle } from 'drizzle-orm/expo-sqlite';
-import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
-import migrations from './drizzle/migrations';
+- **Bun v1.2.0**: Concurrent statement execution issues with Bun SQL (track oven-sh/bun#16774)
+- **Cloudflare D1**: Migrations must be applied from within Workers, not locally; use `ctx.blockConcurrencyWhile()` for Durable Objects
+- **Turso/Neon**: HTTP drivers faster for single queries; WebSocket drivers support sessions and transactions
 
-const expo = SQLite.openDatabaseSync('db.db');
-const db = drizzle(expo);
+### Multi-Tenant Patterns
 
-export default function App() {
-  const { success, error } = useMigrations(db, migrations);
-  
-  useEffect(() => {
-    if (!success) return;
-    (async () => {
-      await db.insert(users).values({ name: 'John', age: 30, email: 'john@example.com' });
-      const items = await db.select().from(users);
-    })();
-  }, [success]);
-}
-```
+Nile guides show tenant-aware schema patterns with `tenant_id` columns and built-in tenants table for multi-tenant applications.
+
+### React Native Support
+
+Expo SQLite and OP-SQLite guides include metro/babel configuration and `useMigrations` hook for applying migrations in React Native apps.

@@ -1,10 +1,8 @@
-## Debounced
-
-Wrapper over `useDebounce` that returns a debounced state with a delay in milliseconds.
+Debounced state wrapper with `cancel()`, `setImmediately(value)`, and `updateImmediately()` methods. Access debounced value via `.current`.
 
 ```ts
-let search = $state("");
 const debounced = new Debounced(() => search, 500);
+debounced.cancel(); // cancel pending update
+debounced.setImmediately(value); // set immediately
+await debounced.updateImmediately(); // run pending update now
 ```
-
-Access the debounced value via `debounced.current`. Methods: `cancel()` to cancel pending updates, `setImmediately(value)` to set immediately, `updateImmediately()` to run pending update now.

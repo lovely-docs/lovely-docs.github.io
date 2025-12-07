@@ -1,0 +1,1 @@
+RetryError: thrown on failed retry operations; check with isInstance(); provides reason, lastError, errors array, and message properties

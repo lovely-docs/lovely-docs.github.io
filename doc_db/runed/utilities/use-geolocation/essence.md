@@ -1,0 +1,1 @@
+Reactive Geolocation API wrapper with position tracking, pause/resume control, and error handling.

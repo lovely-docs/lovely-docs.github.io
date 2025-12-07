@@ -1,1 +1,0 @@
-Abort signals break stream resumption in useChat; must choose between resume: true or abort functionality, not both.

@@ -1,1 +1,0 @@
-Common questions about getting started with Svelte, finding support, tooling, testing strategies, routing, mobile development, and styling practices.

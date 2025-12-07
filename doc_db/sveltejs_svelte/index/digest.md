@@ -1,1 +1,1 @@
-This is the main documentation index page for Svelte. The page itself contains only frontmatter metadata and a note indicating it is auto-generated from a documentation sync script. No actual content is present on this page.
+This is the main entry point for Svelte documentation. The page itself contains minimal content - it's primarily a structural/navigation page that serves as the root of the documentation site. The actual content and documentation details are generated automatically from a script located at `apps/svelte.dev/scripts/sync-docs/index.ts`.

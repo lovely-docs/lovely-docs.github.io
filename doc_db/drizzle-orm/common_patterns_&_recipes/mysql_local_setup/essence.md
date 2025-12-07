@@ -1,1 +1,0 @@
-Pull MySQL Docker image, start container with root password and port mapping, connect via mysql://root:password@localhost:3306/database URL

@@ -1,0 +1,1 @@
+v0.30.5: Added $onUpdate() for runtime column value computation on update (and insert if no default); fixed smallserial insertion behavior.

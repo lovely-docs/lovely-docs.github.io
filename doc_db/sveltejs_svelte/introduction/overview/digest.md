@@ -17,4 +17,4 @@ Example component:
 </style>
 ```
 
-Use cases range from standalone components to full-stack applications using SvelteKit. For learning, the interactive tutorial is recommended as a starting point, with this documentation serving as reference material. Online environments are available via the playground or StackBlitz.
+Use cases range from standalone components to full-stack applications (via SvelteKit companion framework). The documentation serves as reference material; beginners should start with the interactive tutorial. Online environments available: playground for quick testing, StackBlitz for full-featured development.

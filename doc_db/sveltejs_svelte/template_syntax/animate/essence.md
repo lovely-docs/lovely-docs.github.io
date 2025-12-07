@@ -1,1 +1,1 @@
-Svelte's animate directive triggers animations when keyed each block items are reordered, supporting both built-in and custom animation functions with CSS or tick-based implementations.
+animate: directive for reordering animations in keyed each blocks; custom functions receive node and DOMRect positions, return css/tick callbacks with t (0-1) and u (1-t) parameters.

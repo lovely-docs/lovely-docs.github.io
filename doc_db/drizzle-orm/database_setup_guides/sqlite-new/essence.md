@@ -1,0 +1,1 @@
+Step-by-step setup for SQLite with libsql driver: install @libsql/client, configure DB_FILE_NAME env var with file: prefix, connect via libsql client, define schema, create drizzle.config.ts, apply migrations, seed/query with TypeScript, run via tsx.

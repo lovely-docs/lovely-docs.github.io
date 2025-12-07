@@ -1,0 +1,1 @@
+SvelteKit uses standard Web APIs: `fetch` (with special SSR support in `load`/hooks/routes), `Request`/`Response`/`Headers`, `FormData`, Streams, `URL`/`URLSearchParams`, and `Web Crypto`. Examples show reading headers, handling form data, and generating UUIDs.

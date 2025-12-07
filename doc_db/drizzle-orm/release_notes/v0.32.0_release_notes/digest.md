@@ -1,21 +1,28 @@
-## MySQL `$returningId()` Function
+## MySQL `$returningId()` function
 
-MySQL lacks native `RETURNING` support for `INSERT`. Drizzle provides `$returningId()` to automatically retrieve inserted primary key IDs from autoincrement/serial columns:
+MySQL lacks native `RETURNING` support for `INSERT`. Drizzle provides `$returningId()` to automatically retrieve inserted IDs from autoincrement primary keys:
 
 ```ts
+const usersTable = mysqlTable('users', {
+  id: int('id').primaryKey(),
+  name: text('name').notNull(),
+  verified: boolean('verified').notNull().default(false),
+});
+
 const result = await db.insert(usersTable).values([{ name: 'John' }, { name: 'John1' }]).$returningId();
-// Returns: { id: number }[]
+// { id: number }[]
 ```
 
-Also works with custom primary keys generated via `$default` function:
+Also works with custom primary keys generated via `$defaultFn()`:
 
 ```ts
 const usersTableDefFn = mysqlTable('users_default_fn', {
   customId: varchar('id', { length: 256 }).primaryKey().$defaultFn(createId),
   name: text('name').notNull(),
 });
+
 const result = await db.insert(usersTableDefFn).values([{ name: 'John' }, { name: 'John1' }]).$returningId();
-// Returns: { customId: string }[]
+// { customId: string }[]
 ```
 
 If no primary keys exist, returns `{}[]`.
@@ -43,7 +50,7 @@ export const customSequence = customSchema.sequence("name");
 
 ## PostgreSQL Identity Columns
 
-Replace deprecated `serial` type with identity columns (recommended approach):
+Recommended replacement for deprecated `serial` type. Use `.generatedAlwaysAsIdentity()` with optional sequence properties:
 
 ```ts
 import { pgTable, integer, text } from 'drizzle-orm/pg-core' 
@@ -55,11 +62,9 @@ export const ingredients = pgTable("ingredients", {
 });
 ```
 
-Supports all sequence properties and custom sequence names.
-
 ## PostgreSQL Generated Columns
 
-Create generated columns with expressions referencing other columns or static values:
+Create generated columns using `.generatedAlwaysAs()` with SQL expressions or strings:
 
 ```ts
 import { SQL, sql } from "drizzle-orm";
@@ -78,7 +83,6 @@ export const test = pgTable("test", {
   idx: index("idx_content_search").using("gin", t.contentSearch),
 }));
 
-// Static expressions
 export const users = pgTable("users", {
   id: integer("id"),
   name: text("name"),
@@ -89,7 +93,7 @@ export const users = pgTable("users", {
 
 ## MySQL Generated Columns
 
-Specify `stored` or `virtual` generated columns:
+Supports both `stored` and `virtual` modes. Drizzle Kit `push` limitations: can't change expression/type (drop and recreate instead); `generate` has no limitations.
 
 ```ts
 export const users = mysqlTable("users", {
@@ -106,36 +110,27 @@ export const users = mysqlTable("users", {
 });
 ```
 
-Drizzle Kit `push` limitations: Cannot change generated expression or type; must drop and recreate columns. `generate` has no limitations.
-
 ## SQLite Generated Columns
 
-Support for `stored` and `virtual` generated columns with limitations:
-
-- Cannot change stored generated expressions in existing tables (requires table recreation)
-- Cannot add stored expressions to existing columns (but can add virtual)
-- Cannot change stored expressions (but can change virtual)
-- Cannot change from virtual to stored (but can change from stored to virtual)
+Supports `stored` and `virtual` modes. Drizzle Kit limitations: can't change stored expressions in existing tables (requires recreation); can't add stored expressions to existing columns (but can add virtual); can't change stored to virtual (but can change virtual to stored).
 
 ## Drizzle Kit Features
 
-**Migrations support**: Full support for PostgreSQL sequences, identity columns, and generated columns across all dialects.
+**Migrations support**: PostgreSQL sequences, identity columns, and generated columns for all dialects.
 
-**`--force` flag for `push`**: Auto-accept all data-loss statements in CLI.
+**`--force` flag for `push`**: Auto-accept all data-loss statements.
 
-**Migration file prefix customization**:
+**`migrations.prefix` flag**: Customize migration file naming:
+- `index` (default): `0001_name.sql`
+- `supabase`/`timestamp`: `20240627123900_name.sql`
+- `unix`: `1719481298_name.sql`
+- `none`: no prefix
+
 ```ts
 import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
   dialect: "postgresql",
-  migrations: {
-    prefix: 'supabase'  // or 'timestamp', 'unix', 'none'
-  }
+  migrations: { prefix: 'supabase' }
 });
 ```
-
-- `index` (default): `0001_name.sql`
-- `supabase`/`timestamp`: `20240627123900_name.sql`
-- `unix`: `1719481298_name.sql`
-- `none`: no prefix

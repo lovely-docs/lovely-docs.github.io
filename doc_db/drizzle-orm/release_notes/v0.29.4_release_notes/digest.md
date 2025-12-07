@@ -1,10 +1,11 @@
 ## Neon HTTP Batch Support
 
-Added support for batching multiple queries with Neon HTTP driver. Use `db.batch()` to execute multiple operations (inserts, queries) in a single request:
+Added support for batching multiple queries in a single request using Neon's HTTP driver:
 
 ```ts
 import { neon } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
+import { usersTable } from './schema';
 
 const sql = neon(process.env.DRIZZLE_DATABASE_URL!);
 const db = drizzle(sql);
@@ -17,11 +18,11 @@ const batchResponse = await db.batch([
 ]);
 ```
 
-The batch response is a tuple with types matching each operation in order.
+The batch method returns a tuple with typed results for each query in the batch.
 
-## PlanetScale Client Instance Change
+## PlanetScale Client Instance Update
 
-Updated PlanetScale integration to use `Client` instance instead of `connect()` function. The new recommended approach:
+Updated PlanetScale integration to use `Client` instance instead of `connect()` function:
 
 ```ts
 import { Client } from '@planetscale/database';
@@ -36,4 +37,4 @@ const client = new Client({
 const db = drizzle(client);
 ```
 
-Using `connect()` now shows a deprecation warning. Starting from version 0.30.0, passing anything other than a `Client` instance will throw an error. No breaking changes in v0.29.4, but migration is recommended.
+**Breaking change warning**: Version 0.30.0 will require `Client` instances and reject `connect()` results. A deprecation warning is shown in v0.29.4 when using `connect()`. Migrate now to avoid runtime errors.

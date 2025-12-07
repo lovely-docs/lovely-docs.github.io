@@ -1,0 +1,1 @@
+**v0.28.5:** Fixed OpenTelemetry type import bug (`import { type ... }` → `import type { ... }`) that caused runtime errors. OpenTelemetry integration is currently disabled.

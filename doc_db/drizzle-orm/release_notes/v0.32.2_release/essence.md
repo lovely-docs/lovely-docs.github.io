@@ -1,0 +1,1 @@
+v0.32.2 release: AWS Data API type hints fix, MySQL transactions fix, useLiveQuery dependency forwarding, additional SQLite type exports

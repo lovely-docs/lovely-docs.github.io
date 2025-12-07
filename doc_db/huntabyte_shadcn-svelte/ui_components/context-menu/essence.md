@@ -1,1 +1,1 @@
-Right-click context menu with items, submenus, checkboxes, radio buttons, separators, and keyboard shortcuts; install with `npx shadcn-svelte@latest add context-menu -y -o`.
+Right-click context menu with items, checkboxes, radio groups, separators, nested submenus, and keyboard shortcuts.

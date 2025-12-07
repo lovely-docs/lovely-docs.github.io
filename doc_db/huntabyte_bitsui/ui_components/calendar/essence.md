@@ -1,1 +1,0 @@
-Calendar component for date selection with single/multiple modes, validation, and customizable navigation.

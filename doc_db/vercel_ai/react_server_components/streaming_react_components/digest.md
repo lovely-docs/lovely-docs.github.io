@@ -1,10 +1,9 @@
 ## Overview
-The `streamUI` function allows streaming React Server Components from server to client. It works similarly to AI SDK Core functions like `streamText` and `streamObject`, but returns React components instead of text.
 
-## Core Concept
-`streamUI` uses tools that return React components. The model acts as a dynamic router that understands user intent and displays relevant UI. If the model decides to call a tool based on context, it executes that tool and streams the returned React component. If no relevant tool exists, the model returns text which is passed to a `text` handler for rendering.
+The `streamUI` function streams React Server Components from server to client. Unlike `streamText` or `streamObject`, tools provided to `streamUI` return React components instead of text/objects. The model acts as a dynamic router, understanding user intent and displaying relevant UI.
 
 ## Basic Usage
+
 ```tsx
 const result = await streamUI({
   model: openai('gpt-4o'),
@@ -14,13 +13,15 @@ const result = await streamUI({
 });
 ```
 
-## Tool Structure
-A tool is an object with:
-- `description`: string explaining what the tool does and when to use it
-- `inputSchema`: Zod schema describing required inputs
-- `generate`: async generator function that returns a React component
+The `text` handler renders plain text responses as React components. Even with no tools, responses stream as components rather than plain text.
 
-## Tool Example with Streaming
+## Tools with streamUI
+
+Tools are objects with:
+- `description`: what the tool does
+- `inputSchema`: Zod schema for inputs
+- `generate`: async generator function returning a React component
+
 ```tsx
 const result = await streamUI({
   model: openai('gpt-4o'),
@@ -40,12 +41,12 @@ const result = await streamUI({
 });
 ```
 
-The `generate` function uses a generator function (`function*`) to yield intermediate values. It can yield a loading component immediately, then return the final component after async operations complete. This enables streaming UI updates without blocking.
+The `generate` function uses a generator (`function*`) to yield intermediate components (like loading states) before returning the final component. This allows streaming UI updates as data loads.
 
 ## Next.js Integration
-Two components needed:
 
-**Server Action** (`app/actions.tsx`):
+### Server Action (app/actions.tsx)
+
 ```tsx
 'use server';
 import { streamUI } from '@ai-sdk/rsc';
@@ -61,9 +62,9 @@ const getWeather = async (location: string) => {
   return '82°F️ ☀️';
 };
 
-const WeatherComponent = (props: { location: string; weather: string }) => (
+const WeatherComponent = ({ location, weather }: { location: string; weather: string }) => (
   <div className="border border-neutral-200 p-4 rounded-lg max-w-fit">
-    The weather in {props.location} is {props.weather}
+    The weather in {location} is {weather}
   </div>
 );
 
@@ -88,22 +89,19 @@ export async function streamComponent() {
 }
 ```
 
-**Client Page** (`app/page.tsx`):
+### Client Page (app/page.tsx)
+
 ```tsx
 'use client';
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
 import { streamComponent } from './actions';
 
 export default function Page() {
   const [component, setComponent] = useState<React.ReactNode>();
   return (
     <div>
-      <form onSubmit={async e => {
-        e.preventDefault();
-        setComponent(await streamComponent());
-      }}>
-        <Button>Stream Component</Button>
+      <form onSubmit={async e => { e.preventDefault(); setComponent(await streamComponent()); }}>
+        <button>Stream Component</button>
       </form>
       <div>{component}</div>
     </div>
@@ -111,10 +109,12 @@ export default function Page() {
 }
 ```
 
-The page is marked as a client component, calls the Server Action on form submission, and renders the returned ReactNode.
+The Server Action calls `streamUI` and returns `result.value`. The client component calls this action on form submission and renders the returned ReactNode.
 
-## Important Notes
-- AI SDK RSC is experimental; AI SDK UI is recommended for production
-- `streamUI` must always return a React component
-- Generator functions allow yielding intermediate values (like loading states) before returning final components
-- Tools work the same way as in other AI SDK Core functions
+## Key Concepts
+
+- `streamUI` requires returning a React component (via `text` handler or tool `generate` function)
+- Tools with `streamUI` work like other AI SDK Core tools but return components
+- Generator functions in tool `generate` allow yielding intermediate UI (loading states) before final result
+- Model decides whether to call tools based on context; if no relevant tool, uses `text` handler
+- Currently experimental; AI SDK UI recommended for production

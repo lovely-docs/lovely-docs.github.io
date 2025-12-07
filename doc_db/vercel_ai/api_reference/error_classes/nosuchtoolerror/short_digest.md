@@ -1,0 +1,1 @@
+Error when model calls unavailable tool. Check with `NoSuchToolError.isInstance(error)`. Properties: `toolName`, `availableTools`, `message`.

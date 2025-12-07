@@ -1,1 +1,0 @@
-AI SDK Core provides unified access to LLM capabilities: text generation, structured data generation, tool calling, embeddings, image generation, transcription, speech synthesis, and audio processing. Includes provider management for multiple AI services, middleware support, error handling, testing utilities, and telemetry.

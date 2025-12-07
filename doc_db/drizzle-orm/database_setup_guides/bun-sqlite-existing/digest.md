@@ -1,42 +1,48 @@
-## Setup Drizzle ORM with Bun and SQLite in an existing project
+## Setup Drizzle ORM with Bun:SQLite in an existing project
 
-### Prerequisites
-- **dotenv** - for managing environment variables
-- **tsx** - for running TypeScript files
-- **bun** - JavaScript all-in-one toolkit
-- **bun:sqlite** - native high-performance SQLite3 driver
+**Prerequisites:**
+- dotenv - for environment variables
+- tsx - for running TypeScript files
+- bun - JavaScript all-in-one toolkit
+- bun:sqlite - native SQLite3 driver
 
-### Installation
-Install packages:
+**Step 1: Install packages**
 ```bash
 npm install drizzle-orm dotenv
 npm install -D drizzle-kit tsx @types/bun
 ```
 
-### Configuration
-
-1. **Environment variables** - Create `.env` file with database file path:
+**Step 2: Setup environment variables**
+Create a `.env` file with:
 ```plaintext
 DB_FILE_NAME=mydb.sqlite
 ```
 
-2. **Drizzle config** - Setup `drizzle.config.ts` with SQLite dialect and environment variable reference
+**Step 3: Setup Drizzle config file**
+Create `drizzle.config.ts` with SQLite dialect and reference the `DB_FILE_NAME` environment variable.
 
-3. **Database introspection** - Run introspection to generate schema from existing database
+**Step 4: Introspect your database**
+Run introspection to generate schema from existing SQLite database.
 
-4. **Schema file** - Transfer introspected code to your schema file
+**Step 5: Transfer introspected code to schema file**
+Move the generated schema code to your actual schema file.
 
-### Connection Setup
-Connect Drizzle ORM to Bun SQLite database using the configured connection
+**Step 6: Connect Drizzle ORM to the database**
+Use bun:sqlite to establish connection in your application.
 
-### Usage
+**Step 7: Query the database**
+Write queries using the generated schema with bun-sqlite dialect.
 
-Query the database with generated schema:
+**Step 8: Run the script**
 ```bash
 bun src/index.ts
 ```
 
-### Optional: Schema Updates
-- Update table schema definitions
-- Apply changes to database
-- Query database with new fields
+**Step 9 (optional): Update table schema**
+Modify your schema definitions as needed.
+
+**Step 10 (optional): Apply changes to database**
+Run migrations to apply schema changes to the database.
+
+**Step 11 (optional): Query with new fields**
+Test queries with newly added schema fields.

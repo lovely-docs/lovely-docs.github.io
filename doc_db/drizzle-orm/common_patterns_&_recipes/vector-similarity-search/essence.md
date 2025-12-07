@@ -1,0 +1,1 @@
+Implement semantic search in PostgreSQL using pgvector extension with vector embeddings, HNSW indexing, and cosineDistance queries for similarity matching.

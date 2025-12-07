@@ -1,1 +1,0 @@
-AI SDK 5 requires v2 specification; update `@ai-sdk/*` to 2.0.0+, `ai` to 5.0.0+, `zod` to 4.1.8+ to fix `AI_UnsupportedModelVersionError`.

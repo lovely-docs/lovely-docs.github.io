@@ -1,19 +1,16 @@
-## AI SDK 6 Beta Overview
+## Overview
+AI SDK 6 is a major version introducing the v3 Language Model Specification with new capabilities like agents and tool approval. Unlike AI SDK 5, it's not expected to have major breaking changes for most users.
 
-AI SDK 6 is a major version bump due to the v3 Language Model Specification, but is not expected to have major breaking changes for most users. Migration from AI SDK 5 should be straightforward with minimal code changes.
+## Installation
+```bash
+npm install ai@beta @ai-sdk/openai@beta @ai-sdk/react@beta
+```
 
-Install with: `npm install ai@beta @ai-sdk/openai@beta @ai-sdk/react@beta`
-
-### Agent Abstraction
+## Agent Abstraction
 
 New unified `Agent` interface for building agents with full control over execution flow, tool loops, and state management.
 
-**ToolLoopAgent** - Default implementation that automatically handles the tool execution loop:
-1. Calls the LLM with your prompt
-2. Executes any requested tool calls
-3. Adds results back to the conversation
-4. Repeats until complete (default `stopWhen: stepCountIs(20)`)
-
+### ToolLoopAgent (Default Implementation)
 ```typescript
 import { openai } from '@ai-sdk/openai';
 import { ToolLoopAgent } from 'ai';
@@ -30,8 +27,10 @@ const result = await weatherAgent.generate({
 });
 ```
 
-**Call Options** - Type-safe runtime configuration using Zod schemas to dynamically configure agents:
+Automatically handles: calls LLM → executes tool calls → adds results back → repeats until complete (default `stopWhen: stepCountIs(20)`).
 
+### Call Options
+Type-safe runtime configuration for dynamic agent behavior:
 ```typescript
 const supportAgent = new ToolLoopAgent({
   model: 'anthropic/claude-sonnet-4.5',
@@ -52,10 +51,9 @@ const result = await supportAgent.generate({
 });
 ```
 
-Use cases: RAG (inject retrieved documents), dynamic model selection, tool configuration per request, provider options.
+Use cases: RAG (inject documents), dynamic model selection, tool configuration, provider options.
 
-**UI Integration** - Server-side and client-side integration with React:
-
+### UI Integration
 ```typescript
 // Server
 import { createAgentUIStreamResponse } from 'ai';
@@ -71,23 +69,18 @@ type WeatherAgentUIMessage = InferAgentUIMessage<typeof weatherAgent>;
 const { messages, sendMessage } = useChat<WeatherAgentUIMessage>();
 ```
 
-**Custom Agent Implementations** - `Agent` is an interface, not a concrete class. Implement it to build custom architectures like multi-agent orchestrators:
-
+### Custom Agent Implementations
+`Agent` is an interface, not a concrete class. Implement it for custom architectures:
 ```typescript
-import { Agent } from 'ai';
 class Orchestrator implements Agent {
   constructor(private subAgents: Record<string, Agent>) {}
 }
 ```
 
-### Tool Execution Approval
+## Tool Execution Approval
 
-Tool approval system for human-in-the-loop patterns. Enable approval by setting `needsApproval`:
-
+Control when tools are executed with `needsApproval`:
 ```typescript
-import { tool } from 'ai';
-import { z } from 'zod';
-
 const weatherTool = tool({
   description: 'Get the weather in a location',
   inputSchema: z.object({ city: z.string() }),
@@ -96,8 +89,7 @@ const weatherTool = tool({
 });
 ```
 
-**Dynamic Approval** - Make approval decisions based on tool input:
-
+### Dynamic Approval
 ```typescript
 const paymentTool = tool({
   description: 'Process a payment',
@@ -107,8 +99,7 @@ const paymentTool = tool({
 });
 ```
 
-**Client-Side Approval UI** - Handle approval requests in React:
-
+### Client-Side Approval UI
 ```tsx
 export function WeatherToolView({ invocation, addToolApprovalResponse }) {
   if (invocation.state === 'approval-requested') {
@@ -126,23 +117,18 @@ export function WeatherToolView({ invocation, addToolApprovalResponse }) {
 }
 ```
 
-**Auto-Submit After Approvals** - Automatically continue conversation:
-
+### Auto-Submit After Approvals
 ```typescript
-import { useChat } from '@ai-sdk/react';
-import { lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai';
 const { messages, addToolApprovalResponse } = useChat({
   sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses,
 });
 ```
 
-### Structured Output (Stable)
+## Structured Output (Stable)
 
-Generate structured data alongside multi-step tool calling. Previously only available with `generateObject`/`streamObject` (no tool calling). Now `ToolLoopAgent`, `generateText`, and `streamText` support structured output via the `output` parameter:
-
+Generate structured data alongside multi-step tool calling using the `output` parameter:
 ```typescript
 import { Output, ToolLoopAgent, tool } from 'ai';
-import { openai } from '@ai-sdk/openai';
 import { z } from 'zod';
 
 const agent = new ToolLoopAgent({
@@ -169,14 +155,13 @@ const { output } = await agent.generate({
 // { summary: "It's sunny in San Francisco", temperature: 72, recommendation: "Wear light clothing and sunglasses" }
 ```
 
-**Output Types** - `Output` object provides multiple strategies:
-- `Output.object()` - Generate structured objects with Zod schemas
-- `Output.array()` - Generate arrays of structured objects
-- `Output.choice()` - Select from specific set of options
-- `Output.text()` - Generate plain text (default)
+### Output Types
+- `Output.object()`: Zod schemas
+- `Output.array()`: Arrays of structured objects
+- `Output.choice()`: Select from specific options
+- `Output.text()`: Plain text (default)
 
-**Streaming Structured Output** - Use `agent.stream()` to stream structured output as generated:
-
+### Streaming Structured Output
 ```typescript
 const profileAgent = new ToolLoopAgent({
   model: 'anthropic/claude-sonnet-4.5',
@@ -198,37 +183,32 @@ for await (const partial of partialOutputStream) {
 }
 ```
 
-When using structured output with `generateText` or `streamText`, configure multiple steps with `stopWhen` because generating the structured output is itself a step (e.g., `stopWhen: stepCountIs(2)`).
+Structured outputs also supported in `generateText` and `streamText`. When using these, configure multiple steps with `stopWhen` (e.g., `stopWhen: stepCountIs(2)` for tool calling + output generation).
 
-### Reranking Support
+## Reranking Support
 
-Native reranking support to improve search relevance by reordering documents based on query-document relationships. Reranking models are specifically trained for this, producing more accurate relevance scores than embedding-based similarity search:
-
+Improve search relevance by reordering documents based on query relationship using specialized reranking models:
 ```typescript
 import { rerank } from 'ai';
 import { cohere } from '@ai-sdk/cohere';
 
 const documents = ['sunny day at the beach', 'rainy afternoon in the city', 'snowy night in the mountains'];
-
 const { ranking } = await rerank({
   model: cohere.reranking('rerank-v3.5'),
   documents,
   query: 'talk about rain',
   topN: 2,
 });
-
-console.log(ranking);
 // [
 //   { originalIndex: 1, score: 0.9, document: 'rainy afternoon in the city' },
 //   { originalIndex: 0, score: 0.3, document: 'sunny day at the beach' }
 // ]
 ```
 
-**Structured Document Reranking** - Reranking supports structured documents for searching databases, emails, etc.:
-
+### Structured Document Reranking
 ```typescript
 const documents = [
-  { from: 'Paul Doe', subject: 'Follow-up', text: 'We are happy to give you a discount of 20% on your next order.' },
+  { from: 'Paul Doe', subject: 'Follow-up', text: 'We are happy to give you a discount of 20%...' },
   { from: 'John McGill', subject: 'Missing Info', text: 'Sorry, but here is the pricing information from Oracle: $5000/month' },
 ];
 
@@ -238,19 +218,17 @@ const { rerankedDocuments } = await rerank({
   query: 'Which pricing did we get from Oracle?',
   topN: 1,
 });
-
-console.log(rerankedDocuments[0]);
 // { from: 'John McGill', subject: 'Missing Info', text: '...' }
 ```
 
-**Supported Providers** - Cohere, Amazon Bedrock, Together.ai
+Supported providers: Cohere, Amazon Bedrock, Together.ai.
 
-### Image Editing Support
+## Image Editing Support
+Coming soon: image-to-image transformations and multi-modal editing with text prompts.
 
-Native support for image editing and generation workflows coming soon, enabling image-to-image transformations and multi-modal editing with text prompts.
+## Migration from AI SDK 5.x
+Minimal breaking changes expected. Version bump is due to v3 Language Model Specification, but most AI SDK 5 code will work with little or no modification.
 
-### Migration from AI SDK 5.x
-
-AI SDK 6 is expected to have minimal breaking changes. Most AI SDK 5 code will work with little or no modification.
-
-**Timeline**: Beta available now, stable release end of 2025.
+## Timeline
+- AI SDK 6 Beta: Available now
+- Stable Release: End of 2025

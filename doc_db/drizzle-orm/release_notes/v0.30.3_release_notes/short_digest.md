@@ -1,5 +1,4 @@
-**v0.30.3 Release**
-
+**v0.30.3 release:**
 - Added `db.execute(...)` raw query support to Neon HTTP batch API
 - Fixed `@neondatabase/serverless` HTTP driver types
 - Fixed sqlite-proxy driver `.run()` result

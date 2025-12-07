@@ -1,0 +1,1 @@
+Error thrown when embedding call exceeds provider's maxEmbeddingsPerCall limit; detect with isInstance() method.

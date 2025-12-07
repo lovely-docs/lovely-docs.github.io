@@ -1,0 +1,1 @@
+11-step guide to integrate Drizzle ORM with existing Xata PostgreSQL database: install postgres driver, configure DATABASE_URL, introspect schema, connect, and query.

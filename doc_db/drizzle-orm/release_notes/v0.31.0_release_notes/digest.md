@@ -1,22 +1,27 @@
 ## Breaking Changes
 
-**PostgreSQL Indexes API Overhaul**
+**PostgreSQL indexes API was changed** to align with PostgreSQL documentation. The previous API didn't support SQL expressions in `.on()`, conflated `.using()` and `.on()`, and placed ordering modifiers on the index instead of per-column.
 
-The PostgreSQL indexes API was redesigned to align with PostgreSQL documentation. The previous API had fundamental issues:
-- No support for SQL expressions in `.on()`
-- `.using()` and `.on()` were conflated
-- Ordering modifiers (`.asc()`, `.desc()`, `.nullsFirst()`, `.nullsLast()`) were on the index instead of per-column
-
-New API structure:
-
+Previous API:
 ```ts
-// With .on() - ordering per column/expression
+index('name')
+  .on(table.column1, table.column2)
+  .using(sql``)
+  .asc() / .desc()
+  .nullsFirst() / .nullsLast()
+  .where(sql``)
+```
+
+New API:
+```ts
+// With .on()
 index('name')
   .on(table.column1.asc(), table.column2.nullsFirst())
+  .concurrently()
   .where(sql``)
   .with({ fillfactor: '70' })
 
-// With .using() - specify index type and operator classes
+// With .using()
 index('name')
   .using('btree', table.column1.asc(), sql`lower(${table.column2})`, table.column1.op('text_ops'))
   .where(sql``)
@@ -27,9 +32,9 @@ Requires `drizzle-kit@0.22.0` or higher.
 
 ## New Features
 
-**pg_vector Extension Support**
+### pg_vector extension support
 
-Vector type with multiple distance metrics:
+Define vector indexes and use vector distance functions:
 
 ```ts
 const table = pgTable('items', {
@@ -44,20 +49,27 @@ const table = pgTable('items', {
 }))
 ```
 
-Helper functions for vector queries:
-
+Helper functions for queries:
 ```ts
 import { l2Distance, l1Distance, innerProduct, cosineDistance, hammingDistance, jaccardDistance } from 'drizzle-orm'
 
-db.select().from(items).orderBy(l2Distance(items.embedding, [3,1,2])).limit(5)
-db.select({ distance: l2Distance(items.embedding, [3,1,2]) }).from(items)
+l2Distance(table.column, [3, 1, 2]) // <->
+l1Distance(table.column, [3, 1, 2]) // <+>
+innerProduct(table.column, [3, 1, 2]) // <#>
+cosineDistance(table.column, [3, 1, 2]) // <=>
+hammingDistance(table.column, '101') // <~>
+jaccardDistance(table.column, '101') // <%>
+```
 
-const subquery = db.select({ embedding: items.embedding }).from(items).where(eq(items.id, 1))
+Query examples:
+```ts
+db.select().from(items).orderBy(l2Distance(items.embedding, [3,1,2]))
+db.select({ distance: l2Distance(items.embedding, [3,1,2]) }).from(items)
+const subquery = db.select({ embedding: items.embedding }).from(items).where(eq(items.id, 1));
 db.select().from(items).orderBy(l2Distance(items.embedding, subquery)).limit(5)
 ```
 
 Custom distance functions can be created by replicating the pattern:
-
 ```ts
 export function l2Distance(column: SQLWrapper | AnyColumn, value: number[] | string[] | TypedQueryBuilder<any> | string): SQL {
   if (is(value, TypedQueryBuilder<any>) || typeof value === 'string') {
@@ -67,30 +79,27 @@ export function l2Distance(column: SQLWrapper | AnyColumn, value: number[] | str
 }
 ```
 
-**PostgreSQL Geometric Types: point and line**
+### New PostgreSQL types: point and line
 
-`point` type with two modes:
-
+**point** type with two modes:
 ```ts
 const items = pgTable('items', {
- point: point('point'),  // tuple mode: [1,2]
- pointObj: point('point_xy', { mode: 'xy' }),  // xy mode: { x: 1, y: 2 }
+ point: point('point'), // tuple mode: [1,2]
+ pointObj: point('point_xy', { mode: 'xy' }), // xy mode: { x: 1, y: 2 }
 });
 ```
 
-`line` type with two modes:
-
+**line** type with two modes:
 ```ts
 const items = pgTable('items', {
- line: line('line'),  // tuple mode: [1,2,3]
- lineObj: line('line_abc', { mode: 'abc' }),  // abc mode: { a: 1, b: 2, c: 3 }
+ line: line('line'), // tuple mode: [1,2,3]
+ lineObj: line('line_abc', { mode: 'abc' }), // abc mode: { a: 1, b: 2, c: 3 }
 });
 ```
 
-**PostGIS Extension Support**
+### PostGIS extension support
 
-`geometry` type with configurable geometry type and modes:
-
+**geometry** type from postgis:
 ```ts
 const items = pgTable('items', {
   geo: geometry('geo', { type: 'point' }),
@@ -99,64 +108,78 @@ const items = pgTable('items', {
 });
 ```
 
+Modes: `tuple` (default, maps to [x,y]) and `xy` (maps to { x, y }). Type defaults to `point` but accepts any string.
+
 ## Drizzle Kit v0.22.0 Updates
 
-**New Type Support**
+### New type support
+- `point` and `line` from PostgreSQL
+- `vector` from pg_vector extension
+- `geometry` from PostGIS extension
 
-Kit now handles `point`, `line`, `vector`, and `geometry` types.
+### extensionsFilters config parameter
 
-**extensionsFilters Config**
-
-Skip extension-created tables during push/introspect:
-
+Skip tables created by extensions:
 ```ts
 export default defineConfig({
   dialect: "postgresql",
-  extensionsFilters: ["postgis"],  // skips geography_columns, geometry_columns, spatial_ref_sys
+  extensionsFilters: ["postgis"], // skips geography_columns, geometry_columns, spatial_ref_sys
 })
 ```
 
-**SSL Configuration**
+### SSL configuration improvements
 
-Full SSL parameter support for PostgreSQL and MySQL:
-
+Full SSL parameter support:
 ```ts
+// PostgreSQL
 export default defineConfig({
   dialect: "postgresql",
   dbCredentials: {
     ssl: true, // or "require" | "allow" | "prefer" | "verify-full" | node:tls options
   }
 })
+
+// MySQL
+export default defineConfig({
+  dialect: "mysql",
+  dbCredentials: {
+    ssl: "", // string | mysql2 SslOptions
+  }
+})
 ```
 
-**SQLite/libsql URL Normalization**
+### Normalized SQLite URLs
 
-Kit now accepts both file path patterns for libsql and better-sqlite3 drivers.
+libsql and better-sqlite3 drivers now accept both file path patterns and normalize them correctly.
 
-**MySQL/SQLite Index Expression Handling**
+### MySQL and SQLite index-as-expression behavior
 
-Expressions in indexes are no longer escaped as strings:
-
+Expressions are no longer escaped in strings, columns are properly handled:
 ```ts
-// Before: CREATE UNIQUE INDEX `emailUniqueIndex` ON `users` (`lower("users"."email")`)
-// After: CREATE UNIQUE INDEX `emailUniqueIndex` ON `users` (lower("email"))
-
 export const users = sqliteTable('users', {
     id: integer('id').primaryKey(),
     email: text('email').notNull(),
-  }, (table) => ({
+}, (table) => ({
     emailUniqueIndex: uniqueIndex('emailUniqueIndex').on(sql`lower(${table.email})`),
-  }));
+}));
+
+// Before: CREATE UNIQUE INDEX `emailUniqueIndex` ON `users` (`lower("users"."email")`);
+// Now: CREATE UNIQUE INDEX `emailUniqueIndex` ON `users` (lower("email"));
 ```
 
-**Index Limitations**
+### Index limitations
 
-- Must specify index name manually if using expressions: `index('my_name').on(sql`lower(${table.email})`)`
-- Push won't regenerate if these fields change: expressions in `.on()`/`.using()`, `.where()` statements, operator classes `.op()`. Workaround: comment out index, push, uncomment and modify, push again.
-- Generate command has no such limitations.
+Must specify index name manually if using expressions:
+```ts
+index().on(table.id, table.email) // auto-named, works
+index('my_name').on(table.id, table.email) // works
+index().on(sql`lower(${table.email})`) // error
+index('my_name').on(sql`lower(${table.email})`) // works
+```
 
-**Bug Fixes**
+Push won't generate statements if these fields change in existing indexes: expressions in `.on()`/`.using()`, `.where()` statements, or `.op()` operator classes. For changes, comment out the index, push, uncomment and modify, then push again. Generate command has no such limitations.
 
+### Bug fixes
 - Multiple constraints not added (only first generated)
 - Drizzle Studio connection termination errors
 - SQLite local migrations execution

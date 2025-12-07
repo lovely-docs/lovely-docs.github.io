@@ -1,0 +1,1 @@
+Adapters to convert streams from AWS Bedrock, LangChain, and LlamaIndex into AI SDK data streams/responses. Deprecated: StreamingTextResponse and AWSBedrockLlama2Stream (use streamText.toDataStreamResponse() instead). Active: LangChain and LlamaIndex adapters with toDataStream, toDataStreamResponse, mergeIntoDataStream helpers.

@@ -1,5 +1,5 @@
 ## Purpose
-`drizzle-kit up` upgrades schema snapshots to newer versions when breaking changes are introduced.
+Upgrades schema snapshots to newer versions when breaking changes occur.
 
 ## Configuration
 Requires `dialect` and database credentials via config file or CLI:
@@ -10,16 +10,16 @@ export default defineConfig({ dialect: "postgresql" });
 ```shell
 npx drizzle-kit up
 # or
-npx drizzle-kit up --dialect=postgresql
+npx drizzle-kit up --dialect=postgresql --out=./migrations-folder
 ```
 
 ## Multiple Configs
 ```shell
-npx drizzle-kit migrate --config=drizzle-dev.config.ts
-npx drizzle-kit migrate --config=drizzle-prod.config.ts
+npx drizzle-kit up --config=drizzle-dev.config.ts
+npx drizzle-kit up --config=drizzle-prod.config.ts
 ```
 
-## CLI Options
+## Options
 - `dialect` (required): `postgresql`, `mysql`, or `sqlite`
-- `out`: migrations folder, default `./drizzle`
-- `config`: config file path, default `drizzle.config.ts`
+- `out`: migrations folder (default: `./drizzle`)
+- `config`: config file path (default: `drizzle.config.ts`)

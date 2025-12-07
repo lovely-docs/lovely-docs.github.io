@@ -1,1 +1,0 @@
-MDX component library for documentation: Npm, AnchorCards, Callout, CodeTabs, Section, Tabs, IsSupportedChipGroup, SimpleLinkCards, Steps, YoutubeCards with features like copy buttons, syntax highlighting, collapsible blocks, and database-specific tabs.

@@ -1,0 +1,1 @@
+Comparison (eq, ne, gt, gte, lt, lte), existence (exists, notExists), null (isNull, isNotNull), array (inArray, notInArray), range (between, notBetween), string pattern (like, ilike, notIlike), logical (not, and, or), and PostgreSQL array operators (arrayContains, arrayContained, arrayOverlaps) for WHERE clause filtering.

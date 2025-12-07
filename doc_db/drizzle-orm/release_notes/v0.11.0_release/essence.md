@@ -1,0 +1,1 @@
+TypeScript ORM with in-code typed SQL schema; supports PostgreSQL; features typed queries, joins, filters, and automatic migration generation.

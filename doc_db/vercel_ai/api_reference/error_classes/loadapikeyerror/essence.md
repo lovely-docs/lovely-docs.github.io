@@ -1,0 +1,1 @@
+LoadAPIKeyError thrown on failed API key loading; detect via isInstance() method.

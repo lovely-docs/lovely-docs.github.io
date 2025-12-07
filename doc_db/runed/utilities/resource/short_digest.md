@@ -1,26 +1,21 @@
-## Overview
-`resource` combines reactive state with async data fetching. Watches dependencies and runs fetcher function, with automatic request cancellation, loading/error states, and debounce/throttle support.
+Reactive async data fetching with automatic request cancellation, loading/error states, debouncing/throttling, and cleanup hooks. Supports single or multiple dependencies, pre-render execution, and optimistic updates via `mutate()`.
 
-## API
+**Basic usage:**
 ```svelte
-const res = resource(
-  () => dependency,
-  async (value, prevValue, { data, refetching, onCleanup, signal }) => {
-    return await fetch(..., { signal });
+const resource = resource(
+  () => id,
+  async (id, prevId, { data, signal, onCleanup }) => {
+    const res = await fetch(`/api/posts?id=${id}`, { signal });
+    return res.json();
   },
-  { debounce: 300, lazy: false, once: false, initialValue: null, throttle: 0 }
+  { debounce: 300 }
 );
-
-res.current;      // value
-res.loading;      // boolean
-res.error;        // Error | undefined
-res.mutate(val);  // direct update
-res.refetch();    // re-run
+// Access: resource.current, resource.loading, resource.error
+// Methods: resource.mutate(), resource.refetch()
 ```
 
-## Key Features
-- Multiple dependencies: `resource([() => a, () => b], async ([a, b]) => ...)`
-- Automatic AbortSignal cancellation on dependency change
-- Custom cleanup: `onCleanup(() => cleanup())`
-- Pre-render: `resource.pre(() => dep, async (val) => ...)`
-- Debounce/throttle (use one, not both; debounce takes precedence)
+**Multiple dependencies:** `resource([() => query, () => page], async ([query, page]) => ...)`
+
+**Pre-render:** `resource.pre(() => query, async (query) => ...)`
+
+**Options:** `lazy`, `once`, `initialValue`, `debounce`, `throttle`

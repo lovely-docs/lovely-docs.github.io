@@ -1,1 +1,1 @@
-Placeholder for gotchas/pitfalls documentation collection.
+Index page for Drizzle ORM gotchas collection (currently empty/placeholder).

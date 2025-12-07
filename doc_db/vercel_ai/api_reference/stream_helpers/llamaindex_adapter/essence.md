@@ -1,0 +1,1 @@
+LlamaIndex adapter with toDataStream/toDataStreamResponse/mergeIntoDataStream to convert ChatEngine/QueryEngine streams to AI SDK data streams.

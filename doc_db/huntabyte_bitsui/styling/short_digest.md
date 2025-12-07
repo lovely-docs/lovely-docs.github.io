@@ -1,20 +1,17 @@
-## Styling Methods
+## Styling Approaches
 
-- **CSS Frameworks**: Pass classes directly to components
-- **Data Attributes**: Target with `[data-component-name]` selectors
-- **Global Classes**: Define and apply via `class` prop
-- **Scoped Styles**: Use `child` snippet for Svelte scoped styles
-- **Style Prop**: Inline styles as string or object
+Components expose `class` and `style` props. Five main approaches:
 
-## State Styling
+1. **CSS Frameworks**: Pass framework classes directly
+2. **Data Attributes**: Target `[data-component-name]` selectors in global CSS
+3. **Global Classes**: Define CSS classes and apply via `class` prop
+4. **Scoped Styles**: Use `child` snippet for Svelte scoped styles
+5. **Style Prop**: String or object, merged with internal styles
 
-Use data attributes like `[data-state="open"]` and `[data-disabled]` to style based on component state. Access internal values via CSS variables like `--bits-accordion-content-height`.
+## Styling States
 
-## Animations
+Components expose state via data attributes (`[data-state="open"]`, `[data-disabled]`) and CSS variables (`--bits-accordion-content-height`, `--bits-select-anchor-width`).
 
-Combine state attributes with CSS variables and keyframes:
-```css
-[data-accordion-content][data-state="open"] {
-  animation: accordionOpen 400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-```
+## Advanced Techniques
+
+Combine data attributes with CSS variables for animations. Use `@keyframes` with state selectors for custom transitions on component state changes.

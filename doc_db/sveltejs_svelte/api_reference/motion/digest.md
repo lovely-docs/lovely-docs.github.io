@@ -1,45 +1,62 @@
 ## Spring
 
-A class that animates values with spring physics. Changes to `spring.target` smoothly move `spring.current` towards it based on `stiffness` and `damping` parameters.
+A class wrapper for values that animate with spring physics. Available since 5.8.0.
 
 ```js
 import { Spring } from 'svelte/motion';
 const spring = new Spring(0);
-spring.target = 100; // current animates towards 100
+spring.target = 100; // animates current towards target
 ```
 
-Methods:
-- `set(value, options)` - Sets target and returns promise when animation completes. Options: `instant` (skip animation), `preserveMomentum` (continue trajectory for N ms)
-- `Spring.of(fn, options)` - Bind spring to reactive function return value
+Properties: `target` (end value), `current` (getter for current value), `stiffness`, `damping`, `precision`.
 
-Properties: `target`, `current`, `stiffness`, `damping`, `precision`
+Methods:
+- `constructor(value, options?)` - create spring
+- `static of(fn, options?)` - bind spring to function return value (must be in effect root)
+- `set(value, options?)` - set target and return promise when current catches up. Options: `instant` (jump immediately), `preserveMomentum` (continue trajectory for N ms, useful for fling gestures)
 
 ## Tween
 
-A class that smoothly animates values over a fixed duration. Changes to `tween.target` move `tween.current` towards it using `delay`, `duration`, and `easing` options.
+A class wrapper for values that smoothly animate to target. Available since 5.8.0.
 
 ```js
 import { Tween } from 'svelte/motion';
 const tween = new Tween(0);
-tween.target = 100; // current animates towards 100 over duration
+tween.target = 100; // animates current towards target over duration
 ```
 
-Methods:
-- `set(value, options)` - Sets target and returns promise when animation completes
-- `Tween.of(fn, options)` - Bind tween to reactive function return value
+Properties: `target` (getter/setter), `current` (getter).
 
-Properties: `target`, `current`
+Methods:
+- `constructor(value, options?)` - create tween with delay, duration, easing options
+- `static of(fn, options?)` - bind tween to function return value (must be in effect root)
+- `set(value, options?)` - set target and return promise when current catches up. Options override defaults.
 
 ## prefersReducedMotion
 
-A media query that detects if user prefers reduced motion. Use to conditionally disable animations for accessibility.
+A media query that matches user's prefers-reduced-motion setting (available since 5.7.0).
 
 ```js
 import { prefersReducedMotion } from 'svelte/motion';
-transition:fly={{ y: prefersReducedMotion.current ? 0 : 200 }}
+import { fly } from 'svelte/transition';
+
+let visible = $state(false);
 ```
 
-## Legacy APIs
+```svelte
+{#if visible}
+	<p transition:fly={{ y: prefersReducedMotion.current ? 0 : 200 }}>
+		flies in, unless user prefers reduced motion
+	</p>
+{/if}
+```
 
-- `spring()` function - Deprecated, use `Spring` class instead
-- `tweened()` function - Deprecated, use `Tween` class instead
+## Legacy APIs (deprecated)
+
+`spring(value?, opts?)` - function that returns Spring store (use Spring class instead)
+
+`tweened(value?, defaults?)` - function that returns Tweened store (use Tween class instead)
+
+Legacy Spring store interface extends Readable and has `set()`, `update()`, `subscribe()` methods plus `precision`, `damping`, `stiffness` properties.
+
+Legacy Tweened store interface extends Readable and has `set()`, `update()` methods.

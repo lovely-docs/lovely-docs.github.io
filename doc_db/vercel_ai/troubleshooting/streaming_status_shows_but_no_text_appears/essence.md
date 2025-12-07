@@ -1,1 +1,0 @@
-useChat status changes to "streaming" on connection/metadata before LLM tokens arrive; create custom loader checking if lastMessage.parts has content using `lastMessage?.parts?.length === 0` or `!lastMessage?.parts?.some(part => part.type === 'text')`

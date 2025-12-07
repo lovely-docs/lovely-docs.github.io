@@ -1,1 +1,1 @@
-Responsive table component with Root, Header, Body, Footer, Row, Head, and Cell subcomponents; supports colspan and custom styling via classes.
+Responsive table component with Root, Caption, Header, Body, Footer, Row, Head, Cell elements; supports colspan and custom styling via classes.

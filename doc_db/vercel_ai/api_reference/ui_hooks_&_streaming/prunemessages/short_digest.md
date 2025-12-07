@@ -1,0 +1,3 @@
+Filters ModelMessage arrays to reduce context size by removing reasoning, tool calls, and empty messages. Parameters: `messages` (ModelMessage[]), `reasoning` ('all'|'before-last-message'|'none'), `toolCalls` ('all'|'before-last-message'|'before-last-${number}-messages'|'none'|array), `emptyMessages` ('keep'|'remove'). Returns pruned ModelMessage[].
+
+Example: `pruneMessages({ messages, reasoning: 'before-last-message', toolCalls: 'before-last-2-messages', emptyMessages: 'remove' })`

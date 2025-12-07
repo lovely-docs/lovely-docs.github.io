@@ -1,13 +1,7 @@
-## RSC API Reference
+**Server**: `streamUI()` streams LLM-generated React UI with tool support; `createStreamableUI/Value()` for component/data streaming; `getAIState/getMutableAIState()` for state access/updates.
 
-**Streaming:** `streamUI` (LLM-generated UI with tools), `createStreamableUI` (server-to-client UI), `createStreamableValue` (serializable values)
+**Client**: `useAIState/UIState()` hooks access shared state; `useActions()` calls server actions; `useStreamableValue/readStreamableValue()` consume streams.
 
-**State:** `createAI` (context provider), `getAIState()`/`getMutableAIState()` (server), `useAIState()`/`useUIState()` (client hooks)
+**Setup**: `createAI()` provider wraps app with `{ actions, initialAIState, initialUIState, onSetAIState }`.
 
-**Consumption:** `readStreamableValue()` (async iterator), `useStreamableValue()` (hook with `[data, error, pending]`)
-
-**Actions:** `useActions()` (access patched server actions)
-
-**Message Types:** CoreSystemMessage, CoreUserMessage, CoreAssistantMessage, CoreToolMessage with TextPart, ImagePart, FilePart, ToolCallPart, ToolResultPart
-
-**Note:** Experimental; use AI SDK UI for production.
+Full example: Server action calls `streamUI()` with tools that use `createStreamableUI()`, updates mutable AI state, returns to client which renders via `useUIState()` hook.

@@ -1,6 +1,6 @@
 ## Input OTP
 
-Accessible one-time password component with copy-paste functionality, built on Bits UI's PinInput component.
+Accessible one-time password component with copy-paste functionality, built on Bits UI's PinInput.
 
 ### Installation
 
@@ -8,7 +8,7 @@ Accessible one-time password component with copy-paste functionality, built on B
 npx shadcn-svelte@latest add input-otp -y -o
 ```
 
-The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
+(-y: skip confirmation, -o: overwrite existing files)
 
 ### Basic Usage
 
@@ -36,20 +36,16 @@ The `-y` flag skips the confirmation prompt and `-o` overwrites existing files.
 
 ### Components
 
-- **InputOTP.Root**: Container with `maxlength` prop to set OTP length
-- **InputOTP.Group**: Groups cells together
-- **InputOTP.Slot**: Individual input cell that receives `{cell}` prop
-- **InputOTP.Separator**: Visual separator between groups
+- `InputOTP.Root` - Container with `maxlength` prop
+- `InputOTP.Group` - Groups cells together
+- `InputOTP.Slot` - Individual cell, accepts `{cell}` prop
+- `InputOTP.Separator` - Visual separator between groups
 
-### Pattern Validation
+### Examples
 
-Use the `pattern` prop to restrict input characters:
-
+**Pattern validation:**
 ```svelte
-<script lang="ts">
-  import * as InputOTP from "$lib/components/ui/input-otp/index.js";
-  import { REGEXP_ONLY_DIGITS_AND_CHARS } from "bits-ui";
-</script>
+import { REGEXP_ONLY_DIGITS_AND_CHARS } from "bits-ui";
 
 <InputOTP.Root maxlength={6} pattern={REGEXP_ONLY_DIGITS_AND_CHARS}>
   {#snippet children({ cells })}
@@ -62,21 +58,37 @@ Use the `pattern` prop to restrict input characters:
 </InputOTP.Root>
 ```
 
-### Invalid State
-
-Mark slots as invalid using the `aria-invalid` attribute:
-
+**Multiple separators:**
 ```svelte
 <InputOTP.Root maxlength={6}>
   {#snippet children({ cells })}
     <InputOTP.Group>
-      {#each cells.slice(0, 3) as cell (cell)}
-        <InputOTP.Slot aria-invalid {cell} />
+      {#each cells.slice(0, 2) as cell (cell)}
+        <InputOTP.Slot {cell} />
       {/each}
     </InputOTP.Group>
     <InputOTP.Separator />
     <InputOTP.Group>
-      {#each cells.slice(3, 6) as cell (cell)}
+      {#each cells.slice(2, 4) as cell (cell)}
+        <InputOTP.Slot {cell} />
+      {/each}
+    </InputOTP.Group>
+    <InputOTP.Separator />
+    <InputOTP.Group>
+      {#each cells.slice(4, 6) as cell (cell)}
+        <InputOTP.Slot {cell} />
+      {/each}
+    </InputOTP.Group>
+  {/snippet}
+</InputOTP.Root>
+```
+
+**Invalid state:**
+```svelte
+<InputOTP.Root maxlength={6}>
+  {#snippet children({ cells })}
+    <InputOTP.Group>
+      {#each cells as cell (cell)}
         <InputOTP.Slot aria-invalid {cell} />
       {/each}
     </InputOTP.Group>
@@ -84,10 +96,7 @@ Mark slots as invalid using the `aria-invalid` attribute:
 </InputOTP.Root>
 ```
 
-### Form Integration
-
-Integrate with sveltekit-superforms for validation:
-
+**Form integration with validation:**
 ```svelte
 <script lang="ts" module>
   import { z } from "zod/v4";

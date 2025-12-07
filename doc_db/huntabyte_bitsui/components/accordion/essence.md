@@ -1,0 +1,1 @@
+Collapsible sections component supporting single/multiple open items, keyboard navigation, smooth transitions, and browser search within collapsed content.

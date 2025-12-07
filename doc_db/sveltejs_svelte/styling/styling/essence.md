@@ -1,1 +1,1 @@
-Index page for Svelte styling documentation.
+Index page for Svelte styling documentation topics.

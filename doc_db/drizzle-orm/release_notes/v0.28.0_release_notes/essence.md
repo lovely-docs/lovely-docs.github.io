@@ -1,1 +1,1 @@
-v0.28.0: Removed nested relation filtering in where clauses, added mysql2 mode config for PlanetScale support, 430% IntelliSense speedup, rewrote relational queries with lateral joins for better performance, added insert with all defaults via empty objects.
+v0.28.0: Removed nested relation filtering, added mysql2 mode config, 430% IntelliSense speedup, rewrote relational queries with lateral joins for better performance, added insert with all defaults.

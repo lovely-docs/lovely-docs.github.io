@@ -1,0 +1,1 @@
+Generate images from text prompts using `generateImage()` with configurable size/aspect ratio, batch generation, seeds, provider-specific options, error handling, and support for 10+ providers.

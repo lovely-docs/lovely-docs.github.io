@@ -1,0 +1,1 @@
+SQLite column types: integer (modes: number/boolean/timestamp_ms/timestamp, autoincrement), real, text (enum, json), blob (buffer/bigint/json), numeric; customization via .$type<T>(); constraints: notNull(); defaults: static values, SQL expressions, CURRENT_TIME/DATE/TIMESTAMP, $defaultFn() for runtime, $onUpdateFn() for updates.

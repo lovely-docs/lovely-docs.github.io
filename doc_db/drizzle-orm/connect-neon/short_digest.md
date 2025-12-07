@@ -1,12 +1,6 @@
 ## Neon Postgres Connection
 
-**Drivers:** `neon-http` (single transactions, serverless), `neon-websockets` (interactive transactions), or PostgresJS (serverful).
-
-**Installation:**
-```
-npm install drizzle-orm @neondatabase/serverless
-npm install -D drizzle-kit
-```
+Drizzle supports Neon serverless via `neon-http` (faster for single queries) and `neon-websockets` (supports sessions/transactions).
 
 **Neon HTTP:**
 ```typescript
@@ -14,18 +8,13 @@ import { drizzle } from 'drizzle-orm/neon-http';
 const db = drizzle(process.env.DATABASE_URL);
 ```
 
-**Neon WebSockets (Node.js requires ws + bufferutil):**
+**Neon WebSockets:**
 ```typescript
 import { drizzle } from 'drizzle-orm/neon-serverless';
 const db = drizzle(process.env.DATABASE_URL);
-// For Node.js: configure neonConfig.webSocketConstructor = ws
+// Node.js requires ws package and neonConfig.webSocketConstructor = ws
 ```
 
-**With existing driver:**
-```typescript
-import { neon } from '@neondatabase/serverless';
-const sql = neon(process.env.DATABASE_URL!);
-const db = drizzle({ client: sql });
-```
+**Alternative drivers:** node-postgres (`drizzle-orm/node-postgres`) or postgres.js (`drizzle-orm/postgres-js`) for serverful environments.
 
-**node-postgres or postgres.js** also supported for serverful environments.
+Install: `drizzle-orm @neondatabase/serverless` and `-D drizzle-kit`

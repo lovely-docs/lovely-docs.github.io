@@ -1,1 +1,1 @@
-Utility that resolves MaybeGetter<T> (getter or static value) to plain value with optional fallback, supporting undefined coalescing.
+Utility that unwraps MaybeGetter<T> (function or static value) to T, with optional fallback for undefined.

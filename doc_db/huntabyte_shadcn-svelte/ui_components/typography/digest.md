@@ -1,108 +1,100 @@
-## Overview
-Typography documentation provides utility class examples for styling text elements. No typography styles are shipped by default; this page demonstrates how to use Tailwind utility classes to style headings, paragraphs, lists, blockquotes, tables, and other text elements.
+## Typography
 
-## Heading Styles
+No default typography styles are shipped. Use utility classes to style text elements.
 
-**h1** - Large primary heading with scroll margin, 4xl text, extra bold weight, and tight tracking. Responsive: lg:text-5xl
+### Heading Styles
+
+**h1** - Large primary heading:
 ```svelte
 <h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-  Taxing Laughter: The Joke Tax Chronicles
+  Title
 </h1>
 ```
 
-**h2** - Medium heading with bottom border, 3xl text, semibold weight, tight tracking, and transition effects
+**h2** - Secondary heading with bottom border:
 ```svelte
 <h2 class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
-  The People of the Kingdom
+  Subtitle
 </h2>
 ```
 
-**h3** - Smaller heading with 2xl text and semibold weight
+**h3** - Tertiary heading:
 ```svelte
-<h3 class="scroll-m-20 text-2xl font-semibold tracking-tight">The Joke Tax</h3>
+<h3 class="scroll-m-20 text-2xl font-semibold tracking-tight">Heading</h3>
 ```
 
-**h4** - Extra small heading with xl text and semibold weight
+**h4** - Quaternary heading:
 ```svelte
-<h4 class="scroll-m-20 text-xl font-semibold tracking-tight">
-  People stopped telling jokes
-</h4>
+<h4 class="scroll-m-20 text-xl font-semibold tracking-tight">Small heading</h4>
 ```
 
-## Paragraph Styles
+### Paragraph & Text
 
-**Standard paragraph** - 7 line height with top margin on non-first children
+**p** - Standard paragraph with margin between siblings:
 ```svelte
-<p class="leading-7 [&:not(:first-child)]:mt-6">
-  The king, seeing how much happier his subjects were, realized the error of his ways and repealed the joke tax.
-</p>
+<p class="leading-7 [&:not(:first-child)]:mt-6">Text content</p>
 ```
 
-**Lead paragraph** - Muted foreground color, xl text size, used for introductory text
+**Lead** - Emphasized introductory text:
 ```svelte
-<p class="text-muted-foreground text-xl">
-  A modal dialog that interrupts the user with important content and expects a response.
-</p>
+<p class="text-muted-foreground text-xl">Important intro text</p>
 ```
 
-**Large text** - lg font size with semibold weight
+**Large** - Large bold text:
 ```svelte
-<div class="text-lg font-semibold">Are you sure absolutely sure?</div>
+<div class="text-lg font-semibold">Large text</div>
 ```
 
-**Small text** - sm font size with medium weight and no leading
+**Small** - Small text for labels:
 ```svelte
-<small class="text-sm font-medium leading-none">Email address</small>
+<small class="text-sm font-medium leading-none">Label</small>
 ```
 
-**Muted text** - Muted foreground color with sm font size
+**Muted** - Subtle secondary text:
 ```svelte
-<p class="text-muted-foreground text-sm">Enter your email address.</p>
+<p class="text-muted-foreground text-sm">Secondary text</p>
 ```
 
-## Other Elements
+### Other Elements
 
-**Blockquote** - Left border (2px), left padding, and italic styling
+**blockquote** - Quoted text with left border:
 ```svelte
 <blockquote class="mt-6 border-l-2 pl-6 italic">
-  "After all," he said, "everyone enjoys a good joke, so it's only fair that they should pay for the privilege."
+  "Quote text"
 </blockquote>
 ```
 
-**Inline code** - Muted background, rounded corners, horizontal padding, monospace font, sm size, semibold weight
+**Inline code** - Code snippets within text:
 ```svelte
 <code class="bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
-  @lucide/svelte
+  code
 </code>
 ```
 
-**Unordered list** - Disc bullets with top margin between items
+**list** - Unordered list with disc bullets:
 ```svelte
 <ul class="my-6 ml-6 list-disc [&>li]:mt-2">
-  <li>1st level of puns: 5 gold coins</li>
-  <li>2nd level of jokes: 10 gold coins</li>
-  <li>3rd level of one-liners: 20 gold coins</li>
+  <li>Item 1</li>
+  <li>Item 2</li>
 </ul>
 ```
 
-**Table** - Wrapped in overflow container, full width with bordered cells, bold headers, alternating row backgrounds
+**table** - Responsive table with borders:
 ```svelte
 <div class="my-6 w-full overflow-y-auto">
   <table class="w-full">
     <thead>
       <tr class="even:bg-muted m-0 border-t p-0">
         <th class="border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right">
-          King's Treasury
-        </th>
-        <th class="border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right">
-          People's happiness
+          Header
         </th>
       </tr>
     </thead>
     <tbody>
       <tr class="even:bg-muted m-0 border-t p-0">
-        <td class="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">Empty</td>
-        <td class="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">Overflowing</td>
+        <td class="border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right">
+          Cell
+        </td>
       </tr>
     </tbody>
   </table>

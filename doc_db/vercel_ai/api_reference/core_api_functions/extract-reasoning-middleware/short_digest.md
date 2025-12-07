@@ -1,0 +1,1 @@
+Middleware that extracts XML-tagged reasoning sections from AI-generated text. Configure with `tagName` (required), `separator` (optional, defaults to `"\n"`), and `startWithReasoning` (optional, defaults to false). Returns middleware that processes streaming/non-streaming responses, extracts reasoning into separate property, and removes tags from main text.

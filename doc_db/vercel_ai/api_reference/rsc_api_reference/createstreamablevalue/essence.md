@@ -1,1 +1,1 @@
-Server-to-client streaming function for RSC that wraps serializable values in updatable streamable objects; experimental feature.
+Server-to-client streaming function for serializable data in RSC; returns updateable streamable object for Server Actions.

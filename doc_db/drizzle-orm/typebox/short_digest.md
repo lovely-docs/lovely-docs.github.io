@@ -1,20 +1,14 @@
 ## Overview
-`drizzle-typebox` generates Typebox schemas from Drizzle ORM schemas for validation. Requires Drizzle ORM v0.36.0+, Typebox v0.34.8+.
+Plugin generating Typebox schemas from Drizzle ORM schemas for validation.
 
-## Schema Types
-- **Select**: For querying data, validates API responses
-- **Insert**: For inserting data, excludes generated columns
-- **Update**: For updating data, all fields optional, excludes generated columns
-
-```ts
-const userSelectSchema = createSelectSchema(users);
-const userInsertSchema = createInsertSchema(users);
-const userUpdateSchema = createUpdateSchema(users);
-```
+## Core Functions
+- `createSelectSchema()` - validates queried data
+- `createInsertSchema()` - validates data for insertion
+- `createUpdateSchema()` - validates data for updates (excludes generated columns)
+- `createSchemaFactory()` - for extended Typebox instances
 
 ## Refinements
-Extend or overwrite field schemas with callbacks or Typebox schemas:
-
+Pass optional parameter to extend/modify/overwrite field schemas:
 ```ts
 createSelectSchema(users, {
   name: (schema) => Type.String({ ...schema, maxLength: 20 }),
@@ -22,8 +16,5 @@ createSelectSchema(users, {
 });
 ```
 
-## Factory Functions
-Use `createSchemaFactory({ typeboxInstance: t })` for extended Typebox instances.
-
-## Data Type Mappings
-Boolean, Date, String, UUID, Char/Varchar, Enum, Integer (8/16/24/32/64-bit, signed/unsigned), Float/Double, Year, Geometry (point, line), Vectors, JSON, Arrays all map to corresponding Typebox types with appropriate constraints.
+## Type Mappings
+Boolean, Date, String, UUID, Enum, Integer (8/16/24/32/64-bit signed/unsigned), Number, BigInt, Tuple, Object, Array, JSON, and array types all map to corresponding Typebox types with appropriate constraints.

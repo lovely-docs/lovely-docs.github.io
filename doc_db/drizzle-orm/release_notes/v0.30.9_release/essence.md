@@ -1,0 +1,1 @@
+v0.30.9: SQLite onConflictDoUpdate split where into targetWhere/setWhere, added db._.fullSchema for schema introspection, fixed AWS Data API migrator

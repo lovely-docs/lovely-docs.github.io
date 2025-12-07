@@ -1,1 +1,1 @@
-Command to upgrade schema snapshots to newer versions; requires dialect and database credentials via config or CLI flags.
+Command to upgrade schema snapshots to newer versions; requires dialect and optional config/out/database credentials via drizzle.config.ts or CLI flags.

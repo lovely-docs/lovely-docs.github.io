@@ -1,0 +1,1 @@
+Invisible wrapper for named slot content that doesn't render a DOM element; replaced by snippets in Svelte 5+.

@@ -1,0 +1,1 @@
+`sveltekit()` from `@sveltejs/kit/vite` returns a Promise resolving to an array of Vite plugins needed for SvelteKit integration.

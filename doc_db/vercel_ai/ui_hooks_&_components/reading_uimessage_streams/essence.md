@@ -1,0 +1,1 @@
+readUIMessageStream helper converts UIMessageChunk streams to AsyncIterableStream<UIMessage> for iterative message processing; supports tool calls with part-type switching (text/tool-call/tool-result) and conversation resumption via message parameter.

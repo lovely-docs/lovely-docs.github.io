@@ -1,1 +1,0 @@
-Legacy mode component props are declared with the export keyword and can have defaults; exported functions/classes become part of the component's public API.

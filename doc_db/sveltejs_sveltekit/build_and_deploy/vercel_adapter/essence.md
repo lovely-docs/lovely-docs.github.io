@@ -1,1 +1,0 @@
-Deploy SvelteKit apps to Vercel with per-route configuration for runtime, regions, memory, ISR caching, and image optimization.

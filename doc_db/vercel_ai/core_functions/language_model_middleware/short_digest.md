@@ -1,0 +1,3 @@
+Middleware intercepts language model calls to add features like caching, logging, RAG, guardrails. Use `wrapLanguageModel({ model, middleware })` with built-in options (`extractReasoningMiddleware`, `simulateStreamingMiddleware`, `defaultSettingsMiddleware`) or custom implementations.
+
+Custom middleware implements `LanguageModelV3Middleware` with `transformParams`, `wrapGenerate`, or `wrapStream`. Examples: logging (console output), caching (Map-based), RAG (inject sources into prompt), guardrails (filter text). Pass per-request metadata via `providerOptions` and access via `params.providerMetadata`.

@@ -1,0 +1,1 @@
+Generate GraphQL servers from Drizzle schemas using `buildSchema()`. Works with Apollo Server and GraphQL Yoga. Customize by accessing `entities` object to pick specific queries/mutations and add custom resolvers with reusable generated types and inputs.

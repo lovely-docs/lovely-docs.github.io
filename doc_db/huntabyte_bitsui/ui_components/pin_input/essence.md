@@ -1,1 +1,0 @@
-Customizable PIN/OTP input component with invisible input for form submission, autofill support, and flexible validation patterns.

@@ -1,0 +1,1 @@
+Textarea utility that auto-adjusts height to content via off-screen clone measurement; supports grow-only mode via minHeight and max height limits.

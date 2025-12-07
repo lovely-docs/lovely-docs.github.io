@@ -1,0 +1,1 @@
+Stop condition that halts tool-calling loops after N steps. Use with `stopWhen` in `generateText()` or `streamText()`. Can be combined with other stop conditions in an array.

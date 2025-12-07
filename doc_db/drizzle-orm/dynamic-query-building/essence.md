@@ -1,1 +1,1 @@
-Enable dynamic mode with `.$dynamic()` to invoke query builder methods multiple times; use dialect-specific generic types (PgSelect, MySqlSelect, SQLiteSelect) for functions that enhance queries dynamically.
+Enable dynamic mode with `.$dynamic()` to allow multiple invocations of query builder methods; use dialect-specific generic types (PgSelect, MySqlSelect, SQLiteSelect, etc.) for functions that enhance query builders dynamically.

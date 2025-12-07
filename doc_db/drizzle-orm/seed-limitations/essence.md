@@ -1,1 +1,1 @@
-Third parameter type constraints in seed operations
+Type constraints and inference limitations for the third parameter in drizzle-orm seed operations.

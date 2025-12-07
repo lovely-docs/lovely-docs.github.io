@@ -1,0 +1,1 @@
+Insert-or-update queries: PostgreSQL/SQLite use `.onConflictDoUpdate(target, set, setWhere)` with `excluded` keyword; MySQL uses `.onDuplicateKeyUpdate(set)` with `values()` function.

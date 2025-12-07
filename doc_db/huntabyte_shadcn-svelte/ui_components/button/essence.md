@@ -1,1 +1,1 @@
-Button component with variants (outline, secondary, destructive, ghost, link), href support for links, icon/size props, and disabled state.
+Button component with variants (default, secondary, destructive, outline, ghost, link), icon support, size prop, and href for link conversion.

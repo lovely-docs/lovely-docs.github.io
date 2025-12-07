@@ -1,1 +1,1 @@
-Plugin to generate Valibot validation schemas from Drizzle ORM table definitions with createSelectSchema/createInsertSchema/createUpdateSchema functions and comprehensive type mapping including refinements for field customization.
+Plugin generating Valibot schemas from Drizzle ORM tables with createSelectSchema/createInsertSchema/createUpdateSchema functions, refinements support, and comprehensive type mappings including range-validated integers, geometry, vectors, and JSON.

@@ -1,6 +1,6 @@
 ## $derived
 
-Declare derived state that automatically updates when dependencies change:
+Declares derived (computed) state that automatically updates when dependencies change.
 
 ```svelte
 <script>
@@ -9,9 +9,10 @@ Declare derived state that automatically updates when dependencies change:
 </script>
 
 <button onclick={() => count++}>{doubled}</button>
+<p>{count} doubled is {doubled}</p>
 ```
 
-Expressions must be side-effect free. Svelte prevents state mutations inside derived expressions.
+Expressions must be side-effect free; state mutations like `count++` are disallowed inside derived expressions. Can be used on class fields.
 
 ### $derived.by
 
@@ -26,11 +27,17 @@ For complex derivations, use `$derived.by` with a function:
 		return total;
 	});
 </script>
+
+<button onclick={() => numbers.push(numbers.length + 1)}>
+	{numbers.join(' + ')} = {total}
+</button>
 ```
+
+`$derived(expression)` is equivalent to `$derived.by(() => expression)`.
 
 ### Dependencies
 
-Anything read synchronously in the derived expression becomes a dependency. When dependencies change, the derived is marked dirty and recalculated on next read. Use `untrack` to exempt state from being a dependency.
+Anything read synchronously inside the derived expression is a dependency. When dependencies change, the derived is marked dirty and recalculated on next read. Use `untrack` to exempt state from being treated as a dependency.
 
 ### Overriding derived values
 
@@ -40,7 +47,7 @@ Derived values can be temporarily reassigned (unless declared with `const`), use
 <script>
 	let { post, like } = $props();
 	let likes = $derived(post.likes);
-	
+
 	async function onclick() {
 		likes += 1;
 		try {
@@ -54,9 +61,9 @@ Derived values can be temporarily reassigned (unless declared with `const`), use
 <button {onclick}>🧡 {likes}</button>
 ```
 
-### Reactivity behavior
+### Reactivity differences
 
-Unlike `$state`, `$derived` values are not deeply reactive proxies. Mutating properties of a derived value affects the underlying source.
+Unlike `$state`, `$derived` values are not converted to deeply reactive proxies. They remain as-is, so mutating properties of a derived object affects the underlying source array/object.
 
 ### Destructuring
 
@@ -64,9 +71,24 @@ Destructuring with `$derived` makes all resulting variables reactive:
 
 ```js
 let { a, b, c } = $derived(stuff());
-// equivalent to creating separate $derived for each property
+// equivalent to:
+let _stuff = $derived(stuff());
+let a = $derived(_stuff.a);
+let b = $derived(_stuff.b);
+let c = $derived(_stuff.c);
 ```
 
 ### Update propagation
 
-Svelte uses push-pull reactivity: state changes immediately notify dependents (push), but derived values only recalculate when read (pull). If a derived's new value is referentially identical to the previous value, downstream updates are skipped.
+Svelte uses push-pull reactivity: state changes immediately notify dependents (push), but derived values only re-evaluate when read (pull). If a derived's new value is referentially identical to its previous value, downstream updates are skipped:
+
+```svelte
+<script>
+	let count = $state(0);
+	let large = $derived(count > 10);
+</script>
+
+<button onclick={() => count++}>{large}</button>
+```
+
+Button only updates when `large` changes, not when `count` changes.

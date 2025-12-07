@@ -1,1 +1,0 @@
-Decrement columns with `sql`${column} - value`` in update().set() or via custom helper function

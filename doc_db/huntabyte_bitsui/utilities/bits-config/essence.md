@@ -1,0 +1,1 @@
+Context provider for centralized default props (defaultPortalTo, defaultLocale) with scoped inheritance and component-level override support.

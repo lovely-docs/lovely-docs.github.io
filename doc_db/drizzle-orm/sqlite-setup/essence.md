@@ -1,0 +1,1 @@
+Setup SQLite with libsql (files + Turso) or better-sqlite3 (local); libsql has more schema management features and encryption support.

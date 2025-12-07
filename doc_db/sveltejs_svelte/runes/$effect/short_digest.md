@@ -1,7 +1,8 @@
 ## $effect
 
-Effects run when state updates for side effects (canvas drawing, network requests, etc). They track synchronously-read reactive values and re-run when dependencies change. Asynchronously-read values are not tracked.
+Runs functions when state updates (browser-only). Automatically tracks reactive value dependencies and re-runs when they change.
 
+**Basic usage:**
 ```svelte
 $effect(() => {
 	context.fillStyle = color;
@@ -9,8 +10,14 @@ $effect(() => {
 });
 ```
 
-Effects can return teardown functions that run before re-runs or on component destroy.
+**Lifecycle:** Runs after mount, in microtask after state changes, batched. Can return teardown function.
 
-**Variants**: `$effect.pre` (runs before DOM updates), `$effect.tracking()` (checks if in tracking context), `$effect.pending()` (counts pending promises), `$effect.root()` (manual control).
+**Dependencies:** Tracks synchronous reads of `$state`/`$derived`/`$props`. Asynchronous reads not tracked. Only re-runs when object itself changes, not properties. Conditional code affects which values are dependencies.
 
-**Don't use effects for state synchronization** — use `$derived` instead. Avoid multiple effects updating each other; use derived values or function bindings.
+**Variants:**
+- `$effect.pre()` — runs before DOM updates
+- `$effect.tracking()` — returns if in tracking context
+- `$effect.pending()` — count of pending promises
+- `$effect.root()` — non-tracked scope with manual cleanup
+
+**Don't use for state sync** — use `$derived` instead. Don't create circular dependencies — use `$derived` + function bindings. Use `untrack()` if you must update state in effect.

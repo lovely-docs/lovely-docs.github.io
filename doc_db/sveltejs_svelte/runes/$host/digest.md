@@ -1,6 +1,6 @@
-The `$host` rune provides access to the host element when compiling a component as a custom element. This allows you to dispatch custom events from within the component.
+The `$host` rune provides access to the host element when compiling a component as a custom element. This allows you to dispatch custom events and interact with the host DOM element directly.
 
-Example: In a custom element component, use `$host().dispatchEvent(new CustomEvent(type))` to dispatch events that can be listened to by the parent application:
+**Example:**
 
 ```svelte
 <svelte:options customElement="my-stepper" />
@@ -15,11 +15,19 @@ Example: In a custom element component, use `$host().dispatchEvent(new CustomEve
 <button onclick={() => dispatch('increment')}>increment</button>
 ```
 
-The parent can then listen to these events:
+Usage in parent component:
 
 ```svelte
+<script>
+	let count = $state(0);
+</script>
+
 <my-stepper
 	ondecrement={() => count -= 1}
 	onincrement={() => count += 1}
 ></my-stepper>
+
+<p>count: {count}</p>
 ```
+
+The `$host()` call returns the host element, enabling custom event dispatching from within the custom element component.

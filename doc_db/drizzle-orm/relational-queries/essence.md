@@ -1,0 +1,1 @@
+Relational query API for fetching nested SQL data with single statement; supports with/columns/where/limit/offset/orderBy/extras/prepared statements.

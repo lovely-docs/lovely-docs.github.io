@@ -1,1 +1,1 @@
-Cache AI responses via language model middleware (wrapGenerate/wrapStream with simulateReadableStream) or onFinish callbacks with KV storage.
+Cache AI responses using language model middleware (intercept with wrapGenerate/wrapStream) or onFinish callbacks; replay cached streams with simulateReadableStream.

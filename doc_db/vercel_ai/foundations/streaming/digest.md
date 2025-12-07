@@ -1,16 +1,22 @@
 ## Why Streaming Matters
 
-Large language models generate long outputs slowly, causing poor user experience with blocking UIs where users wait 5-40+ seconds for complete responses before anything displays. Streaming UIs mitigate this by displaying response parts as they become available, significantly improving perceived performance and user satisfaction in conversational applications.
+Large language models generate long outputs slowly (5-40s latency). Blocking UIs force users to wait for the entire response before displaying anything, causing poor UX. Streaming UIs display response parts as they become available, improving perceived performance and user experience.
 
 ## Blocking vs Streaming
 
-**Blocking UI**: Waits for entire response generation before displaying anything. Results in long loading spinner waits.
+**Blocking UI**: Waits for full response generation before displaying anything.
 
-**Streaming UI**: Transmits and displays response parts incrementally as they're generated. Users see content appearing immediately, reducing perceived latency.
+**Streaming UI**: Transmits and displays response parts incrementally as they're generated.
+
+Real-world example: Generating the first 200 characters of a Harry Potter book shows streaming displays results much faster than blocking because it doesn't wait for completion.
+
+## When to Use Streaming
+
+Streaming greatly enhances UX with larger models, but isn't always necessary. Smaller, faster models may not need streaming and can lead to simpler development.
 
 ## Implementation
 
-The AI SDK simplifies streaming implementation. Stream text generation from OpenAI's gpt-4.1 (or other models like Anthropic Claude) in under 10 lines using the `streamText` function:
+The AI SDK makes streaming simple. Stream text generation from OpenAI's gpt-4.1 in under 10 lines using `streamText`:
 
 ```ts
 import { streamText } from 'ai';
@@ -25,8 +31,4 @@ for await (const textPart of textStream) {
 }
 ```
 
-The `textStream` is an async iterable that yields text chunks as they're generated.
-
-## When to Use Streaming
-
-Streaming is beneficial for long-output LLM responses and conversational applications. However, if a smaller, faster model can achieve desired functionality without streaming, that simpler approach may be preferable for easier development. Regardless of model speed, the SDK makes streaming implementation straightforward.
+The `streamText` function returns a `textStream` that can be iterated with `for await` to process each text chunk as it arrives.

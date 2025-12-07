@@ -1,1 +1,0 @@
-Dropdown select component supporting single/multiple selection with typeahead, keyboard navigation, customizable positioning, and scroll management.

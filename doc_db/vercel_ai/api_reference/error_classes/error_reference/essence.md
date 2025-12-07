@@ -1,0 +1,1 @@
+28 error types covering API calls, validation, configuration, response processing, generation failures, and tool operations.

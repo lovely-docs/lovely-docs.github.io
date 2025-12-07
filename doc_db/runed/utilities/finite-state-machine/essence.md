@@ -1,0 +1,1 @@
+Strongly-typed finite state machine with state→event→state transitions, action functions, lifecycle hooks (_enter/_exit), wildcard handlers, and debounce scheduling.

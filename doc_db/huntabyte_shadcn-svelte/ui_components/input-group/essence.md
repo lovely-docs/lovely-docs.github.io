@@ -1,0 +1,1 @@
+Input/textarea wrapper component with configurable addons for icons, text, buttons, tooltips, dropdowns, and loading indicators; supports inline and block alignment.

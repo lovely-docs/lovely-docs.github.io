@@ -1,31 +1,12 @@
-## Tool Invocation Missing Result Error
+**Error**: "ToolInvocation must have a result" when tool without `execute` is called.
 
-Error occurs when tools without `execute` functions are called without providing results.
-
-**Server-side (with `execute`):**
+**Fix**: Either add `execute` function to tool for server-side execution, or use `useChat` with `addToolOutput` for client-side execution:
 ```tsx
-const tools = {
-  weather: tool({
-    description: 'Get the weather',
-    parameters: z.object({ location: z.string() }),
-    execute: async ({ location }) => ({ temperature: 72, conditions: 'sunny' }),
-  }),
-};
-```
+// Server-side
+execute: async ({ location }) => ({ temperature: 72, conditions: 'sunny' })
 
-**Client-side (with `useChat` and `addToolOutput`):**
-```tsx
-const { addToolOutput } = useChat({
-  sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithToolCalls,
-  onToolCall: async ({ toolCall }) => {
-    const result = await getLocationData();
-    addToolOutput({
-      tool: 'getLocation',
-      toolCallId: toolCall.toolCallId,
-      output: result,
-    });
-  },
-});
+// Client-side
+onToolCall: async ({ toolCall }) => {
+  addToolOutput({ tool: 'name', toolCallId, output: result });
+}
 ```
-
-Every tool call must have a result before conversation continues.

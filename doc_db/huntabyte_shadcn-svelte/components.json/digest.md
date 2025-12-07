@@ -1,26 +1,21 @@
-## Purpose
+## Overview
 The `components.json` file configures your project for the shadcn-svelte CLI. It's optional and only required when using the CLI to add components; not needed for copy-paste method.
 
-## Initialization
-Create the file by running:
+Create it with:
 ```bash
 npx shadcn-svelte@latest init
 ```
 
 ## Configuration Options
 
-### $schema
-Reference the JSON schema for validation:
+**$schema**: Reference the JSON schema at `https://shadcn-svelte.com/schema.json`
 ```json
 {
   "$schema": "https://shadcn-svelte.com/schema.json"
 }
 ```
 
-### tailwind
-Configures Tailwind CSS setup for the CLI.
-
-**tailwind.css**: Path to the CSS file importing Tailwind CSS
+**tailwind.css**: Path to your Tailwind CSS import file
 ```json
 {
   "tailwind": {
@@ -29,23 +24,21 @@ Configures Tailwind CSS setup for the CLI.
 }
 ```
 
-**tailwind.baseColor**: Generates the default color palette. Cannot be changed after initialization. Options: `gray`, `neutral`, `slate`, `stone`, `zinc`
+**tailwind.baseColor**: Sets the default color palette (cannot be changed after initialization)
 ```json
 {
   "tailwind": {
-    "baseColor": "gray"
+    "baseColor": "gray" | "neutral" | "slate" | "stone" | "zinc"
   }
 }
 ```
 
-### aliases
-Path aliases must be set up in `svelte.config.js`. The CLI uses these to place generated components correctly.
-
-- **aliases.lib**: Import alias for library code (typically `$lib`)
-- **aliases.utils**: Import alias for utility functions (typically `$lib/utils`)
-- **aliases.components**: Import alias for components (typically `$lib/components`)
-- **aliases.ui**: Import alias for UI components (typically `$lib/components/ui`)
-- **aliases.hooks**: Import alias for hooks/reactive functions (typically `$lib/hooks`)
+**aliases**: Path aliases for organizing generated components. Must be configured in `svelte.config.js`:
+- `lib`: Library root (typically `$lib`)
+- `utils`: Utility functions (typically `$lib/utils`)
+- `components`: All components (typically `$lib/components`)
+- `ui`: UI components (typically `$lib/components/ui`)
+- `hooks`: Svelte 5 reactive functions/classes (typically `$lib/hooks`)
 
 ```json
 {
@@ -59,15 +52,12 @@ Path aliases must be set up in `svelte.config.js`. The CLI uses these to place g
 }
 ```
 
-### typescript
-Enable or disable TypeScript:
+**typescript**: Enable/disable TypeScript or specify custom config path
 ```json
 {
-  "typescript": true
+  "typescript": true | false
 }
 ```
-
-Specify a custom TypeScript config file:
 ```json
 {
   "typescript": {
@@ -76,8 +66,7 @@ Specify a custom TypeScript config file:
 }
 ```
 
-### registry
-Specifies where the CLI fetches components from. Can pin to a preview release or custom fork:
+**registry**: URL for fetching components (can pin to preview release or custom fork)
 ```json
 {
   "registry": "https://shadcn-svelte.com/registry"

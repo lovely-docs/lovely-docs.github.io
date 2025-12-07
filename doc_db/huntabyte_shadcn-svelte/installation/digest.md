@@ -1,41 +1,36 @@
 ## Installation Guides
 
-Installation instructions are provided for multiple frameworks:
-- SvelteKit
-- Astro
-- Vite
-- Manual setup
+Multiple setup paths available: SvelteKit, Astro, Vite, or Manual installation.
 
 ## Component Structure & Imports
 
-Unlike the React version, components are split into multiple files because Svelte doesn't support multiple components per file. The CLI creates a folder for each component containing individual `.svelte` files and an `index.ts` barrel export.
+Unlike shadcn/ui for React, components are split across multiple files because Svelte doesn't support multiple components per file. The CLI creates a folder for each component with an `index.ts` barrel export.
 
-Example: Accordion component structure:
-```
-accordion/
-  ├── accordion.svelte
-  ├── accordion-content.svelte
-  ├── accordion-item.svelte
-  ├── accordion-trigger.svelte
-  └── index.ts
-```
+Example: Accordion component split into 4 files:
+- `accordion.svelte`
+- `accordion-content.svelte`
+- `accordion-item.svelte`
+- `accordion-trigger.svelte`
 
-Import approaches (both are tree-shaken by Rollup):
+Import options:
 ```ts
 import * as Accordion from '$lib/components/ui/accordion'
 // or
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '$lib/components/ui/accordion'
 ```
 
+Components are tree-shaken by Rollup, so unused exports don't bloat the bundle.
+
 ## IDE Extensions
 
-**VSCode**: Install shadcn-svelte extension by @selemondev
-- Initialize CLI
-- Add components
-- Navigate to component documentation
-- Component import snippets
+**VSCode**: shadcn-svelte extension by @selemondev provides:
+- CLI initialization
+- Component addition
+- Documentation navigation
+- Import/markup snippets
 
-**JetBrains IDEs**: Install shadcn/ui Components Manager by @WarningImHack3r (supports Svelte, React, Vue, Solid)
-- Auto-detect components
+**JetBrains IDEs**: shadcn/ui Components Manager by @WarningImHack3r supports:
+- Auto-detect shadcn/ui components
 - Add/remove/update with one click
+- Works with Svelte, React, Vue, Solid
 - Search remote or existing components

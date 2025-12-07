@@ -1,1 +1,1 @@
-Module for accessing private runtime environment variables on the server side.
+Server-side runtime environment variable access module; filters by publicPrefix/privatePrefix config; dev includes .env automatically.

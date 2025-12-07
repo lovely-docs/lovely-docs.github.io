@@ -1,1 +1,0 @@
-Manage multiple providers and models via custom providers (pre-configure settings/aliases/limits), provider registry (access via `providerId:modelId`), and global provider configuration (use plain model IDs with default provider).

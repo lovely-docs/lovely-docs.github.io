@@ -1,1 +1,1 @@
-Collapsible component with Root, Trigger, and Content parts; install with `npx shadcn-svelte@latest add collapsible -y -o`; trigger toggles content visibility.
+Collapsible component with Root, Trigger, and Content subcomponents for expandable panels.

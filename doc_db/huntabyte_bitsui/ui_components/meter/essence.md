@@ -1,1 +1,0 @@
-Component for displaying static measurements within a known range with real-time value fluctuation.

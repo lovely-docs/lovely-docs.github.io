@@ -1,15 +1,7 @@
-## Quick Start
+**Project setup**: `npx sv create my-app && npm run dev` (localhost:5173). Pages are Svelte components in `src/routes`, server-rendered then client-side takeover.
 
-`npx sv create my-app` scaffolds a project. `npm run dev` starts dev server on localhost:5173.
+**Deployment options**: SSR+CSR (default), SSG (`adapter-static`), SPA, MPA, separate backend, serverless (`adapter-auto`/`adapter-vercel`/`adapter-netlify`/`adapter-cloudflare`), Node (`adapter-node`), containers, libraries, PWA, mobile (Tauri/Capacitor), desktop (Tauri/Wails/Electron), browser extensions, embedded devices. Use `bundleStrategy: 'single'` for limited connections.
 
-## Structure
+**Directory structure**: `src/{lib,lib/server,params,routes,app.html,error.html,hooks.client.js,hooks.server.js,service-worker.js,instrumentation.server.js}`, `static/`, `tests/`, config files (`package.json`, `svelte.config.js`, `tsconfig.json`, `vite.config.js`). `.svelte-kit/` auto-generated.
 
-Pages are Svelte components in `src/routes`. Key files: `src/app.html` (page template), `src/error.html` (error page), `svelte.config.js`, `vite.config.js`.
-
-## Rendering Patterns
-
-Default: SSR initial load → CSR navigation. Also supports static generation, SPA, multi-page, serverless, containers, PWA, mobile/desktop apps, browser extensions.
-
-## Web APIs
-
-Standard APIs: Fetch (special server-side version for direct endpoint invocation), Request, Response, Headers, FormData, Streams, URL, Web Crypto.
+**Web APIs**: `fetch` (SSR-optimized in `load`/hooks/routes), Request/Response/Headers, FormData, Streams, URL/URLSearchParams, Web Crypto available in hooks, server routes, and browser.

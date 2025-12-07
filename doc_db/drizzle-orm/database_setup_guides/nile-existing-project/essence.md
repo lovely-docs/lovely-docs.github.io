@@ -1,0 +1,1 @@
+Setup Drizzle with Nile PostgreSQL: install pg, set NILEDB_URL env var, create config, run `drizzle-kit pull` to introspect and generate schema/migrations, connect and query; update schema by modifying schema.ts and running `drizzle-kit generate`.
