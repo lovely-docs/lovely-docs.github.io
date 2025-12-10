@@ -14,24 +14,24 @@
 
 	const pmCommands: Record<PackageManager, { init: string; add: string; list: string }> = {
 		npm: {
-			init: 'npx -y lovely-docs init',
-			add: 'npx -y lovely-docs add',
-			list: 'npx -y lovely-docs list'
+			init: 'npx -y lovely-docs@latest init',
+			add: 'npx -y lovely-docs@latest add',
+			list: 'npx -y lovely-docs@latest list'
 		},
 		pnpm: {
-			init: 'pnpm dlx lovely-docs init',
-			add: 'pnpm dlx lovely-docs add',
-			list: 'pnpm dlx lovely-docs list'
+			init: 'pnpm dlx lovely-docs@latest init',
+			add: 'pnpm dlx lovely-docs@latest add',
+			list: 'pnpm dlx lovely-docs@latest list'
 		},
 		yarn: {
-			init: 'yarn dlx lovely-docs init',
-			add: 'yarn dlx lovely-docs add',
-			list: 'yarn dlx lovely-docs list'
+			init: 'yarn dlx lovely-docs@latest init',
+			add: 'yarn dlx lovely-docs@latest add',
+			list: 'yarn dlx lovely-docs@latest list'
 		},
 		bun: {
-			init: 'bunx lovely-docs init',
-			add: 'bunx lovely-docs add',
-			list: 'bunx lovely-docs list'
+			init: 'bunx lovely-docs@latest init',
+			add: 'bunx lovely-docs@latest add',
+			list: 'bunx lovely-docs@latest list'
 		}
 	};
 

@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { Tabs, TabsContent, TabsList, TabsTrigger } from '$lib/components/ui/tabs';
-	import { Button } from '$lib/components/ui/button';
-	import { Terminal, Globe, Copy, Check } from '@lucide/svelte';
 	import SimpleIcon from '$lib/components/SimpleIcon.svelte';
-	import { siCursor, siAnthropic, siGooglegemini, siOpenai, siZedindustries, siGithub } from 'simple-icons';
+	import { Button } from '$lib/components/ui/button';
+	import { Tabs, TabsContent, TabsList, TabsTrigger } from '$lib/components/ui/tabs';
+	import { Check, Copy, Globe, Terminal } from '@lucide/svelte';
 	import type { SimpleIcon as SimpleIconType } from 'simple-icons';
+	import { siAnthropic, siCursor, siGithub, siGooglegemini, siOpenai, siZedindustries } from 'simple-icons';
 
 	// ============================================================================
 	// Types & Constants
@@ -32,7 +32,7 @@
 	};
 
 	const MCP_SERVER_NAME = 'lovely-docs';
-	const PACKAGE_NAME = 'lovely-docs';
+	const PACKAGE_NAME = 'lovely-docs@latest';
 	const REMOTE_URL = 'https://lovely-docs.up.railway.app/mcp';
 
 	// ============================================================================
@@ -83,8 +83,7 @@
 					[MCP_SERVER_NAME]: isWeb ? { url: REMOTE_URL } : { command: cmd, args }
 				}
 			}),
-			instructions:
-				'File → Preferences → Cursor Settings → Features → MCP Servers → "Add New MCP Server" → Paste configuration'
+			instructions: 'File → Preferences → Cursor Settings → Features → MCP Servers → "Add New MCP Server" → Paste configuration'
 		};
 	}
 
@@ -170,9 +169,7 @@ args = ${json(args)}`,
 	}
 
 	function githubEnv(isWeb: boolean, cmd: string, args: string[]): EnvConfig {
-		const config = isWeb
-			? { type: 'http', url: REMOTE_URL, tools: ['*'] }
-			: { type: 'stdio', command: cmd, args, tools: ['*'] };
+		const config = isWeb ? { type: 'http', url: REMOTE_URL, tools: ['*'] } : { type: 'stdio', command: cmd, args, tools: ['*'] };
 
 		return {
 			snippet: json({
@@ -258,14 +255,12 @@ args = ${json(args)}`,
 	}
 </script>
 
-<div class="relative mt-6 w-full max-w-4xl mx-auto">
+<div class="relative mx-auto mt-6 w-full max-w-4xl">
 	<Tabs bind:value={selectedEnv}>
 		<!-- Environment Tabs -->
-		<TabsList class="justify-start gap-4 rounded-none bg-transparent px-0 flex-wrap h-auto border-b">
+		<TabsList class="h-auto flex-wrap justify-start gap-4 rounded-none border-b bg-transparent px-0">
 			{#each environments as env}
-				<TabsTrigger
-					value={env.id}
-					class=" border-b-2 border-transparent data-[state=active]:border-primary flex items-center gap-2">
+				<TabsTrigger value={env.id} class=" data-[state=active]:border-primary flex items-center gap-2 border-b-2 border-transparent">
 					{#if env.icon && iconMap[env.icon]}
 						<SimpleIcon icon={iconMap[env.icon]} class="size-4" />
 					{/if}
@@ -284,23 +279,23 @@ args = ${json(args)}`,
 			)}
 			<TabsContent value={env.id} class="mt-0">
 				<!-- Code Card -->
-				<figure class="relative mt-6 rounded-lg border bg-card">
+				<figure class="bg-card relative mt-6 rounded-lg border">
 					<Tabs bind:value={selectedTool}>
 						<!-- Package Manager Tabs -->
 						<div class="flex items-center gap-2 border-b px-4 py-2">
-							<div class="flex size-4 items-center justify-center rounded-[1px] bg-foreground opacity-70">
-								<Terminal class="size-3 text-background" />
+							<div class="bg-foreground flex size-4 items-center justify-center rounded-[1px] opacity-70">
+								<Terminal class="text-background size-3" />
 							</div>
-							<TabsList class="h-auto rounded-none bg-transparent p-0 gap-1">
+							<TabsList class="h-auto gap-1 rounded-none bg-transparent p-0">
 								{#each tools as tool}
 									{#if tool.id === 'web'}
-										<div class="flex size-4 items-center justify-center rounded-[1px] bg-foreground opacity-70 ml-1">
-											<Globe class="size-3 text-background" />
+										<div class="bg-foreground ml-1 flex size-4 items-center justify-center rounded-[1px] opacity-70">
+											<Globe class="text-background size-3" />
 										</div>
 									{/if}
 									<TabsTrigger
 										value={tool.id}
-										class="rounded-md border border-transparent px-3 py-1 text-sm h-7 data-[state=active]:border-input data-[state=active]:bg-accent">
+										class="data-[state=active]:border-input data-[state=active]:bg-accent h-7 rounded-md border border-transparent px-3 py-1 text-sm">
 										{tool.label}
 									</TabsTrigger>
 								{/each}
@@ -316,7 +311,7 @@ args = ${json(args)}`,
 										<Button
 											variant="ghost"
 											size="icon"
-											class="absolute right-2 top-2 size-8"
+											class="absolute top-2 right-2 size-8"
 											onclick={() => copyToClipboard(config.snippet)}>
 											{#if copied}
 												<Check class="size-4" />
@@ -326,7 +321,7 @@ args = ${json(args)}`,
 										</Button>
 										<pre class="overflow-x-auto"><code class="font-mono text-sm">{config.snippet}</code></pre>
 									{:else}
-										<div class="text-sm text-muted-foreground italic">No snippet for this configuration</div>
+										<div class="text-muted-foreground text-sm italic">No snippet for this configuration</div>
 									{/if}
 								</TabsContent>
 							{/each}
@@ -336,7 +331,7 @@ args = ${json(args)}`,
 
 				<!-- Instructions -->
 				{#if config.instructions}
-					<p class="mt-4 text-sm text-muted-foreground">
+					<p class="text-muted-foreground mt-4 text-sm">
 						{config.instructions}
 					</p>
 				{/if}

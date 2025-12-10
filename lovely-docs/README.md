@@ -9,8 +9,8 @@ MCP is token-inefficient and inflexible for documentation. Instead, `lovely-docs
 ## Installation
 
 ```bash
-npx -y lovely-docs init
-npx -y lovely-docs add sveltejs_svelte
+npx -y lovely-docs@latest init
+npx -y lovely-docs@latest add sveltejs_svelte
 ```
 
 ## File Structure
@@ -49,17 +49,17 @@ Cybernetically enhanced web apps
 
 ```bash
 # Initialize
-npx -y lovely-docs init           # Interactive setup
-npx -y lovely-docs init -y        # Skip prompts
+npx -y lovely-docs@latest init           # Interactive setup
+npx -y lovely-docs@latest init -y        # Skip prompts
 
 # Manage libraries
-npx -y lovely-docs list           # Show available docs
-npx -y lovely-docs add <library>  # Add documentation
-npx -y lovely-docs remove <library> # Remove documentation
-npx -y lovely-docs update         # Update installed docs
+npx -y lovely-docs@latest list           # Show available docs
+npx -y lovely-docs@latest add <library>  # Add documentation
+npx -y lovely-docs@latest remove <library> # Remove documentation
+npx -y lovely-docs@latest update         # Update installed docs
 
 # Interactive mode
-npx -y lovely-docs                # Select ecosystems & libraries
+npx -y lovely-docs@latest                # Select ecosystems & libraries
 ```
 
 ## Configuration
@@ -87,10 +87,10 @@ For web-based AI services (Claude Chat, etc.) that can't access local files:
 
 ```bash
 # Stdio mode
-npx -y lovely-docs mcp
+npx -y lovely-docs@latest mcp
 
 # HTTP mode
-npx -y lovely-docs mcp --transport http --port 3000
+npx -y lovely-docs@latest mcp --transport http --port 3000
 ```
 
 ### MCP Configuration
@@ -102,7 +102,7 @@ Add to your MCP client config:
 	"mcpServers": {
 		"lovely-docs": {
 			"command": "npx",
-			"args": ["-y", "lovely-docs", "mcp"]
+			"args": ["-y", "lovely-docs@latest", "mcp"]
 		}
 	}
 }
