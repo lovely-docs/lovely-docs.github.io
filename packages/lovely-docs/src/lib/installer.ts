@@ -38,6 +38,13 @@ export class Installer {
 		const index: IndexJson = JSON.parse(indexContent);
 
 		const libTargetDir = join(this.targetDir, libraryName);
+
+		// Clean up existing installation artifacts before installing
+		await fs.remove(libTargetDir);
+		await fs.remove(join(this.targetDir, `${libraryName}.md`));
+		await fs.remove(join(this.targetDir, `${libraryName}.orig.md`));
+		await fs.remove(join(this.targetDir, `${libraryName}.summary.md`));
+
 		await fs.ensureDir(libTargetDir);
 
 		// 1. Copy Library Level Files

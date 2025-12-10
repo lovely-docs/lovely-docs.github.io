@@ -268,12 +268,6 @@ export const addCommand = new Command('add')
 			s.start(`Installing ${library.name}...`);
 
 			try {
-				// Clean up existing installation artifacts
-				await fs.remove(targetLibDir);
-				await fs.remove(join(targetDir, `${libraryId}.md`));
-				await fs.remove(join(targetDir, `${libraryId}.orig.md`));
-				await fs.remove(join(targetDir, `${libraryId}.summary.md`));
-
 				const installer = new Installer(docDbPath, targetDir);
 				await installer.install(libraryId, installMode, includeSummaries, includeLlmMap);
 
