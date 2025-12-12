@@ -84,7 +84,10 @@
 		const hash = variant ? `${variant}-${id}` : id;
 		history.replaceState(null, '', `#${hash}`);
 		const el = document.getElementById(hash);
-		if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		if (!el) return;
+		const y = el.getBoundingClientRect().top + window.scrollY;
+		const headerOffset = 80;
+		window.scrollTo({ top: Math.max(0, y - headerOffset), behavior: 'smooth' });
 	}
 </script>
 
