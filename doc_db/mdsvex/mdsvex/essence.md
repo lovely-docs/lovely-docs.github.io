@@ -1,0 +1,1 @@
+Markdown preprocessor for Svelte with component embedding, configurable syntax highlighting, layout wrapping, custom markdown element replacement, remark/rehype plugin support, and YAML/custom frontmatter parsing.

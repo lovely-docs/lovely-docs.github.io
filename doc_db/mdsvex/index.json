@@ -1,0 +1,105 @@
+{
+  "map": {
+    "origPath": "mdsvex",
+    "displayName": "",
+    "relevant": true,
+    "usage": {
+      "input": 7143,
+      "output": 2525,
+      "details": null
+    },
+    "token_counts": {
+      "fulltext": 5860,
+      "digest": 1957,
+      "short_digest": 450
+    },
+    "children": {
+      "mdsvex": {
+        "origPath": "mdsvex/mdsvex.svtext",
+        "displayName": "mdsvex",
+        "relevant": true,
+        "usage": {
+          "input": 7760,
+          "output": 2653,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 6468,
+          "digest": 2218,
+          "short_digest": 305
+        },
+        "children": {}
+      },
+      "svast-utils": {
+        "origPath": "mdsvex/svast-utils.md",
+        "displayName": "svast-utils",
+        "relevant": true,
+        "usage": {
+          "input": 2269,
+          "output": 815,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 977,
+          "digest": 571,
+          "short_digest": 120
+        },
+        "children": {}
+      },
+      "svast": {
+        "origPath": "mdsvex/svast.md",
+        "displayName": "svast",
+        "relevant": true,
+        "usage": {
+          "input": 5747,
+          "output": 2502,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 4457,
+          "digest": 2026,
+          "short_digest": 345
+        },
+        "children": {}
+      },
+      "svelte-parse": {
+        "origPath": "mdsvex/svelte-parse.md",
+        "displayName": "svelte-parse",
+        "relevant": true,
+        "usage": {
+          "input": 3684,
+          "output": 1218,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 2392,
+          "digest": 869,
+          "short_digest": 216
+        },
+        "children": {}
+      }
+    }
+  },
+  "name": "mdsvex",
+  "ecosystems": [
+    "svelte",
+    "js"
+  ],
+  "source_type": "git",
+  "source": {
+    "name": "mdsvex",
+    "comment": null,
+    "ecosystems": [
+      "svelte",
+      "js"
+    ],
+    "include": null,
+    "exclude": null,
+    "doc_dir": ".",
+    "repo": "https://github.com/pngwn/MDsveX",
+    "commit": "1b31fe43a1d9353292f74f2a3a569054bf857101"
+  },
+  "date": "2025-12-12T08:01:36.860429+00:00",
+  "model": "claude-haiku-4.5",
+  "commit": "9eaa2bd42dcb21db45cd77386443cd0aab1a7111-dirty"
+}

@@ -1,0 +1,1 @@
+Unist-based AST specification for Svelte with svelte-prefixed nodes for elements, components, directives, properties, and control blocks (each, if, await, custom)

@@ -1,0 +1,7 @@
+**mdsvex**: Markdown preprocessor for Svelte. Install: `npm i --save-dev mdsvex`. Add `preprocess: mdsvex(opts)` to bundler config or use `compile()` directly. Options: `extensions`, `smartypants`, `layout` (wraps in component, supports named layouts and custom element replacement), `remarkPlugins`/`rehypePlugins`, `highlight` (PrismJS default, customizable), `frontmatter` (YAML default, customizable). Frontmatter variables available in template and exported as `metadata`. Limitations: no 4-space code indentation, use fenced blocks.
+
+**SVAST**: Unist-based AST for Svelte. Nodes: `Root`, `SvelteTag`, `Element`/`Component` (with `properties: [Property|Directive]`, `selfClosing`, `children`), `Script`/`Style`, `Comment`, `Text`, `VoidBlock` (`{@html}`), `BranchingBlock` (if/custom), `EachBlock`, `Branch`. Properties have `name`, `value`, `shorthand` ('none'/'boolean'/'expression'), `modifiers`. Directives have `name`, `specifier`, `value`, `modifiers`.
+
+**svelte-parse**: Permissive Svelte parser → SVAST. `parse({value, generatePositions?})` for documents, `parseNode({value, currentPosition?, childParser, block?, silent?, generatePositions})` for composable parsing. Language-agnostic (doesn't parse JS), error-tolerant. Limitations: JS regex braces fail, HTML parsing rudimentary, each blocks parsed as BranchingBlock.
+
+**svast-utils**: Mutable tree utilities. `walk(tree, cb)` recursively visits nodes (return false to skip children). `cleanPositions(tree)` strips position metadata. Both return mutated tree.

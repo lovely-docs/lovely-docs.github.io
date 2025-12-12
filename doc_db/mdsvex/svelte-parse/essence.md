@@ -1,0 +1,1 @@
+Permissive Svelte parser generating SVAST with `parse()` for documents and `parseNode()` for composable parsing; limitations in JS expression handling, HTML parsing, and each block structure.

@@ -1,0 +1,1 @@
+Two mutable utility functions: `walk()` for tree traversal with optional child-skipping, and `cleanPositions()` to strip position metadata from nodes.
