@@ -5,7 +5,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import { Tabs, TabsList, TabsTrigger } from '$lib/components/ui/tabs';
 	import UsageInstructions from '$lib/components/UsageInstructions.svelte';
-	import { BookOpen, Bot, File, Folder, Terminal } from '@lucide/svelte';
+	import { BookOpen, Bot, File, Folder, Github, Terminal } from '@lucide/svelte';
 	import { siDiscord, siX } from 'simple-icons';
 
 	// Package Manager State
@@ -230,7 +230,14 @@
 
 <div class="mx-auto flex max-w-5xl flex-col items-center justify-start space-y-16 p-8">
 	<div class="absolute top-4 right-4">
-		<ThemeToggle />
+		<div class="flex items-center gap-2">
+			<a href="https://github.com/xl0/lovely-docs" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+				<Button variant="outline" size="icon">
+					<Github size={20} />
+				</Button>
+			</a>
+			<ThemeToggle />
+		</div>
 	</div>
 
 	<!-- Hero -->
