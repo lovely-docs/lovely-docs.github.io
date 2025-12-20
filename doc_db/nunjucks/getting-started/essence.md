@@ -1,0 +1,1 @@
+Installation (npm/browser), basic configuration and rendering, Express integration, security warning about user-defined templates, browser file selection (full vs slim).

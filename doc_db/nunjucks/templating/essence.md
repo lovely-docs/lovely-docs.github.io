@@ -1,0 +1,1 @@
+Nunjucks templating: variables, filters, inheritance (extends/block/super), control flow (if/for), composition (include/import/macro/set), expressions, whitespace control, 40+ builtin filters, global functions—no sandboxing.

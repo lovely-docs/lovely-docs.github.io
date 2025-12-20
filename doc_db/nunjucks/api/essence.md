@@ -1,0 +1,1 @@
+Complete API reference: simple API (render, renderString, compile, configure), Environment class, loaders (FileSystem, Web, NodeResolve, custom), precompiling, custom filters (sync/async with keyword args), custom tags/extensions (sync/async), async rendering, autoescaping, syntax customization, security warning against user-defined templates.

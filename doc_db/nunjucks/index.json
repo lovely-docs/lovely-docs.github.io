@@ -1,0 +1,87 @@
+{
+  "map": {
+    "origPath": "nunjucks",
+    "displayName": "",
+    "relevant": true,
+    "usage": {
+      "input": 9980,
+      "output": 2978,
+      "details": null
+    },
+    "token_counts": {
+      "fulltext": 8712,
+      "digest": 2672,
+      "short_digest": 204
+    },
+    "children": {
+      "api": {
+        "origPath": "nunjucks/api.md",
+        "displayName": "API",
+        "relevant": true,
+        "usage": {
+          "input": 10578,
+          "output": 4373,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 9289,
+          "digest": 3510,
+          "short_digest": 698
+        },
+        "children": {}
+      },
+      "getting-started": {
+        "origPath": "nunjucks/getting-started.md",
+        "displayName": "getting-started",
+        "relevant": true,
+        "usage": {
+          "input": 2530,
+          "output": 1037,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 1239,
+          "digest": 614,
+          "short_digest": 305
+        },
+        "children": {}
+      },
+      "templating": {
+        "origPath": "nunjucks/templating.md",
+        "displayName": "templating",
+        "relevant": true,
+        "usage": {
+          "input": 13201,
+          "output": 5259,
+          "details": null
+        },
+        "token_counts": {
+          "fulltext": 11911,
+          "digest": 4417,
+          "short_digest": 693
+        },
+        "children": {}
+      }
+    }
+  },
+  "name": "nunjucks",
+  "ecosystems": [
+    "js"
+  ],
+  "source_type": "git",
+  "source": {
+    "name": "nunjucks",
+    "comment": null,
+    "ecosystems": [
+      "js"
+    ],
+    "include": null,
+    "exclude": null,
+    "doc_dir": "docs",
+    "repo": "https://github.com/mozilla/nunjucks",
+    "commit": "2025c933fba374482ef97122514bb36de6bf9de4"
+  },
+  "date": "2025-12-20T04:59:55.541759+00:00",
+  "model": "claude-haiku-4.5",
+  "commit": "f409c8c6dde305df7f7cf2f26015d299b8af8fe0-dirty"
+}
